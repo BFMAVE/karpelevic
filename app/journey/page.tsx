@@ -91,13 +91,13 @@ export default function JourneyPage() {
           <a
             className="site-identity"
             href={sitePath("/")}
-            aria-label="Critical Invariant Polygons — Home"
+            aria-label="Karpelevic — Home"
           >
             <span className="site-monogram" aria-hidden="true">
               Θ
             </span>
             <span>
-              <strong>Critical Invariant Polygons</strong>
+              <strong>Karpelevic</strong>
               <small>A companion to the manuscript</small>
             </span>
           </a>

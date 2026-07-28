@@ -6,6 +6,8 @@
 
 by Brecht Verbeken and Vincent Ginis
 
+Website name: **Karpelevic**
+
 This file is the living project record. It should be updated at every milestone
 with what is complete, what is under review, what remains, and which decisions
 require author judgment.
@@ -334,6 +336,8 @@ local source history and adopt the automated deployment workflow.
 - 28 July 2026 — The author-approved Home/Problem, History, and My Journey
   release replaced the original GitHub Pages placeholder and was verified at
   <https://bfmave.github.io/paper-project-site/>.
+- 28 July 2026 — The website identity was shortened to “Karpelevic”; the full
+  paper title remains unchanged wherever the manuscript itself is identified.
 
 ## Update Log
 
@@ -412,3 +416,5 @@ local source history and adopt the automated deployment workflow.
   three-item navigation, the construction marker, the History source ledger,
   the Journey Leslie-matrix citation, Zenodo linking, and clean browser
   consoles on all HTML routes.
+- 28 July 2026 — Renamed the website identity and document-title suffix to
+  “Karpelevic” while preserving the paper’s full scholarly title.

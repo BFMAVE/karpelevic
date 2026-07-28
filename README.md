@@ -1,4 +1,4 @@
-# Critical Invariant Polygons — paper website
+# Karpelevic — paper website
 
 Offline development site for:
 

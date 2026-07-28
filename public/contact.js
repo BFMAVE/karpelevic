@@ -12,7 +12,7 @@ document.addEventListener("submit", (event) => {
   const replyTo = String(data.get("email") ?? "").trim();
   const subject =
     String(data.get("subject") ?? "").trim() ||
-    "Question about Critical Invariant Polygons";
+    "Question about Karpelevic";
   const message = String(data.get("message") ?? "").trim();
   const address = `${["brecht", "verbeken"].join(".")}@${[
     "gmail",
