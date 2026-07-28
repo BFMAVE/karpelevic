@@ -1,67 +1,718 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="The future home of a paper, its evidence, and its reproducibility record."
-    />
-    <title>Research Project — Early Preview</title>
-    <style>
-      :root{--ink:#182017;--paper:#f1f0e9;--accent:#df4d31;--line:rgba(24,32,23,.2);--muted:#61685d}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 78% 14%,rgba(223,77,49,.08),transparent 22rem),var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif}a{color:inherit;text-decoration:none}main{min-height:100vh;padding:24px}.page-shell{display:flex;min-height:calc(100vh - 48px);max-width:1500px;margin:0 auto;flex-direction:column;border:1px solid var(--line)}header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}.wordmark,.status{display:inline-flex;align-items:center;gap:10px}.wordmark-mark{display:grid;width:28px;height:28px;place-items:center;border-radius:50%;background:var(--ink);color:var(--paper);font:italic 14px Georgia,serif;text-transform:none}.status-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(223,77,49,.1)}.hero{flex:1;padding:clamp(54px,8vw,124px) clamp(22px,7vw,104px) clamp(64px,8vw,112px)}.eyebrow{display:flex;max-width:520px;align-items:center;gap:14px;color:var(--muted);font:11px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase}.eyebrow-line{height:1px;flex:1;background:var(--line)}h1{max-width:1100px;margin:clamp(48px,8vw,92px) 0 0;font-family:Georgia,"Times New Roman",serif;font-size:clamp(58px,10.5vw,156px);font-weight:400;letter-spacing:-.065em;line-height:.82}h1 em{color:var(--accent);font-weight:400}.hero-support{display:grid;max-width:800px;margin-top:clamp(56px,7vw,92px);margin-left:auto;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:56px}.hero-support p{margin:0;color:var(--muted);font-size:clamp(17px,1.6vw,22px);line-height:1.55}.preview-link{display:inline-flex;min-width:194px;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--ink);font:11px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.07em;text-transform:uppercase;transition:color 160ms ease,border-color 160ms ease}.preview-link:hover,.preview-link:focus-visible{border-color:var(--accent);color:var(--accent)}.pillars{display:grid;border-top:1px solid var(--line);grid-template-columns:repeat(3,minmax(0,1fr))}.pillar{display:grid;min-height:190px;padding:24px 26px 28px;grid-template-columns:42px 1fr;gap:20px;border-right:1px solid var(--line)}.pillar:last-child{border-right:0}.pillar-number{color:var(--accent);font:11px ui-monospace,SFMono-Regular,Menlo,monospace}.pillar h2{margin:0 0 22px;font:400 28px Georgia,"Times New Roman",serif;letter-spacing:-.025em}.pillar p{max-width:310px;margin:0;color:var(--muted);font-size:14px;line-height:1.55}footer{display:flex;justify-content:space-between;padding:16px 22px;border-top:1px solid var(--line);color:var(--muted);font:10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase}@media(max-width:760px){main{padding:10px}.page-shell{min-height:calc(100vh - 20px)}.status{font-size:0}.status-dot{width:9px;height:9px}h1{letter-spacing:-.055em;line-height:.88}.hero-support{grid-template-columns:1fr;gap:32px}.preview-link{width:100%}.pillars{grid-template-columns:1fr}.pillar{min-height:0;border-right:0;border-bottom:1px solid var(--line)}.pillar:last-child{border-bottom:0}footer{gap:20px}footer span:last-child{display:none}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-    </style>
-  </head>
-  <body>
-    <main>
-      <div class="page-shell">
-        <header aria-label="Project header">
-          <a class="wordmark" href="#top" aria-label="Research project home">
-            <span class="wordmark-mark" aria-hidden="true">R</span>
-            <span>Research Project</span>
-          </a>
-          <span class="status">
-            <span class="status-dot" aria-hidden="true"></span>
-            Early preview
-          </span>
-        </header>
-        <section class="hero" id="top" aria-labelledby="hero-title">
-          <div class="eyebrow">
-            <span>Project archive</span>
-            <span class="eyebrow-line" aria-hidden="true"></span>
-            <span>2026</span>
-          </div>
-          <h1 id="hero-title">Work that can<br /><em>be checked.</em></h1>
-          <div class="hero-support">
-            <p>
-              This will become the public record for a research project: the
-              paper, the evidence behind it, and the exact path from claim to
-              verification.
-            </p>
-            <a class="preview-link" href="#foundations">
-              Explore the foundation <span aria-hidden="true">↘</span>
-            </a>
-          </div>
-        </section>
-        <section class="pillars" id="foundations" aria-label="Project foundations">
-          <article class="pillar">
-            <span class="pillar-number">01</span>
-            <div><h2>The paper</h2><p>A readable account of the question, the result, and why it matters.</p></div>
-          </article>
-          <article class="pillar">
-            <span class="pillar-number">02</span>
-            <div><h2>The evidence</h2><p>Claims connected to proofs, computations, sources, and independent checks.</p></div>
-          </article>
-          <article class="pillar">
-            <span class="pillar-number">03</span>
-            <div><h2>The record</h2><p>Methods, revisions, reproducibility materials, and a transparent development history.</p></div>
-          </article>
-        </section>
-        <footer>
-          <span>Project site · Preview 01</span>
-          <span>Built for transparent research</span>
-        </footer>
-      </div>
-    </main>
-  </body>
-</html>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/paper-project-site/assets/index-BfoGCuEw.css" data-rsc-css-href="/paper-project-site/assets/index-BfoGCuEw.css" data-precedence="vite-rsc/importer-resources"/><title>Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic Spectra · Critical Invariant Polygons</title><meta name="description" content="An accessible companion to the paper by Brecht Verbeken and Vincent Ginis."/><link rel="shortcut icon" href="/paper-project-site/favicon.svg"/><link rel="icon" href="/paper-project-site/favicon.svg"/>
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7d0fab25.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-bd3fa9fe.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-5f813686.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-0365c557.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-fe99e303.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-dd44b623.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-44d82aa9.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7f5a19db.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-21114939.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-e99b45a2.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f621cbc7.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-217990d7.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f5ee9e70.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-d15fd541.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-d4e0271a.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-016594d3.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-558d9db4.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-e5f8a85e.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-18280d9b.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-2969689c.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-5ebdfa32.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f81edfa3.woff2" as="font" type="font/woff2" crossorigin />
+<style data-vinext-fonts>/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7d0fab25.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-bd3fa9fe.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-5f813686.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-0365c557.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-fe99e303.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7d0fab25.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-bd3fa9fe.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-5f813686.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-0365c557.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-fe99e303.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7d0fab25.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-bd3fa9fe.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-5f813686.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-0365c557.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-fe99e303.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7d0fab25.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-bd3fa9fe.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-5f813686.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-0365c557.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-fe99e303.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-dd44b623.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-44d82aa9.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7f5a19db.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-21114939.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-e99b45a2.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-dd44b623.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-44d82aa9.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7f5a19db.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-21114939.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-e99b45a2.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-dd44b623.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-44d82aa9.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7f5a19db.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-21114939.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-e99b45a2.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-dd44b623.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-44d82aa9.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7f5a19db.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-21114939.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-e99b45a2.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+.__font_cormorant_garamond_02lyszc { font-family: 'Cormorant Garamond', sans-serif; }
+
+.__variable_cormorant_garamond_02lyszc { --font-display: 'Cormorant Garamond', sans-serif; }
+
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f621cbc7.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-217990d7.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f5ee9e70.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-d15fd541.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-d4e0271a.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-016594d3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f621cbc7.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-217990d7.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f5ee9e70.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-d15fd541.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-d4e0271a.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-016594d3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f621cbc7.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-217990d7.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f5ee9e70.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-d15fd541.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-d4e0271a.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-016594d3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-558d9db4.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-e5f8a85e.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-18280d9b.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-2969689c.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-5ebdfa32.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f81edfa3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-558d9db4.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-e5f8a85e.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-18280d9b.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-2969689c.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-5ebdfa32.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f81edfa3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-558d9db4.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-e5f8a85e.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-18280d9b.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-2969689c.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-5ebdfa32.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f81edfa3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+.__font_source_serif_4_0p29hys { font-family: 'Source Serif 4', sans-serif; }
+
+.__variable_source_serif_4_0p29hys { --font-reading: 'Source Serif 4', sans-serif; }
+</style>
+</head><body class="__variable_cormorant_garamond_02lyszc __variable_source_serif_4_0p29hys"><a class="skip-link" href="#main-content">Skip to the article</a><header class="site-header" id="top"><div class="masthead"><a class="site-identity" href="/paper-project-site/" aria-label="Critical Invariant Polygons — Home"><span class="site-monogram" aria-hidden="true">Θ</span><span><strong>Critical Invariant Polygons</strong><small>A companion to the manuscript</small></span></a></div><nav class="primary-navigation" aria-label="Primary navigation"><a aria-current="page" href="/paper-project-site/">Problem</a><a href="/paper-project-site/history/">History</a><a href="/paper-project-site/journey/">My Journey</a></nav><p class="construction-notice" role="status"><span aria-hidden="true">🚧</span><span>Under construction</span></p></header><main id="main-content"><div class="first-block"><section class="hero-section" aria-labelledby="paper-title"><header class="hero-copy"><p class="kicker">A paper in two parts</p><h1 id="paper-title">Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic Spectra</h1><p class="subtitle">Contact Return Normal Forms, Projective Holonomy, and the Karpelevič–Ito Theorem</p><p class="authors">Brecht Verbeken · Vincent Ginis</p><p class="hero-deck">A geometric route from invariant polygons to the classical boundary of stochastic spectra.</p><dl class="paper-facts"><div><dt>Status</dt><dd><a class="manuscript-link" href="https://zenodo.org/records/21529144">Zenodo record<!-- --> <span aria-hidden="true">↗</span></a></dd></div><div><dt>Prepared</dt><dd>24 July 2026</dd></div><div><dt>Length</dt><dd>93<!-- --> pages</dd></div></dl></header><figure class="plate theta-atlas"><div class="plate-heading" aria-hidden="true"><span>Plate I</span><span>Orders I–VII</span></div><svg class="theta-figure" viewBox="0 0 820 820" role="img" aria-labelledby="theta-atlas-title theta-atlas-description"><title id="theta-atlas-title">The stochastic eigenvalue regions from order one through order seven</title><desc id="theta-atlas-description">One comparison plot showing the nested boundaries of Theta four through Theta seven, the exact triangular region and real tail for Theta three, the interval Theta two, and the point Theta one.</desc><defs><pattern id="atlas-engraving" width="11" height="11" patternUnits="userSpaceOnUse" patternTransform="rotate(18)"><line x1="0" y1="0" x2="0" y2="11" class="engraving-line"></line></pattern></defs><line class="axis-line" x1="68" y1="410" x2="752" y2="410"></line><line class="axis-line" x1="410" y1="68" x2="410" y2="752"></line><circle class="unit-circle" cx="410" cy="410" r="318"></circle><path class="theta-atlas-fill" d="M 728.00 410.00 L 724.01 401.71 L 720.11 393.61 L 716.29 385.69 L 712.56 377.93 L 708.89 370.32 L 705.28 362.83 L 701.74 355.46 L 698.24 348.20 L 694.79 341.03 L 691.37 333.94 L 687.99 326.92 L 684.64 319.96 L 681.31 313.05 L 678.00 306.18 L 674.70 299.33 L 671.42 292.51 L 668.13 285.69 L 664.85 278.87 L 661.57 272.05 L 658.27 265.20 L 654.96 258.33 L 651.63 251.42 L 648.28 244.45 L 644.90 237.44 L 641.48 230.35 L 638.03 223.18 L 634.53 215.91 L 630.98 208.55 L 627.38 201.06 L 623.71 193.45 L 619.98 185.69 L 616.16 177.77 L 612.26 169.67 L 608.27 161.38 L 606.77 161.02 L 605.29 160.64 L 603.84 160.24 L 602.41 159.82 L 601.00 159.37 L 599.62 158.90 L 598.26 158.41 L 596.92 157.90 L 595.60 157.36 L 594.30 156.80 L 593.02 156.22 L 591.77 155.61 L 590.53 154.97 L 589.31 154.32 L 588.11 153.63 L 586.93 152.92 L 585.77 152.19 L 584.63 151.43 L 583.51 150.63 L 582.41 149.81 L 581.32 148.96 L 580.25 148.08 L 579.21 147.17 L 578.18 146.23 L 577.17 145.25 L 576.18 144.23 L 575.21 143.18 L 574.26 142.09 L 573.33 140.96 L 572.42 139.78 L 571.53 138.56 L 570.66 137.29 L 569.82 135.98 L 569.00 134.60 L 566.76 134.58 L 564.55 134.52 L 562.39 134.42 L 560.26 134.27 L 558.16 134.09 L 556.10 133.86 L 554.07 133.60 L 552.06 133.29 L 550.09 132.95 L 548.15 132.56 L 546.23 132.13 L 544.35 131.66 L 542.48 131.14 L 540.64 130.58 L 538.83 129.98 L 537.04 129.33 L 535.27 128.64 L 533.52 127.90 L 531.80 127.11 L 530.09 126.27 L 528.41 125.37 L 526.75 124.42 L 525.10 123.42 L 523.48 122.35 L 521.87 121.23 L 520.28 120.03 L 518.72 118.77 L 517.17 117.43 L 515.64 116.02 L 514.12 114.52 L 512.63 112.93 L 511.16 111.25 L 509.70 109.46 L 508.27 107.56 L 504.85 108.64 L 501.50 109.62 L 498.21 110.52 L 494.98 111.33 L 491.80 112.06 L 488.68 112.70 L 485.61 113.26 L 482.57 113.74 L 479.58 114.14 L 476.63 114.47 L 473.72 114.71 L 470.83 114.87 L 467.98 114.96 L 465.15 114.96 L 462.35 114.88 L 459.57 114.72 L 456.81 114.47 L 454.06 114.14 L 451.33 113.71 L 448.61 113.20 L 445.90 112.58 L 443.19 111.86 L 440.49 111.03 L 437.79 110.09 L 435.09 109.03 L 432.38 107.84 L 429.66 106.51 L 426.92 105.03 L 424.18 103.38 L 421.41 101.56 L 418.61 99.53 L 415.78 97.28 L 412.91 94.78 L 410.00 92.00 L 407.91 93.97 L 405.85 95.70 L 403.81 97.22 L 401.78 98.56 L 399.76 99.75 L 397.75 100.78 L 395.75 101.69 L 393.75 102.48 L 391.75 103.16 L 389.76 103.74 L 387.76 104.23 L 385.76 104.63 L 383.76 104.95 L 381.76 105.20 L 379.74 105.37 L 377.72 105.48 L 375.69 105.53 L 373.66 105.52 L 371.61 105.45 L 369.55 105.34 L 367.48 105.17 L 365.39 104.96 L 363.30 104.70 L 361.19 104.41 L 359.06 104.08 L 356.92 103.71 L 354.76 103.32 L 352.59 102.89 L 350.41 102.45 L 348.20 101.98 L 345.98 101.50 L 343.75 101.00 L 341.50 100.49 L 339.24 99.97 L 336.81 101.88 L 334.40 103.73 L 331.99 105.52 L 329.59 107.25 L 327.19 108.92 L 324.80 110.55 L 322.40 112.12 L 320.01 113.63 L 317.61 115.10 L 315.21 116.51 L 312.80 117.87 L 310.39 119.18 L 307.96 120.44 L 305.53 121.66 L 303.08 122.82 L 300.62 123.93 L 298.14 124.99 L 295.65 126.00 L 293.13 126.97 L 290.59 127.88 L 288.02 128.74 L 285.43 129.55 L 282.81 130.30 L 280.15 131.00 L 277.46 131.64 L 274.72 132.23 L 271.95 132.76 L 269.13 133.23 L 266.26 133.63 L 263.34 133.97 L 260.35 134.24 L 257.31 134.44 L 254.19 134.56 L 251.00 134.60 L 248.74 138.47 L 246.47 142.22 L 244.20 145.88 L 241.93 149.43 L 239.64 152.90 L 237.34 156.27 L 235.02 159.56 L 232.69 162.77 L 230.34 165.89 L 227.96 168.94 L 225.56 171.91 L 223.12 174.82 L 220.66 177.65 L 218.16 180.42 L 215.62 183.12 L 213.04 185.75 L 210.41 188.33 L 207.73 190.84 L 204.99 193.30 L 202.20 195.69 L 199.34 198.03 L 196.40 200.31 L 193.40 202.54 L 190.30 204.71 L 187.12 206.82 L 183.84 208.87 L 180.45 210.87 L 176.95 212.81 L 173.31 214.69 L 169.54 216.50 L 165.61 218.25 L 161.51 219.94 L 157.23 221.55 L 152.73 223.08 L 152.69 225.12 L 152.57 227.09 L 152.37 228.99 L 152.10 230.83 L 151.78 232.61 L 151.39 234.35 L 150.94 236.03 L 150.44 237.68 L 149.89 239.29 L 149.29 240.86 L 148.64 242.39 L 147.95 243.89 L 147.22 245.37 L 146.44 246.81 L 145.63 248.23 L 144.77 249.63 L 143.88 251.00 L 142.94 252.35 L 141.97 253.68 L 140.97 254.99 L 139.93 256.29 L 138.86 257.56 L 137.75 258.83 L 136.61 260.08 L 135.44 261.31 L 134.23 262.54 L 132.99 263.75 L 131.72 264.96 L 130.43 266.15 L 129.10 267.34 L 127.74 268.52 L 126.35 269.69 L 124.94 270.86 L 123.49 272.02 L 123.47 276.65 L 123.41 281.19 L 123.31 285.67 L 123.16 290.08 L 122.97 294.43 L 122.74 298.72 L 122.47 302.95 L 122.15 307.14 L 121.79 311.28 L 121.38 315.38 L 120.92 319.44 L 120.42 323.46 L 119.86 327.45 L 119.25 331.41 L 118.59 335.34 L 117.88 339.26 L 117.11 343.15 L 116.28 347.03 L 115.39 350.89 L 114.43 354.75 L 113.41 358.60 L 112.31 362.45 L 111.15 366.30 L 109.90 370.16 L 108.58 374.02 L 107.16 377.90 L 105.66 381.80 L 104.06 385.72 L 102.35 389.67 L 100.54 393.65 L 98.60 397.66 L 96.54 401.72 L 94.35 405.83 L 92.00 410.00 L 94.35 414.17 L 96.54 418.28 L 98.60 422.34 L 100.54 426.35 L 102.35 430.33 L 104.06 434.28 L 105.66 438.20 L 107.16 442.10 L 108.58 445.98 L 109.90 449.84 L 111.15 453.70 L 112.31 457.55 L 113.41 461.40 L 114.43 465.25 L 115.39 469.11 L 116.28 472.97 L 117.11 476.85 L 117.88 480.74 L 118.59 484.66 L 119.25 488.59 L 119.86 492.55 L 120.42 496.54 L 120.92 500.56 L 121.38 504.62 L 121.79 508.72 L 122.15 512.86 L 122.47 517.05 L 122.74 521.28 L 122.97 525.57 L 123.16 529.92 L 123.31 534.33 L 123.41 538.81 L 123.47 543.35 L 123.49 547.98 L 124.94 549.14 L 126.35 550.31 L 127.74 551.48 L 129.10 552.66 L 130.43 553.85 L 131.72 555.04 L 132.99 556.25 L 134.23 557.46 L 135.44 558.69 L 136.61 559.92 L 137.75 561.17 L 138.86 562.44 L 139.93 563.71 L 140.97 565.01 L 141.97 566.32 L 142.94 567.65 L 143.88 569.00 L 144.77 570.37 L 145.63 571.77 L 146.44 573.19 L 147.22 574.63 L 147.95 576.11 L 148.64 577.61 L 149.29 579.14 L 149.89 580.71 L 150.44 582.32 L 150.94 583.97 L 151.39 585.65 L 151.78 587.39 L 152.10 589.17 L 152.37 591.01 L 152.57 592.91 L 152.69 594.88 L 152.73 596.92 L 157.23 598.45 L 161.51 600.06 L 165.61 601.75 L 169.54 603.50 L 173.31 605.31 L 176.95 607.19 L 180.45 609.13 L 183.84 611.13 L 187.12 613.18 L 190.30 615.29 L 193.40 617.46 L 196.40 619.69 L 199.34 621.97 L 202.20 624.31 L 204.99 626.70 L 207.73 629.16 L 210.41 631.67 L 213.04 634.25 L 215.62 636.88 L 218.16 639.58 L 220.66 642.35 L 223.12 645.18 L 225.56 648.09 L 227.96 651.06 L 230.34 654.11 L 232.69 657.23 L 235.02 660.44 L 237.34 663.73 L 239.64 667.10 L 241.93 670.57 L 244.20 674.12 L 246.47 677.78 L 248.74 681.53 L 251.00 685.40 L 254.19 685.44 L 257.31 685.56 L 260.35 685.76 L 263.34 686.03 L 266.26 686.37 L 269.13 686.77 L 271.95 687.24 L 274.72 687.77 L 277.46 688.36 L 280.15 689.00 L 282.81 689.70 L 285.43 690.45 L 288.02 691.26 L 290.59 692.12 L 293.13 693.03 L 295.65 694.00 L 298.14 695.01 L 300.62 696.07 L 303.08 697.18 L 305.53 698.34 L 307.96 699.56 L 310.39 700.82 L 312.80 702.13 L 315.21 703.49 L 317.61 704.90 L 320.01 706.37 L 322.40 707.88 L 324.80 709.45 L 327.19 711.08 L 329.59 712.75 L 331.99 714.48 L 334.40 716.27 L 336.81 718.12 L 339.24 720.03 L 341.50 719.51 L 343.75 719.00 L 345.98 718.50 L 348.20 718.02 L 350.41 717.55 L 352.59 717.11 L 354.76 716.68 L 356.92 716.29 L 359.06 715.92 L 361.19 715.59 L 363.30 715.30 L 365.39 715.04 L 367.48 714.83 L 369.55 714.66 L 371.61 714.55 L 373.66 714.48 L 375.69 714.47 L 377.72 714.52 L 379.74 714.63 L 381.76 714.80 L 383.76 715.05 L 385.76 715.37 L 387.76 715.77 L 389.76 716.26 L 391.75 716.84 L 393.75 717.52 L 395.75 718.31 L 397.75 719.22 L 399.76 720.25 L 401.78 721.44 L 403.81 722.78 L 405.85 724.30 L 407.91 726.03 L 410.00 728.00 L 412.91 725.22 L 415.78 722.72 L 418.61 720.47 L 421.41 718.44 L 424.18 716.62 L 426.92 714.97 L 429.66 713.49 L 432.38 712.16 L 435.09 710.97 L 437.79 709.91 L 440.49 708.97 L 443.19 708.14 L 445.90 707.42 L 448.61 706.80 L 451.33 706.29 L 454.06 705.86 L 456.81 705.53 L 459.57 705.28 L 462.35 705.12 L 465.15 705.04 L 467.98 705.04 L 470.83 705.13 L 473.72 705.29 L 476.63 705.53 L 479.58 705.86 L 482.57 706.26 L 485.61 706.74 L 488.68 707.30 L 491.80 707.94 L 494.98 708.67 L 498.21 709.48 L 501.50 710.38 L 504.85 711.36 L 508.27 712.44 L 509.70 710.54 L 511.16 708.75 L 512.63 707.07 L 514.12 705.48 L 515.64 703.98 L 517.17 702.57 L 518.72 701.23 L 520.28 699.97 L 521.87 698.77 L 523.48 697.65 L 525.10 696.58 L 526.75 695.58 L 528.41 694.63 L 530.09 693.73 L 531.80 692.89 L 533.52 692.10 L 535.27 691.36 L 537.04 690.67 L 538.83 690.02 L 540.64 689.42 L 542.48 688.86 L 544.35 688.34 L 546.23 687.87 L 548.15 687.44 L 550.09 687.05 L 552.06 686.71 L 554.07 686.40 L 556.10 686.14 L 558.16 685.91 L 560.26 685.73 L 562.39 685.58 L 564.55 685.48 L 566.76 685.42 L 569.00 685.40 L 569.82 684.02 L 570.66 682.71 L 571.53 681.44 L 572.42 680.22 L 573.33 679.04 L 574.26 677.91 L 575.21 676.82 L 576.18 675.77 L 577.17 674.75 L 578.18 673.77 L 579.21 672.83 L 580.25 671.92 L 581.32 671.04 L 582.41 670.19 L 583.51 669.37 L 584.63 668.57 L 585.77 667.81 L 586.93 667.08 L 588.11 666.37 L 589.31 665.68 L 590.53 665.03 L 591.77 664.39 L 593.02 663.78 L 594.30 663.20 L 595.60 662.64 L 596.92 662.10 L 598.26 661.59 L 599.62 661.10 L 601.00 660.63 L 602.41 660.18 L 603.84 659.76 L 605.29 659.36 L 606.77 658.98 L 608.27 658.62 L 612.26 650.33 L 616.16 642.23 L 619.98 634.31 L 623.71 626.55 L 627.38 618.94 L 630.98 611.45 L 634.53 604.09 L 638.03 596.82 L 641.48 589.65 L 644.90 582.56 L 648.28 575.55 L 651.63 568.58 L 654.96 561.67 L 658.27 554.80 L 661.57 547.95 L 664.85 541.13 L 668.13 534.31 L 671.42 527.49 L 674.70 520.67 L 678.00 513.82 L 681.31 506.95 L 684.64 500.04 L 687.99 493.08 L 691.37 486.06 L 694.79 478.97 L 698.24 471.80 L 701.74 464.54 L 705.28 457.17 L 708.89 449.68 L 712.56 442.07 L 716.29 434.31 L 720.11 426.39 L 724.01 418.29 Z"></path><path class="theta-atlas-hatching" d="M 728.00 410.00 L 724.01 401.71 L 720.11 393.61 L 716.29 385.69 L 712.56 377.93 L 708.89 370.32 L 705.28 362.83 L 701.74 355.46 L 698.24 348.20 L 694.79 341.03 L 691.37 333.94 L 687.99 326.92 L 684.64 319.96 L 681.31 313.05 L 678.00 306.18 L 674.70 299.33 L 671.42 292.51 L 668.13 285.69 L 664.85 278.87 L 661.57 272.05 L 658.27 265.20 L 654.96 258.33 L 651.63 251.42 L 648.28 244.45 L 644.90 237.44 L 641.48 230.35 L 638.03 223.18 L 634.53 215.91 L 630.98 208.55 L 627.38 201.06 L 623.71 193.45 L 619.98 185.69 L 616.16 177.77 L 612.26 169.67 L 608.27 161.38 L 606.77 161.02 L 605.29 160.64 L 603.84 160.24 L 602.41 159.82 L 601.00 159.37 L 599.62 158.90 L 598.26 158.41 L 596.92 157.90 L 595.60 157.36 L 594.30 156.80 L 593.02 156.22 L 591.77 155.61 L 590.53 154.97 L 589.31 154.32 L 588.11 153.63 L 586.93 152.92 L 585.77 152.19 L 584.63 151.43 L 583.51 150.63 L 582.41 149.81 L 581.32 148.96 L 580.25 148.08 L 579.21 147.17 L 578.18 146.23 L 577.17 145.25 L 576.18 144.23 L 575.21 143.18 L 574.26 142.09 L 573.33 140.96 L 572.42 139.78 L 571.53 138.56 L 570.66 137.29 L 569.82 135.98 L 569.00 134.60 L 566.76 134.58 L 564.55 134.52 L 562.39 134.42 L 560.26 134.27 L 558.16 134.09 L 556.10 133.86 L 554.07 133.60 L 552.06 133.29 L 550.09 132.95 L 548.15 132.56 L 546.23 132.13 L 544.35 131.66 L 542.48 131.14 L 540.64 130.58 L 538.83 129.98 L 537.04 129.33 L 535.27 128.64 L 533.52 127.90 L 531.80 127.11 L 530.09 126.27 L 528.41 125.37 L 526.75 124.42 L 525.10 123.42 L 523.48 122.35 L 521.87 121.23 L 520.28 120.03 L 518.72 118.77 L 517.17 117.43 L 515.64 116.02 L 514.12 114.52 L 512.63 112.93 L 511.16 111.25 L 509.70 109.46 L 508.27 107.56 L 504.85 108.64 L 501.50 109.62 L 498.21 110.52 L 494.98 111.33 L 491.80 112.06 L 488.68 112.70 L 485.61 113.26 L 482.57 113.74 L 479.58 114.14 L 476.63 114.47 L 473.72 114.71 L 470.83 114.87 L 467.98 114.96 L 465.15 114.96 L 462.35 114.88 L 459.57 114.72 L 456.81 114.47 L 454.06 114.14 L 451.33 113.71 L 448.61 113.20 L 445.90 112.58 L 443.19 111.86 L 440.49 111.03 L 437.79 110.09 L 435.09 109.03 L 432.38 107.84 L 429.66 106.51 L 426.92 105.03 L 424.18 103.38 L 421.41 101.56 L 418.61 99.53 L 415.78 97.28 L 412.91 94.78 L 410.00 92.00 L 407.91 93.97 L 405.85 95.70 L 403.81 97.22 L 401.78 98.56 L 399.76 99.75 L 397.75 100.78 L 395.75 101.69 L 393.75 102.48 L 391.75 103.16 L 389.76 103.74 L 387.76 104.23 L 385.76 104.63 L 383.76 104.95 L 381.76 105.20 L 379.74 105.37 L 377.72 105.48 L 375.69 105.53 L 373.66 105.52 L 371.61 105.45 L 369.55 105.34 L 367.48 105.17 L 365.39 104.96 L 363.30 104.70 L 361.19 104.41 L 359.06 104.08 L 356.92 103.71 L 354.76 103.32 L 352.59 102.89 L 350.41 102.45 L 348.20 101.98 L 345.98 101.50 L 343.75 101.00 L 341.50 100.49 L 339.24 99.97 L 336.81 101.88 L 334.40 103.73 L 331.99 105.52 L 329.59 107.25 L 327.19 108.92 L 324.80 110.55 L 322.40 112.12 L 320.01 113.63 L 317.61 115.10 L 315.21 116.51 L 312.80 117.87 L 310.39 119.18 L 307.96 120.44 L 305.53 121.66 L 303.08 122.82 L 300.62 123.93 L 298.14 124.99 L 295.65 126.00 L 293.13 126.97 L 290.59 127.88 L 288.02 128.74 L 285.43 129.55 L 282.81 130.30 L 280.15 131.00 L 277.46 131.64 L 274.72 132.23 L 271.95 132.76 L 269.13 133.23 L 266.26 133.63 L 263.34 133.97 L 260.35 134.24 L 257.31 134.44 L 254.19 134.56 L 251.00 134.60 L 248.74 138.47 L 246.47 142.22 L 244.20 145.88 L 241.93 149.43 L 239.64 152.90 L 237.34 156.27 L 235.02 159.56 L 232.69 162.77 L 230.34 165.89 L 227.96 168.94 L 225.56 171.91 L 223.12 174.82 L 220.66 177.65 L 218.16 180.42 L 215.62 183.12 L 213.04 185.75 L 210.41 188.33 L 207.73 190.84 L 204.99 193.30 L 202.20 195.69 L 199.34 198.03 L 196.40 200.31 L 193.40 202.54 L 190.30 204.71 L 187.12 206.82 L 183.84 208.87 L 180.45 210.87 L 176.95 212.81 L 173.31 214.69 L 169.54 216.50 L 165.61 218.25 L 161.51 219.94 L 157.23 221.55 L 152.73 223.08 L 152.69 225.12 L 152.57 227.09 L 152.37 228.99 L 152.10 230.83 L 151.78 232.61 L 151.39 234.35 L 150.94 236.03 L 150.44 237.68 L 149.89 239.29 L 149.29 240.86 L 148.64 242.39 L 147.95 243.89 L 147.22 245.37 L 146.44 246.81 L 145.63 248.23 L 144.77 249.63 L 143.88 251.00 L 142.94 252.35 L 141.97 253.68 L 140.97 254.99 L 139.93 256.29 L 138.86 257.56 L 137.75 258.83 L 136.61 260.08 L 135.44 261.31 L 134.23 262.54 L 132.99 263.75 L 131.72 264.96 L 130.43 266.15 L 129.10 267.34 L 127.74 268.52 L 126.35 269.69 L 124.94 270.86 L 123.49 272.02 L 123.47 276.65 L 123.41 281.19 L 123.31 285.67 L 123.16 290.08 L 122.97 294.43 L 122.74 298.72 L 122.47 302.95 L 122.15 307.14 L 121.79 311.28 L 121.38 315.38 L 120.92 319.44 L 120.42 323.46 L 119.86 327.45 L 119.25 331.41 L 118.59 335.34 L 117.88 339.26 L 117.11 343.15 L 116.28 347.03 L 115.39 350.89 L 114.43 354.75 L 113.41 358.60 L 112.31 362.45 L 111.15 366.30 L 109.90 370.16 L 108.58 374.02 L 107.16 377.90 L 105.66 381.80 L 104.06 385.72 L 102.35 389.67 L 100.54 393.65 L 98.60 397.66 L 96.54 401.72 L 94.35 405.83 L 92.00 410.00 L 94.35 414.17 L 96.54 418.28 L 98.60 422.34 L 100.54 426.35 L 102.35 430.33 L 104.06 434.28 L 105.66 438.20 L 107.16 442.10 L 108.58 445.98 L 109.90 449.84 L 111.15 453.70 L 112.31 457.55 L 113.41 461.40 L 114.43 465.25 L 115.39 469.11 L 116.28 472.97 L 117.11 476.85 L 117.88 480.74 L 118.59 484.66 L 119.25 488.59 L 119.86 492.55 L 120.42 496.54 L 120.92 500.56 L 121.38 504.62 L 121.79 508.72 L 122.15 512.86 L 122.47 517.05 L 122.74 521.28 L 122.97 525.57 L 123.16 529.92 L 123.31 534.33 L 123.41 538.81 L 123.47 543.35 L 123.49 547.98 L 124.94 549.14 L 126.35 550.31 L 127.74 551.48 L 129.10 552.66 L 130.43 553.85 L 131.72 555.04 L 132.99 556.25 L 134.23 557.46 L 135.44 558.69 L 136.61 559.92 L 137.75 561.17 L 138.86 562.44 L 139.93 563.71 L 140.97 565.01 L 141.97 566.32 L 142.94 567.65 L 143.88 569.00 L 144.77 570.37 L 145.63 571.77 L 146.44 573.19 L 147.22 574.63 L 147.95 576.11 L 148.64 577.61 L 149.29 579.14 L 149.89 580.71 L 150.44 582.32 L 150.94 583.97 L 151.39 585.65 L 151.78 587.39 L 152.10 589.17 L 152.37 591.01 L 152.57 592.91 L 152.69 594.88 L 152.73 596.92 L 157.23 598.45 L 161.51 600.06 L 165.61 601.75 L 169.54 603.50 L 173.31 605.31 L 176.95 607.19 L 180.45 609.13 L 183.84 611.13 L 187.12 613.18 L 190.30 615.29 L 193.40 617.46 L 196.40 619.69 L 199.34 621.97 L 202.20 624.31 L 204.99 626.70 L 207.73 629.16 L 210.41 631.67 L 213.04 634.25 L 215.62 636.88 L 218.16 639.58 L 220.66 642.35 L 223.12 645.18 L 225.56 648.09 L 227.96 651.06 L 230.34 654.11 L 232.69 657.23 L 235.02 660.44 L 237.34 663.73 L 239.64 667.10 L 241.93 670.57 L 244.20 674.12 L 246.47 677.78 L 248.74 681.53 L 251.00 685.40 L 254.19 685.44 L 257.31 685.56 L 260.35 685.76 L 263.34 686.03 L 266.26 686.37 L 269.13 686.77 L 271.95 687.24 L 274.72 687.77 L 277.46 688.36 L 280.15 689.00 L 282.81 689.70 L 285.43 690.45 L 288.02 691.26 L 290.59 692.12 L 293.13 693.03 L 295.65 694.00 L 298.14 695.01 L 300.62 696.07 L 303.08 697.18 L 305.53 698.34 L 307.96 699.56 L 310.39 700.82 L 312.80 702.13 L 315.21 703.49 L 317.61 704.90 L 320.01 706.37 L 322.40 707.88 L 324.80 709.45 L 327.19 711.08 L 329.59 712.75 L 331.99 714.48 L 334.40 716.27 L 336.81 718.12 L 339.24 720.03 L 341.50 719.51 L 343.75 719.00 L 345.98 718.50 L 348.20 718.02 L 350.41 717.55 L 352.59 717.11 L 354.76 716.68 L 356.92 716.29 L 359.06 715.92 L 361.19 715.59 L 363.30 715.30 L 365.39 715.04 L 367.48 714.83 L 369.55 714.66 L 371.61 714.55 L 373.66 714.48 L 375.69 714.47 L 377.72 714.52 L 379.74 714.63 L 381.76 714.80 L 383.76 715.05 L 385.76 715.37 L 387.76 715.77 L 389.76 716.26 L 391.75 716.84 L 393.75 717.52 L 395.75 718.31 L 397.75 719.22 L 399.76 720.25 L 401.78 721.44 L 403.81 722.78 L 405.85 724.30 L 407.91 726.03 L 410.00 728.00 L 412.91 725.22 L 415.78 722.72 L 418.61 720.47 L 421.41 718.44 L 424.18 716.62 L 426.92 714.97 L 429.66 713.49 L 432.38 712.16 L 435.09 710.97 L 437.79 709.91 L 440.49 708.97 L 443.19 708.14 L 445.90 707.42 L 448.61 706.80 L 451.33 706.29 L 454.06 705.86 L 456.81 705.53 L 459.57 705.28 L 462.35 705.12 L 465.15 705.04 L 467.98 705.04 L 470.83 705.13 L 473.72 705.29 L 476.63 705.53 L 479.58 705.86 L 482.57 706.26 L 485.61 706.74 L 488.68 707.30 L 491.80 707.94 L 494.98 708.67 L 498.21 709.48 L 501.50 710.38 L 504.85 711.36 L 508.27 712.44 L 509.70 710.54 L 511.16 708.75 L 512.63 707.07 L 514.12 705.48 L 515.64 703.98 L 517.17 702.57 L 518.72 701.23 L 520.28 699.97 L 521.87 698.77 L 523.48 697.65 L 525.10 696.58 L 526.75 695.58 L 528.41 694.63 L 530.09 693.73 L 531.80 692.89 L 533.52 692.10 L 535.27 691.36 L 537.04 690.67 L 538.83 690.02 L 540.64 689.42 L 542.48 688.86 L 544.35 688.34 L 546.23 687.87 L 548.15 687.44 L 550.09 687.05 L 552.06 686.71 L 554.07 686.40 L 556.10 686.14 L 558.16 685.91 L 560.26 685.73 L 562.39 685.58 L 564.55 685.48 L 566.76 685.42 L 569.00 685.40 L 569.82 684.02 L 570.66 682.71 L 571.53 681.44 L 572.42 680.22 L 573.33 679.04 L 574.26 677.91 L 575.21 676.82 L 576.18 675.77 L 577.17 674.75 L 578.18 673.77 L 579.21 672.83 L 580.25 671.92 L 581.32 671.04 L 582.41 670.19 L 583.51 669.37 L 584.63 668.57 L 585.77 667.81 L 586.93 667.08 L 588.11 666.37 L 589.31 665.68 L 590.53 665.03 L 591.77 664.39 L 593.02 663.78 L 594.30 663.20 L 595.60 662.64 L 596.92 662.10 L 598.26 661.59 L 599.62 661.10 L 601.00 660.63 L 602.41 660.18 L 603.84 659.76 L 605.29 659.36 L 606.77 658.98 L 608.27 658.62 L 612.26 650.33 L 616.16 642.23 L 619.98 634.31 L 623.71 626.55 L 627.38 618.94 L 630.98 611.45 L 634.53 604.09 L 638.03 596.82 L 641.48 589.65 L 644.90 582.56 L 648.28 575.55 L 651.63 568.58 L 654.96 561.67 L 658.27 554.80 L 661.57 547.95 L 664.85 541.13 L 668.13 534.31 L 671.42 527.49 L 674.70 520.67 L 678.00 513.82 L 681.31 506.95 L 684.64 500.04 L 687.99 493.08 L 691.37 486.06 L 694.79 478.97 L 698.24 471.80 L 701.74 464.54 L 705.28 457.17 L 708.89 449.68 L 712.56 442.07 L 716.29 434.31 L 720.11 426.39 L 724.01 418.29 Z"></path><path class="theta-contour theta-order-4" d="M 728.00 410.00 L 713.95 395.95 L 701.03 383.03 L 689.07 371.07 L 677.92 359.92 L 667.45 349.45 L 657.56 339.56 L 648.17 330.17 L 639.21 321.21 L 630.60 312.60 L 622.29 304.29 L 614.24 296.24 L 606.40 288.40 L 598.72 280.72 L 591.18 273.18 L 583.73 265.73 L 576.35 258.35 L 569.00 251.00 L 561.65 243.65 L 554.27 236.27 L 546.82 228.82 L 539.28 221.28 L 531.60 213.60 L 523.76 205.76 L 515.71 197.71 L 507.40 189.40 L 498.79 180.79 L 489.83 171.83 L 480.44 162.44 L 470.55 152.55 L 460.08 142.08 L 448.93 130.93 L 436.97 118.97 L 424.05 106.05 L 410.00 92.00 L 405.18 96.75 L 400.49 101.22 L 395.92 105.43 L 391.46 109.39 L 387.10 113.13 L 382.82 116.65 L 378.61 119.97 L 374.47 123.09 L 370.39 126.03 L 366.35 128.79 L 362.35 131.38 L 358.37 133.80 L 354.41 136.06 L 350.47 138.17 L 346.52 140.11 L 342.57 141.90 L 338.60 143.53 L 334.60 145.00 L 330.56 146.31 L 326.48 147.45 L 322.33 148.42 L 318.10 149.21 L 313.78 149.80 L 309.35 150.19 L 304.78 150.35 L 300.06 150.26 L 295.16 149.90 L 290.03 149.23 L 284.63 148.20 L 278.91 146.74 L 272.81 144.79 L 266.21 142.23 L 259.00 138.91 L 251.00 134.60 L 250.60 152.56 L 249.54 167.85 L 248.01 181.16 L 246.10 192.96 L 243.89 203.57 L 241.42 213.23 L 238.74 222.13 L 235.86 230.41 L 232.81 238.18 L 229.59 245.53 L 226.21 252.54 L 222.68 259.27 L 219.00 265.77 L 215.17 272.08 L 211.19 278.26 L 207.04 284.33 L 202.74 290.34 L 198.26 296.30 L 193.61 302.25 L 188.78 308.22 L 183.74 314.23 L 178.49 320.31 L 173.03 326.49 L 167.32 332.80 L 161.36 339.25 L 155.12 345.89 L 148.58 352.75 L 141.72 359.85 L 134.51 367.24 L 126.92 374.95 L 118.92 383.03 L 110.46 391.52 L 101.50 400.50 L 92.00 410.00 L 101.50 419.50 L 110.46 428.48 L 118.92 436.97 L 126.92 445.05 L 134.51 452.76 L 141.72 460.15 L 148.58 467.25 L 155.12 474.11 L 161.36 480.75 L 167.32 487.20 L 173.03 493.51 L 178.49 499.69 L 183.74 505.77 L 188.78 511.78 L 193.61 517.75 L 198.26 523.70 L 202.74 529.66 L 207.04 535.67 L 211.19 541.74 L 215.17 547.92 L 219.00 554.23 L 222.68 560.73 L 226.21 567.46 L 229.59 574.47 L 232.81 581.82 L 235.86 589.59 L 238.74 597.87 L 241.42 606.77 L 243.89 616.43 L 246.10 627.04 L 248.01 638.84 L 249.54 652.15 L 250.60 667.44 L 251.00 685.40 L 259.00 681.09 L 266.21 677.77 L 272.81 675.21 L 278.91 673.26 L 284.63 671.80 L 290.03 670.77 L 295.16 670.10 L 300.06 669.74 L 304.78 669.65 L 309.35 669.81 L 313.78 670.20 L 318.10 670.79 L 322.33 671.58 L 326.48 672.55 L 330.56 673.69 L 334.60 675.00 L 338.60 676.47 L 342.57 678.10 L 346.52 679.89 L 350.47 681.83 L 354.41 683.94 L 358.37 686.20 L 362.35 688.62 L 366.35 691.21 L 370.39 693.97 L 374.47 696.91 L 378.61 700.03 L 382.82 703.35 L 387.10 706.87 L 391.46 710.61 L 395.92 714.57 L 400.49 718.78 L 405.18 723.25 L 410.00 728.00 L 424.05 713.95 L 436.97 701.03 L 448.93 689.07 L 460.08 677.92 L 470.55 667.45 L 480.44 657.56 L 489.83 648.17 L 498.79 639.21 L 507.40 630.60 L 515.71 622.29 L 523.76 614.24 L 531.60 606.40 L 539.28 598.72 L 546.82 591.18 L 554.27 583.73 L 561.65 576.35 L 569.00 569.00 L 576.35 561.65 L 583.73 554.27 L 591.18 546.82 L 598.72 539.28 L 606.40 531.60 L 614.24 523.76 L 622.29 515.71 L 630.60 507.40 L 639.21 498.79 L 648.17 489.83 L 657.56 480.44 L 667.45 470.55 L 677.92 460.08 L 689.07 448.93 L 701.03 436.97 L 713.95 424.05 Z"><title>Boundary of Θ4</title></path><path class="theta-contour theta-order-5" d="M 728.00 410.00 L 719.68 398.55 L 711.76 387.65 L 704.20 377.24 L 696.95 367.27 L 689.98 357.66 L 683.24 348.39 L 676.72 339.41 L 670.38 330.69 L 664.20 322.18 L 658.15 313.86 L 652.23 305.71 L 646.40 297.69 L 640.65 289.78 L 634.97 281.95 L 629.33 274.20 L 623.73 266.48 L 618.13 258.78 L 612.54 251.09 L 606.94 243.37 L 601.30 235.61 L 595.61 227.79 L 589.87 219.88 L 584.04 211.85 L 578.11 203.70 L 572.07 195.38 L 565.89 186.88 L 559.55 178.15 L 553.03 169.17 L 546.29 159.90 L 539.32 150.30 L 532.07 140.32 L 524.50 129.91 L 516.59 119.02 L 508.27 107.56 L 504.85 108.64 L 501.50 109.62 L 498.21 110.52 L 494.98 111.33 L 491.80 112.06 L 488.68 112.70 L 485.61 113.26 L 482.57 113.74 L 479.58 114.14 L 476.63 114.47 L 473.72 114.71 L 470.83 114.87 L 467.98 114.96 L 465.15 114.96 L 462.35 114.88 L 459.57 114.72 L 456.81 114.47 L 454.06 114.14 L 451.33 113.71 L 448.61 113.20 L 445.90 112.58 L 443.19 111.86 L 440.49 111.03 L 437.79 110.09 L 435.09 109.03 L 432.38 107.84 L 429.66 106.51 L 426.92 105.03 L 424.18 103.38 L 421.41 101.56 L 418.61 99.53 L 415.78 97.28 L 412.91 94.78 L 410.00 92.00 L 405.18 96.75 L 400.49 101.22 L 395.92 105.43 L 391.46 109.39 L 387.10 113.13 L 382.82 116.65 L 378.61 119.97 L 374.47 123.09 L 370.39 126.03 L 366.35 128.79 L 362.35 131.38 L 358.37 133.80 L 354.41 136.06 L 350.47 138.17 L 346.52 140.11 L 342.57 141.90 L 338.60 143.53 L 334.60 145.00 L 330.56 146.31 L 326.48 147.45 L 322.33 148.42 L 318.10 149.21 L 313.78 149.80 L 309.35 150.19 L 304.78 150.35 L 300.06 150.26 L 295.16 149.90 L 290.03 149.23 L 284.63 148.20 L 278.91 146.74 L 272.81 144.79 L 266.21 142.23 L 259.00 138.91 L 251.00 134.60 L 250.74 141.84 L 250.05 148.08 L 249.03 153.57 L 247.75 158.46 L 246.24 162.87 L 244.56 166.88 L 242.71 170.56 L 240.71 173.95 L 238.58 177.09 L 236.33 180.03 L 233.97 182.78 L 231.50 185.36 L 228.93 187.80 L 226.25 190.10 L 223.48 192.30 L 220.61 194.38 L 217.65 196.37 L 214.59 198.28 L 211.44 200.11 L 208.19 201.88 L 204.85 203.58 L 201.41 205.23 L 197.88 206.84 L 194.25 208.40 L 190.53 209.92 L 186.71 211.42 L 182.79 212.90 L 178.77 214.35 L 174.66 215.80 L 170.46 217.24 L 166.16 218.69 L 161.77 220.14 L 157.30 221.60 L 152.73 223.08 L 152.70 230.23 L 152.60 237.15 L 152.43 243.86 L 152.20 250.37 L 151.89 256.71 L 151.52 262.88 L 151.08 268.90 L 150.56 274.78 L 149.97 280.52 L 149.31 286.15 L 148.57 291.67 L 147.74 297.08 L 146.83 302.41 L 145.83 307.66 L 144.74 312.83 L 143.55 317.95 L 142.25 323.00 L 140.84 328.01 L 139.32 332.98 L 137.67 337.93 L 135.88 342.85 L 133.94 347.76 L 131.85 352.67 L 129.59 357.58 L 127.13 362.51 L 124.47 367.48 L 121.57 372.48 L 118.42 377.54 L 114.99 382.66 L 111.23 387.87 L 107.11 393.19 L 102.58 398.63 L 97.57 404.23 L 92.00 410.00 L 97.57 415.77 L 102.58 421.37 L 107.11 426.81 L 111.23 432.13 L 114.99 437.34 L 118.42 442.46 L 121.57 447.52 L 124.47 452.52 L 127.13 457.49 L 129.59 462.42 L 131.85 467.33 L 133.94 472.24 L 135.88 477.15 L 137.67 482.07 L 139.32 487.02 L 140.84 491.99 L 142.25 497.00 L 143.55 502.05 L 144.74 507.17 L 145.83 512.34 L 146.83 517.59 L 147.74 522.92 L 148.57 528.33 L 149.31 533.85 L 149.97 539.48 L 150.56 545.22 L 151.08 551.10 L 151.52 557.12 L 151.89 563.29 L 152.20 569.63 L 152.43 576.14 L 152.60 582.85 L 152.70 589.77 L 152.73 596.92 L 157.30 598.40 L 161.77 599.86 L 166.16 601.31 L 170.46 602.76 L 174.66 604.20 L 178.77 605.65 L 182.79 607.10 L 186.71 608.58 L 190.53 610.08 L 194.25 611.60 L 197.88 613.16 L 201.41 614.77 L 204.85 616.42 L 208.19 618.12 L 211.44 619.89 L 214.59 621.72 L 217.65 623.63 L 220.61 625.62 L 223.48 627.70 L 226.25 629.90 L 228.93 632.20 L 231.50 634.64 L 233.97 637.22 L 236.33 639.97 L 238.58 642.91 L 240.71 646.05 L 242.71 649.44 L 244.56 653.12 L 246.24 657.13 L 247.75 661.54 L 249.03 666.43 L 250.05 671.92 L 250.74 678.16 L 251.00 685.40 L 259.00 681.09 L 266.21 677.77 L 272.81 675.21 L 278.91 673.26 L 284.63 671.80 L 290.03 670.77 L 295.16 670.10 L 300.06 669.74 L 304.78 669.65 L 309.35 669.81 L 313.78 670.20 L 318.10 670.79 L 322.33 671.58 L 326.48 672.55 L 330.56 673.69 L 334.60 675.00 L 338.60 676.47 L 342.57 678.10 L 346.52 679.89 L 350.47 681.83 L 354.41 683.94 L 358.37 686.20 L 362.35 688.62 L 366.35 691.21 L 370.39 693.97 L 374.47 696.91 L 378.61 700.03 L 382.82 703.35 L 387.10 706.87 L 391.46 710.61 L 395.92 714.57 L 400.49 718.78 L 405.18 723.25 L 410.00 728.00 L 412.91 725.22 L 415.78 722.72 L 418.61 720.47 L 421.41 718.44 L 424.18 716.62 L 426.92 714.97 L 429.66 713.49 L 432.38 712.16 L 435.09 710.97 L 437.79 709.91 L 440.49 708.97 L 443.19 708.14 L 445.90 707.42 L 448.61 706.80 L 451.33 706.29 L 454.06 705.86 L 456.81 705.53 L 459.57 705.28 L 462.35 705.12 L 465.15 705.04 L 467.98 705.04 L 470.83 705.13 L 473.72 705.29 L 476.63 705.53 L 479.58 705.86 L 482.57 706.26 L 485.61 706.74 L 488.68 707.30 L 491.80 707.94 L 494.98 708.67 L 498.21 709.48 L 501.50 710.38 L 504.85 711.36 L 508.27 712.44 L 516.59 700.98 L 524.50 690.09 L 532.07 679.68 L 539.32 669.70 L 546.29 660.10 L 553.03 650.83 L 559.55 641.85 L 565.89 633.12 L 572.07 624.62 L 578.11 616.30 L 584.04 608.15 L 589.87 600.12 L 595.61 592.21 L 601.30 584.39 L 606.94 576.63 L 612.54 568.91 L 618.13 561.22 L 623.73 553.52 L 629.33 545.80 L 634.97 538.05 L 640.65 530.22 L 646.40 522.31 L 652.23 514.29 L 658.15 506.14 L 664.20 497.82 L 670.38 489.31 L 676.72 480.59 L 683.24 471.61 L 689.98 462.34 L 696.95 452.73 L 704.20 442.76 L 711.76 432.35 L 719.68 421.45 Z"><title>Boundary of Θ5</title></path><path class="theta-contour theta-order-6" d="M 728.00 410.00 L 722.44 400.37 L 717.07 391.06 L 711.85 382.03 L 706.78 373.25 L 701.84 364.70 L 697.02 356.35 L 692.30 348.17 L 687.68 340.16 L 683.13 332.29 L 678.66 324.53 L 674.24 316.89 L 669.87 309.32 L 665.55 301.83 L 661.26 294.40 L 656.99 287.01 L 652.74 279.65 L 648.50 272.30 L 644.26 264.95 L 640.01 257.59 L 635.74 250.20 L 631.45 242.77 L 627.13 235.28 L 622.76 227.72 L 618.34 220.07 L 613.87 212.32 L 609.32 204.44 L 604.70 196.43 L 599.98 188.26 L 595.16 179.91 L 590.22 171.35 L 585.15 162.57 L 579.93 153.54 L 574.56 144.23 L 569.00 134.60 L 566.76 134.58 L 564.55 134.52 L 562.39 134.42 L 560.26 134.27 L 558.16 134.09 L 556.10 133.86 L 554.07 133.60 L 552.06 133.29 L 550.09 132.95 L 548.15 132.56 L 546.23 132.13 L 544.35 131.66 L 542.48 131.14 L 540.64 130.58 L 538.83 129.98 L 537.04 129.33 L 535.27 128.64 L 533.52 127.90 L 531.80 127.11 L 530.09 126.27 L 528.41 125.37 L 526.75 124.42 L 525.10 123.42 L 523.48 122.35 L 521.87 121.23 L 520.28 120.03 L 518.72 118.77 L 517.17 117.43 L 515.64 116.02 L 514.12 114.52 L 512.63 112.93 L 511.16 111.25 L 509.70 109.46 L 508.27 107.56 L 504.85 108.64 L 501.50 109.62 L 498.21 110.52 L 494.98 111.33 L 491.80 112.06 L 488.68 112.70 L 485.61 113.26 L 482.57 113.74 L 479.58 114.14 L 476.63 114.47 L 473.72 114.71 L 470.83 114.87 L 467.98 114.96 L 465.15 114.96 L 462.35 114.88 L 459.57 114.72 L 456.81 114.47 L 454.06 114.14 L 451.33 113.71 L 448.61 113.20 L 445.90 112.58 L 443.19 111.86 L 440.49 111.03 L 437.79 110.09 L 435.09 109.03 L 432.38 107.84 L 429.66 106.51 L 426.92 105.03 L 424.18 103.38 L 421.41 101.56 L 418.61 99.53 L 415.78 97.28 L 412.91 94.78 L 410.00 92.00 L 405.17 96.61 L 400.47 100.71 L 395.87 104.38 L 391.35 107.67 L 386.90 110.62 L 382.51 113.29 L 378.15 115.70 L 373.83 117.87 L 369.53 119.84 L 365.24 121.63 L 360.95 123.24 L 356.67 124.69 L 352.37 126.01 L 348.06 127.19 L 343.73 128.25 L 339.38 129.20 L 334.99 130.05 L 330.56 130.80 L 326.09 131.46 L 321.57 132.04 L 317.00 132.54 L 312.38 132.97 L 307.69 133.34 L 302.94 133.65 L 298.12 133.90 L 293.23 134.11 L 288.25 134.27 L 283.20 134.39 L 278.06 134.48 L 272.84 134.54 L 267.52 134.58 L 262.11 134.60 L 256.60 134.60 L 251.00 134.60 L 248.74 138.47 L 246.47 142.22 L 244.20 145.88 L 241.93 149.43 L 239.64 152.90 L 237.34 156.27 L 235.02 159.56 L 232.69 162.77 L 230.34 165.89 L 227.96 168.94 L 225.56 171.91 L 223.12 174.82 L 220.66 177.65 L 218.16 180.42 L 215.62 183.12 L 213.04 185.75 L 210.41 188.33 L 207.73 190.84 L 204.99 193.30 L 202.20 195.69 L 199.34 198.03 L 196.40 200.31 L 193.40 202.54 L 190.30 204.71 L 187.12 206.82 L 183.84 208.87 L 180.45 210.87 L 176.95 212.81 L 173.31 214.69 L 169.54 216.50 L 165.61 218.25 L 161.51 219.94 L 157.23 221.55 L 152.73 223.08 L 152.65 230.19 L 152.40 237.01 L 152.00 243.58 L 151.47 249.92 L 150.81 256.07 L 150.04 262.04 L 149.16 267.85 L 148.17 273.53 L 147.08 279.08 L 145.90 284.53 L 144.64 289.89 L 143.28 295.16 L 141.84 300.37 L 140.31 305.52 L 138.70 310.62 L 137.01 315.69 L 135.25 320.73 L 133.40 325.74 L 131.47 330.75 L 129.46 335.75 L 127.37 340.76 L 125.20 345.79 L 122.94 350.83 L 120.60 355.90 L 118.17 361.01 L 115.66 366.16 L 113.05 371.37 L 110.35 376.64 L 107.55 381.97 L 104.66 387.39 L 101.66 392.89 L 98.55 398.48 L 95.33 404.18 L 92.00 410.00 L 95.33 415.82 L 98.55 421.52 L 101.66 427.11 L 104.66 432.61 L 107.55 438.03 L 110.35 443.36 L 113.05 448.63 L 115.66 453.84 L 118.17 458.99 L 120.60 464.10 L 122.94 469.17 L 125.20 474.21 L 127.37 479.24 L 129.46 484.25 L 131.47 489.25 L 133.40 494.26 L 135.25 499.27 L 137.01 504.31 L 138.70 509.38 L 140.31 514.48 L 141.84 519.63 L 143.28 524.84 L 144.64 530.11 L 145.90 535.47 L 147.08 540.92 L 148.17 546.47 L 149.16 552.15 L 150.04 557.96 L 150.81 563.93 L 151.47 570.08 L 152.00 576.42 L 152.40 582.99 L 152.65 589.81 L 152.73 596.92 L 157.23 598.45 L 161.51 600.06 L 165.61 601.75 L 169.54 603.50 L 173.31 605.31 L 176.95 607.19 L 180.45 609.13 L 183.84 611.13 L 187.12 613.18 L 190.30 615.29 L 193.40 617.46 L 196.40 619.69 L 199.34 621.97 L 202.20 624.31 L 204.99 626.70 L 207.73 629.16 L 210.41 631.67 L 213.04 634.25 L 215.62 636.88 L 218.16 639.58 L 220.66 642.35 L 223.12 645.18 L 225.56 648.09 L 227.96 651.06 L 230.34 654.11 L 232.69 657.23 L 235.02 660.44 L 237.34 663.73 L 239.64 667.10 L 241.93 670.57 L 244.20 674.12 L 246.47 677.78 L 248.74 681.53 L 251.00 685.40 L 256.60 685.40 L 262.11 685.40 L 267.52 685.42 L 272.84 685.46 L 278.06 685.52 L 283.20 685.61 L 288.25 685.73 L 293.23 685.89 L 298.12 686.10 L 302.94 686.35 L 307.69 686.66 L 312.38 687.03 L 317.00 687.46 L 321.57 687.96 L 326.09 688.54 L 330.56 689.20 L 334.99 689.95 L 339.38 690.80 L 343.73 691.75 L 348.06 692.81 L 352.37 693.99 L 356.67 695.31 L 360.95 696.76 L 365.24 698.37 L 369.53 700.16 L 373.83 702.13 L 378.15 704.30 L 382.51 706.71 L 386.90 709.38 L 391.35 712.33 L 395.87 715.62 L 400.47 719.29 L 405.17 723.39 L 410.00 728.00 L 412.91 725.22 L 415.78 722.72 L 418.61 720.47 L 421.41 718.44 L 424.18 716.62 L 426.92 714.97 L 429.66 713.49 L 432.38 712.16 L 435.09 710.97 L 437.79 709.91 L 440.49 708.97 L 443.19 708.14 L 445.90 707.42 L 448.61 706.80 L 451.33 706.29 L 454.06 705.86 L 456.81 705.53 L 459.57 705.28 L 462.35 705.12 L 465.15 705.04 L 467.98 705.04 L 470.83 705.13 L 473.72 705.29 L 476.63 705.53 L 479.58 705.86 L 482.57 706.26 L 485.61 706.74 L 488.68 707.30 L 491.80 707.94 L 494.98 708.67 L 498.21 709.48 L 501.50 710.38 L 504.85 711.36 L 508.27 712.44 L 509.70 710.54 L 511.16 708.75 L 512.63 707.07 L 514.12 705.48 L 515.64 703.98 L 517.17 702.57 L 518.72 701.23 L 520.28 699.97 L 521.87 698.77 L 523.48 697.65 L 525.10 696.58 L 526.75 695.58 L 528.41 694.63 L 530.09 693.73 L 531.80 692.89 L 533.52 692.10 L 535.27 691.36 L 537.04 690.67 L 538.83 690.02 L 540.64 689.42 L 542.48 688.86 L 544.35 688.34 L 546.23 687.87 L 548.15 687.44 L 550.09 687.05 L 552.06 686.71 L 554.07 686.40 L 556.10 686.14 L 558.16 685.91 L 560.26 685.73 L 562.39 685.58 L 564.55 685.48 L 566.76 685.42 L 569.00 685.40 L 574.56 675.77 L 579.93 666.46 L 585.15 657.43 L 590.22 648.65 L 595.16 640.09 L 599.98 631.74 L 604.70 623.57 L 609.32 615.56 L 613.87 607.68 L 618.34 599.93 L 622.76 592.28 L 627.13 584.72 L 631.45 577.23 L 635.74 569.80 L 640.01 562.41 L 644.26 555.05 L 648.50 547.70 L 652.74 540.35 L 656.99 532.99 L 661.26 525.60 L 665.55 518.17 L 669.87 510.68 L 674.24 503.11 L 678.66 495.47 L 683.13 487.71 L 687.68 479.84 L 692.30 471.83 L 697.02 463.65 L 701.84 455.30 L 706.78 446.75 L 711.85 437.97 L 717.07 428.94 L 722.44 419.63 Z"><title>Boundary of Θ6</title></path><path class="theta-contour theta-order-7" d="M 728.00 410.00 L 724.01 401.71 L 720.11 393.61 L 716.29 385.69 L 712.56 377.93 L 708.89 370.32 L 705.28 362.83 L 701.74 355.46 L 698.24 348.20 L 694.79 341.03 L 691.37 333.94 L 687.99 326.92 L 684.64 319.96 L 681.31 313.05 L 678.00 306.18 L 674.70 299.33 L 671.42 292.51 L 668.13 285.69 L 664.85 278.87 L 661.57 272.05 L 658.27 265.20 L 654.96 258.33 L 651.63 251.42 L 648.28 244.45 L 644.90 237.44 L 641.48 230.35 L 638.03 223.18 L 634.53 215.91 L 630.98 208.55 L 627.38 201.06 L 623.71 193.45 L 619.98 185.69 L 616.16 177.77 L 612.26 169.67 L 608.27 161.38 L 606.77 161.02 L 605.29 160.64 L 603.84 160.24 L 602.41 159.82 L 601.00 159.37 L 599.62 158.90 L 598.26 158.41 L 596.92 157.90 L 595.60 157.36 L 594.30 156.80 L 593.02 156.22 L 591.77 155.61 L 590.53 154.97 L 589.31 154.32 L 588.11 153.63 L 586.93 152.92 L 585.77 152.19 L 584.63 151.43 L 583.51 150.63 L 582.41 149.81 L 581.32 148.96 L 580.25 148.08 L 579.21 147.17 L 578.18 146.23 L 577.17 145.25 L 576.18 144.23 L 575.21 143.18 L 574.26 142.09 L 573.33 140.96 L 572.42 139.78 L 571.53 138.56 L 570.66 137.29 L 569.82 135.98 L 569.00 134.60 L 566.76 134.58 L 564.55 134.52 L 562.39 134.42 L 560.26 134.27 L 558.16 134.09 L 556.10 133.86 L 554.07 133.60 L 552.06 133.29 L 550.09 132.95 L 548.15 132.56 L 546.23 132.13 L 544.35 131.66 L 542.48 131.14 L 540.64 130.58 L 538.83 129.98 L 537.04 129.33 L 535.27 128.64 L 533.52 127.90 L 531.80 127.11 L 530.09 126.27 L 528.41 125.37 L 526.75 124.42 L 525.10 123.42 L 523.48 122.35 L 521.87 121.23 L 520.28 120.03 L 518.72 118.77 L 517.17 117.43 L 515.64 116.02 L 514.12 114.52 L 512.63 112.93 L 511.16 111.25 L 509.70 109.46 L 508.27 107.56 L 504.85 108.64 L 501.50 109.62 L 498.21 110.52 L 494.98 111.33 L 491.80 112.06 L 488.68 112.70 L 485.61 113.26 L 482.57 113.74 L 479.58 114.14 L 476.63 114.47 L 473.72 114.71 L 470.83 114.87 L 467.98 114.96 L 465.15 114.96 L 462.35 114.88 L 459.57 114.72 L 456.81 114.47 L 454.06 114.14 L 451.33 113.71 L 448.61 113.20 L 445.90 112.58 L 443.19 111.86 L 440.49 111.03 L 437.79 110.09 L 435.09 109.03 L 432.38 107.84 L 429.66 106.51 L 426.92 105.03 L 424.18 103.38 L 421.41 101.56 L 418.61 99.53 L 415.78 97.28 L 412.91 94.78 L 410.00 92.00 L 407.91 93.97 L 405.85 95.70 L 403.81 97.22 L 401.78 98.56 L 399.76 99.75 L 397.75 100.78 L 395.75 101.69 L 393.75 102.48 L 391.75 103.16 L 389.76 103.74 L 387.76 104.23 L 385.76 104.63 L 383.76 104.95 L 381.76 105.20 L 379.74 105.37 L 377.72 105.48 L 375.69 105.53 L 373.66 105.52 L 371.61 105.45 L 369.55 105.34 L 367.48 105.17 L 365.39 104.96 L 363.30 104.70 L 361.19 104.41 L 359.06 104.08 L 356.92 103.71 L 354.76 103.32 L 352.59 102.89 L 350.41 102.45 L 348.20 101.98 L 345.98 101.50 L 343.75 101.00 L 341.50 100.49 L 339.24 99.97 L 336.81 101.88 L 334.40 103.73 L 331.99 105.52 L 329.59 107.25 L 327.19 108.92 L 324.80 110.55 L 322.40 112.12 L 320.01 113.63 L 317.61 115.10 L 315.21 116.51 L 312.80 117.87 L 310.39 119.18 L 307.96 120.44 L 305.53 121.66 L 303.08 122.82 L 300.62 123.93 L 298.14 124.99 L 295.65 126.00 L 293.13 126.97 L 290.59 127.88 L 288.02 128.74 L 285.43 129.55 L 282.81 130.30 L 280.15 131.00 L 277.46 131.64 L 274.72 132.23 L 271.95 132.76 L 269.13 133.23 L 266.26 133.63 L 263.34 133.97 L 260.35 134.24 L 257.31 134.44 L 254.19 134.56 L 251.00 134.60 L 248.74 138.47 L 246.47 142.22 L 244.20 145.88 L 241.93 149.43 L 239.64 152.90 L 237.34 156.27 L 235.02 159.56 L 232.69 162.77 L 230.34 165.89 L 227.96 168.94 L 225.56 171.91 L 223.12 174.82 L 220.66 177.65 L 218.16 180.42 L 215.62 183.12 L 213.04 185.75 L 210.41 188.33 L 207.73 190.84 L 204.99 193.30 L 202.20 195.69 L 199.34 198.03 L 196.40 200.31 L 193.40 202.54 L 190.30 204.71 L 187.12 206.82 L 183.84 208.87 L 180.45 210.87 L 176.95 212.81 L 173.31 214.69 L 169.54 216.50 L 165.61 218.25 L 161.51 219.94 L 157.23 221.55 L 152.73 223.08 L 152.69 225.12 L 152.57 227.09 L 152.37 228.99 L 152.10 230.83 L 151.78 232.61 L 151.39 234.35 L 150.94 236.03 L 150.44 237.68 L 149.89 239.29 L 149.29 240.86 L 148.64 242.39 L 147.95 243.89 L 147.22 245.37 L 146.44 246.81 L 145.63 248.23 L 144.77 249.63 L 143.88 251.00 L 142.94 252.35 L 141.97 253.68 L 140.97 254.99 L 139.93 256.29 L 138.86 257.56 L 137.75 258.83 L 136.61 260.08 L 135.44 261.31 L 134.23 262.54 L 132.99 263.75 L 131.72 264.96 L 130.43 266.15 L 129.10 267.34 L 127.74 268.52 L 126.35 269.69 L 124.94 270.86 L 123.49 272.02 L 123.47 276.65 L 123.41 281.19 L 123.31 285.67 L 123.16 290.08 L 122.97 294.43 L 122.74 298.72 L 122.47 302.95 L 122.15 307.14 L 121.79 311.28 L 121.38 315.38 L 120.92 319.44 L 120.42 323.46 L 119.86 327.45 L 119.25 331.41 L 118.59 335.34 L 117.88 339.26 L 117.11 343.15 L 116.28 347.03 L 115.39 350.89 L 114.43 354.75 L 113.41 358.60 L 112.31 362.45 L 111.15 366.30 L 109.90 370.16 L 108.58 374.02 L 107.16 377.90 L 105.66 381.80 L 104.06 385.72 L 102.35 389.67 L 100.54 393.65 L 98.60 397.66 L 96.54 401.72 L 94.35 405.83 L 92.00 410.00 L 94.35 414.17 L 96.54 418.28 L 98.60 422.34 L 100.54 426.35 L 102.35 430.33 L 104.06 434.28 L 105.66 438.20 L 107.16 442.10 L 108.58 445.98 L 109.90 449.84 L 111.15 453.70 L 112.31 457.55 L 113.41 461.40 L 114.43 465.25 L 115.39 469.11 L 116.28 472.97 L 117.11 476.85 L 117.88 480.74 L 118.59 484.66 L 119.25 488.59 L 119.86 492.55 L 120.42 496.54 L 120.92 500.56 L 121.38 504.62 L 121.79 508.72 L 122.15 512.86 L 122.47 517.05 L 122.74 521.28 L 122.97 525.57 L 123.16 529.92 L 123.31 534.33 L 123.41 538.81 L 123.47 543.35 L 123.49 547.98 L 124.94 549.14 L 126.35 550.31 L 127.74 551.48 L 129.10 552.66 L 130.43 553.85 L 131.72 555.04 L 132.99 556.25 L 134.23 557.46 L 135.44 558.69 L 136.61 559.92 L 137.75 561.17 L 138.86 562.44 L 139.93 563.71 L 140.97 565.01 L 141.97 566.32 L 142.94 567.65 L 143.88 569.00 L 144.77 570.37 L 145.63 571.77 L 146.44 573.19 L 147.22 574.63 L 147.95 576.11 L 148.64 577.61 L 149.29 579.14 L 149.89 580.71 L 150.44 582.32 L 150.94 583.97 L 151.39 585.65 L 151.78 587.39 L 152.10 589.17 L 152.37 591.01 L 152.57 592.91 L 152.69 594.88 L 152.73 596.92 L 157.23 598.45 L 161.51 600.06 L 165.61 601.75 L 169.54 603.50 L 173.31 605.31 L 176.95 607.19 L 180.45 609.13 L 183.84 611.13 L 187.12 613.18 L 190.30 615.29 L 193.40 617.46 L 196.40 619.69 L 199.34 621.97 L 202.20 624.31 L 204.99 626.70 L 207.73 629.16 L 210.41 631.67 L 213.04 634.25 L 215.62 636.88 L 218.16 639.58 L 220.66 642.35 L 223.12 645.18 L 225.56 648.09 L 227.96 651.06 L 230.34 654.11 L 232.69 657.23 L 235.02 660.44 L 237.34 663.73 L 239.64 667.10 L 241.93 670.57 L 244.20 674.12 L 246.47 677.78 L 248.74 681.53 L 251.00 685.40 L 254.19 685.44 L 257.31 685.56 L 260.35 685.76 L 263.34 686.03 L 266.26 686.37 L 269.13 686.77 L 271.95 687.24 L 274.72 687.77 L 277.46 688.36 L 280.15 689.00 L 282.81 689.70 L 285.43 690.45 L 288.02 691.26 L 290.59 692.12 L 293.13 693.03 L 295.65 694.00 L 298.14 695.01 L 300.62 696.07 L 303.08 697.18 L 305.53 698.34 L 307.96 699.56 L 310.39 700.82 L 312.80 702.13 L 315.21 703.49 L 317.61 704.90 L 320.01 706.37 L 322.40 707.88 L 324.80 709.45 L 327.19 711.08 L 329.59 712.75 L 331.99 714.48 L 334.40 716.27 L 336.81 718.12 L 339.24 720.03 L 341.50 719.51 L 343.75 719.00 L 345.98 718.50 L 348.20 718.02 L 350.41 717.55 L 352.59 717.11 L 354.76 716.68 L 356.92 716.29 L 359.06 715.92 L 361.19 715.59 L 363.30 715.30 L 365.39 715.04 L 367.48 714.83 L 369.55 714.66 L 371.61 714.55 L 373.66 714.48 L 375.69 714.47 L 377.72 714.52 L 379.74 714.63 L 381.76 714.80 L 383.76 715.05 L 385.76 715.37 L 387.76 715.77 L 389.76 716.26 L 391.75 716.84 L 393.75 717.52 L 395.75 718.31 L 397.75 719.22 L 399.76 720.25 L 401.78 721.44 L 403.81 722.78 L 405.85 724.30 L 407.91 726.03 L 410.00 728.00 L 412.91 725.22 L 415.78 722.72 L 418.61 720.47 L 421.41 718.44 L 424.18 716.62 L 426.92 714.97 L 429.66 713.49 L 432.38 712.16 L 435.09 710.97 L 437.79 709.91 L 440.49 708.97 L 443.19 708.14 L 445.90 707.42 L 448.61 706.80 L 451.33 706.29 L 454.06 705.86 L 456.81 705.53 L 459.57 705.28 L 462.35 705.12 L 465.15 705.04 L 467.98 705.04 L 470.83 705.13 L 473.72 705.29 L 476.63 705.53 L 479.58 705.86 L 482.57 706.26 L 485.61 706.74 L 488.68 707.30 L 491.80 707.94 L 494.98 708.67 L 498.21 709.48 L 501.50 710.38 L 504.85 711.36 L 508.27 712.44 L 509.70 710.54 L 511.16 708.75 L 512.63 707.07 L 514.12 705.48 L 515.64 703.98 L 517.17 702.57 L 518.72 701.23 L 520.28 699.97 L 521.87 698.77 L 523.48 697.65 L 525.10 696.58 L 526.75 695.58 L 528.41 694.63 L 530.09 693.73 L 531.80 692.89 L 533.52 692.10 L 535.27 691.36 L 537.04 690.67 L 538.83 690.02 L 540.64 689.42 L 542.48 688.86 L 544.35 688.34 L 546.23 687.87 L 548.15 687.44 L 550.09 687.05 L 552.06 686.71 L 554.07 686.40 L 556.10 686.14 L 558.16 685.91 L 560.26 685.73 L 562.39 685.58 L 564.55 685.48 L 566.76 685.42 L 569.00 685.40 L 569.82 684.02 L 570.66 682.71 L 571.53 681.44 L 572.42 680.22 L 573.33 679.04 L 574.26 677.91 L 575.21 676.82 L 576.18 675.77 L 577.17 674.75 L 578.18 673.77 L 579.21 672.83 L 580.25 671.92 L 581.32 671.04 L 582.41 670.19 L 583.51 669.37 L 584.63 668.57 L 585.77 667.81 L 586.93 667.08 L 588.11 666.37 L 589.31 665.68 L 590.53 665.03 L 591.77 664.39 L 593.02 663.78 L 594.30 663.20 L 595.60 662.64 L 596.92 662.10 L 598.26 661.59 L 599.62 661.10 L 601.00 660.63 L 602.41 660.18 L 603.84 659.76 L 605.29 659.36 L 606.77 658.98 L 608.27 658.62 L 612.26 650.33 L 616.16 642.23 L 619.98 634.31 L 623.71 626.55 L 627.38 618.94 L 630.98 611.45 L 634.53 604.09 L 638.03 596.82 L 641.48 589.65 L 644.90 582.56 L 648.28 575.55 L 651.63 568.58 L 654.96 561.67 L 658.27 554.80 L 661.57 547.95 L 664.85 541.13 L 668.13 534.31 L 671.42 527.49 L 674.70 520.67 L 678.00 513.82 L 681.31 506.95 L 684.64 500.04 L 687.99 493.08 L 691.37 486.06 L 694.79 478.97 L 698.24 471.80 L 701.74 464.54 L 705.28 457.17 L 708.89 449.68 L 712.56 442.07 L 716.29 434.31 L 720.11 426.39 L 724.01 418.29 Z"><title>Boundary of Θ7</title></path><path class="theta-three-fill" d="M 728.00 410.00 L 251.00 134.60 L 251.00 685.40 Z"></path><path class="theta-contour theta-order-3" d="M 728.00 410.00 L 251.00 134.60 L 251.00 685.40 Z"><title>Exact boundary of Θ3</title></path><line class="theta-contour theta-order-3 theta-three-tail" x1="92" y1="410" x2="251" y2="410"></line><line class="theta-order-2" x1="92" y1="410" x2="728" y2="410"><title>Θ2 is the interval from minus one to one</title></line><circle class="theta-order-1" cx="728" cy="410" r="7"><title>Θ1 is the point one</title></circle><text class="axis-label" x="759" y="416">1</text><text class="axis-label" x="52" y="416">−1</text><text class="axis-label" x="418" y="60">Im λ</text><text class="axis-label" x="738" y="444">Re λ</text></svg><div class="atlas-legend" aria-label="Figure legend"><div class="legend-item legend-order-1"><span class="legend-swatch" aria-hidden="true"></span><span>Θ<sub>1</sub></span><small>point</small></div><div class="legend-item legend-order-2"><span class="legend-swatch" aria-hidden="true"></span><span>Θ<sub>2</sub></span><small>interval</small></div><div class="legend-item legend-order-3"><span class="legend-swatch" aria-hidden="true"></span><span>Θ<sub>3</sub></span><small>exact polygon and tail</small></div><div class="legend-item legend-order-4"><span class="legend-swatch" aria-hidden="true"></span><span>Θ<sub>4</sub></span><small>boundary</small></div><div class="legend-item legend-order-5"><span class="legend-swatch" aria-hidden="true"></span><span>Θ<sub>5</sub></span><small>boundary</small></div><div class="legend-item legend-order-6"><span class="legend-swatch" aria-hidden="true"></span><span>Θ<sub>6</sub></span><small>boundary</small></div><div class="legend-item legend-order-7"><span class="legend-swatch" aria-hidden="true"></span><span>Θ<sub>7</sub></span><small>boundary</small></div></div><figcaption><span>Figure 1.</span> The regions Θ<sub>1</sub> through Θ<sub>7</sub> in one coordinate plane. Orders one, two, and three are drawn from their exact elementary descriptions; the contours for orders four through seven are evaluated cell by cell from the radial boundary equation in the manuscript. Each contour encloses its corresponding region, and the sequence is nested.</figcaption></figure></section><div class="article-rule" aria-hidden="true"><span>✦</span></div><section class="section-grid problem-section" aria-labelledby="problem-heading"><header class="section-heading"><p class="section-number">I</p><p class="section-label">The problem</p><h2 id="problem-heading">Where can a stochastic eigenvalue live?</h2></header><div class="reading-column"><p>A row-stochastic matrix is a nonnegative matrix whose rows each add to one. Such matrices encode finite Markov chains, averaging processes, and many other systems in which mass or probability is redistributed without being lost.</p><p>For a fixed size n, which complex numbers can occur as an eigenvalue of one of these matrices? The union of all possibilities is denoted by Θₙ. The problem is to determine this set for every n.</p><div class="display-equation"><math display="block" aria-label="Theta n is the union of the spectra of nonnegative n by n matrices A satisfying A one equals one."><msub><mi>Θ</mi><mi>n</mi></msub><mo>=</mo><munder><mo>⋃</mo><mrow><mi>A</mi><mo>≥</mo><mn>0</mn><mo>,</mo><mspace width="0.4em"></mspace><mi>A</mi><mi mathvariant="bold">1</mi><mo>=</mo><mi mathvariant="bold">1</mi></mrow></munder><mrow><mi>spec</mi><mo>⁡</mo><mo>(</mo><mi>A</mi><mo>)</mo></mrow></math></div><p class="problem-statement">Determine Θ<sub>n</sub> for every integer n ≥ 1.</p></div></section></div><section class="reading-routes" aria-labelledby="routes-heading"><header class="reading-routes-heading"><p class="section-label">Continue reading</p><h2 id="routes-heading">Choose where to go next</h2><p>If you want to go to the paper immediately, read a little history first, or learn more about where I encountered this problem, choose one of the three paths below.</p></header><nav class="reading-route-grid" aria-label="Ways to continue"><a class="reading-route-card" href="https://zenodo.org/records/21529144"><span class="reading-route-number" aria-hidden="true">01</span><span class="section-label">The paper</span><strong>Go directly to the manuscript</strong><span class="reading-route-description">Open the current archival version on Zenodo and begin with the paper itself.</span><span class="reading-route-link">Continue <span aria-hidden="true">→</span></span></a><a class="reading-route-card" href="/paper-project-site/history/"><span class="reading-route-number" aria-hidden="true">02</span><span class="section-label">History</span><strong>Read a little of the story first</strong><span class="reading-route-description">Follow the problem from invariant polygons and the classical theorem to Farey-indexed arcs and realizing matrices.</span><span class="reading-route-link">Continue <span aria-hidden="true">→</span></span></a><a class="reading-route-card" href="/paper-project-site/journey/"><span class="reading-route-number" aria-hidden="true">03</span><span class="section-label">My journey</span><strong>Learn where I encountered the problem</strong><span class="reading-route-description">Read how I came across the question, why it held my attention, and how the project developed.</span><span class="reading-route-link">Continue <span aria-hidden="true">→</span></span></a></nav></section><section class="purpose-and-ai" aria-labelledby="purpose-heading"><div><p class="section-label">Purpose</p><h2 id="purpose-heading">Why this site exists</h2><p>The aim of this project is to make the paper, together with its archival Zenodo record, more approachable and digestible—both for me and for the wider community.</p></div><div><p class="section-label">Generative AI</p><h2>How this site is being made</h2><p>This website is being developed through vibecoding with generative-AI assistance. AI tools assist with design, coding, and editorial organization; the authors remain responsible for the mathematics, historical claims, wording, and final presentation.</p></div></section><section class="bottom-information"><article class="arxiv-note" aria-labelledby="arxiv-heading"><p class="section-label">Manuscript status</p><h2 id="arxiv-heading">Why is this paper not on arXiv?</h2><p>Generative AI makes projects such as this website possible, but it has also contributed to a flood of submissions on arXiv. This paper is currently in the moderation queue. Once it gets through, I will update this website with the arXiv record.</p></article><section class="contact-panel" aria-labelledby="contact-heading"><p class="section-label">Contact</p><h2 id="contact-heading">Send a note</h2><p class="contact-invitation">I regard mathematics as a cultural and community endeavour. All comments are welcome—especially if you spot an error.</p><form class="contact-form"><label><span>Name</span><input type="text" autoComplete="name" required="" name="name"/></label><label><span>Email</span><input type="email" autoComplete="email" required="" name="email"/></label><label class="contact-wide"><span>Subject</span><input type="text" name="subject" value="Question about Critical Invariant Polygons"/></label><label class="contact-wide"><span>Message</span><textarea name="message" rows="6" required=""></textarea></label><div class="contact-actions contact-wide"><button class="button button-primary" type="submit">Open email to send</button><p>This opens your email application with a prepared message. Nothing is transmitted through the website itself.</p></div></form></section></section></main><footer class="site-footer"><div class="footer-meta"><time dateTime="2026-07-28T20:31:43.000Z">Last updated <!-- -->28 July 2026<!-- -->.</time><time dateTime="2026-07-28T20:38:20.535Z">Site build <!-- -->28 July 2026<!-- -->.</time><span>© <!-- -->2026<!-- --> The authors</span><a class="to-top" href="#top">To the top ↑</a></div></footer><script src="/paper-project-site/contact.js" defer></script></body></html>
