@@ -97,18 +97,18 @@ material, not with generative imagery.
 |---|---|---|
 | 0 | Create the living project record | **Complete** |
 | 1 | Discovery and content audit | **Complete** |
-| 2 | Site foundation and Home-page visual specimen | **Complete — awaiting visual review** |
+| 2 | Site foundation and Home-page visual specimen | **Complete — author reviewed** |
 | 3 | Minimum coherent release: Home, Paper, Updates and Errata | Not started |
 | 4 | Mathematical and historical context: Problem, History | **History first draft complete — awaiting author review** |
 | 5 | Personal and contribution pages: My Journey, What This Paper Adds | **My Journey first draft complete — awaiting author review** |
 | 6 | Interactive exploration | Not started |
-| 7 | Final QA and author-approved deployment | **In progress — publication approved** |
+| 7 | Final QA and author-approved deployment | **Current three-page release deployed and verified** |
 
 ## Completed
 
-- A public placeholder repository and GitHub Pages site exist:
+- The author-approved three-page release is public:
   - Repository: <https://github.com/BFMAVE/paper-project-site>
-  - Placeholder: <https://bfmave.github.io/paper-project-site/>
+  - Website: <https://bfmave.github.io/paper-project-site/>
 - A local working project exists at `/Users/brechtverbeken/paper-project-site`.
 - The canonical manuscript paths, required routes, audiences, design direction,
   review sequence, technical requirements, and deployment restriction have been recorded.
@@ -200,29 +200,30 @@ material, not with generative imagery.
 - A static GitHub Pages exporter and full-history deployment workflow now
   produce and validate Home, History, and My Journey beneath the repository
   subpath `/paper-project-site/`.
-
-The original public placeholder is being replaced by the author-approved
-three-page paper website in the current release.
+- The original public placeholder has been replaced by the author-approved
+  Home/Problem, History, and My Journey release.
+- The public Home, History, My Journey, and bundled-PDF URLs were verified in
+  Chrome after deployment. All three HTML routes load without console errors,
+  expose the intended three-item primary navigation, and serve their
+  repository-subpath assets correctly.
 
 ## Not Yet Done
 
 - The History-page claims have been checked against primary papers and
   official journal or author records, but the narrative and emphasis still
   require author review.
-- The My Journey narrative and its account of the research sequence require
-  author review before publication.
 - The exact public Zenodo URL or DOI for the Type II realization paper has not
   been recovered from the public Zenodo index, so the paper is cited without an
   invented link.
-- The Home-page visual direction has not yet been approved by the author.
 - The standalone Paper and Updates and Errata pages have not been implemented.
 - No interactive mathematics has been implemented or verified.
 - No arXiv identifier, final manuscript status, or source-archive policy has
   been supplied or configured.
 - The local repository is not yet connected and synchronized with the public
   GitHub repository.
-- The approved GitHub Pages deployment has been prepared; the public workflow
-  and final URL still require post-push verification.
+- The public repository was updated through GitHub's browser interface, so the
+  local source branch and the public static-output commit history are not yet
+  synchronized as one conventional source deployment branch.
 
 ## Critical Review Findings
 
@@ -231,10 +232,10 @@ three-page paper website in the current release.
   preserves the contact form with a small standalone script, rewrites assets
   beneath `/paper-project-site/`, and validates the finished artifact. The
   deployment workflow checks out full Git history and publishes that artifact.
-- **The timestamps are currently fallbacks.** Every source file is still
-  untracked, so Git cannot provide a page-specific modification date. There is
-  also no workflow with `fetch-depth: 0`. The timestamp code is sound, but its
-  promised behaviour cannot be demonstrated until the site has real commits.
+- **The timestamps are live and machine-readable.** The source files have real
+  Git history, the deployment workflow uses `fetch-depth: 0`, and every public
+  HTML route exposes a visible `<time datetime="...">` value. The current build
+  also retains the documented build-time fallback for history-less exports.
 - **The correction route is incomplete.** History and My Journey invite
   corrections, but the required Updates and Errata page does not exist yet.
   The Home contact form prepares a message in the reader’s mail application;
@@ -264,10 +265,10 @@ three-page paper website in the current release.
 
 ## Next Action
 
-Publish the approved three-page release to the existing
-`BFMAVE/paper-project-site` repository, replacing its original placeholder.
-Then verify the GitHub Pages workflow, public routes, assets, navigation, and
-page-specific timestamps.
+Review the live three-page release in ordinary use, then begin the next agreed
+milestone: the standalone Paper and Updates and Errata pages. Before that
+release, decide whether to synchronize the public repository with the full
+local source history and adopt the automated deployment workflow.
 
 ## Decision Log
 
@@ -330,6 +331,9 @@ page-specific timestamps.
 - 28 July 2026 — “New region of interest” refers to the two-layer renewal
   working paper and is described as a complete analysis of its structured
   family for every \(q\ge2\).
+- 28 July 2026 — The author-approved Home/Problem, History, and My Journey
+  release replaced the original GitHub Pages placeholder and was verified at
+  <https://bfmave.github.io/paper-project-site/>.
 
 ## Update Log
 
@@ -402,3 +406,9 @@ page-specific timestamps.
 - 28 July 2026 — Added the Problem-page construction marker, confirmed the
   Leslie-matrix citation in the Journey narrative and bibliography, and added
   a verified static exporter plus GitHub Pages deployment workflow.
+- 28 July 2026 — Published the static release to the existing
+  `BFMAVE/paper-project-site` repository through the authenticated Chrome
+  session. Verified the Home, History, My Journey, and bundled-PDF URLs, the
+  three-item navigation, the construction marker, the History source ledger,
+  the Journey Leslie-matrix citation, Zenodo linking, and clean browser
+  consoles on all HTML routes.
