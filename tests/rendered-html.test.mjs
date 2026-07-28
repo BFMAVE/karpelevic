@@ -61,7 +61,10 @@ test("server-renders the scholarly Home page", async () => {
   assert.match(html, /href="https:\/\/zenodo\.org\/records\/21529144"/);
   assert.match(html, /Zenodo record/);
   assert.match(html, /93(?:<!-- -->)? pages/);
-  assert.match(html, /aria-current="page" href="\/">Problem<\/a>/);
+  assert.match(
+    html,
+    /aria-current="page" href="(?:\/paper-project-site)?\/">Problem<\/a>/,
+  );
   assert.match(html, /name="message"/);
   assert.match(html, /Open email to send/);
   assert.match(html, /mathematics as a cultural and community endeavour/);
@@ -121,7 +124,10 @@ test("server-renders the sourced History page", async () => {
   assert.match(html, /References and further reading/);
   assert.match(html, /id="reference-dmitriev-dynkin-1946"/);
   assert.match(html, /id="reference-verbeken-ginis-2026"/);
-  assert.match(html, /aria-current="page" href="\/history\/">History/);
+  assert.match(
+    html,
+    /aria-current="page" href="(?:\/paper-project-site)?\/history\/">History/,
+  );
   assert.match(html, /href="https:\/\/www\.mathnet\.ru\/eng\/im3595"/);
   assert.match(
     html,
@@ -173,7 +179,10 @@ test("server-renders the personal Journey page", async () => {
   );
   assert.match(html, /id="journey-reference-ran-teng-2024"/);
   assert.match(html, /id="journey-reference-kirkland-leslie-1992"/);
-  assert.match(html, /aria-current="page" href="\/journey\/">My Journey/);
+  assert.match(
+    html,
+    /aria-current="page" href="(?:\/paper-project-site)?\/journey\/">My Journey/,
+  );
   assert.match(html, /<time dateTime="[^"]+"/);
   assert.match(html, /generative-AI assistance/);
   assert.match(html, /To the top/);
