@@ -58,13 +58,13 @@ export default function HistoryPage() {
           <a
             className="site-identity"
             href={sitePath("/")}
-            aria-label="Karpelevic — Home"
+            aria-label="Critical Invariant Polygons — Home"
           >
             <span className="site-monogram" aria-hidden="true">
               Θ
             </span>
             <span>
-              <strong>Karpelevic</strong>
+              <strong>Critical Invariant Polygons</strong>
               <small>A companion to the manuscript</small>
             </span>
           </a>

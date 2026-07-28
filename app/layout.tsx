@@ -22,8 +22,8 @@ const readingSerif = Source_Serif_4({
 
 export const metadata: Metadata = {
   title: {
-    default: "Karpelevic",
-    template: "%s · Karpelevic",
+    default: "Critical Invariant Polygons",
+    template: "%s · Critical Invariant Polygons",
   },
   description:
     "A scholarly companion to Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic Spectra.",

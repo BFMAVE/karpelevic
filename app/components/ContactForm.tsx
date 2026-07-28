@@ -15,7 +15,7 @@ export function ContactForm() {
     const replyTo = String(form.get("email") ?? "").trim();
     const subject =
       String(form.get("subject") ?? "").trim() ||
-      "Question about Karpelevic";
+      "Question about Critical Invariant Polygons";
     const message = String(form.get("message") ?? "").trim();
     const body = [
       message,
@@ -56,7 +56,7 @@ export function ContactForm() {
           <input
             name="subject"
             type="text"
-            defaultValue="Question about Karpelevic"
+            defaultValue="Question about Critical Invariant Polygons"
           />
         </label>
         <label className="contact-wide">
