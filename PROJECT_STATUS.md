@@ -6,8 +6,6 @@
 
 by Brecht Verbeken and Vincent Ginis
 
-Website name: **Karpelevic**
-
 This file is the living project record. It should be updated at every milestone
 with what is complete, what is under review, what remains, and which decisions
 require author judgment.
@@ -109,8 +107,8 @@ material, not with generative imagery.
 ## Completed
 
 - The author-approved three-page release is public:
-  - Repository: <https://github.com/BFMAVE/paper-project-site>
-  - Website: <https://bfmave.github.io/paper-project-site/>
+  - Repository: <https://github.com/BFMAVE/karpelevic>
+  - Website: <https://bfmave.github.io/karpelevic/>
 - A local working project exists at `/Users/brechtverbeken/paper-project-site`.
 - The canonical manuscript paths, required routes, audiences, design direction,
   review sequence, technical requirements, and deployment restriction have been recorded.
@@ -201,7 +199,7 @@ material, not with generative imagery.
   1992 all-dimensional eigenvalue region for row-stochastic Leslie matrices.
 - A static GitHub Pages exporter and full-history deployment workflow now
   produce and validate Home, History, and My Journey beneath the repository
-  subpath `/paper-project-site/`.
+  subpath `/karpelevic/`.
 - The original public placeholder has been replaced by the author-approved
   Home/Problem, History, and My Journey release.
 - The public Home, History, My Journey, and bundled-PDF URLs were verified in
@@ -232,7 +230,7 @@ material, not with generative imagery.
 - **The GitHub Pages blocker has been resolved.** A dedicated static exporter
   now renders the three live routes, removes worker-only hydration payloads,
   preserves the contact form with a small standalone script, rewrites assets
-  beneath `/paper-project-site/`, and validates the finished artifact. The
+  beneath `/karpelevic/`, and validates the finished artifact. The
   deployment workflow checks out full Git history and publishes that artifact.
 - **The timestamps are live and machine-readable.** The source files have real
   Git history, the deployment workflow uses `fetch-depth: 0`, and every public
@@ -335,9 +333,13 @@ local source history and adopt the automated deployment workflow.
   family for every \(q\ge2\).
 - 28 July 2026 — The author-approved Home/Problem, History, and My Journey
   release replaced the original GitHub Pages placeholder and was verified at
-  <https://bfmave.github.io/paper-project-site/>.
-- 28 July 2026 — The website identity was shortened to “Karpelevic”; the full
-  paper title remains unchanged wherever the manuscript itself is identified.
+  <https://bfmave.github.io/karpelevic/>.
+- 28 July 2026 — The repository itself was renamed from `paper-project-site`
+  to `karpelevic`, moving the canonical GitHub Pages URL to
+  <https://bfmave.github.io/karpelevic/>.
+- 28 July 2026 — The temporary visible rename was undone before the repository
+  rename. The masthead and browser-title suffix remain “Critical Invariant
+  Polygons”; only the repository and URL use `karpelevic`.
 
 ## Update Log
 
@@ -416,5 +418,9 @@ local source history and adopt the automated deployment workflow.
   three-item navigation, the construction marker, the History source ledger,
   the Journey Leslie-matrix citation, Zenodo linking, and clean browser
   consoles on all HTML routes.
-- 28 July 2026 — Renamed the website identity and document-title suffix to
-  “Karpelevic” while preserving the paper’s full scholarly title.
+- 28 July 2026 — Corrected the repository-level rename: changed the GitHub
+  Pages base path to `/karpelevic/`, rebuilt every internal URL, and moved the
+  public project from `BFMAVE/paper-project-site` to `BFMAVE/karpelevic`.
+- 28 July 2026 — Restored the original visible site identity before publishing
+  the repository rename, then verified Home, History, My Journey, and the PDF
+  at their new `/karpelevic/` addresses with clean browser consoles.
