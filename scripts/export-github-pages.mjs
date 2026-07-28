@@ -7,7 +7,7 @@ const projectRoot = path.resolve(
   "..",
 );
 const outputRoot = path.join(projectRoot, "pages-out");
-const basePath = "/paper-project-site";
+const basePath = "/karpelevic";
 const routes = [
   { requestPath: "/", outputPath: "index.html" },
   { requestPath: "/history", outputPath: "history/index.html" },

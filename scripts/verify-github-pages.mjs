@@ -20,8 +20,8 @@ for (const [relativePath, expectedText] of pages) {
   assert.match(html, new RegExp(expectedText));
   assert.doesNotMatch(html, /(?:href|src)="\/assets\//);
   assert.doesNotMatch(html, /<script\b[^>]*>self\.__VINEXT/);
-  assert.match(html, /\/paper-project-site\/assets\//);
-  assert.match(html, /\/paper-project-site\/contact\.js/);
+  assert.match(html, /\/karpelevic\/assets\//);
+  assert.match(html, /\/karpelevic\/contact\.js/);
 }
 
 await access(path.join(outputRoot, "favicon.svg"));

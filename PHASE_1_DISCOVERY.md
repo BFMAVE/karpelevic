@@ -301,8 +301,8 @@ Reference: <https://roed314.github.io/gq2/>
 - `.openai/hosting.json`: present, with no D1 or R2 bindings
 - Current implementation: one placeholder React page plus a standalone
   `docs/index.html`
-- Current public repository: <https://github.com/BFMAVE/paper-project-site>
-- Current public site: <https://bfmave.github.io/paper-project-site/>
+- Current public repository: <https://github.com/BFMAVE/karpelevic>
+- Current public site: <https://bfmave.github.io/karpelevic/>
 
 The local starter is not synchronized with the public repository. Its test
 file still describes the deleted starter skeleton and should not be treated as
@@ -317,7 +317,7 @@ Use **Astro in fully static-output mode**, with:
 - KaTeX rendered at build time;
 - vanilla TypeScript/Canvas or deterministic SVG for the future explorer;
 - a single GitHub Pages workflow that builds to `dist/`;
-- a configured base path of `/paper-project-site`;
+- a configured base path of `/karpelevic`;
 - no runtime server, database, authentication, analytics, or cookies.
 
 Why this fits:

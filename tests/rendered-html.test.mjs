@@ -63,7 +63,7 @@ test("server-renders the scholarly Home page", async () => {
   assert.match(html, /93(?:<!-- -->)? pages/);
   assert.match(
     html,
-    /aria-current="page" href="(?:\/paper-project-site)?\/">Problem<\/a>/,
+    /aria-current="page" href="(?:\/karpelevic)?\/">Problem<\/a>/,
   );
   assert.match(html, /name="message"/);
   assert.match(html, /Open email to send/);
@@ -126,7 +126,7 @@ test("server-renders the sourced History page", async () => {
   assert.match(html, /id="reference-verbeken-ginis-2026"/);
   assert.match(
     html,
-    /aria-current="page" href="(?:\/paper-project-site)?\/history\/">History/,
+    /aria-current="page" href="(?:\/karpelevic)?\/history\/">History/,
   );
   assert.match(html, /href="https:\/\/www\.mathnet\.ru\/eng\/im3595"/);
   assert.match(
@@ -181,7 +181,7 @@ test("server-renders the personal Journey page", async () => {
   assert.match(html, /id="journey-reference-kirkland-leslie-1992"/);
   assert.match(
     html,
-    /aria-current="page" href="(?:\/paper-project-site)?\/journey\/">My Journey/,
+    /aria-current="page" href="(?:\/karpelevic)?\/journey\/">My Journey/,
   );
   assert.match(html, /<time dateTime="[^"]+"/);
   assert.match(html, /generative-AI assistance/);

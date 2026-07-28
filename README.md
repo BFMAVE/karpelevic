@@ -1,4 +1,4 @@
-# Karpelevic — paper website
+# Critical Invariant Polygons — paper website
 
 Offline development site for:
 
@@ -7,8 +7,8 @@ Offline development site for:
 >
 > Brecht Verbeken and Vincent Ginis
 
-The approved public release replaces the original GitHub Pages placeholder at
-<https://bfmave.github.io/paper-project-site/>.
+The approved public release is available at
+<https://bfmave.github.io/karpelevic/>.
 
 ## Local development
 
