@@ -1,0 +1,718 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/paper-project-site/assets/index-BfoGCuEw.css" data-rsc-css-href="/paper-project-site/assets/index-BfoGCuEw.css" data-precedence="vite-rsc/importer-resources"/><title>My Journey · Critical Invariant Polygons</title><meta name="description" content="Brecht Verbeken’s personal account of finding the Karpelevič problem through structured stochastic matrices, collaboration, and generative-AI-assisted research."/><link rel="shortcut icon" href="/paper-project-site/favicon.svg"/><link rel="icon" href="/paper-project-site/favicon.svg"/>
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7d0fab25.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-bd3fa9fe.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-5f813686.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-0365c557.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-fe99e303.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-dd44b623.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-44d82aa9.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7f5a19db.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-21114939.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-e99b45a2.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f621cbc7.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-217990d7.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f5ee9e70.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-d15fd541.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-d4e0271a.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-016594d3.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-558d9db4.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-e5f8a85e.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-18280d9b.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-2969689c.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-5ebdfa32.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f81edfa3.woff2" as="font" type="font/woff2" crossorigin />
+<style data-vinext-fonts>/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7d0fab25.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-bd3fa9fe.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-5f813686.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-0365c557.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-fe99e303.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7d0fab25.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-bd3fa9fe.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-5f813686.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-0365c557.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-fe99e303.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7d0fab25.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-bd3fa9fe.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-5f813686.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-0365c557.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-fe99e303.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7d0fab25.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-bd3fa9fe.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-5f813686.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-0365c557.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-fe99e303.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-dd44b623.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-44d82aa9.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7f5a19db.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-21114939.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-e99b45a2.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-dd44b623.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-44d82aa9.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7f5a19db.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-21114939.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-e99b45a2.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-dd44b623.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-44d82aa9.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7f5a19db.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-21114939.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-e99b45a2.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-dd44b623.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-44d82aa9.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-7f5a19db.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-21114939.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/cormorant-garamond-f03df7a5d5a4/cormorant-garamond-e99b45a2.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+.__font_cormorant_garamond_02lyszc { font-family: 'Cormorant Garamond', sans-serif; }
+
+.__variable_cormorant_garamond_02lyszc { --font-display: 'Cormorant Garamond', sans-serif; }
+
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f621cbc7.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-217990d7.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f5ee9e70.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-d15fd541.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-d4e0271a.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-016594d3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f621cbc7.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-217990d7.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f5ee9e70.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-d15fd541.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-d4e0271a.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-016594d3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f621cbc7.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-217990d7.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f5ee9e70.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-d15fd541.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-d4e0271a.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-016594d3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-558d9db4.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-e5f8a85e.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-18280d9b.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-2969689c.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-5ebdfa32.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f81edfa3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-558d9db4.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-e5f8a85e.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-18280d9b.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-2969689c.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-5ebdfa32.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f81edfa3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-558d9db4.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-e5f8a85e.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-18280d9b.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-2969689c.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-5ebdfa32.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/paper-project-site/assets/_vinext_fonts/source-serif-4-ab7334bbedce/source-serif-4-f81edfa3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+.__font_source_serif_4_0p29hys { font-family: 'Source Serif 4', sans-serif; }
+
+.__variable_source_serif_4_0p29hys { --font-reading: 'Source Serif 4', sans-serif; }
+</style>
+</head><body class="__variable_cormorant_garamond_02lyszc __variable_source_serif_4_0p29hys"><a class="skip-link" href="#main-content">Skip to the article</a><header class="site-header" id="top"><div class="masthead"><a class="site-identity" href="/paper-project-site/" aria-label="Critical Invariant Polygons — Home"><span class="site-monogram" aria-hidden="true">Θ</span><span><strong>Critical Invariant Polygons</strong><small>A companion to the manuscript</small></span></a></div><nav class="primary-navigation" aria-label="Primary navigation"><a href="/paper-project-site/">Problem</a><a href="/paper-project-site/history/">History</a><a aria-current="page" href="/paper-project-site/journey/">My Journey</a></nav></header><main class="journey-page" id="main-content"><header class="journey-hero"><div class="journey-hero-title"><p class="kicker">My journey</p><h1>How I found my way to Karpelevič</h1></div><p class="journey-deck">I first knew the theorem only by reputation. A colleague’s persistence, two conjectures about structured matrices, and a series of experiments with generative AI gradually gave me the courage to look again.</p><aside class="journey-scope" aria-label="Scope of this personal account"><p class="section-label">A personal account</p><p>This is a personal account of how I encountered the problem and how the work developed. It is not intended as a complete history of stochastic eigenvalue regions; that belongs on the History page.</p><time dateTime="2026-07-28T20:31:43.000Z">Last updated <!-- -->28 July 2026<!-- -->.</time></aside></header><section class="journey-route-section" aria-labelledby="route-heading"><header><p class="section-label">The path in brief</p><h2 id="route-heading">From a distant theorem to a working problem</h2></header><ol class="journey-route"><li><span class="journey-route-marker" aria-hidden="true">01</span><time>2018–2024</time><p>A theorem at the edge of my PhD</p></li><li><span class="journey-route-marker" aria-hidden="true">02</span><time>After 2024</time><p>Brando, Swift, and a translation</p></li><li><span class="journey-route-marker" aria-hidden="true">03</span><time>Early 2026</time><p>Two conjectures on the final pages</p></li><li><span class="journey-route-marker" aria-hidden="true">04</span><time>2026</time><p>GenAI changes the ambition</p></li><li><span class="journey-route-marker" aria-hidden="true">05</span><time>May–June</time><p>From cycles to realizers</p></li><li><span class="journey-route-marker" aria-hidden="true">06</span><time>July</time><p>Invariant polygons</p></li></ol></section><section class="journey-chapter" aria-labelledby="journey-I"><header class="journey-chapter-heading"><p class="section-number">I</p><p class="section-label">A difficult field nearby</p><time>2018–2024</time><h2 id="journey-I">A theorem at the edge of my PhD</h2></header><div class="journey-reading-column"><p>I first encountered the Karpelevič theorem during my PhD, between 2018 and 2024, but only indirectly. My doctoral research concerned stochastic models, Markov and semi-Markov systems, and questions of model performance. Eigenvalue regions of stochastic matrices and their subclasses formed a nearby field that I knew was considered difficult.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-verbeken-thesis-2024" aria-label="Reference 1">1</a></span></sup></p><p>I knew that the classical theorem answered the single-eigenvalue question for stochastic matrices. I did not know its proof closely. It was one of those results one learns to recognize before one has the courage to enter.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-ams-translations-1988" aria-label="Reference 3">3</a></span></sup></p></div></section><section class="journey-chapter" aria-labelledby="journey-II"><header class="journey-chapter-heading"><p class="section-number">II</p><p class="section-label">The paper comes closer</p><time>After 2024</time><h2 id="journey-II">Brando, Swift, and an elusive translation</h2></header><div class="journey-reading-column"><p>The theorem moved closer when my colleague Brando Vagenende began his PhD on eigenvalue regions of subclasses of stochastic matrices, especially monotone stochastic matrices. He could not immediately obtain the English translation of Karpelevič’s paper, so he initially worked through Joanne Swift’s 1972 master’s thesis.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-swift-1972" aria-label="Reference 2">2</a></span><span>, <a href="#journey-reference-monotone-2025" aria-label="Reference 5">5</a></span></sup></p><p>Through my friend Arne Mertens, I was eventually able to help Brando obtain the translated paper. He worked through it for months and described it as remarkably obscure. His experience made me increasingly curious, although for a long time I still did not have the courage to begin dissecting the proof myself.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-ams-translations-1988" aria-label="Reference 3">3</a></span></sup></p></div></section><section class="journey-conjectures" aria-labelledby="conjectures-heading"><header class="journey-conjectures-heading"><div><p class="section-label">A page that changed the direction</p><h2 id="conjectures-heading">Two conjectures on the final pages</h2></div><p>An important turning point came from a paper by André Ran and Zhixuan Emily Teng. Their main subject is the nonnegative inverse eigenvalue problem with prescribed zero patterns in dimension three, but its final pages propose two questions about structured four-dimensional stochastic matrices. Brando and I decided to attack both.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-ran-teng-2024" aria-label="Reference 6">6</a></span></sup></p></header><div class="journey-conjecture-grid"><article><p class="conjecture-number">01</p><p class="conjecture-pattern">A four-cycle support</p><h3>Which nonreal numbers can occur as eigenvalues of this cyclic stochastic family?</h3><p>The resulting paper determines the exact nonreal region and gives explicit boundary constructions.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-four-cycle-2026" aria-label="Reference 8">8</a></span></sup></p></article><article><p class="conjecture-number">02</p><p class="conjecture-pattern">A tridiagonal support</p><h3>Can the second-largest eigenvalue of an irreducible 4 × 4 tridiagonal stochastic matrix ever be negative?</h3><p>The resulting paper proves nonnegativity and extends the treatment to reducible matrices.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-tridiagonal-2026" aria-label="Reference 9">9</a></span></sup></p></article></div></section><section class="journey-genai"><section class="journey-chapter" aria-labelledby="journey-III"><header class="journey-chapter-heading"><p class="section-number">III</p><p class="section-label">A change in research practice</p><time>2026</time><h2 id="journey-III">GenAI and a change in ambition</h2></header><div class="journey-reading-column"><p>I am part of the Data Analytics Laboratory at the Vrije Universiteit Brussel. Within the Data Lab, we sometimes call ourselves GenAI pioneers: we began experimenting relatively early with the role that generative AI might play in research, while remaining conscious that mathematical verification and responsibility cannot be delegated to a language model.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-vibe-proving-2026" aria-label="Reference 7">7</a></span></sup></p><p>The four-cycle problem became a concrete case study. Generative AI helped us propose proof directions, reformulate the problem, test possible routes, and identify gaps that still required human repair. We documented that process rather than presenting the final proof as if it had appeared fully formed.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-vibe-proving-2026" aria-label="Reference 7">7</a></span><span>, <a href="#journey-reference-four-cycle-2026" aria-label="Reference 8">8</a></span></sup></p><p>Those successes changed my sense of what could reasonably be attempted. GenAI did not make the Karpelevič theorem easy, but it gave me the courage to rethink a problem that I had previously regarded as too difficult to approach.</p></div></section><div class="journey-genai-note" aria-label="Research responsibility"><p class="section-label">The boundary that remains</p><p>Generative AI widened the search. It did not decide which claims were correct. Mathematical and editorial responsibility remained with us.</p></div></section><section class="journey-chapter" aria-labelledby="journey-IV"><header class="journey-chapter-heading"><p class="section-number">IV</p><p class="section-label">Structured families</p><time>May–June 2026</time><h2 id="journey-IV">From one cycle to arbitrary cycles</h2></header><div class="journey-reading-column"><p>After the four-cycle result, I went to ILAS 2026 asking whether the same kind of reasoning could be pushed beyond a single four-dimensional pattern. Brando was at the conference with me, and I tried to generalize the four-cycle classification into a theorem for a broader family.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-four-cycle-2026" aria-label="Reference 8">8</a></span><span>, <a href="#journey-reference-ilas-2026" aria-label="Reference 10">10</a></span></sup></p><p>Complete spectral-region classifications that work for every matrix size are exceptionally rare. The full row-stochastic class is covered by Karpelevič’s theorem; among structured subclasses, the principal all-dimensional example I knew was Kirkland’s classification for row-stochastic Leslie matrices. That scarcity made an all-n cycle result particularly attractive.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-ams-translations-1988" aria-label="Reference 3">3</a></span><span>, <a href="#journey-reference-kirkland-leslie-1992" aria-label="Reference 4">4</a></span></sup></p><p>I now do my postdoctoral research with Vincent Ginis. Working together, we turned to n-cycle stochastic matrices. The resulting paper determines the complete spectral region for every cycle length. Its proof is independent of the Karpelevič theorem, but roots of unity, exposed boundary pieces, argument coordinates, and questions of visibility were already central.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-n-cycle-2026" aria-label="Reference 11">11</a></span></sup></p></div></section><section class="journey-chapter" aria-labelledby="journey-V"><header class="journey-chapter-heading"><p class="section-number">V</p><p class="section-label">Boundary equations become matrices</p><time>June–July 2026</time><h2 id="journey-V">From arcs to their realizers</h2></header><div class="journey-reading-column"><p>The work of Stephen Kirkland and Helena Šmigoc brought another question into focus. It is one thing to know a polynomial equation describing a boundary arc; it is another to understand the stochastic matrices that realize that polynomial.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-kirkland-smigoc-2022" aria-label="Reference 12">12</a></span></sup></p><p>Vincent and I studied the Type III and Type II reduced Ito families separately. The Type III paper resolves the Kirkland–Šmigoc realization conjecture over the full nonzero parameter range. The Type II paper classifies the corresponding non-degenerate full-degree realizers. These projects forced us to examine cycles, allowed transitions, weights, and the way local pieces combine into a global characteristic polynomial.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-type-three-2026" aria-label="Reference 13">13</a></span><span>, <a href="#journey-reference-type-two-2026" aria-label="Reference 14">14</a></span></sup></p></div></section><section class="journey-working-paper" aria-labelledby="working-paper-heading"><header><p class="section-label">New region of interest</p><h2 id="working-paper-heading">Another interesting family</h2><p class="working-paper-status">Working paper · 2026</p></header><div><p>Another interesting family emerged from the Type II work: two-layer renewal stochastic matrices. For every q ≥ 2, this family consists of 2q × 2q stochastic matrices formed by coupling two renewal chains and allowing all renewal parameters and probability vectors to vary.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-two-layer-2026" aria-label="Reference 15">15</a></span></sup></p><p>The working paper develops a complete description of the spectral region of this entire structured family—not merely a selection of numerical examples. Its boundary is selected through Farey arithmetic and contact with power polygons, while a radial-filling argument recovers the complete region below that boundary.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-two-layer-2026" aria-label="Reference 15">15</a></span></sup></p><p>This was a useful intermediate laboratory: much smaller than the class of all stochastic matrices, but rich enough for mechanisms that later appear in the invariant-polygon paper to become visible.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-critical-polygons-2026" aria-label="Reference 16">16</a></span></sup></p></div><aside class="working-paper-family" aria-label="Scope of the working paper"><p class="section-label">Scope</p><p>Every order <em>q</em> ≥ 2</p><p>Every pair of renewal parameters and every probability vector in the defining two-layer family</p><p>Exact boundary classification and radial filling of the resulting spectral region</p></aside></section><section class="journey-return" aria-labelledby="journey-VI"><header><p class="section-number">VI</p><p class="section-label">The classical problem revisited</p><time>July 2026</time><h2 id="journey-VI">Returning to Karpelevič</h2></header><div><p>By then, the theorem no longer looked like a single impenetrable proof. It looked like a meeting point of several ideas we had encountered separately: structured stochastic families, cyclic supports and return patterns, roots of unity, boundary realization, radial extremality, and polygonal contact under multiplication by an eigenvalue.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-n-cycle-2026" aria-label="Reference 11">11</a></span><span>, <a href="#journey-reference-type-three-2026" aria-label="Reference 13">13</a></span><span>, <a href="#journey-reference-type-two-2026" aria-label="Reference 14">14</a></span></sup></p><p>The decisive change was to look at the problem through invariant polygons. Instead of beginning with the classical boundary equations, Vincent and I asked what an extremal eigenvalue forces an invariant polygon to do. Contact, return structure, and cyclic order then offered a route from geometry to the Farey–Ito boundary.<sup class="citation-cluster" aria-label="References"><span><a href="#journey-reference-critical-polygons-2026" aria-label="Reference 16">16</a></span></sup></p><p>I did not arrive at this problem through a single moment of inspiration. I approached it through other people’s questions, smaller matrix families, computational experiments, and a growing willingness to reconsider what might be possible.</p><a class="journey-paper-link" href="https://zenodo.org/records/21529144">Read the current paper on Zenodo <span aria-hidden="true">↗</span></a></div></section><section class="journey-references" aria-labelledby="journey-references-heading"><header class="history-wide-heading journey-references-heading"><div><p class="section-number">VII</p><p class="section-label">Works along the way</p></div><div><h2 id="journey-references-heading">References</h2><p>These are the works mentioned in this personal account. The longer historical and mathematical bibliography belongs on the History and Paper pages.</p></div></header><ol class="reference-list"><li id="journey-reference-verbeken-thesis-2024"><p><span class="reference-authors">B. Verbeken<!-- -->.</span> <cite>On models and metrics: Improving stochastic model performance in manpower planning</cite>. <!-- -->PhD thesis, Vrije Universiteit Brussel, 2024.</p><p class="reference-links"><a href="https://researchportal.vub.be/en/publications/on-models-and-metrics-improving-stochastic-model-performance-in-m/">VUB record<!-- --> <span aria-hidden="true">↗</span></a></p></li><li id="journey-reference-swift-1972"><p><span class="reference-authors">J. Swift<!-- -->.</span> <cite>The Location of Characteristic Roots of Stochastic Matrices</cite>. <!-- -->M.Sc. thesis, McGill University, 1972.</p><p class="reference-links"><a href="https://escholarship.mcgill.ca/concern/theses/12579t72d">McGill<!-- --> <span aria-hidden="true">↗</span></a></p></li><li id="journey-reference-ams-translations-1988"><p><span class="reference-authors">N. A. Dmitriev, E. B. Dynkin, and F. I. Karpelevič<!-- -->.</span> <cite>Characteristic roots of stochastic matrices; On the characteristic roots of matrices with nonnegative elements</cite>. <!-- -->English translations in American Mathematical Society Translations, Series 2, vol. 140, 1988.</p><p class="reference-links"><a href="https://bookstore.ams.org/TRANS2/140">AMS volume<!-- --> <span aria-hidden="true">↗</span></a></p></li><li id="journey-reference-kirkland-leslie-1992"><p><span class="reference-authors">S. Kirkland<!-- -->.</span> <cite>An eigenvalue region for Leslie matrices</cite>. <!-- -->SIAM J. Matrix Anal. Appl. 13, no. 2 (1992), 507–529.</p><p class="reference-links"><a href="https://epubs.siam.org/doi/10.1137/0613033">Journal<!-- --> <span aria-hidden="true">↗</span></a><a href="https://doi.org/10.1137/0613033">DOI<!-- --> <span aria-hidden="true">↗</span></a></p></li><li id="journey-reference-monotone-2025"><p><span class="reference-authors">B. Vagenende, B. Verbeken, and M.-A. Guerry<!-- -->.</span> <cite>Eigenvalue regions and realising monotone stochastic matrices</cite>. <!-- -->Electronic Journal of Linear Algebra 42 (2026), 387–398.</p><p class="reference-links"><a href="https://journals.uwyo.edu/index.php/ela/article/view/10159">Journal<!-- --> <span aria-hidden="true">↗</span></a><a href="https://doi.org/10.13001/ela.2026.10159">DOI<!-- --> <span aria-hidden="true">↗</span></a><a href="https://arxiv.org/abs/2502.01314">arXiv<!-- --> <span aria-hidden="true">↗</span></a></p></li><li id="journey-reference-ran-teng-2024"><p><span class="reference-authors">A. C. M. Ran and Z. E. Teng<!-- -->.</span> <cite>The nonnegative inverse eigenvalue problem with prescribed zero patterns in dimension three</cite>. <!-- -->Electron. J. Linear Algebra 40 (2024), 506–537.</p><p class="reference-links"><a href="https://journals.uwyo.edu/index.php/ela/article/view/7965">Journal<!-- --> <span aria-hidden="true">↗</span></a><a href="https://doi.org/10.13001/ela.2024.7965">DOI<!-- --> <span aria-hidden="true">↗</span></a></p></li><li id="journey-reference-vibe-proving-2026"><p><span class="reference-authors">B. Verbeken, B. Vagenende, M.-A. Guerry, A. Algaba, and V. Ginis<!-- -->.</span> <cite>Early Evidence of Vibe-Proving with Consumer LLMs: A Case Study on Spectral Region Characterization with ChatGPT-5.2 (Thinking)</cite>. <!-- -->Preprint, arXiv:2602.18918, 2026.</p><p class="reference-links"><a href="https://arxiv.org/abs/2602.18918">arXiv<!-- --> <span aria-hidden="true">↗</span></a></p></li><li id="journey-reference-four-cycle-2026"><p><span class="reference-authors">B. Vagenende, B. Verbeken, A. Algaba, and M.-A. Guerry<!-- -->.</span> <cite>On the Spectral Region of 4-Cycle Stochastic Matrices</cite>. <!-- -->Preprint, arXiv:2605.06743, 2026.</p><p class="reference-links"><a href="https://arxiv.org/abs/2605.06743">arXiv<!-- --> <span aria-hidden="true">↗</span></a></p></li><li id="journey-reference-tridiagonal-2026"><p><span class="reference-authors">B. Vagenende, B. Verbeken, and M.-A. Guerry<!-- -->.</span> <cite>Nonnegativity of the second largest eigenvalue of 4 × 4 tridiagonal stochastic matrices</cite>. <!-- -->Preprint, arXiv:2605.07591, 2026.</p><p class="reference-links"><a href="https://arxiv.org/abs/2605.07591">arXiv<!-- --> <span aria-hidden="true">↗</span></a></p></li><li id="journey-reference-ilas-2026"><p><span class="reference-authors">B. Verbeken and V. Ginis<!-- -->.</span> <cite>Spectrally Complete Subsets and Eigenvalue Regions of Classes of Stochastic Matrices</cite>. <!-- -->Minisymposium talk, 27th Conference of the International Linear Algebra Society, 21 May 2026.</p><p class="reference-links"><a href="https://indico.math.vt.edu/event/2/contributions/44/">Programme<!-- --> <span aria-hidden="true">↗</span></a></p></li><li id="journey-reference-n-cycle-2026"><p><span class="reference-authors">B. Verbeken and V. Ginis<!-- -->.</span> <cite>On the Spectral Region of n-Cycle Stochastic Matrices</cite>. <!-- -->Preprint, arXiv:2606.10143, 2026.</p><p class="reference-links"><a href="https://arxiv.org/abs/2606.10143">arXiv<!-- --> <span aria-hidden="true">↗</span></a></p></li><li id="journey-reference-kirkland-smigoc-2022"><p><span class="reference-authors">S. Kirkland and H. Šmigoc<!-- -->.</span> <cite>Stochastic matrices realising the boundary of the Karpelevič region</cite>. <!-- -->Linear Algebra Appl. 635 (2022), 116–138.</p><p class="reference-links"><a href="https://arxiv.org/abs/2110.01040">arXiv<!-- --> <span aria-hidden="true">↗</span></a><a href="https://doi.org/10.1016/j.laa.2021.11.016">DOI<!-- --> <span aria-hidden="true">↗</span></a></p></li><li id="journey-reference-type-three-2026"><p><span class="reference-authors">B. Verbeken and V. Ginis<!-- -->.</span> <cite>The Type III realisation conjecture of Kirkland and Šmigoc</cite>. <!-- -->Zenodo, 2026.</p><p class="reference-links"><a href="https://zenodo.org/records/21219088">Zenodo<!-- --> <span aria-hidden="true">↗</span></a><a href="https://doi.org/10.5281/zenodo.21219088">DOI<!-- --> <span aria-hidden="true">↗</span></a></p></li><li id="journey-reference-type-two-2026"><p><span class="reference-authors">B. Verbeken and V. Ginis<!-- -->.</span> <cite>Stochastic realisers of non-degenerate full-degree Type II reduced Ito polynomials</cite>. <!-- -->Zenodo working paper, 2026.</p></li><li id="journey-reference-two-layer-2026"><p><span class="reference-authors">Working paper<!-- -->.</span> <cite>The Spectral Region of Two-Layer Renewal Stochastic Matrices</cite>. <!-- -->Unpublished working paper, 2026.</p></li><li id="journey-reference-critical-polygons-2026"><p><span class="reference-authors">B. Verbeken and V. Ginis<!-- -->.</span> <cite>Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic Spectra</cite>. <!-- -->Zenodo, version dated 24 July 2026.</p><p class="reference-links"><a href="https://zenodo.org/records/21529144">Zenodo<!-- --> <span aria-hidden="true">↗</span></a><a href="https://doi.org/10.5281/zenodo.21529144">DOI<!-- --> <span aria-hidden="true">↗</span></a></p></li></ol></section></main><footer class="site-footer"><div class="footer-disclosure history-footer-disclosure"><div><p class="footer-disclosure-label">Corrections are welcome</p><h2>This account can grow with the project.</h2></div><p>Mathematics is a cultural and community endeavour. Comments, corrections, and missing parts of the story are welcome, especially if you spot an error. This site is being made through vibecoding with generative-AI assistance; the authors remain responsible for every claim.</p></div><div class="footer-meta"><time dateTime="2026-07-28T20:31:43.000Z">Last updated <!-- -->28 July 2026<!-- -->.</time><time dateTime="2026-07-28T20:38:20.535Z">Site build <!-- -->28 July 2026<!-- -->.</time><span>© <!-- -->2026<!-- --> The authors</span><a class="to-top" href="#top">To the top ↑</a></div></footer><script src="/paper-project-site/contact.js" defer></script></body></html>
