@@ -68,6 +68,22 @@
     }
   }
 
+  function revealAnchor(anchorId, shouldFocus) {
+    if (!anchorId) return;
+    const target = document.getElementById(anchorId);
+    if (!target) return;
+    const panel = target.closest("[data-topic-slug]");
+    if (panel) showPanel(panel, false);
+
+    requestAnimationFrame(() => {
+      target.scrollIntoView({ block: "start" });
+      if (shouldFocus) {
+        target.setAttribute("tabindex", "-1");
+        target.focus({ preventScroll: true });
+      }
+    });
+  }
+
   links.forEach((link) => {
     link.addEventListener("click", (event) => {
       const panel = panels.find(
@@ -75,8 +91,13 @@
       );
       if (!panel) return;
       event.preventDefault();
-      history.pushState({}, "", `#${panel.id}`);
-      showPanel(panel, true);
+      const anchorId = link.dataset.proofAnchor;
+      history.pushState({}, "", `#${anchorId || panel.id}`);
+      if (anchorId) {
+        revealAnchor(anchorId, true);
+      } else {
+        showPanel(panel, true);
+      }
     });
   });
 
@@ -87,11 +108,15 @@
   });
 
   window.addEventListener("popstate", () => {
+    const anchorId = window.location.hash.replace(/^#/, "");
     showPanel(panelForHash(window.location.hash), false);
+    revealAnchor(anchorId, false);
   });
 
   window.addEventListener("hashchange", () => {
+    const anchorId = window.location.hash.replace(/^#/, "");
     showPanel(panelForHash(window.location.hash), false);
+    revealAnchor(anchorId, false);
   });
 
   window.addEventListener(
@@ -99,6 +124,10 @@
     () => {
       showPanel(panelForHash(window.location.hash), false);
       setReadingMode(reader.dataset.readingMode);
+      const anchorId = window.location.hash.replace(/^#/, "");
+      if (anchorId && !anchorId.startsWith("topic-")) {
+        revealAnchor(anchorId, false);
+      }
     },
     { once: true },
   );
