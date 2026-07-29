@@ -41,7 +41,7 @@ import { sitePath } from "../lib/site-path";
 export const metadata: Metadata = {
   title: "How the Proof Works",
   description:
-    "Topics I and II of a guided, source-aware reader for Part I of Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic Spectra.",
+    "Topics I and II of a fourteen-topic, source-aware reader that works from critical invariant polygons to the Karpelevič–Ito theorem.",
 };
 
 const pageTimestamp = getPageTimestamp("app/data/proof.ts");
@@ -67,7 +67,24 @@ const visibleDisplayMathCount =
   (topicIFormalHtml.match(/<math display="block"/g)?.length ?? 0) +
   (topicIIFormalHtml.match(/<math display="block"/g)?.length ?? 0) +
   5;
-const topicNumerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"] as const;
+const topicNumerals = [
+  "I",
+  "II",
+  "III",
+  "IV",
+  "V",
+  "VI",
+  "VII",
+  "VIII",
+  "IX",
+  "X",
+  "XI",
+  "XII",
+  "XIII",
+  "XIV",
+] as const;
+const totalTopicNumeral =
+  topicNumerals[proofTopics.length - 1] ?? String(proofTopics.length);
 
 function resultNumber(label: string): string {
   return label.replace(/^(?:Proposition|Lemma|Theorem|Remark)\s+/, "");
@@ -150,7 +167,7 @@ export default function ProofPage() {
           <div className="proof-hero-copy">
             <p className="proof-deck">{proofContent.deck}</p>
             <div className="proof-edition-meta">
-              <span>Topics I–II of VIII</span>
+              <span>Topics I–II of {totalTopicNumeral}</span>
               <span>{visibleDefinitionCount} numbered definitions</span>
               <span>{visibleResultCount} results</span>
               <span>{visibleProofCount} complete proofs</span>
@@ -164,15 +181,19 @@ export default function ProofPage() {
 
         <details className="proof-manuscript-map">
           <summary>
-            <span>Eight-part map</span>
+            <span>Fourteen-part map</span>
             Where the website topics sit in the manuscript
           </summary>
           <div className="proof-manuscript-map-body">
             <p>
               These are the printed page numbers in the 91-page manuscript
-              PDF. Appendix tools are reported separately so that a topic’s
-              main narrative is not mistaken for one continuous page range
-              when it invokes a foundational lemma.
+              PDF. The order is pedagogical rather than a copy of the
+              manuscript’s section order: Topics I–VII build the intrinsic
+              engine, Topic VIII supplies the stochastic-criticality bridge,
+              Topics IX–XIII prove the Karpelevič–Ito theorem, and Topic XIV
+              is the complete order-seven example. Appendix tools are reported
+              separately so that a topic’s main narrative is not mistaken for
+              one continuous page range when it invokes a foundational lemma.
             </p>
             <ol>
               {proofTopics.map((topic, index) => (
@@ -206,7 +227,7 @@ export default function ProofPage() {
               <div className="proof-topic-index-heading">
                 <p className="section-label">Part I reader</p>
                 <p className="proof-topic-counter" aria-live="polite">
-                  Topic I of VIII
+                  Topic I of {totalTopicNumeral}
                 </p>
               </div>
               <ol>
@@ -908,7 +929,8 @@ export default function ProofPage() {
                     <div className="proof-topic-complete">
                       <span>End of Topic {topicNumerals[topicIndex]}</span>
                       <strong>
-                        Topic {topicNumerals[topicIndex]} of VIII complete
+                        Topic {topicNumerals[topicIndex]} of{" "}
+                        {totalTopicNumeral} complete
                       </strong>
                     </div>
                     {topicIndex > 0 ? (

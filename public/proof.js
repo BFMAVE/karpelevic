@@ -13,7 +13,22 @@
     reader.querySelectorAll("[data-guided-layer]"),
   );
   const totalTopics = Number(reader.dataset.totalTopics) || panels.length;
-  const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
+  const roman = [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V",
+    "VI",
+    "VII",
+    "VIII",
+    "IX",
+    "X",
+    "XI",
+    "XII",
+    "XIII",
+    "XIV",
+  ];
 
   function setReadingMode(mode) {
     const resolvedMode = mode === "compact" ? "compact" : "guided";

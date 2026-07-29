@@ -49,7 +49,8 @@ Routes:
 - `/` — Problem and two-minute project orientation
 - `/history/` — sourced historical development and prior art
 - `/journey/` — first-person intellectual history, with prompts where input is missing
-- `/proof/` — an eight-topic guided reader for all seventy Part I items
+- `/proof/` — a fourteen-topic guided reader from critical invariant polygons
+  to the Karpelevič–Ito theorem, followed by a complete order-seven example
 - `/contribution/` — cautious novelty and contribution ledger
 - `/explore/` — verified interactive mathematical visualization
 - `/paper/` — canonical scholarly entry point and PDF
@@ -105,7 +106,78 @@ material, not with generative imagery.
 | 5 | Personal and contribution pages: My Journey, What This Paper Adds | **My Journey first draft complete — awaiting author review** |
 | 6 | Interactive exploration | Not started |
 | 7 | Final QA and author-approved deployment | **Current three-page release deployed and verified** |
-| 8 | Part I annotated proof reader | **Topics I–II complete locally; Topic I is the latest published edition** |
+| 8 | Fourteen-topic annotated proof reader | **Topics I–II complete locally; Topic I is the latest published edition** |
+
+## Canonical Proof-Reader Architecture
+
+The proof reader has **fourteen topics**. Topics I–XIII form the necessary
+mathematical route to the Karpelevič–Ito theorem. Topic XIV is a worked example
+and is not a dependency of the proof.
+
+The order is pedagogical rather than a copy of the manuscript’s section order:
+the reader first completes the intrinsic polygonal engine, then returns to
+stochastic matrices, constructs and bounds the candidate boundary, proves
+attainment and nesting, and states the classical theorem only after all of its
+ingredients are available.
+
+1. **Topic I — The language of critical polygons.**
+   PDF pages 2–3 and 6–10; supporting Lemma A.2 on page 63.
+   Complete locally and published.
+2. **Topic II — From convex order to active sides.**
+   PDF pages 10–15; supporting Lemmas A.1 and A.3 on pages 61 and 63.
+   Complete locally; deliberately offline pending author review.
+3. **Topic III — Building one-sided ownership.**
+   PDF pages 15–19; supporting Lemmas A.4 and A.5 on page 64.
+4. **Topic IV — From endpoint order to contact reduction.**
+   PDF pages 19–30.
+5. **Topic V — Rotation arithmetic and the projective corridor.**
+   PDF pages 31–40; supporting Lemma A.6 on page 65.
+6. **Topic VI — Projective escape and unit return.**
+   PDF pages 41–50. This is expected to be the hardest single topic; Topics
+   V–VI together are the principal structural bottleneck.
+7. **Topic VII — The Farey carrier and return monodromy.**
+   PDF pages 51–58.
+8. **Topic VIII — Returning to stochastic spectra.**
+   PDF pages 3–5, 59–60, 66, and 71–75. This topic includes the complete bridge
+   from stochastic eigenvalues through invariant polygons and new-shell radial
+   extrema to \(N\)-criticality.
+9. **Topic IX — The candidate Farey–Ito boundary.**
+   PDF pages 67–71. Farey cells, scalar radius equations, carrier polynomials,
+   endpoint limits, and the order-three exception.
+10. **Topic X — The sharp radial upper bound.**
+    PDF pages 73–77. Critical monodromy, the Jensen sheet, log-sine
+    equalization, and the sharp cellwise inequality.
+11. **Topic XI — Explicit stochastic realizers and attainment.**
+    PDF pages 77–79. Sparse carrier matrices and the independent reverse
+    inclusion.
+12. **Topic XII — Farey refinement and nesting.**
+    PDF pages 79–85. This is expected to be the densest topic after the Part I
+    engine.
+13. **Topic XIII — The Karpelevič–Ito theorem.**
+    The formal statement on page 71 and the completed proof on pages 85–89:
+    small orders, induction, radial boundary identification, conjugation, and
+    the unit-circle statement.
+14. **Topic XIV — The complete order-seven example and boundary laboratory.**
+    PDF pages 89–90, including the worked ray \(x=3/8\). This is an
+    illustration of the theorem, not part of its logical proof. It has three
+    planned parts:
+    1. the complete order-seven Farey-cell atlas and worked ray;
+    2. a documented and mathematically verified boundary-generation routine,
+       published as reusable source code in the project’s GitHub repository;
+    3. an interactive website widget in which the reader chooses an order
+       \(n\) and receives the corresponding boundary drawing.
+
+    The widget must expose which data are exact—Farey neighbours, denominator
+    labels, endpoint roots of unity, and carrier equations—and which output is
+    numerical, such as root-finding, sampling, and the rendered curve. The
+    implementation should reuse or adapt the numerical routine in the longer
+    original manuscript and must be checked against the complete \(n=7\)
+    example and the worked ray \(x=3/8\) before publication.
+
+The five necessary chapters after Topic VIII are therefore Topics IX–XIII.
+Topic XIV is the optional but planned complete example and computational
+laboratory. Its code and widget are scholarly outputs of the site, but they are
+not dependencies in the proof of the Karpelevič–Ito theorem.
 
 ## Completed
 
@@ -211,9 +283,10 @@ material, not with generative imagery.
   Chrome after deployment. All three HTML routes load without console errors,
   expose the intended three-item primary navigation, and serve their
   repository-subpath assets correctly.
-- A local textbook edition of Topic I of **The Proof** has been implemented at
-  `/proof/`. The complete Part I argument has been inventoried into eight
-  consecutive topics, but only Topic I is currently exposed to readers.
+- A local textbook edition of Topics I and II of **The Proof** has been
+  implemented at `/proof/`. The complete route to the Karpelevič–Ito theorem
+  and its order-seven example has been inventoried into fourteen consecutive
+  topics. Topic I is public; Topic II is exposed only in the local reader.
 - Topic I contains its complete mathematical text: two numbered definitions,
   seven results, seven canonical proofs, the surrounding argument, and 39
   displayed formulas. Proposition 2.2 additionally offers an optional
@@ -261,7 +334,7 @@ material, not with generative imagery.
   <https://bfmave.github.io/karpelevic/proof/>. The deployed page and its
   stylesheet and reading-mode script were verified directly after publication.
 - Topic II, **From convex order to active sides**, is complete locally inside
-  the same eight-topic proof reader. It contains Lemmas 2.7–2.10, Proposition
+  the same fourteen-topic proof reader. It contains Lemmas 2.7–2.10, Proposition
   3.1, Theorem 3.2, Remark 3.3, and Lemma 4.1, together with the two appendix
   foundations used by the theorem: Lemmas A.1 and A.3.
 - Topic II deliberately presents the results in dependency order
@@ -314,8 +387,9 @@ material, not with generative imagery.
   require author review.
 - The standalone Paper and Updates and Errata pages have not been implemented.
 - No interactive mathematics has been implemented or verified.
-- Topics III–VIII have been inventoried but have not yet been converted into
-  the reviewed textbook format or exposed on the page.
+- Topics III–XIV have been inventoried but have not yet been converted into
+  the reviewed textbook format. Topics III–XIII form the remaining proof
+  route; Topic XIV is the complete order-seven example.
 - Topic II is local only and has not been pushed or deployed; it awaits author
   review.
 - PDF page-number links and sentence-level marginal annotations have not yet
@@ -372,10 +446,10 @@ material, not with generative imagery.
 
 ## Next Action
 
-Review the live three-page release in ordinary use, then begin the next agreed
-milestone: the standalone Paper and Updates and Errata pages. Before that
-release, decide whether to synchronize the public repository with the full
-local source history and adopt the automated deployment workflow.
+Review Topic II locally, then begin Topic III in the canonical fourteen-topic
+order. Keep unfinished topics offline. The separate Paper and Updates and
+Errata pages and synchronization of the public repository with the full local
+source history remain later site milestones.
 
 ## Decision Log
 
@@ -541,10 +615,17 @@ local source history and adopt the automated deployment workflow.
 - 29 July 2026 — Published the validated Topic I static release to the existing
   GitHub Pages project and verified the live proof route, 39 displayed
   formulas, Guided/Compact controls, stylesheet, and standalone proof script.
-## Current milestone — Topic I textbook chapter
+- 29 July 2026 — Adopted the canonical fourteen-topic proof architecture.
+  Topics I–XIII now work toward the Karpelevič–Ito theorem in dependency order;
+  Topic XIV is the complete order-seven example and is not a proof dependency.
+  Topic VIII will absorb the full stochastic-to-criticality bridge, leaving
+  five necessary chapters, Topics IX–XIII, after it.
 
-- **Done locally:** The Proof is now a staged reader showing Topic I of VIII
-  only. Topics II–VIII remain in the local data but are not rendered.
+## Current milestone — Topics I–II textbook chapters
+
+- **Done locally:** The Proof is now a staged reader with a fourteen-topic map.
+  Topics I and II are rendered in the local reader. Topic I alone is public;
+  Topic II remains offline pending author review.
 - **Done locally:** the visible mathematical text is extracted from the
   canonical TeX for exactly the nine Topic I items, including the complete
   proof of the strict-separation lemma from Appendix A. The two main theorems
@@ -604,7 +685,7 @@ local source history and adopt the automated deployment workflow.
   operator rather than a combining or spacing mark, bringing transported
   notation such as `T̃` and `P̃` closer to the manuscript’s
   `\widetilde{T}` rendering.
-- **Done locally:** one expandable eight-topic overview records the exact main
+- **Done locally:** one expandable fourteen-topic overview records the exact main
   PDF page ranges and any supporting appendix pages for every website topic.
   The verified map is:
   - Topic I — pages 2–3 and 6–10; supporting Lemma A.2 on page 63.
@@ -614,7 +695,15 @@ local source history and adopt the automated deployment workflow.
   - Topic V — pages 31–40; supporting Lemma A.6 on page 65.
   - Topic VI — pages 41–50.
   - Topic VII — pages 51–58.
-  - Topic VIII — pages 3–5 and 59–60.
+  - Topic VIII — pages 3–5, 59–60, 66, and 71–75.
+  - Topic IX — pages 67–71.
+  - Topic X — pages 73–77.
+  - Topic XI — pages 77–79.
+  - Topic XII — pages 79–85.
+  - Topic XIII — page 71 and pages 85–89.
+  - Topic XIV — pages 89–90; complete order-seven example, verified
+    boundary-generation code for GitHub, and an order-\(n\) drawing widget;
+    not a proof dependency.
 - **Done locally:** the relative-interior explanation now contains two
   concrete comparisons: a segment inside the plane, and a filled triangle
   together with one of its sides. These distinguish ambient interior from
@@ -639,7 +728,7 @@ local source history and adopt the automated deployment workflow.
 - **Done locally:** Topic I includes two additional explanatory figures beside
   the relevant mathematics.
 - **Done locally:** all topic counters use Roman numerals:
-  “Topic I of VIII.”
+  “Topic I of XIV.”
 - **Done locally:** the prerequisite overview and its three shelf links have
   been completely removed from The Proof. The dedicated `/prerequisites/`
   route is retained locally but is no longer linked from the proof chapter.
@@ -688,8 +777,8 @@ local source history and adopt the automated deployment workflow.
   `share/Critical_Invariant_Polygons_Topic_I.html` and
   `/Users/brechtverbeken/Desktop/Critical_Invariant_Polygons_Topic_I.html`;
   its reading-mode controls work without a server.
-- **Next:** author review of Topic I before prerequisite libraries for later
-  topics are implemented.
+- **Next:** author review of Topic II, followed by Topic III. Later topics
+  remain offline until separately approved.
 - **Publication status:** live at
   <https://bfmave.github.io/karpelevic/proof/>; public GitHub Pages commit
-  `9e86f8e`.
+  `687db71`. The public edition contains Topic I only.

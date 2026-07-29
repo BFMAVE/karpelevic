@@ -208,16 +208,32 @@ test("server-renders the Part I proof reader", async () => {
   const topicIPanelHtml = html.slice(topicIPanelStart, topicIIPanelStart);
   const topicIIPanelHtml = html.slice(topicIIPanelStart);
   assert.match(html, /How the Proof Works/);
-  assert.match(html, /Part I · Critical invariant polygons and the Farey return/);
-  assert.match(html, /Topic I of VIII/);
-  assert.doesNotMatch(html, /Topic I of eight|Topic 1 of 8/);
+  assert.match(
+    html,
+    /Critical invariant polygons and the route to Karpelevič–Ito/,
+  );
+  assert.match(html, /Topics I–II of (?:<!-- -->)?XIV/);
+  assert.match(html, /Topic I of (?:<!-- -->)?XIV/);
+  assert.doesNotMatch(html, /Topic I of fourteen|Topic 1 of 14/);
   assert.doesNotMatch(html, /How to read this page|orientation layer/);
   assert.match(html, /Where the website topics sit in the manuscript/);
+  assert.match(html, /Fourteen-part map/);
+  assert.match(html, /Topics IX–XIII prove the Karpelevič–Ito theorem/);
+  assert.match(html, /Topic XIV[\s\S]*?complete order-seven example/);
   assert.match(html, /printed page numbers in the 91-page manuscript/);
   assert.match(html, /Main text: pages (?:<!-- -->)?2–3 and 6–10/);
   assert.match(html, /Lemma A\.2 on page 63/);
   assert.match(html, /Main text: pages (?:<!-- -->)?51–58/);
-  assert.match(html, /Main text: pages (?:<!-- -->)?3–5 and 59–60/);
+  assert.match(
+    html,
+    /Main text: pages (?:<!-- -->)?3–5, 59–60, 66, and 71–75/,
+  );
+  assert.match(html, /Main text: pages (?:<!-- -->)?67–71/);
+  assert.match(html, /Main text: pages (?:<!-- -->)?73–77/);
+  assert.match(html, /Main text: pages (?:<!-- -->)?77–79/);
+  assert.match(html, /Main text: pages (?:<!-- -->)?79–85/);
+  assert.match(html, /Main text: pages (?:<!-- -->)?71 and 85–89/);
+  assert.match(html, /Main text: pages (?:<!-- -->)?89–90/);
   assert.equal(
     (html.match(/class="proof-manuscript-map"/g) ?? []).length,
     1,
@@ -761,7 +777,10 @@ test("server-renders the Part I proof reader", async () => {
   );
   assert.match(html, /Scientific plate/);
   assert.match(html, /Plate I/);
-  assert.match(html, /Topic (?:<!-- -->)?I(?:<!-- -->)? of VIII complete/);
+  assert.match(
+    html,
+    /Topic (?:<!-- -->)?I(?:<!-- -->)? of(?:<!-- -->)? (?:<!-- -->)?XIV(?:<!-- -->)? complete/,
+  );
   assert.doesNotMatch(html, /Theorem 1\.3/);
   assert.doesNotMatch(html, /Theorem 1\.4/);
   assert.doesNotMatch(topicIPanelHtml, /Lemma 2\.7/);

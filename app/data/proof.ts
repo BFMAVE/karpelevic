@@ -389,21 +389,100 @@ export const proofTopics: readonly ProofTopic[] = [
     eyebrow: "Topic VIII · 7 items",
     title: "Returning to stochastic spectra",
     question:
-      "How does the intrinsic polygon theorem recover the classical eigenvalue region?",
+      "How does a stochastic radial extremum become a critical planar contraction?",
     overview: [
-      "The final topic reattaches the geometry to row-stochastic matrices. The invariant-polygon criterion passes in both directions between a stochastic eigenvalue and a polygon with at most the prescribed number of vertices.",
-      "Compactness, radial filling, roots of unity, and representative selection then compress the intrinsic return theorem into the classical Farey-indexed boundary. The destination is classical; the value of Part I is the explicit geometric route taken to reach it.",
+      "This topic reattaches the geometry to row-stochastic matrices. The invariant-polygon criterion passes in both directions between a stochastic eigenvalue and a polygon with at most the prescribed number of vertices.",
+      "Compactness, radial filling, and the unit-circle classification isolate new-shell radial extrema. The criticality bridge then turns such an extremum into the intrinsic monodromy data proved in Part I. This is the complete interface needed by the five proof chapters that follow.",
     ],
     itemNumbers: [3, 4, 60, 61, 62, 63, 64],
-    manuscriptPages: "3–5 and 59–60",
+    manuscriptPages: "3–5, 59–60, 66, and 71–75",
+  },
+  {
+    slug: "candidate-boundary",
+    eyebrow: "Topic IX · candidate construction",
+    title: "The candidate Farey–Ito boundary",
+    question:
+      "What is the exact boundary curve that the stochastic spectrum is supposed to attain?",
+    overview: [
+      "Consecutive Farey fractions determine one cell at a time. On each ray in that cell, a scalar radius equation selects a unique candidate point and connects it to the corresponding Ito carrier polynomial.",
+      "Endpoint limits and the exceptional terminal behaviour at order three are handled explicitly. The formal Karpelevič–Ito theorem is deliberately reserved for Topic XIII; this topic constructs only the candidate that later chapters must bound and realize.",
+    ],
+    itemNumbers: [],
+    manuscriptPages: "67–71",
+  },
+  {
+    slug: "sharp-radius",
+    eyebrow: "Topic X · upper bound",
+    title: "The sharp radial upper bound",
+    question:
+      "Why can no stochastic eigenvalue lie beyond its candidate Farey–Ito arc?",
+    overview: [
+      "The critical-polygon monodromy from Part I supplies a heterogeneous Ito product and places all return factors on one controlled Jensen sheet.",
+      "A strictly convex log-sine potential equalizes those factors. Its equality case identifies the unique outermost radial profile and proves the sharp cellwise upper bound.",
+    ],
+    itemNumbers: [],
+    manuscriptPages: "73–77",
+  },
+  {
+    slug: "realization",
+    eyebrow: "Topic XI · reverse inclusion",
+    title: "Explicit stochastic realizers and attainment",
+    question:
+      "How can every candidate boundary point be realized by an actual stochastic matrix?",
+    overview: [
+      "A sparse directed block graph turns the Ito carrier into a row-stochastic matrix. Cycle-cover bookkeeping computes its characteristic polynomial without importing the upper-bound argument.",
+      "The resulting construction proves the reverse inclusion independently: every scalar equality point is genuinely attained in the stochastic spectrum.",
+    ],
+    itemNumbers: [],
+    manuscriptPages: "77–79",
+  },
+  {
+    slug: "nesting",
+    eyebrow: "Topic XII · order comparison",
+    title: "Farey refinement and nesting",
+    question:
+      "Why does increasing the matrix order enlarge the candidate region in the correct way?",
+    overview: [
+      "Mediant insertion refines one Farey cell into smaller cells. Log-line comparison, multiplicity padding, and an exhaustive denominator split compare the corresponding radial candidates.",
+      "The candidate-nesting theorem is the global arithmetic step that lets the final proof pass from new-shell extrema to all stochastic eigenvalues by induction on the order.",
+    ],
+    itemNumbers: [],
+    manuscriptPages: "79–85",
+  },
+  {
+    slug: "karpelevic-ito",
+    eyebrow: "Topic XIII · final theorem",
+    title: "The Karpelevič–Ito theorem",
+    question:
+      "How do the upper bound, attainment, and nesting assemble into the complete stochastic eigenvalue region?",
+    overview: [
+      "The small orders are proved directly. For every later order, each ray is either genuinely new or inherited from the preceding order; the sharp inequality and nesting identify the same candidate radius in both cases.",
+      "Continuity of the radial graph, conjugation, radial filling, and the unit-circle classification then identify the carrier chain with the full topological boundary. This is where the classical theorem is finally stated and proved.",
+    ],
+    itemNumbers: [],
+    manuscriptPages: "71 and 85–89",
+  },
+  {
+    slug: "order-seven",
+    eyebrow: "Topic XIV · worked example and computational laboratory",
+    title: "The complete order-seven example and boundary laboratory",
+    question:
+      "What does the theorem produce at one concrete order, and how can a reader draw further orders for themselves?",
+    overview: [
+      "Order seven turns the abstract carrier chain into a finite atlas of explicit cells, equations, and boundary arcs. The worked ray at x = 3/8 shows the scalar construction numerically from beginning to end.",
+      "The chapter will also document the verified boundary-generation routine and publish that code through the project’s GitHub repository. Its final section will provide a widget in which the reader selects n and receives the corresponding drawing, with exact Farey data kept visibly distinct from numerical root-finding and plotting.",
+      "This computational laboratory illustrates the theorem but is not part of its logical proof. Topic XIII remains the endpoint of the necessary argument; Topic XIV lets readers inspect the complete machinery at order seven and then explore other orders themselves.",
+    ],
+    itemNumbers: [],
+    manuscriptPages: "89–90",
   },
 ] as const;
 
 export const proofContent = {
   title: "How the Proof Works",
-  subtitle: "Part I · Critical invariant polygons and the Farey return",
+  subtitle: "Critical invariant polygons and the route to Karpelevič–Ito",
   deck:
-    "Topics I and II in full: the intrinsic language, finite convex certificates, the normal-fan transfer, and hereditary saturation—with complete proofs, explicit dependencies, and verified mathematical plates.",
+    "A fourteen-topic route from intrinsic polygon geometry to the Karpelevič–Ito theorem. Topics I and II are presented in full, with complete proofs, explicit dependencies, and verified mathematical plates; Topic XIV is a worked example rather than a proof dependency.",
   auditNote:
     "These labels classify mathematical statements, not proofs. “Previously claimed” is used when an antecedent occurs in Karpelevič’s original argument but an independent complete proof of the exact step has not yet been verified. The classifications remain open to correction.",
   criticalPath:
