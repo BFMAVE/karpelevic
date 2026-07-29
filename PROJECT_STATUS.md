@@ -105,7 +105,7 @@ material, not with generative imagery.
 | 5 | Personal and contribution pages: My Journey, What This Paper Adds | **My Journey first draft complete — awaiting author review** |
 | 6 | Interactive exploration | Not started |
 | 7 | Final QA and author-approved deployment | **Current three-page release deployed and verified** |
-| 8 | Part I annotated proof reader | **Topic I textbook edition published — author review continues** |
+| 8 | Part I annotated proof reader | **Topics I–II complete locally; Topic I is the latest published edition** |
 
 ## Completed
 
@@ -260,6 +260,52 @@ material, not with generative imagery.
 - The Topic I proof reader is publicly available at
   <https://bfmave.github.io/karpelevic/proof/>. The deployed page and its
   stylesheet and reading-mode script were verified directly after publication.
+- Topic II, **From convex order to active sides**, is complete locally inside
+  the same eight-topic proof reader. It contains Lemmas 2.7–2.10, Proposition
+  3.1, Theorem 3.2, Remark 3.3, and Lemma 4.1, together with the two appendix
+  foundations used by the theorem: Lemmas A.1 and A.3.
+- Topic II deliberately presents the results in dependency order
+  `2.7–2.10 → 3.1 → A.1 → A.3 → 3.2 → 3.3 → 4.1`. The appendix labels are
+  preserved, but the two tools are brought forward before their first use so
+  that the web chapter has no backwards dependency hidden from the reader.
+- A visible dependency covenant identifies every import from Topic I,
+  explicitly cites the standard convexity and matrix-analysis background, and
+  distinguishes those inputs from the nine results proved in full on the
+  page. The standard source shelf now gives precise Schneider and
+  Horn–Johnson references.
+- Every Topic II result has its manuscript label, the definitions first needed
+  there, a complete statement, and—except for Remark 3.3—a complete proof in a
+  closed disclosure. Longer conceptual routes are optional rather than a
+  compulsory second proof.
+- The chapter adds exact explanations of the finite common-neighbourhood
+  argument, normal-fan support coordinates, positive spanning and recession,
+  complementarity, and the passage from support equality to actual side
+  contact.
+- Plate II was replaced by an exact regular-heptagon construction:
+  \(T=\cos(\pi/7)e^{i\pi/7}\) sends every vertex to a side midpoint. Three
+  additional deterministic SVG plates illustrate the triple-sign test,
+  one exact row of the normal-fan matrix, and vertex–side duality under
+  polarity.
+- The two-topic reader now has working Topic I/Topic II navigation, deep links
+  that reveal the correct hidden topic before scrolling, Guided and Compact
+  modes, and responsive navy/oxblood chapter treatments.
+- A new self-contained offline edition containing Topics I and II is available
+  at `/Users/brechtverbeken/Desktop/Critical_Invariant_Polygons_Topics_I_II.html`.
+  The older Topic I standalone file was retained unchanged.
+- The local production build, lint, and all six rendered-output test suites
+  pass. The Topic II tests verify item order, manuscript labels, nine closed
+  proof disclosures, formula anchors, unique element IDs, internal fragment
+  targets, and deterministic figure data.
+- Topic I has received a second first-use vocabulary audit. Five terms that a
+  reader with linear algebra but little topology or convex geometry might not
+  know now have closed, local explanations before the result that first uses
+  them: the adjoint for the adapted inner product, homeomorphism, Hausdorff
+  convergence, density of an infinite rotation orbit, and degree \(+1\).
+- The Hausdorff-convergence explanation gives the two-sided Hausdorff-distance
+  formula, the \(\varepsilon\)-neighbourhood interpretation, a moving-vertex
+  polygon example, and the exact isometry argument showing why complex
+  conjugation preserves Hausdorff convergence. It cites Schneider,
+  *Convex Bodies*, 2nd ed., §1.8.
 
 ## Not Yet Done
 
@@ -268,8 +314,10 @@ material, not with generative imagery.
   require author review.
 - The standalone Paper and Updates and Errata pages have not been implemented.
 - No interactive mathematics has been implemented or verified.
-- Topics II–VIII have been inventoried but have not yet been converted into
+- Topics III–VIII have been inventoried but have not yet been converted into
   the reviewed textbook format or exposed on the page.
+- Topic II is local only and has not been pushed or deployed; it awaits author
+  review.
 - PDF page-number links and sentence-level marginal annotations have not yet
   been added. Topic I currently explains every proof in numbered conceptual
   steps without annotating every individual sentence.

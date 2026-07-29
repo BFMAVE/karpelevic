@@ -3,14 +3,22 @@ import { ProofTopicFigure } from "../components/ProofTopicFigure";
 import { Proposition22ExpandedProof } from "../components/Proposition22ExpandedProof";
 import { StrictPolygonExplainer } from "../components/StrictPolygonExplainer";
 import { TopicIConceptFigure } from "../components/TopicIConceptFigure";
+import { TopicIIChapter } from "../components/TopicIIChapter";
 import {
+  AdjointExplainer,
   AffineContactExplainer,
+  DegreeOneExplainer,
+  DenseRotationOrbitExplainer,
   ExposedFaceExplainer,
+  HausdorffConvergenceExplainer,
+  HomeomorphismExplainer,
 } from "../components/TopicILocalExplainers";
 import { primaryNavigation } from "../data/home";
 import {
   topicIHtmlByItem,
   topicISetupHtml,
+  topicIIHtmlByItem,
+  topicIISetupHtml,
 } from "../data/part-i-content.generated";
 import { topicICommentary } from "../data/topic-i-commentary";
 import {
@@ -33,14 +41,14 @@ import { sitePath } from "../lib/site-path";
 export const metadata: Metadata = {
   title: "How the Proof Works",
   description:
-    "Topic I of a guided, source-aware reader for Part I of Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic Spectra.",
+    "Topics I and II of a guided, source-aware reader for Part I of Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic Spectra.",
 };
 
 const pageTimestamp = getPageTimestamp("app/data/proof.ts");
 const buildTimestamp = getBuildTimestamp();
-const visibleProofTopics = proofTopics.slice(0, 1);
+const visibleProofTopics = proofTopics.slice(0, 2);
 const visibleTopicItems = getProofItems(
-  visibleProofTopics[0].itemNumbers,
+  visibleProofTopics.flatMap((topic) => topic.itemNumbers),
 );
 const visibleDefinitionCount = visibleTopicItems.filter(
   (item) => item.kind === "Definition",
@@ -48,16 +56,21 @@ const visibleDefinitionCount = visibleTopicItems.filter(
 const visibleResultCount = visibleTopicItems.length - visibleDefinitionCount;
 const topicIFormalHtml =
   topicISetupHtml + Object.values(topicIHtmlByItem).join("");
+const topicIIFormalHtml =
+  topicIISetupHtml + Object.values(topicIIHtmlByItem).join("");
 const visibleProofCount =
-  topicIFormalHtml.match(/class="proof"/g)?.length ?? 0;
+  (topicIFormalHtml.match(/class="proof"/g)?.length ?? 0) +
+  (topicIIFormalHtml.match(/class="proof"/g)?.length ?? 0);
 // Proposition 2.2 shows the manuscript proof plus five displays in its optional
 // six-step expansion.
 const visibleDisplayMathCount =
-  (topicIFormalHtml.match(/<math display="block"/g)?.length ?? 0) + 5;
+  (topicIFormalHtml.match(/<math display="block"/g)?.length ?? 0) +
+  (topicIIFormalHtml.match(/<math display="block"/g)?.length ?? 0) +
+  5;
 const topicNumerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"] as const;
 
 function resultNumber(label: string): string {
-  return label.replace(/^(?:Proposition|Lemma)\s+/, "");
+  return label.replace(/^(?:Proposition|Lemma|Theorem|Remark)\s+/, "");
 }
 
 const collapsibleProofItems = new Set([5, 6, 8, 9, 10, 66]);
@@ -137,7 +150,7 @@ export default function ProofPage() {
           <div className="proof-hero-copy">
             <p className="proof-deck">{proofContent.deck}</p>
             <div className="proof-edition-meta">
-              <span>Topic I of VIII</span>
+              <span>Topics I–II of VIII</span>
               <span>{visibleDefinitionCount} numbered definitions</span>
               <span>{visibleResultCount} results</span>
               <span>{visibleProofCount} complete proofs</span>
@@ -280,6 +293,8 @@ export default function ProofPage() {
                     </div>
                   </details>
 
+                  {topic.slug === "language" ? (
+                    <>
                   <section
                     className="topic-i-setup"
                     aria-labelledby="topic-i-setup-heading"
@@ -726,7 +741,21 @@ export default function ProofPage() {
                             ) : null}
 
                             {item.number === 7 ? (
-                              <ExposedFaceExplainer />
+                              <>
+                                <HomeomorphismExplainer />
+                                <ExposedFaceExplainer />
+                              </>
+                            ) : null}
+
+                            {item.number === 5 ? <AdjointExplainer /> : null}
+                            {item.number === 8 ? (
+                              <HausdorffConvergenceExplainer />
+                            ) : null}
+                            {item.number === 9 ? (
+                              <DenseRotationOrbitExplainer />
+                            ) : null}
+                            {item.number === 10 ? (
+                              <DegreeOneExplainer />
                             ) : null}
 
                             {proofIsCollapsible ? (
@@ -840,6 +869,14 @@ export default function ProofPage() {
                     </ol>
                   </section>
 
+                    </>
+                  ) : (
+                    <>
+                      <ProofTopicFigure slug={topic.slug} />
+                      <TopicIIChapter />
+                    </>
+                  )}
+
                   <section className="proof-topic-sources" aria-labelledby={`topic-${topic.slug}-sources`}>
                     <p className="section-label">Sources cited in this topic</p>
                     <h3 id={`topic-${topic.slug}-sources`}>Source shelf</h3>
@@ -861,20 +898,49 @@ export default function ProofPage() {
                   </section>
 
                   <nav
-                    className="proof-topic-controls proof-topic-controls-single"
+                    className={`proof-topic-controls${
+                      topicIndex > 0
+                        ? " proof-topic-controls-with-previous"
+                        : ""
+                    }`}
                     aria-label={`End of ${topic.title}`}
                   >
                     <div className="proof-topic-complete">
-                      <span>End of Topic I</span>
-                      <strong>Topic I of VIII complete</strong>
+                      <span>End of Topic {topicNumerals[topicIndex]}</span>
+                      <strong>
+                        Topic {topicNumerals[topicIndex]} of VIII complete
+                      </strong>
                     </div>
-                    <a
-                      className="proof-topic-control proof-topic-control-next"
-                      href="#topic-language"
-                    >
-                      <span>Return</span>
-                      <strong>Beginning of Topic I</strong>
-                    </a>
+                    {topicIndex > 0 ? (
+                      <a
+                        className="proof-topic-control proof-topic-control-previous"
+                        data-proof-target={visibleProofTopics[topicIndex - 1].slug}
+                        href={`#topic-${visibleProofTopics[topicIndex - 1].slug}`}
+                      >
+                        <span>Previous</span>
+                        <strong>{visibleProofTopics[topicIndex - 1].title}</strong>
+                      </a>
+                    ) : null}
+                    {topicIndex < visibleProofTopics.length - 1 ? (
+                      <a
+                        className="proof-topic-control proof-topic-control-next"
+                        data-proof-target={visibleProofTopics[topicIndex + 1].slug}
+                        href={`#topic-${visibleProofTopics[topicIndex + 1].slug}`}
+                      >
+                        <span>Next</span>
+                        <strong>{visibleProofTopics[topicIndex + 1].title}</strong>
+                      </a>
+                    ) : (
+                      <a
+                        className="proof-topic-control proof-topic-control-next"
+                        data-proof-anchor={`topic-${topic.slug}-heading`}
+                        data-proof-target={topic.slug}
+                        href={`#topic-${topic.slug}-heading`}
+                      >
+                        <span>Return</span>
+                        <strong>Beginning of Topic II</strong>
+                      </a>
+                    )}
                   </nav>
                 </article>
               );
@@ -885,8 +951,8 @@ export default function ProofPage() {
         <noscript>
           <style>{`.proof-topic-panel[hidden]{display:block!important}`}</style>
           <p className="proof-noscript">
-            JavaScript is unavailable. Topic I remains fully readable in
-            sequence.
+            JavaScript is unavailable. Topics I and II remain fully readable
+            in sequence.
           </p>
         </noscript>
 

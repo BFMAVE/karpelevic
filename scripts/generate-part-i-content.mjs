@@ -318,6 +318,14 @@ html = html.replace(
     return `<div id="${id}" class="${kind}">\n<p><strong>${label.kind} ${label.number}</strong>`;
   },
 );
+html = html.replace(
+  /<div id="([^"]+)" class="remark">\s*<p><em>[^<]+<\/em>/g,
+  (match, id) => {
+    const label = statementLabels.get(id);
+    if (!label) return match;
+    return `<div id="${id}" class="remark">\n<p><strong>${label.kind} ${label.number}</strong>`;
+  },
+);
 
 html = html.replace(
   /<math display="block"([^>]*)>([\s\S]*?)<\/math>/g,
@@ -421,8 +429,24 @@ const markers = {
     '<div id="lem:oriented-boundary-order" class="lemma">',
   firstTopicTwoLemma:
     '<div id="lem:triple-sign-criterion" class="lemma">',
+  simultaneousConvexOpenness:
+    '<div id="lem:simultaneous-convex-openness" class="lemma">',
+  supportFaceTest:
+    '<div id="lem:support-face-test" class="lemma">',
+  angularGaps:
+    '<div id="lem:angular-gaps" class="lemma">',
   saturation: '<h3 id="sec:saturation">',
+  normalFanTransfer:
+    '<div id="lem:normal-fan-transfer" class="proposition">',
+  hereditarySaturation:
+    '<div id="thm:hereditary-saturation" class="theorem">',
+  heredityRemark:
+    '<div id="rem:heredity-key" class="remark">',
   oneSided: '<h3 id="sec:one-sided">',
+  sideWitness:
+    '<div id="lem:side-witness" class="lemma">',
+  ownershipWord:
+    '<div id="def:ownership-word" class="definition">',
   edgeCaps: '<h4 id="edge-caps-and-one-sided-interlacing">',
   mutation: '<h3 id="sec:mutation">',
   rotation: '<h3 id="sec:rotation">',
@@ -432,12 +456,20 @@ const markers = {
   stochastic: '<h3 id="sec:stochastic">',
   strictSeparation:
     '<div id="lem:strict-separation" class="lemma">',
+  perronTools:
+    '<div id="lem:perron-tools" class="lemma">',
   polygonPolarity:
     '<div id="lem:polygon-polarity" class="lemma">',
+  polygonHausdorff:
+    '<div id="lem:polygonal-hausdorff-continuity" class="lemma">',
 };
 
 const introHeadingEnd = html.indexOf("</h3>", start(markers.intro)) + 5;
 const prelimHeadingEnd = html.indexOf("</h3>", start(markers.prelim)) + 5;
+const saturationHeadingEnd =
+  html.indexOf("</h3>", start(markers.saturation)) + 5;
+const oneSidedHeadingEnd =
+  html.indexOf("</h3>", start(markers.oneSided)) + 5;
 const topicISetupHtml = html.slice(
   introHeadingEnd,
   start(markers.nCritical),
@@ -456,12 +488,44 @@ const topicIHtmlByItem = {
   66: section(markers.strictSeparation, markers.polygonPolarity),
 };
 
+const topicIISetupHtml = html.slice(
+  saturationHeadingEnd,
+  start(markers.normalFanTransfer),
+);
+const topicIIHtmlByItem = {
+  11: section(
+    markers.firstTopicTwoLemma,
+    markers.simultaneousConvexOpenness,
+  ),
+  12: section(
+    markers.simultaneousConvexOpenness,
+    markers.supportFaceTest,
+  ),
+  13: section(markers.supportFaceTest, markers.angularGaps),
+  14: section(markers.angularGaps, markers.saturation),
+  15: section(markers.normalFanTransfer, markers.hereditarySaturation),
+  16: section(markers.hereditarySaturation, markers.heredityRemark),
+  17: section(markers.heredityRemark, markers.oneSided),
+  18: html.slice(oneSidedHeadingEnd, start(markers.ownershipWord)),
+  65: section(markers.perronTools, markers.strictSeparation),
+  67: section(markers.polygonPolarity, markers.polygonHausdorff),
+};
+
 const topicHtml = {
   language:
     '<h3 id="topic-i-basic-setting">Basic setting and notation</h3>' +
     topicISetupHtml +
     Object.values(topicIHtmlByItem).join(""),
-  "active-sides": section(markers.saturation, markers.oneSided),
+  "active-sides":
+    '<h3 id="topic-ii-convex-preliminaries">Convex preliminaries</h3>' +
+    [11, 12, 13, 14]
+      .map((itemNumber) => topicIIHtmlByItem[itemNumber])
+      .join("") +
+    '<h3 id="topic-ii-hereditary-saturation">Hereditary saturation</h3>' +
+    topicIISetupHtml +
+    [15, 65, 67, 16, 17, 18]
+      .map((itemNumber) => topicIIHtmlByItem[itemNumber])
+      .join(""),
   ownership: section(markers.oneSided, markers.edgeCaps),
   mutation:
     '<h3 class="continued-heading">One-sided contact selection — continued</h3>' +
@@ -500,6 +564,10 @@ export const partIHtmlByTopic = ${JSON.stringify(topicHtml)} as const;
 export const topicISetupHtml = ${JSON.stringify(topicISetupHtml)} as const;
 
 export const topicIHtmlByItem = ${JSON.stringify(topicIHtmlByItem)} as const;
+
+export const topicIISetupHtml = ${JSON.stringify(topicIISetupHtml)} as const;
+
+export const topicIIHtmlByItem = ${JSON.stringify(topicIIHtmlByItem)} as const;
 `;
 
 writeFileSync(outputPath, generated, "utf8");

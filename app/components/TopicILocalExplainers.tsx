@@ -1,5 +1,256 @@
 import { sitePath } from "../lib/site-path";
 
+export function AdjointExplainer() {
+  return (
+    <details className="topic-i-local-explainer" id="adjoint-explained">
+      <summary>
+        <span>Linear-algebra notation</span>
+        What is the adjoint in the adapted inner product?
+      </summary>
+      <div className="topic-i-local-explainer-body">
+        <p>
+          Once an inner product ⟨·,·⟩ has been chosen, the{" "}
+          <strong>adjoint</strong> of a real-linear map <i>A</i> is the
+          unique linear map <i>A</i>
+          <sup>*</sup> satisfying
+        </p>
+        <p className="topic-i-local-display">
+          ⟨<i>Ax</i>,<i>y</i>⟩ = ⟨<i>x</i>,<i>A</i>
+          <sup>*</sup>
+          <i>y</i>⟩
+          &nbsp; for every <i>x</i>,<i>y</i>.
+        </p>
+        <p>
+          In an orthonormal basis, <i>A</i>
+          <sup>*</sup> is represented by the transpose matrix. The word
+          “orthonormal” matters: after a non-orthogonal change of coordinates,
+          simply transposing the displayed matrix need not represent the
+          adjoint for the original inner product.
+        </p>
+        <p>
+          Proposition 2.1 constructs an inner product for which{" "}
+          <i>J</i>
+          <sub>+</sub> is an isometry, meaning that it preserves the inner
+          product and therefore lengths and angles. Because <i>J</i>
+          <sub>+</sub>
+          <sup>2</sup>=−<i>I</i>, its inverse is −<i>J</i>
+          <sub>+</sub>. An isometry satisfies{" "}
+          <i>J</i>
+          <sub>+</sub>
+          <sup>*</sup>=<i>J</i>
+          <sub>+</sub>
+          <sup>−1</sup>, so here{" "}
+          <i>J</i>
+          <sub>+</sub>
+          <sup>*</sup>=−<i>J</i>
+          <sub>+</sub>. This is the identity used to compute <i>T</i>
+          <sup>*</sup>.
+        </p>
+      </div>
+    </details>
+  );
+}
+
+export function HomeomorphismExplainer() {
+  return (
+    <details className="topic-i-local-explainer" id="homeomorphism-explained">
+      <summary>
+        <span>Topological vocabulary</span>
+        What does “homeomorphism” contribute here?
+      </summary>
+      <div className="topic-i-local-explainer-body">
+        <p>
+          A <strong>homeomorphism</strong> is a continuous bijection whose
+          inverse is also continuous. It preserves topological features such
+          as open and closed sets, interior, boundary, and connectedness,
+          although it need not preserve lengths or angles.
+        </p>
+        <p>
+          Every invertible real-linear map <i>A</i> on a finite-dimensional
+          plane is a homeomorphism: both <i>A</i> and its linear inverse{" "}
+          <i>A</i>
+          <sup>−1</sup> are continuous. The proof of Proposition 2.3 uses
+          more than topology as well—linearity preserves convex
+          combinations and line segments. The homeomorphism property
+          preserves ambient interiors and boundaries; applying the same
+          argument to the restriction of <i>A</i> between the relevant
+          affine hulls preserves relative interiors.
+        </p>
+      </div>
+    </details>
+  );
+}
+
+export function HausdorffConvergenceExplainer() {
+  return (
+    <details
+      className="topic-i-local-explainer"
+      id="hausdorff-convergence-explained"
+    >
+      <summary>
+        <span>Convergence of moving polygons</span>
+        What exactly is Hausdorff convergence?
+      </summary>
+      <div className="topic-i-local-explainer-body">
+        <p>
+          For a point <i>x</i> and a nonempty compact set <i>L</i>, write{" "}
+          dist(<i>x</i>,<i>L</i>) for the smallest distance from <i>x</i> to
+          a point of <i>L</i>. The <strong>Hausdorff distance</strong> between
+          two nonempty compact sets <i>K</i> and <i>L</i> is
+        </p>
+        <p className="topic-i-local-display topic-i-local-display-stacked">
+          <span>
+            <i>d</i>
+            <sub>H</sub>(<i>K</i>,<i>L</i>) =
+          </span>
+          <span>
+            max{"{"} sup
+            <sub>x∈K</sub> dist(<i>x</i>,<i>L</i>), sup
+            <sub>y∈L</sub> dist(<i>y</i>,<i>K</i>) {"}"}.
+          </span>
+        </p>
+        <p>
+          Thus <i>d</i>
+          <sub>H</sub>(<i>K</i>,<i>L</i>)≤<i>ε</i> means two things at once:
+          every point of <i>K</i> lies within <i>ε</i> of <i>L</i>, and every
+          point of <i>L</i> lies within <i>ε</i> of <i>K</i>. A family{" "}
+          <i>P</i>
+          <sub>τ</sub> converges to <i>P</i>
+          <sub>0</sub> in the Hausdorff sense when{" "}
+          <i>d</i>
+          <sub>H</sub>(<i>P</i>
+          <sub>τ</sub>,<i>P</i>
+          <sub>0</sub>)→0 as <i>τ</i>→0.
+        </p>
+        <div className="topic-i-local-example-grid">
+          <article>
+            <h4>A moving polygon</h4>
+            <p>
+              If corresponding vertices of two polygons are all within{" "}
+              <i>ε</i>, then corresponding convex combinations are within{" "}
+              <i>ε</i>. Hence moving every vertex continuously makes the
+              polygon move continuously in Hausdorff distance.
+            </p>
+          </article>
+          <article>
+            <h4>Why conjugation preserves it</h4>
+            <p>
+              Complex conjugation <i>C</i> is an isometry:
+              |<i>Cx</i>−<i>Cy</i>|=|<i>x</i>−<i>y</i>|. It therefore
+              preserves every point-to-set distance and gives the exact
+              equality{" "}
+              <i>d</i>
+              <sub>H</sub>(<i>C</i>(<i>K</i>),<i>C</i>(<i>L</i>))=
+              <i>d</i>
+              <sub>H</sub>(<i>K</i>,<i>L</i>). This proves the preservation
+              claim in Lemma 2.4.
+            </p>
+          </article>
+        </div>
+        <p className="topic-i-local-source-note">
+          Standard reference: R. Schneider,{" "}
+          <cite>Convex Bodies: The Brunn–Minkowski Theory</cite>, 2nd ed.,
+          §1.8, on the Hausdorff metric for convex bodies.
+        </p>
+      </div>
+    </details>
+  );
+}
+
+export function DenseRotationOrbitExplainer() {
+  return (
+    <details className="topic-i-local-explainer" id="dense-rotation-explained">
+      <summary>
+        <span>The orbit used in Lemma 2.5</span>
+        What does “dense in the unit circle” mean, and why is it true?
+      </summary>
+      <div className="topic-i-local-explainer-body">
+        <p>
+          A subset of the unit circle is <strong>dense</strong> when every
+          nonempty open arc contains one of its points. For the rotation{" "}
+          <i>R</i>
+          <sub>θ</sub>(<i>z</i>)=<i>e</i>
+          <sup>iθ</sup>
+          <i>z</i>, the orbit of a nonzero point is{" "}
+          {"{"}<i>e</i>
+          <sup>ikθ</sup>
+          <i>z</i>:<i>k</i>≥0{"}"}. It is finite exactly when{" "}
+          <i>θ</i>/(2<i>π</i>) is rational.
+        </p>
+        <p>
+          Here is a short reason for the infinite-order case. Consider all
+          integer powers and take their closure <i>H</i>. It is a{" "}
+          <strong>closed subgroup</strong>: it contains 1, is closed under
+          multiplication and inverses, and contains the limits of its
+          convergent sequences. Since the powers are infinite and the circle
+          is compact, quotients of two sufficiently close powers give
+          nonidentity elements of <i>H</i> with arbitrarily small positive
+          angle.
+        </p>
+        <p>
+          Fix any angular tolerance <i>ε</i> and choose such an element with
+          angle 0&lt;<i>δ</i>&lt;<i>ε</i>. Its successive powers have angles
+          0,<i>δ</i>,2<i>δ</i>,… and come within <i>δ</i> of every angle
+          before completing the circle. Thus <i>H</i> comes within{" "}
+          <i>ε</i> of every point for every <i>ε</i>&gt;0. Since <i>H</i> is
+          closed, <i>H</i> is the entire circle. Finally, the closure of the
+          nonnegative powers is the same: compactness gives positive powers
+          approaching 1, and multiplying those powers by any fixed negative
+          power approximates that negative power using nonnegative exponents.
+          Hence the forward orbit used in the lemma is dense.
+        </p>
+        <p>
+          In Lemma 2.5, the set where the supporting functional{" "}
+          <i>ℓ</i> is negative is an open semicircle. Density guarantees that
+          some rotated iterate enters it, contradicting the inequality{" "}
+          <i>ℓ</i>(<i>e</i>
+          <sup>ikθ</sup>
+          <i>z</i>)≥0.
+        </p>
+      </div>
+    </details>
+  );
+}
+
+export function DegreeOneExplainer() {
+  return (
+    <details className="topic-i-local-explainer" id="degree-one-explained">
+      <summary>
+        <span>The topological step in Lemma 2.6</span>
+        What does degree +1 mean here?
+      </summary>
+      <div className="topic-i-local-explainer-body">
+        <p>
+          A continuous map from one circle to another has an integer{" "}
+          <strong>degree</strong>, its signed number of turns. If a circular
+          parameter <i>t</i> is lifted from angles modulo 2<i>π</i> to real
+          angles, the target angle can be lifted to a continuous function{" "}
+          <i>F</i> satisfying
+        </p>
+        <p className="topic-i-local-display">
+          <i>F</i>(<i>t</i>+2<i>π</i>) =
+          <i>F</i>(<i>t</i>)+2<i>πd</i>.
+        </p>
+        <p>
+          The integer <i>d</i> is the degree. Degree +1 means that one positive
+          circuit of the source produces exactly one counterclockwise circuit
+          of the target; degree −1 would reverse the orientation.
+        </p>
+        <p>
+          For the radial map{" "}
+          <i>π</i>
+          <sub>o</sub>(<i>z</i>)=(<i>z</i>−<i>o</i>)/|<i>z</i>−<i>o</i>|,
+          every ray from the interior point <i>o</i> meets the boundary of a
+          compact convex set exactly once. The map is therefore a
+          homeomorphism. Traversing the positively oriented boundary keeps
+          the interior on the left and turns the ray once counterclockwise,
+          so its degree is +1 and it preserves cyclic order.
+        </p>
+      </div>
+    </details>
+  );
+}
+
 function ExposedFacePlate() {
   return (
     <svg

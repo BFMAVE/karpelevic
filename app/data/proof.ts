@@ -100,15 +100,17 @@ export const proofSources: readonly ProofSource[] = [
   },
   {
     id: "standard-linear-algebra",
-    short: "Classical linear algebra",
+    short: "Horn–Johnson, Matrix Analysis",
     citation:
-      "Cayley–Hamilton, the real canonical form in dimension two, Perron–Frobenius theory, and standard spectral facts for stochastic matrices.",
+      "R. A. Horn and C. R. Johnson, Matrix Analysis, 2nd ed., Cambridge University Press (2013), especially Chapter 8, “Positive and Nonnegative Matrices.”",
+    href: "https://doi.org/10.1017/CBO9781139020411",
   },
   {
     id: "standard-convexity",
-    short: "Classical convexity",
+    short: "Schneider, Convex Bodies",
     citation:
-      "Supporting lines, strict separation, polar duality, Hausdorff convergence, and strict area monotonicity for planar convex bodies.",
+      "R. Schneider, Convex Bodies: The Brunn–Minkowski Theory, expanded ed., Cambridge University Press (2014): Chapter 1, §§1.1, 1.3, 1.6, 1.7, and Chapter 2, §§2.1, 2.4.",
+    href: "https://doi.org/10.1017/CBO9781139003858",
   },
   {
     id: "standard-projective",
@@ -401,7 +403,7 @@ export const proofContent = {
   title: "How the Proof Works",
   subtitle: "Part I · Critical invariant polygons and the Farey return",
   deck:
-    "Topic I in full: two numbered definitions, seven results with complete proofs, first-use vocabulary, optional guided explanations, and mathematical plates.",
+    "Topics I and II in full: the intrinsic language, finite convex certificates, the normal-fan transfer, and hereditary saturation—with complete proofs, explicit dependencies, and verified mathematical plates.",
   auditNote:
     "These labels classify mathematical statements, not proofs. “Previously claimed” is used when an antecedent occurs in Karpelevič’s original argument but an independent complete proof of the exact step has not yet been verified. The classifications remain open to correction.",
   criticalPath:

@@ -201,6 +201,12 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
+  const topicIPanelStart = html.indexOf('data-topic-slug="language"');
+  const topicIIPanelStart = html.indexOf('data-topic-slug="active-sides"');
+  assert.ok(topicIPanelStart >= 0);
+  assert.ok(topicIIPanelStart > topicIPanelStart);
+  const topicIPanelHtml = html.slice(topicIPanelStart, topicIIPanelStart);
+  const topicIIPanelHtml = html.slice(topicIIPanelStart);
   assert.match(html, /How the Proof Works/);
   assert.match(html, /Part I · Critical invariant polygons and the Farey return/);
   assert.match(html, /Topic I of VIII/);
@@ -258,7 +264,7 @@ test("server-renders the Part I proof reader", async () => {
   assert.doesNotMatch(html, /Small library invoked in this definition/);
   assert.match(html, /Seven results, with complete proofs/);
   assert.match(html, /2(?:<!-- -->)? numbered definitions/);
-  assert.match(html, /7(?:<!-- -->)? results/);
+  assert.match(html, /17(?:<!-- -->)? results/);
   assert.doesNotMatch(html, /Result (?:<!-- -->)?I/);
   assert.doesNotMatch(html, /Result (?:<!-- -->)?VII/);
   assert.match(html, /proof-result-sequence">Proposition 2\.1/);
@@ -268,7 +274,7 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(html, /proof-result-sequence">Lemma A\.2/);
   assert.equal(
     (
-      html.match(
+      topicIPanelHtml.match(
         /class="topic-i-result-primer proof-guided-layer"/g,
       ) ?? []
     ).length,
@@ -276,9 +282,9 @@ test("server-renders the Part I proof reader", async () => {
   );
   assert.match(
     html,
-    /class="proof-reader proof-reader-single"[^>]*data-reading-mode="guided"/,
+    /class="proof-reader"[^>]*data-reading-mode="guided"/,
   );
-  assert.doesNotMatch(html, /class="proof-topic-index"/);
+  assert.match(html, /class="proof-topic-index"/);
   assert.match(html, /aria-label="Reading mode"/);
   assert.match(html, /data-reading-mode-button="guided"/);
   assert.match(html, /data-reading-mode-button="compact"/);
@@ -409,6 +415,17 @@ test("server-renders the Part I proof reader", async () => {
   assert.doesNotMatch(proposition21Html, /class="proof-item-provenance"/);
   assert.doesNotMatch(proposition21Html, /Source and classification/);
   assert.match(
+    proposition21Html,
+    /What is the adjoint in the adapted inner product/,
+  );
+  assert.match(proposition21Html, /unique linear map/);
+  assert.match(proposition21Html, /represented by the transpose matrix/);
+  assert.match(proposition21Html, /isometry satisfies/);
+  assert.doesNotMatch(
+    proposition21Html,
+    /id="adjoint-explained"[^>]* open/,
+  );
+  assert.match(
     proposition22Html,
     /Open the proof of Proposition 2\.2/,
   );
@@ -447,6 +464,22 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(
     proposition23Html,
     /What does it mean for a functional to expose a face/,
+  );
+  assert.match(
+    proposition23Html,
+    /What does “homeomorphism” contribute here/,
+  );
+  assert.match(
+    proposition23Html,
+    /continuous bijection whose[\s\S]*?inverse is also continuous/,
+  );
+  assert.match(
+    proposition23Html,
+    /Every invertible real-linear map[\s\S]*?is a homeomorphism/,
+  );
+  assert.doesNotMatch(
+    proposition23Html,
+    /id="homeomorphism-explained"[^>]* open/,
   );
   assert.match(proposition23Html, /A functional exposes a face/);
   assert.match(
@@ -509,6 +542,18 @@ test("server-renders the Part I proof reader", async () => {
     lemma24Html,
     /class="proof-item-commentary proof-item-explainer"/,
   );
+  assert.match(lemma24Html, /What exactly is Hausdorff convergence/);
+  assert.match(lemma24Html, /Hausdorff distance/);
+  assert.match(lemma24Html, /every point of[\s\S]*?lies within/);
+  assert.match(lemma24Html, /A moving polygon/);
+  assert.match(lemma24Html, /Why conjugation preserves it/);
+  assert.match(lemma24Html, /preserves every point-to-set distance/);
+  assert.match(lemma24Html, /Schneider/);
+  assert.match(lemma24Html, /§1\.8/);
+  assert.doesNotMatch(
+    lemma24Html,
+    /id="hausdorff-convergence-explained"[^>]* open/,
+  );
   assert.match(lemma24Html, /Roadmap for later topics/);
   assert.match(
     lemma25Html,
@@ -521,6 +566,17 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(
     lemma25Html,
     /class="proof-item-commentary proof-item-explainer"/,
+  );
+  assert.match(
+    lemma25Html,
+    /What does “dense in the unit circle” mean, and why is it true/,
+  );
+  assert.match(lemma25Html, /every nonempty open arc/);
+  assert.match(lemma25Html, /<strong>closed subgroup<\/strong>/);
+  assert.match(lemma25Html, /open semicircle/);
+  assert.doesNotMatch(
+    lemma25Html,
+    /id="dense-rotation-explained"[^>]* open/,
   );
   assert.match(lemma25Html, /possibly a segment/);
   assert.match(lemma25Html, /\\rho\^k&gt;0/);
@@ -535,6 +591,13 @@ test("server-renders the Part I proof reader", async () => {
   assert.doesNotMatch(
     lemma26Html,
     /class="proof-item-commentary proof-item-explainer"/,
+  );
+  assert.match(lemma26Html, /What does degree \+1 mean here/);
+  assert.match(lemma26Html, /signed number of turns/);
+  assert.match(lemma26Html, /degree is \+1 and it preserves cyclic order/);
+  assert.doesNotMatch(
+    lemma26Html,
+    /id="degree-one-explained"[^>]* open/,
   );
   assert.match(
     lemmaA2Html,
@@ -587,7 +650,7 @@ test("server-renders the Part I proof reader", async () => {
   );
   assert.equal(
     (
-      html.match(
+      topicIPanelHtml.match(
         /class="proof-item-commentary proof-item-explainer"/g,
       ) ?? []
     ).length,
@@ -606,12 +669,16 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(html, /Construct the complex structure/);
   assert.match(html, /Use the rotation orbit/);
   assert.equal(
-    (html.match(/class="proof-item-intuition"/g) ?? []).length,
+    (topicIPanelHtml.match(/class="proof-item-intuition"/g) ?? []).length,
     4,
   );
   assert.equal(
-    (html.match(/class="topic-i-concept-figure"/g) ?? []).length,
+    (topicIPanelHtml.match(/class="topic-i-concept-figure"/g) ?? []).length,
     2,
+  );
+  assert.equal(
+    (topicIPanelHtml.match(/class="topic-i-local-explainer"/g) ?? []).length,
+    7,
   );
   assert.match(html, /Figure I\.1/);
   assert.match(html, /Figure I\.2/);
@@ -633,20 +700,23 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(orbitMarks[0][0], /data-z="true"/);
   assert.ok(Number(orbitMarks[0][3]) < 205);
   assert.ok(orbitMarks.slice(1).some((mark) => Number(mark[3]) > 205));
-  assert.equal((html.match(/class="topic-i-formal"/g) ?? []).length, 9);
+  assert.equal((topicIPanelHtml.match(/class="topic-i-formal"/g) ?? []).length, 9);
   assert.doesNotMatch(html, /9(?:<!-- -->)? numbered items/);
-  assert.match(html, /7(?:<!-- -->)? complete proofs/);
-  assert.match(html, /39(?:<!-- -->)? displayed formulas/);
+  assert.match(html, /16(?:<!-- -->)? complete proofs/);
+  assert.match(html, /97(?:<!-- -->)? displayed formulas/);
   assert.doesNotMatch(
     html,
     /Topic I makes no claim of a new mathematical result/,
   );
   assert.match(html, /id="part-i-item-1"/);
   assert.match(html, /id="part-i-item-66"/);
-  assert.equal((html.match(/id="part-i-item-\d+"/g) ?? []).length, 9);
-  assert.equal((html.match(/class="proof-topic-panel"/g) ?? []).length, 1);
-  assert.equal((html.match(/class="proof"/g) ?? []).length, 8);
-  assert.equal((html.match(/<math[^>]*display="block"/g) ?? []).length, 39);
+  assert.equal((topicIPanelHtml.match(/id="part-i-item-\d+"/g) ?? []).length, 9);
+  assert.equal((html.match(/class="proof-topic-panel"/g) ?? []).length, 2);
+  assert.equal((topicIPanelHtml.match(/class="proof"/g) ?? []).length, 8);
+  assert.equal(
+    (topicIPanelHtml.match(/<math[^>]*display="block"/g) ?? []).length,
+    39,
+  );
   assert.match(html, /Definition 1\.1/);
   assert.match(html, /Proposition 2\.1/);
   assert.match(html, /Lemma 2\.6/);
@@ -691,15 +761,15 @@ test("server-renders the Part I proof reader", async () => {
   );
   assert.match(html, /Scientific plate/);
   assert.match(html, /Plate I/);
-  assert.match(html, /Topic I of VIII complete/);
+  assert.match(html, /Topic (?:<!-- -->)?I(?:<!-- -->)? of VIII complete/);
   assert.doesNotMatch(html, /Theorem 1\.3/);
   assert.doesNotMatch(html, /Theorem 1\.4/);
-  assert.doesNotMatch(html, /Lemma 2\.7/);
-  assert.doesNotMatch(html, /Hereditary saturation/);
-  assert.doesNotMatch(html, /Projective unit return/);
-  assert.doesNotMatch(html, /Return factors lie on the Jensen sheet/);
+  assert.doesNotMatch(topicIPanelHtml, /Lemma 2\.7/);
+  assert.doesNotMatch(topicIPanelHtml, /Hereditary saturation/);
+  assert.doesNotMatch(topicIPanelHtml, /Projective unit return/);
+  assert.doesNotMatch(topicIPanelHtml, /Return factors lie on the Jensen sheet/);
   assert.match(html, /Returning to stochastic spectra/);
-  assert.doesNotMatch(html, /data-topic-slug="active-sides"/);
+  assert.match(html, /data-topic-slug="active-sides"/);
   assert.doesNotMatch(
     html,
     /local instalment|current instalment|Topics II–VIII|developing annotated edition/i,
@@ -716,6 +786,104 @@ test("server-renders the Part I proof reader", async () => {
   assert.doesNotMatch(html, /proof status/i);
   const sourceShelfHtml = html.slice(sourceShelfStart);
   assert.doesNotMatch(sourceShelfHtml, /<table\b/);
+
+  assert.match(topicIIPanelHtml, /Topic II · 10 items/);
+  assert.match(topicIIPanelHtml, /From convex order to active sides/);
+  assert.match(topicIIPanelHtml, /What is allowed into Topic II/);
+  assert.match(topicIIPanelHtml, /A closed dependency chain/);
+  assert.match(topicIIPanelHtml, /Imported from Topic I/);
+  assert.match(topicIIPanelHtml, /Standard background, stated with sources/);
+  assert.match(topicIIPanelHtml, /Proved on this page/);
+  assert.match(topicIIPanelHtml, /No irreducibility, smoothness, or generic-position/);
+  assert.match(topicIIPanelHtml, /data-proof-target="language"/);
+  assert.match(topicIIPanelHtml, /data-proof-anchor="part-i-item-2"/);
+  assert.match(topicIIPanelHtml, /data-proof-anchor="part-i-item-10"/);
+  assert.match(topicIIPanelHtml, /Schneider/);
+  assert.match(topicIIPanelHtml, /Horn and C\. R\. Johnson/);
+  assert.match(topicIIPanelHtml, /Bitsoris/);
+  assert.match(topicIIPanelHtml, /Dmitriev–Dynkin/);
+  assert.match(topicIIPanelHtml, /Swift’s 1972 thesis/);
+
+  const topicIIOrder = [11, 12, 13, 14, 15, 65, 67, 16, 17, 18];
+  let precedingPosition = -1;
+  for (const itemNumber of topicIIOrder) {
+    const position = topicIIPanelHtml.indexOf(`id="part-i-item-${itemNumber}"`);
+    assert.ok(position > precedingPosition, `Topic II item ${itemNumber} is out of order`);
+    precedingPosition = position;
+  }
+
+  for (const label of [
+    "Lemma 2.7",
+    "Lemma 2.8",
+    "Lemma 2.9",
+    "Lemma 2.10",
+    "Proposition 3.1",
+    "Lemma A.1",
+    "Lemma A.3",
+    "Theorem 3.2",
+    "Remark 3.3",
+    "Lemma 4.1",
+  ]) {
+    assert.match(topicIIPanelHtml, new RegExp(label.replace(".", "\\.")));
+  }
+
+  assert.equal(
+    (topicIIPanelHtml.match(/id="part-i-item-\d+"/g) ?? []).length,
+    10,
+  );
+  assert.equal(
+    (topicIIPanelHtml.match(/class="topic-i-formal"/g) ?? []).length,
+    10,
+  );
+  assert.equal(
+    (topicIIPanelHtml.match(/class="proof"/g) ?? []).length,
+    9,
+  );
+  assert.equal(
+    (topicIIPanelHtml.match(/class="topic-i-proof-disclosure"/g) ?? []).length,
+    9,
+  );
+  assert.doesNotMatch(
+    topicIIPanelHtml,
+    /class="topic-i-proof-disclosure" open/,
+  );
+  assert.equal(
+    (
+      topicIIPanelHtml.match(
+        /<span>Definitions before the result<\/span>/g,
+      ) ?? []
+    ).length,
+    10,
+  );
+  assert.match(topicIIPanelHtml, /The finite-continuity argument, without shorthand/);
+  assert.match(topicIIPanelHtml, /Why adjacent normals determine one support value/);
+  assert.match(topicIIPanelHtml, /Boundedness, contact, and complementarity unpacked/);
+  assert.match(topicIIPanelHtml, /Two appendix lemmas before saturation/);
+  assert.match(topicIIPanelHtml, /Their labels A\.1 and A\.3 are retained/);
+  assert.match(topicIIPanelHtml, /id="eq:sine-coefficients"/);
+  assert.match(topicIIPanelHtml, /id="eq:fan-containment"/);
+  assert.match(topicIIPanelHtml, /id="eq:critical-spectral-radius"/);
+  assert.match(topicIIPanelHtml, /id="eq:stress-complementarity"/);
+  assert.match(topicIIPanelHtml, /id="eq:full-side-touch"/);
+  assert.match(topicIIPanelHtml, /Plate II/);
+  assert.match(topicIIPanelHtml, /cos\(π\/7\)eⁱπ⁄⁷/);
+  assert.equal(
+    (topicIIPanelHtml.match(/data-contact-side="\d+"/g) ?? []).length,
+    7,
+  );
+  assert.match(topicIIPanelHtml, /Figure II\.1/);
+  assert.match(topicIIPanelHtml, /Figure II\.2/);
+  assert.match(topicIIPanelHtml, /Figure II\.3/);
+  assert.match(topicIIPanelHtml, /data-min-determinant="[^"]+"/);
+  assert.match(topicIIPanelHtml, /data-coefficient-a="[^"]+"/);
+  assert.doesNotMatch(topicIIPanelHtml, /<table\b/);
+
+  const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
+  assert.equal(new Set(ids).size, ids.length, "The proof page has duplicate ids");
+  const idSet = new Set(ids);
+  for (const match of topicIIPanelHtml.matchAll(/href="#([^"]+)"/g)) {
+    assert.ok(idSet.has(match[1]), `Fragment target #${match[1]} is missing`);
+  }
 });
 
 test("server-renders the illustrated prerequisite library", async () => {

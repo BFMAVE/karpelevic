@@ -11,7 +11,7 @@ const outputPath = path.resolve(
   process.env.PROOF_HTML_OUTPUT ??
     path.join(
       projectRoot,
-      "share/Critical_Invariant_Polygons_Topic_I.html",
+      "share/Critical_Invariant_Polygons_Topics_I_II.html",
     ),
 );
 const publicSite = "https://bfmave.github.io/karpelevic";
@@ -183,6 +183,15 @@ function verifyStandaloneHtml(html) {
     "Proposition 2.1",
     "Lemma 2.6",
     "Lemma A.2",
+    "Lemma 2.7",
+    "Proposition 3.1",
+    "Lemma A.1",
+    "Lemma A.3",
+    "Theorem 3.2",
+    "Remark 3.3",
+    "Lemma 4.1",
+    "What is allowed into Topic II",
+    "data-topic-slug=\"active-sides\"",
     "equation (2.3)",
     "What does it mean for a functional to expose a face?",
     "data-reading-mode-button",

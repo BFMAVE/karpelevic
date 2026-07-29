@@ -15,9 +15,9 @@ const figureCopy: Readonly<
   "active-sides": {
     title: "Every side is active at radial criticality",
     description:
-      "The image polygon T P has a contact point on each side of the outer polygon P.",
+      "A regular heptagon contains its image under a rotation by pi over seven followed by contraction by cosine pi over seven; the image vertices are the side midpoints.",
     caption:
-      "Plate II. Saturation means that each supporting side of P is attained by TP. Hereditary saturation preserves this fact after admissible polygon changes.",
+      "Plate II. An exact model: for a regular heptagon, T = cos(π/7)e^{iπ/7} sends every vertex to the midpoint of the next side. Thus every side meets TP. The theorem proves this saturation for every critical invariant polygon, not only this symmetric example.",
   },
   ownership: {
     title: "Half-open ownership at a vertex contact",
@@ -120,6 +120,58 @@ function RotationFigure() {
   );
 }
 
+function ActiveSidesFigure() {
+  const count = 7;
+  const centreX = 380;
+  const centreY = 182;
+  const radius = 145;
+  const vertices = Array.from({ length: count }, (_, index) => {
+    const angle = -Math.PI / 2 + (2 * Math.PI * index) / count;
+    return {
+      x: centreX + radius * Math.cos(angle),
+      y: centreY + radius * Math.sin(angle),
+    };
+  });
+  const imageVertices = vertices.map((vertex, index) => {
+    const next = vertices[(index + 1) % count];
+    return {
+      x: (vertex.x + next.x) / 2,
+      y: (vertex.y + next.y) / 2,
+    };
+  });
+
+  return (
+    <>
+      <polygon
+        className="proof-figure-polygon"
+        points={vertices.map(({ x, y }) => `${x},${y}`).join(" ")}
+      />
+      <polygon
+        className="proof-figure-image"
+        data-rho={Math.cos(Math.PI / count)}
+        data-theta={Math.PI / count}
+        points={imageVertices.map(({ x, y }) => `${x},${y}`).join(" ")}
+      />
+      {imageVertices.map(({ x, y }, index) => (
+        <circle
+          className="proof-figure-contact"
+          cx={x}
+          cy={y}
+          data-contact-side={index}
+          key={index}
+          r="7"
+        />
+      ))}
+      <circle className="proof-figure-origin" cx={centreX} cy={centreY} r="5" />
+      <text className="proof-figure-label" x="620" y="79">P</text>
+      <text className="proof-figure-label proof-figure-accent" x="493" y="169">TP</text>
+      <text className="proof-figure-note" x="380" y="346" textAnchor="middle">
+        T = cos(π/7)eⁱπ⁄⁷ · every image vertex is a side midpoint
+      </text>
+    </>
+  );
+}
+
 function FigureDrawing({ slug }: { slug: string }) {
   switch (slug) {
     case "language":
@@ -146,34 +198,7 @@ function FigureDrawing({ slug }: { slug: string }) {
         </>
       );
     case "active-sides":
-      return (
-        <>
-          <polygon
-            className="proof-figure-polygon"
-            points="105,235 178,75 365,43 610,105 657,250 382,320 168,300"
-          />
-          <polygon
-            className="proof-figure-image"
-            points="142,155 269,58 489,74 634,177 520,287 275,311 113,268"
-          />
-          {[
-            [142, 155],
-            [269, 58],
-            [489, 74],
-            [634, 177],
-            [520, 287],
-            [275, 311],
-            [113, 268],
-          ].map(([x, y]) => (
-            <circle className="proof-figure-contact" cx={x} cy={y} key={`${x}-${y}`} r="7" />
-          ))}
-          <text className="proof-figure-label" x="616" y="80">P</text>
-          <text className="proof-figure-label proof-figure-accent" x="486" y="166">TP</text>
-          <text className="proof-figure-note" x="365" y="193" textAnchor="middle">
-            every side is touched
-          </text>
-        </>
-      );
+      return <ActiveSidesFigure />;
     case "ownership":
       return (
         <>
