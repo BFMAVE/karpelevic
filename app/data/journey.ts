@@ -221,8 +221,17 @@ export const journeyReferences: readonly JourneyReference[] = [
     authors: "B. Verbeken and V. Ginis",
     title:
       "Stochastic realisers of non-degenerate full-degree Type II reduced Ito polynomials",
-    publication: "Zenodo working paper, 2026.",
-    links: [],
+    publication: "Zenodo, 2026.",
+    links: [
+      {
+        label: "Zenodo",
+        href: "https://zenodo.org/records/21653759",
+      },
+      {
+        label: "DOI",
+        href: "https://doi.org/10.5281/zenodo.21653759",
+      },
+    ],
   },
   {
     id: "two-layer-2026",

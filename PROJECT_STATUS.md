@@ -185,7 +185,9 @@ material, not with generative imagery.
   Karpelevič region and Kirkland’s row-stochastic Leslie region as the
   principal all-dimensional examples in view.
 - The Type II and Type III realization projects are cited separately. The
-  verified Type III Zenodo record is linked directly.
+  verified Zenodo records are linked directly: Type III at
+  <https://zenodo.org/records/21219088> and Type II at
+  <https://zenodo.org/records/21653759>.
 - “New region of interest” is presented as the working paper on two-layer
   renewal stochastic matrices. The page states precisely that it treats the
   complete parameter family for every \(q\ge2\), not the full class of all
@@ -212,9 +214,6 @@ material, not with generative imagery.
 - The History-page claims have been checked against primary papers and
   official journal or author records, but the narrative and emphasis still
   require author review.
-- The exact public Zenodo URL or DOI for the Type II realization paper has not
-  been recovered from the public Zenodo index, so the paper is cited without an
-  invented link.
 - The standalone Paper and Updates and Errata pages have not been implemented.
 - No interactive mathematics has been implemented or verified.
 - No arXiv identifier, final manuscript status, or source-archive policy has
@@ -424,3 +423,5 @@ local source history and adopt the automated deployment workflow.
 - 28 July 2026 — Restored the original visible site identity before publishing
   the repository rename, then verified Home, History, My Journey, and the PDF
   at their new `/karpelevic/` addresses with clean browser consoles.
+- 29 July 2026 — Verified the public Type II paper record on Zenodo and added
+  its record and DOI links to the My Journey reference ledger.
