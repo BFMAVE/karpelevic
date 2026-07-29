@@ -12,6 +12,11 @@ const routes = [
   { requestPath: "/", outputPath: "index.html" },
   { requestPath: "/history", outputPath: "history/index.html" },
   { requestPath: "/journey", outputPath: "journey/index.html" },
+  { requestPath: "/proof", outputPath: "proof/index.html" },
+  {
+    requestPath: "/prerequisites",
+    outputPath: "prerequisites/index.html",
+  },
 ];
 
 function makeStatic(html) {
@@ -25,7 +30,7 @@ function makeStatic(html) {
 
   return withProjectAssets.replace(
     "</body>",
-    `<script src="${basePath}/contact.js" defer></script></body>`,
+    `<script src="${basePath}/contact.js" defer></script><script src="${basePath}/proof.js" defer></script></body>`,
   );
 }
 

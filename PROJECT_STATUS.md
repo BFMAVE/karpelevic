@@ -42,12 +42,14 @@ Primary navigation:
 - Problem
 - History
 - My Journey
+- The Proof
 
 Routes:
 
 - `/` — Problem and two-minute project orientation
 - `/history/` — sourced historical development and prior art
 - `/journey/` — first-person intellectual history, with prompts where input is missing
+- `/proof/` — an eight-topic guided reader for all seventy Part I items
 - `/contribution/` — cautious novelty and contribution ledger
 - `/explore/` — verified interactive mathematical visualization
 - `/paper/` — canonical scholarly entry point and PDF
@@ -103,6 +105,7 @@ material, not with generative imagery.
 | 5 | Personal and contribution pages: My Journey, What This Paper Adds | **My Journey first draft complete — awaiting author review** |
 | 6 | Interactive exploration | Not started |
 | 7 | Final QA and author-approved deployment | **Current three-page release deployed and verified** |
+| 8 | Part I annotated proof reader | **Topic I textbook edition published — author review continues** |
 
 ## Completed
 
@@ -208,6 +211,55 @@ material, not with generative imagery.
   Chrome after deployment. All three HTML routes load without console errors,
   expose the intended three-item primary navigation, and serve their
   repository-subpath assets correctly.
+- A local textbook edition of Topic I of **The Proof** has been implemented at
+  `/proof/`. The complete Part I argument has been inventoried into eight
+  consecutive topics, but only Topic I is currently exposed to readers.
+- Topic I contains its complete mathematical text: two numbered definitions,
+  seven results, seven canonical proofs, the surrounding argument, and 39
+  displayed formulas. Proposition 2.2 additionally offers an optional
+  six-step expansion of its concise manuscript proof.
+- The full text is generated deterministically from the canonical TeX source
+  by `scripts/generate-part-i-content.mjs`. The generator converts the
+  mathematics to accessible native MathML, assigns stable web theorem
+  numbers and equation anchors, and records the SHA-256 hash of the source
+  used for the edition.
+- Topic I now begins with an explicit definition sequence for real planes,
+  real-linear maps, compact nondegenerate convex polygons, invariance,
+  polygonal complexity, elliptic maps, spectral radius, and elliptic
+  contractions. No elliptic contraction is used in the chapter overview
+  before this vocabulary is established.
+- Named mathematical operators in the web edition use explicit function
+  notation throughout: `tr(T)`, `det(T)`, `Ext(P)`, `relint(F)`, and
+  `aff(S)`.
+- The foundational definition block now explains why compactness is essential
+  to the vertex-count problem and distinguishes ambient interior from relative
+  interior. These longer explanations are expandable.
+- Definition 1.1 and Definition 1.2 remain explicitly separate from the
+  results. Their former editorial preamble and per-definition prerequisite
+  callouts have been removed.
+- Each of Topic I’s seven results is presented as one continuous textbook
+  unit. Supporting definitions, prerequisite links, walkthroughs, and source
+  notes are included only where they add useful information rather than as a
+  compulsory template on every result.
+- Topic I includes a deterministic overview plate and two additional inline
+  concept figures. The separate illustrated prerequisite library remains
+  available as a direct local route but is no longer promoted inside the
+  proof chapter.
+- The **How the Proof Works** title now occupies the full available page
+  width before the deck and edition metadata.
+- Result cards may carry one of the agreed mathematical-statement labels:
+  Classical result, Previously known, Previously claimed, Strengthened, or New
+  result. Proposition 2.1 deliberately carries no classification or source
+  panel at the author’s request.
+- “Previously claimed” is reserved for mechanisms located in Karpelevič’s
+  original proof whose exact step has not yet been verified through an
+  independent complete proof. Each non-new label points to its source, and the
+  page explains the qualification explicitly.
+- The proof reader is progressive-enhancement friendly: Topic I is fully
+  server-rendered and remains readable without JavaScript.
+- The Topic I proof reader is publicly available at
+  <https://bfmave.github.io/karpelevic/proof/>. The deployed page and its
+  stylesheet and reading-mode script were verified directly after publication.
 
 ## Not Yet Done
 
@@ -216,6 +268,14 @@ material, not with generative imagery.
   require author review.
 - The standalone Paper and Updates and Errata pages have not been implemented.
 - No interactive mathematics has been implemented or verified.
+- Topics II–VIII have been inventoried but have not yet been converted into
+  the reviewed textbook format or exposed on the page.
+- PDF page-number links and sentence-level marginal annotations have not yet
+  been added. Topic I currently explains every proof in numbered conceptual
+  steps without annotating every individual sentence.
+- The Part I provenance labels are a conservative first classification and
+  still require author review, especially the boundary between “Previously
+  claimed,” “Strengthened,” and “New result.”
 - No arXiv identifier, final manuscript status, or source-archive policy has
   been supplied or configured.
 - The local repository is not yet connected and synchronized with the public
@@ -425,3 +485,163 @@ local source history and adopt the automated deployment workflow.
   at their new `/karpelevic/` addresses with clean browser consoles.
 - 29 July 2026 — Verified the public Type II paper record on Zenodo and added
   its record and DOI links to the My Journey reference ledger.
+- 29 July 2026 — Implemented the approved Topic I mathematical and editorial
+  audit, the corrected rotation-orbit figure, Guided/Compact reading modes,
+  full-width single-topic layout, navy topic opener, tighter reading rhythm,
+  print treatment, regression tests, and interactive standalone export. The
+  proposed source table was deliberately omitted.
+- 29 July 2026 — Published the validated Topic I static release to the existing
+  GitHub Pages project and verified the live proof route, 39 displayed
+  formulas, Guided/Compact controls, stylesheet, and standalone proof script.
+## Current milestone — Topic I textbook chapter
+
+- **Done locally:** The Proof is now a staged reader showing Topic I of VIII
+  only. Topics II–VIII remain in the local data but are not rendered.
+- **Done locally:** the visible mathematical text is extracted from the
+  canonical TeX for exactly the nine Topic I items, including the complete
+  proof of the strict-separation lemma from Appendix A. The two main theorems
+  and the Topic II convexity lemmas are no longer included in this instalment.
+- **Done locally:** the separate “How to read this page” introduction has been
+  removed. The chapter now defines every foundational object before the first
+  numbered item.
+- **Done locally:** each numbered item keeps its formal statement and proof
+  together. Supplementary walkthroughs are retained selectively rather than
+  forced onto every item; references are consolidated at the end of the topic.
+- **Done locally:** repeated item-level “Small library,” classification badges,
+  and “Source and classification” disclosures have been removed from the
+  mathematical chapter. The entire “Before beginning Topic I” prerequisite
+  section has also been removed; the consolidated reference shelf remains at
+  the end.
+- **Done locally:** the two manuscript definitions are separated from the
+  seven propositions and lemmas. Results now use the exact PDF numbering:
+  Propositions 2.1–2.3, Lemmas 2.4–2.6, and Lemma A.2.
+- **Done locally:** the definition-level prerequisite callouts have been
+  removed. Proposition 2.2 also omits its empty “No new definitions” panel and
+  its two prerequisite links.
+- **Done locally:** optional pedagogical material is collapsed by default.
+  The statements remain visible; the proofs of Propositions 2.1 and 2.2 are
+  closed initially and open on demand. The proofs of Lemmas 2.4–2.6 and
+  Lemma A.2 are now handled in the same way. Propositions 2.2, Lemmas 2.4 and
+  2.6, and Lemma A.2 have no separate optional walkthrough.
+- **Done locally:** Definition 1.2 now states explicitly that
+  `e^⊳=(t(e),h(e)]` is a half-open line segment, not a power, and explains
+  which endpoint is excluded and which is included.
+- **Done locally:** Figure I.4 now contrasts two supporting lines through the
+  same vertex: a non-strict line whose contact face is an entire side and a
+  strict line whose contact face is the vertex alone.
+- **Done locally:** Proposition 2.3 has two closed local explainers. One defines
+  how a linear functional exposes the complete maximizing face and includes a
+  deterministic level-line diagram. The other unpacks the three affine
+  contact-transport identities as the same side operations after relabelling
+  by the coordinate change.
+- **Done locally:** “a functional exposes a face” is also defined immediately
+  before Proposition 2.3 as
+  `F={x∈P:ℓ(x)=max{ℓ(y):y∈P}}`; the adjacent closed explainer gives the
+  level-line construction and a whole-side example in Figure I.5.
+- **Done locally:** every labelled manuscript display now carries its printed
+  equation number, and every equation cross-reference uses the standard form
+  “equation (2.3)” rather than a generated verbal nickname. The numbering is
+  derived deterministically from the canonical TeX, including section resets,
+  Appendix A, multirow `align` displays, and `\notag` rows; unresolved or
+  unsupported numbering constructs stop content generation instead of
+  silently producing a wrong reference.
+- **Done locally:** all generated and hand-written Topic I notation now writes
+  named operators with arguments in parentheses. The deterministic TeX-to-web
+  generator performs this normalization without modifying the canonical
+  manuscript source.
+- **Done locally:** mathematical relation colons now receive explicit,
+  balanced spacing in generated MathML, including formulas involving
+  `Ext(P)`, maps, and set-builder notation.
+- **Done locally:** MathML tildes now use the stretchable mathematical tilde
+  operator rather than a combining or spacing mark, bringing transported
+  notation such as `T̃` and `P̃` closer to the manuscript’s
+  `\widetilde{T}` rendering.
+- **Done locally:** one expandable eight-topic overview records the exact main
+  PDF page ranges and any supporting appendix pages for every website topic.
+  The verified map is:
+  - Topic I — pages 2–3 and 6–10; supporting Lemma A.2 on page 63.
+  - Topic II — pages 10–15; supporting Lemmas A.1 and A.3 on pages 61 and 63.
+  - Topic III — pages 15–19; supporting Lemmas A.4 and A.5 on page 64.
+  - Topic IV — pages 19–30.
+  - Topic V — pages 31–40; supporting Lemma A.6 on page 65.
+  - Topic VI — pages 41–50.
+  - Topic VII — pages 51–58.
+  - Topic VIII — pages 3–5 and 59–60.
+- **Done locally:** the relative-interior explanation now contains two
+  concrete comparisons: a segment inside the plane, and a filled triangle
+  together with one of its sides. These distinguish ambient interior from
+  interior taken inside the affine hull.
+- **Done locally:** a responsive-layout audit found and removed an intrinsic
+  width on the Topic I stage that clipped prose at phone widths. Long display
+  equations now remain contained as local horizontal scrollers without making
+  the page itself overflow.
+- **Verified locally:** the expanded examples, all 39 displayed formulas, and
+  every generated relation colon were inspected at desktop and phone widths.
+  The page has no global horizontal overflow, no clipped leaf text, and no
+  browser-console errors.
+- **Done locally:** Definition 1.2 no longer sends the reader to the general
+  convex-geometry shelf for its core terminology. A collapsed inline lesson
+  now defines adjacent collinear sides, maximal boundary segments, contact
+  faces, normal cones, and strict supporting lines, with two deterministic
+  comparison plates.
+- **Verified locally:** the new Definition 1.2 lesson was opened and inspected
+  at desktop and phone widths. Its four SVG panels stack cleanly on phones,
+  the page has no horizontal overflow, Shelf II is absent from this
+  definition, and the browser console is clean.
+- **Done locally:** Topic I includes two additional explanatory figures beside
+  the relevant mathematics.
+- **Done locally:** all topic counters use Roman numerals:
+  “Topic I of VIII.”
+- **Done locally:** the prerequisite overview and its three shelf links have
+  been completely removed from The Proof. The dedicated `/prerequisites/`
+  route is retained locally but is no longer linked from the proof chapter.
+- **Done locally:** the visible page contains only the background needed for
+  Topic I that is not normally covered in a first linear-algebra course:
+  adapted complex structures, precise convex-geometric terminology, and
+  oriented boundary order/covariance.
+- **Saved for later:** the earlier drafts concerning finite rotations,
+  projective geometry, and Farey cells are parked in
+  `app/data/prerequisites-later.ts` and are not rendered.
+- **Done locally:** a reproducible exporter creates one self-contained Topic I
+  HTML file with the complete styling and fonts embedded, native expandable
+  proofs and explanations intact, and no development-server or local-file
+  dependencies. This is the edition intended for direct sharing.
+- **Done locally:** the mathematical audit has been implemented in both the
+  canonical TeX and the generated web edition. The boundary definition now
+  uses closure, normal cones live intrinsically in the dual plane, the custom
+  strict-polygon terminology is disambiguated, and radial criticality is
+  described as the last outward scale at which the vertex budget suffices.
+- **Done locally:** Proposition 2.1 explicitly records
+  `det(T)>0`. Proposition 2.3 now confines its formal statement to the
+  contact geometry defined in Topic I and moves later functorial constructions
+  into an unnumbered consequence. Lemma 2.4 labels its forward references as a
+  roadmap; Lemmas 2.5 and 2.6 include the previously omitted positivity,
+  degree, and noncollinearity justifications.
+- **Done locally:** Figure I.2 has been redrawn from one deterministic
+  equal-radius rotation orbit. Its zeroth point is exactly `z`, and a later
+  point crosses into the forbidden half-plane. The rendered-output tests
+  verify these geometric facts numerically.
+- **Done locally:** Topic I is full-width in standalone mode and no longer
+  spends desktop space on a one-item sidebar. A keyboard-accessible
+  Guided/Compact switch controls the optional topic orientation, foundational
+  definitions, and first-use vocabulary without removing any formal
+  statements or proofs.
+- **Done locally:** the topic opener uses the navy journal band, routine
+  result spacing is tighter, secondary text is larger, and print output
+  removes the coloured band. These colours organize the chapter; they do not
+  encode novelty.
+- **Done locally:** Proposition 2.2 now presents the concise manuscript proof
+  first, with the six-step pedagogical proof nested as an optional second
+  layer. The repetitive walkthrough for Proposition 2.3 has been removed.
+- **Author decision:** no source table was added. The existing end-of-topic
+  Source shelf remains a simple bibliography, as requested.
+- **Verified locally:** production build, ESLint, and all six rendered-output
+  tests pass. The self-contained HTML has been regenerated at both
+  `share/Critical_Invariant_Polygons_Topic_I.html` and
+  `/Users/brechtverbeken/Desktop/Critical_Invariant_Polygons_Topic_I.html`;
+  its reading-mode controls work without a server.
+- **Next:** author review of Topic I before prerequisite libraries for later
+  topics are implemented.
+- **Publication status:** live at
+  <https://bfmave.github.io/karpelevic/proof/>; public GitHub Pages commit
+  `9e86f8e`.

@@ -89,4 +89,5 @@ export const primaryNavigation = [
   { label: "Problem", href: "/" },
   { label: "History", href: "/history/" },
   { label: "My Journey", href: "/journey/" },
+  { label: "The Proof", href: "/proof/" },
 ] as const;

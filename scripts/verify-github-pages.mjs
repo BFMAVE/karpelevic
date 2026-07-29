@@ -12,6 +12,11 @@ const pages = [
   ["index.html", "Under construction"],
   ["history/index.html", "How a geometric question became an arithmetic boundary"],
   ["journey/index.html", "An eigenvalue region for Leslie matrices"],
+  ["proof/index.html", "How the Proof Works"],
+  [
+    "prerequisites/index.html",
+    "The small library this reader assumes",
+  ],
 ];
 
 for (const [relativePath, expectedText] of pages) {
@@ -22,8 +27,10 @@ for (const [relativePath, expectedText] of pages) {
   assert.doesNotMatch(html, /<script\b[^>]*>self\.__VINEXT/);
   assert.match(html, /\/karpelevic\/assets\//);
   assert.match(html, /\/karpelevic\/contact\.js/);
+  assert.match(html, /\/karpelevic\/proof\.js/);
 }
 
 await access(path.join(outputRoot, "favicon.svg"));
 await access(path.join(outputRoot, "contact.js"));
+await access(path.join(outputRoot, "proof.js"));
 await access(path.join(outputRoot, ".nojekyll"));
