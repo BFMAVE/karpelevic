@@ -106,7 +106,7 @@ material, not with generative imagery.
 | 5 | Personal and contribution pages: My Journey, What This Paper Adds | **My Journey first draft complete — awaiting author review** |
 | 6 | Interactive exploration | Not started |
 | 7 | Final QA and author-approved deployment | **Current three-page release deployed and verified** |
-| 8 | Fourteen-topic annotated proof reader | **Complete locally; Topic I remains the latest published edition** |
+| 8 | Fourteen-topic annotated proof reader | **Complete locally; two independent student readings and 16 classified reports complete; Topic I remains the latest published edition** |
 
 ## Canonical Proof-Reader Architecture
 
@@ -622,10 +622,17 @@ full local source history remain later site milestones.
 - 1 August 2026 — Completed the local fourteen-topic proof reader. Topics
   I–XIII now preserve 93 formal statement cards and 81 complete manuscript
   proof blocks; Topic XIV supplies the verified order-seven example,
-  downloadable boundary generator, and interactive order selector. Two
-  adversarial reads were recorded for every physical page. The final build,
+  downloadable boundary generator, and interactive order selector. The
+  technical, mathematical, source, interaction, and route-closure audits were
+  recorded in `docs/proof-audits/`; these were not the two independent
+  student-perspective readings later requested by the author. The final build,
   lint, 28-test suite, sixteen-route closure audit, and GitHub project-subpath
   check all pass. Topics II–XIV remain deliberately unpublished.
+- 1 August 2026 — Completed two genuinely independent, linear
+  student-perspective readings of every physical proof page. Sixteen
+  consolidated reports retain the evidence from both readings and classify 44
+  recommendations as Needed, 107 as Advised, and 45 as Would be nice to add.
+  No recommendation was implemented during the review.
 
 ## Current milestone — Topics I–II textbook chapters
 
@@ -816,10 +823,10 @@ full local source history remain later site milestones.
   order-seven Farey ledger, the worked `x=3/8` radius, the order-three
   exceptional segment, conjugation symmetry, and midpoint residuals for every
   Farey cell through orders 3–12.
-- **Audited locally:** each physical page has received two adversarial reads:
-  one for mathematical closure, source fidelity, and dependency order; one for
-  novice readability, notation, figures, links, and interaction. Audit records
-  are stored in `docs/proof-audits/`.
+- **Technically audited locally:** mathematical closure, source fidelity,
+  dependency order, novice readability, notation, figures, links, interaction,
+  and route integrity are recorded in `docs/proof-audits/`. Those audits are a
+  separate layer from the independent student readings below.
 - **Regression protection:** the rendered-route suite records the expected
   result-card and complete-proof counts for every formal chapter. This prevents
   a visually complete page from silently losing the manuscript proof block.
@@ -833,3 +840,36 @@ full local source history remain later site milestones.
 - **Next:** author review in sequence, starting with Topic II, followed by
   targeted revisions. Do not deploy the complete reader without explicit
   approval.
+
+## Current milestone — Independent student-comprehension review
+
+- **Project organization:** `/Users/brechtverbeken/paper-project-site` is the
+  canonical local repository. `docs/PROJECT_STRUCTURE.md` records the
+  source-of-truth hierarchy, generated artifacts, directory conventions, and
+  local/public deployment boundary.
+- **Reader model:** every physical page was read twice by independent reviewers
+  assuming one standard undergraduate linear-algebra course and no specialist
+  convex geometry, topology, projective geometry, Farey arithmetic, stochastic
+  spectral theory, or Karpelevič literature.
+- **Method:** both readers proceeded linearly, opened the formal proofs and
+  optional explainers, and repeatedly tested whether each concept was known or
+  defined, each dependency was locatable, each inference followed, and each
+  example or figure supplied real explanatory value.
+- **Evidence retained:** the four raw readings are stored in
+  `docs/student-reviews/raw/`. They are not replaced by the synthesis.
+- **Reports complete:** `docs/student-reviews/reports/` contains one report for
+  each of the 16 physical pages. Every report keeps Reading 1 and Reading 2
+  separate before giving a cross-reading synthesis.
+- **Classification result:** 44 Needed, 107 Advised, and 45 Would be nice to
+  add recommendations; 196 recommendations in total. Needed is reserved for a
+  true continuation blocker, an indispensable undefined object or implication,
+  or wording that teaches a materially false mathematical idea.
+- **Quality assurance:** recommendation counts match the numbered lists, report
+  headings and mathematical delimiters are balanced, no control characters or
+  trailing whitespace remain, and every tested report anchor resolves exactly
+  once on the rendered local page.
+- **Editorial status:** recommendations only. No proof page, figure, widget, or
+  source content was changed as part of this review, and no review artifact was
+  pushed or deployed.
+- **Next:** author selection of recommendations, beginning with the Needed
+  class, before any implementation pass.
