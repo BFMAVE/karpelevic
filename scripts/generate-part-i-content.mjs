@@ -406,6 +406,25 @@ function section(startMarker, endMarker) {
   return html.slice(start(startMarker), start(endMarker));
 }
 
+function statementBlock(marker) {
+  const blockStart = start(marker);
+  const divToken = /<div\b[^>]*>|<\/div>/g;
+  divToken.lastIndex = blockStart;
+  let depth = 0;
+  let token;
+
+  while ((token = divToken.exec(html)) !== null) {
+    if (token[0].startsWith("</")) {
+      depth -= 1;
+      if (depth === 0) return html.slice(blockStart, divToken.lastIndex);
+    } else {
+      depth += 1;
+    }
+  }
+
+  throw new Error(`Could not close generated statement block: ${marker}`);
+}
+
 const markers = {
   intro: '<h3 id="sec:intro">',
   nCritical:
@@ -447,12 +466,92 @@ const markers = {
     '<div id="lem:side-witness" class="lemma">',
   ownershipWord:
     '<div id="def:ownership-word" class="definition">',
+  halfOpenSideAtlas:
+    '<div id="lem:half-open-side-atlas" class="lemma">',
+  boundaryFaceRigidity:
+    '<div id="lem:boundary-face-rigidity" class="lemma">',
+  boundarySegmentLocator:
+    '<div id="lem:boundary-segment-locator" class="lemma">',
+  labeledSideMatrix:
+    '<div id="lem:labeled-side-matrix" class="lemma">',
+  ownershipSurgeryModel:
+    '<div id="lem:ownership-surgery-model" class="lemma">',
   edgeCaps: '<h4 id="edge-caps-and-one-sided-interlacing">',
+  edgeCap:
+    '<div id="lem:edge-cap" class="lemma">',
+  areaCapBound:
+    '<div id="lem:area-cap-bound" class="lemma">',
+  cyclicEndpointLedger:
+    '<div id="lem:cyclic-endpoint-ledger" class="lemma">',
+  cyclicInterlacing:
+    '<div id="lem:cyclic-interlacing" class="lemma">',
+  globalHalfOpenOwnership:
+    '<div id="cor:global-half-open-ownership" class="corollary">',
+  oneSidedContact:
+    '<div id="lem:one-sided-contact" class="lemma">',
+  liftedEndpointPaths:
+    '<div id="lem:lifted-endpoint-paths" class="lemma">',
   mutation: '<h3 id="sec:mutation">',
+  contactSurgery:
+    '<div id="lem:contact-surgery" class="proposition">',
+  intrinsicMutationLaw:
+    '<div id="cor:intrinsic-mutation-law" class="corollary">',
+  legalChipSequence:
+    '<div id="cor:legal-chip-sequence" class="corollary">',
+  booleanSweeps:
+    '<div id="cor:boolean-sweeps-geometric" class="corollary">',
+  oneBlock:
+    '<div id="lem:one-block" class="lemma">',
   rotation: '<h3 id="sec:rotation">',
+  rotationSection:
+    '<div id="thm:rotation-section" class="theorem">',
+  endpointPaddedSection:
+    '<div id="cor:endpoint-padded-section" class="corollary">',
+  latticeSail:
+    '<div id="rem:lattice-sail" class="remark">',
   noSkipping: '<h3 id="sec:no-skipping">',
+  shortCorridorSupports:
+    '<div id="lem:short-corridor-supports" class="lemma">',
+  properCorridorChain:
+    '<div id="lem:proper-corridor-chain" class="lemma">',
+  returnEdgeLedger:
+    '<div id="prop:return-edge-ledger" class="proposition">',
   corridor: '<h4 id="the-projective-corridor-theorem">',
+  projectiveCorridor:
+    '<div id="def:projective-corridor" class="definition">',
+  holonomyChart:
+    '<div id="prop:holonomy-chart" class="proposition">',
+  holonomyCalibration:
+    '<div id="lem:holonomy-calibration" class="lemma">',
+  projectiveFixedPointEscape:
+    '<div id="lem:projective-fixed-point-escape" class="lemma">',
+  projectiveCorridorEscape:
+    '<div id="thm:projective-corridor-escape" class="theorem">',
+  deformationAdmissibility:
+    '<div id="lem:deformation-admissibility" class="lemma">',
+  globalReturnDeformation:
+    '<div id="thm:global-return-deformation" class="theorem">',
+  unitReturn:
+    '<div id="thm:unit-return" class="theorem">',
+  noSkippingBoundaryLedger:
+    '<div id="rem:no-skipping-boundary-ledger" class="remark">',
+  protectiveHolonomy:
+    '<div id="rem:protective-holonomy" class="remark">',
   monodromy: '<h3 id="sec:monodromy">',
+  fareyAdjacency:
+    '<div id="lem:farey-adjacency-expanded" class="lemma">',
+  fareyReflection:
+    '<div id="lem:farey-reflection" class="lemma">',
+  backwardStripReflection:
+    '<div id="lem:backward-strip-reflection" class="lemma">',
+  identityRotationReflection:
+    '<div id="lem:kappa-N" class="lemma">',
+  largeBlockProduct:
+    '<div id="prop:large-block-product" class="proposition">',
+  minimalBlockProduct:
+    '<div id="prop:minimal-block-product" class="proposition">',
+  compressionBranch:
+    '<div id="lem:compression-branch" class="lemma">',
   stochastic: '<h3 id="sec:stochastic">',
   strictSeparation:
     '<div id="lem:strict-separation" class="lemma">',
@@ -462,6 +561,10 @@ const markers = {
     '<div id="lem:polygon-polarity" class="lemma">',
   polygonHausdorff:
     '<div id="lem:polygonal-hausdorff-continuity" class="lemma">',
+  strictAreaMonotonicity:
+    '<div id="lem:strict-area-monotonicity" class="lemma">',
+  latticeParallelogramCount:
+    '<div id="lem:lattice-parallelogram-count" class="lemma">',
 };
 
 const introHeadingEnd = html.indexOf("</h3>", start(markers.intro)) + 5;
@@ -509,6 +612,65 @@ const topicIIHtmlByItem = {
   18: html.slice(oneSidedHeadingEnd, start(markers.ownershipWord)),
   65: section(markers.perronTools, markers.strictSeparation),
   67: section(markers.polygonPolarity, markers.polygonHausdorff),
+};
+
+const topicIIIHtmlByItem = {
+  19: statementBlock(markers.ownershipWord),
+  20: statementBlock(markers.halfOpenSideAtlas),
+  21: statementBlock(markers.boundaryFaceRigidity),
+  22: statementBlock(markers.boundarySegmentLocator),
+  23: statementBlock(markers.labeledSideMatrix),
+  24: statementBlock(markers.ownershipSurgeryModel),
+  25: statementBlock(markers.edgeCap),
+  26: statementBlock(markers.areaCapBound),
+  68: statementBlock(markers.polygonHausdorff),
+  69: statementBlock(markers.strictAreaMonotonicity),
+};
+
+const topicIVHtmlByItem = {
+  27: statementBlock(markers.cyclicEndpointLedger),
+  28: statementBlock(markers.cyclicInterlacing),
+  29: statementBlock(markers.globalHalfOpenOwnership),
+  30: statementBlock(markers.oneSidedContact),
+  31: statementBlock(markers.liftedEndpointPaths),
+  32: statementBlock(markers.contactSurgery),
+  33: statementBlock(markers.intrinsicMutationLaw),
+  34: statementBlock(markers.legalChipSequence),
+  35: statementBlock(markers.booleanSweeps),
+  36: statementBlock(markers.oneBlock),
+};
+
+const topicVHtmlByItem = {
+  37: statementBlock(markers.rotationSection),
+  38: statementBlock(markers.endpointPaddedSection),
+  39: statementBlock(markers.latticeSail),
+  40: statementBlock(markers.shortCorridorSupports),
+  41: statementBlock(markers.properCorridorChain),
+  42: statementBlock(markers.returnEdgeLedger),
+  43: statementBlock(markers.projectiveCorridor),
+  44: statementBlock(markers.holonomyChart),
+  70: statementBlock(markers.latticeParallelogramCount),
+};
+
+const topicVIHtmlByItem = {
+  45: statementBlock(markers.holonomyCalibration),
+  46: statementBlock(markers.projectiveFixedPointEscape),
+  47: statementBlock(markers.projectiveCorridorEscape),
+  48: statementBlock(markers.deformationAdmissibility),
+  49: statementBlock(markers.globalReturnDeformation),
+  50: statementBlock(markers.unitReturn),
+  51: statementBlock(markers.noSkippingBoundaryLedger),
+  52: statementBlock(markers.protectiveHolonomy),
+};
+
+const topicVIIHtmlByItem = {
+  53: statementBlock(markers.fareyAdjacency),
+  54: statementBlock(markers.fareyReflection),
+  55: statementBlock(markers.backwardStripReflection),
+  56: statementBlock(markers.identityRotationReflection),
+  57: statementBlock(markers.largeBlockProduct),
+  58: statementBlock(markers.minimalBlockProduct),
+  59: statementBlock(markers.compressionBranch),
 };
 
 const topicHtml = {
@@ -568,6 +730,16 @@ export const topicIHtmlByItem = ${JSON.stringify(topicIHtmlByItem)} as const;
 export const topicIISetupHtml = ${JSON.stringify(topicIISetupHtml)} as const;
 
 export const topicIIHtmlByItem = ${JSON.stringify(topicIIHtmlByItem)} as const;
+
+export const topicIIIHtmlByItem = ${JSON.stringify(topicIIIHtmlByItem)} as const;
+
+export const topicIVHtmlByItem = ${JSON.stringify(topicIVHtmlByItem)} as const;
+
+export const topicVHtmlByItem = ${JSON.stringify(topicVHtmlByItem)} as const;
+
+export const topicVIHtmlByItem = ${JSON.stringify(topicVIHtmlByItem)} as const;
+
+export const topicVIIHtmlByItem = ${JSON.stringify(topicVIIHtmlByItem)} as const;
 `;
 
 writeFileSync(outputPath, generated, "utf8");

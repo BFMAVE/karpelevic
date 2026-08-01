@@ -7569,3 +7569,354 @@ math mover > mo[accent="true"] {
     break-inside: avoid-page;
   }
 }
+
+/* Multi-page proof chapters: Topics II–XIV. */
+.proof-chapter-page {
+  padding-bottom: 0;
+}
+
+.proof-chapter-hero {
+  margin-bottom: 0;
+}
+
+.proof-chapter-atlas {
+  width: min(100%, 1540px);
+  margin: 0 auto 34px;
+  padding: 18px clamp(18px, 3vw, 46px) 22px;
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule-strong);
+  background: color-mix(in srgb, var(--paper) 88%, white);
+}
+
+.proof-chapter-atlas > .section-label {
+  margin: 0 0 12px;
+  color: var(--muted-ink);
+}
+
+.proof-chapter-atlas ol {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  padding: 1px;
+  list-style: none;
+  background: var(--rule);
+}
+
+.proof-chapter-atlas li {
+  min-width: 0;
+  background: var(--paper);
+}
+
+.proof-chapter-atlas a {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr);
+  align-items: center;
+  min-height: 3.7rem;
+  padding: 9px 10px;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.proof-chapter-atlas a:hover {
+  background: var(--paper-deep);
+}
+
+.proof-chapter-atlas a[aria-current="step"] {
+  background: var(--navy);
+  color: var(--paper);
+}
+
+.proof-chapter-atlas a > span {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.proof-chapter-atlas a > strong {
+  overflow: hidden;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+}
+
+.proof-chapter-parts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(calc(100% - 36px), 980px);
+  margin: 0 auto 30px;
+  border: 1px solid var(--rule-strong);
+  background: var(--paper);
+}
+
+.proof-chapter-parts a {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  padding: 14px 18px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.proof-chapter-parts a + a {
+  border-left: 1px solid var(--rule);
+}
+
+.proof-chapter-parts a[aria-current="page"] {
+  background: color-mix(in srgb, var(--oxblood) 10%, var(--paper));
+  box-shadow: inset 0 -3px 0 var(--oxblood);
+}
+
+.proof-chapter-parts span {
+  color: var(--oxblood);
+  font-size: 0.69rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.proof-chapter-parts strong {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1rem;
+}
+
+.proof-chapter-panel {
+  display: block;
+}
+
+.proof-chapter-heading h2 {
+  max-width: 25ch;
+}
+
+.proof-chapter-orientation {
+  margin-bottom: 30px;
+}
+
+.proof-chapter-contract {
+  margin-bottom: 34px;
+}
+
+.proof-chapter-group + .proof-chapter-group {
+  margin-top: 44px;
+}
+
+.proof-chapter-group > header > div:last-child {
+  max-width: 54rem;
+  color: var(--muted-ink);
+  font-size: 0.98rem;
+  line-height: 1.66;
+}
+
+.proof-chapter-group > header > div:last-child > :first-child {
+  margin-top: 0;
+}
+
+.proof-chapter-group > header > div:last-child > :last-child {
+  margin-bottom: 0;
+}
+
+.proof-chapter-result {
+  scroll-margin-top: 24px;
+}
+
+.proof-chapter-provenance {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.65rem;
+  padding: 2px 9px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  color: var(--oxblood);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.proof-chapter-vocabulary > summary,
+.proof-chapter-source-note > summary {
+  cursor: pointer;
+}
+
+.proof-chapter-example {
+  margin-top: 12px;
+  border-left: 2px solid var(--copper);
+  padding-left: 14px;
+}
+
+.proof-chapter-example > summary {
+  cursor: pointer;
+  color: var(--oxblood);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.proof-chapter-example > div {
+  padding: 10px 0 2px;
+}
+
+.proof-chapter-formal {
+  margin-top: 22px;
+}
+
+.proof-chapter-proof > summary {
+  min-height: 4.1rem;
+}
+
+.proof-chapter-guided-proof {
+  margin: 0 clamp(16px, 4vw, 54px) 34px;
+  padding: clamp(22px, 4vw, 38px);
+  border: 1px solid color-mix(in srgb, var(--copper) 58%, var(--rule));
+  background: color-mix(in srgb, var(--paper-deep) 74%, white);
+}
+
+.proof-chapter-guided-proof > header {
+  max-width: 54rem;
+}
+
+.proof-chapter-guided-proof h4 {
+  margin: 6px 0 8px;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  line-height: 1.08;
+}
+
+.proof-chapter-guided-proof > header > p:last-child {
+  color: var(--muted-ink);
+  line-height: 1.65;
+}
+
+.proof-chapter-guided-proof ol {
+  display: grid;
+  gap: 0;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: guided-proof;
+}
+
+.proof-chapter-guided-proof li {
+  display: grid;
+  grid-template-columns: 2.7rem minmax(0, 1fr);
+  gap: 14px;
+  padding: 20px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.proof-chapter-guided-proof li > span {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--oxblood);
+  border-radius: 50%;
+  color: var(--oxblood);
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+}
+
+.proof-chapter-guided-proof h5 {
+  margin: 0 0 7px;
+  color: var(--navy);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.15rem;
+}
+
+.proof-chapter-guided-proof li p,
+.proof-chapter-guided-proof li div {
+  line-height: 1.68;
+}
+
+.proof-chapter-check {
+  margin-top: 12px;
+  padding: 10px 13px;
+  border-left: 3px solid var(--navy);
+  background: color-mix(in srgb, var(--navy) 6%, transparent);
+}
+
+.proof-chapter-takeaway {
+  margin-top: 22px;
+}
+
+.proof-chapter-source-note {
+  margin-top: 18px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--paper-deep) 36%, transparent);
+}
+
+.proof-chapter-source-note > summary {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  padding: 13px 16px;
+  color: var(--muted-ink);
+  font-size: 0.78rem;
+}
+
+.proof-chapter-source-note > summary > span {
+  color: var(--oxblood);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.proof-chapter-source-note > div {
+  padding: 4px 18px 18px;
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.proof-chapter-source-note ul {
+  margin: 12px 0 0;
+  padding-left: 1.2rem;
+}
+
+.proof-chapter-source-note a {
+  color: var(--oxblood);
+}
+
+@media (max-width: 980px) {
+  .proof-chapter-atlas {
+    overflow-x: auto;
+    padding-right: 18px;
+    padding-left: 18px;
+    scrollbar-color: var(--copper) var(--paper-deep);
+  }
+
+  .proof-chapter-atlas ol {
+    grid-template-columns: repeat(14, minmax(8.5rem, 1fr));
+    min-width: 122rem;
+  }
+}
+
+@media (max-width: 620px) {
+  .proof-chapter-parts {
+    grid-template-columns: 1fr;
+  }
+
+  .proof-chapter-parts a + a {
+    border-top: 1px solid var(--rule);
+    border-left: 0;
+  }
+
+  .proof-chapter-guided-proof {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+  .proof-chapter-guided-proof li {
+    grid-template-columns: 2.3rem minmax(0, 1fr);
+    gap: 10px;
+  }
+}
+
+@media print {
+  .proof-chapter-atlas,
+  .proof-chapter-parts,
+  .proof-chapter-source-note {
+    display: none !important;
+  }
+}

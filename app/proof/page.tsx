@@ -41,12 +41,12 @@ import { sitePath } from "../lib/site-path";
 export const metadata: Metadata = {
   title: "How the Proof Works",
   description:
-    "Topics I and II of a fourteen-topic, source-aware reader that works from critical invariant polygons to the Karpelevič–Ito theorem.",
+    "Topic I of a fourteen-topic, source-aware reader that works from critical invariant polygons to the Karpelevič–Ito theorem.",
 };
 
 const pageTimestamp = getPageTimestamp("app/data/proof.ts");
 const buildTimestamp = getBuildTimestamp();
-const visibleProofTopics = proofTopics.slice(0, 2);
+const visibleProofTopics = proofTopics.slice(0, 1);
 const visibleTopicItems = getProofItems(
   visibleProofTopics.flatMap((topic) => topic.itemNumbers),
 );
@@ -59,14 +59,11 @@ const topicIFormalHtml =
 const topicIIFormalHtml =
   topicIISetupHtml + Object.values(topicIIHtmlByItem).join("");
 const visibleProofCount =
-  (topicIFormalHtml.match(/class="proof"/g)?.length ?? 0) +
-  (topicIIFormalHtml.match(/class="proof"/g)?.length ?? 0);
+  topicIFormalHtml.match(/class="proof"/g)?.length ?? 0;
 // Proposition 2.2 shows the manuscript proof plus five displays in its optional
 // six-step expansion.
 const visibleDisplayMathCount =
-  (topicIFormalHtml.match(/<math display="block"/g)?.length ?? 0) +
-  (topicIIFormalHtml.match(/<math display="block"/g)?.length ?? 0) +
-  5;
+  (topicIFormalHtml.match(/<math display="block"/g)?.length ?? 0) + 5;
 
 function toRomanNumeral(n: number): string | null {
   const value = Math.trunc(Math.max(0, n));
@@ -102,7 +99,7 @@ function toRomanNumeral(n: number): string | null {
 }
 
 const totalTopicNumeral = "XIV";
-const proofEditionTopicLabel = `Topics I–II of ${totalTopicNumeral}`;
+const proofEditionTopicLabel = `Topic I of ${totalTopicNumeral}`;
 const proofTopicCounterLabel = `Topic I of ${totalTopicNumeral}`;
 
 function resultNumber(label: string): string {
@@ -981,12 +978,10 @@ export default function ProofPage() {
                     ) : (
                       <a
                         className="proof-topic-control proof-topic-control-next"
-                        data-proof-anchor={`topic-${topic.slug}-heading`}
-                        data-proof-target={topic.slug}
-                        href={`#topic-${topic.slug}-heading`}
+                        href={sitePath("/proof/topic-ii/")}
                       >
-                        <span>Return</span>
-                        <strong>Beginning of Topic II</strong>
+                        <span>Next</span>
+                        <strong>Topic II · From convex order to active sides</strong>
                       </a>
                     )}
                   </nav>
@@ -999,8 +994,8 @@ export default function ProofPage() {
         <noscript>
           <style>{`.proof-topic-panel[hidden]{display:block!important}`}</style>
           <p className="proof-noscript">
-            JavaScript is unavailable. Topics I and II remain fully readable
-            in sequence.
+            JavaScript is unavailable. Topic I remains fully readable, and
+            Topic II is available through the ordinary next-page link.
           </p>
         </noscript>
 

@@ -14,6 +14,7 @@ import {
   NormalFanExplainer,
   SaturationGapExplainer,
 } from "./TopicIILocalExplainers";
+import { sitePath } from "../lib/site-path";
 
 function resultNumber(label: string): string {
   return label.replace(/^(?:Proposition|Lemma|Theorem|Remark)\s+/, "");
@@ -42,9 +43,7 @@ function ImportedTopicILink({
 }) {
   return (
     <a
-      data-proof-anchor={anchor}
-      data-proof-target="language"
-      href={`#${anchor}`}
+      href={sitePath(`/proof/#${anchor}`)}
     >
       {children}
     </a>

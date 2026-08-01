@@ -1,0 +1,36 @@
+import type { Metadata } from "next";
+import { ProofTopicFigure } from "../../components/ProofTopicFigure";
+import { TopicIIChapter } from "../../components/TopicIIChapter";
+import { ProofChapterShell } from "../../components/proof/ProofChapterShell";
+import { ProofSourceShelf } from "../../components/proof/ProofSourceShelf";
+import { getProofItems, proofTopics } from "../../data/proof";
+import { getPageTimestamp } from "../../lib/git-dates";
+
+export const metadata: Metadata = {
+  title: "Topic II — From Convex Order to Active Sides",
+  description:
+    "A complete, annotated account of finite convex certificates, normal-fan transfer, and hereditary saturation.",
+};
+
+const topic = proofTopics[1];
+const items = getProofItems(topic.itemNumbers);
+const sourceIds = items.flatMap((item) => item.sourceIds);
+const updatedAt = getPageTimestamp("app/data/topic-ii-result-guide.ts");
+
+export default function TopicIIPage() {
+  return (
+    <ProofChapterShell
+      routeKey="topic-ii"
+      updatedAt={updatedAt}
+      stats={[
+        { value: 7, label: "core results" },
+        { value: 2, label: "foundational lemmas" },
+        { value: 1, label: "remark" },
+      ]}
+    >
+      <ProofTopicFigure slug="active-sides" />
+      <TopicIIChapter />
+      <ProofSourceShelf sourceIds={sourceIds} headingId="topic-ii-sources" />
+    </ProofChapterShell>
+  );
+}
