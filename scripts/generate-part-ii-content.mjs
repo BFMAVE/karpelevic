@@ -310,6 +310,23 @@ const partIIHtmlByLabel = Object.fromEntries(
   labels.map(([id, kind]) => [id, statementBlock(id, kind)]),
 );
 
+function proofBlockAfterStatement(id, kind) {
+  const statementStart = start(`<div id="${id}" class="${kind}">`);
+  const statementHtml = divBlockAt(statementStart);
+  const statementEnd = statementStart + statementHtml.length;
+  const nextContent = html.slice(statementEnd).match(/\S/);
+  if (!nextContent || nextContent.index === undefined) return "";
+  const proofStart = statementEnd + nextContent.index;
+  if (!html.startsWith('<div class="proof">', proofStart)) return "";
+  return divBlockAt(proofStart);
+}
+
+const partIIProofHtmlByLabel = Object.fromEntries(
+  labels
+    .map(([id, kind]) => [id, proofBlockAfterStatement(id, kind)])
+    .filter(([, proofHtml]) => proofHtml),
+);
+
 const inductionHeading = start('<h2 id="induction-on-the-order">');
 const theoremProofStart = html.indexOf('<div class="proof">', inductionHeading);
 if (theoremProofStart < 0) throw new Error("Could not locate the final theorem proof");
@@ -327,6 +344,6 @@ const generated = `// Generated mechanically from the canonical Part II TeX sour
   },
   null,
   2,
-)} as const;\n\nexport const partIIHtmlByLabel = ${JSON.stringify(partIIHtmlByLabel)} as const;\n\nexport const partIIMainTheoremProofHtml = ${JSON.stringify(mainTheoremProofHtml)} as const;\n\nexport const partIIOrderSevenHtml = ${JSON.stringify(orderSevenHtml)} as const;\n`;
+)} as const;\n\nexport const partIIHtmlByLabel = ${JSON.stringify(partIIHtmlByLabel)} as const;\n\nexport const partIIProofHtmlByLabel = ${JSON.stringify(partIIProofHtmlByLabel)} as const;\n\nexport const partIIMainTheoremProofHtml = ${JSON.stringify(mainTheoremProofHtml)} as const;\n\nexport const partIIOrderSevenHtml = ${JSON.stringify(orderSevenHtml)} as const;\n`;
 
 writeFileSync(outputPath, generated, "utf8");

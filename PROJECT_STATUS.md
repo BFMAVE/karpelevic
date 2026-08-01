@@ -106,7 +106,7 @@ material, not with generative imagery.
 | 5 | Personal and contribution pages: My Journey, What This Paper Adds | **My Journey first draft complete — awaiting author review** |
 | 6 | Interactive exploration | Not started |
 | 7 | Final QA and author-approved deployment | **Current three-page release deployed and verified** |
-| 8 | Fourteen-topic annotated proof reader | **Topics I–II complete locally; Topic I is the latest published edition** |
+| 8 | Fourteen-topic annotated proof reader | **Complete locally; Topic I remains the latest published edition** |
 
 ## Canonical Proof-Reader Architecture
 
@@ -320,14 +320,15 @@ not dependencies in the proof of the Karpelevič–Ito theorem.
   proof chapter.
 - The **How the Proof Works** title now occupies the full available page
   width before the deck and edition metadata.
-- Result cards may carry one of the agreed mathematical-statement labels:
-  Classical result, Previously known, Previously claimed, Strengthened, or New
-  result. Proposition 2.1 deliberately carries no classification or source
-  panel at the author’s request.
-- “Previously claimed” is reserved for mechanisms located in Karpelevič’s
-  original proof whose exact step has not yet been verified through an
-  independent complete proof. Each non-new label points to its source, and the
-  page explains the qualification explicitly.
+- Result cards may carry one of exactly four agreed mathematical-statement
+  labels: Classical result, Previously known, Strengthened, or New result.
+  The labels classify statements, never the proof supplied on the website.
+  Proposition 2.1 deliberately carries no classification or source panel at
+  the author’s request.
+- A mechanism found only in Karpelevič’s original proof does not receive a
+  fifth label and is not promoted to “Previously known.” Its historical
+  antecedent is cited in prose and the result remains deliberately unbadged.
+  Every Classical, Previously known, or Strengthened label points to a source.
 - The proof reader is progressive-enhancement friendly: Topic I is fully
   server-rendered and remains readable without JavaScript.
 - The Topic I proof reader is publicly available at
@@ -386,18 +387,16 @@ not dependencies in the proof of the Karpelevič–Ito theorem.
   official journal or author records, but the narrative and emphasis still
   require author review.
 - The standalone Paper and Updates and Errata pages have not been implemented.
-- No interactive mathematics has been implemented or verified.
-- Topics III–XIV have been inventoried but have not yet been converted into
-  the reviewed textbook format. Topics III–XIII form the remaining proof
-  route; Topic XIV is the complete order-seven example.
-- Topic II is local only and has not been pushed or deployed; it awaits author
-  review.
+- The standalone Explore page has not been implemented. A first verified
+  interactive boundary laboratory now exists locally inside Topic XIV.
+- Topics II–XIV are complete locally in the guided textbook format but have
+  not been pushed or deployed; they await author review topic by topic.
 - PDF page-number links and sentence-level marginal annotations have not yet
   been added. Topic I currently explains every proof in numbered conceptual
   steps without annotating every individual sentence.
-- The Part I provenance labels are a conservative first classification and
-  still require author review, especially the boundary between “Previously
-  claimed,” “Strengthened,” and “New result.”
+- The statement classifications are a conservative first pass and still
+  require author review, especially the boundary between an unbadged
+  Karpelevič-only antecedent, “Strengthened,” and “New result.”
 - No arXiv identifier, final manuscript status, or source-archive policy has
   been supplied or configured.
 - The local repository is not yet connected and synchronized with the public
@@ -446,10 +445,10 @@ not dependencies in the proof of the Karpelevič–Ito theorem.
 
 ## Next Action
 
-Review Topic II locally, then begin Topic III in the canonical fourteen-topic
-order. Keep unfinished topics offline. The separate Paper and Updates and
-Errata pages and synchronization of the public repository with the full local
-source history remain later site milestones.
+Review Topics II–XIV locally in order, beginning with Topic II. Revise each
+chapter from author feedback before any deployment. The separate Paper and
+Updates and Errata pages and synchronization of the public repository with the
+full local source history remain later site milestones.
 
 ## Decision Log
 
@@ -620,6 +619,13 @@ source history remain later site milestones.
   Topic XIV is the complete order-seven example and is not a proof dependency.
   Topic VIII will absorb the full stochastic-to-criticality bridge, leaving
   five necessary chapters, Topics IX–XIII, after it.
+- 1 August 2026 — Completed the local fourteen-topic proof reader. Topics
+  I–XIII now preserve 93 formal statement cards and 81 complete manuscript
+  proof blocks; Topic XIV supplies the verified order-seven example,
+  downloadable boundary generator, and interactive order selector. Two
+  adversarial reads were recorded for every physical page. The final build,
+  lint, 28-test suite, sixteen-route closure audit, and GitHub project-subpath
+  check all pass. Topics II–XIV remain deliberately unpublished.
 
 ## Current milestone — Topics I–II textbook chapters
 
@@ -782,3 +788,48 @@ source history remain later site milestones.
 - **Publication status:** live at
   <https://bfmave.github.io/karpelevic/proof/>; public GitHub Pages commit
   `687db71`. The public edition contains Topic I only.
+
+## Current milestone — Complete local XIV-topic proof reader
+
+- **Done locally:** all fourteen topics now have implemented routes. Topics VI
+  and XII are each divided into two physical pages so that their dense
+  arguments remain readable; they still count as one mathematical topic each.
+- **Done locally:** Topics III–XIII preserve the canonical manuscript number,
+  full formal statement, and complete original proof. The website then adds
+  first-use definitions, intuition, guided proof steps, dependency contracts,
+  source notes, and deterministic mathematical plates around—not instead of—
+  that formal text.
+- **Done locally:** every page identifies what is imported from earlier topics,
+  what standard background is being used, and what is proved on the page. The
+  order is dependency-driven; no later topic is imported to justify an earlier
+  one.
+- **Done locally:** the visible classification system has exactly four
+  statement categories: Classical result, Previously known, Strengthened, and
+  New result. A Karpelevič-only antecedent is cited but left unbadged. Existing
+  sources accompany every Classical, Previously known, and Strengthened badge.
+- **Done locally:** Topic XIV gives the full order-seven atlas and worked ray
+  `x=3/8`, includes downloadable dependency-free JavaScript for the boundary,
+  and provides an interactive order selector for drawing `Theta_n`. Exact
+  Farey data are visibly separated from floating-point root finding and
+  plotting.
+- **Verified locally:** Topic XIV’s numerical suite checks the complete
+  order-seven Farey ledger, the worked `x=3/8` radius, the order-three
+  exceptional segment, conjugation symmetry, and midpoint residuals for every
+  Farey cell through orders 3–12.
+- **Audited locally:** each physical page has received two adversarial reads:
+  one for mathematical closure, source fidelity, and dependency order; one for
+  novice readability, notation, figures, links, and interaction. Audit records
+  are stored in `docs/proof-audits/`.
+- **Regression protection:** the rendered-route suite records the expected
+  result-card and complete-proof counts for every formal chapter. This prevents
+  a visually complete page from silently losing the manuscript proof block.
+- **Final closure record:** the connected dependency, source, proof, figure,
+  numerical, route, and project-subpath checks are recorded in
+  `docs/proof-audits/full-reader-closure.md`.
+- **Publication status:** local only. Topics II–XIV have not been pushed or
+  deployed, and the public GitHub Pages exporter still excludes their routes.
+  Topic I remains the sole public proof chapter until the author approves
+  later topics.
+- **Next:** author review in sequence, starting with Topic II, followed by
+  targeted revisions. Do not deploy the complete reader without explicit
+  approval.

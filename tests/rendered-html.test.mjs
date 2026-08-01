@@ -202,17 +202,17 @@ test("server-renders the Part I proof reader", async () => {
 
   const html = await response.text();
   const topicIPanelStart = html.indexOf('data-topic-slug="language"');
-  const topicIIPanelStart = html.indexOf('data-topic-slug="active-sides"');
   assert.ok(topicIPanelStart >= 0);
-  assert.ok(topicIIPanelStart > topicIPanelStart);
-  const topicIPanelHtml = html.slice(topicIPanelStart, topicIIPanelStart);
-  const topicIIPanelHtml = html.slice(topicIIPanelStart);
+  assert.equal(html.indexOf('data-topic-slug="active-sides"'), -1);
+  const topicIPanelHtml = html.slice(topicIPanelStart);
+  const topicIIResponse = await render("/proof/topic-ii");
+  assert.equal(topicIIResponse.status, 200);
+  const topicIIPanelHtml = await topicIIResponse.text();
   assert.match(html, /How the Proof Works/);
   assert.match(
     html,
     /Critical invariant polygons and the route to Karpelevič–Ito/,
   );
-  assert.match(html, /Topics I–II of (?:<!-- -->)?XIV/);
   assert.match(html, /Topic I of (?:<!-- -->)?XIV/);
   assert.doesNotMatch(html, /Topic I of fourteen|Topic 1 of 14/);
   assert.doesNotMatch(html, /How to read this page|orientation layer/);
@@ -280,7 +280,7 @@ test("server-renders the Part I proof reader", async () => {
   assert.doesNotMatch(html, /Small library invoked in this definition/);
   assert.match(html, /Seven results, with complete proofs/);
   assert.match(html, /2(?:<!-- -->)? numbered definitions/);
-  assert.match(html, /17(?:<!-- -->)? results/);
+  assert.match(html, /7(?:<!-- -->)? results/);
   assert.doesNotMatch(html, /Result (?:<!-- -->)?I/);
   assert.doesNotMatch(html, /Result (?:<!-- -->)?VII/);
   assert.match(html, /proof-result-sequence">Proposition 2\.1/);
@@ -298,9 +298,9 @@ test("server-renders the Part I proof reader", async () => {
   );
   assert.match(
     html,
-    /class="proof-reader"[^>]*data-reading-mode="guided"/,
+    /class="[^"]*\bproof-reader\b[^"]*"[^>]*data-reading-mode="guided"/,
   );
-  assert.match(html, /class="proof-topic-index"/);
+  assert.doesNotMatch(html, /class="proof-topic-index"/);
   assert.match(html, /aria-label="Reading mode"/);
   assert.match(html, /data-reading-mode-button="guided"/);
   assert.match(html, /data-reading-mode-button="compact"/);
@@ -718,8 +718,8 @@ test("server-renders the Part I proof reader", async () => {
   assert.ok(orbitMarks.slice(1).some((mark) => Number(mark[3]) > 205));
   assert.equal((topicIPanelHtml.match(/class="topic-i-formal"/g) ?? []).length, 9);
   assert.doesNotMatch(html, /9(?:<!-- -->)? numbered items/);
-  assert.match(html, /16(?:<!-- -->)? complete proofs/);
-  assert.match(html, /97(?:<!-- -->)? displayed formulas/);
+  assert.match(html, /7(?:<!-- -->)? complete proofs/);
+  assert.match(html, /39(?:<!-- -->)? displayed formulas/);
   assert.doesNotMatch(
     html,
     /Topic I makes no claim of a new mathematical result/,
@@ -727,7 +727,7 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(html, /id="part-i-item-1"/);
   assert.match(html, /id="part-i-item-66"/);
   assert.equal((topicIPanelHtml.match(/id="part-i-item-\d+"/g) ?? []).length, 9);
-  assert.equal((html.match(/class="proof-topic-panel"/g) ?? []).length, 2);
+  assert.equal((html.match(/class="proof-topic-panel"/g) ?? []).length, 1);
   assert.equal((topicIPanelHtml.match(/class="proof"/g) ?? []).length, 8);
   assert.equal(
     (topicIPanelHtml.match(/<math[^>]*display="block"/g) ?? []).length,
@@ -788,7 +788,7 @@ test("server-renders the Part I proof reader", async () => {
   assert.doesNotMatch(topicIPanelHtml, /Projective unit return/);
   assert.doesNotMatch(topicIPanelHtml, /Return factors lie on the Jensen sheet/);
   assert.match(html, /Returning to stochastic spectra/);
-  assert.match(html, /data-topic-slug="active-sides"/);
+  assert.match(html, /href="(?:\/karpelevic)?\/proof\/topic-ii\/"/);
   assert.doesNotMatch(
     html,
     /local instalment|current instalment|Topics II–VIII|developing annotated edition/i,
@@ -806,7 +806,7 @@ test("server-renders the Part I proof reader", async () => {
   const sourceShelfHtml = html.slice(sourceShelfStart);
   assert.doesNotMatch(sourceShelfHtml, /<table\b/);
 
-  assert.match(topicIIPanelHtml, /Topic II · 10 items/);
+  assert.match(topicIIPanelHtml, /7(?:<!-- -->|\s)*core results/);
   assert.match(topicIIPanelHtml, /From convex order to active sides/);
   assert.match(topicIIPanelHtml, /What is allowed into Topic II/);
   assert.match(topicIIPanelHtml, /A closed dependency chain/);
@@ -814,9 +814,8 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(topicIIPanelHtml, /Standard background, stated with sources/);
   assert.match(topicIIPanelHtml, /Proved on this page/);
   assert.match(topicIIPanelHtml, /No irreducibility, smoothness, or generic-position/);
-  assert.match(topicIIPanelHtml, /data-proof-target="language"/);
-  assert.match(topicIIPanelHtml, /data-proof-anchor="part-i-item-2"/);
-  assert.match(topicIIPanelHtml, /data-proof-anchor="part-i-item-10"/);
+  assert.match(topicIIPanelHtml, /href="(?:\/karpelevic)?\/proof\/#part-i-item-2"/);
+  assert.match(topicIIPanelHtml, /href="(?:\/karpelevic)?\/proof\/#part-i-item-10"/);
   assert.match(topicIIPanelHtml, /Schneider/);
   assert.match(topicIIPanelHtml, /Horn and C\. R\. Johnson/);
   assert.match(topicIIPanelHtml, /Bitsoris/);
@@ -885,7 +884,7 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(topicIIPanelHtml, /id="eq:stress-complementarity"/);
   assert.match(topicIIPanelHtml, /id="eq:full-side-touch"/);
   assert.match(topicIIPanelHtml, /Plate II/);
-  assert.match(topicIIPanelHtml, /cos\(π\/7\)eⁱπ⁄⁷/);
+  assert.match(topicIIPanelHtml, /ρ = cos\(π\/7\), θ = π\/7/);
   assert.equal(
     (topicIIPanelHtml.match(/data-contact-side="\d+"/g) ?? []).length,
     7,
@@ -897,7 +896,7 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(topicIIPanelHtml, /data-coefficient-a="[^"]+"/);
   assert.doesNotMatch(topicIIPanelHtml, /<table\b/);
 
-  const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
+  const ids = [...topicIIPanelHtml.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
   assert.equal(new Set(ids).size, ids.length, "The proof page has duplicate ids");
   const idSet = new Set(ids);
   for (const match of topicIIPanelHtml.matchAll(/href="#([^"]+)"/g)) {

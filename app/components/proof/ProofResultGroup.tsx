@@ -4,6 +4,7 @@ type ProofResultGroupProps = {
   number: string;
   title: string;
   introduction: React.ReactNode;
+  prelude?: React.ReactNode;
   results: readonly ProofResultData[];
 };
 
@@ -11,6 +12,7 @@ export function ProofResultGroup({
   number,
   title,
   introduction,
+  prelude,
   results,
 }: ProofResultGroupProps) {
   return (
@@ -22,6 +24,7 @@ export function ProofResultGroup({
         </div>
         <div>{introduction}</div>
       </header>
+      {prelude}
       <ol className="topic-i-textbook-list">
         {results.map((result) => (
           <ProofResult key={result.id} result={result} />

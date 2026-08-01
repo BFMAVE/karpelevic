@@ -11,7 +11,7 @@ export const topicIICommentary: Readonly<
   11: {
     figure: "triple-sign",
     intuition:
-      "Convexity can be certified without first drawing the convex hull. If every triple of boundary vertices (zᵢ,zⱼ,zₖ) of the displayed cyclic list, with i&lt;j&lt;k in that order, has the same nonzero orientation, then each consecutive segment sees every remaining point strictly on its inner side and must therefore be an exposed boundary edge.",
+      "Convexity can be certified without first drawing the convex hull. If every triple of boundary vertices (zᵢ,zⱼ,zₖ) of the displayed cyclic list, with i<j<k in that order, has the same nonzero orientation, then each consecutive segment sees every remaining point strictly on its inner side and must therefore be an exposed boundary edge.",
     architecture: [
       "Necessity is imported from Lemma 2.6: positive boundary order and positive determinant describe the same orientation.",
       "For sufficiency, fix one consecutive pair zᵢ,zᵢ₊₁. The triple inequalities put every other point strictly in the same open half-plane.",

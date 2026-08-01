@@ -7,7 +7,7 @@ import {
   topicIIPedagogicalOrder,
   topicIIResultGuides,
 } from "../data/topic-ii-result-guide";
-import { getProofItems } from "../data/proof";
+import { getProofItems, getProofSource } from "../data/proof";
 import { TopicIIConceptFigure } from "./TopicIIConceptFigure";
 import {
   FiniteOpennessExplainer,
@@ -18,6 +18,16 @@ import { sitePath } from "../lib/site-path";
 
 function resultNumber(label: string): string {
   return label.replace(/^(?:Proposition|Lemma|Theorem|Remark)\s+/, "");
+}
+
+function sourceRelation(itemNumber: number, fallback?: string): string | undefined {
+  if (itemNumber === 15) {
+    return "Bitsoris gives the previously known nonnegative-matrix criterion for invariance of a polyhedron described by linear inequalities. Proposition 3.1 proves the planar fixed-normal-fan specialization used here and records its first-harmonic identity explicitly.";
+  }
+  if (itemNumber === 18) {
+    return "Dmitriev–Dynkin, as translated in Swift’s thesis, is the historical antecedent for side-contact arguments in this problem. The exact image-vertex witness used here is also an elementary exposed-face consequence and is proved completely on this page.";
+  }
+  return fallback;
 }
 
 function splitFormalProof(html: string): {
@@ -32,6 +42,20 @@ function splitFormalProof(html: string): {
     statementHtml: html.slice(0, proofStart),
     proofHtml: html.slice(proofStart),
   };
+}
+
+const topicIImportAnchors = new Set([
+  "lem:oriented-boundary-order",
+  "lem:origin-interior",
+  "prop:affine-invariance",
+]);
+
+function qualifyTopicIImports(html: string): string {
+  return html.replace(/href="#([^"]+)"/g, (match, anchor: string) =>
+    topicIImportAnchors.has(anchor)
+      ? `href="${sitePath(`/proof/#${anchor}`)}"`
+      : match,
+  );
 }
 
 function ImportedTopicILink({
@@ -54,10 +78,16 @@ function TopicIIResult({ itemNumber }: { itemNumber: number }) {
   const item = getProofItems([itemNumber])[0];
   const guide = topicIIResultGuides[itemNumber];
   const commentary = topicIICommentary[itemNumber];
-  const formalHtml =
-    topicIIHtmlByItem[itemNumber as keyof typeof topicIIHtmlByItem];
+  const formalHtml = qualifyTopicIImports(
+    topicIIHtmlByItem[itemNumber as keyof typeof topicIIHtmlByItem],
+  );
   const { statementHtml, proofHtml } = splitFormalProof(formalHtml);
   const isRemark = item.kind === "Remark";
+  const sources = isRemark
+    ? []
+    : item.sourceIds
+        .map((sourceId) => getProofSource(sourceId))
+        .filter((source): source is NonNullable<typeof source> => Boolean(source));
 
   return (
     <li
@@ -75,6 +105,9 @@ function TopicIIResult({ itemNumber }: { itemNumber: number }) {
             <span className="proof-result-sequence">
               {guide.manuscriptLabel}
             </span>
+            {item.provenance ? (
+              <span className="proof-chapter-provenance">{item.provenance}</span>
+            ) : null}
             {guide.role === "Foundation brought forward" ? (
               <span className="topic-ii-role">Foundation brought forward</span>
             ) : null}
@@ -167,6 +200,37 @@ function TopicIIResult({ itemNumber }: { itemNumber: number }) {
               <span>Keep in mind</span>
               {commentary.takeaway}
             </p>
+          </div>
+        </details>
+      ) : null}
+
+      {!isRemark && (item.provenance || sources.length > 0) ? (
+        <details className="proof-chapter-source-note">
+          <summary>
+            <span>Classification and sources</span>
+            Why this mathematical statement carries its displayed label
+          </summary>
+          <div>
+            {item.provenance ? (
+              <p>
+                <strong>{item.provenance}.</strong>{" "}
+                {sourceRelation(itemNumber, item.sourceRelation) ??
+                  "The classification concerns the mathematical statement, not the proof reproduced on this page."}
+              </p>
+            ) : null}
+            {sources.length > 0 ? (
+              <ul>
+                {sources.map((source) => (
+                  <li key={source.id}>
+                    {source.href ? (
+                      <a href={source.href}>{source.citation}</a>
+                    ) : (
+                      source.citation
+                    )}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </div>
         </details>
       ) : null}
@@ -296,17 +360,16 @@ export function TopicIIChapter() {
             </h3>
           </div>
           <p>
-            We fix one nonreal elliptic contraction <i>T</i>. The
-            integer budget is <i>N := ν</i>
-            <sub>poly</sub>(<i>T</i>), the smallest number of vertices among
-            all invariant polygons for <i>T</i> (or <i>∞</i> if none exist).
-            Every side is encoded by a support inequality. Its side slack is the
-            amount by which the value used by <i>TP</i> falls short of matching
-            the same bound for <i>P</i>; zero slack means that side is active and
-            exactly touched, while positive slack means it is not tight. The first
-            four lemmas replace geometric order by finite inequalities:
-            strict convexity, persistence under perturbation, strict support, and
-            monotonic polar angle.
+            The first four lemmas concern finite point configurations in a
+            real plane; they do not yet assume criticality or even introduce a
+            linear map. They replace geometric order by finitely many
+            inequalities: strict polygonal convex position, persistence under
+            perturbation, strict support, and monotonic polar angle. The
+            contraction <i>T</i> and its vertex budget enter only in the later
+            saturation theorem. There <i>N := ν</i>
+            <sub>poly</sub>(<i>T</i>) is the smallest number of vertices among
+            all <i>T</i>-invariant polygons, and the theorem formally assumes
+            that this number is finite and that <i>T</i> is <i>N</i>-critical.
             <span>Four complete proofs</span>
           </p>
         </header>

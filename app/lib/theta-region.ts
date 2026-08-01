@@ -11,6 +11,17 @@ export type PlotPoint = {
   fraction?: FareyFraction;
 };
 
+export type FareyCell = {
+  left: FareyFraction;
+  right: FareyFraction;
+  p: number;
+  q: number;
+  r: number;
+  s: number;
+  repeats: number;
+  closingExponent: number;
+};
+
 function greatestCommonDivisor(a: number, b: number): number {
   let left = Math.abs(a);
   let right = Math.abs(b);
@@ -39,9 +50,29 @@ export function fareyUpper(order: number): FareyFraction[] {
 
   return fractions.sort(
     (left, right) =>
-      left.numerator / left.denominator -
-      right.numerator / right.denominator,
+      left.numerator * right.denominator -
+      right.numerator * left.denominator,
   );
+}
+
+export function fareyCells(order: number): FareyCell[] {
+  const fractions = fareyUpper(order);
+  return fractions.slice(0, -1).map((left, index) => {
+    const right = fractions[index + 1];
+    const first = left.denominator <= right.denominator ? left : right;
+    const second = first === left ? right : left;
+    const repeats = Math.floor(order / first.denominator);
+    return {
+      left,
+      right,
+      p: first.numerator,
+      q: first.denominator,
+      r: second.numerator,
+      s: second.denominator,
+      repeats,
+      closingExponent: second.denominator - repeats * first.denominator,
+    };
+  });
 }
 
 function radialEquation(
@@ -177,6 +208,95 @@ export function thetaBoundary(
   return {
     boundary: [...upperBoundary, ...lowerBoundary],
     upperFareyNodes,
+  };
+}
+
+export function thetaBoundaryForOrder(
+  order: number,
+  samplesPerCell = 48,
+): {
+  boundary: PlotPoint[];
+  upperFareyNodes: PlotPoint[];
+  kind: "point" | "interval" | "region";
+} {
+  const normalizedOrder = Math.max(1, Math.trunc(order));
+  if (normalizedOrder === 1) {
+    return {
+      boundary: [toPlotPoint(0, 1, { numerator: 0, denominator: 1 })],
+      upperFareyNodes: [toPlotPoint(0, 1, { numerator: 0, denominator: 1 })],
+      kind: "point",
+    };
+  }
+  if (normalizedOrder === 2) {
+    return {
+      boundary: [
+        { x: -1, y: 0, angle: 0.5, radius: 1 },
+        { x: 1, y: 0, angle: 0, radius: 1 },
+      ],
+      upperFareyNodes: [
+        toPlotPoint(0, 1, { numerator: 0, denominator: 1 }),
+        toPlotPoint(0.5, 1, { numerator: 1, denominator: 2 }),
+      ],
+      kind: "interval",
+    };
+  }
+
+  const fractions = fareyUpper(normalizedOrder);
+  const upperBoundary: PlotPoint[] = [];
+  for (let cell = 0; cell < fractions.length - 1; cell += 1) {
+    const left = fractions[cell];
+    const right = fractions[cell + 1];
+    const leftValue = left.numerator / left.denominator;
+    const rightValue = right.numerator / right.denominator;
+    const terminalOrderThree =
+      normalizedOrder === 3 &&
+      left.numerator === 1 &&
+      left.denominator === 3 &&
+      right.numerator === 1 &&
+      right.denominator === 2;
+
+    if (terminalOrderThree) {
+      for (let sample = 1; sample < samplesPerCell; sample += 1) {
+        const angleFraction =
+          leftValue + ((rightValue - leftValue) * sample) / samplesPerCell;
+        upperBoundary.push(
+          toPlotPoint(
+            angleFraction,
+            boundaryRadius(normalizedOrder, angleFraction, left, right),
+          ),
+        );
+      }
+      upperBoundary.push({ x: -0.5, y: 0, angle: 0.5, radius: 0.5 });
+      for (let sample = 1; sample <= samplesPerCell; sample += 1) {
+        const x = -0.5 - (0.5 * sample) / samplesPerCell;
+        upperBoundary.push({ x, y: 0, angle: 0.5, radius: Math.abs(x) });
+      }
+      continue;
+    }
+
+    for (let sample = 0; sample <= samplesPerCell; sample += 1) {
+      if (cell > 0 && sample === 0) continue;
+      const angleFraction =
+        leftValue + ((rightValue - leftValue) * sample) / samplesPerCell;
+      upperBoundary.push(
+        toPlotPoint(
+          angleFraction,
+          boundaryRadius(normalizedOrder, angleFraction, left, right),
+        ),
+      );
+    }
+  }
+
+  const lowerBoundary = upperBoundary
+    .slice(1, -1)
+    .reverse()
+    .map((point) => ({ ...point, y: -point.y, angle: 1 - point.angle }));
+  return {
+    boundary: [...upperBoundary, ...lowerBoundary],
+    upperFareyNodes: fractions.map((fraction) =>
+      toPlotPoint(fraction.numerator / fraction.denominator, 1, fraction),
+    ),
+    kind: "region",
   };
 }
 

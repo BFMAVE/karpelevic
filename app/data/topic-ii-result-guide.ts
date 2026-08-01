@@ -46,7 +46,7 @@ export const topicIIResultGuides: Readonly<
       {
         term: "Exposed edge",
         definition:
-          "A segment is an exposed edge of a convex hull when one supporting line meets the hull in exactly that segment. A supporting line {\"exposes\"} a face F if the face is exactly the set where the supporting inequality is tight. In this lemma the consistent determinant sign puts every other displayed point strictly on one side of each consecutive segment, so that segment must be a boundary edge.",
+          "A segment is an exposed edge of a convex hull when one supporting line meets the hull in exactly that segment. A supporting line “exposes” a face F if the face is exactly the set where the supporting inequality is tight. In this lemma the consistent determinant sign puts every other displayed point strictly on one side of each consecutive segment, so that segment must be a boundary edge.",
       },
       {
         term: "Complete certificate",
@@ -62,7 +62,7 @@ export const topicIIResultGuides: Readonly<
       {
         term: "Continuous point function",
         definition:
-          "A map ϕ:(−δ,δ)→ℂ² (or ℝ²), with δ&gt;0, that varies continuously in the parameter τ. In ordinary terms, as τ changes slightly, the point moves without jumps.",
+          "A continuous map ϕ:(−δ,δ)→V, where V is the real plane used throughout the chapter (and may be identified with ℝ² or ℂ). The word ‘point’ only says that each value ϕ(τ) is a point of that plane: as τ changes slightly, the point moves without jumps.",
       },
       {
         term: "Common-neighbourhood argument",

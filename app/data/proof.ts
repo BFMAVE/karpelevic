@@ -1,7 +1,6 @@
 export type ProofProvenance =
   | "Classical result"
   | "Previously known"
-  | "Previously claimed"
   | "Strengthened"
   | "New result";
 
@@ -26,6 +25,7 @@ export type ProofItem = {
   title: string;
   reading: string;
   provenance?: ProofProvenance;
+  karpelevicOnlyAntecedent: boolean;
   sourceIds: readonly string[];
   sourceRelation?: string;
 };
@@ -99,6 +99,26 @@ export const proofSources: readonly ProofSource[] = [
     href: "https://doi.org/10.1016/S0024-3795(97)80052-3",
   },
   {
+    id: "coates-1959",
+    short: "Coates (1959)",
+    citation:
+      "C. L. Coates, “Flow-graph solutions of linear algebraic equations,” IRE Transactions on Circuit Theory 6(2) (1959), 170–187.",
+  },
+  {
+    id: "johnson-paparella-2017",
+    short: "Johnson–Paparella (2017)",
+    citation:
+      "C. R. Johnson and P. Paparella, “A matricial view of the Karpelevič theorem,” Linear Algebra and its Applications 520 (2017), 1–15.",
+    href: "https://doi.org/10.1016/j.laa.2017.01.009",
+  },
+  {
+    id: "kirkland-smigoc-2022",
+    short: "Kirkland–Šmigoc (2022)",
+    citation:
+      "S. Kirkland and H. Šmigoc, “Stochastic matrices realising the boundary of the Karpelevič region,” Linear Algebra and its Applications 635 (2022), 116–138.",
+    href: "https://doi.org/10.1016/j.laa.2021.11.016",
+  },
+  {
     id: "standard-linear-algebra",
     short: "Horn–Johnson, Matrix Analysis",
     citation:
@@ -114,19 +134,35 @@ export const proofSources: readonly ProofSource[] = [
   },
   {
     id: "standard-projective",
-    short: "Classical projective geometry",
+    short: "Coxeter, Projective Geometry",
     citation:
-      "Projectivities of a line are fractional-linear; a nonidentity projectivity has isolated fixed points.",
+      "H. S. M. Coxeter, Projective Geometry, 2nd ed., Springer (1987), especially Chapters 1–3 on projectivities and projective coordinates.",
+    href: "https://link.springer.com/book/9780387406237",
+  },
+  {
+    id: "standard-covering-spaces",
+    short: "Hatcher, Algebraic Topology",
+    citation:
+      "A. Hatcher, Algebraic Topology, Cambridge University Press (2002), §1.3, especially the path-lifting property for covering spaces.",
+    href: "https://pi.math.cornell.edu/~hatcher/AT/ATpage.html",
   },
   {
     id: "standard-farey",
-    short: "Classical Farey and lattice arithmetic",
+    short: "Hardy–Wright, Farey series",
     citation:
-      "The determinant-one criterion for Farey neighbours, lattice index, and the Euclidean return arithmetic of rational rotations.",
+      "G. H. Hardy and E. M. Wright, An Introduction to the Theory of Numbers, 6th ed., Oxford University Press (2008), Chapter III, “Farey Series and a Theorem of Minkowski.”",
+    href: "https://doi.org/10.1093/oso/9780199219858.001.0001",
+  },
+  {
+    id: "standard-lattice",
+    short: "Cassels, Geometry of Numbers",
+    citation:
+      "J. W. S. Cassels, An Introduction to the Geometry of Numbers, Springer (1997), Chapter I, “Lattices.”",
+    href: "https://doi.org/10.1007/978-3-642-62035-5",
   },
 ] as const;
 
-const claimed = new Set([
+const karpelevicOnlyAntecedent = new Set([
   3, 32, 33, 34, 35, 36, 37, 38, 40, 41, 47, 49, 50, 55, 56,
 ]);
 const strengthened = new Set([16, 57, 58]);
@@ -144,12 +180,13 @@ function provenanceFor(
   }
   if (newResults.has(number)) return "New result";
   if (strengthened.has(number)) return "Strengthened";
-  if (claimed.has(number)) return "Previously claimed";
+  if (karpelevicOnlyAntecedent.has(number)) return undefined;
   if (previouslyKnown.has(number)) return "Previously known";
   return "Classical result";
 }
 
 function sourcesFor(number: number): readonly string[] {
+  if ([51, 52].includes(number)) return [];
   if ([15, 23].includes(number)) return ["bitsoris-1988"];
   if ([16, 18, 20, 25, 26, 27, 28, 29, 30, 61, 62].includes(number)) {
     return ["dmitriev-dynkin-1946", "swift-1972"];
@@ -165,16 +202,20 @@ function sourcesFor(number: number): readonly string[] {
   }
   if ([39].includes(number)) return ["german-2005"];
   if ([43, 44, 46].includes(number)) return ["standard-projective"];
-  if ([53, 54, 55, 70].includes(number)) return ["standard-farey"];
-  if ([56, 57, 58].includes(number)) return ["karpelevic-1951"];
+  if ([53, 54].includes(number)) return ["standard-farey"];
+  if ([70].includes(number)) return ["standard-lattice"];
+  if ([55, 56, 57, 58].includes(number)) return ["karpelevic-1951"];
   if ([4, 59, 64].includes(number)) {
     return ["karpelevic-1951", "ito-1997", "djokovic-1990"];
   }
   if ([5, 60, 63, 65].includes(number)) return ["standard-linear-algebra"];
+  if ([31].includes(number)) {
+    return ["standard-covering-spaces", "standard-convexity"];
+  }
   if (
     [
-      2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 17, 19, 21, 22, 24, 31, 51,
-      52, 66, 67, 68, 69,
+      2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 17, 19, 21, 22, 24, 66,
+      67, 68, 69,
     ].includes(number)
   ) {
     return ["standard-convexity"];
@@ -183,14 +224,18 @@ function sourcesFor(number: number): readonly string[] {
 }
 
 function sourceRelationFor(number: number): string | undefined {
+  if ([51, 52].includes(number)) return undefined;
+  if (number === 31) {
+    return "This is a standard application of path lifting for the universal covering ℝ → S¹, combined with the polygonal boundary-order facts cited from convex geometry; the complete specialized argument is included here.";
+  }
   if (newResults.has(number)) {
     return "The displayed source is the closest antecedent. The exact statement used here appears to be new, but its older mechanism or conclusion is stated separately.";
   }
   if (strengthened.has(number)) {
     return "The cited source contains the earlier result; this manuscript states a strictly stronger version.";
   }
-  if (claimed.has(number)) {
-    return "This mechanism is present in Karpelevič’s original argument, but the current audit has not verified an independent complete proof of this exact step. It is therefore not labelled “Previously known.”";
+  if (karpelevicOnlyAntecedent.has(number)) {
+    return "Karpelevič’s original argument contains an antecedent of this mechanism. Under this site’s four-category convention, that occurrence alone does not justify a “Previously known” label, so the statement is deliberately left unbadged.";
   }
   if (previouslyKnown.has(number)) {
     return "The mathematical result is available in the cited literature; the manuscript includes it as part of a self-contained route.";
@@ -283,6 +328,7 @@ export const proofItems: readonly ProofItem[] = rawItems.map(
     title,
     reading,
     provenance: provenanceFor(number, kind),
+    karpelevicOnlyAntecedent: karpelevicOnlyAntecedent.has(number),
     sourceIds: sourcesFor(number),
     sourceRelation: sourceRelationFor(number),
   }),
@@ -339,7 +385,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "How does a geometric contact become a legal move on a finite cyclic board?",
     overview: [
       "The remaining endpoint lemmas finish the one-sided representative. A contacted vertex can then be replaced by its image-contact point without breaking strictness or invariance.",
-      "That exact surgery becomes a chip mutation. Legal sequences are realized geometrically, Boolean sweeps become available, and an arbitrary configuration reduces to one strict consecutive block. The mechanism is already present in Karpelevič’s 1951 proof, so these cards are labelled “Previously claimed” rather than “Previously known.”",
+      "That exact surgery becomes a chip mutation. Legal sequences are realized geometrically, Boolean sweeps become available, and an arbitrary configuration reduces to one strict consecutive block. Karpelevič’s 1951 proof contains antecedents of these mechanisms, but an occurrence there alone does not earn a “Previously known” badge under this site’s four-category convention.",
     ],
     itemNumbers: [27, 28, 29, 30, 31, 32, 33, 34, 35, 36],
     manuscriptPages: "19–30",
@@ -482,9 +528,9 @@ export const proofContent = {
   title: "How the Proof Works",
   subtitle: "Critical invariant polygons and the route to Karpelevič–Ito",
   deck:
-    "A fourteen-topic route from intrinsic polygon geometry to the Karpelevič–Ito theorem. Topics I and II are presented in full, with complete proofs, explicit dependencies, and verified mathematical plates; Topic XIV is a worked example rather than a proof dependency.",
+    "A fourteen-topic route from intrinsic polygon geometry to the Karpelevič–Ito theorem. Each chapter preserves the manuscript’s formal statements and complete proofs, then adds definitions, dependency maps, guided explanations, and verified mathematical plates. Topic XIV is a worked example rather than a proof dependency.",
   auditNote:
-    "These labels classify mathematical statements, not proofs. “Previously claimed” is used when an antecedent occurs in Karpelevič’s original argument but an independent complete proof of the exact step has not yet been verified. The classifications remain open to correction.",
+    "The four labels—Classical result, Previously known, Strengthened, and New result—classify mathematical statements, not proofs. A Karpelevič-only antecedent is cited but deliberately left unbadged. The classifications remain open to correction.",
   criticalPath:
     "5 → 16 → 30 → 32 → 36 → 37 → 42 → 48 → 50 → (57, 58) → 59 → 4 → 64",
 } as const;

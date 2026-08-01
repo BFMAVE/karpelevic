@@ -102,37 +102,37 @@ function NormalFanDrawing() {
   const coefficient = 1 / Math.sqrt(3);
   return (
     <>
-      <path className="topic-ii-figure-cone" d="M130 286 L620 286 L375 43 Z" />
+      <path className="topic-ii-figure-cone" d="M230 286 L530 286 L380 26.192 Z" />
       <path
         className="topic-ii-figure-ray"
-        d="M130 286 L620 286"
+        d="M230 286 L530 286"
         markerEnd="url(#topic-ii-arrow-normal-fan)"
       />
       <path
         className="topic-ii-figure-ray"
-        d="M130 286 L375 43"
+        d="M230 286 L380 26.192"
         markerEnd="url(#topic-ii-arrow-normal-fan)"
       />
       <path
         className="topic-ii-figure-target"
-        d="M130 286 L554 41"
+        d="M230 286 L489.808 136"
         markerEnd="url(#topic-ii-arrow-normal-fan)"
       />
-      <path className="topic-ii-figure-angle" d="M214 286 A84 84 0 0 0 203 244" />
-      <path className="topic-ii-figure-angle" d="M203 244 A84 84 0 0 0 172 213" />
-      <text className="topic-ii-figure-small" x="214" y="266">
+      <path className="topic-ii-figure-angle" d="M314 286 A84 84 0 0 0 303 244" />
+      <path className="topic-ii-figure-angle" d="M303 244 A84 84 0 0 0 272 213" />
+      <text className="topic-ii-figure-small" x="314" y="266">
         30°
       </text>
-      <text className="topic-ii-figure-small" x="179" y="232">
+      <text className="topic-ii-figure-small" x="279" y="232">
         30°
       </text>
-      <text className="topic-ii-figure-label" x="624" y="307">
+      <text className="topic-ii-figure-label" x="542" y="307">
         uⱼ
       </text>
-      <text className="topic-ii-figure-label" x="365" y="34">
+      <text className="topic-ii-figure-label" x="370" y="20">
         uⱼ₊₁
       </text>
-      <text className="topic-ii-figure-label topic-ii-figure-accent" x="564" y="48">
+      <text className="topic-ii-figure-label topic-ii-figure-accent" x="500" y="132">
         e⁻ⁱᶿuᵢ
       </text>
       <text className="topic-ii-figure-equation" x="392" y="342" textAnchor="middle">

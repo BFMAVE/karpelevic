@@ -117,9 +117,9 @@ export function SaturationGapExplainer() {
             satisfy ⟨<i>u</i>
             <sub>i</sub>,<i>d</i>⟩ ≤ 0 for every <i>i</i>∈<i>S</i>. If the{" "}
             <i>u</i>
-            <sub>i</sub> positively span ℝ², then also −<i>d</i> is a
+            <sub>i</sub> positively span ℝ², then <i>d</i> itself is a
             nonnegative combination of them. Pairing that combination with{" "}
-            <i>d</i> gives −|<i>d</i>|² ≥ 0, so <i>d</i>=0. A finite
+            <i>d</i> gives |<i>d</i>|² ≤ 0, so <i>d</i>=0. A finite
             half-plane intersection with no nonzero escape direction is
             bounded.
           </p>

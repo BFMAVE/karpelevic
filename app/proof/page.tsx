@@ -17,8 +17,6 @@ import { primaryNavigation } from "../data/home";
 import {
   topicIHtmlByItem,
   topicISetupHtml,
-  topicIIHtmlByItem,
-  topicIISetupHtml,
 } from "../data/part-i-content.generated";
 import { topicICommentary } from "../data/topic-i-commentary";
 import {
@@ -56,14 +54,25 @@ const visibleDefinitionCount = visibleTopicItems.filter(
 const visibleResultCount = visibleTopicItems.length - visibleDefinitionCount;
 const topicIFormalHtml =
   topicISetupHtml + Object.values(topicIHtmlByItem).join("");
-const topicIIFormalHtml =
-  topicIISetupHtml + Object.values(topicIIHtmlByItem).join("");
 const visibleProofCount =
   topicIFormalHtml.match(/class="proof"/g)?.length ?? 0;
 // Proposition 2.2 shows the manuscript proof plus five displays in its optional
 // six-step expansion.
 const visibleDisplayMathCount =
   (topicIFormalHtml.match(/<math display="block"/g)?.length ?? 0) + 5;
+
+const topicIRoadmapRoutes: Readonly<Record<string, string>> = {
+  "lem:cyclic-interlacing": "/proof/topic-iv/",
+  "lem:one-sided-contact": "/proof/topic-iv/",
+  "lem:backward-strip-reflection": "/proof/topic-vii/",
+};
+
+function qualifyTopicIRoadmapLinks(html: string): string {
+  return html.replace(/href="#([^"]+)"/g, (match, anchor: string) => {
+    const route = topicIRoadmapRoutes[anchor];
+    return route ? `href="${sitePath(`${route}#${anchor}`)}"` : match;
+  });
+}
 
 function toRomanNumeral(n: number): string | null {
   const value = Math.trunc(Math.max(0, n));
@@ -621,10 +630,11 @@ export default function ProofPage() {
                     >
                       {definitionItems.map((item) => {
                         const commentary = topicICommentary[item.number];
-                        const formalHtml =
+                        const formalHtml = qualifyTopicIRoadmapLinks(
                           topicIHtmlByItem[
                             item.number as keyof typeof topicIHtmlByItem
-                          ];
+                          ],
+                        );
 
                         return (
                           <article
@@ -730,10 +740,11 @@ export default function ProofPage() {
                       {resultItems.map((item) => {
                         const commentary = topicICommentary[item.number];
                         const guide = topicIResultGuides[item.number];
-                        const formalHtml =
+                        const formalHtml = qualifyTopicIRoadmapLinks(
                           topicIHtmlByItem[
                             item.number as keyof typeof topicIHtmlByItem
-                          ];
+                          ],
+                        );
                         const { statementHtml, proofHtml } =
                           splitFormalProof(formalHtml);
                         const proofIsCollapsible =

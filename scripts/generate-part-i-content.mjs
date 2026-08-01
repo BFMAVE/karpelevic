@@ -433,6 +433,8 @@ const markers = {
     '<div id="def:strict-polygon" class="definition">',
   firstMainTheorem:
     '<div id="thm:critical-polygon-normal-form" class="theorem">',
+  secondMainTheorem:
+    '<div id="thm:complex-monodromy" class="theorem">',
   prelim: '<h3 id="sec:prelim">',
   adaptedComplex:
     '<div id="prop:adapted-complex" class="proposition">',
@@ -673,6 +675,11 @@ const topicVIIHtmlByItem = {
   59: statementBlock(markers.compressionBranch),
 };
 
+const partIMainTheoremHtmlById = {
+  "thm:critical-polygon-normal-form": statementBlock(markers.firstMainTheorem),
+  "thm:complex-monodromy": statementBlock(markers.secondMainTheorem),
+};
+
 const topicHtml = {
   language:
     '<h3 id="topic-i-basic-setting">Basic setting and notation</h3>' +
@@ -740,6 +747,8 @@ export const topicVHtmlByItem = ${JSON.stringify(topicVHtmlByItem)} as const;
 export const topicVIHtmlByItem = ${JSON.stringify(topicVIHtmlByItem)} as const;
 
 export const topicVIIHtmlByItem = ${JSON.stringify(topicVIIHtmlByItem)} as const;
+
+export const partIMainTheoremHtmlById = ${JSON.stringify(partIMainTheoremHtmlById)} as const;
 `;
 
 writeFileSync(outputPath, generated, "utf8");

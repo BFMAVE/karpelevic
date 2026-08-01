@@ -8,6 +8,10 @@
   --copper: #955c38;
   --rule: #b8a98e;
   --rule-dark: #7e735f;
+  /* Semantic aliases used by the multi-page proof-reader components. */
+  --navy: var(--ink);
+  --muted-ink: var(--ink-soft);
+  --rule-strong: var(--rule-dark);
   --shadow: rgba(35, 30, 23, 0.12);
   --reading-width: 43rem;
   --page-width: 86rem;
@@ -7918,5 +7922,363 @@ math mover > mo[accent="true"] {
   .proof-chapter-parts,
   .proof-chapter-source-note {
     display: none !important;
+  }
+}
+
+.boundary-laboratory {
+  margin: 38px 0;
+  border: 1px solid var(--rule-dark);
+  background: color-mix(in srgb, var(--paper) 92%, white);
+  box-shadow: 0 22px 54px rgb(15 31 54 / 8%);
+}
+
+.boundary-laboratory > header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: end;
+  padding: clamp(24px, 4vw, 42px);
+  border-bottom: 1px solid var(--rule);
+}
+
+.boundary-laboratory h3 {
+  margin: 5px 0 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.7rem, 3.2vw, 2.7rem);
+  line-height: 1.02;
+}
+
+.boundary-laboratory > header label {
+  display: grid;
+  gap: 6px;
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.boundary-laboratory input {
+  width: 7.5rem;
+  min-height: 2.8rem;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 700 1.15rem/1 var(--font-reading), Georgia, serif;
+  padding: 8px 10px;
+}
+
+.boundary-laboratory-help {
+  margin: 0;
+  padding: 14px clamp(24px, 4vw, 42px);
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.boundary-laboratory-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(16rem, 0.75fr);
+}
+
+.boundary-laboratory figure {
+  margin: 0;
+  padding: clamp(20px, 3vw, 36px);
+  border-right: 1px solid var(--rule);
+}
+
+.boundary-laboratory svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.boundary-lab-axis {
+  stroke: color-mix(in srgb, var(--ink) 30%, transparent);
+  stroke-width: 1;
+}
+
+.boundary-lab-unit {
+  fill: none;
+  stroke: color-mix(in srgb, var(--copper) 58%, transparent);
+  stroke-dasharray: 5 7;
+  stroke-width: 1.2;
+}
+
+.boundary-lab-region {
+  fill: color-mix(in srgb, var(--ink) 7%, transparent);
+  stroke: var(--ink);
+  stroke-linejoin: round;
+  stroke-width: 3;
+}
+
+.boundary-lab-interval {
+  stroke: var(--ink);
+  stroke-width: 4;
+}
+
+.boundary-lab-point,
+.boundary-lab-root {
+  fill: var(--oxblood);
+  stroke: var(--paper);
+  stroke-width: 2;
+}
+
+.boundary-lab-label {
+  fill: var(--ink-soft);
+  font: 600 17px var(--font-reading), Georgia, serif;
+}
+
+.boundary-laboratory figcaption {
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.boundary-laboratory figcaption span {
+  color: var(--oxblood);
+  font-weight: 700;
+}
+
+.boundary-laboratory aside {
+  padding: clamp(22px, 3vw, 34px);
+}
+
+.boundary-laboratory aside section + section {
+  margin-top: 26px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+
+.boundary-laboratory aside h4 {
+  margin: 5px 0 8px;
+  color: var(--ink);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.35rem;
+}
+
+.boundary-laboratory aside p:not(.section-label) {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.62;
+}
+
+.boundary-laboratory aside > details {
+  margin-top: 28px;
+  border-top: 1px solid var(--rule-dark);
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.boundary-laboratory aside > details > summary {
+  cursor: pointer;
+  padding: 13px 0;
+  color: var(--oxblood);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.boundary-cell-ledger {
+  max-height: 21rem;
+  overflow: auto;
+  padding-bottom: 12px;
+}
+
+.boundary-cell-ledger > div {
+  display: grid;
+  gap: 3px;
+  padding: 9px 0;
+  border-top: 1px solid var(--rule);
+  font-size: 0.78rem;
+}
+
+.boundary-cell-ledger strong {
+  color: var(--ink);
+}
+
+.boundary-cell-ledger span {
+  color: var(--ink-soft);
+}
+
+@media (max-width: 860px) {
+  .boundary-laboratory-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .boundary-laboratory figure {
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+}
+
+@media (max-width: 560px) {
+  .boundary-laboratory > header {
+    grid-template-columns: 1fr;
+  }
+}
+
+.topic-xiv-cell-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: 26px 0;
+  padding: 1px;
+  background: var(--rule);
+}
+
+.topic-xiv-cell-strip article {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 4px 10px;
+  padding: 16px;
+  background: var(--paper);
+}
+
+.topic-xiv-cell-strip article > span {
+  grid-row: 1 / 3;
+  color: var(--oxblood);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.topic-xiv-cell-strip strong {
+  color: var(--ink);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.05rem;
+}
+
+.topic-xiv-cell-strip small {
+  color: var(--ink-soft);
+  font-size: 0.75rem;
+}
+
+.topic-xiv-manuscript {
+  margin-top: 28px;
+}
+
+.topic-xiv-manuscript-body {
+  padding: clamp(18px, 4vw, 38px);
+}
+
+.topic-xiv-manuscript-body > h3:first-child {
+  display: none;
+}
+
+.topic-xiv-manuscript-body table {
+  width: 100%;
+  min-width: 44rem;
+  border-collapse: collapse;
+}
+
+.topic-xiv-manuscript-body table th,
+.topic-xiv-manuscript-body table td {
+  padding: 8px 10px;
+  border: 1px solid var(--rule);
+}
+
+.topic-xiv-manuscript-body .longtable {
+  overflow-x: auto;
+}
+
+.topic-xiv-worked-steps {
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.topic-xiv-worked-steps > li {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: 18px;
+  padding: 24px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.topic-xiv-worked-steps > li > span {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--oxblood);
+  border-radius: 50%;
+  color: var(--oxblood);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.topic-xiv-worked-steps h4 {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.35rem;
+}
+
+.topic-xiv-worked-steps p {
+  max-width: 62rem;
+  margin: 0;
+  line-height: 1.7;
+}
+
+.topic-xiv-worked-steps p + p {
+  margin-top: 12px;
+}
+
+.topic-xiv-code-ledger {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 26px;
+  padding: 1px;
+  background: var(--rule);
+}
+
+.topic-xiv-code-ledger > div {
+  padding: 20px;
+  background: var(--paper);
+}
+
+.topic-xiv-code-ledger span {
+  color: var(--oxblood);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.topic-xiv-code-ledger p {
+  margin: 9px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.topic-xiv-download {
+  margin: 22px 0 0;
+}
+
+.topic-xiv-download a {
+  display: inline-flex;
+  padding: 12px 16px;
+  border: 1px solid var(--oxblood);
+  color: var(--oxblood);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.topic-xiv-download a:hover {
+  background: var(--oxblood);
+  color: var(--paper);
+}
+
+@media (max-width: 840px) {
+  .topic-xiv-cell-strip,
+  .topic-xiv-code-ledger {
+    grid-template-columns: 1fr;
   }
 }
