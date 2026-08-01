@@ -11,14 +11,14 @@ export const topicIICommentary: Readonly<
   11: {
     figure: "triple-sign",
     intuition:
-      "Convexity can be certified without first drawing the convex hull. If every cyclically ordered triple has the same nonzero orientation, then each consecutive segment sees every remaining point strictly on its inner side and must therefore be an exposed boundary edge.",
+      "Convexity can be certified without first drawing the convex hull. If every triple of boundary vertices (zᵢ,zⱼ,zₖ) of the displayed cyclic list, with i&lt;j&lt;k in that order, has the same nonzero orientation, then each consecutive segment sees every remaining point strictly on its inner side and must therefore be an exposed boundary edge.",
     architecture: [
       "Necessity is imported from Lemma 2.6: positive boundary order and positive determinant describe the same orientation.",
       "For sufficiency, fix one consecutive pair zᵢ,zᵢ₊₁. The triple inequalities put every other point strictly in the same open half-plane.",
       "That half-plane statement exposes [zᵢ,zᵢ₊₁]. Repeating it for every i proves that all displayed points, and no hidden ones, are the vertices in the displayed order.",
     ],
     takeaway:
-      "A finite list of strict determinant signs is a complete certificate of strict convex position.",
+      "A finite list of strict determinant signs is a complete certificate in the usual sense: the listed sign conditions are all necessary, and together they are sufficient. If the points were not in strict convex position, at least one listed condition would fail.",
   },
   12: {
     intuition:

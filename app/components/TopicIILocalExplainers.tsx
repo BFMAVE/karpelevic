@@ -1,6 +1,10 @@
 export function FiniteOpennessExplainer() {
   return (
-    <details className="topic-ii-local-explainer proof-guided-layer" data-guided-layer>
+    <details
+      className="topic-ii-local-explainer proof-guided-layer"
+      data-guided-layer
+      suppressHydrationWarning
+    >
       <summary>
         <span>Why the common interval exists</span>
         The finite-continuity argument, without shorthand
@@ -37,7 +41,11 @@ export function FiniteOpennessExplainer() {
 
 export function NormalFanExplainer() {
   return (
-    <details className="topic-ii-local-explainer proof-guided-layer" data-guided-layer open>
+    <details
+      className="topic-ii-local-explainer proof-guided-layer"
+      data-guided-layer
+      suppressHydrationWarning
+    >
       <summary>
         <span>The geometric dictionary</span>
         Why adjacent normals determine one support value
@@ -86,7 +94,11 @@ export function NormalFanExplainer() {
 
 export function SaturationGapExplainer() {
   return (
-    <details className="topic-ii-local-explainer proof-guided-layer" data-guided-layer>
+    <details
+      className="topic-ii-local-explainer proof-guided-layer"
+      data-guided-layer
+      suppressHydrationWarning
+    >
       <summary>
         <span>Three compressed implications</span>
         Boundedness, contact, and complementarity unpacked

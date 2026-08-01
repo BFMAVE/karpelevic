@@ -39,9 +39,19 @@ export const topicIIResultGuides: Readonly<
           "For vectors a=(a₁,a₂) and b=(b₁,b₂), det(a,b)=a₁b₂−a₂b₁. It is positive exactly when the turn from a to b is counterclockwise through an angle strictly between 0 and π. Equivalently, det(q−p,z−p)>0 places z strictly to the left of the directed line p→q.",
       },
       {
+        term: "Cyclic triple",
+        definition:
+          "A triple of boundary points (zᵢ,zⱼ,zₖ) in increasing cyclic order around the polygon, written with indices i<j<k in one chosen starting point.",
+      },
+      {
         term: "Exposed edge",
         definition:
-          "A segment is an exposed edge of a convex hull when one supporting line meets the hull in exactly that segment. In this lemma the consistent determinant sign puts every other displayed point strictly on one side of each consecutive segment, so that segment must be a boundary edge.",
+          "A segment is an exposed edge of a convex hull when one supporting line meets the hull in exactly that segment. A supporting line {\"exposes\"} a face F if the face is exactly the set where the supporting inequality is tight. In this lemma the consistent determinant sign puts every other displayed point strictly on one side of each consecutive segment, so that segment must be a boundary edge.",
+      },
+      {
+        term: "Complete certificate",
+        definition:
+          "A finite list is a complete certificate when the listed conditions are necessary and sufficient for the target property. If every condition holds, the target property follows; if the target property fails, at least one condition must fail.",
       },
     ],
   },
@@ -52,7 +62,12 @@ export const topicIIResultGuides: Readonly<
       {
         term: "Continuous point function",
         definition:
-          "A path τ↦z(τ) in the plane whose coordinates vary continuously with the real parameter τ. Every determinant and every affine coefficient built from finitely many such paths is continuous wherever its denominator is nonzero.",
+          "A map ϕ:(−δ,δ)→ℂ² (or ℝ²), with δ&gt;0, that varies continuously in the parameter τ. In ordinary terms, as τ changes slightly, the point moves without jumps.",
+      },
+      {
+        term: "Common-neighbourhood argument",
+        definition:
+          "If finitely many conditions are strict and remain true at τ=0, each gives an open interval of τ where it still holds. Their finite intersection is a nonempty open interval on which all of them hold simultaneously.",
       },
       {
         term: "Simultaneous admissibility",
@@ -129,6 +144,11 @@ export const topicIIResultGuides: Readonly<
           "A real matrix B=(bᵢⱼ) with bᵢⱼ≥0 for every i,j. Consequently x≥0 implies Bx≥0, and |Bz|≤B|z| coordinatewise.",
       },
       {
+        term: "Spectral radius, spr(B)",
+        definition:
+          "spr(B) is the maximum of |λ| over all eigenvalues λ of B. For nonnegative matrices this governs how powers of B scale: if spr(B)<1, Perron–Frobenius arguments give strong contraction-type conclusions.",
+      },
+      {
         term: "Weighted supremum norm",
         definition:
           "For a vector x with all coordinates positive, ‖z‖ₓ=maxᵢ |zᵢ|/xᵢ. It rescales the coordinate axes so that the comparison Bx≤cx becomes the operator-norm bound ‖B‖ₓ≤c.",
@@ -178,7 +198,27 @@ export const topicIIResultGuides: Readonly<
       {
         term: "Saturation",
         definition:
-          "Side saturation means every side of R meets TR. Vertex saturation means every vertex of TR lies on ∂R. The theorem proves both, for every invariant polygon with the allowed vertex budget.",
+          "Side saturation means every side of R has nonempty intersection with TR (equivalently, each support inequality is tight). Vertex saturation means every vertex of TR lies on ∂R. The theorem proves both, for every invariant polygon with the same vertex budget N=νpoly(T).",
+      },
+      {
+        term: "Vertex budget",
+        definition:
+          "The fixed value N=νpoly(T), the minimal number of vertices among T-invariant polygons (or ∞ if none exist). In this topic the budget is fixed once and for all for the contraction T under study.",
+      },
+      {
+        term: "Support slack",
+        definition:
+          "For support vector h and matrix B, define slack q:=h−ρBh. Each coordinate is qᵢ=hᵢ−(ρBh)ᵢ and is ≥0 by invariance. qᵢ=0 is tight saturation of side i, while qᵢ>0 means that side is not hit by TR.",
+      },
+      {
+        term: "Vanishing slack",
+        definition:
+          "The condition q=0, i.e. h=ρBh coordinatewise. Vanishing slack means every side inequality is tight, so every side intersects TR.",
+      },
+      {
+        term: "Meets",
+        definition:
+          "For sets A and B, A meets B means A∩B is nonempty. Here a polygon side meets TR if they share at least one point.",
       },
       {
         term: "Positive spanning",
@@ -198,7 +238,7 @@ export const topicIIResultGuides: Readonly<
       {
         term: "Neumann series",
         definition:
-          "If spr(M)<1, then (I−M)⁻¹=Σₖ≥0Mᵏ. The appendix proof of Lemma A.1 contains the finite-dimensional convergence argument used here; applying it to M=ρB produces a strictly positive comparison vector.",
+          "If spr(M)<1, then (I−M)⁻¹=∑_{k=0}^{∞}M^k. This convergent series produces a nonnegative comparison vector used to perturb support data.",
       },
     ],
   },

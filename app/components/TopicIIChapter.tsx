@@ -88,8 +88,8 @@ function TopicIIResult({ itemNumber }: { itemNumber: number }) {
       {guide.newVocabulary.length > 0 ? (
         <details
           className="topic-i-result-primer proof-guided-layer"
+          suppressHydrationWarning
           data-guided-layer
-          open
         >
           <summary>
             <span>Definitions before the result</span>
@@ -297,9 +297,17 @@ export function TopicIIChapter() {
             </h3>
           </div>
           <p>
-            The first four lemmas replace pictures by finite inequalities:
-            strict convexity, persistence under perturbation, strict support,
-            and increasing polar angle.
+            We fix one nonreal elliptic contraction <i>T</i>. The
+            integer budget is <i>N := ν</i>
+            <sub>poly</sub>(<i>T</i>), the smallest number of vertices among
+            all invariant polygons for <i>T</i> (or <i>∞</i> if none exist).
+            Every side is encoded by a support inequality. Its side slack is the
+            amount by which the value used by <i>TP</i> falls short of matching
+            the same bound for <i>P</i>; zero slack means that side is active and
+            exactly touched, while positive slack means it is not tight. The first
+            four lemmas replace geometric order by finite inequalities:
+            strict convexity, persistence under perturbation, strict support, and
+            monotonic polar angle.
             <span>Four complete proofs</span>
           </p>
         </header>

@@ -67,24 +67,43 @@ const visibleDisplayMathCount =
   (topicIFormalHtml.match(/<math display="block"/g)?.length ?? 0) +
   (topicIIFormalHtml.match(/<math display="block"/g)?.length ?? 0) +
   5;
-const topicNumerals = [
-  "I",
-  "II",
-  "III",
-  "IV",
-  "V",
-  "VI",
-  "VII",
-  "VIII",
-  "IX",
-  "X",
-  "XI",
-  "XII",
-  "XIII",
-  "XIV",
-] as const;
-const totalTopicNumeral =
-  topicNumerals[proofTopics.length - 1] ?? String(proofTopics.length);
+
+function toRomanNumeral(n: number): string | null {
+  const value = Math.trunc(Math.max(0, n));
+  if (value === 0) return null;
+
+  const numerals: readonly [number, string][] = [
+    [1000, "M"],
+    [900, "CM"],
+    [500, "D"],
+    [400, "CD"],
+    [100, "C"],
+    [90, "XC"],
+    [50, "L"],
+    [40, "XL"],
+    [10, "X"],
+    [9, "IX"],
+    [5, "V"],
+    [4, "IV"],
+    [1, "I"],
+  ] as const;
+
+  let remainder = value;
+  let result = "";
+  for (const [amount, numeral] of numerals) {
+    const repeats = Math.floor(remainder / amount);
+    if (repeats > 0) {
+      result += numeral.repeat(repeats);
+      remainder -= repeats * amount;
+    }
+  }
+
+  return result || null;
+}
+
+const totalTopicNumeral = "XIV";
+const proofEditionTopicLabel = `Topics I–II of ${totalTopicNumeral}`;
+const proofTopicCounterLabel = `Topic I of ${totalTopicNumeral}`;
 
 function resultNumber(label: string): string {
   return label.replace(/^(?:Proposition|Lemma|Theorem|Remark)\s+/, "");
@@ -166,8 +185,8 @@ export default function ProofPage() {
 
           <div className="proof-hero-copy">
             <p className="proof-deck">{proofContent.deck}</p>
-            <div className="proof-edition-meta">
-              <span>Topics I–II of {totalTopicNumeral}</span>
+                <div className="proof-edition-meta">
+                  <span suppressHydrationWarning>{proofEditionTopicLabel}</span>
               <span>{visibleDefinitionCount} numbered definitions</span>
               <span>{visibleResultCount} results</span>
               <span>{visibleProofCount} complete proofs</span>
@@ -198,7 +217,9 @@ export default function ProofPage() {
             <ol>
               {proofTopics.map((topic, index) => (
                 <li key={topic.slug}>
-                  <span>Topic {topicNumerals[index]}</span>
+                  <span>
+                    Topic {toRomanNumeral(index + 1) ?? index + 1}
+                  </span>
                   <div>
                     <h2>{topic.title}</h2>
                     <p>
@@ -226,8 +247,12 @@ export default function ProofPage() {
             <nav className="proof-topic-index" aria-label="Part I topics">
               <div className="proof-topic-index-heading">
                 <p className="section-label">Part I reader</p>
-                <p className="proof-topic-counter" aria-live="polite">
-                  Topic I of {totalTopicNumeral}
+                <p
+                  className="proof-topic-counter"
+                  aria-live="polite"
+                  suppressHydrationWarning
+                >
+                  {proofTopicCounterLabel}
                 </p>
               </div>
               <ol>
@@ -300,8 +325,8 @@ export default function ProofPage() {
 
                   <details
                     className="proof-topic-overview proof-guided-layer"
+                    suppressHydrationWarning
                     data-guided-layer
-                    open
                   >
                     <summary>
                       <span>Topic orientation</span>
@@ -322,8 +347,8 @@ export default function ProofPage() {
                   >
                     <details
                       className="topic-i-foundations proof-guided-layer"
+                      suppressHydrationWarning
                       data-guided-layer
-                      open
                     >
                       <summary>
                         <span>Guided foundations</span>
@@ -739,10 +764,10 @@ export default function ProofPage() {
                             </header>
 
                             {guide.newVocabulary.length > 0 ? (
-                              <details
+                            <details
                                 className="topic-i-result-primer proof-guided-layer"
+                                suppressHydrationWarning
                                 data-guided-layer
-                                open
                               >
                                 <summary>
                                   <span>First-use vocabulary</span>
@@ -927,10 +952,11 @@ export default function ProofPage() {
                     aria-label={`End of ${topic.title}`}
                   >
                     <div className="proof-topic-complete">
-                      <span>End of Topic {topicNumerals[topicIndex]}</span>
+                      <span>
+                        End of Topic {toRomanNumeral(topicIndex + 1) ?? topicIndex + 1}
+                      </span>
                       <strong>
-                        Topic {topicNumerals[topicIndex]} of{" "}
-                        {totalTopicNumeral} complete
+                        {`Topic ${toRomanNumeral(topicIndex + 1) ?? topicIndex + 1} of ${totalTopicNumeral} complete`}
                       </strong>
                     </div>
                     {topicIndex > 0 ? (

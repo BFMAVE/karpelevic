@@ -305,7 +305,7 @@ export const proofTopics: readonly ProofTopic[] = [
   },
   {
     slug: "active-sides",
-    eyebrow: "Topic II · 10 items",
+    eyebrow: "Topic II · 7 core results · 2 foundational lemmas · 1 remark",
     title: "From convex order to active sides",
     question:
       "Why must every side of a critical polygon participate in the dynamics?",

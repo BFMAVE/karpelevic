@@ -12,23 +12,49 @@
   const guidedLayers = Array.from(
     reader.querySelectorAll("[data-guided-layer]"),
   );
-  const totalTopics = Number(reader.dataset.totalTopics) || panels.length;
-  const roman = [
-    "I",
-    "II",
-    "III",
-    "IV",
-    "V",
-    "VI",
-    "VII",
-    "VIII",
-    "IX",
-    "X",
-    "XI",
-    "XII",
-    "XIII",
-    "XIV",
-  ];
+  const totalTopics = Math.max(0, Number(reader.dataset.totalTopics) || panels.length);
+
+  function toRomanNumeral(number) {
+    const value = Math.max(0, Number(number) || 0);
+    if (!Number.isFinite(value) || value <= 0) return null;
+
+    const numerals = [
+      [1000, "M"],
+      [900, "CM"],
+      [500, "D"],
+      [400, "CD"],
+      [100, "C"],
+      [90, "XC"],
+      [50, "L"],
+      [40, "XL"],
+      [10, "X"],
+      [9, "IX"],
+      [5, "V"],
+      [4, "IV"],
+      [1, "I"],
+    ];
+
+    let remainder = Math.trunc(value);
+    let result = "";
+
+    for (const [amount, numeral] of numerals) {
+      const repeats = Math.floor(remainder / amount);
+      if (repeats > 0) {
+        result += numeral.repeat(repeats);
+        remainder -= repeats * amount;
+      }
+    }
+
+    return result || null;
+  }
+
+  function topicLabel(index) {
+    return toRomanNumeral(index + 1) || String(index + 1);
+  }
+
+  function totalTopicLabel() {
+    return toRomanNumeral(totalTopics) || String(totalTopics || 0);
+  }
 
   function setReadingMode(mode) {
     const resolvedMode = mode === "compact" ? "compact" : "guided";
@@ -48,13 +74,16 @@
 
   function panelForHash(hash) {
     if (!hash) return panels[0];
+    if (!panels.length) return undefined;
     const target = document.getElementById(hash.replace(/^#/, ""));
     return target?.closest("[data-topic-slug]") || panels[0];
   }
 
   function showPanel(panel, shouldFocus) {
+    if (!panel || !panel.dataset) return;
     const slug = panel.dataset.topicSlug;
     const index = panels.indexOf(panel);
+    if (index < 0) return;
 
     panels.forEach((candidate) => {
       candidate.hidden = candidate !== panel;
@@ -69,17 +98,20 @@
     });
 
     if (counter) {
-      counter.textContent =
-        `Topic ${roman[index] || index + 1} of ${roman[totalTopics - 1] || totalTopics}`;
+      counter.textContent = `Topic ${topicLabel(index)} of ${totalTopicLabel()}`;
     }
 
     if (shouldFocus) {
       const heading = panel.querySelector("h2");
       if (heading) {
         heading.setAttribute("tabindex", "-1");
-        heading.focus({ preventScroll: true });
+        if (typeof heading.focus === "function") {
+          heading.focus({ preventScroll: true });
+        }
       }
-      reader.scrollIntoView({ block: "start" });
+      if (typeof reader.scrollIntoView === "function") {
+        reader.scrollIntoView({ block: "start" });
+      }
     }
   }
 
@@ -91,20 +123,23 @@
     if (panel) showPanel(panel, false);
 
     requestAnimationFrame(() => {
-      target.scrollIntoView({ block: "start" });
-      if (shouldFocus) {
+      if (typeof target.scrollIntoView === "function") {
+        target.scrollIntoView({ block: "start" });
+      }
+      if (shouldFocus && typeof target.focus === "function") {
         target.setAttribute("tabindex", "-1");
         target.focus({ preventScroll: true });
       }
     });
   }
 
-  links.forEach((link) => {
+  function onPanelClick(link) {
+    const panel = panels.find(
+      (candidate) => candidate.dataset.topicSlug === link.dataset.proofTarget,
+    );
+    if (!panel) return;
+
     link.addEventListener("click", (event) => {
-      const panel = panels.find(
-        (candidate) => candidate.dataset.topicSlug === link.dataset.proofTarget,
-      );
-      if (!panel) return;
       event.preventDefault();
       const anchorId = link.dataset.proofAnchor;
       history.pushState({}, "", `#${anchorId || panel.id}`);
@@ -114,7 +149,9 @@
         showPanel(panel, true);
       }
     });
-  });
+  }
+
+  links.forEach(onPanelClick);
 
   readingModeButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -123,14 +160,14 @@
   });
 
   window.addEventListener("popstate", () => {
-    const anchorId = window.location.hash.replace(/^#/, "");
     showPanel(panelForHash(window.location.hash), false);
+    const anchorId = window.location.hash.replace(/^#/, "");
     revealAnchor(anchorId, false);
   });
 
   window.addEventListener("hashchange", () => {
-    const anchorId = window.location.hash.replace(/^#/, "");
     showPanel(panelForHash(window.location.hash), false);
+    const anchorId = window.location.hash.replace(/^#/, "");
     revealAnchor(anchorId, false);
   });
 

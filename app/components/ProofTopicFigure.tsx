@@ -17,7 +17,7 @@ const figureCopy: Readonly<
     description:
       "A regular heptagon contains its image under a rotation by pi over seven followed by contraction by cosine pi over seven; the image vertices are the side midpoints.",
     caption:
-      "Plate II. An exact model: for a regular heptagon, T = cos(π/7)e^{iπ/7} sends every vertex to the midpoint of the next side. Thus every side meets TP. The theorem proves this saturation for every critical invariant polygon, not only this symmetric example.",
+      "Plate II. An exact model: for a regular heptagon, T = ρe^{iθ} with ρ = cos(π/7), θ = π/7 sends every vertex to the midpoint of the next side. Thus every side meets TP. The theorem proves this saturation for every critical invariant polygon, not only this symmetric example.",
   },
   ownership: {
     title: "Half-open ownership at a vertex contact",
@@ -166,7 +166,9 @@ function ActiveSidesFigure() {
       <text className="proof-figure-label" x="620" y="79">P</text>
       <text className="proof-figure-label proof-figure-accent" x="493" y="169">TP</text>
       <text className="proof-figure-note" x="380" y="346" textAnchor="middle">
-        T = cos(π/7)eⁱπ⁄⁷ · every image vertex is a side midpoint
+        T = ρe
+        <tspan baselineShift="super" fontSize="18">iθ</tspan> with ρ = cos(π/7),
+        θ = π/7. Every image vertex is a side midpoint.
       </text>
     </>
   );
