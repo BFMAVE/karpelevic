@@ -633,6 +633,11 @@ full local source history remain later site milestones.
   consolidated reports retain the evidence from both readings and classify 44
   recommendations as Needed, 107 as Advised, and 45 as Would be nice to add.
   No recommendation was implemented during the review.
+- 6 August 2026 — Published the current Topic I reader to the existing GitHub
+  Pages static branch. The release includes the fourteen-topic manuscript map,
+  Topic I's complete two-definition/seven-result inventory, the current
+  explanatory layers, and its cited source shelf. No Topic II–XIV page file was
+  included. Static release commit: `89e7cb5`.
 
 ## Current milestone — Topics I–II textbook chapters
 
@@ -794,7 +799,7 @@ full local source history remain later site milestones.
   remain offline until separately approved.
 - **Publication status:** live at
   <https://bfmave.github.io/karpelevic/proof/>; public GitHub Pages commit
-  `687db71`. The public edition contains Topic I only.
+  `89e7cb5`. The public edition contains Topic I only.
 
 ## Current milestone — Complete local XIV-topic proof reader
 
