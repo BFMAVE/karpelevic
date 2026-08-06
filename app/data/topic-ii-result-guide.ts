@@ -1,6 +1,7 @@
 export type TopicIINewVocabulary = {
   term: string;
   definition: string;
+  formula?: "lifted-arguments" | "support-function" | "neumann-series";
 };
 
 export type TopicIIResultGuide = {
@@ -99,7 +100,8 @@ export const topicIIResultGuides: Readonly<
       {
         term: "Lifted arguments",
         definition:
-          "Angles Θᵢ chosen as real numbers rather than only modulo 2π, with Θᵢ₊ₙ=Θᵢ+2π. This records an unbroken counterclockwise circuit and makes each angular gap an ordinary real number.",
+          "Angles chosen as real numbers rather than only modulo 2π. They obey the periodic lift relation below, which records an unbroken counterclockwise circuit and makes each angular gap an ordinary real number.",
+        formula: "lifted-arguments",
       },
       {
         term: "Argument along a segment",
@@ -115,7 +117,8 @@ export const topicIIResultGuides: Readonly<
       {
         term: "Support function and support number",
         definition:
-          "For a compact convex set P and a vector u, h_P(u)=max{⟨u,z⟩:z∈P}. If uᵢ is an outward unit normal to a side, hᵢ=h_P(uᵢ) is that side’s signed distance from 0 in the adapted Euclidean metric. It is positive because 0 lies in the interior.",
+          "For a compact convex set P, the support function assigns to each vector u the largest value of the functional z↦⟨u,z⟩ on P. For an outward unit normal to a side, the corresponding support number is that side’s signed distance from 0 in the adapted Euclidean metric. It is positive because 0 lies in the interior.",
+        formula: "support-function",
       },
       {
         term: "Normal fan",
@@ -238,7 +241,8 @@ export const topicIIResultGuides: Readonly<
       {
         term: "Neumann series",
         definition:
-          "If spr(M)<1, then (I−M)⁻¹=∑_{k=0}^{∞}M^k. This convergent series produces a nonnegative comparison vector used to perturb support data.",
+          "When the spectral radius of M is smaller than 1, the required inverse has the convergent expansion displayed below. In this proof, the series produces a nonnegative comparison vector used to perturb support data.",
+        formula: "neumann-series",
       },
     ],
   },

@@ -10,7 +10,7 @@ const projectRoot = path.resolve(
 );
 const manuscriptPath =
   process.env.PART_I_TEX_PATH ??
-  "/Users/brechtverbeken/Desktop/research/Karp/Files and check/arxiv/Complete_Karp_arXiv.tex";
+  "/Users/brechtverbeken/Desktop/research/on arxiv or submitted/Karp/Files and check/arxiv/Complete_Karp_arXiv.tex";
 const outputPath = path.join(
   projectRoot,
   "app/data/part-i-content.generated.ts",
@@ -235,7 +235,31 @@ function parenthesizeNamedOperators(tex) {
     .replace(/\(\\tr\(([^()]*)\)\)\^2/g, "\\tr($1)^2");
 }
 
-const webSource = parenthesizeNamedOperators(partISource);
+function polishWebsiteEquationTypesetting(tex) {
+  const label = String.raw`\label{eq:triple-sign-criterion}`;
+  const labelIndex = tex.indexOf(label);
+  const equationEnd = tex.indexOf(String.raw`\end{equation}`, labelIndex);
+  const undottedProduct = String.raw`\varepsilon\det`;
+
+  if (labelIndex < 0 || equationEnd < 0) {
+    throw new Error("Could not locate equation (2.9) for web typesetting.");
+  }
+
+  const equation = tex.slice(labelIndex, equationEnd);
+  if (!equation.includes(undottedProduct)) {
+    throw new Error("Equation (2.9) no longer contains the expected product.");
+  }
+
+  return (
+    tex.slice(0, labelIndex) +
+    equation.replace(undottedProduct, String.raw`\varepsilon\cdot\det`) +
+    tex.slice(equationEnd)
+  );
+}
+
+const webSource = polishWebsiteEquationTypesetting(
+  parenthesizeNamedOperators(partISource),
+);
 const pandocInput = `${webSource}
 \\end{document}
 `

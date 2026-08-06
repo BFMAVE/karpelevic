@@ -6,6 +6,7 @@ import { topicIICommentary } from "../data/topic-ii-commentary";
 import {
   topicIIPedagogicalOrder,
   topicIIResultGuides,
+  type TopicIINewVocabulary,
 } from "../data/topic-ii-result-guide";
 import { getProofItems, getProofSource } from "../data/proof";
 import { TopicIIConceptFigure } from "./TopicIIConceptFigure";
@@ -74,6 +75,142 @@ function ImportedTopicILink({
   );
 }
 
+function TopicIIVocabularyFormula({
+  formula,
+}: {
+  formula: NonNullable<TopicIINewVocabulary["formula"]>;
+}) {
+  if (formula === "lifted-arguments") {
+    return (
+      <math
+        aria-label="Theta sub i plus N equals Theta sub i plus two pi"
+        className="topic-ii-vocabulary-formula"
+        display="block"
+      >
+        <mrow>
+          <msub>
+            <mi>Θ</mi>
+            <mrow>
+              <mi>i</mi>
+              <mo>+</mo>
+              <mi>N</mi>
+            </mrow>
+          </msub>
+          <mo>=</mo>
+          <msub>
+            <mi>Θ</mi>
+            <mi>i</mi>
+          </msub>
+          <mo>+</mo>
+          <mn>2</mn>
+          <mi>π</mi>
+          <mo>.</mo>
+        </mrow>
+      </math>
+    );
+  }
+
+  if (formula === "support-function") {
+    return (
+      <math
+        aria-label="h sub P of u equals the maximum over z in P of the inner product of u and z; h sub i equals h sub P of u sub i"
+        className="topic-ii-vocabulary-formula"
+        display="block"
+      >
+        <mrow>
+          <msub>
+            <mi>h</mi>
+            <mi>P</mi>
+          </msub>
+          <mo>(</mo>
+          <mi>u</mi>
+          <mo>)</mo>
+          <mo>=</mo>
+          <munder>
+            <mi mathvariant="normal">max</mi>
+            <mrow>
+              <mi>z</mi>
+              <mo>∈</mo>
+              <mi>P</mi>
+            </mrow>
+          </munder>
+          <mo>⟨</mo>
+          <mi>u</mi>
+          <mo>,</mo>
+          <mi>z</mi>
+          <mo>⟩</mo>
+          <mo>,</mo>
+          <mspace width="1.5em" />
+          <msub>
+            <mi>h</mi>
+            <mi>i</mi>
+          </msub>
+          <mo>=</mo>
+          <msub>
+            <mi>h</mi>
+            <mi>P</mi>
+          </msub>
+          <mo>(</mo>
+          <msub>
+            <mi>u</mi>
+            <mi>i</mi>
+          </msub>
+          <mo>)</mo>
+          <mo>.</mo>
+        </mrow>
+      </math>
+    );
+  }
+
+  return (
+    <math
+      aria-label="If the spectral radius of M is less than one, then open parenthesis I minus M close parenthesis inverse equals the sum from k equals zero to infinity of M to the k"
+      className="topic-ii-vocabulary-formula"
+      display="block"
+    >
+      <mrow>
+        <mi mathvariant="normal">spr</mi>
+        <mo>(</mo>
+        <mi>M</mi>
+        <mo>)</mo>
+        <mo>&lt;</mo>
+        <mn>1</mn>
+        <mspace width="1.2em" />
+        <mo>⟹</mo>
+        <mspace width="1.2em" />
+        <msup>
+          <mrow>
+            <mo>(</mo>
+            <mi>I</mi>
+            <mo>−</mo>
+            <mi>M</mi>
+            <mo>)</mo>
+          </mrow>
+          <mrow>
+            <mo>−</mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+        <mo>=</mo>
+        <munderover>
+          <mo>∑</mo>
+          <mrow>
+            <mi>k</mi>
+            <mo>=</mo>
+            <mn>0</mn>
+          </mrow>
+          <mi>∞</mi>
+        </munderover>
+        <msup>
+          <mi>M</mi>
+          <mi>k</mi>
+        </msup>
+        <mo>.</mo>
+      </mrow>
+    </math>
+  );
+}
+
 function TopicIIResult({ itemNumber }: { itemNumber: number }) {
   const item = getProofItems([itemNumber])[0];
   const guide = topicIIResultGuides[itemNumber];
@@ -132,7 +269,12 @@ function TopicIIResult({ itemNumber }: { itemNumber: number }) {
               {guide.newVocabulary.map((entry) => (
                 <div key={entry.term}>
                   <dt>{entry.term}</dt>
-                  <dd>{entry.definition}</dd>
+                  <dd>
+                    {entry.definition}
+                    {entry.formula ? (
+                      <TopicIIVocabularyFormula formula={entry.formula} />
+                    ) : null}
+                  </dd>
                 </div>
               ))}
             </dl>
@@ -171,7 +313,7 @@ function TopicIIResult({ itemNumber }: { itemNumber: number }) {
       {itemNumber === 15 ? <NormalFanExplainer /> : null}
       {itemNumber === 16 ? <SaturationGapExplainer /> : null}
 
-      {commentary ? (
+      {commentary && itemNumber !== 15 ? (
         <details className="proof-item-commentary proof-item-explainer">
           <summary>
             <span>Conceptual route</span>
@@ -204,7 +346,9 @@ function TopicIIResult({ itemNumber }: { itemNumber: number }) {
         </details>
       ) : null}
 
-      {!isRemark && (item.provenance || sources.length > 0) ? (
+      {itemNumber !== 15 &&
+      !isRemark &&
+      (item.provenance || sources.length > 0) ? (
         <details className="proof-chapter-source-note">
           <summary>
             <span>Classification and sources</span>

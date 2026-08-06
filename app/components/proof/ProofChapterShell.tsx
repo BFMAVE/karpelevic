@@ -150,6 +150,7 @@ export function ProofChapterShell({
 
         <article
           className="proof-topic-panel proof-chapter-panel"
+          data-proof-route={routeKey}
           data-topic-tone={route.topicNumber % 2 === 0 ? "oxblood" : "navy"}
         >
           <header className="proof-topic-header proof-chapter-heading">

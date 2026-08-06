@@ -14,6 +14,10 @@ const pages = [
   ["journey/index.html", "An eigenvalue region for Leslie matrices"],
   ["proof/index.html", "How the Proof Works"],
   [
+    "proof/topic-ii/index.html",
+    "From convex order to active sides",
+  ],
+  [
     "prerequisites/index.html",
     "The small library this reader assumes",
   ],

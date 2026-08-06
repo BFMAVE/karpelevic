@@ -14,6 +14,10 @@ const routes = [
   { requestPath: "/journey", outputPath: "journey/index.html" },
   { requestPath: "/proof", outputPath: "proof/index.html" },
   {
+    requestPath: "/proof/topic-ii",
+    outputPath: "proof/topic-ii/index.html",
+  },
+  {
     requestPath: "/prerequisites",
     outputPath: "prerequisites/index.html",
   },

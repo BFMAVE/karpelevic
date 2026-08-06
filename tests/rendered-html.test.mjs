@@ -883,10 +883,48 @@ test("server-renders the Part I proof reader", async () => {
     7,
   );
   assert.match(topicIIPanelHtml, /Figure II\.1/);
-  assert.match(topicIIPanelHtml, /Figure II\.2/);
+  assert.doesNotMatch(topicIIPanelHtml, /Figure II\.2/);
   assert.match(topicIIPanelHtml, /Figure II\.3/);
   assert.match(topicIIPanelHtml, /data-min-determinant="[^"]+"/);
-  assert.match(topicIIPanelHtml, /data-coefficient-a="[^"]+"/);
+  assert.doesNotMatch(topicIIPanelHtml, /data-coefficient-a="[^"]+"/);
+  assert.match(
+    topicIIPanelHtml,
+    /id="eq:triple-sign-criterion"[\s\S]*?<mi>ε<\/mi><mo>⋅<\/mo>[\s\S]*?aria-label="Equation 2\.9/,
+  );
+  assert.equal(
+    (topicIIPanelHtml.match(/class="topic-ii-vocabulary-formula"/g) ?? [])
+      .length,
+    3,
+  );
+  assert.match(
+    topicIIPanelHtml,
+    /aria-label="Theta sub i plus N equals Theta sub i plus two pi"[\s\S]*?<msub>[\s\S]*?<mi>Θ<\/mi>/,
+  );
+  assert.match(
+    topicIIPanelHtml,
+    /aria-label="h sub P of u equals the maximum over z in P/,
+  );
+  assert.match(
+    topicIIPanelHtml,
+    /aria-label="If the spectral radius of M is less than one/,
+  );
+  assert.doesNotMatch(topicIIPanelHtml, /Θᵢ₊ₙ=Θᵢ\+2π/);
+  const proposition31Start = topicIIPanelHtml.indexOf('id="part-i-item-15"');
+  const proposition31End = topicIIPanelHtml.indexOf(
+    'id="part-i-item-65"',
+    proposition31Start,
+  );
+  assert.ok(proposition31Start >= 0 && proposition31End > proposition31Start);
+  const proposition31Html = topicIIPanelHtml.slice(
+    proposition31Start,
+    proposition31End,
+  );
+  assert.doesNotMatch(
+    proposition31Html,
+    /Conceptual route|Classification and sources/,
+  );
+  assert.match(topicIIPanelHtml, /Conceptual route/);
+  assert.match(topicIIPanelHtml, /Classification and sources/);
   assert.doesNotMatch(topicIIPanelHtml, /<table\b/);
 
   const ids = [...topicIIPanelHtml.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
