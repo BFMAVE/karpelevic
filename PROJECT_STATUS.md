@@ -637,13 +637,19 @@ full local source history remain later site milestones.
   Pages static branch. The release includes the fourteen-topic manuscript map,
   Topic I's complete two-definition/seven-result inventory, the current
   explanatory layers, and its cited source shelf. No Topic II–XIV page file was
-  included. Static release commit: `89e7cb5`.
+  included. Updated Topic I static content commit pushed: `f02bfa2`.
+- 6 August 2026 — Pushed Topic II only after the updated Topic I release.
+  Topic II adds the complete reader chapter “From convex order to active
+  sides” and its required stylesheet; Topics III–XIV remain unpublished.
+  Static content commit: `b5b3784`; Pages retry commit: `2b5838a`. GitHub's
+  Actions and Pages outage has left that deployment pending.
 
 ## Current milestone — Topics I–II textbook chapters
 
 - **Done locally:** The Proof is now a staged reader with a fourteen-topic map.
-  Topics I and II are rendered in the local reader. Topic I alone is public;
-  Topic II remains offline pending author review.
+  Topics I and II are rendered in the local reader. Their separate routes are
+  present on the public static branch, but the updated Pages deployment is
+  pending during GitHub's service outage.
 - **Done locally:** the visible mathematical text is extracted from the
   canonical TeX for exactly the nine Topic I items, including the complete
   proof of the strict-separation lemma from Appendix A. The two main theorems
@@ -795,11 +801,13 @@ full local source history remain later site milestones.
   `share/Critical_Invariant_Polygons_Topic_I.html` and
   `/Users/brechtverbeken/Desktop/Critical_Invariant_Polygons_Topic_I.html`;
   its reading-mode controls work without a server.
-- **Next:** author review of Topic II, followed by Topic III. Later topics
-  remain offline until separately approved.
-- **Publication status:** live at
-  <https://bfmave.github.io/karpelevic/proof/>; public GitHub Pages commit
-  `89e7cb5`. The public edition contains Topic I only.
+- **Next:** author review of Topic III. Later topics remain offline until
+  separately approved.
+- **Publication status:** the existing Topic I edition remains live at
+  <https://bfmave.github.io/karpelevic/proof/>. The updated Topic I content
+  (`f02bfa2`) and new Topic II route
+  (<https://bfmave.github.io/karpelevic/proof/topic-ii/>, content commit
+  `b5b3784`) await the queued Pages deployment at `2b5838a`.
 
 ## Current milestone — Complete local XIV-topic proof reader
 
@@ -838,12 +846,12 @@ full local source history remain later site milestones.
 - **Final closure record:** the connected dependency, source, proof, figure,
   numerical, route, and project-subpath checks are recorded in
   `docs/proof-audits/full-reader-closure.md`.
-- **Publication status:** local only. Topics II–XIV have not been pushed or
-  deployed, and the public GitHub Pages exporter still excludes their routes.
-  Topic I remains the sole public proof chapter until the author approves
-  later topics.
-- **Next:** author review in sequence, starting with Topic II, followed by
-  targeted revisions. Do not deploy the complete reader without explicit
+- **Publication status:** the public static branch contains Topics I and II;
+  their updated Pages deployment is pending during GitHub's service outage.
+  Topics III–XIV remain local only, and the public GitHub Pages exporter still
+  excludes their routes.
+- **Next:** author review in sequence, starting with Topic III, followed by
+  targeted revisions. Do not deploy the rest of the reader without explicit
   approval.
 
 ## Current milestone — Independent student-comprehension review
