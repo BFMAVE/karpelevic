@@ -188,6 +188,13 @@ function verifyStandaloneHtml(html) {
           "data-proof-route=\"topic-iii\"",
           "data-reading-mode-button",
         ]
+      : proofRoute === "/proof/topic-ii"
+        ? [
+            "Topic II",
+            "From convex order to active sides",
+            "data-proof-route=\"topic-ii\"",
+            "data-reading-mode-button",
+          ]
       : proofRoute === "/proof/topic-iv"
         ? [
             "Topic IV",
