@@ -216,27 +216,20 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(html, /Topic I of (?:<!-- -->)?XIV/);
   assert.doesNotMatch(html, /Topic I of fourteen|Topic 1 of 14/);
   assert.doesNotMatch(html, /How to read this page|orientation layer/);
-  assert.match(html, /Where the website topics sit in the manuscript/);
-  assert.match(html, /Fourteen-part map/);
-  assert.match(html, /Topics IX–XIII prove the Karpelevič–Ito theorem/);
-  assert.match(html, /Topic XIV[\s\S]*?complete order-seven example/);
-  assert.match(html, /printed page numbers in the 91-page manuscript/);
-  assert.match(html, /Main text: pages (?:<!-- -->)?2–3 and 6–10/);
-  assert.match(html, /Lemma A\.2 on page 63/);
-  assert.match(html, /Main text: pages (?:<!-- -->)?51–58/);
+  const atlasStart = html.indexOf('class="proof-chapter-atlas"');
+  const atlasEnd = html.indexOf('class="proof-reader', atlasStart);
+  assert.ok(atlasStart >= 0 && atlasEnd > atlasStart);
+  const atlasHtml = html.slice(atlasStart, atlasEnd);
+  assert.match(atlasHtml, /The complete route/);
+  assert.match(atlasHtml, /The language of critical polygons/);
+  assert.match(atlasHtml, /The complete order-seven example/);
   assert.match(
-    html,
-    /Main text: pages (?:<!-- -->)?3–5, 59–60, 66, and 71–75/,
+    atlasHtml,
+    /aria-current="step" href="(?:\/karpelevic)?\/proof\/"/,
   );
-  assert.match(html, /Main text: pages (?:<!-- -->)?67–71/);
-  assert.match(html, /Main text: pages (?:<!-- -->)?73–77/);
-  assert.match(html, /Main text: pages (?:<!-- -->)?77–79/);
-  assert.match(html, /Main text: pages (?:<!-- -->)?79–85/);
-  assert.match(html, /Main text: pages (?:<!-- -->)?71 and 85–89/);
-  assert.match(html, /Main text: pages (?:<!-- -->)?89–90/);
   assert.equal(
-    (html.match(/class="proof-manuscript-map"/g) ?? []).length,
-    1,
+    (atlasHtml.match(/<li>/g) ?? []).length,
+    14,
   );
   assert.doesNotMatch(html, /Before beginning Topic I/);
   assert.doesNotMatch(html, /The small library this reader assumes/);

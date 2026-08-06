@@ -29,6 +29,7 @@ import {
   proofContent,
   proofTopics,
 } from "../data/proof";
+import { proofReaderTopicLinks } from "../data/proof-reader";
 import {
   formatDate,
   getBuildTimestamp,
@@ -204,42 +205,24 @@ export default function ProofPage() {
           </div>
         </header>
 
-        <details className="proof-manuscript-map">
-          <summary>
-            <span>Fourteen-part map</span>
-            Where the website topics sit in the manuscript
-          </summary>
-          <div className="proof-manuscript-map-body">
-            <p>
-              These are the printed page numbers in the 91-page manuscript
-              PDF. The order is pedagogical rather than a copy of the
-              manuscript’s section order: Topics I–VII build the intrinsic
-              engine, Topic VIII supplies the stochastic-criticality bridge,
-              Topics IX–XIII prove the Karpelevič–Ito theorem, and Topic XIV
-              is the complete order-seven example. Appendix tools are reported
-              separately so that a topic’s main narrative is not mistaken for
-              one continuous page range when it invokes a foundational lemma.
-            </p>
-            <ol>
-              {proofTopics.map((topic, index) => (
-                <li key={topic.slug}>
+        <nav className="proof-chapter-atlas" aria-label="Fourteen proof topics">
+          <p className="section-label">The complete route</p>
+          <ol>
+            {proofReaderTopicLinks.map((link) => (
+              <li key={link.topicNumber}>
+                <a
+                  aria-current={link.topicNumber === 1 ? "step" : undefined}
+                  href={sitePath(link.href)}
+                >
                   <span>
-                    Topic {toRomanNumeral(index + 1) ?? index + 1}
+                    {toRomanNumeral(link.topicNumber) ?? link.topicNumber}
                   </span>
-                  <div>
-                    <h2>{topic.title}</h2>
-                    <p>
-                      Main text: pages {topic.manuscriptPages}.
-                      {topic.appendixPages ? (
-                        <> Supporting appendix: {topic.appendixPages}.</>
-                      ) : null}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </details>
+                  <strong>{link.title}</strong>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
 
         <div
           className={`proof-reader${
