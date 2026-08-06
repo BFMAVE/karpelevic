@@ -14,6 +14,7 @@ const outputPath = path.resolve(
       "share/Critical_Invariant_Polygons_Topics_I_II.html",
     ),
 );
+const proofRoute = process.env.PROOF_ROUTE ?? "/proof";
 const publicSite = "https://bfmave.github.io/karpelevic";
 
 const mimeTypes = new Map([
@@ -178,24 +179,42 @@ function verifyStandaloneHtml(html) {
     );
   }
 
-  for (const required of [
-    "How the Proof Works",
-    "Proposition 2.1",
-    "Lemma 2.6",
-    "Lemma A.2",
-    "Lemma 2.7",
-    "Proposition 3.1",
-    "Lemma A.1",
-    "Lemma A.3",
-    "Theorem 3.2",
-    "Remark 3.3",
-    "Lemma 4.1",
-    "What is allowed into Topic II",
-    "data-topic-slug=\"active-sides\"",
-    "equation (2.3)",
-    "What does it mean for a functional to expose a face?",
-    "data-reading-mode-button",
-  ]) {
+  const requiredByRoute =
+    proofRoute === "/proof/topic-iii"
+      ? [
+          "Topic III",
+          "Building one-sided ownership",
+          "Hausdorff convergence",
+          "data-proof-route=\"topic-iii\"",
+          "data-reading-mode-button",
+        ]
+      : proofRoute === "/proof/topic-iv"
+        ? [
+            "Topic IV",
+            "From endpoint order to contact reduction",
+            "data-proof-route=\"topic-iv\"",
+            "data-reading-mode-button",
+          ]
+        : [
+            "How the Proof Works",
+            "Proposition 2.1",
+            "Lemma 2.6",
+            "Lemma A.2",
+            "Lemma 2.7",
+            "Proposition 3.1",
+            "Lemma A.1",
+            "Lemma A.3",
+            "Theorem 3.2",
+            "Remark 3.3",
+            "Lemma 4.1",
+            "What is allowed into Topic II",
+            "data-topic-slug=\"active-sides\"",
+            "equation (2.3)",
+            "What does it mean for a functional to expose a face?",
+            "data-reading-mode-button",
+          ];
+
+  for (const required of requiredByRoute) {
     if (!html.includes(required)) {
       throw new Error(
         `Standalone proof HTML is missing required text: ${required}`,
@@ -210,7 +229,7 @@ const serverEntry = pathToFileURL(
 serverEntry.searchParams.set("standalone-proof", Date.now().toString());
 const { default: worker } = await import(serverEntry.href);
 const response = await worker.fetch(
-  new Request("https://bfmave.github.io/proof", {
+  new Request(`https://bfmave.github.io${proofRoute}`, {
     headers: { accept: "text/html" },
   }),
   {
