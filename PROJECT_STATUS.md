@@ -106,7 +106,7 @@ material, not with generative imagery.
 | 5 | Personal and contribution pages: My Journey, What This Paper Adds | **My Journey first draft complete — awaiting author review** |
 | 6 | Interactive exploration | Not started |
 | 7 | Final QA and author-approved deployment | **Current three-page release deployed and verified** |
-| 8 | Fourteen-topic annotated proof reader | **Complete locally; two independent student readings and 16 classified reports complete; Topic I remains the latest published edition** |
+| 8 | Fourteen-topic annotated proof reader | **Complete locally; two independent student readings and 16 classified reports complete; Topics I and II published** |
 
 ## Canonical Proof-Reader Architecture
 
@@ -125,7 +125,7 @@ ingredients are available.
    Complete locally and published.
 2. **Topic II — From convex order to active sides.**
    PDF pages 10–15; supporting Lemmas A.1 and A.3 on pages 61 and 63.
-   Complete locally; deliberately offline pending author review.
+   Complete locally and published.
 3. **Topic III — Building one-sided ownership.**
    PDF pages 15–19; supporting Lemmas A.4 and A.5 on page 64.
 4. **Topic IV — From endpoint order to contact reduction.**
@@ -286,7 +286,7 @@ not dependencies in the proof of the Karpelevič–Ito theorem.
 - A local textbook edition of Topics I and II of **The Proof** has been
   implemented at `/proof/`. The complete route to the Karpelevič–Ito theorem
   and its order-seven example has been inventoried into fourteen consecutive
-  topics. Topic I is public; Topic II is exposed only in the local reader.
+  topics. Topics I and II are public; Topics III–XIV remain local.
 - Topic I contains its complete mathematical text: two numbered definitions,
   seven results, seven canonical proofs, the surrounding argument, and 39
   displayed formulas. Proposition 2.2 additionally offers an optional
@@ -445,7 +445,7 @@ not dependencies in the proof of the Karpelevič–Ito theorem.
 
 ## Next Action
 
-Review Topics II–XIV locally in order, beginning with Topic II. Revise each
+Review Topics III–XIV locally in order, beginning with Topic III. Revise each
 chapter from author feedback before any deployment. The separate Paper and
 Updates and Errata pages and synchronization of the public repository with the
 full local source history remain later site milestones.
@@ -643,13 +643,16 @@ full local source history remain later site milestones.
   sides” and its required stylesheet; Topics III–XIV remain unpublished.
   Static content commit: `b5b3784`; Pages retry commit: `2b5838a`. GitHub's
   Actions and Pages outage has left that deployment pending.
+- 7 August 2026 — Retried the unchanged static release after GitHub recovered.
+  Pages workflow `31144509651` completed successfully at deployment commit
+  `c02ac0a`. The live Topic I and Topic II files have SHA-256 hashes identical
+  to their validated local static artifacts.
 
 ## Current milestone — Topics I–II textbook chapters
 
 - **Done locally:** The Proof is now a staged reader with a fourteen-topic map.
-  Topics I and II are rendered in the local reader. Their separate routes are
-  present on the public static branch, but the updated Pages deployment is
-  pending during GitHub's service outage.
+  Topics I and II are rendered in the local reader and published as separate
+  GitHub Pages routes.
 - **Done locally:** the visible mathematical text is extracted from the
   canonical TeX for exactly the nine Topic I items, including the complete
   proof of the strict-separation lemma from Appendix A. The two main theorems
@@ -803,11 +806,10 @@ full local source history remain later site milestones.
   its reading-mode controls work without a server.
 - **Next:** author review of Topic III. Later topics remain offline until
   separately approved.
-- **Publication status:** the existing Topic I edition remains live at
-  <https://bfmave.github.io/karpelevic/proof/>. The updated Topic I content
-  (`f02bfa2`) and new Topic II route
-  (<https://bfmave.github.io/karpelevic/proof/topic-ii/>, content commit
-  `b5b3784`) await the queued Pages deployment at `2b5838a`.
+- **Publication status:** Topic I is live at
+  <https://bfmave.github.io/karpelevic/proof/> and Topic II is live at
+  <https://bfmave.github.io/karpelevic/proof/topic-ii/>. Their content commits
+  are `f02bfa2` and `b5b3784`; successful Pages deployment commit `c02ac0a`.
 
 ## Current milestone — Complete local XIV-topic proof reader
 
@@ -846,9 +848,8 @@ full local source history remain later site milestones.
 - **Final closure record:** the connected dependency, source, proof, figure,
   numerical, route, and project-subpath checks are recorded in
   `docs/proof-audits/full-reader-closure.md`.
-- **Publication status:** the public static branch contains Topics I and II;
-  their updated Pages deployment is pending during GitHub's service outage.
-  Topics III–XIV remain local only, and the public GitHub Pages exporter still
+- **Publication status:** Topics I and II are live on GitHub Pages. Topics
+  III–XIV remain local only, and the public GitHub Pages exporter still
   excludes their routes.
 - **Next:** author review in sequence, starting with Topic III, followed by
   targeted revisions. Do not deploy the rest of the reader without explicit
