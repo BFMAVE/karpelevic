@@ -18,6 +18,10 @@ const pages = [
     "From convex order to active sides",
   ],
   [
+    "proof/topic-iii/index.html",
+    "Half-open boundary assignments and edge clipping",
+  ],
+  [
     "prerequisites/index.html",
     "The small library this reader assumes",
   ],
@@ -41,12 +45,28 @@ for (const [relativePath, expectedText] of pages) {
 for (const relativePath of [
   "proof/index.html",
   "proof/topic-ii/index.html",
+  "proof/topic-iii/index.html",
 ]) {
   const html = await readFile(path.join(outputRoot, relativePath), "utf8");
   assert.match(html, /Forthcoming/);
   assert.doesNotMatch(
     html,
-    /href="\/karpelevic\/proof\/topic-iii\//,
+    /href="\/karpelevic\/proof\/topic-iv\//,
+  );
+}
+
+{
+  const html = await readFile(
+    path.join(outputRoot, "proof/topic-iii/index.html"),
+    "utf8",
+  );
+  assert.match(html, /data-proof-route="topic-iii"/);
+  assert.match(html, /Assignment to half-open sides/);
+  assert.match(html, /This is only the membership statement/);
+  assert.match(html, /Cyclic shift[^<]*κ and source vertex/);
+  assert.doesNotMatch(
+    html,
+    /labelled boundary slot|ownership word|zero-side signature|radius-one anchor/i,
   );
 }
 
@@ -57,6 +77,7 @@ await access(path.join(outputRoot, ".nojekyll"));
 
 await assert.rejects(access(path.join(outputRoot, ".vite")));
 await assert.rejects(access(path.join(outputRoot, "code")));
+await assert.rejects(access(path.join(outputRoot, "proof/topic-iv")));
 const publicAssetEntries = await readdir(path.join(outputRoot, "assets"));
 assert.equal(
   publicAssetEntries.some((entry) => entry.endsWith(".js")),

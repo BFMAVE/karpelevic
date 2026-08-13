@@ -18,6 +18,10 @@ const routes = [
     outputPath: "proof/topic-ii/index.html",
   },
   {
+    requestPath: "/proof/topic-iii",
+    outputPath: "proof/topic-iii/index.html",
+  },
+  {
     requestPath: "/prerequisites",
     outputPath: "prerequisites/index.html",
   },
@@ -26,7 +30,15 @@ const routes = [
 function makeStatic(html, requestPath) {
   const withoutScripts = html
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
-    .replace(/<link\b[^>]*rel="modulepreload"[^>]*>/gi, "");
+    .replace(/<link\b[^>]*rel="modulepreload"[^>]*>/gi, "")
+    // Topic III contains one mathematical forward reference to Topic IV.
+    // Keep its label visible, but do not publish a live link to an unavailable
+    // proof route. The chapter atlas already renders later topics as text with
+    // a Forthcoming label.
+    .replace(
+      /\s+href="(?:\/karpelevic)?\/proof\/topic-(?:iv|v|vi(?:\/[ab])?|vii|viii|ix|x|xi|xii(?:\/[ab])?|xiii|xiv)\/?[^\"]*"/gi,
+      "",
+    );
   const withProjectAssets = withoutScripts.replaceAll(
     "/assets/",
     `${basePath}/assets/`,
