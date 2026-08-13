@@ -389,7 +389,7 @@ not dependencies in the proof of the Karpelevič–Ito theorem.
 - The standalone Paper and Updates and Errata pages have not been implemented.
 - The standalone Explore page has not been implemented. A first verified
   interactive boundary laboratory now exists locally inside Topic XIV.
-- Topics II–XIV are complete locally in the guided textbook format but have
+- Topics III–XIV are complete locally in the guided textbook format but have
   not been pushed or deployed; they await author review topic by topic.
 - PDF page-number links and sentence-level marginal annotations have not yet
   been added. Topic I currently explains every proof in numbered conceptual
@@ -808,8 +808,8 @@ full local source history remain later site milestones.
   separately approved.
 - **Publication status:** Topic I is live at
   <https://bfmave.github.io/karpelevic/proof/> and Topic II is live at
-  <https://bfmave.github.io/karpelevic/proof/topic-ii/>. Their content commits
-  are `f02bfa2` and `b5b3784`; successful Pages deployment commit `c02ac0a`.
+  <https://bfmave.github.io/karpelevic/proof/topic-ii/>. The current corrected
+  two-topic public edition is Pages deployment commit `df87437`.
 
 ## Current milestone — Complete local XIV-topic proof reader
 
@@ -888,7 +888,7 @@ full local source history remain later site milestones.
 - **Next:** author selection of recommendations, beginning with the Needed
   class, before any implementation pass.
 
-## Current milestone — Topic II focused correction pass (local only)
+## Current milestone — Topic II focused correction pass (published)
 
 - **Done locally in the canonical TeX:** Lemma 2.10 now states the winding
   argument that produces a total angular increase of `2π`; cyclic indexing is
@@ -913,7 +913,12 @@ full local source history remain later site milestones.
   GitHub Pages project-subpath export, and the standalone Topic II checks pass.
   The shareable file is
   `share/Critical_Invariant_Polygons_Topic_II.html`.
-- **Publication status:** unchanged. These corrections have not been pushed or
-  deployed.
-- **Next:** author review of Topic II at the local preview. Publish only after
+- **Publication status:** the corrected Topic II edition was published on
+  13 August 2026 at
+  <https://bfmave.github.io/karpelevic/proof/topic-ii/> in static Pages commit
+  `df87437`. The successful GitHub Pages run was `31723329029`. The live Topic
+  I and Topic II files match the audited export exactly; Topic III returns 404,
+  and no Topics III–XIV route or client bundle is present in the public
+  package.
+- **Next:** author review of Topic III locally. Publish no later topic without
   explicit approval.
