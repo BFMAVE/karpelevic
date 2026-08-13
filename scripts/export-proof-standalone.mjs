@@ -135,7 +135,7 @@ function markUnavailableTopicLinks(html) {
   ]).get(proofRoute);
   if (routeTopicNumber === undefined) return html;
   const configuredPublicMaximum = Number(
-    process.env.PROOF_STANDALONE_TOPIC_MAX ?? "3",
+    process.env.PROOF_STANDALONE_TOPIC_MAX ?? "4",
   );
   const availableTopicMaximum = Math.max(
     routeTopicNumber,
@@ -339,9 +339,13 @@ function verifyStandaloneHtml(html) {
   }
 
   if (proofRoute === "/proof/topic-iii") {
-    if (/href="[^"]*\/proof\/topic-iv\//i.test(html)) {
+    if (
+      !/href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-iv\//i.test(
+        html,
+      )
+    ) {
       throw new Error(
-        "Standalone Topic III must mark the unpublished Topic IV page as forthcoming.",
+        "Standalone Topic III must link to the published Topic IV page.",
       );
     }
     const visibleText = visibleTextFromHtml(html);

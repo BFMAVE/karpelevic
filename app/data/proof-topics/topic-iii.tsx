@@ -14,6 +14,8 @@ type PartISection = keyof typeof partIHtmlByTopic;
 const crossTopicLinks: Readonly<Record<string, string>> = {
   "lem:oriented-boundary-order": sitePath("/proof/#lem:oriented-boundary-order"),
   "lem:strict-separation": sitePath("/proof/#lem:strict-separation"),
+  "lem:triple-sign-criterion": sitePath("/proof/topic-ii/#lem:triple-sign-criterion"),
+  "thm:hereditary-saturation": sitePath("/proof/topic-ii/#thm:hereditary-saturation"),
 };
 
 function repairCrossTopicLinks(html: string): string {
@@ -63,6 +65,8 @@ function completeHtml(item: TopicIIIItem, section: PartISection, id: string): st
 const commonSources = {
   convex: ["standard-convexity"] as const,
   swift: ["swift-1972"] as const,
+  dmitrievSwift: ["dmitriev-dynkin-1946", "swift-1972"] as const,
+  analysis: ["rudin-principles", "rudin-real-complex"] as const,
 };
 
 const localResults: readonly ProofResultData[] = [
@@ -99,6 +103,7 @@ const localResults: readonly ProofResultData[] = [
     intuition: <>A point in the relative interior of a side belongs to only that side. At a vertex, two closed sides overlap. Excluding each side’s left endpoint and including its right endpoint removes that overlap everywhere around the boundary.</>,
     figure: <OwnershipMutationFigure kind="half-open" id="topic-iii-half-open-definition" />,
     takeaway: <>This defines a boundary partition only; a simultaneous assignment of all image vertices still has to be proved.</>,
+    takeawayLabel: "Key conclusion",
   },
   {
     id: "part-i-item-20",
@@ -122,9 +127,9 @@ const localResults: readonly ProofResultData[] = [
       },
     ],
     intuition: <>The equations <i>D</i><sub>r</sub>(<i>z</i>)=0 say exactly which side lines pass through <i>z</i>. One vanishing determinant identifies a side-interior point; two adjacent ones identify a vertex. At that vertex, the half-open convention retains only the incoming side.</>,
-    provenance: "Previously known",
-    sourceIds: commonSources.swift,
-    sourceRelation: <>Swift&apos;s translation, Appendix A, p. A-6, records the closed, left-half-open, and right-half-open side conventions. This lemma states the partition and the exact vanishing-determinant sets explicitly.</>,
+    provenance: "Classical result",
+    sourceIds: [...commonSources.convex, ...commonSources.swift],
+    sourceRelation: <>The partition and determinant-zero description follow from the classical irredundant half-plane representation of a convex polygon, as treated in Schneider, Chapter 1, §§1.1 and 1.3. Swift&apos;s translation, Appendix A, p. A-6, records the closed, left-half-open, and right-half-open side conventions.</>,
   },
   {
     id: "part-i-item-21",
@@ -181,11 +186,12 @@ const localResults: readonly ProofResultData[] = [
     intuition: <>After replacing <i>x</i><sub>i</sub> by <i>ξ</i><sub>i</sub>, the new point is the right endpoint of its incoming side and the excluded left endpoint of the next side. The same convention protects the unchanged endpoint at <i>x</i><sub>i+1</sub>.</>,
     figure: <OwnershipMutationFigure kind="replacement" id="topic-iii-vertex-replacement" />,
     proofSteps: [
-      { title: "Write the old local order", explanation: <>The four points occur in the displayed positive cyclic order: <i>x</i><sub>i−1</sub>, <i>ξ</i><sub>i</sub>, <i>x</i><sub>i</sub>, <i>x</i><sub>i+1</sub>=<i>ξ</i><sub>i+1</sub>.</> },
-      { title: "Replace the corner", explanation: <>The adjacent new sides are [<i>x</i><sub>i−1</sub>,<i>ξ</i><sub>i</sub>] and [<i>ξ</i><sub>i</sub>,<i>x</i><sub>i+1</sub>].</> },
+      { title: "Define the modified polygon", explanation: <>Replace <i>x</i><sub>i</sub> by the chosen point <i>ξ</i><sub>i</sub> in the relative interior of the incoming side, and take the convex hull of the resulting <i>N</i> points.</> },
+      { title: "Verify the new boundary", explanation: <>Supporting lines and determinant signs show that all <i>N</i> displayed points remain extreme, in the same cyclic order. Hence the adjacent new sides are [<i>x</i><sub>i−1</sub>,<i>ξ</i><sub>i</sub>] and [<i>ξ</i><sub>i</sub>,<i>x</i><sub>i+1</sub>].</> },
       { title: "Apply the right-half-open convention", explanation: <>Each displayed shared endpoint belongs only to the side arriving there.</> },
     ],
     takeaway: <>Replacing one vertex changes only the two adjacent sides; the half-open endpoint convention determines both local memberships without a global index shift.</>,
+    takeawayLabel: "Key conclusion",
   },
 ];
 
@@ -209,14 +215,15 @@ const clippingResults: readonly ProofResultData[] = [
     proofSteps: [
       { title: "Preserve cyclic order", explanation: <>Multiplication by <i>λ≠0</i> is orientation-preserving because its real determinant is |<i>λ</i>|<sup>2</sup>&gt;0. Because all image vertices lie on ∂<i>P</i>, two consecutive image vertices delimit a boundary arc of <i>P</i> containing no other image vertex.</> },
       { title: "Preserve invariance", explanation: <>From <i>Q⊆P</i><sub>j</sub><i>⊆P</i>, obtain <i>λP</i><sub>j</sub><i>⊆λP=Q⊆P</i><sub>j</sub>.</> },
-      { title: "Locate the line endpoints", explanation: <>In a nontrivial clip the outer polygon has points on both sides of the line. Interior points of its line section are therefore interior to the polygon, so the two boundary image vertices are the section endpoints.</> },
+      { title: "Locate the line endpoints", explanation: <>For a proper cut, the outer polygon has points on both sides of the line. Interior points of its line section are therefore interior to the polygon, so the two boundary image vertices are the section endpoints.</> },
       { title: "Count the remaining vertices", explanation: <>Remove the old vertices on the discarded closed arc and add an edge endpoint only when it was not already an old vertex. The count simplifies to <i>N+2−k</i><sub>j</sub>.</> },
       { title: "Allow collinearity", explanation: <>Deleting any listed point that lies in the interior of a straight boundary segment can only reduce the number of extreme points, which explains the inequality rather than equality.</> },
     ],
     takeaway: <>The clipped polygon is invariant and has at most <i>N+2−k</i><sub>j</sub> vertices.</>,
+    takeawayLabel: "Key conclusion",
     provenance: "Previously known",
-    sourceIds: commonSources.swift,
-    sourceRelation: <>Swift&apos;s translation, Appendix A, pp. A-8–A-9, Lemma II, gives the polygonal boundary-segment replacement and its vertex count. The endpoint cases are written out explicitly here.</>,
+    sourceIds: commonSources.dmitrievSwift,
+    sourceRelation: <>Dmitriev–Dynkin is the primary source for this clipping mechanism. Swift&apos;s English translation, Appendix A, pp. A-8–A-9, Lemma II, gives the polygonal boundary-segment replacement and its vertex count. The endpoint cases are written out explicitly here.</>,
   },
 ];
 
@@ -246,9 +253,10 @@ const compactnessResults: readonly ProofResultData[] = [
       { title: "Pass invariance and radius", explanation: <>Approximate each limit point by points in the polygons to preserve <i>AP⊆P</i>; maximal radius reduces to the maximum of finitely many generator norms.</> },
     ],
     takeaway: <>Finite vertex convergence is strong enough to produce the limiting polygon and preserve its area, maximal radius, and invariance under the fixed map.</>,
+    takeawayLabel: "Key conclusion",
     provenance: "Classical result",
-    sourceIds: commonSources.convex,
-    sourceRelation: <>Schneider, Chapter 1, §§1.6–1.7 and Chapter 2, §§2.1 and 2.4, supplies Hausdorff/support-function continuity for convex bodies. The indicator-function passage uses the dominated-convergence source listed in the dependency contract.</>,
+    sourceIds: [...commonSources.convex, ...commonSources.analysis],
+    sourceRelation: <>Schneider, Chapter 1, §§1.6–1.7 and Chapter 2, §§2.1 and 2.4, supplies Hausdorff/support-function continuity for convex bodies. Rudin&apos;s <cite>Principles of Mathematical Analysis</cite> supplies the finite-dimensional compactness background, and <cite>Real and Complex Analysis</cite> supplies dominated convergence.</>,
   },
   {
     id: "part-i-item-69",
@@ -260,17 +268,18 @@ const compactnessResults: readonly ProofResultData[] = [
     vocabulary: [
       { term: "Proper inclusion", definition: <><i>K⊊L</i> means every point of <i>K</i> belongs to <i>L</i>, but at least one point of <i>L</i> is missing from <i>K</i>.</> },
     ],
-    intuition: <>Separate one new point of the larger body from the smaller body. Joining it to a small disk inside the smaller body creates an open triangle of positive area that is absent from the smaller body.</>,
+    intuition: <>Separate one new point of the larger body from the smaller body. Moving a small interior disk toward that point produces a smaller disk of positive area inside the larger body but outside the smaller one.</>,
     proofSteps: [
       { title: "Choose and separate a new point", explanation: <>Take <i>y∈L\K</i> and a functional whose value at <i>y</i> is strictly above its maximum on <i>K</i>.</> },
       { title: "Choose an interior disk", explanation: <>A closed disk inside <i>K</i> has positive width in every direction.</> },
-      { title: "Find the additional open triangle", explanation: <>The convex hull of the disk and <i>y</i> lies in <i>L</i>; above the separating level it contains a nonempty open triangle disjoint from <i>K</i>.</> },
-      { title: "Compare areas", explanation: <>That triangle has positive area, so the proper inclusion increases area strictly.</> },
+      { title: "Move the disk beyond the support level", explanation: <>For a parameter <i>t</i> sufficiently close to 1, the homothetic image <i>D</i><sub>t</sub>=(1−<i>t</i>)<i>D</i>+<i>t y</i> is a disk of positive area contained in <i>L</i> and strictly beyond the maximum of the separating functional on <i>K</i>.</> },
+      { title: "Compare areas", explanation: <>The disk <i>D</i><sub>t</sub> lies in <i>L</i>∖<i>K</i> and has positive area, so the proper inclusion increases area strictly.</> },
     ],
     takeaway: <>A proper convex clip that preserves nonempty interior must reduce area strictly.</>,
+    takeawayLabel: "Key conclusion",
     provenance: "Classical result",
     sourceIds: commonSources.convex,
-    sourceRelation: <>Schneider, Chapter 1, §§1.1 and 1.3, supplies strict separation and convex-body monotonicity; the proof here exhibits the additional open triangle explicitly.</>,
+    sourceRelation: <>Schneider, Chapter 1, §§1.1 and 1.3, supplies strict separation and convex-body monotonicity; the proof here exhibits an explicit positive-area disk inside <i>L</i>∖<i>K</i>.</>,
   },
   {
     id: "part-i-item-26",
@@ -281,8 +290,8 @@ const compactnessResults: readonly ProofResultData[] = [
     manuscriptHtml: completeHtml("26", "mutation", "lem:area-cap-bound"),
     vocabulary: [
       { term: "Unit maximal-radius normalization about the origin", definition: <>Rescale the polygon so <span>max<sub>z∈P</sub>|z|=1</span>. The centre is fixed at the origin; this is not the movable-centre circumradius used elsewhere in geometry. Without a fixed scale, every polygon could be shrunk and “least area” would be meaningless.</> },
-      { term: "Area-minimizer", definition: <>A normalized invariant polygon with exactly <i>N</i> vertices whose area is no larger than that of any other normalized invariant polygon with exactly <i>N</i> vertices. Lemma A.4 proves that such a polygon exists.</> },
-      { term: "Nontrivial clipping", definition: <>A clipping for which <i>P</i><sub>j</sub> is a proper subset of <i>P</i>, so a nonempty two-dimensional region is actually removed.</> },
+      { term: "Area-minimizer", definition: <>A normalized invariant polygon with exactly <i>N</i> vertices whose area is no larger than that of any other normalized invariant polygon with exactly <i>N</i> vertices. Lemma 4.9 proves existence by combining finite-dimensional compactness, the limit properties in Lemma A.4, and continuity of area.</> },
+      { term: "Proper cut", definition: <>A clipping for which <i>P</i><sub>j</sub> is a proper subset of <i>P</i>, so a nonempty two-dimensional region is actually removed.</> },
     ],
     intuition: <>If a discarded arc contains three old vertices, clipping produces an invariant polygon with too few vertices. If it contains two, clipping produces a smaller normalized invariant <i>N</i>-gon unless the open arc contains the chosen vertex <i>v</i> with |<i>v</i>|=1.</>,
     figure: <OwnershipMutationFigure kind="area-minimizer" id="topic-iii-area-minimizer" />,
@@ -294,10 +303,11 @@ const compactnessResults: readonly ProofResultData[] = [
       { title: "Exclude ordinary two-vertex arcs", explanation: <>If the open discarded arc misses a maximal-radius vertex <i>v</i>, the clipped polygon remains normalized. Criticality forces it to have exactly <i>N</i> vertices, while Lemma A.5 gives it strictly smaller area.</> },
       { title: "Count the sole exception", explanation: <>Because <i>Q</i> lies in the disk of radius |<i>λ</i>|&lt;1, <i>v</i> is not a vertex of <i>Q</i>. The open discarded arcs are pairwise disjoint, so <i>v</i> belongs to at most one of them. Only that arc escapes the area comparison.</> },
     ],
-    takeaway: <>Every nontrivial clipping discards an arc containing at most two old vertices, and at most one discarded arc can contain two.</>,
+    takeaway: <>Every proper cut discards an arc containing at most two old vertices, and at most one discarded arc can contain two.</>,
+    takeawayLabel: "Key conclusion",
     provenance: "Previously known",
-    sourceIds: commonSources.swift,
-    sourceRelation: <>Swift&apos;s translation, Appendix A, pp. A-8–A-9, Lemma II, underlies the discarded-arc vertex count. The normalized least-area existence and comparison are supplied self-contained here through Hausdorff compactness and strict area monotonicity.</>,
+    sourceIds: commonSources.dmitrievSwift,
+    sourceRelation: <>Dmitriev–Dynkin is the primary source for the minimal-polygon clipping argument; Swift&apos;s English translation, Appendix A, pp. A-8–A-9, Lemma II, gives the discarded-arc vertex count. The normalized least-area existence is supplied self-contained here through compactness and continuity of area; strict area monotonicity is used afterwards to exclude a proper normalized cut.</>,
   },
 ];
 
@@ -309,14 +319,13 @@ export function TopicIIIChapter() {
   return (
     <>
       <ProofDependencyContract
+        importedHeading="Direct dependencies from earlier topics"
         imported={[
           { label: "Definition 1.1", href: sitePath("/proof/#part-i-item-1"), explanation: <>polygonal complexity and radial <i>N</i>-criticality.</> },
           { label: "Definition 1.2", href: sitePath("/proof/#part-i-item-2"), explanation: <>strict polygons, their complete cyclic vertex list, and oriented sides.</> },
-          { label: "Lemma 2.5", href: sitePath("/proof/#part-i-item-9"), explanation: <>the origin lies in the interior of every invariant polygon for a nonreal contraction.</> },
           { label: "Lemma 2.6", href: sitePath("/proof/#part-i-item-10"), explanation: <>positive cyclic boundary order agrees with orientation from an interior point.</> },
-          { label: "Lemma 2.9", href: sitePath("/proof/topic-ii/#part-i-item-13"), explanation: <>supporting functionals expose exactly the side or vertex on which equality holds.</> },
+          { label: "Lemma 2.7", href: sitePath("/proof/topic-ii/#part-i-item-11"), explanation: <>the strict determinant-sign criterion used to prove that the modified list in Lemma 4.7 is exactly the cyclic list of extreme points.</> },
           { label: "Theorem 3.2", href: sitePath("/proof/topic-ii/#part-i-item-16"), explanation: <>for every invariant polygon with at most <i>N</i> vertices, its image intersects every side and every image vertex lies on the outer boundary.</> },
-          { label: "Lemma 4.1", href: sitePath("/proof/topic-ii/#part-i-item-18"), explanation: <>if a side <i>E</i> of <i>P</i> intersects a polygon <i>Q⊆P</i>, then <i>E</i> contains a vertex of <i>Q</i>.</> },
           { label: "Lemma A.2", href: sitePath("/proof/#part-i-item-66"), explanation: <>strict separation, used in the two compactness tools brought forward here.</> },
         ]}
         background={[
@@ -329,13 +338,13 @@ export function TopicIIIChapter() {
       <ProofResultGroup
         number="III-A · Half-open side assignments"
         title="Assign every boundary point to exactly one side"
-        introduction={<p>The half-open sides <i>E</i><sub>i</sub><sup>+</sup>=(<i>x</i><sub>i−1</sub>,<i>x</i><sub>i</sub>] form a disjoint partition of ∂<i>P</i>. Supporting functionals and determinant inequalities then identify the relevant side without introducing another geometric relation.</p>}
+        introduction={<p>The half-open sides <i>E</i><sub>i</sub><sup>+</sup>=(<i>x</i><sub>i−1</sub>,<i>x</i><sub>i</sub>] form a disjoint partition of ∂<i>P</i>. Supporting functionals and determinant inequalities then identify the relevant side without introducing another geometric relation. Definition 4.2 and Lemmas 4.3–4.7 form the first strand of this chapter: they prepare the endpoint-order argument in Topic IV and are not used to prove the clipping bound below.</p>}
         results={localResults}
       />
       <ProofResultGroup
         number="III-B · Edge clipping"
         title="Clip along an actual edge of the image polygon"
-        introduction={<p>The retained half-plane contains the entire image polygon. That single containment preserves invariance and leaves an exact old-vertex/new-endpoint count.</p>}
+        introduction={<p>This begins the second strand. The retained half-plane contains the entire image polygon. That single containment preserves invariance and leaves an exact count of the vertices that remain and the possible new endpoints.</p>}
         results={clippingResults}
       />
       <ProofResultGroup

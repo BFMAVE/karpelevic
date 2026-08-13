@@ -133,6 +133,18 @@ export const proofSources: readonly ProofSource[] = [
     href: "https://doi.org/10.1017/CBO9781139003858",
   },
   {
+    id: "rudin-principles",
+    short: "Rudin, Principles of Mathematical Analysis",
+    citation:
+      "W. Rudin, Principles of Mathematical Analysis, 3rd ed., McGraw–Hill (1976), Chapter 2, “Basic Topology.”",
+  },
+  {
+    id: "rudin-real-complex",
+    short: "Rudin, Real and Complex Analysis",
+    citation:
+      "W. Rudin, Real and Complex Analysis, 3rd ed., McGraw–Hill (1987), Chapter 1, “Abstract Integration.”",
+  },
+  {
     id: "standard-projective",
     short: "Coxeter, Projective Geometry",
     citation:
@@ -168,7 +180,7 @@ const karpelevicOnlyAntecedent = new Set([
 const strengthened = new Set([16, 57, 58]);
 const newResults = new Set([4, 42, 45, 48, 59]);
 const previouslyKnown = new Set([
-  15, 18, 20, 23, 25, 26, 27, 28, 29, 30, 61, 62, 64,
+  15, 18, 23, 25, 26, 27, 28, 29, 30, 61, 62, 64,
 ]);
 
 function provenanceFor(
@@ -187,8 +199,9 @@ function provenanceFor(
 
 function sourcesFor(number: number): readonly string[] {
   if ([51, 52].includes(number)) return [];
+  if (number === 20) return ["standard-convexity", "swift-1972"];
   if ([15, 23].includes(number)) return ["bitsoris-1988"];
-  if ([16, 18, 20, 25, 26, 27, 28, 29, 30, 61, 62].includes(number)) {
+  if ([16, 18, 25, 26, 27, 28, 29, 30, 61, 62].includes(number)) {
     return ["dmitriev-dynkin-1946", "swift-1972"];
   }
   if ([3].includes(number)) {
@@ -371,7 +384,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "When a contact lands at a vertex, how do we assign it to exactly one of the two incident sides?",
     overview: [
       "A boundary contact is ambiguous only when it is a vertex, because that vertex lies on two closed sides. The half-open sides (xᵢ₋₁,xᵢ] form a disjoint partition of the boundary, so every contact receives one side index.",
-      "The determinant tests make this assignment precise. Clipping along an edge of the image polygon preserves invariance, and a least-area normalized polygon then gives the boundary-arc bound needed in Topic IV. This topic stops at that local bound; it does not assume the later global interlacing result.",
+      "Definition 4.2 and Lemmas 4.3–4.7 make the assignment precise and prepare the endpoint-order argument of Topic IV. Independently, Lemmas 4.8–4.9 use image-edge clipping, compactness, and area comparison to prove the boundary-arc bound needed there. This topic does not assume the later global interlacing result.",
     ],
     itemNumbers: [19, 20, 21, 22, 23, 24, 25, 26, 68, 69],
     manuscriptPages: "15–19",

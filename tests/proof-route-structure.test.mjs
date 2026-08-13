@@ -120,6 +120,30 @@ test("Topic III states half-open side membership without invented boundary jargo
   assert.match(visibleText, /Plate III\.4/);
   assert.match(visibleText, /Plate III\.5/);
   assert.match(visibleText, /Plate III\.6/);
+  assert.match(visibleText, /Direct dependencies from earlier topics/);
+  assert.match(visibleText, /Definitions and notation used here/);
+  assert.doesNotMatch(visibleText, /terms? first used here/i);
+  assert.match(visibleText, /Definition 4\.2 and Lemmas 4\.3–4\.7 form the first strand/);
+  assert.match(visibleText, /This begins the second strand/);
+  assert.match(visibleText, /continuity of area yield a least-area member/);
+  assert.match(visibleText, /strict area monotonicity is then used to rule out proper normalized cuts/);
+  assert.match(visibleText, /Rudin[^.]*Principles of Mathematical Analysis/);
+  assert.match(visibleText, /Rudin[^.]*Real and Complex Analysis/);
+  assert.match(visibleText, /Key conclusion/);
+  assert.match(visibleText, /Proper cut/);
+  assert.match(visibleText, /homothetic image/);
+  assert.match(visibleText, /positive-area disk/);
+  assert.doesNotMatch(visibleText, /additional open triangle|creates an open triangle/i);
+  assert.doesNotMatch(visibleText, /xᵢ₊₁=ξᵢ₊₁/);
+
+  const lemma43Html = html.match(/id="part-i-item-20"[\s\S]*?id="part-i-item-21"/)?.[0] ?? "";
+  assert.match(lemma43Html, /Classical result/);
+  assert.doesNotMatch(lemma43Html, /Previously known/);
+  assert.match(lemma43Html, /Open the complete manuscript proof/);
+  assert.doesNotMatch(lemma43Html, /Open the manuscript proof and its guided explanation/);
+
+  const lemma47Html = html.match(/id="part-i-item-24"[\s\S]*?id="part-i-item-25"/)?.[0] ?? "";
+  assert.match(lemma47Html, /Open the manuscript proof and its guided explanation/);
   assert.doesNotMatch(
     visibleText,
     /labelled boundary slot|labeled boundary slot|determinant atlas|zero-side signature|transparent vertex budget|radius-one anchor|One endpoint, one owner|strict mixture|shared-side edge|source shelf|support gap|boundary mixture|collinear candidates|closed dependency chain|Nothing is smuggled|\bcap(?:s|ped|ping)?\b|admissible (?:polygon|candidate)|cyclic shift[^<]*κ and source vertex/i,

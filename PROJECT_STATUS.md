@@ -1091,3 +1091,39 @@ full local source history remain later site milestones.
   topic.
 - **Next:** review Topic IV online and keep Topic V local until it receives the
   same mathematical, editorial, figure, accessibility, and source audit.
+
+## Current milestone — Topic III standalone-rigor refinement (publication pending)
+
+- **Formal gaps closed:** Lemma 4.7 now defines the modified polygon (P') and
+  proves that its displayed list consists of exactly (N) extreme points and
+  that the two claimed replacement segments are exposed sides. Lemma 4.8 now
+  states and proves the exact equality
+  \(\partial P\setminus P_j=A_j^\circ\). Lemma 4.9 introduces
+  \(T(z)=\lambda z\) locally and explicitly invokes Theorem 3.2 before using
+  the clipping lemma.
+- **Compactness tools completed:** Lemma A.4 defines Hausdorff distance and the
+  closed unit disk, displays the uniform support margin, and identifies the
+  common integrable dominating disk. Lemma A.5 replaces the abbreviated
+  triangle step by an explicit positive-area homothetic disk.
+- **Teaching structure corrected:** the page distinguishes the endpoint-order
+  strand from the clipping/minimization strand, lists only direct earlier-topic
+  dependencies, states accurately when guided proof commentary exists, and
+  gives the two Rudin references used by the compactness argument.
+- **Figures refined:** Plate III.1 writes both endpoint memberships literally;
+  Plate III.3 labels (P'); Plate III.4 marks the origin; Plate III.5 labels
+  (P_k), (P), and the interior disk; and Plate III.6 now depicts and names the
+  two-vertex case ruled out by area minimality. All six plates have dedicated
+  phone layouts.
+- **Source audit:** Lemma 4.3 is classified as classical convex geometry.
+  Dmitriev–Dynkin is named as the primary source for the clipping/minimal-
+  polygon antecedent, with Swift's English translation pinpointed at Appendix
+  A, p. A-6 and pp. A-8–A-9. The full formal proofs remain visible and
+  self-contained.
+- **Verified locally:** canonical TeX and generated content have matching hash
+  `7ebe78673738fbd8e0a8856aa6f75952b9ee73639c90e115ce38e9b91f18c649`;
+  Tectonic compiles; the generator is deterministic; all 30 automated tests,
+  ESLint, and `git diff --check` pass. Browser checks at desktop and 390-pixel
+  widths found no overflow or console errors; all nine proof disclosures and
+  the Guided/Formal/Open/Close controls work.
+- **Publication status:** approved by the author and pending the static-only
+  GitHub Pages deployment. Topics V–XIV must remain absent.

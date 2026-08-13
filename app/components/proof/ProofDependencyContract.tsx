@@ -6,6 +6,7 @@ export type ProofDependency = {
 
 type ProofDependencyContractProps = {
   imported: readonly ProofDependency[];
+  importedHeading?: string;
   background?: readonly ProofDependency[];
   provedHere: React.ReactNode;
 };
@@ -26,6 +27,7 @@ function DependencyList({ items }: { items: readonly ProofDependency[] }) {
 
 export function ProofDependencyContract({
   imported,
+  importedHeading = "Imported from earlier topics",
   background = [],
   provedHere,
 }: ProofDependencyContractProps) {
@@ -42,7 +44,7 @@ export function ProofDependencyContract({
       </header>
       <div className="topic-ii-contract-grid">
         <section>
-          <h4>Imported from earlier topics</h4>
+          <h4>{importedHeading}</h4>
           <DependencyList items={imported} />
         </section>
         {background.length > 0 ? (

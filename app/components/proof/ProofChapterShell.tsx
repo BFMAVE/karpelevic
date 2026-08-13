@@ -189,8 +189,9 @@ export function ProofChapterShell({
               <p>
                 <strong>Reading convention.</strong> Essential definitions
                 appear before the first statement that needs them. Complete
-                manuscript proofs are closed by default; opening one also
-                reveals the added line-by-line explanation.
+                manuscript proofs are closed by default. When a result has an
+                added line-by-line explanation, it appears inside the same
+                disclosure as the proof.
               </p>
             </div>
           </details>

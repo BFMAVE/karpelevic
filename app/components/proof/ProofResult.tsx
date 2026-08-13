@@ -25,6 +25,7 @@ export type ProofResultData = {
   intuition?: React.ReactNode;
   proofSteps?: readonly GuidedProofStep[];
   takeaway?: React.ReactNode;
+  takeawayLabel?: string;
   figure?: React.ReactNode;
   provenance?: ProofProvenance;
   sourceIds?: readonly string[];
@@ -79,8 +80,8 @@ export function ProofResult({ result }: { result: ProofResultData }) {
       {result.vocabulary?.length ? (
         <details className="topic-i-result-primer proof-chapter-vocabulary">
           <summary>
-            <span>Definitions before the result</span>
-            {result.vocabulary.length} term{result.vocabulary.length === 1 ? "" : "s"} first used here
+            <span>Definitions and notation used here</span>
+            {`${result.vocabulary.length} ${result.vocabulary.length === 1 ? "entry" : "entries"} to consult as needed`}
           </summary>
           <div className="topic-i-new-vocabulary">
             <dl>
@@ -135,7 +136,9 @@ export function ProofResult({ result }: { result: ProofResultData }) {
           <details className="topic-i-proof-disclosure proof-chapter-proof">
             <summary>
               <span>Complete proof</span>
-              Open the manuscript proof and its guided explanation
+              {result.proofSteps?.length
+                ? "Open the manuscript proof and its guided explanation"
+                : "Open the complete manuscript proof"}
             </summary>
             <div
               className="part-i-manuscript topic-i-collapsible-proof-text"
@@ -176,7 +179,7 @@ export function ProofResult({ result }: { result: ProofResultData }) {
 
       {result.takeaway ? (
         <p className="proof-item-takeaway proof-chapter-takeaway">
-          <span>What survives</span>
+          <span>{result.takeawayLabel ?? "What survives"}</span>
           {result.takeaway}
         </p>
       ) : null}
