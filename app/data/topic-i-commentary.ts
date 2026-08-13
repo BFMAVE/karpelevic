@@ -13,50 +13,50 @@ export const topicICommentary: Readonly<Record<number, TopicICommentary>> = {
   1: {
     number: 1,
     intuition:
-      "Polygonal complexity is an optimisation problem over every invariant polygon, not a property of one convenient drawing. Radial criticality identifies the last, outermost radial scale at which a fixed vertex budget still suffices as the contraction factor is increased along one ray in the complex plane.",
+      "Polygonal complexity is an optimisation problem over every invariant polygon, not a property of one convenient drawing. The equality νpoly(T)=N says that N is the least number of vertices of such a polygon. Radial criticality adds that, for every t>1, no polygon with at most N vertices is invariant under tT.",
     details: [
       {
         title: "The first condition",
         text:
-          "The equality νpoly(T)=N says both that an invariant N-gon exists and that no invariant polygon with fewer than N genuine vertices exists.",
+          "The equality νpoly(T)=N says both that an invariant N-gon exists and that no invariant polygon with fewer than N extreme points exists.",
       },
       {
         title: "The radial condition",
         text:
-          "For every t>1, the map tT has polygonal complexity greater than N. The rotation angle is unchanged; only the radial scale grows. The value may be infinite because tT need not remain a contraction.",
+          "For every t>1, the map tT has polygonal complexity greater than N. Multiplication by t scales every output of T by the positive factor t without changing its angular action. The value may be infinite because tT need not remain a contraction.",
       },
       {
         title: "Why the quantifier is strict",
         text:
-          "Criticality is not merely the existence of an invariant N-gon. It forbids every outward radial perturbation from retaining the same vertex budget, which is the extremality used in the contact argument.",
+          "Criticality is not merely the existence of an invariant N-gon. It says that every tT with t>1 requires more than N vertices, which is the extremal condition used later.",
       },
     ],
     takeaway:
-      "Read N-critical as “N vertices work exactly here, but cease to suffice under any outward radial enlargement.”",
+      "Read N-critical as “N is the least possible vertex count for T, and no polygon with at most N vertices works for any tT with t>1.”",
   },
   2: {
     number: 2,
     intuition:
-      "A polygon can be displayed with repeated points or with extra points inserted along a side. Those choices must not alter the complexity. Strictness removes this bookkeeping ambiguity before sides, contacts, and cyclic order are used.",
+      "A polygon can be displayed with repeated points or with extra points inserted along a side. Those choices must not alter the complexity. The manuscript calls a polygon strict when its displayed list contains each extreme point exactly once and no other points. This removes redundant entries before sides and cyclic order are used.",
     details: [
       {
-        title: "Genuine vertices",
+        title: "Extreme points only",
         text:
           "The displayed cyclic list contains every point of Ext(P) exactly once and contains no other points. A point in the relative interior of a side is a convex combination of its endpoints and therefore is not a vertex. The manuscript’s custom word “strict” does not mean strictly convex in the standard sense.",
       },
       {
         title: "Maximal sides",
         text:
-          "Adjacent sides are consecutive boundary segments sharing an endpoint. If they lie on the same line, their shared endpoint is not a genuine corner and their union is one longer segment. A maximal side is this longest straight boundary segment: it cannot be extended at either end while remaining in the boundary.",
+          "Adjacent sides are consecutive boundary segments sharing an endpoint. If they lie on the same line, their shared endpoint is not an extreme point and their union is one longer segment. A maximal side is this longest straight boundary segment: it cannot be extended at either end while remaining in the boundary.",
       },
       {
         title: "Strict support",
         text:
-          "The contact face of a supporting line is the part of the polygon lying on that line. Support is strict when the contact face is the single vertex rather than a complete edge. Intrinsically, the exposing object is a nonzero covector in the dual plane; after an auxiliary inner product identifies covectors with normal arrows, strictness means that arrow lies in the interior of the vertex’s normal cone.",
+          "The contact face of a supporting line is the part of the polygon lying on that line. A supporting line is strict when its contact face is the single vertex rather than a complete edge. Intrinsically, the exposing object is a nonzero covector in the dual plane; after an auxiliary inner product identifies covectors with normal arrows, such a line is strict exactly when its arrow lies in the interior of the vertex’s normal cone.",
       },
     ],
     takeaway:
-      "Strictness makes the combinatorics faithful to the convex set: every displayed vertex and side carries real geometric information.",
+      "For a strict polygon in the manuscript’s sense, every displayed vertex is an extreme point and every displayed side is a maximal boundary segment.",
   },
   5: {
     number: 5,
@@ -91,7 +91,7 @@ export const topicICommentary: Readonly<Record<number, TopicICommentary>> = {
   6: {
     number: 6,
     intuition:
-      "Polygonal complexity should not change when a picture is sheared, stretched, or expressed in another basis. The proof is a direct transport of every admissible polygon.",
+      "Polygonal complexity should not change when a picture is sheared, stretched, or expressed in another basis. The proof transports every polygon satisfying TP⊆P through the coordinate change.",
     details: [
       {
         title: "Transport a candidate",
@@ -101,7 +101,7 @@ export const topicICommentary: Readonly<Record<number, TopicICommentary>> = {
       {
         title: "Preserve the vertex count",
         text:
-          "Invertible linear maps preserve convex combinations in both directions, so Ext(AP)=A(Ext(P)). The polygons P and AP have the same number of genuine vertices.",
+          "Invertible linear maps preserve convex combinations in both directions, so Ext(AP)=A(Ext(P)). The polygons P and AP have the same number of extreme points.",
       },
       {
         title: "Run the argument backwards",
@@ -125,21 +125,21 @@ export const topicICommentary: Readonly<Record<number, TopicICommentary>> = {
       {
         title: "Geometric operations",
         text:
-          "Clipping by a half-plane and replacing a vertex by a contact point commute with A. Strictness, incidence equalities, invariance, and vertex counts survive each operation.",
+          "Intersecting with a half-plane and replacing a vertex by a specified image point on the boundary commute with A. The condition that the displayed vertices are exactly the extreme points, as well as incidence equalities, invariance, and vertex counts, is preserved.",
       },
       {
         title: "Cyclic labels",
         text:
-          "When the target boundary receives the orientation transported by A, the induced side bijection conjugates the successor map, the strict-contact set, and the contact rotation.",
+          "When the target boundary receives the orientation transported by A, the induced side bijection sends the next-side map s, the interior-contact side set I, and the cyclic shift σ to their corresponding maps and set on AP.",
       },
     ],
     takeaway:
-      "Coordinate changes transport the complete contact system—not only the inclusion TP⊆P.",
+      "A coordinate change preserves TP⊆P and transports the associated vertices, sides, side assignments, and cyclic maps.",
   },
   8: {
     number: 8,
     intuition:
-      "Complex conjugation is harmless for unoriented convex geometry but reverses every cyclic convention. Endpoint ownership is therefore the subtle point.",
+      "Complex conjugation preserves the unoriented convex geometry but reverses cyclic order. One must therefore check which half-open side contains a contact at a shared endpoint.",
     details: [
       {
         title: "Intertwine the maps",
@@ -154,17 +154,17 @@ export const topicICommentary: Readonly<Record<number, TopicICommentary>> = {
       {
         title: "Track half-open sides",
         text:
-          "The right-half-open side (xj−1,xj] becomes a left-half-open side after conjugation. Vertex contacts can therefore change ownership even though the underlying segment and incidence are preserved.",
+          "The right-half-open side (xj−1,xj] becomes a left-half-open side after conjugation. A contact at a shared endpoint can therefore be assigned to the other incident side even though the underlying segment and incidence are preserved.",
       },
     ],
     takeaway:
-      "Orientation reversal conjugates λ and reverses cyclic order; it cannot silently preserve a right-handed endpoint convention.",
+      "Orientation reversal conjugates λ and reverses cyclic order; the included and excluded endpoints of every half-open side must be checked explicitly.",
   },
   9: {
     number: 9,
     figure: "origin-and-order",
     intuition:
-      "A rotating contraction cannot preserve a nondegenerate polygon confined to one side of the origin. Its iterates eventually sample incompatible directions.",
+      "A rotating contraction cannot preserve a nondegenerate polygon confined to one side of the origin: some rotated iterate must eventually enter the opposite open half-plane.",
     details: [
       {
         title: "First put 0 in P",
@@ -208,7 +208,7 @@ export const topicICommentary: Readonly<Record<number, TopicICommentary>> = {
       {
         title: "Compare the two orders",
         text:
-          "Because K is convex about the interior point o, its boundary is a positive radial graph: one positive boundary circuit makes the polar direction complete one counterclockwise turn. The radial map therefore has degree +1 and preserves cyclic order. The rays to a,b,c are counterclockwise exactly when det(b−a,c−a)>0.",
+          "Every ray from o meets the boundary of K exactly once. Traversing the positively oriented boundary once therefore makes the direction z−o traverse the unit circle once counterclockwise. The radial map has degree +1 and preserves cyclic order. The rays to a,b,c are counterclockwise exactly when det(b−a,c−a)>0.",
       },
       {
         title: "Restrict to another polygon",

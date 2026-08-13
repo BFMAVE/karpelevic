@@ -3,9 +3,11 @@ import { getProofSource } from "../../data/proof";
 export function ProofSourceShelf({
   sourceIds,
   headingId,
+  heading = "Source shelf",
 }: {
   sourceIds: readonly string[];
   headingId: string;
+  heading?: string;
 }) {
   const sources = Array.from(new Set(sourceIds))
     .map((sourceId) => getProofSource(sourceId))
@@ -16,7 +18,7 @@ export function ProofSourceShelf({
   return (
     <section className="proof-topic-sources" aria-labelledby={headingId}>
       <p className="section-label">Sources cited in this topic</p>
-      <h3 id={headingId}>Source shelf</h3>
+      <h3 id={headingId}>{heading}</h3>
       <ol>
         {sources.map((source) => (
           <li key={source.id}>

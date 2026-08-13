@@ -128,13 +128,30 @@ function rewriteInternalLinks(html) {
 }
 
 function markUnavailableTopicLinks(html) {
-  if (proofRoute !== "/proof/topic-ii") return html;
+  const routeTopicNumber = new Map([
+    ["/proof/topic-ii", 2],
+    ["/proof/topic-iii", 3],
+    ["/proof/topic-iv", 4],
+  ]).get(proofRoute);
+  if (routeTopicNumber === undefined) return html;
+  const configuredPublicMaximum = Number(
+    process.env.PROOF_STANDALONE_TOPIC_MAX ?? "3",
+  );
+  const availableTopicMaximum = Math.max(
+    routeTopicNumber,
+    Number.isFinite(configuredPublicMaximum) ? configuredPublicMaximum : 3,
+  );
 
   return html.replace(
     /<a\b([^>]*\bdata-proof-topic-number="(\d+)"[^>]*)>([\s\S]*?)<\/a>/gi,
     (match, rawAttributes, topicNumberText, children) => {
       const topicNumber = Number(topicNumberText);
-      if (!Number.isFinite(topicNumber) || topicNumber <= 2) return match;
+      if (
+        !Number.isFinite(topicNumber) ||
+        topicNumber <= availableTopicMaximum
+      ) {
+        return match;
+      }
 
       let attributes = rawAttributes
         .replace(/\s+href="[^"]*"/i, "")
@@ -151,6 +168,14 @@ function markUnavailableTopicLinks(html) {
       return `<span${attributes} aria-disabled="true">${children}<small>Forthcoming</small></span>`;
     },
   );
+}
+
+function visibleTextFromHtml(html) {
+  return html
+    .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+    .replace(/<annotation\b[\s\S]*?<\/annotation>/gi, " ")
+    .replace(/<[^>]*>/g, " ");
 }
 
 function removeRuntimeMarkup(html) {
@@ -220,14 +245,16 @@ function verifyStandaloneHtml(html) {
     proofRoute === "/proof/topic-iii"
       ? [
           "Topic III",
-          "Building one-sided ownership",
+          "Half-open boundary assignments and edge clipping",
           "Hausdorff convergence",
+          "Old-vertex bound on discarded boundary arcs",
+          "Forthcoming",
           "data-proof-route=\"topic-iii\"",
         ]
       : proofRoute === "/proof/topic-ii"
         ? [
             "Topic II",
-            "From convex order to active sides",
+            "From convex order to contact on every side",
             "data-proof-route=\"topic-ii\"",
             "Forthcoming",
           ]
@@ -274,9 +301,13 @@ function verifyStandaloneHtml(html) {
         "Standalone Topic II must link Previous to the public Topic I page.",
       );
     }
-    if (/href="[^"]*\/proof\/topic-iii\//i.test(html)) {
+    if (
+      !/href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-iii\//i.test(
+        html,
+      )
+    ) {
       throw new Error(
-        "Standalone Topic II must not link to the unpublished Topic III page.",
+        "Standalone Topic II must link to the published Topic III page.",
       );
     }
     if (
@@ -286,6 +317,24 @@ function verifyStandaloneHtml(html) {
     ) {
       throw new Error(
         "Standalone Topic II still contains the orphaned Topic III endpoint introduction.",
+      );
+    }
+  }
+
+  if (proofRoute === "/proof/topic-iii") {
+    if (/href="[^"]*\/proof\/topic-iv\//i.test(html)) {
+      throw new Error(
+        "Standalone Topic III must mark the unpublished Topic IV page as forthcoming.",
+      );
+    }
+    const visibleText = visibleTextFromHtml(html);
+    if (
+      /labelled boundary slot|ownership word|zero-side signature|radius-one anchor|strict mixture|shared-side edge|source shelf|support gap|boundary mixture|collinear candidates|closed dependency chain|Nothing is smuggled|\bcap(?:s|ped|ping)?\b/i.test(
+        visibleText,
+      )
+    ) {
+      throw new Error(
+        "Standalone Topic III still contains avoidable reader-facing jargon.",
       );
     }
   }

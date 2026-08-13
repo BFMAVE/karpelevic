@@ -27,7 +27,7 @@ const copy = {
     description:
       "A regular pentagon and a separately scaled schematic of its polar are displayed. A selected vertex of the first corresponds to a selected side of the polar.",
     caption:
-      "Figure II.3. Schematic polarity correspondence; the two polygons are independently scaled for legibility. The polar inequality supplied by a vertex x of R cuts out the dual side Fₓ of R°. Side touching for T*R° therefore returns as vertex touching for TR.",
+      "Figure II.3. Schematic polarity correspondence; the two polygons are independently scaled for legibility. The polar inequality supplied by a vertex x of R cuts out the dual side Fₓ of R°. If Fₓ intersects T*R°, the corresponding vertex of TR lies on the boundary of R.",
   },
 } as const;
 

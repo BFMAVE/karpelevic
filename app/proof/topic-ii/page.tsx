@@ -7,9 +7,9 @@ import { getProofItems, proofTopics } from "../../data/proof";
 import { getPageTimestamp } from "../../lib/git-dates";
 
 export const metadata: Metadata = {
-  title: "Topic II — From Convex Order to Active Sides",
+  title: "Topic II — From Convex Order to Contact on Every Side",
   description:
-    "A complete, annotated account of finite convex certificates, normal-fan transfer, and hereditary saturation.",
+    "A complete, annotated account of determinant criteria for convex position, normal-fan transfer, and hereditary saturation.",
 };
 
 const topic = proofTopics[1];
@@ -30,7 +30,11 @@ export default function TopicIIPage() {
     >
       <ProofTopicFigure slug="active-sides" />
       <TopicIIChapter />
-      <ProofSourceShelf sourceIds={sourceIds} headingId="topic-ii-sources" />
+      <ProofSourceShelf
+        sourceIds={sourceIds}
+        headingId="topic-ii-sources"
+        heading="References and provenance"
+      />
     </ProofChapterShell>
   );
 }

@@ -24,7 +24,7 @@ const figureCopy: Readonly<
   },
   "active-sides": {
     qualification: "Exact geometric model",
-    title: "Every side is active at radial criticality",
+    title: "Every side intersects the image polygon at radial criticality",
     description:
       "A regular heptagon contains its image under a rotation by pi over seven followed by contraction by cosine pi over seven; the image vertices are the side midpoints.",
     caption: (
@@ -66,8 +66,10 @@ const figureCopy: Readonly<
           </mrow>
         </math>{" "}
         sends every vertex to the midpoint of the next side. Thus every side
-        meets <i>TP</i>. The theorem proves this saturation for every critical
-        invariant polygon, not only this symmetric example.
+        has nonempty intersection with <i>TP</i>. The theorem proves the same
+        side-intersection conclusion for every invariant polygon with at most
+        <i>N</i> vertices under an <i>N</i>-critical map, not only this
+        symmetric example.
       </>
     ),
   },

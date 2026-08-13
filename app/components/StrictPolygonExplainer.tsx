@@ -44,15 +44,15 @@ function FlatTurnDrawing() {
   );
 }
 
-function GenuineCornerDrawing() {
+function ExtremePointDrawing() {
   return (
     <svg
-      aria-label="A polygon with a genuine corner at which two noncollinear adjacent sides meet"
+      aria-label="A polygon with an extreme point at which two noncollinear adjacent sides meet"
       role="img"
       viewBox="0 0 330 245"
     >
       <text className="strict-polygon-kicker" x="20" y="26">
-        A GENUINE CORNER
+        AN EXTREME POINT
       </text>
       <path
         className="strict-polygon-shape"
@@ -202,7 +202,7 @@ export function StrictPolygonExplainer() {
 
       <div className="strict-polygon-explainer-body">
         <section>
-          <p className="section-label">1 · No artificial corners</p>
+          <p className="section-label">1 · Extreme points only</p>
           <h6>Adjacent and collinear sides</h6>
           <p>
             Two sides are <strong>adjacent</strong> when they occur one after
@@ -211,32 +211,34 @@ export function StrictPolygonExplainer() {
             line. Thus, if <i>m</i> lies between <i>a</i> and <i>b</i>, the
             adjacent segments [<i>a</i>,<i>m</i>] and [
             <i>m</i>,<i>b</i>] are collinear: the boundary does not turn at{" "}
-            <i>m</i>, so <i>m</i> is not a genuine vertex.
+            <i>m</i>, so <i>m</i> is not an extreme point.
           </p>
           <p>
             A <strong>maximal boundary segment</strong> is a straight segment
             contained in the boundary that cannot be extended at either end
             while remaining a straight boundary segment. In the left-hand
-            picture below, [<i>a</i>,<i>b</i>] is maximal; its two artificial
-            pieces are not. At a genuine polygonal vertex, by contrast, the
-            boundary changes direction.
+            picture below, [<i>a</i>,<i>b</i>] is maximal; neither of its two
+            shorter pieces is. At an extreme point of the polygon, by
+            contrast, the boundary changes direction.
           </p>
           <p>
-            The manuscript calls a polygon with exactly these genuine corners{" "}
-            <strong>strict</strong>. This is a local term for the present
-            argument; it does <strong>not</strong> mean “strictly convex” in
-            the standard convex-geometric sense.
+            The manuscript calls a polygon <strong>strict</strong> when its
+            displayed vertex list contains every extreme point exactly once
+            and no other points. Thus the list has no repeated vertices or
+            points inserted along a side. This is custom manuscript
+            terminology; it does <strong>not</strong> mean “strictly convex”
+            in the standard convex-geometric sense.
           </p>
 
           <figure className="strict-polygon-figure">
             <div className="strict-polygon-plate-grid">
               <FlatTurnDrawing />
-              <GenuineCornerDrawing />
+              <ExtremePointDrawing />
             </div>
             <figcaption>
               <span>Figure I.3.</span> A point inserted halfway along a
-              straight edge merely subdivides one side (left). A genuine
-              vertex is where two adjacent sides have different supporting
+              straight edge merely subdivides one side (left). An extreme
+              point is where two adjacent sides have different supporting
               lines and the boundary turns (right).
             </figcaption>
           </figure>
@@ -271,8 +273,9 @@ export function StrictPolygonExplainer() {
             auxiliary inner product, every covector <i>ℓ</i> can be
             represented by a normal arrow <i>n</i>; the wedge of arrows in
             the drawing is this convenient representation of the dual cone.
-            A genuine corner gives a two-dimensional wedge with nonempty
-            interior. A flat, falsely inserted point gives only one ray.
+            At an extreme point the normal cone is two-dimensional and has
+            nonempty interior. At a point inserted in the interior of a side,
+            the normal cone is only one ray.
           </p>
           <p>
             A <strong>nonzero covector</strong> on the boundary of the cone
@@ -308,10 +311,11 @@ export function StrictPolygonExplainer() {
 
         <aside className="strict-polygon-conclusion">
           <strong>What the manuscript sentence is saying.</strong>
-          Once the displayed vertex list contains only genuine corners, there
-          are no flat turns. Consequently every displayed side is already the
-          longest straight piece of boundary in that direction, and every
-          vertex has a genuine wedge of strict supporting directions.
+          Once the displayed vertex list contains exactly the extreme points,
+          there are no flat turns. Consequently every displayed side is
+          already the longest straight piece of boundary in that direction,
+          and the normal cone at every vertex has an open set of covectors
+          that expose that vertex alone.
         </aside>
       </div>
     </details>

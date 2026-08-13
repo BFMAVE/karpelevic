@@ -208,6 +208,9 @@ test("server-renders the Part I proof reader", async () => {
   const topicIIResponse = await render("/proof/topic-ii");
   assert.equal(topicIIResponse.status, 200);
   const topicIIPanelHtml = await topicIIResponse.text();
+  const terminologyAuditHtml = `${topicIPanelHtml}\n${topicIIPanelHtml}`
+    .replace(/<script[\s\S]*?<\/script>/gi, "")
+    .replace(/<style[\s\S]*?<\/style>/gi, "");
   assert.match(html, /How the Proof Works/);
   assert.match(
     html,
@@ -221,7 +224,7 @@ test("server-renders the Part I proof reader", async () => {
   assert.ok(atlasStart >= 0 && atlasEnd > atlasStart);
   const atlasHtml = html.slice(atlasStart, atlasEnd);
   assert.match(atlasHtml, /The complete route/);
-  assert.match(atlasHtml, /The language of critical polygons/);
+  assert.match(atlasHtml, /Critical maps and invariant polygons/);
   assert.match(atlasHtml, /The complete order-seven example/);
   assert.match(
     atlasHtml,
@@ -359,9 +362,12 @@ test("server-renders the Part I proof reader", async () => {
   );
   assert.match(
     strictDefinitionHtml,
-    /excluding[\s\S]*?tail[\s\S]*?including[\s\S]*?head/,
+    /excluding[\s\S]*?starting endpoint[\s\S]*?including[\s\S]*?ending endpoint/,
   );
-  assert.match(strictDefinitionHtml, /two-dimensional wedge with nonempty/);
+  assert.match(
+    strictDefinitionHtml,
+    /normal cone is two-dimensional[\s\S]*?nonempty interior/,
+  );
   assert.match(strictDefinitionHtml, /dual plane/);
   assert.match(strictDefinitionHtml, /auxiliary inner product/);
   assert.match(strictDefinitionHtml, /nonzero covector/);
@@ -506,7 +512,7 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(proposition23Html, /Figure I\.5/);
   assert.match(
     proposition23Html,
-    /What does “affine contact conjugacy” mean here/,
+    /How does a coordinate change transport the side data/,
   );
   assert.match(
     proposition23Html,
@@ -747,7 +753,10 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(html, /where the overline denotes closure/);
   assert.match(html, /compact convex set used here is closed/);
   assert.match(html, /\\det\(T\)&gt;0/);
-  assert.match(html, /positive radial graph/);
+  assert.match(
+    html,
+    /traversing[\s\S]*?boundary once makes the direction[\s\S]*?traverse[\s\S]*?unit circle once counterclockwise/,
+  );
   assert.match(html, /No three vertices of/);
   assert.match(
     html,
@@ -800,17 +809,23 @@ test("server-renders the Part I proof reader", async () => {
   assert.doesNotMatch(sourceShelfHtml, /<table\b/);
 
   assert.match(topicIIPanelHtml, /7(?:<!-- -->|\s)*core results/);
-  assert.match(topicIIPanelHtml, /From convex order to active sides/);
-  assert.match(topicIIPanelHtml, /What is allowed into Topic II/);
-  assert.match(topicIIPanelHtml, /A closed dependency chain/);
+  assert.match(topicIIPanelHtml, /From convex order to contact on every side/);
+  assert.match(topicIIPanelHtml, /Where each prerequisite is established/);
+  assert.match(topicIIPanelHtml, /Prerequisites and sources/);
   assert.match(topicIIPanelHtml, /Imported from Topic I/);
   assert.match(topicIIPanelHtml, /Standard background, stated with sources/);
   assert.match(topicIIPanelHtml, /Proved on this page/);
-  assert.match(topicIIPanelHtml, /How the dependencies close/);
+  assert.match(topicIIPanelHtml, /How the results depend on one another/);
   assert.match(topicIIPanelHtml, /Lemma 2\.7[\s\S]*?Lemma 2\.8/);
   assert.match(topicIIPanelHtml, /Proposition 3\.1[\s\S]*?Lemma A\.1/);
-  assert.match(topicIIPanelHtml, /Lemma A\.3[\s\S]*?vertex-saturation/);
-  assert.match(topicIIPanelHtml, /Lemma 4\.1[\s\S]*?Topic III/);
+  assert.match(
+    topicIIPanelHtml,
+    /Lemma A\.3[\s\S]*?every vertex of[\s\S]*?lies on the boundary/,
+  );
+  assert.match(
+    topicIIPanelHtml,
+    /Lemma 4\.1[\s\S]*?side[\s\S]*?intersects[\s\S]*?contains a vertex/,
+  );
   assert.match(topicIIPanelHtml, /No irreducibility, smoothness, or generic-position/);
   assert.match(topicIIPanelHtml, /href="(?:\/karpelevic)?\/proof\/#part-i-item-2"/);
   assert.match(topicIIPanelHtml, /href="(?:\/karpelevic)?\/proof\/#part-i-item-10"/);
@@ -869,12 +884,12 @@ test("server-renders the Part I proof reader", async () => {
         /<span>Definitions before the result<\/span>/g,
       ) ?? []
     ).length,
-    10,
+    9,
   );
   assert.match(topicIIPanelHtml, /The finite-continuity argument, without shorthand/);
-  assert.match(topicIIPanelHtml, /Output 1 — strict convex-position persistence/);
-  assert.match(topicIIPanelHtml, /Output 2 — open-side persistence/);
-  assert.match(topicIIPanelHtml, /Output 3 — strict-side persistence/);
+  assert.match(topicIIPanelHtml, /Output 1 — the points remain in strict convex position/);
+  assert.match(topicIIPanelHtml, /Output 2 — the selected points remain in side interiors/);
+  assert.match(topicIIPanelHtml, /Output 3 — the prescribed determinant signs remain strict/);
   assert.match(topicIIPanelHtml, /Why adjacent normals determine one support value/);
   assert.match(topicIIPanelHtml, /Boundedness, contact, and complementarity unpacked/);
   assert.match(topicIIPanelHtml, /Two appendix lemmas before saturation/);
@@ -951,6 +966,10 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(topicIIPanelHtml, /Classification and sources/);
   assert.doesNotMatch(topicIIPanelHtml, /admissible subpolygon/i);
   assert.doesNotMatch(topicIIPanelHtml, /<table\b/);
+  assert.doesNotMatch(
+    terminologyAuditHtml,
+    /vertex budget|right-admissible|right-handed|handedness|\bownership\b|\bsurgery\b|no-skipping|projective-holonomy|continuous point function|complete certificate|finite convex certificate|fan cone|active sides?|critical polygons?|affine contact conjugacy|contact rotation|strict side set|positive radial graph|polar direction|radial scale|genuine (?:vertex|corner)|source shelf/i,
+  );
 
   for (const [index, itemNumber] of topicIIOrder.entries()) {
     const itemStart = topicIIPanelHtml.indexOf(`id="part-i-item-${itemNumber}"`);

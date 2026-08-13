@@ -14,7 +14,7 @@ export function FiniteOpennessExplainer() {
       </summary>
       <div className="topic-ii-local-explainer-body">
         <section>
-          <h4>Output 1 — strict convex-position persistence</h4>
+          <h4>Output 1 — the points remain in strict convex position</h4>
           <p>
             Lemma 2.7 describes strict convex position by finitely many
             positive triple determinants. Each determinant depends
@@ -24,7 +24,7 @@ export function FiniteOpennessExplainer() {
           </p>
         </section>
         <section>
-          <h4>Output 2 — open-side persistence</h4>
+          <h4>Output 2 — the selected points remain in side interiors</h4>
           <p>
             For each index <i>a</i> in the finite set <i>𝒜</i>, the relevant
             moving point has an affine coordinate <i>α</i>
@@ -35,7 +35,7 @@ export function FiniteOpennessExplainer() {
           </p>
         </section>
         <section>
-          <h4>Output 3 — strict-side persistence</h4>
+          <h4>Output 3 — the prescribed determinant signs remain strict</h4>
           <p>
             For every prescribed side test in the finite set <i>ℬ</i>, a
             determinant records on which open side of the supporting line
@@ -67,7 +67,7 @@ export function NormalFanExplainer() {
       suppressHydrationWarning
     >
       <summary>
-        <span>The geometric dictionary</span>
+        <span>The support-function calculation</span>
         Why adjacent normals determine one support value
       </summary>
       <div className="topic-ii-local-explainer-body">
@@ -103,7 +103,7 @@ export function NormalFanExplainer() {
           manuscript.
         </p>
         <p>
-          This support-function dictionary is standard convex geometry;
+          This support-function calculation is standard convex geometry;
           see Schneider, <cite>Convex Bodies</cite>, Chapter 1, §§1.3 and
           1.7, and Chapter 2, §§2.1 and 2.4. Proposition 3.1 proves the
           particular transfer formula used here.
@@ -128,7 +128,7 @@ export function SaturationGapExplainer() {
       <div className="topic-ii-local-explainer-body">
         <TopicIIConceptFigure kind="polar-saturation" />
         <section>
-          <h4>Why positive spanning makes the retained polygon bounded</h4>
+          <h4>Why positive spanning makes the intersection bounded</h4>
           <p>
             For{" "}
             <i>R</i>
@@ -136,7 +136,8 @@ export function SaturationGapExplainer() {
             <sub>i∈S</sub>
             {"{"}<i>z</i> : ⟨<i>u</i>
             <sub>i</sub>,<i>z</i>⟩ ≤ <i>h</i>
-            <sub>i</sub>{"}"}, an escape direction <i>d</i> would have to
+            <sub>i</sub>{"}"}. A nonzero direction <i>d</i> along which one
+            could remain inside this intersection indefinitely would have to
             satisfy ⟨<i>u</i>
             <sub>i</sub>,<i>d</i>⟩ ≤ 0 for every <i>i</i>∈<i>S</i>. If the{" "}
             <i>u</i>
@@ -148,7 +149,7 @@ export function SaturationGapExplainer() {
           </p>
         </section>
         <section>
-          <h4>Why complementarity removes every support slack</h4>
+          <h4>Why complementarity removes every support-inequality gap</h4>
           <p>
             Put <i>q</i>=<i>h</i>−<i>ρBh</i>. Both <i>w</i> and{" "}
             <i>q</i> are coordinatewise nonnegative, while the eigenvector
@@ -176,7 +177,7 @@ export function SaturationGapExplainer() {
             <sub>i</sub>,·⟩ has the same maximum on the compact sets{" "}
             <i>TR</i> and <i>R</i>. It attains that maximum at some point
             of <i>TR</i>, and every point of <i>R</i> attaining it lies on
-            side <i>i</i>. Hence that side meets <i>TR</i>.
+            side <i>i</i>. Hence that side intersects <i>TR</i>.
           </p>
         </section>
       </div>

@@ -23,10 +23,10 @@ function resultNumber(label: string): string {
 
 function sourceRelation(itemNumber: number, fallback?: string): string | undefined {
   if (itemNumber === 15) {
-    return "Bitsoris gives the previously known nonnegative-matrix criterion for invariance of a polyhedron described by linear inequalities. Proposition 3.1 proves the planar fixed-normal-fan specialization used here and records its first-harmonic identity explicitly.";
+    return "Bitsoris gives the previously known nonnegative-matrix criterion for invariance of a polyhedron described by linear inequalities. Proposition 3.1 proves the planar formula for a polygon with a fixed cyclic list of outward normal rays and records the eigenvector identity used here.";
   }
   if (itemNumber === 18) {
-    return "Dmitriev–Dynkin, as translated in Swift’s thesis, is the historical antecedent for side-contact arguments in this problem. The exact image-vertex witness used here is also an elementary exposed-face consequence and is proved completely on this page.";
+    return "Dmitriev–Dynkin, as translated in Swift’s thesis, is the historical antecedent for side-intersection arguments in this problem. The precise conclusion used here—that a side intersecting the inner polygon contains one of its vertices—is also an elementary exposed-face consequence and is proved completely on this page.";
   }
   return fallback;
 }
@@ -394,14 +394,16 @@ export function TopicIIChapter() {
     <>
       <section className="topic-ii-reader-contract" aria-labelledby="topic-ii-contract-heading">
         <header>
-          <p className="section-label">A closed dependency chain</p>
-          <h3 id="topic-ii-contract-heading">What is allowed into Topic II</h3>
+          <p className="section-label">Prerequisites and sources</p>
+          <h3 id="topic-ii-contract-heading">
+            Where each prerequisite is established
+          </h3>
           <p>
-            Every ingredient has one of three addresses: an earlier result
-            in Topic I, an explicitly named standard source, or a complete
-            proof on this page. The manuscript’s appendix tools are moved
-            forward to the point where the saturation theorem first needs
-            them; their PDF labels remain unchanged.
+            Each prerequisite is either proved in Topic I, cited to an
+            explicitly named standard source, or proved completely on this
+            page. The manuscript’s appendix results are placed at the point
+            where Theorem 3.2 first uses them; their PDF labels remain
+            unchanged.
           </p>
         </header>
 
@@ -469,13 +471,15 @@ export function TopicIIChapter() {
                 The polyhedral invariance viewpoint has an antecedent in G.
                 Bitsoris, “On the positive invariance of polyhedral sets for
                 discrete-time systems” (1988). Proposition 3.1 proves the
-                fixed-normal-fan formula used here.
+                planar formula for a fixed cyclic list of outward normal rays
+                used here.
               </li>
               <li>
-                Earlier side-contact arguments occur in
+                Earlier side-intersection arguments occur in
                 Dmitriev–Dynkin (1946), accessible in Swift’s 1972 thesis.
-                Theorem 3.2 proves the hereditary strengthening used by this
-                manuscript.
+                Theorem 3.2 proves the stronger version used here, which
+                applies to every invariant polygon with at most <i>N</i>{" "}
+                vertices.
               </li>
             </ul>
           </section>
@@ -497,27 +501,30 @@ export function TopicIIChapter() {
           aria-labelledby="topic-ii-dependency-route-heading"
         >
           <h4 id="topic-ii-dependency-route-heading">
-            How the dependencies close
+            How the results depend on one another
           </h4>
           <ol>
             <li>
               <a href="#part-i-item-11">Lemma 2.7</a> →{" "}
               <a href="#part-i-item-12">Lemma 2.8</a>: determinant
-              certificates make strict polygonal geometry stable under small
+              conditions make strict polygonal geometry stable under small
               perturbations.
             </li>
             <li>
               <a href="#part-i-item-15">Proposition 3.1</a> +{" "}
-              <a href="#part-i-item-65">Lemma A.1</a> → the side-saturation
-              half of <a href="#part-i-item-16">Theorem 3.2</a>.
+              <a href="#part-i-item-65">Lemma A.1</a> → the conclusion in{" "}
+              <a href="#part-i-item-16">Theorem 3.2</a> that every side of{" "}
+              <i>R</i> intersects <i>TR</i>.
             </li>
             <li>
-              <a href="#part-i-item-67">Lemma A.3</a> → the vertex-saturation
-              half of <a href="#part-i-item-16">Theorem 3.2</a> by polarity.
+              <a href="#part-i-item-67">Lemma A.3</a> → the conclusion in{" "}
+              <a href="#part-i-item-16">Theorem 3.2</a> that every vertex of{" "}
+              <i>TR</i> lies on the boundary of <i>R</i>.
             </li>
             <li>
-              <a href="#part-i-item-18">Lemma 4.1</a> turns saturated side
-              contact into the image-vertex witnesses used in Topic III.
+              <a href="#part-i-item-18">Lemma 4.1</a> proves that if a side
+              of <i>P</i> intersects a polygon <i>Q</i> contained in <i>P</i>,
+              then that side contains a vertex of <i>Q</i>.
             </li>
           </ol>
         </section>
@@ -526,7 +533,9 @@ export function TopicIIChapter() {
       <section className="topic-i-textbook topic-ii-textbook" aria-labelledby="topic-ii-convex-heading">
         <header>
           <div>
-            <p className="section-label">1 · Finite convex certificates</p>
+            <p className="section-label">
+              1 · Determinant criteria for convex position
+            </p>
             <h3 id="topic-ii-convex-heading">
               From determinant signs to stable geometry
             </h3>
@@ -537,8 +546,8 @@ export function TopicIIChapter() {
             linear map. They replace geometric order by finitely many
             inequalities: strict polygonal convex position, persistence under
             perturbation, strict support, and monotonic polar angle. The
-            contraction <i>T</i> and its vertex budget enter only in the later
-            saturation theorem. There <i>N := ν</i>
+            contraction <i>T</i> and the minimal vertex count enter only in
+            the later saturation theorem. There <i>N := ν</i>
             <sub>poly</sub>(<i>T</i>) is the smallest number of vertices among
             all <i>T</i>-invariant polygons, and the theorem formally assumes
             that this number is finite and that <i>T</i> is <i>N</i>-critical.
@@ -588,7 +597,7 @@ export function TopicIIChapter() {
             </dd>
           </div>
           <div>
-            <dt>Fan cone</dt>
+            <dt>Cone between adjacent normal rays</dt>
             <dd>
               The nonnegative cone spanned by two adjacent normal rays.
               Every nonzero direction belongs to at least one such cone,
@@ -604,7 +613,8 @@ export function TopicIIChapter() {
               <i>e</i>
               <sup>−iθ</sup>
               <i>u</i>
-              <sub>i</sub> in its containing fan cone.
+              <sub>i</sub> using the two adjacent normal rays that contain it
+              between them.
             </dd>
           </div>
         </dl>
@@ -623,8 +633,10 @@ export function TopicIIChapter() {
           </div>
           <p>
             One proposition translates polygon invariance into finitely many
-            support inequalities and identifies the rotating first harmonic
-            of the transfer matrix.
+            support inequalities and proves that the complex vector <i>u</i>{" "}
+            of outward normals satisfies <i>B</i>
+            <sub>Φ</sub>(<i>θ</i>)<i>u</i>=<i>e</i>
+            <sup>−iθ</sup><i>u</i>.
             <span>One complete proof</span>
           </p>
         </header>
@@ -664,9 +676,11 @@ export function TopicIIChapter() {
             </h3>
           </div>
           <p>
-            The theorem closes the chain. The final lemma converts its
-            set-level side contact into the image-vertex witnesses needed
-            for Topic III.
+            The theorem proves that every side of <i>R</i> intersects{" "}
+            <i>TR</i> and every vertex of <i>TR</i> lies on the boundary of{" "}
+            <i>R</i>. The final lemma shows that if a side of <i>P</i>{" "}
+            intersects a polygon <i>Q</i> contained in <i>P</i>, that side
+            contains a vertex of <i>Q</i>.
             <span>{proofCount} complete proofs in Topic II</span>
           </p>
         </header>

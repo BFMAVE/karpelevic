@@ -1,7 +1,9 @@
 type FigureKind =
   | "half-open"
   | "face-rigidity"
-  | "cap"
+  | "replacement"
+  | "clip"
+  | "area-minimizer"
   | "hausdorff"
   | "endpoint-ledger"
   | "interlacing"
@@ -64,19 +66,290 @@ function FaceRigidity() {
   );
 }
 
-function Cap() {
+function VertexReplacement() {
   return (
     <>
-      <polygon points="105,210 190,78 370,62 555,148 505,280 260,302" fill="none" stroke={ink} strokeWidth="2.6" />
-      <polygon points="151,139 280,70 463,105 530,214 382,291 184,260" fill={pale} stroke={red} strokeWidth="2.4" />
-      <line x1="151" y1="139" x2="280" y2="70" stroke={red} strokeWidth="4" />
-      <path d="M105 210 Q125 160 151 139 M280 70 Q235 64 190 78" fill="none" stroke={copper} strokeWidth="5" />
-      <Dot x={151} y={139} accent />
-      <Dot x={280} y={70} accent />
-      <Dot x={190} y={78} />
-      <text x="74" y="118" fill={ink}>discarded cap Aⱼ</text>
-      <text x="337" y="177" fill={red}>Q = λP stays inside Hⱼ</text>
-      <text x="180" y="342" fill={ink}>Pⱼ = P ∩ Hⱼ; old vertices leave, edge endpoints enter</text>
+      <text x="180" y="38" fill={ink} textAnchor="middle">before</text>
+      <path d="M55 270 L205 70 L330 255" {...line} />
+      <path d="M55 270 L145 150" stroke={red} strokeWidth="4" fill="none" />
+      <Dot x={55} y={270} />
+      <Dot x={145} y={150} accent />
+      <Dot x={205} y={70} />
+      <Dot x={330} y={255} />
+      <text x="34" y="297" fill={ink}>xᵢ₋₁</text>
+      <text x="116" y="137" fill={red}>ξᵢ</text>
+      <text x="195" y="55" fill={ink}>xᵢ</text>
+      <text x="309" y="282" fill={ink}>xᵢ₊₁</text>
+
+      <line x1="342" y1="185" x2="380" y2="185" stroke={copper} strokeWidth="2.5" />
+      <path d="M372 178 L382 185 L372 192" fill="none" stroke={copper} strokeWidth="2.5" />
+
+      <text x="520" y="38" fill={ink} textAnchor="middle">after replacing xᵢ by ξᵢ</text>
+      <path d="M390 270 L480 150 L655 255" fill="none" stroke={red} strokeWidth="3.2" />
+      <path d="M480 150 L540 70 L655 255" fill="none" stroke={copper} strokeWidth="1.8" strokeDasharray="7 7" />
+      <Dot x={390} y={270} />
+      <Dot x={480} y={150} accent />
+      <circle cx="540" cy="70" r="6" fill={paper} stroke={copper} strokeWidth="2" />
+      <path d="M534 64 L546 76 M546 64 L534 76" stroke={copper} strokeWidth="1.8" />
+      <Dot x={655} y={255} />
+      <text x="367" y="297" fill={ink}>xᵢ₋₁</text>
+      <text x="450" y="137" fill={red}>ξᵢ</text>
+      <text x="525" y="54" fill={copper}>xᵢ removed</text>
+      <text x="615" y="282" fill={ink}>xᵢ₊₁</text>
+
+      <path d="M404 321 H479" stroke={ink} strokeWidth="2.2" />
+      <circle cx="404" cy="321" r="5" fill={paper} stroke={ink} strokeWidth="2" />
+      <circle cx="479" cy="321" r="5" fill={red} stroke={red} strokeWidth="2" />
+      <path d="M493 321 H568" stroke={ink} strokeWidth="2.2" />
+      <circle cx="493" cy="321" r="5" fill={paper} stroke={ink} strokeWidth="2" />
+      <circle cx="568" cy="321" r="5" fill={red} stroke={red} strokeWidth="2" />
+      <text x="442" y="349" fill={ink} fontSize="14" textAnchor="middle">(xᵢ₋₁, ξᵢ]</text>
+      <text x="531" y="349" fill={ink} fontSize="14" textAnchor="middle">(ξᵢ, xᵢ₊₁]</text>
+    </>
+  );
+}
+
+type Point = readonly [number, number];
+
+function regularHeptagonClipGeometry(cx = 340, cy = 188, radius = 142) {
+  const vertices = Array.from({ length: 7 }, (_, index) => {
+    // Decreasing SVG angles correspond to increasing mathematical angles because
+    // the SVG y-axis points downward.
+    const angle = -Math.PI / 2 - (2 * Math.PI * index) / 7;
+    return [cx + radius * Math.cos(angle), cy + radius * Math.sin(angle)] as Point;
+  });
+  const imageVertices = vertices.map((point, index) => {
+    const next = vertices[(index + 1) % vertices.length];
+    return [(point[0] + next[0]) / 2, (point[1] + next[1]) / 2] as Point;
+  });
+  const removedVertex = vertices[0];
+  const rightEndpoint = imageVertices[6];
+  const leftEndpoint = imageVertices[0];
+  const retained = [rightEndpoint, leftEndpoint, ...vertices.slice(1)] as readonly Point[];
+  return { cx, cy, radius, vertices, imageVertices, removedVertex, rightEndpoint, leftEndpoint, retained };
+}
+
+function VertexReplacementMobile() {
+  return (
+    <>
+      <text x="180" y="34" fill={ink} fontSize="19" textAnchor="middle">before</text>
+      <path d="M42 220 L154 58 L310 220" {...line} />
+      <path d="M42 220 L104 130" stroke={red} strokeWidth="4" fill="none" />
+      <Dot x={42} y={220} />
+      <Dot x={104} y={130} accent />
+      <Dot x={154} y={58} />
+      <Dot x={310} y={220} />
+      <text x="23" y="246" fill={ink} fontSize="16">xᵢ₋₁</text>
+      <text x="76" y="119" fill={red} fontSize="17">ξᵢ</text>
+      <text x="145" y="46" fill={ink} fontSize="17">xᵢ</text>
+      <text x="286" y="246" fill={ink} fontSize="16">xᵢ₊₁</text>
+
+      <line x1="180" y1="250" x2="180" y2="292" stroke={copper} strokeWidth="2.5" />
+      <path d="M173 282 L180 293 L187 282" fill="none" stroke={copper} strokeWidth="2.5" />
+
+      <text x="180" y="326" fill={ink} fontSize="19" textAnchor="middle">after replacing xᵢ by ξᵢ</text>
+      <path d="M42 520 L104 430 L310 520" fill="none" stroke={red} strokeWidth="3.2" />
+      <path d="M104 430 L154 358 L310 520" fill="none" stroke={copper} strokeWidth="1.8" strokeDasharray="7 7" />
+      <Dot x={42} y={520} />
+      <Dot x={104} y={430} accent />
+      <circle cx="154" cy="358" r="6" fill={paper} stroke={copper} strokeWidth="2" />
+      <path d="M148 352 L160 364 M160 352 L148 364" stroke={copper} strokeWidth="1.8" />
+      <Dot x={310} y={520} />
+      <text x="23" y="546" fill={ink} fontSize="16">xᵢ₋₁</text>
+      <text x="76" y="419" fill={red} fontSize="17">ξᵢ</text>
+      <text x="164" y="365" fill={copper} fontSize="16">xᵢ removed</text>
+      <text x="286" y="546" fill={ink} fontSize="16">xᵢ₊₁</text>
+      <text x="88" y="586" fill={ink} fontSize="15" textAnchor="middle">(xᵢ₋₁, ξᵢ]</text>
+      <text x="247" y="586" fill={ink} fontSize="15" textAnchor="middle">(ξᵢ, xᵢ₊₁]</text>
+    </>
+  );
+}
+
+function ImageEdgeClipMobile() {
+  const { vertices, imageVertices, removedVertex, rightEndpoint, leftEndpoint, retained } = regularHeptagonClipGeometry(180, 250, 116);
+  const points = (items: readonly Point[]) => items.map(([x, y]) => `${x},${y}`).join(" ");
+  return (
+    <>
+      <text x="180" y="30" fill={ink} fontSize="17" textAnchor="middle">one old vertex is removed</text>
+      <path d={`M180 38 L${removedVertex[0]} ${removedVertex[1] - 8}`} stroke={ink} strokeWidth="1.5" />
+      <polygon points={points(retained)} fill={pale} opacity="0.72" />
+      <polygon points={points([rightEndpoint, removedVertex, leftEndpoint])} fill={red} opacity="0.14" />
+      <polygon points={points(vertices)} fill="none" stroke={ink} strokeWidth="2.6" />
+      <polygon points={points(imageVertices)} fill={paper} fillOpacity="0.72" stroke={red} strokeWidth="2.2" />
+      <polyline points={points([rightEndpoint, removedVertex, leftEndpoint])} fill="none" stroke={copper} strokeWidth="5" />
+      <line x1={rightEndpoint[0]} y1={rightEndpoint[1]} x2={leftEndpoint[0]} y2={leftEndpoint[1]} stroke={red} strokeWidth="4" />
+      <Dot x={removedVertex[0]} y={removedVertex[1]} />
+      <Dot x={leftEndpoint[0]} y={leftEndpoint[1]} accent />
+      <Dot x={rightEndpoint[0]} y={rightEndpoint[1]} accent />
+      <text x="18" y="112" fill={copper} fontSize="16">discarded arc</text>
+      <path d={`M118 116 L${leftEndpoint[0] - 5} ${leftEndpoint[1] - 1}`} stroke={copper} strokeWidth="1.4" />
+      <text x="235" y="112" fill={red} fontSize="16">edge of Q</text>
+      <path d={`M278 117 L${rightEndpoint[0] + 4} ${rightEndpoint[1] - 1}`} stroke={red} strokeWidth="1.4" />
+      <text x="17" y="198" fill={red} fontSize="16">removed region</text>
+      <path d="M135 193 L168 148" stroke={red} strokeWidth="1.4" />
+      <text x="272" y="245" fill={red} fontSize="17">Q = λP</text>
+      <text x="180" y="405" fill={ink} fontSize="17" textAnchor="middle">Q stays in the retained half-plane,</text>
+      <text x="180" y="430" fill={ink} fontSize="17" textAnchor="middle">so λ(P ∩ H) stays there as well.</text>
+    </>
+  );
+}
+
+function AreaMinimizerMobile() {
+  const center = [180, 220] as const;
+  const radius = 115;
+  const v = [180, 105] as const;
+  const p1 = [263, 148] as const;
+  const p2 = [288, 234] as const;
+  const p3 = [245, 313] as const;
+  const p4 = [133, 324] as const;
+  const p5 = [72, 250] as const;
+  const p6 = [86, 158] as const;
+  const leftEndpoint = [95.1, 278] as const;
+  const rightEndpoint = [264.1, 278] as const;
+  const polygon = [v, p1, p2, p3, p4, p5, p6];
+  const retained = [v, p1, p2, rightEndpoint, leftEndpoint, p5, p6];
+  const removedRegion = [rightEndpoint, p3, p4, leftEndpoint];
+  const points = (items: readonly Point[]) => items.map(([x, y]) => `${x},${y}`).join(" ");
+  return (
+    <>
+      <circle cx={center[0]} cy={center[1]} r={radius} fill="none" stroke={copper} strokeWidth="1.7" strokeDasharray="7 7" />
+      <polygon points={points(retained)} fill={pale} opacity="0.75" />
+      <polygon points={points(removedRegion)} fill={red} opacity="0.15" />
+      <polygon points={points(polygon)} fill="none" stroke={ink} strokeWidth="2.6" />
+      <polyline points={points([rightEndpoint, p3, p4, leftEndpoint])} fill="none" stroke={copper} strokeWidth="5" />
+      <line x1={leftEndpoint[0]} y1={leftEndpoint[1]} x2={rightEndpoint[0]} y2={rightEndpoint[1]} stroke={red} strokeWidth="4" />
+      <Dot x={v[0]} y={v[1]} accent />
+      <Dot x={p3[0]} y={p3[1]} />
+      <Dot x={p4[0]} y={p4[1]} />
+      <Dot x={leftEndpoint[0]} y={leftEndpoint[1]} open accent />
+      <Dot x={rightEndpoint[0]} y={rightEndpoint[1]} open accent />
+      <circle cx={center[0]} cy={center[1]} r="3.5" fill={ink} />
+      <text x="192" y="96" fill={red} fontSize="17">v, |v| = 1</text>
+      <text x="237" y="130" fill={copper} fontSize="16">unit circle</text>
+      <text x="180" y="238" fill={ink} fontSize="16" textAnchor="middle">retained polygon P ∩ H</text>
+      <text x="270" y="269" fill={red} fontSize="16">image edge</text>
+      <text x="180" y="306" fill={red} fontSize="15" textAnchor="middle">removed region</text>
+      <text x="180" y="359" fill={copper} fontSize="16" textAnchor="middle">discarded open boundary arc Aⱼ°</text>
+      <text x="180" y="414" fill={ink} fontSize="17" textAnchor="middle">The radius-one vertex v remains.</text>
+      <text x="180" y="438" fill={ink} fontSize="17" textAnchor="middle">The clipped polygon stays normalized.</text>
+    </>
+  );
+}
+
+export function verifyRegularHeptagonClipGeometry() {
+  const geometry = regularHeptagonClipGeometry();
+  const { cx, cy, vertices, imageVertices, rightEndpoint, leftEndpoint } = geometry;
+  const theta = Math.PI / 7;
+  const rho = Math.cos(theta);
+  const tolerance = 1e-8;
+  const cross = (a: Point, b: Point, p: Point) =>
+    (b[0] - a[0]) * (p[1] - a[1]) - (b[1] - a[1]) * (p[0] - a[0]);
+  const distance = (a: Point, b: Point) => Math.hypot(a[0] - b[0], a[1] - b[1]);
+
+  const lambdaErrors = vertices.map((point, index) => {
+    const dx = point[0] - cx;
+    const dy = point[1] - cy;
+    const transformed: Point = [
+      cx + rho * (dx * Math.cos(theta) + dy * Math.sin(theta)),
+      cy + rho * (-dx * Math.sin(theta) + dy * Math.cos(theta)),
+    ];
+    return distance(transformed, imageVertices[index]);
+  });
+
+  const centroid: Point = [
+    vertices.reduce((sum, point) => sum + point[0], 0) / vertices.length,
+    vertices.reduce((sum, point) => sum + point[1], 0) / vertices.length,
+  ];
+  const imageContained = vertices.every((start, index) => {
+    const end = vertices[(index + 1) % vertices.length];
+    const inwardOrientation = Math.sign(cross(start, end, centroid));
+    return imageVertices.every((point) => cross(start, end, point) * inwardOrientation >= -tolerance);
+  });
+
+  const imageSideSigns = imageVertices.slice(1, 6).map((point) => cross(rightEndpoint, leftEndpoint, point));
+  const retainedSign = Math.sign(imageSideSigns.find((value) => Math.abs(value) > tolerance) ?? 0);
+  const removedOldVertexCount = vertices.filter((point) => {
+    const sign = Math.sign(cross(rightEndpoint, leftEndpoint, point));
+    return sign !== 0 && sign !== retainedSign;
+  }).length;
+
+  return {
+    lambdaImageError: Math.max(...lambdaErrors),
+    imageContained,
+    removedOldVertexCount,
+    valid: Math.max(...lambdaErrors) < tolerance && imageContained && removedOldVertexCount === 1,
+  };
+}
+
+function ImageEdgeClip() {
+  const { vertices, imageVertices, removedVertex, rightEndpoint, leftEndpoint, retained } = regularHeptagonClipGeometry();
+  const verification = verifyRegularHeptagonClipGeometry();
+  if (!verification.valid) throw new Error("The exact regular-heptagon clipping plate failed its geometric verification.");
+  const points = (items: readonly Point[]) => items.map(([x, y]) => `${x},${y}`).join(" ");
+
+  return (
+    <>
+      <polygon points={points(retained)} fill={pale} opacity="0.72" />
+      <polygon points={points([rightEndpoint, removedVertex, leftEndpoint])} fill={red} opacity="0.14" />
+      <polygon points={points(vertices)} fill="none" stroke={ink} strokeWidth="2.6" />
+      <polygon points={points(imageVertices)} fill={paper} fillOpacity="0.72" stroke={red} strokeWidth="2.2" />
+      <polyline points={points([rightEndpoint, removedVertex, leftEndpoint])} fill="none" stroke={copper} strokeWidth="5" />
+      <line x1={rightEndpoint[0]} y1={rightEndpoint[1]} x2={leftEndpoint[0]} y2={leftEndpoint[1]} stroke={red} strokeWidth="4" />
+      <Dot x={removedVertex[0]} y={removedVertex[1]} />
+      <Dot x={leftEndpoint[0]} y={leftEndpoint[1]} accent />
+      <Dot x={rightEndpoint[0]} y={rightEndpoint[1]} accent />
+      <text x="340" y="23" fill={ink} fontSize="15" textAnchor="middle">one old vertex lies on the discarded boundary arc</text>
+      <path d="M340 29 L340 39" stroke={ink} strokeWidth="1.4" />
+      <text x="490" y="62" fill={red} fontSize="15">chosen edge of Q</text>
+      <path d={`M482 66 L${rightEndpoint[0] + 7} ${rightEndpoint[1] - 1}`} stroke={red} strokeWidth="1.4" fill="none" />
+      <text x="456" y="168" fill={red}>Q = λP</text>
+      <text x="75" y="121" fill={copper} fontSize="15">discarded boundary arc</text>
+      <path d={`M215 116 L${leftEndpoint[0] - 7} ${leftEndpoint[1] + 1}`} stroke={copper} strokeWidth="1.4" fill="none" />
+      <text x="65" y="167" fill={red} fontSize="15">removed 2D region</text>
+      <path d="M205 162 L314 60" stroke={red} strokeWidth="1.4" fill="none" />
+      <text x="340" y="354" fill={ink} fontSize="16" textAnchor="middle">the retained half-plane contains all of Q, hence also λ(P ∩ H)</text>
+    </>
+  );
+}
+
+function AreaMinimizer() {
+  const center = [320, 170] as const;
+  const unitRadius = 125;
+  const v = [320, 45] as const;
+  const p1 = [410, 92] as const;
+  const p2 = [438, 185] as const;
+  const p3 = [390, 270] as const;
+  const p4 = [267, 282] as const;
+  const p5 = [202, 205] as const;
+  const p6 = [218, 104] as const;
+  const leftEndpoint = [223.1, 230] as const;
+  const rightEndpoint = [412.6, 230] as const;
+  const polygon = [v, p1, p2, p3, p4, p5, p6];
+  const retained = [v, p1, p2, rightEndpoint, leftEndpoint, p5, p6];
+  const removedRegion = [rightEndpoint, p3, p4, leftEndpoint];
+  const points = (items: readonly (readonly [number, number])[]) => items.map(([x, y]) => `${x},${y}`).join(" ");
+
+  return (
+    <>
+      <circle cx={center[0]} cy={center[1]} r={unitRadius} fill="none" stroke={copper} strokeWidth="1.7" strokeDasharray="7 7" />
+      <polygon points={points(retained)} fill={pale} opacity="0.75" />
+      <polygon points={points(removedRegion)} fill={red} opacity="0.15" />
+      <polygon points={points(polygon)} fill="none" stroke={ink} strokeWidth="2.6" />
+      <polyline points={points([rightEndpoint, p3, p4, leftEndpoint])} fill="none" stroke={copper} strokeWidth="5" />
+      <line x1={leftEndpoint[0]} y1={leftEndpoint[1]} x2={rightEndpoint[0]} y2={rightEndpoint[1]} stroke={red} strokeWidth="4" />
+      <Dot x={v[0]} y={v[1]} accent />
+      <Dot x={p3[0]} y={p3[1]} />
+      <Dot x={p4[0]} y={p4[1]} />
+      <Dot x={leftEndpoint[0]} y={leftEndpoint[1]} open accent />
+      <Dot x={rightEndpoint[0]} y={rightEndpoint[1]} open accent />
+      <circle cx={center[0]} cy={center[1]} r="3.5" fill={ink} />
+      <text x="333" y="40" fill={red}>v, |v| = 1</text>
+      <text x="454" y="66" fill={copper} fontSize="15">normalizing unit circle</text>
+      <text x="455" y="226" fill={red} fontSize="15">chosen image edge</text>
+      <text x="320" y="211" fill={ink} fontSize="15" textAnchor="middle">retained polygon P ∩ H</text>
+      <text x="320" y="262" fill={red} fontSize="14" textAnchor="middle">removed 2D region</text>
+      <text x="320" y="325" fill={copper} fontSize="15" textAnchor="middle">discarded open boundary arc Aⱼ°</text>
+      <text x="320" y="353" fill={ink} fontSize="15" textAnchor="middle">the radius-one vertex v remains, so the clipped polygon stays normalized</text>
     </>
   );
 }
@@ -209,9 +482,11 @@ function ResidueBlock({ markerId }: { markerId: string }) {
 
 const descriptions: Record<FigureKind, { title: string; description: string; caption: string }> = {
   "half-open": { title: "One endpoint, one half-open side", description: "Two closed polygon sides share a vertex, but the incoming half-open side includes it and the outgoing half-open side excludes it.", caption: "Plate III.1. The right-half-open convention places the shared vertex in its incoming side and not in its outgoing side." },
-  "face-rigidity": { title: "A boundary mixture lies in one face", description: "Two points and their strict convex combination lie on one supporting side of a polygon.", caption: "Plate III.2. Equality in a supporting functional forces both endpoints—and therefore their segment—onto the same exposed side." },
-  cap: { title: "Clipping along an image edge", description: "An outer polygon, its inner image, and the cap discarded by the line of one image edge.", caption: "Plate III.3. Keeping the edge half-plane containing Q preserves λPⱼ⊆Q⊆Pⱼ and makes the vertex count explicit." },
-  hausdorff: { title: "Two-sided convergence of polygons", description: "A dashed polygon and a nearby limit polygon, with corresponding displacements and an interior disk.", caption: "Plate III.4. Hausdorff convergence controls both directions; the interior disk supplies the uniform support gap used in the area argument." },
+  "face-rigidity": { title: "A boundary convex combination lies in one face", description: "Two points and their strict convex combination lie on one supporting side of a polygon.", caption: "Plate III.2. Equality in a supporting functional forces both endpoints—and therefore their segment—onto the same exposed side." },
+  replacement: { title: "Replacing one vertex by a boundary contact", description: "Before-and-after boundary diagrams show a point in the relative interior of one side replacing the following vertex, together with the resulting two half-open sides.", caption: "Plate III.3. Schematic local replacement: after xᵢ is replaced by ξᵢ, the point ξᵢ is included in (xᵢ₋₁, ξᵢ] and excluded from (ξᵢ, xᵢ₊₁]." },
+  clip: { title: "Clipping along an image edge", description: "An exact regular-heptagon construction in which the image polygon has its vertices at the side midpoints of the outer polygon; one image edge cuts off exactly one old vertex.", caption: "Plate III.4. Exact regular-heptagon model: for λ = cos(π/7) exp(iπ/7), the vertices of Q = λP are the side midpoints of P. The chosen edge of Q cuts off the boundary arc containing exactly one old vertex, while Q remains in the retained half-plane." },
+  hausdorff: { title: "Two-sided convergence of polygons", description: "A dashed polygon and a nearby limit polygon, with corresponding displacements and an interior disk.", caption: "Plate III.5. Hausdorff convergence controls both directions; the interior disk supplies the fixed positive margin used in the area argument." },
+  "area-minimizer": { title: "The exceptional two-vertex boundary arc", description: "A schematic normalized polygon lies inside the unit circle, with one radius-one vertex retained while an image-edge chord removes a two-dimensional region whose open boundary arc contains two old vertices.", caption: "Plate III.6. Schematic area comparison: the discarded open boundary arc and the removed two-dimensional region are different objects. When the radius-one vertex v remains in the retained polygon, the clip preserves the normalization and strictly lowers area." },
   "endpoint-ledger": { title: "The finite endpoint ledger", description: "An eight-field example with one gap count two, one gap count zero, a binary endpoint word, and opposite half-open counts all equal to one.", caption: "Plate IV.1. Here r=(1,2,1,1,1,0,1,1) and c=(0,0,1,1,1,1,0,0). The unique rise occurs at the 2, the unique fall at the 0, and ℓⱼ=rⱼ+cⱼ−cⱼ₊₁=1 in every field." },
   interlacing: { title: "Global cyclic interlacing", description: "Vertices of an inner red polygon alternate with vertices of an outer navy polygon around the same boundary order.", caption: "Plate IV.1. The endpoint ledger forces exactly one outer vertex in each consistently chosen half-open inner gap." },
   "lifted-shift": { title: "The cyclic shift on the real angle line", description: "Lifted angle marks and an arc showing addition of the multiplier angle followed by a fixed cyclic shift.", caption: "Plate IV.2. Lifting angles removes hidden multiples of 2π: endpoint contacts land exactly; strict contacts land inside a side interval." },
@@ -224,17 +499,39 @@ export function OwnershipMutationFigure({ kind, id }: { kind: FigureKind; id: st
   const titleId = `${id}-title`;
   const descriptionId = `${id}-description`;
   const markerId = `${id}-arrow`;
+  const hasMobileLayout = kind === "replacement" || kind === "clip" || kind === "area-minimizer";
+  const mobileViewBox = kind === "replacement" ? "0 0 360 610" : kind === "clip" ? "0 0 360 455" : "0 0 360 465";
   return (
     <figure className="topic-ii-concept-figure">
       <div className="topic-ii-concept-heading"><span>Deterministic mathematical plate</span><span>{copy.title}</span></div>
-      <svg role="img" aria-labelledby={`${titleId} ${descriptionId}`} viewBox="0 0 680 370">
+      <svg
+        role="img"
+        aria-labelledby={`${titleId} ${descriptionId}`}
+        className={hasMobileLayout ? "topic-ii-concept-svg topic-ii-concept-svg-desktop" : undefined}
+        viewBox="0 0 680 370"
+      >
         <title id={titleId}>{copy.title}</title><desc id={descriptionId}>{copy.description}</desc>
         <defs><marker id={markerId} markerHeight="7" markerWidth="8" orient="auto" refX="7" refY="3.5"><path d="M0,0 L8,3.5 L0,7 Z" fill={red} /></marker></defs>
         {kind === "half-open" ? <HalfOpen /> : null}{kind === "face-rigidity" ? <FaceRigidity /> : null}
-        {kind === "cap" ? <Cap /> : null}{kind === "hausdorff" ? <Hausdorff /> : null}{kind === "endpoint-ledger" ? <EndpointLedger /> : null}
-        {kind === "interlacing" ? <Interlacing /> : null}{kind === "lifted-shift" ? <LiftedShift markerId={markerId} /> : null}
-        {kind === "surgery" ? <Surgery markerId={markerId} /> : null}{kind === "residue-block" ? <ResidueBlock markerId={markerId} /> : null}
+        {kind === "replacement" ? <VertexReplacement /> : null}{kind === "clip" ? <ImageEdgeClip /> : null}
+        {kind === "area-minimizer" ? <AreaMinimizer /> : null}{kind === "hausdorff" ? <Hausdorff /> : null}
+        {kind === "endpoint-ledger" ? <EndpointLedger /> : null}{kind === "interlacing" ? <Interlacing /> : null}
+        {kind === "lifted-shift" ? <LiftedShift markerId={markerId} /> : null}{kind === "surgery" ? <Surgery markerId={markerId} /> : null}
+        {kind === "residue-block" ? <ResidueBlock markerId={markerId} /> : null}
       </svg>
+      {hasMobileLayout ? (
+        <svg
+          role="img"
+          aria-label={`${copy.title}, compact mobile layout`}
+          className="topic-ii-concept-svg topic-ii-concept-svg-mobile"
+          data-figure-layout="mobile"
+          viewBox={mobileViewBox}
+        >
+          {kind === "replacement" ? <VertexReplacementMobile /> : null}
+          {kind === "clip" ? <ImageEdgeClipMobile /> : null}
+          {kind === "area-minimizer" ? <AreaMinimizerMobile /> : null}
+        </svg>
+      ) : null}
       <figcaption>{copy.caption}</figcaption>
     </figure>
   );

@@ -10,11 +10,11 @@ export const topicIICommentary: Readonly<
   11: {
     figure: "triple-sign",
     intuition:
-      "Convexity can be certified without first drawing the convex hull. If every cyclic triple (zᵢ,zⱼ,zₖ) in the displayed list has the same nonzero orientation, then each consecutive segment sees every remaining point strictly on its inner side and must therefore be an exposed boundary edge.",
+      "The determinant conditions decide convexity without first drawing the convex hull. If every cyclic triple (zᵢ,zⱼ,zₖ) in the displayed list has the same nonzero orientation, then every remaining point lies in the same open half-plane determined by each consecutive segment. That half-plane is the one containing the polygon’s interior, so the segment is an exposed boundary edge.",
     architecture: [
       "Necessity is imported from Lemma 2.6: positive boundary order and positive determinant describe the same orientation.",
       "For sufficiency, fix one consecutive pair zᵢ,zᵢ₊₁. The triple inequalities put every other point strictly in the same open half-plane.",
-      "That half-plane statement exposes [zᵢ,zᵢ₊₁]. Repeating it for every i proves that all displayed points, and no hidden ones, are the vertices in the displayed order.",
+      "That half-plane statement exposes [zᵢ,zᵢ₊₁]. Repeating it for every i proves that the listed points are exactly the extreme points, in the displayed order.",
     ],
   },
   14: {
@@ -32,12 +32,12 @@ export const topicIICommentary: Readonly<
     architecture: [
       "A positive comparison vector x turns Bx≤cx into an operator-norm bound, hence spr(B)≤c.",
       "For a strictly positive matrix, minimise maxᵢ(Ax)ᵢ/xᵢ on the open probability simplex; the minimiser cannot approach the boundary and must satisfy Ax=Mx.",
-      "Approximate a general B≥0 by B+ε11ᵀ. A resolvent/Neumann-series comparison proves convergence of the Perron roots, while compactness of the simplex gives limiting right and left eigenvectors.",
+      "Approximate a general B≥0 by B+ε11ᵀ. The convergent series for (cI−B)⁻¹ proves convergence of the spectral radii, while compactness of the simplex gives limiting right and left eigenvectors.",
     ],
   },
   67: {
     intuition:
-      "Polarity turns every vertex into one supporting side and every side into one vertex. It is the mechanism that converts the already-proved side-touching statement into vertex touching without repeating the spectral argument.",
+      "Polarity turns every vertex into one supporting side and every side into one vertex. It converts the conclusion that every side intersects the image polygon into the conclusion that every image vertex lies on the boundary, without repeating the spectral argument.",
     architecture: [
       "Inner and outer disks around K give reciprocal outer and inner disks around K°, proving compactness and nonempty interior.",
       "The adjoint identity transports invariance from K to K°.",

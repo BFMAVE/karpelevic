@@ -361,9 +361,9 @@ export function ExposedFaceExplainer() {
         <p>
           is the <strong>face exposed by <i>ℓ</i></strong>. It consists of
           every point where <i>ℓ</i> attains its maximum—not merely one
-          arbitrarily chosen contact point. It may be a whole side, as below,
-          or a single vertex. In the single-vertex case, the corresponding
-          supporting line is strict.
+          arbitrarily chosen point of intersection. It may be a whole side,
+          as below, or a single vertex. In the single-vertex case, the
+          corresponding supporting line is strict.
         </p>
 
         <figure className="topic-i-local-figure">
@@ -386,8 +386,8 @@ export function AffineContactExplainer() {
       id="affine-contact-identities-explained"
     >
       <summary>
-        <span>The displayed identities, unpacked</span>
-        What does “affine contact conjugacy” mean here?
+        <span>Equation (2.3), unpacked</span>
+        How does a coordinate change transport the side data?
       </summary>
 
       <div className="topic-i-local-explainer-body">
@@ -409,9 +409,12 @@ export function AffineContactExplainer() {
             <span>On AP</span>
           </div>
           <div>
-            <span>strict contact side <i>e</i> ∈ <i>I</i></span>
+            <span>
+              side <i>e</i> ∈ <i>I</i>, with its assigned image point in the
+              relative interior
+            </span>
             <span aria-hidden="true">→</span>
-            <span>strict contact side <i>Ae</i> in the target set</span>
+            <span>side <i>Ae</i> in the corresponding target set</span>
           </div>
           <div>
             <span>next side <i>s</i>(<i>e</i>)</span>
@@ -419,18 +422,18 @@ export function AffineContactExplainer() {
             <span>next side after <i>Ae</i></span>
           </div>
           <div>
-            <span>contact rotation <i>σ</i>(<i>e</i>)</span>
+            <span>cyclic shift <i>σ</i>(<i>e</i>)</span>
             <span aria-hidden="true">→</span>
-            <span>contact rotation of <i>Ae</i></span>
+            <span>corresponding cyclic shift of <i>Ae</i></span>
           </div>
         </div>
 
         <p>
           The three identities say that these target objects are exactly the
           transported versions of the original ones. Equivalently: rename
-          each side by applying <i>A</i>, perform the successor or contact
-          operation, and you obtain the same answer as performing the
-          operation first and then applying <i>A</i>.
+          each side by applying <i>A</i>, then take the next side or apply the
+          cyclic shift. The result is the same as applying the operation first
+          and then renaming the resulting side by <i>A</i>.
         </p>
         <p>
           “Conjugacy” therefore means <strong>the same combinatorial rule after

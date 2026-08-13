@@ -32,12 +32,12 @@ export function ProofDependencyContract({
   return (
     <section className="topic-ii-reader-contract proof-chapter-contract" aria-labelledby="chapter-contract-heading">
       <header>
-        <p className="section-label">A closed dependency chain</p>
-        <h3 id="chapter-contract-heading">What this chapter is allowed to use</h3>
+        <p className="section-label">Prerequisites and sources</p>
+        <h3 id="chapter-contract-heading">What this chapter uses</h3>
         <p>
-          Nothing is smuggled in. Every ingredient below has already been
-          proved, is stated here with a precise source, or is established in
-          full before the chapter uses it.
+          Every ingredient below has already been proved, is stated here with
+          a precise source, or is established in full before the chapter uses
+          it.
         </p>
       </header>
       <div className="topic-ii-contract-grid">
@@ -59,4 +59,3 @@ export function ProofDependencyContract({
     </section>
   );
 }
-

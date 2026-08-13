@@ -8,6 +8,12 @@ const projectRoot = path.resolve(
   "..",
 );
 const outputRoot = path.join(projectRoot, "pages-out");
+const visibleTextFromHtml = (html) =>
+  html
+    .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+    .replace(/<annotation\b[\s\S]*?<\/annotation>/gi, " ")
+    .replace(/<[^>]*>/g, " ");
 const pages = [
   ["index.html", "Under construction"],
   ["history/index.html", "How a geometric question became an arithmetic boundary"],
@@ -15,7 +21,7 @@ const pages = [
   ["proof/index.html", "How the Proof Works"],
   [
     "proof/topic-ii/index.html",
-    "From convex order to active sides",
+    "From convex order to contact on every side",
   ],
   [
     "proof/topic-iii/index.html",
@@ -60,13 +66,15 @@ for (const relativePath of [
     path.join(outputRoot, "proof/topic-iii/index.html"),
     "utf8",
   );
+  const visibleText = visibleTextFromHtml(html);
   assert.match(html, /data-proof-route="topic-iii"/);
   assert.match(html, /Assignment to half-open sides/);
   assert.match(html, /This is only the membership statement/);
-  assert.match(html, /Cyclic shift[^<]*κ and source vertex/);
+  assert.match(html, /Positive closed and open boundary arcs/);
+  assert.match(html, /Discarded arc and old-vertex count/);
   assert.doesNotMatch(
-    html,
-    /labelled boundary slot|ownership word|zero-side signature|radius-one anchor/i,
+    visibleText,
+    /labelled boundary slot|ownership word|zero-side signature|radius-one anchor|cyclic shift[^<]*κ and source vertex|strict mixture|shared-side edge|source shelf|support gap|boundary mixture|collinear candidates|closed dependency chain|Nothing is smuggled|\bcap(?:s|ped|ping)?\b/i,
   );
 }
 

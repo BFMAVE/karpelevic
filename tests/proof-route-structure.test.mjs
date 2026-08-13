@@ -72,13 +72,24 @@ test("Topic III states half-open side membership without invented boundary jargo
   assert.equal(response.status, 200);
 
   const html = await response.text();
+  const documentHtml = html
+    .replace(/<script[\s\S]*?<\/script>/gi, "")
+    .replace(/<style[\s\S]*?<\/style>/gi, "")
+    .replace(/<annotation\b[\s\S]*?<\/annotation>/gi, "");
+  const visibleText = documentHtml.replace(/<[^>]*>/g, " ");
   assert.match(html, /Half-open boundary assignments and edge clipping/);
   assert.match(html, /Assignment to half-open sides/);
   assert.match(html, /This is only the membership statement/);
-  assert.match(html, /Cyclic shift[^<]*κ and source vertex/);
+  assert.match(visibleText, /indices are read modulo/);
+  assert.match(visibleText, /Positive closed and open boundary arcs/);
+  assert.match(visibleText, /Discarded arc and old-vertex count/);
+  assert.match(visibleText, /Plate III\.3/);
+  assert.match(visibleText, /Plate III\.4/);
+  assert.match(visibleText, /Plate III\.5/);
+  assert.match(visibleText, /Plate III\.6/);
   assert.doesNotMatch(
-    html,
-    /labelled boundary slot|labeled boundary slot|determinant atlas|zero-side signature|transparent vertex budget|radius-one anchor|One endpoint, one owner/i,
+    visibleText,
+    /labelled boundary slot|labeled boundary slot|determinant atlas|zero-side signature|transparent vertex budget|radius-one anchor|One endpoint, one owner|strict mixture|shared-side edge|source shelf|support gap|boundary mixture|collinear candidates|closed dependency chain|Nothing is smuggled|\bcap(?:s|ped|ping)?\b|admissible (?:polygon|candidate)|cyclic shift[^<]*κ and source vertex/i,
   );
 });
 

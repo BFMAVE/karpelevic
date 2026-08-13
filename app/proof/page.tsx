@@ -40,7 +40,7 @@ import { sitePath } from "../lib/site-path";
 export const metadata: Metadata = {
   title: "How the Proof Works",
   description:
-    "Topic I of a fourteen-topic, source-aware reader that works from critical invariant polygons to the Karpelevič–Ito theorem.",
+    "Topic I of a fourteen-topic annotated proof that works from critical invariant polygons to the Karpelevič–Ito theorem.",
 };
 
 const pageTimestamp = getPageTimestamp("app/data/proof.ts");
@@ -116,6 +116,11 @@ function resultNumber(label: string): string {
   return label.replace(/^(?:Proposition|Lemma|Theorem|Remark)\s+/, "");
 }
 
+const topicIReadingOverrides: Readonly<Record<number, string>> = {
+  1: "Defines N-criticality by comparing the least invariant-polygon vertex count for T with the counts for every tT with t>1.",
+  7: "Shows that an invertible coordinate change preserves vertices, sides, boundary intersections, and the side data in equation (2.3).",
+};
+
 const collapsibleProofItems = new Set([5, 6, 8, 9, 10, 66]);
 const resultCommentaryOmissions = new Set([6, 7, 8, 10, 66]);
 
@@ -149,7 +154,7 @@ export default function ProofPage() {
   return (
     <>
       <a className="skip-link" href="#main-content">
-        Skip to the proof reader
+        Skip to Topic I
       </a>
 
       <header className="site-header" id="top">
@@ -399,7 +404,7 @@ export default function ProofPage() {
                           The convex hull of finitely many points, bounded and
                           closed, with nonempty two-dimensional interior.
                           “Nondegenerate” rules out a single point or a line
-                          segment. Its genuine corner points form{" "}
+                          segment. Its extreme points form{" "}
                           Ext(<i>P</i>), the set of extreme points of{" "}
                           <i>P</i>.
                           <details className="topic-i-definition-question">
@@ -568,7 +573,7 @@ export default function ProofPage() {
                         <dt>Polygonal complexity</dt>
                         <dd>
                           The number ν<sub>poly</sub>(<i>A</i>) is the smallest
-                          possible number of genuine vertices among all
+                          possible number of extreme points among all
                           nondegenerate compact convex polygons invariant
                           under <i>A</i>. It is ∞ if no such polygon exists.
                         </dd>
@@ -613,7 +618,7 @@ export default function ProofPage() {
                       <p>
                         The displayed minimum below packages the first five
                         definitions into one coordinate-free quantity. Read{" "}
-                        Ext(<i>P</i>) as “the genuine vertices of <i>P</i>.”
+                        Ext(<i>P</i>) as “the extreme points of <i>P</i>.”
                       </p>
                     </div>
                     <div
@@ -644,7 +649,10 @@ export default function ProofPage() {
                                 {topicIManuscriptLabels[item.number]}
                               </p>
                               <h5>{item.title}</h5>
-                              <p>{item.reading}</p>
+                              <p>
+                                {topicIReadingOverrides[item.number] ??
+                                  item.reading}
+                              </p>
                             </header>
 
                             <section
@@ -669,8 +677,10 @@ export default function ProofPage() {
                                   <sup>⊳</sup> is not a power of <i>e</i>: it
                                   denotes the half-open line segment{" "}
                                   (<i>t</i>(<i>e</i>), <i>h</i>(<i>e</i>)]
-                                  obtained from the side <i>e</i> by excluding
-                                  its tail and including its head.
+                                  obtained from the oriented side <i>e</i> by
+                                  excluding its starting endpoint <i>t</i>(
+                                  <i>e</i>) and including its ending endpoint{" "}
+                                  <i>h</i>(<i>e</i>).
                                 </p>
                                 <StrictPolygonExplainer />
                               </>
@@ -764,7 +774,10 @@ export default function ProofPage() {
                                   </span>
                                 </div>
                                 <h3>{item.title}</h3>
-                                <p>{item.reading}</p>
+                                <p>
+                                  {topicIReadingOverrides[item.number] ??
+                                    item.reading}
+                                </p>
                               </div>
                             </header>
 
@@ -930,7 +943,9 @@ export default function ProofPage() {
 
                   <section className="proof-topic-sources" aria-labelledby={`topic-${topic.slug}-sources`}>
                     <p className="section-label">Sources cited in this topic</p>
-                    <h3 id={`topic-${topic.slug}-sources`}>Source shelf</h3>
+                    <h3 id={`topic-${topic.slug}-sources`}>
+                      References and provenance
+                    </h3>
                     <ol>
                       {sourceIds.map((sourceId) => {
                         const source = getProofSource(sourceId);
@@ -989,7 +1004,9 @@ export default function ProofPage() {
                         href={sitePath("/proof/topic-ii/")}
                       >
                         <span>Next</span>
-                        <strong>Topic II · From convex order to active sides</strong>
+                        <strong>
+                          Topic II · From convex order to contact on every side
+                        </strong>
                       </a>
                     )}
                   </nav>

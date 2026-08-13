@@ -106,7 +106,7 @@ material, not with generative imagery.
 | 5 | Personal and contribution pages: My Journey, What This Paper Adds | **My Journey first draft complete — awaiting author review** |
 | 6 | Interactive exploration | Not started |
 | 7 | Final QA and author-approved deployment | **Current three-page release deployed and verified** |
-| 8 | Fourteen-topic annotated proof reader | **Complete locally; two independent student readings and 16 classified reports complete; Topics I and II published** |
+| 8 | Fourteen-topic annotated proof reader | **Complete locally; two independent student readings and 16 classified reports complete; Topics I–III published** |
 
 ## Canonical Proof-Reader Architecture
 
@@ -120,10 +120,10 @@ stochastic matrices, constructs and bounds the candidate boundary, proves
 attainment and nesting, and states the classical theorem only after all of its
 ingredients are available.
 
-1. **Topic I — The language of critical polygons.**
+1. **Topic I — Critical maps and invariant polygons.**
    PDF pages 2–3 and 6–10; supporting Lemma A.2 on page 63.
    Complete locally and published.
-2. **Topic II — From convex order to active sides.**
+2. **Topic II — From convex order to contact on every side.**
    PDF pages 10–15; supporting Lemmas A.1 and A.3 on pages 61 and 63.
    Complete locally and published.
 3. **Topic III — Half-open boundary assignments and edge clipping.**
@@ -774,7 +774,7 @@ full local source history remain later site milestones.
   canonical TeX and the generated web edition. The boundary definition now
   uses closure, normal cones live intrinsically in the dual plane, the custom
   strict-polygon terminology is disambiguated, and radial criticality is
-  described as the last outward scale at which the vertex budget suffices.
+  described as the last outward scale at which (N) vertices suffice.
 - **Done locally:** Proposition 2.1 explicitly records
   `det(T)>0`. Proposition 2.3 now confines its formal statement to the
   contact geometry defined in Topic I and moves later functorial constructions
@@ -797,8 +797,8 @@ full local source history remain later site milestones.
 - **Done locally:** Proposition 2.2 now presents the concise manuscript proof
   first, with the six-step pedagogical proof nested as an optional second
   layer. The repetitive walkthrough for Proposition 2.3 has been removed.
-- **Author decision:** no source table was added. The existing end-of-topic
-  Source shelf remains a simple bibliography, as requested.
+- **Author decision:** no source table was added. The end-of-topic References
+  and provenance section remains a simple bibliography, as requested.
 - **Verified locally:** production build, ESLint, and all six rendered-output
   tests pass. The self-contained HTML has been regenerated at both
   `share/Critical_Invariant_Polygons_Topic_I.html` and
@@ -954,3 +954,78 @@ full local source history remain later site milestones.
   from the public package; Topic IV returns 404.
 - **Next:** author review of Topic IV locally. Publish no later topic without
   explicit approval.
+
+## Current milestone — Topic I–II terminology pass (local review)
+
+- **Direct mathematical language:** avoidable shorthand has been removed from
+  the rendered Topic I and Topic II chapters. In particular, the pages no
+  longer use “vertex budget,” “critical polygon,” “active side,” “ownership,”
+  “handedness,” “certificate,” “fan cone,” “continuous point function,” or
+  “affine contact conjugacy” as explanatory terminology.
+- **Necessary local terms:** polygonal complexity, \(N\)-criticality, strict
+  polygon, one-sided contact representation, and hereditary saturation are
+  retained because the argument uses them repeatedly. Each is now accompanied
+  by its exact definition or by the explicit set membership, map, or
+  inequality it abbreviates.
+- **Formal text synchronized:** the corresponding canonical TeX passages were
+  revised without changing theorem numbers, labels, hypotheses, conclusions,
+  or proof logic, and `app/data/part-i-content.generated.ts` was regenerated.
+  Side contact is written as a nonempty intersection and the cyclic map
+  \(\sigma\) is described as a cyclic shift of side labels.
+- **Regression protection:** the rendered-route test rejects the removed
+  Topic I–II terminology so that it cannot silently return in later edits.
+- **Verified locally:** the production build, all 29 automated tests, ESLint,
+  and `git diff --check` pass. Browser inspection at desktop and phone widths
+  found the intended 54-pixel and 20-pixel body gutters respectively, no page
+  overflow, no rejected terms in visible text, and no console warnings or
+  errors. Representative collapsed explanations were opened and inspected on
+  both chapters.
+- **Publication status:** local only and awaiting author review. Nothing from
+  this terminology pass has been pushed or deployed.
+- **Next:** author review at <http://localhost:3000/proof> and
+  <http://localhost:3000/proof/topic-ii>. Publish only after explicit approval.
+
+## Current milestone — Topic III precision, figure, and jargon pass (local review)
+
+- **Formal precision repaired:** Topic III now states cyclic indexing modulo
+  (N), defines positive open and closed boundary arcs, requires the linear
+  part of a supporting affine functional to be nonzero, and never uses
+  “strict convexity” as a synonym for the custom strict-polygon condition.
+- **Clipping objects separated:** Lemmas 4.8–4.9 distinguish the removed
+  two-dimensional region, the discarded closed boundary arc (A_j), its open
+  part (A_j^\circ), and the old-vertex count (k_j). The canonical proof now
+  supplies the missing supporting-functional, orientation, normalization,
+  criticality, and disjoint-arc justifications.
+- **Lemma 4.7 localized:** its statement concerns only the two half-open side
+  memberships after replacing one vertex. It no longer assumes the global
+  shift parameter that is established only in Topic IV.
+- **Figures corrected:** Plate III.3 is a genuine before-and-after vertex
+  replacement; Plate III.4 is an exact regular-heptagon clipping model; and
+  Plate III.6 separately depicts the discarded arc and removed region in the
+  least-area argument. A deterministic check verifies the Plate III.4
+  multiplier to (8.04\times10^{-14}), (Q\subseteq P), and exactly one
+  removed old vertex.
+- **Reader-facing language simplified:** avoidable “atlas,” “ledger,”
+  “certificate,” “slot,” “ownership,” “cap,” “shared-side edge,” “candidate,”
+  “support gap,” and similar shorthand is absent from the rendered Topic III
+  text. Recurrent mathematical terms are retained only when defined or
+  explicitly imported.
+- **Mobile figures rebuilt:** Plates III.3, III.4, and III.6 use dedicated
+  compact layouts on phones. At a 390-pixel viewport, their labels render at
+  approximately 13.5–17.1 pixels, with no horizontal overflow.
+- **Sources made more exact:** Swift Appendix A, p. A-6 is cited for the
+  half-open convention; Swift pp. A-8–A-9, Lemma II for the clipping count;
+  and Schneider for the stated supporting-hyperplane and exposed-face facts.
+  Lemma 4.7 is conservatively left without a provenance badge pending a
+  separate primary-literature audit.
+- **Verified locally:** the manuscript content generator, production build,
+  all 29 automated tests, ESLint, `git diff --check`, the GitHub Pages
+  subpath/privacy export, and the portable offline export pass. Desktop and
+  mobile browser inspection found the intended 54-pixel and 20-pixel body
+  gutters, no page or figure overflow, and no console warnings or errors.
+- **Portable review copy:**
+  `share/Critical_Invariant_Polygons_Topic_III.html`.
+- **Publication status:** local only and awaiting author review. These Topic
+  III corrections have not been pushed or deployed.
+- **Next:** author review at <http://localhost:3000/proof/topic-iii>. Publish
+  only after explicit approval.

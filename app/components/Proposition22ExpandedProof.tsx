@@ -219,7 +219,7 @@ export function Proposition22ExpandedProof() {
           </li>
 
           <li>
-            <h6>The correspondence preserves genuine vertices.</h6>
+            <h6>The correspondence preserves extreme points.</h6>
             <p>
               Suppose <i>x</i> is extreme in <i>P</i> and{" "}
               <i>Ax</i> = <i>s y</i>
@@ -266,13 +266,13 @@ export function Proposition22ExpandedProof() {
           <li>
             <h6>The two minimisation problems are identical.</h6>
             <p>
-              We have a bijection between all polygons admissible for{" "}
-              <i>T</i> and all polygons admissible for{" "}
-              <i>ATA</i>
+              We have a bijection between all polygons satisfying{" "}
+              <i>TP</i>⊆<i>P</i> and all polygons satisfying the corresponding
+              inclusion for <i>ATA</i>
               <sup>−1</sup>, and the bijection preserves the number of extreme
               points. The two sets of possible vertex counts are therefore
-              equal. Their minima agree; if either admissible class is empty,
-              both are empty and both complexities equal ∞. Hence
+              equal. Their minima agree; if either set of candidate polygons
+              is empty, both are empty and both complexities equal ∞. Hence
             </p>
             <ComplexityEquation />
           </li>

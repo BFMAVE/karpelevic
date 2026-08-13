@@ -65,15 +65,20 @@ export const topicIResultGuides: Readonly<
         definition:
           "A construction is covariant when a change of coordinates transports every object it produces—vertices, sides, faces, contacts, and labels—in a compatible way.",
       },
+      {
+        term: "The side data in equation (2.3)",
+        definition:
+          "The set ℰ(P) consists of the oriented sides of P, and s(e) is the next side. The map χ assigns each vertex v to a side containing Tv. The set I consists of those assigned sides for which Tv lies in the relative interior, while h(e) is the ending vertex of e and σ(e)=χ(h(e)) is a cyclic shift of the side labels. Finally, A_ℰ sends each side e of P to the side Ae of AP.",
+      },
     ],
   },
   8: {
     manuscriptLabel: "Lemma 2.4",
     newVocabulary: [
       {
-        term: "Right-admissible contact labelling",
+        term: "Assignment to right-half-open sides",
         definition:
-          "A contact assignment in which every image vertex belongs to its assigned right-half-open side. Reflection turns right-half-open sides into left-half-open sides.",
+          "Every image vertex Tv is assigned to a side whose right-half-open segment (tail, head] contains Tv. Reflection changes this segment into one that includes the opposite endpoint, so endpoint assignments must be checked again.",
       },
     ],
   },
@@ -98,7 +103,7 @@ export const topicIResultGuides: Readonly<
       {
         term: "Degree +1",
         definition:
-          "Since K is convex about the interior point o, its boundary is a positive radial graph: one positive boundary circuit makes the polar direction complete one counterclockwise turn. Thus the radial map from ∂K to the circle has degree +1 and preserves cyclic order.",
+          "Every ray from the interior point o meets ∂K exactly once. Traversing ∂K once in its positive orientation therefore makes the direction z−o traverse the unit circle once counterclockwise. Thus the radial map has degree +1 and preserves cyclic order.",
       },
     ],
   },

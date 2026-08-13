@@ -49,32 +49,12 @@ export const topicIIResultGuides: Readonly<
         definition:
           "A segment is an exposed edge of a convex hull when one supporting line meets the hull in exactly that segment. A supporting line “exposes” a face F if the face is exactly the set where the supporting inequality is tight. In this lemma the consistent determinant sign puts every other displayed point strictly on one side of each consecutive segment, so that segment must be a boundary edge.",
       },
-      {
-        term: "Complete certificate",
-        definition:
-          "A finite list is a complete certificate when the listed conditions are necessary and sufficient for the target property. If every condition holds, the target property follows; if the target property fails, at least one condition must fail.",
-      },
     ],
   },
   12: {
     manuscriptLabel: "Lemma 2.8",
     role: "Main argument",
     newVocabulary: [
-      {
-        term: "Continuous point function",
-        definition:
-          "A continuous map ϕ:(−δ,δ)→V, where V is the real plane used throughout the chapter (and may be identified with ℝ² or ℂ). The word ‘point’ only says that each value ϕ(τ) is a point of that plane: as τ changes slightly, the point moves without jumps.",
-      },
-      {
-        term: "Common-neighbourhood argument",
-        definition:
-          "If finitely many conditions are strict and remain true at τ=0, each gives an open interval of τ where it still holds. Their finite intersection is a nonempty open interval on which all of them hold simultaneously.",
-      },
-      {
-        term: "Simultaneous admissibility",
-        definition:
-          "All required strict inequalities and open-segment conditions hold on one common interval around τ=0. Finiteness matters: intersecting finitely many open neighbourhoods still leaves an open neighbourhood of 0.",
-      },
       {
         term: "Affine coordinate on a side",
         definition:
@@ -128,7 +108,7 @@ export const topicIIResultGuides: Readonly<
       {
         term: "Nonnegative transfer matrix BΦ(θ)",
         definition:
-          "For each row i, rotate uᵢ backwards by θ and express it as aᵢuⱼ+bᵢuⱼ₊₁ in the containing fan cone. The only nonzero entries in row i are those coefficients aᵢ,bᵢ≥0. Thus BΦ(θ) records how the rotated directions interpolate between adjacent fan rays.",
+          "For each row i, rotate uᵢ backwards by θ and express it as aᵢuⱼ+bᵢuⱼ₊₁ using the two adjacent normal rays that contain the rotated direction between them. The only nonzero entries in row i are those coefficients aᵢ,bᵢ≥0. Thus BΦ(θ) records how the rotated directions interpolate between adjacent normal rays.",
       },
       {
         term: "Componentwise inequality",
@@ -185,7 +165,7 @@ export const topicIIResultGuides: Readonly<
       {
         term: "Irredundant inequality",
         definition:
-          "A defining half-plane inequality that cannot be deleted without enlarging the set. Each vertex x of K gives the irredundant polar inequality ⟨y,x⟩≤1 and therefore one genuine side of K°.",
+          "A defining half-plane inequality that cannot be deleted without enlarging the set. Each vertex x of K gives the irredundant polar inequality ⟨y,x⟩≤1 and therefore one nondegenerate side of K°.",
       },
       {
         term: "Dual face",
@@ -199,29 +179,19 @@ export const topicIIResultGuides: Readonly<
     role: "Main argument",
     newVocabulary: [
       {
-        term: "Saturation",
+        term: "Hereditary saturation",
         definition:
-          "Side saturation means every side of R has nonempty intersection with TR (equivalently, each support inequality is tight). Vertex saturation means every vertex of TR lies on ∂R. The theorem proves both, for every invariant polygon with the same vertex budget N=νpoly(T).",
+          "This manuscript uses hereditary saturation for two conclusions that hold for every invariant polygon R with at most N vertices: every side E of R satisfies E∩TR≠∅, and every vertex of TR lies on ∂R. Here N=νpoly(T) is the minimal number of vertices among T-invariant polygons.",
       },
       {
-        term: "Vertex budget",
+        term: "Gap in a support inequality",
         definition:
-          "The fixed value N=νpoly(T), the minimal number of vertices among T-invariant polygons (or ∞ if none exist). In this topic the budget is fixed once and for all for the contraction T under study.",
+          "For support vector h and matrix B, put q:=h−ρBh. Its coordinate qᵢ=hᵢ−(ρBh)ᵢ is nonnegative by invariance and measures the gap in side i’s support inequality. If qᵢ=0, side i intersects TR; if qᵢ>0, it does not. In optimization, such a nonnegative gap is often called slack.",
       },
       {
-        term: "Support slack",
+        term: "Nonempty intersection",
         definition:
-          "For support vector h and matrix B, define slack q:=h−ρBh. Each coordinate is qᵢ=hᵢ−(ρBh)ᵢ and is ≥0 by invariance. qᵢ=0 is tight saturation of side i, while qᵢ>0 means that side is not hit by TR.",
-      },
-      {
-        term: "Vanishing slack",
-        definition:
-          "The condition q=0, i.e. h=ρBh coordinatewise. Vanishing slack means every side inequality is tight, so every side intersects TR.",
-      },
-      {
-        term: "Meets",
-        definition:
-          "For sets A and B, A meets B means A∩B is nonempty. Here a polygon side meets TR if they share at least one point.",
+          "The statement E∩TR≠∅ means that the side E and the image polygon TR share at least one point.",
       },
       {
         term: "Positive spanning",
@@ -231,12 +201,12 @@ export const topicIIResultGuides: Readonly<
       {
         term: "Recession cone",
         definition:
-          "The directions d for which z+td remains in a convex set for every t≥0. For {z:⟨uᵢ,z⟩≤hᵢ}, it is {d:⟨uᵢ,d⟩≤0 for all i}. Positive spanning makes this cone {0}, hence the finite half-plane intersection is bounded.",
+          "For a convex set C, its recession cone consists of the directions d for which z+td∈C for every z∈C and every t≥0. For C={z:⟨uᵢ,z⟩≤hᵢ}, it is {d:⟨uᵢ,d⟩≤0 for all i}. Positive spanning makes this cone {0}, hence the finite half-plane intersection is bounded.",
       },
       {
         term: "Complementarity",
         definition:
-          "If w≥0 and q=h−ρBh≥0 satisfy wᵀq=0, then every product wᵢqᵢ is zero. Once every wᵢ is proved positive, all slacks qᵢ vanish, so every supporting inequality is attained.",
+          "If w≥0 and q=h−ρBh≥0 satisfy wᵀq=0, then every product wᵢqᵢ is zero. Once every wᵢ is proved positive, every support-inequality gap qᵢ is zero, so every supporting inequality is attained by TR.",
       },
       {
         term: "Neumann series",
@@ -251,21 +221,15 @@ export const topicIIResultGuides: Readonly<
     role: "Consequence",
     newVocabulary: [
       {
-        term: "Hereditary",
+        term: "Why the theorem is called hereditary",
         definition:
-          "The conclusion is not tied to one initially chosen critical polygon. It applies again to every later replacement polygon once that polygon has independently been shown to remain an invariant N-gon.",
+          "The conclusion is not tied to one initially chosen polygon. It applies again whenever a modified polygon has independently been shown to remain an invariant N-gon.",
       },
     ],
   },
   18: {
     manuscriptLabel: "Lemma 4.1",
     role: "Main argument",
-    newVocabulary: [
-      {
-        term: "Witness",
-        definition:
-          "A concrete vertex q of Q lying on the side E. The lemma upgrades the set-level statement E∩Q≠∅ to a vertex-level contact, which is the discrete datum needed later.",
-      },
-    ],
+    newVocabulary: [],
   },
 } as const;
