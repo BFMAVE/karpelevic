@@ -1,4 +1,4 @@
-import { cp, mkdir, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
@@ -72,6 +72,19 @@ await mkdir(outputRoot, { recursive: true });
 await cp(path.join(projectRoot, "dist/client"), outputRoot, {
   recursive: true,
 });
+
+// The client build contains artifacts for every local proof route. The public
+// Pages edition intentionally publishes only the rendered routes above, so
+// remove build metadata, later-topic downloads, and client bundles that the
+// script-free static pages do not reference.
+await rm(path.join(outputRoot, ".vite"), { force: true, recursive: true });
+await rm(path.join(outputRoot, "code"), { force: true, recursive: true });
+const assetDirectory = path.join(outputRoot, "assets");
+for (const entry of await readdir(assetDirectory, { withFileTypes: true })) {
+  if (entry.isFile() && entry.name.endsWith(".js")) {
+    await rm(path.join(assetDirectory, entry.name), { force: true });
+  }
+}
 
 const serverEntry = pathToFileURL(
   path.join(projectRoot, "dist/server/index.js"),

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { access, readFile } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -54,3 +54,12 @@ await access(path.join(outputRoot, "favicon.svg"));
 await access(path.join(outputRoot, "contact.js"));
 await access(path.join(outputRoot, "proof.js"));
 await access(path.join(outputRoot, ".nojekyll"));
+
+await assert.rejects(access(path.join(outputRoot, ".vite")));
+await assert.rejects(access(path.join(outputRoot, "code")));
+const publicAssetEntries = await readdir(path.join(outputRoot, "assets"));
+assert.equal(
+  publicAssetEntries.some((entry) => entry.endsWith(".js")),
+  false,
+  "The public static asset directory must not expose later-topic client bundles.",
+);
