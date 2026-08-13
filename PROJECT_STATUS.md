@@ -1092,7 +1092,7 @@ full local source history remain later site milestones.
 - **Next:** review Topic IV online and keep Topic V local until it receives the
   same mathematical, editorial, figure, accessibility, and source audit.
 
-## Current milestone — Topic III standalone-rigor refinement (publication pending)
+## Current milestone — Topic III standalone-rigor refinement (published 13 August 2026)
 
 - **Formal gaps closed:** Lemma 4.7 now defines the modified polygon (P') and
   proves that its displayed list consists of exactly (N) extreme points and
@@ -1125,5 +1125,10 @@ full local source history remain later site milestones.
   ESLint, and `git diff --check` pass. Browser checks at desktop and 390-pixel
   widths found no overflow or console errors; all nine proof disclosures and
   the Guided/Formal/Open/Close controls work.
-- **Publication status:** approved by the author and pending the static-only
-  GitHub Pages deployment. Topics V–XIV must remain absent.
+- **Publication status:** published at
+  `https://bfmave.github.io/karpelevic/proof/topic-iii/` from local source
+  commit `345d55bcf13eda6415031d2c2789ed4018669981` through the static-only
+  public commit `660854aef53831d6229ebcb646d160caaca8d1c8`. The deployed Topic III
+  HTML is byte-identical to the audited export; Topics I–IV return HTTP 200,
+  Topic V returns HTTP 404, and Topics V–XIV remain absent from the public
+  route atlas.
