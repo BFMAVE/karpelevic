@@ -40,7 +40,7 @@ function HalfOpen() {
       <Dot x={310} y={105} accent />
       <Dot x={545} y={205} />
       <text x="72" y="253" fill={ink}>xᵢ₋₁ excluded</text>
-      <text x="268" y="80" fill={red}>xᵢ owned by Eᵢ⁺</text>
+      <text x="268" y="80" fill={red}>xᵢ belongs only to Eᵢ⁺</text>
       <text x="430" y="244" fill={ink}>outgoing side Eᵢ₊₁</text>
       <text x="240" y="280" fill={ink} fontSize="18">Eᵢ⁺ = (xᵢ₋₁, xᵢ]</text>
     </>
@@ -59,7 +59,7 @@ function FaceRigidity() {
       <text x="417" y="42" fill={ink}>B</text>
       <text x="282" y="111" fill={ink}>(1−s)A+sB</text>
       {[112, 142, 172].map((y) => <line key={y} x1="135" y1={y} x2="520" y2={y - 17.24} stroke={copper} strokeWidth="1" strokeDasharray="7 7" />)}
-      <text x="340" y="330" fill={ink} fontSize="16" textAnchor="middle">a boundary mixture traps both endpoints on one exposed side</text>
+      <text x="340" y="330" fill={ink} fontSize="16" textAnchor="middle">both endpoints lie on the same exposed side</text>
     </>
   );
 }
@@ -208,7 +208,7 @@ function ResidueBlock({ markerId }: { markerId: string }) {
 }
 
 const descriptions: Record<FigureKind, { title: string; description: string; caption: string }> = {
-  "half-open": { title: "One endpoint, one owner", description: "Two polygon sides share a vertex, but the incoming half-open side includes it and the outgoing side excludes it.", caption: "Plate III.1. The right-half-open convention assigns the shared vertex to its incoming side only." },
+  "half-open": { title: "One endpoint, one half-open side", description: "Two closed polygon sides share a vertex, but the incoming half-open side includes it and the outgoing half-open side excludes it.", caption: "Plate III.1. The right-half-open convention places the shared vertex in its incoming side and not in its outgoing side." },
   "face-rigidity": { title: "A boundary mixture lies in one face", description: "Two points and their strict convex combination lie on one supporting side of a polygon.", caption: "Plate III.2. Equality in a supporting functional forces both endpoints—and therefore their segment—onto the same exposed side." },
   cap: { title: "Clipping along an image edge", description: "An outer polygon, its inner image, and the cap discarded by the line of one image edge.", caption: "Plate III.3. Keeping the edge half-plane containing Q preserves λPⱼ⊆Q⊆Pⱼ and makes the vertex count explicit." },
   hausdorff: { title: "Two-sided convergence of polygons", description: "A dashed polygon and a nearby limit polygon, with corresponding displacements and an interior disk.", caption: "Plate III.4. Hausdorff convergence controls both directions; the interior disk supplies the uniform support gap used in the area argument." },

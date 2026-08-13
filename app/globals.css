@@ -7835,18 +7835,15 @@ math mover > mo[accent="true"] {
 
 .proof-chapter-panel {
   display: block;
+  --proof-chapter-page-gutter: clamp(20px, 4.2vw, 64px);
+
+  padding-right: var(--proof-chapter-page-gutter);
+  padding-left: var(--proof-chapter-page-gutter);
 }
 
-.proof-chapter-panel[data-proof-route="topic-ii"] {
-  --topic-ii-page-gutter: clamp(20px, 4.2vw, 64px);
-
-  padding-right: var(--topic-ii-page-gutter);
-  padding-left: var(--topic-ii-page-gutter);
-}
-
-.proof-chapter-panel[data-proof-route="topic-ii"] > .proof-chapter-heading {
-  margin-right: calc(-1 * var(--topic-ii-page-gutter));
-  margin-left: calc(-1 * var(--topic-ii-page-gutter));
+.proof-chapter-panel > .proof-chapter-heading {
+  margin-right: calc(-1 * var(--proof-chapter-page-gutter));
+  margin-left: calc(-1 * var(--proof-chapter-page-gutter));
 }
 
 .proof-chapter-heading h2 {
@@ -8099,12 +8096,12 @@ math mover > mo[accent="true"] {
     display: none !important;
   }
 
-  .proof-chapter-panel[data-proof-route="topic-ii"] {
+  .proof-chapter-panel {
     padding-right: 0;
     padding-left: 0;
   }
 
-  .proof-chapter-panel[data-proof-route="topic-ii"] > .proof-chapter-heading {
+  .proof-chapter-panel > .proof-chapter-heading {
     margin-right: 0;
     margin-left: 0;
   }

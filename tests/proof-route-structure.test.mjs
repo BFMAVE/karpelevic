@@ -67,6 +67,21 @@ for (const [pathname, expectedResults, expectedProofs] of chapters) {
   });
 }
 
+test("Topic III states half-open side membership without invented boundary jargon", async () => {
+  const response = await render("/proof/topic-iii");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /Half-open boundary assignments and edge clipping/);
+  assert.match(html, /Assignment to half-open sides/);
+  assert.match(html, /This is only the membership statement/);
+  assert.match(html, /Cyclic shift[^<]*κ and source vertex/);
+  assert.doesNotMatch(
+    html,
+    /labelled boundary slot|labeled boundary slot|determinant atlas|zero-side signature|transparent vertex budget|radius-one anchor|One endpoint, one owner/i,
+  );
+});
+
 test("Topic XIV provides the complete example and executable boundary lab", async () => {
   const response = await render("/proof/topic-xiv");
   assert.equal(response.status, 200);

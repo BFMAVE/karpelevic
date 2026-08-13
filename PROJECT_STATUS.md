@@ -126,7 +126,7 @@ ingredients are available.
 2. **Topic II — From convex order to active sides.**
    PDF pages 10–15; supporting Lemmas A.1 and A.3 on pages 61 and 63.
    Complete locally and published.
-3. **Topic III — Building one-sided ownership.**
+3. **Topic III — Half-open boundary assignments and edge clipping.**
    PDF pages 15–19; supporting Lemmas A.4 and A.5 on page 64.
 4. **Topic IV — From endpoint order to contact reduction.**
    PDF pages 19–30.
@@ -922,3 +922,29 @@ full local source history remain later site milestones.
   package.
 - **Next:** author review of Topic III locally. Publish no later topic without
   explicit approval.
+
+## Current milestone — Topic III terminology and layout pass (local only)
+
+- **Layout corrected:** every multi-page proof chapter now has the same
+  responsive horizontal gutter. At the reviewed desktop width, Topic III's
+  body begins about 63 pixels from the viewport edge instead of 0 pixels; the
+  navy chapter heading remains full width. Topic II keeps its existing
+  spacing, and the same correction prevents the defect in Topics IV–XIV.
+- **Nonstandard shorthand removed from Topic III:** the visible exposition and
+  formal excerpt now state half-open side membership directly. “Field,”
+  “labelled boundary slot,” “owns,” “ownership word,” “atlas,” “address,”
+  “certificate,” “vertex budget,” and “radius-one anchor” are no longer used
+  to explain the Topic III argument.
+- **Definitions made explicit:** side index `i` is defined simply as the label
+  of `E_i=[x_{i-1},x_i]`; assignment means the membership
+  `z in E_i^+`; the vanishing-index set is displayed in full; and the
+  conditional cyclic shift `kappa` and its source vertex are introduced before
+  Lemma 4.7 uses them.
+- **Mathematics preserved:** result numbers, labels, formulas, hypotheses,
+  conclusions, and full proofs are unchanged. Display titles and prose now
+  describe the mathematical assertions directly.
+- **Verified locally:** the production build and all 29 automated tests pass.
+  Chrome shows the revised page without the previous transform overlay, and
+  the visible body gutter matches the intended Topic II spacing.
+- **Publication status:** local only. Topic III remains absent from the public
+  Pages package pending author review and explicit approval.

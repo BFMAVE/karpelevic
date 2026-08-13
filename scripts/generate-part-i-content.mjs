@@ -491,7 +491,7 @@ const markers = {
   sideWitness:
     '<div id="lem:side-witness" class="lemma">',
   symbolicEndpointOwnership:
-    '<h4 id="symbolic-endpoint-ownership">',
+    '<h4 id="half-open-boundary-assignments">',
   ownershipWord:
     '<div id="def:ownership-word" class="definition">',
   halfOpenSideAtlas:
@@ -504,7 +504,7 @@ const markers = {
     '<div id="lem:labeled-side-matrix" class="lemma">',
   ownershipSurgeryModel:
     '<div id="lem:ownership-surgery-model" class="lemma">',
-  edgeCaps: '<h4 id="edge-caps-and-one-sided-interlacing">',
+  edgeCaps: '<h4 id="clipping-along-image-edges">',
   edgeCap:
     '<div id="lem:edge-cap" class="lemma">',
   areaCapBound:
