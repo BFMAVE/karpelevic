@@ -1036,7 +1036,7 @@ full local source history remain later site milestones.
 - **Next:** author review of Topic IV locally. Publish no later topic without
   explicit approval.
 
-## Current milestone — Topic IV correction and teaching pass (local review)
+## Current milestone — Topic IV correction and teaching pass (published)
 
 - **Formal typing repaired:** the canonical manuscript now defines the
   surgery-induced side-continuation bijection (b_e:\mathcal E(P)\to
@@ -1077,7 +1077,17 @@ full local source history remain later site milestones.
   checks at desktop and 390-pixel widths found no page or figure overflow.
   Guided/Formal mode, proof controls, print expansion, and all five figures
   work without console warnings or hydration errors.
-- **Publication status:** local only. Topic IV has not been committed,
-  pushed, or included in the public Pages package.
-- **Next:** author review at <http://localhost:3000/proof/topic-iv>. Publish
-  Topic IV only after explicit approval.
+- **Publication status:** Topic IV is live at
+  <https://bfmave.github.io/karpelevic/proof/topic-iv/>. The corrected source
+  is recorded locally in commit `70a254e`; the static-only public Pages tree
+  is commit `7377ea3` on `main`. GitHub Pages completed the legacy branch build
+  on 13 August 2026, and the live HTML matches the verified local export
+  byte-for-byte.
+- **Public scope verified:** Topic IV is the only newly published proof
+  chapter. The shared Guided/Formal and proof controls, corrected equation
+  references, and the side-continuation definition also update the already
+  public Topics I–III. Topics V–XIV remain absent from the public package;
+  Topic V returns HTTP 404 and no public page links to a later unpublished
+  topic.
+- **Next:** review Topic IV online and keep Topic V local until it receives the
+  same mathematical, editorial, figure, accessibility, and source audit.
