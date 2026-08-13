@@ -28,6 +28,10 @@ const pages = [
     "Half-open boundary assignments and edge clipping",
   ],
   [
+    "proof/topic-iv/index.html",
+    "From endpoint order to contact reduction",
+  ],
+  [
     "prerequisites/index.html",
     "The small library this reader assumes",
   ],
@@ -46,18 +50,24 @@ for (const [relativePath, expectedText] of pages) {
   } else {
     assert.doesNotMatch(html, /\/karpelevic\/proof\.js/);
   }
+  if (relativePath.startsWith("proof/topic-")) {
+    assert.match(html, /\/karpelevic\/proof-chapter\.js/);
+  } else {
+    assert.doesNotMatch(html, /\/karpelevic\/proof-chapter\.js/);
+  }
 }
 
 for (const relativePath of [
   "proof/index.html",
   "proof/topic-ii/index.html",
   "proof/topic-iii/index.html",
+  "proof/topic-iv/index.html",
 ]) {
   const html = await readFile(path.join(outputRoot, relativePath), "utf8");
   assert.match(html, /Forthcoming/);
   assert.doesNotMatch(
     html,
-    /href="\/karpelevic\/proof\/topic-(?:iv|v|vi(?:\/[ab])?|vii|viii|ix|x|xi|xii(?:\/[ab])?|xiii|xiv)\//,
+    /href="\/karpelevic\/proof\/topic-(?:v|vi(?:\/[ab])?|vii|viii|ix|x|xi|xii(?:\/[ab])?|xiii|xiv)\//,
   );
 }
 
@@ -78,14 +88,34 @@ for (const relativePath of [
   );
 }
 
+{
+  const html = await readFile(
+    path.join(outputRoot, "proof/topic-iv/index.html"),
+    "utf8",
+  );
+  const visibleText = visibleTextFromHtml(html);
+  assert.match(html, /data-proof-route="topic-iv"/);
+  assert.match(html, /Topic IV at a glance/);
+  assert.match(html, /Side-continuation bijection b/);
+  assert.match(html, /aria-label="Equation 5\.11, permalink"/);
+  assert.match(html, /Plate IV\.1/);
+  assert.match(html, /Plate IV\.5/);
+  assert.match(html, /proof-chapter\.js/);
+  assert.doesNotMatch(
+    visibleText,
+    /\b(?:field|fields|ledger|ownership|owned|owns|certificate|audit)\b/i,
+  );
+}
+
 await access(path.join(outputRoot, "favicon.svg"));
 await access(path.join(outputRoot, "contact.js"));
 await access(path.join(outputRoot, "proof.js"));
+await access(path.join(outputRoot, "proof-chapter.js"));
 await access(path.join(outputRoot, ".nojekyll"));
 
 await assert.rejects(access(path.join(outputRoot, ".vite")));
 await assert.rejects(access(path.join(outputRoot, "code")));
-await assert.rejects(access(path.join(outputRoot, "proof/topic-iv")));
+await assert.rejects(access(path.join(outputRoot, "proof/topic-v")));
 const publicAssetEntries = await readdir(path.join(outputRoot, "assets"));
 assert.equal(
   publicAssetEntries.some((entry) => entry.endsWith(".js")),

@@ -20,6 +20,7 @@ export type ProofResultData = {
   title: string;
   purpose: React.ReactNode;
   manuscriptHtml: string;
+  prelude?: React.ReactNode;
   vocabulary?: readonly ProofVocabularyEntry[];
   intuition?: React.ReactNode;
   proofSteps?: readonly GuidedProofStep[];
@@ -70,6 +71,10 @@ export function ProofResult({ result }: { result: ProofResultData }) {
           <p>{result.purpose}</p>
         </div>
       </header>
+
+      {result.prelude ? (
+        <div className="proof-chapter-result-prelude">{result.prelude}</div>
+      ) : null}
 
       {result.vocabulary?.length ? (
         <details className="topic-i-result-primer proof-chapter-vocabulary">
@@ -209,4 +214,3 @@ export function ProofResult({ result }: { result: ProofResultData }) {
     </li>
   );
 }
-

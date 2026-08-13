@@ -22,6 +22,10 @@ const routes = [
     outputPath: "proof/topic-iii/index.html",
   },
   {
+    requestPath: "/proof/topic-iv",
+    outputPath: "proof/topic-iv/index.html",
+  },
+  {
     requestPath: "/prerequisites",
     outputPath: "prerequisites/index.html",
   },
@@ -31,12 +35,11 @@ function makeStatic(html, requestPath) {
   const withoutScripts = html
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
     .replace(/<link\b[^>]*rel="modulepreload"[^>]*>/gi, "")
-    // Topic III contains one mathematical forward reference to Topic IV.
-    // Keep its label visible, but do not publish a live link to an unavailable
-    // proof route. The chapter atlas already renders later topics as text with
-    // a Forthcoming label.
+    // Keep mathematical forward-reference labels visible, but do not publish
+    // live links to unavailable proof routes. The chapter atlas already
+    // renders later topics as text with a Forthcoming label.
     .replace(
-      /\s+href="(?:\/karpelevic)?\/proof\/topic-(?:iv|v|vi(?:\/[ab])?|vii|viii|ix|x|xi|xii(?:\/[ab])?|xiii|xiv)\/?[^\"]*"/gi,
+      /\s+href="(?:\/karpelevic)?\/proof\/topic-(?:v|vi(?:\/[ab])?|vii|viii|ix|x|xi|xii(?:\/[ab])?|xiii|xiv)\/?[^\"]*"/gi,
       "",
     );
   const withProjectAssets = withoutScripts.replaceAll(
@@ -48,9 +51,12 @@ function makeStatic(html, requestPath) {
     requestPath === "/proof"
       ? `<script src="${basePath}/proof.js" defer></script>`
       : "";
+  const proofChapterScript = requestPath.startsWith("/proof/topic-")
+    ? `<script src="${basePath}/proof-chapter.js" defer></script>`
+    : "";
   return withProjectAssets.replace(
     "</body>",
-    `<script src="${basePath}/contact.js" defer></script>${proofReaderScript}</body>`,
+    `<script src="${basePath}/contact.js" defer></script>${proofReaderScript}${proofChapterScript}</body>`,
   );
 }
 

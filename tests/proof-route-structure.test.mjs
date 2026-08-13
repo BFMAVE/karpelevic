@@ -61,11 +61,44 @@ for (const [pathname, expectedResults, expectedProofs] of chapters) {
 
     assert.equal(resultCount, expectedResults, "formal result-card count");
     assert.equal(proofCount, expectedProofs, "complete manuscript-proof count");
+    assert.match(html, /<section[^>]*data-proof-chapter-controls="true"[^>]*>/);
+    assert.match(html, /<script src="\/proof-chapter\.js" defer=""><\/script>/);
     assert.match(html, /<time dateTime="[^"]+"/);
     assert.doesNotMatch(html, /Previously claimed/);
     assert.doesNotMatch(html, /Unhandled Script Error|Internal Server Error/i);
   });
 }
+
+test("Topic IV exposes its local setup, typed mutation guide, and five unique plates", async () => {
+  const response = await render("/proof/topic-iv");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  const figureCount = [...html.matchAll(/class="[^"]*\btopic-ii-concept-figure\b[^"]*"/g)].length;
+  const deltaIds = [...html.matchAll(/\sid="eq:delta"/g)].length;
+
+  assert.match(html, /Topic IV at a glance/);
+  assert.match(html, /Recall from Topic III/);
+  assert.match(html, /Right-admissible means the full one-sided contact data/);
+  assert.match(html, /Blocks and cyclic relabelling/);
+  assert.match(html, /Side-continuation bijection b/);
+  assert.match(html, /correctly typed set/);
+  assert.equal(deltaIds, 1, "equation 5.11 appears exactly once");
+  assert.match(html, /aria-label="Equation 5\.11, permalink"/);
+  assert.equal(figureCount, 5, "repeated explanatory figures are references, not copies");
+  for (let plate = 1; plate <= 5; plate += 1) {
+    assert.match(html, new RegExp(`Plate IV\\.${plate}\\.`));
+  }
+  assert.match(html, /href="#plate-iv-3-lifted-shift"/);
+  assert.match(html, /href="#plate-iv-4-contact-surgery"/);
+  assert.match(html, /Hatcher[^<]*Algebraic Topology/);
+  assert.match(html, /<h3 id="topic-iv-sources">References<\/h3>/);
+  assert.equal(
+    [...html.matchAll(/class="proof-chapter-scope-reminder"/g)].length,
+    2,
+    "both sweep corollaries repeat the proper-shift scope",
+  );
+});
 
 test("Topic III states half-open side membership without invented boundary jargon", async () => {
   const response = await render("/proof/topic-iii");

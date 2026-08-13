@@ -192,16 +192,22 @@ function removeRuntimeMarkup(html) {
 }
 
 async function addStandaloneProofScript(html) {
-  if (proofRoute !== "/proof") return html;
+  const isCombinedReader = proofRoute === "/proof";
+  const isChapter = proofRoute.startsWith("/proof/topic-");
+  if (!isCombinedReader && !isChapter) return html;
 
+  const scriptName = isCombinedReader ? "proof.js" : "proof-chapter.js";
+  const marker = isCombinedReader
+    ? "data-standalone-proof-script"
+    : "data-standalone-proof-chapter-script";
   const proofScript = await readFile(
-    path.join(projectRoot, "public/proof.js"),
+    path.join(projectRoot, "public", scriptName),
     "utf8",
   );
   const safeScript = proofScript.replace(/<\/script/gi, "<\\/script");
   return html.replace(
     "</body>",
-    `<script data-standalone-proof-script>${safeScript}</script></body>`,
+    `<script ${marker}>${safeScript}</script></body>`,
   );
 }
 
@@ -233,6 +239,17 @@ function verifyStandaloneHtml(html) {
     ) {
       throw new Error(
         "The combined standalone proof reader must contain one marked inline reading-mode script.",
+      );
+    }
+  } else if (proofRoute.startsWith("/proof/topic-")) {
+    if (
+      scripts.length !== 1 ||
+      !/<script data-standalone-proof-chapter-script>(?![\s\S]*\bsrc=)/i.test(
+        scripts[0],
+      )
+    ) {
+      throw new Error(
+        "A standalone proof chapter must contain one marked inline chapter-controls script.",
       );
     }
   } else if (scripts.length !== 0) {

@@ -10,6 +10,7 @@ import {
 } from "../../data/proof-reader";
 import { formatDate, getBuildTimestamp } from "../../lib/git-dates";
 import { sitePath } from "../../lib/site-path";
+import { ProofChapterReadingControls } from "./ProofChapterReadingControls";
 
 type ChapterStat = {
   label: string;
@@ -163,6 +164,8 @@ export function ProofChapterShell({
 
         <article
           className="proof-topic-panel proof-chapter-panel"
+          data-chapter-reading-mode="guided"
+          data-proof-chapter
           data-proof-route={routeKey}
           data-topic-tone={route.topicNumber % 2 === 0 ? "oxblood" : "navy"}
         >
@@ -191,6 +194,8 @@ export function ProofChapterShell({
               </p>
             </div>
           </details>
+
+          <ProofChapterReadingControls />
 
           {children}
 
@@ -264,6 +269,7 @@ export function ProofChapterShell({
           </a>
         </div>
       </footer>
+      <script src={sitePath("/proof-chapter.js")} defer />
     </>
   );
 }

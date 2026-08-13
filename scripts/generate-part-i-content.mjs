@@ -386,7 +386,23 @@ html = html.replace(
 );
 
 function statementLinks(referenceList) {
-  const ids = referenceList.split(",");
+  const ids = referenceList.split(",").map((id) => id.trim());
+  const equationReferences = ids.map((id) => ({
+    id,
+    number: equationLabels.get(id),
+  }));
+
+  if (equationReferences.every(({ number }) => Boolean(number))) {
+    const renderedEquations = equationReferences.map(
+      ({ id, number }) =>
+        `<a class="part-i-equation-reference" href="#${id}">(${number})</a>`,
+    );
+    const joined = renderedEquations.length === 2
+      ? `${renderedEquations[0]} and ${renderedEquations[1]}`
+      : renderedEquations.join(", ");
+    return `${renderedEquations.length === 1 ? "equation" : "equations"} ${joined}`;
+  }
+
   const rendered = ids.map((id) => {
     const label = statementLabels.get(id);
     const text = label ? `${label.kind} ${label.number}` : id;
@@ -415,7 +431,7 @@ html = html.replace(
             `Could not resolve manuscript number for equation reference: ${cleanId}`,
           );
         }
-        return `<a class="part-i-equation-reference" href="#${cleanId}">equation (${number})</a>`;
+        return `<a class="part-i-equation-reference" href="#${cleanId}">(${number})</a>`;
       })
       .join(" and "),
 );

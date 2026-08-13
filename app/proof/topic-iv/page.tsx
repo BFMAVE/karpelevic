@@ -21,7 +21,7 @@ export default function TopicIVPage() {
       routeKey="topic-iv"
       updatedAt={updatedAt}
       overview={[
-        "The cap bound from Topic III and a finite endpoint ledger select one consistent half-open orientation. Cyclic order turns the global contact assignment into a single shift κ, while lifted angles record that shift without hidden multiples of 2π.",
+        "The boundary-interval bound from Topic III and a finite endpoint count select one consistent half-open orientation. Cyclic order turns the global contact assignment into a single shift κ, while lifted angles record that shift without hidden multiples of 2π.",
         "An exact corner surgery then realizes one legal Boolean move, and finite induction realizes every legal sweep. A lexicographically minimal reachable contact pattern reduces to one strict block. Karpelevič is cited as a historical antecedent where relevant, but an occurrence there alone is not treated as proof that the exact result was previously established.",
       ]}
       stats={[
@@ -30,7 +30,7 @@ export default function TopicIVPage() {
       ]}
     >
       <TopicIVChapter />
-      <ProofSourceShelf sourceIds={topicIVSourceIds} headingId="topic-iv-sources" />
+      <ProofSourceShelf sourceIds={topicIVSourceIds} headingId="topic-iv-sources" heading="References" />
     </ProofChapterShell>
   );
 }

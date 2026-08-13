@@ -1035,3 +1035,49 @@ full local source history remain later site milestones.
   Topic IV remains unpublished and returns 404.
 - **Next:** author review of Topic IV locally. Publish no later topic without
   explicit approval.
+
+## Current milestone — Topic IV correction and teaching pass (local review)
+
+- **Formal typing repaired:** the canonical manuscript now defines the
+  surgery-induced side-continuation bijection (b_e:\mathcal E(P)\to
+  \mathcal E(P')). The headline theorem, Corollary 5.2, and the later proof
+  use the well-typed identities (b\circ s=s'\circ b),
+  (I'=b((I\setminus\{e\})\cup\{\sigma(e)\})), and
+  \(\sigma'=b\sigma b^{-1}\).
+- **Remaining mathematical precision fixes:** the conflicting phrase “strict
+  convex polygon” and the duplicated strictness assertion in Proposition 5.1
+  are removed. Equation (5.11), \(\delta=\gcd(N,\kappa)\), is now visible at
+  the beginning of Lemma 5.5, without changing any subsequent numbering.
+- **Dependencies made local:** Topic IV now includes a one-screen result
+  index, a precise recall of the Topic III objects used by Lemma 4.11, a
+  visible unnumbered definition of right-admissibility, reminders of the
+  proper-shift scope (1\leq\kappa<N), and definitions of groups and cyclic
+  relabelling at first use.
+- **Five distinct mathematical plates:** the figures are numbered IV.1–IV.5.
+  The half-open interval has explicit open/closed endpoints; contact surgery
+  has separate before/after states; and the residue-block diagram identifies
+  the exact block and uses shape as well as colour. Each plate has a dedicated
+  mobile composition and accessible contrast.
+- **Reading controls added:** every multi-page proof chapter now has optional
+  Guided/Formal views and Open all/Close all proof controls. The controls are
+  progressive enhancement, survive GitHub Pages' static export, announce
+  changes accessibly, and expand all disclosures for printing.
+- **Direct terminology pass:** visible Topic IV prose no longer relies on the
+  custom shorthand “field,” “ledger,” “ownership,” or “certificate.” It uses
+  side index, boundary-interval count, assignment, and the exact proposition
+  instead. Internal legacy labels remain unchanged so existing anchors do not
+  break.
+- **Sources and cross-references:** Hatcher is now present in the actual
+  reference list for Lemma 4.14; repeated plates are linked rather than
+  rendered twice; raw equation labels and doubled “equation” link text are
+  eliminated; the final bibliography heading is “References.”
+- **Verified locally:** the canonical TeX compiles; the content generator is
+  deterministic; the production build, all 30 automated tests, ESLint,
+  `git diff --check`, and the GitHub Pages subpath/privacy export pass. Browser
+  checks at desktop and 390-pixel widths found no page or figure overflow.
+  Guided/Formal mode, proof controls, print expansion, and all five figures
+  work without console warnings or hydration errors.
+- **Publication status:** local only. Topic IV has not been committed,
+  pushed, or included in the public Pages package.
+- **Next:** author review at <http://localhost:3000/proof/topic-iv>. Publish
+  Topic IV only after explicit approval.

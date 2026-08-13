@@ -520,7 +520,7 @@ test("server-renders the Part I proof reader", async () => {
   );
   assert.match(
     proposition23Html,
-    /class="part-i-equation-reference" href="#eq:affine-contact-conjugacy">equation \(2\.3\)<\/a>/,
+    /class="part-i-equation-reference" href="#eq:affine-contact-conjugacy">\(2\.3\)<\/a>/,
   );
   assert.match(
     proposition23Html,
@@ -628,23 +628,23 @@ test("server-renders the Part I proof reader", async () => {
   );
   assert.match(
     html,
-    /class="part-i-equation-reference" href="#eq:adapted-J">equation \(2\.1\)<\/a>/,
+    /class="part-i-equation-reference" href="#eq:adapted-J">\(2\.1\)<\/a>/,
   );
   assert.match(
     html,
-    /class="part-i-equation-reference" href="#eq:T-similarity-form">equation \(2\.2\)<\/a>/,
+    /class="part-i-equation-reference" href="#eq:T-similarity-form">\(2\.2\)<\/a>/,
   );
   assert.match(
     html,
-    /class="part-i-equation-reference" href="#eq:coordinate-reversal-intertwining">equation \(2\.6\)<\/a>/,
+    /class="part-i-equation-reference" href="#eq:coordinate-reversal-intertwining">\(2\.6\)<\/a>/,
   );
   assert.match(
     html,
-    /class="part-i-equation-reference" href="#eq:coordinate-reversal-half-open">equation \(2\.7\)<\/a>/,
+    /class="part-i-equation-reference" href="#eq:coordinate-reversal-half-open">\(2\.7\)<\/a>/,
   );
   assert.match(
     html,
-    /class="part-i-equation-reference" href="#eq:oriented-boundary-determinant">equation \(2\.8\)<\/a>/,
+    /class="part-i-equation-reference" href="#eq:oriented-boundary-determinant">\(2\.8\)<\/a>/,
   );
   assert.doesNotMatch(
     html,
@@ -718,7 +718,7 @@ test("server-renders the Part I proof reader", async () => {
   assert.equal((topicIPanelHtml.match(/class="topic-i-formal"/g) ?? []).length, 9);
   assert.doesNotMatch(html, /9(?:<!-- -->)? numbered items/);
   assert.match(html, /7(?:<!-- -->)? complete proofs/);
-  assert.match(html, /39(?:<!-- -->)? displayed formulas/);
+  assert.match(html, /41(?:<!-- -->)? displayed formulas/);
   assert.doesNotMatch(
     html,
     /Topic I makes no claim of a new mathematical result/,
@@ -730,7 +730,7 @@ test("server-renders the Part I proof reader", async () => {
   assert.equal((topicIPanelHtml.match(/class="proof"/g) ?? []).length, 8);
   assert.equal(
     (topicIPanelHtml.match(/<math[^>]*display="block"/g) ?? []).length,
-    39,
+    41,
   );
   assert.match(html, /Definition 1\.1/);
   assert.match(html, /Proposition 2\.1/);
