@@ -955,7 +955,7 @@ full local source history remain later site milestones.
 - **Next:** author review of Topic IV locally. Publish no later topic without
   explicit approval.
 
-## Current milestone — Topic I–II terminology pass (local review)
+## Current milestone — Topic I–II terminology pass (published)
 
 - **Direct mathematical language:** avoidable shorthand has been removed from
   the rendered Topic I and Topic II chapters. In particular, the pages no
@@ -980,12 +980,15 @@ full local source history remain later site milestones.
   overflow, no rejected terms in visible text, and no console warnings or
   errors. Representative collapsed explanations were opened and inspected on
   both chapters.
-- **Publication status:** local only and awaiting author review. Nothing from
-  this terminology pass has been pushed or deployed.
-- **Next:** author review at <http://localhost:3000/proof> and
-  <http://localhost:3000/proof/topic-ii>. Publish only after explicit approval.
+- **Publication status:** published on 13 August 2026 at
+  <https://bfmave.github.io/karpelevic/proof/> and
+  <https://bfmave.github.io/karpelevic/proof/topic-ii/> in static Pages commit
+  `a431704`. The public files are byte-for-byte identical to the audited local
+  artifacts.
+- **Next:** continue reviewing later topics locally. Publish no later topic
+  without explicit approval.
 
-## Current milestone — Topic III precision, figure, and jargon pass (local review)
+## Current milestone — Topic III precision, figure, and jargon pass (published)
 
 - **Formal precision repaired:** Topic III now states cyclic indexing modulo
   (N), defines positive open and closed boundary arcs, requires the linear
@@ -1025,7 +1028,10 @@ full local source history remain later site milestones.
   gutters, no page or figure overflow, and no console warnings or errors.
 - **Portable review copy:**
   `share/Critical_Invariant_Polygons_Topic_III.html`.
-- **Publication status:** local only and awaiting author review. These Topic
-  III corrections have not been pushed or deployed.
-- **Next:** author review at <http://localhost:3000/proof/topic-iii>. Publish
-  only after explicit approval.
+- **Publication status:** published on 13 August 2026 at
+  <https://bfmave.github.io/karpelevic/proof/topic-iii/> in static Pages commit
+  `a431704`. Legacy Pages build `1149719829` completed successfully. The live
+  Topic I–III files are byte-for-byte identical to their audited artifacts;
+  Topic IV remains unpublished and returns 404.
+- **Next:** author review of Topic IV locally. Publish no later topic without
+  explicit approval.
