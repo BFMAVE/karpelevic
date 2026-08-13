@@ -16,6 +16,18 @@ const outputPath = path.resolve(
 );
 const proofRoute = process.env.PROOF_ROUTE ?? "/proof";
 const publicSite = "https://bfmave.github.io/karpelevic";
+const bundleLinkMode = process.env.PROOF_STANDALONE_BUNDLE_LINKS === "1";
+const reviewBundleFiles = new Map([
+  ["/proof/topic-v", "Critical_Invariant_Polygons_Topic_V.html"],
+  ["/proof/topic-vi/a", "Critical_Invariant_Polygons_Topic_VI_Part_A.html"],
+  ["/proof/topic-vi/b", "Critical_Invariant_Polygons_Topic_VI_Part_B.html"],
+  ["/proof/topic-vii", "Critical_Invariant_Polygons_Topic_VII.html"],
+]);
+
+function normalizeRoutePath(routePath) {
+  const normalized = routePath.replace(/\/+$/, "");
+  return normalized || "/";
+}
 
 const mimeTypes = new Map([
   [".avif", "image/avif"],
@@ -113,11 +125,19 @@ function rewriteInternalLinks(html) {
         siteUrl = siteUrl.slice("/karpelevic".length);
       }
 
-      if (
-        proofRoute === "/proof" &&
-        /^\/proof\/?(?:#top)?$/.test(siteUrl)
-      ) {
-        return `${attribute}="#top"`;
+      const fragmentIndex = siteUrl.indexOf("#");
+      const sitePathname =
+        fragmentIndex >= 0 ? siteUrl.slice(0, fragmentIndex) : siteUrl;
+      const fragment = fragmentIndex >= 0 ? siteUrl.slice(fragmentIndex) : "";
+      const normalizedPathname = normalizeRoutePath(sitePathname);
+      const normalizedCurrentRoute = normalizeRoutePath(proofRoute);
+
+      if (normalizedPathname === normalizedCurrentRoute) {
+        return `${attribute}="${fragment || "#top"}"`;
+      }
+
+      if (bundleLinkMode && reviewBundleFiles.has(normalizedPathname)) {
+        return `${attribute}="${reviewBundleFiles.get(normalizedPathname)}${fragment}"`;
       }
       if (siteUrl.startsWith("/")) {
         return `${attribute}="${publicSite}${siteUrl}"`;
@@ -132,6 +152,10 @@ function markUnavailableTopicLinks(html) {
     ["/proof/topic-ii", 2],
     ["/proof/topic-iii", 3],
     ["/proof/topic-iv", 4],
+    ["/proof/topic-v", 5],
+    ["/proof/topic-vi/a", 6],
+    ["/proof/topic-vi/b", 6],
+    ["/proof/topic-vii", 7],
   ]).get(proofRoute);
   if (routeTopicNumber === undefined) return html;
   const configuredPublicMaximum = Number(
@@ -281,6 +305,38 @@ function verifyStandaloneHtml(html) {
             "From endpoint order to contact reduction",
             "data-proof-route=\"topic-iv\"",
           ]
+        : proofRoute === "/proof/topic-v"
+          ? [
+              "Topic V",
+              "Rotation arithmetic and the projective corridor",
+              "Lattice parallelogram count",
+              "data-proof-route=\"topic-v\"",
+              "Forthcoming",
+            ]
+          : proofRoute === "/proof/topic-vi/a"
+            ? [
+                "Topic VI",
+                "Projective escape and unit return — local projective escape",
+                "Calibrate the projective return",
+                "data-proof-route=\"topic-vi-a\"",
+                "Forthcoming",
+              ]
+            : proofRoute === "/proof/topic-vi/b"
+              ? [
+                  "Topic VI",
+                  "Projective escape and unit return — global admissibility and unit return",
+                  "Transport the local motion to every label",
+                  "data-proof-route=\"topic-vi-b\"",
+                  "Forthcoming",
+                ]
+              : proofRoute === "/proof/topic-vii"
+                ? [
+                    "Topic VII",
+                    "The Farey carrier and return monodromy",
+                    "Farey adjacency and exact reflection",
+                    "data-proof-route=\"topic-vii\"",
+                    "Forthcoming",
+                  ]
         : [
             "How the Proof Works",
             "Proposition 2.1",
@@ -358,6 +414,17 @@ function verifyStandaloneHtml(html) {
         "Standalone Topic III still contains avoidable reader-facing jargon.",
       );
     }
+  }
+
+  if (
+    bundleLinkMode &&
+    /href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-(?:v(?:i(?:i)?(?:\/[ab])?)?)(?:\/|#)/i.test(
+      html,
+    )
+  ) {
+    throw new Error(
+      "A review-bundle chapter still links to an unpublished public Topic V–VII route.",
+    );
   }
 }
 
