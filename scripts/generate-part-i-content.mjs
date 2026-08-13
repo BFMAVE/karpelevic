@@ -490,6 +490,8 @@ const markers = {
   oneSided: '<h3 id="sec:one-sided">',
   sideWitness:
     '<div id="lem:side-witness" class="lemma">',
+  symbolicEndpointOwnership:
+    '<h4 id="symbolic-endpoint-ownership">',
   ownershipWord:
     '<div id="def:ownership-word" class="definition">',
   halfOpenSideAtlas:
@@ -635,7 +637,10 @@ const topicIIHtmlByItem = {
   15: section(markers.normalFanTransfer, markers.hereditarySaturation),
   16: section(markers.hereditarySaturation, markers.heredityRemark),
   17: section(markers.heredityRemark, markers.oneSided),
-  18: html.slice(oneSidedHeadingEnd, start(markers.ownershipWord)),
+  18: html.slice(
+    oneSidedHeadingEnd,
+    start(markers.symbolicEndpointOwnership),
+  ),
   65: section(markers.perronTools, markers.strictSeparation),
   67: section(markers.polygonPolarity, markers.polygonHausdorff),
 };

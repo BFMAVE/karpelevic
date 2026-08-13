@@ -4,6 +4,7 @@ import {
   getProofReaderNeighbours,
   getProofReaderParts,
   getProofReaderRoute,
+  isProofTopicAvailable,
   proofReaderTopicLinks,
   toRomanNumeral,
 } from "../../data/proof-reader";
@@ -120,13 +121,25 @@ export function ProofChapterShell({
               const isCurrent = link.topicNumber === route.topicNumber;
               return (
                 <li key={link.topicNumber}>
-                  <a
-                    aria-current={isCurrent ? "step" : undefined}
-                    href={sitePath(link.href)}
-                  >
-                    <span>{toRomanNumeral(link.topicNumber)}</span>
-                    <strong>{link.title}</strong>
-                  </a>
+                  {link.available ? (
+                    <a
+                      aria-current={isCurrent ? "step" : undefined}
+                      data-proof-topic-number={link.topicNumber}
+                      href={sitePath(link.href)}
+                    >
+                      <span>{toRomanNumeral(link.topicNumber)}</span>
+                      <strong>{link.title}</strong>
+                    </a>
+                  ) : (
+                    <span
+                      className="proof-chapter-unavailable"
+                      data-proof-topic-number={link.topicNumber}
+                    >
+                      <span>{toRomanNumeral(link.topicNumber)}</span>
+                      <strong>{link.title}</strong>
+                      <small>Forthcoming</small>
+                    </span>
+                  )}
                 </li>
               );
             })}
@@ -188,23 +201,36 @@ export function ProofChapterShell({
               </span>
               <strong>This chapter is complete</strong>
             </div>
-            {neighbours.previous ? (
+            {neighbours.previous &&
+            isProofTopicAvailable(neighbours.previous.topicNumber) ? (
               <a
                 className="proof-topic-control proof-topic-control-previous"
+                data-proof-topic-number={neighbours.previous.topicNumber}
                 href={sitePath(neighbours.previous.href)}
               >
                 <span>Previous</span>
                 <strong>{neighbours.previous.title}</strong>
               </a>
             ) : null}
-            {neighbours.next ? (
+            {neighbours.next &&
+            isProofTopicAvailable(neighbours.next.topicNumber) ? (
               <a
                 className="proof-topic-control proof-topic-control-next"
+                data-proof-topic-number={neighbours.next.topicNumber}
                 href={sitePath(neighbours.next.href)}
               >
                 <span>Next</span>
                 <strong>{neighbours.next.title}</strong>
               </a>
+            ) : neighbours.next ? (
+              <span
+                className="proof-topic-control proof-topic-control-next proof-topic-control-unavailable"
+                data-proof-topic-number={neighbours.next.topicNumber}
+              >
+                <span>Next</span>
+                <strong>{neighbours.next.title}</strong>
+                <small>Forthcoming</small>
+              </span>
             ) : null}
           </nav>
         </article>

@@ -1,8 +1,11 @@
+import { TopicIIConceptFigure } from "./TopicIIConceptFigure";
+
 export function FiniteOpennessExplainer() {
   return (
     <details
       className="topic-ii-local-explainer proof-guided-layer"
       data-guided-layer
+      data-conceptual-layer
       suppressHydrationWarning
     >
       <summary>
@@ -10,29 +13,45 @@ export function FiniteOpennessExplainer() {
         The finite-continuity argument, without shorthand
       </summary>
       <div className="topic-ii-local-explainer-body">
+        <section>
+          <h4>Output 1 — strict convex-position persistence</h4>
+          <p>
+            Lemma 2.7 describes strict convex position by finitely many
+            positive triple determinants. Each determinant depends
+            continuously on <i>τ</i>, so every one that is positive at 0
+            remains positive on some interval about 0. Their common
+            interval preserves the displayed cyclic polygon.
+          </p>
+        </section>
+        <section>
+          <h4>Output 2 — open-side persistence</h4>
+          <p>
+            For each index <i>a</i> in the finite set <i>𝒜</i>, the relevant
+            moving point has an affine coordinate <i>α</i>
+            <sub>a</sub>(<i>τ</i>) on its moving side. The two strict
+            inequalities 0 &lt; <i>α</i>
+            <sub>a</sub>(<i>τ</i>) &lt; 1 say exactly that the point remains in
+            the relative interior of that side.
+          </p>
+        </section>
+        <section>
+          <h4>Output 3 — strict-side persistence</h4>
+          <p>
+            For every prescribed side test in the finite set <i>ℬ</i>, a
+            determinant records on which open side of the supporting line
+            the test point lies. Its sign is strict at <i>τ</i>=0 and hence
+            persists on a sufficiently small interval.
+          </p>
+        </section>
         <p>
-          Suppose <i>f</i>
+          In all three outputs the same elementary principle is used. If
+          finitely many continuous real functions <i>f</i>
           <sub>1</sub>, …, <i>f</i>
-          <sub>r</sub> are continuous real functions and every{" "}
-          <i>f</i>
-          <sub>j</sub>(0) is positive. For each <i>j</i>, continuity at 0
-          supplies an open interval <i>I</i>
-          <sub>j</sub> on which{" "}
-          <i>f</i>
-          <sub>j</sub>(<i>τ</i>) remains positive. Because there are only
-          finitely many functions,{" "}
-          <i>I</i> = <i>I</i>
-          <sub>1</sub> ∩ ··· ∩ <i>I</i>
-          <sub>r</sub> is still an open interval containing 0.
-        </p>
-        <p>
-          Lemma 2.8 applies this elementary fact three times: to the
-          triple determinants certifying strict convexity, to the
-          inequalities 0 &lt; <i>α</i>
-          <sub>a</sub>(<i>τ</i>) &lt; 1 certifying open-side membership,
-          and to the prescribed side determinants. The sets{" "}
-          <i>𝒜</i>, <i>ℬ</i>, and the cyclic vertex set are finite, so one
-          final intersection works for every requirement simultaneously.
+          <sub>r</sub> are positive at 0, continuity gives an interval for
+          each inequality, and the finite intersection of those intervals
+          is still an open interval containing 0. Intersecting once more
+          across the three finite families gives the single interval
+          asserted by Lemma 2.8.
         </p>
       </div>
     </details>
@@ -44,6 +63,7 @@ export function NormalFanExplainer() {
     <details
       className="topic-ii-local-explainer proof-guided-layer"
       data-guided-layer
+      data-conceptual-layer
       suppressHydrationWarning
     >
       <summary>
@@ -51,6 +71,7 @@ export function NormalFanExplainer() {
         Why adjacent normals determine one support value
       </summary>
       <div className="topic-ii-local-explainer-body">
+        <TopicIIConceptFigure kind="normal-fan" />
         <p>
           Let the side inequalities meeting at a vertex <i>v</i> be{" "}
           ⟨<i>u</i>
@@ -97,6 +118,7 @@ export function SaturationGapExplainer() {
     <details
       className="topic-ii-local-explainer proof-guided-layer"
       data-guided-layer
+      data-conceptual-layer
       suppressHydrationWarning
     >
       <summary>
@@ -104,6 +126,7 @@ export function SaturationGapExplainer() {
         Boundedness, contact, and complementarity unpacked
       </summary>
       <div className="topic-ii-local-explainer-body">
+        <TopicIIConceptFigure kind="polar-saturation" />
         <section>
           <h4>Why positive spanning makes the retained polygon bounded</h4>
           <p>

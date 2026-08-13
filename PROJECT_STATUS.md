@@ -887,3 +887,33 @@ full local source history remain later site milestones.
   pushed or deployed.
 - **Next:** author selection of recommendations, beginning with the Needed
   class, before any implementation pass.
+
+## Current milestone — Topic II focused correction pass (local only)
+
+- **Done locally in the canonical TeX:** Lemma 2.10 now states the winding
+  argument that produces a total angular increase of `2π`; cyclic indexing is
+  defined combinatorially; Lemma 2.8 labels its three persistence outputs;
+  the normal fan `Φ` and complex vector `u` are explicit; and Theorem 3.2
+  contains a quantified radial enlargement and a proved planar positive-cone
+  fact. All manuscript numbering and labels are unchanged.
+- **Done locally in the reader:** the Lemma 2.9 teaser and “subpolygon” wording
+  are corrected, each result has at most one genuinely distinct conceptual
+  layer, the full formal proofs remain intact, and a compact dependency route
+  makes the chain into Theorem 3.2 visible.
+- **Done locally in the figures:** Figure II.1 has an exact supporting line and
+  shaded open half-plane; Figure II.2 gives one verified row of
+  `B_Φ(θ)`; Figure II.3 is identified as an independently scaled schematic;
+  and all three figures have intentional mobile compositions. Plate II keeps
+  its formula in the HTML caption and no longer places it inside the SVG.
+- **Done locally in navigation and export:** the orphaned Topic III endpoint
+  introduction has been removed from Topic II; public builds display Topics
+  III–XIV as forthcoming without dead links; Topic II’s standalone Previous
+  control points to Topic I; and the unused standalone reader script is gone.
+- **Verified locally:** the production build, ESLint, 28 automated tests, the
+  GitHub Pages project-subpath export, and the standalone Topic II checks pass.
+  The shareable file is
+  `share/Critical_Invariant_Polygons_Topic_II.html`.
+- **Publication status:** unchanged. These corrections have not been pushed or
+  deployed.
+- **Next:** author review of Topic II at the local preview. Publish only after
+  explicit approval.

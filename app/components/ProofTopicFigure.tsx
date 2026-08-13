@@ -1,9 +1,19 @@
+import type { ReactNode } from "react";
+
 type ProofTopicFigureProps = {
   slug: string;
 };
 
 const figureCopy: Readonly<
-  Record<string, { title: string; description: string; caption: string }>
+  Record<
+    string,
+    {
+      title: string;
+      description: string;
+      caption: ReactNode;
+      qualification?: string;
+    }
+  >
 > = {
   language: {
     title: "An invariant polygon and its contracted rotated image",
@@ -13,11 +23,53 @@ const figureCopy: Readonly<
       "Plate I. The intrinsic starting point: T acts as a rotation-contraction in adapted coordinates, while polygonal complexity counts the vertices of P.",
   },
   "active-sides": {
+    qualification: "Exact geometric model",
     title: "Every side is active at radial criticality",
     description:
       "A regular heptagon contains its image under a rotation by pi over seven followed by contraction by cosine pi over seven; the image vertices are the side midpoints.",
-    caption:
-      "Plate II. An exact model: for a regular heptagon, T = ρe^{iθ} with ρ = cos(π/7), θ = π/7 sends every vertex to the midpoint of the next side. Thus every side meets TP. The theorem proves this saturation for every critical invariant polygon, not only this symmetric example.",
+    caption: (
+      <>
+        Plate II. An exact model: for a regular heptagon,{" "}
+        <math
+          aria-label="T equals rho e to the i theta, with rho equals cosine of pi over seven and theta equals pi over seven"
+          display="inline"
+        >
+          <mrow>
+            <mi>T</mi>
+            <mo>=</mo>
+            <mi>ρ</mi>
+            <msup>
+              <mi>e</mi>
+              <mrow>
+                <mi>i</mi>
+                <mi>θ</mi>
+              </mrow>
+            </msup>
+            <mtext> with </mtext>
+            <mi>ρ</mi>
+            <mo>=</mo>
+            <mi mathvariant="normal">cos</mi>
+            <mo>(</mo>
+            <mfrac>
+              <mi>π</mi>
+              <mn>7</mn>
+            </mfrac>
+            <mo>)</mo>
+            <mo>,</mo>
+            <mspace width="0.45em" />
+            <mi>θ</mi>
+            <mo>=</mo>
+            <mfrac>
+              <mi>π</mi>
+              <mn>7</mn>
+            </mfrac>
+          </mrow>
+        </math>{" "}
+        sends every vertex to the midpoint of the next side. Thus every side
+        meets <i>TP</i>. The theorem proves this saturation for every critical
+        invariant polygon, not only this symmetric example.
+      </>
+    ),
   },
   ownership: {
     title: "Half-open ownership at a vertex contact",
@@ -164,11 +216,13 @@ function ActiveSidesFigure() {
       ))}
       <circle className="proof-figure-origin" cx={centreX} cy={centreY} r="5" />
       <text className="proof-figure-label" x="620" y="79">P</text>
-      <text className="proof-figure-label proof-figure-accent" x="493" y="169">TP</text>
-      <text className="proof-figure-note" x="380" y="346" textAnchor="middle">
-        T = ρe
-        <tspan baselineShift="super" fontSize="18">iθ</tspan> with ρ = cos(π/7),
-        θ = π/7. Every image vertex is a side midpoint.
+      <text
+        className="proof-figure-label proof-figure-accent"
+        x="445"
+        y="190"
+        textAnchor="middle"
+      >
+        TP
       </text>
     </>
   );
@@ -372,7 +426,7 @@ export function ProofTopicFigure({ slug }: ProofTopicFigureProps) {
     <figure className="proof-topic-figure">
       <div className="proof-topic-figure-heading">
         <span>Scientific plate</span>
-        <span>Schematic, not to scale</span>
+        <span>{copy.qualification ?? "Schematic, not to scale"}</span>
       </div>
       <svg
         aria-labelledby={`${titleId} ${descriptionId}`}

@@ -115,7 +115,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         title: "Heredity makes the conclusion reusable",
         body:
-          "The same argument applies to every admissible subpolygon with at most N vertices, not just the first chosen P. This is essential because contact surgery repeatedly replaces P by another invariant polygon.",
+          "The same argument applies to every invariant polygon with at most N vertices, not just the first chosen P. This is essential because contact surgery repeatedly replaces P by another invariant polygon.",
       },
     ],
     glossary: [

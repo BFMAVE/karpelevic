@@ -18,6 +18,21 @@ export type ProofReaderRoute = {
 const topicTitle = (topicNumber: number): string =>
   proofTopics[topicNumber - 1]?.title ?? `Topic ${topicNumber}`;
 
+const configuredTopicMaximum = Number.parseInt(
+  process.env.NEXT_PUBLIC_PROOF_TOPIC_MAX ?? "",
+  10,
+);
+
+export const availableProofTopicMaximum = Number.isFinite(
+  configuredTopicMaximum,
+)
+  ? Math.min(proofTopics.length, Math.max(1, configuredTopicMaximum))
+  : proofTopics.length;
+
+export function isProofTopicAvailable(topicNumber: number): boolean {
+  return topicNumber <= availableProofTopicMaximum;
+}
+
 export const proofReaderRoutes: readonly ProofReaderRoute[] = [
   {
     key: "topic-i",
@@ -148,6 +163,7 @@ export const proofReaderTopicLinks = Array.from(
       topicNumber,
       title: topicTitle(topicNumber),
       href: firstRoute?.href ?? "/proof/",
+      available: isProofTopicAvailable(topicNumber),
     };
   },
 );

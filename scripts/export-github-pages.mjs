@@ -23,7 +23,7 @@ const routes = [
   },
 ];
 
-function makeStatic(html) {
+function makeStatic(html, requestPath) {
   const withoutScripts = html
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
     .replace(/<link\b[^>]*rel="modulepreload"[^>]*>/gi, "");
@@ -32,9 +32,13 @@ function makeStatic(html) {
     `${basePath}/assets/`,
   );
 
+  const proofReaderScript =
+    requestPath === "/proof"
+      ? `<script src="${basePath}/proof.js" defer></script>`
+      : "";
   return withProjectAssets.replace(
     "</body>",
-    `<script src="${basePath}/contact.js" defer></script><script src="${basePath}/proof.js" defer></script></body>`,
+    `<script src="${basePath}/contact.js" defer></script>${proofReaderScript}</body>`,
   );
 }
 
@@ -60,7 +64,7 @@ async function renderRoute(worker, requestPath) {
     );
   }
 
-  return makeStatic(await response.text());
+  return makeStatic(await response.text(), requestPath);
 }
 
 await rm(outputRoot, { force: true, recursive: true });

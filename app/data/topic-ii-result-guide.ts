@@ -42,7 +42,7 @@ export const topicIIResultGuides: Readonly<
       {
         term: "Cyclic triple",
         definition:
-          "A triple of boundary points (zᵢ,zⱼ,zₖ) in increasing cyclic order around the polygon, written with indices i<j<k in one chosen starting point.",
+          "A triple of distinct indices in the prescribed cyclic list (z₀,…,zₘ₋₁), encountered in that order while the indices increase modulo m. Equivalently, after a cyclic relabelling, the three indices can be written 0≤i<j<k<m. This is a property of the displayed order; it does not assume that the points already form a polygon.",
       },
       {
         term: "Exposed edge",

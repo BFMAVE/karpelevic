@@ -113,13 +113,42 @@ function rewriteInternalLinks(html) {
         siteUrl = siteUrl.slice("/karpelevic".length);
       }
 
-      if (/^\/proof\/?(?:#top)?$/.test(siteUrl)) {
+      if (
+        proofRoute === "/proof" &&
+        /^\/proof\/?(?:#top)?$/.test(siteUrl)
+      ) {
         return `${attribute}="#top"`;
       }
       if (siteUrl.startsWith("/")) {
         return `${attribute}="${publicSite}${siteUrl}"`;
       }
       return match;
+    },
+  );
+}
+
+function markUnavailableTopicLinks(html) {
+  if (proofRoute !== "/proof/topic-ii") return html;
+
+  return html.replace(
+    /<a\b([^>]*\bdata-proof-topic-number="(\d+)"[^>]*)>([\s\S]*?)<\/a>/gi,
+    (match, rawAttributes, topicNumberText, children) => {
+      const topicNumber = Number(topicNumberText);
+      if (!Number.isFinite(topicNumber) || topicNumber <= 2) return match;
+
+      let attributes = rawAttributes
+        .replace(/\s+href="[^"]*"/i, "")
+        .replace(/\s+aria-current="[^"]*"/i, "");
+      if (/\bclass="[^"]*"/i.test(attributes)) {
+        attributes = attributes.replace(
+          /\bclass="([^"]*)"/i,
+          'class="$1 proof-chapter-unavailable"',
+        );
+      } else {
+        attributes += ' class="proof-chapter-unavailable"';
+      }
+
+      return `<span${attributes} aria-disabled="true">${children}<small>Forthcoming</small></span>`;
     },
   );
 }
@@ -138,6 +167,8 @@ function removeRuntimeMarkup(html) {
 }
 
 async function addStandaloneProofScript(html) {
+  if (proofRoute !== "/proof") return html;
+
   const proofScript = await readFile(
     path.join(projectRoot, "public/proof.js"),
     "utf8",
@@ -168,14 +199,20 @@ function verifyStandaloneHtml(html) {
   }
 
   const scripts = html.match(/<script\b[\s\S]*?<\/script>/gi) ?? [];
-  if (
-    scripts.length !== 1 ||
-    !/<script data-standalone-proof-script>(?![\s\S]*\bsrc=)/i.test(
-      scripts[0],
-    )
-  ) {
+  if (proofRoute === "/proof") {
+    if (
+      scripts.length !== 1 ||
+      !/<script data-standalone-proof-script>(?![\s\S]*\bsrc=)/i.test(
+        scripts[0],
+      )
+    ) {
+      throw new Error(
+        "The combined standalone proof reader must contain one marked inline reading-mode script.",
+      );
+    }
+  } else if (scripts.length !== 0) {
     throw new Error(
-      "Standalone proof HTML must contain exactly one marked inline reading-mode script.",
+      "A standalone chapter must not contain unused reading-mode scripts.",
     );
   }
 
@@ -186,21 +223,19 @@ function verifyStandaloneHtml(html) {
           "Building one-sided ownership",
           "Hausdorff convergence",
           "data-proof-route=\"topic-iii\"",
-          "data-reading-mode-button",
         ]
       : proofRoute === "/proof/topic-ii"
         ? [
             "Topic II",
             "From convex order to active sides",
             "data-proof-route=\"topic-ii\"",
-            "data-reading-mode-button",
+            "Forthcoming",
           ]
       : proofRoute === "/proof/topic-iv"
         ? [
             "Topic IV",
             "From endpoint order to contact reduction",
             "data-proof-route=\"topic-iv\"",
-            "data-reading-mode-button",
           ]
         : [
             "How the Proof Works",
@@ -225,6 +260,32 @@ function verifyStandaloneHtml(html) {
     if (!html.includes(required)) {
       throw new Error(
         `Standalone proof HTML is missing required text: ${required}`,
+      );
+    }
+  }
+
+  if (proofRoute === "/proof/topic-ii") {
+    if (
+      !/class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/"/i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "Standalone Topic II must link Previous to the public Topic I page.",
+      );
+    }
+    if (/href="[^"]*\/proof\/topic-iii\//i.test(html)) {
+      throw new Error(
+        "Standalone Topic II must not link to the unpublished Topic III page.",
+      );
+    }
+    if (
+      /Symbolic endpoint ownership|The following finite model fixes the endpoint convention/i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "Standalone Topic II still contains the orphaned Topic III endpoint introduction.",
       );
     }
   }
@@ -259,6 +320,7 @@ html = await inlineStylesheets(html);
 html = await inlineCssAssets(html, clientRoot);
 html = removeRuntimeMarkup(html);
 html = rewriteInternalLinks(html);
+html = markUnavailableTopicLinks(html);
 html = await addStandaloneProofScript(html);
 html = html.replace(
   "<head>",

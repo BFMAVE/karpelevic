@@ -31,7 +31,23 @@ for (const [relativePath, expectedText] of pages) {
   assert.doesNotMatch(html, /<script\b[^>]*>self\.__VINEXT/);
   assert.match(html, /\/karpelevic\/assets\//);
   assert.match(html, /\/karpelevic\/contact\.js/);
-  assert.match(html, /\/karpelevic\/proof\.js/);
+  if (relativePath === "proof/index.html") {
+    assert.match(html, /\/karpelevic\/proof\.js/);
+  } else {
+    assert.doesNotMatch(html, /\/karpelevic\/proof\.js/);
+  }
+}
+
+for (const relativePath of [
+  "proof/index.html",
+  "proof/topic-ii/index.html",
+]) {
+  const html = await readFile(path.join(outputRoot, relativePath), "utf8");
+  assert.match(html, /Forthcoming/);
+  assert.doesNotMatch(
+    html,
+    /href="\/karpelevic\/proof\/topic-iii\//,
+  );
 }
 
 await access(path.join(outputRoot, "favicon.svg"));

@@ -13,7 +13,7 @@
     "dev": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext dev",
     "build": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext build",
     "export:proof-html": "npm run build && node scripts/export-proof-standalone.mjs",
-    "build:pages": "NEXT_PUBLIC_BASE_PATH=/karpelevic npm run build && node scripts/export-github-pages.mjs && node scripts/verify-github-pages.mjs",
+    "build:pages": "NEXT_PUBLIC_BASE_PATH=/karpelevic NEXT_PUBLIC_PROOF_TOPIC_MAX=2 npm run build && node scripts/export-github-pages.mjs && node scripts/verify-github-pages.mjs",
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
     "test": "npm run build && node --test tests/*.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern pages-out",

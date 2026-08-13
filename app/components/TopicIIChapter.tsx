@@ -282,8 +282,6 @@ function TopicIIResult({ itemNumber }: { itemNumber: number }) {
         </details>
       ) : null}
 
-      {itemNumber === 12 ? <FiniteOpennessExplainer /> : null}
-
       <section
         className="topic-i-formal"
         aria-label={`${isRemark ? "Complete text" : "Statement and proof"} for ${guide.manuscriptLabel}`}
@@ -310,14 +308,18 @@ function TopicIIResult({ itemNumber }: { itemNumber: number }) {
         ) : null}
       </section>
 
+      {itemNumber === 12 ? <FiniteOpennessExplainer /> : null}
       {itemNumber === 15 ? <NormalFanExplainer /> : null}
       {itemNumber === 16 ? <SaturationGapExplainer /> : null}
 
-      {commentary && itemNumber !== 15 ? (
-        <details className="proof-item-commentary proof-item-explainer">
+      {commentary ? (
+        <details
+          className="proof-item-commentary proof-item-explainer"
+          data-conceptual-layer
+        >
           <summary>
-            <span>Conceptual route</span>
-            Open intuition and proof architecture
+            <span>Guided explanation</span>
+            Open the idea and the proof architecture
           </summary>
           <div className="proof-item-explainer-body">
             <p className="proof-item-intuition">
@@ -338,10 +340,6 @@ function TopicIIResult({ itemNumber }: { itemNumber: number }) {
                 </li>
               ))}
             </ol>
-            <p className="proof-item-takeaway">
-              <span>Keep in mind</span>
-              {commentary.takeaway}
-            </p>
           </div>
         </details>
       ) : null}
@@ -493,6 +491,36 @@ export function TopicIIChapter() {
             </p>
           </section>
         </div>
+
+        <section
+          className="topic-ii-dependency-route"
+          aria-labelledby="topic-ii-dependency-route-heading"
+        >
+          <h4 id="topic-ii-dependency-route-heading">
+            How the dependencies close
+          </h4>
+          <ol>
+            <li>
+              <a href="#part-i-item-11">Lemma 2.7</a> →{" "}
+              <a href="#part-i-item-12">Lemma 2.8</a>: determinant
+              certificates make strict polygonal geometry stable under small
+              perturbations.
+            </li>
+            <li>
+              <a href="#part-i-item-15">Proposition 3.1</a> +{" "}
+              <a href="#part-i-item-65">Lemma A.1</a> → the side-saturation
+              half of <a href="#part-i-item-16">Theorem 3.2</a>.
+            </li>
+            <li>
+              <a href="#part-i-item-67">Lemma A.3</a> → the vertex-saturation
+              half of <a href="#part-i-item-16">Theorem 3.2</a> by polarity.
+            </li>
+            <li>
+              <a href="#part-i-item-18">Lemma 4.1</a> turns saturated side
+              contact into the image-vertex witnesses used in Topic III.
+            </li>
+          </ol>
+        </section>
       </section>
 
       <section className="topic-i-textbook topic-ii-textbook" aria-labelledby="topic-ii-convex-heading">
@@ -585,7 +613,6 @@ export function TopicIIChapter() {
           className="part-i-manuscript topic-ii-setup-formal"
           dangerouslySetInnerHTML={{ __html: topicIISetupHtml }}
         />
-        <NormalFanExplainer />
       </section>
 
       <section className="topic-i-textbook topic-ii-textbook" aria-labelledby="topic-ii-transfer-heading">

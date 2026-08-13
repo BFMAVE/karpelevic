@@ -225,7 +225,7 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(atlasHtml, /The complete order-seven example/);
   assert.match(
     atlasHtml,
-    /aria-current="step" href="(?:\/karpelevic)?\/proof\/"/,
+    /aria-current="step"[^>]*href="(?:\/karpelevic)?\/proof\/"/,
   );
   assert.equal(
     (atlasHtml.match(/<li>/g) ?? []).length,
@@ -806,6 +806,11 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(topicIIPanelHtml, /Imported from Topic I/);
   assert.match(topicIIPanelHtml, /Standard background, stated with sources/);
   assert.match(topicIIPanelHtml, /Proved on this page/);
+  assert.match(topicIIPanelHtml, /How the dependencies close/);
+  assert.match(topicIIPanelHtml, /Lemma 2\.7[\s\S]*?Lemma 2\.8/);
+  assert.match(topicIIPanelHtml, /Proposition 3\.1[\s\S]*?Lemma A\.1/);
+  assert.match(topicIIPanelHtml, /Lemma A\.3[\s\S]*?vertex-saturation/);
+  assert.match(topicIIPanelHtml, /Lemma 4\.1[\s\S]*?Topic III/);
   assert.match(topicIIPanelHtml, /No irreducibility, smoothness, or generic-position/);
   assert.match(topicIIPanelHtml, /href="(?:\/karpelevic)?\/proof\/#part-i-item-2"/);
   assert.match(topicIIPanelHtml, /href="(?:\/karpelevic)?\/proof\/#part-i-item-10"/);
@@ -867,6 +872,9 @@ test("server-renders the Part I proof reader", async () => {
     10,
   );
   assert.match(topicIIPanelHtml, /The finite-continuity argument, without shorthand/);
+  assert.match(topicIIPanelHtml, /Output 1 — strict convex-position persistence/);
+  assert.match(topicIIPanelHtml, /Output 2 — open-side persistence/);
+  assert.match(topicIIPanelHtml, /Output 3 — strict-side persistence/);
   assert.match(topicIIPanelHtml, /Why adjacent normals determine one support value/);
   assert.match(topicIIPanelHtml, /Boundedness, contact, and complementarity unpacked/);
   assert.match(topicIIPanelHtml, /Two appendix lemmas before saturation/);
@@ -876,17 +884,33 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(topicIIPanelHtml, /id="eq:critical-spectral-radius"/);
   assert.match(topicIIPanelHtml, /id="eq:stress-complementarity"/);
   assert.match(topicIIPanelHtml, /id="eq:full-side-touch"/);
+  assert.match(topicIIPanelHtml, /winding number/);
+  assert.match(topicIIPanelHtml, /cyclic normal fan/);
+  assert.match(topicIIPanelHtml, /complex vector/);
+  assert.match(topicIIPanelHtml, /Planar positive-cone fact/);
+  assert.doesNotMatch(topicIIPanelHtml, /Symbolic endpoint ownership/);
+  assert.doesNotMatch(
+    topicIIPanelHtml,
+    /The following finite model fixes the endpoint convention/,
+  );
   assert.match(topicIIPanelHtml, /Plate II/);
-  assert.match(topicIIPanelHtml, /ρ = cos\(π\/7\), θ = π\/7/);
+  assert.match(
+    topicIIPanelHtml,
+    /aria-label="T equals rho e to the i theta, with rho equals cosine of pi over seven and theta equals pi over seven"/,
+  );
   assert.equal(
     (topicIIPanelHtml.match(/data-contact-side="\d+"/g) ?? []).length,
     7,
   );
   assert.match(topicIIPanelHtml, /Figure II\.1/);
-  assert.doesNotMatch(topicIIPanelHtml, /Figure II\.2/);
+  assert.match(topicIIPanelHtml, /Figure II\.2/);
   assert.match(topicIIPanelHtml, /Figure II\.3/);
   assert.match(topicIIPanelHtml, /data-min-determinant="[^"]+"/);
-  assert.doesNotMatch(topicIIPanelHtml, /data-coefficient-a="[^"]+"/);
+  assert.match(topicIIPanelHtml, /data-coefficient-a="[^"]+"/);
+  assert.match(topicIIPanelHtml, /data-supporting-edge="z0-z1"/);
+  assert.match(topicIIPanelHtml, /topic-ii-figure-half-plane/);
+  assert.match(topicIIPanelHtml, /Schematic polarity correspondence/);
+  assert.match(topicIIPanelHtml, /data-figure-layout="mobile"/);
   assert.match(
     topicIIPanelHtml,
     /id="eq:triple-sign-criterion"[\s\S]*?<mi>ε<\/mi><mo>⋅<\/mo>[\s\S]*?aria-label="Equation 2\.9/,
@@ -923,9 +947,27 @@ test("server-renders the Part I proof reader", async () => {
     proposition31Html,
     /Conceptual route|Classification and sources/,
   );
-  assert.match(topicIIPanelHtml, /Conceptual route/);
+  assert.match(topicIIPanelHtml, /Guided explanation/);
   assert.match(topicIIPanelHtml, /Classification and sources/);
+  assert.doesNotMatch(topicIIPanelHtml, /admissible subpolygon/i);
   assert.doesNotMatch(topicIIPanelHtml, /<table\b/);
+
+  for (const [index, itemNumber] of topicIIOrder.entries()) {
+    const itemStart = topicIIPanelHtml.indexOf(`id="part-i-item-${itemNumber}"`);
+    const nextItemNumber = topicIIOrder[index + 1];
+    const itemEnd = nextItemNumber
+      ? topicIIPanelHtml.indexOf(`id="part-i-item-${nextItemNumber}"`, itemStart)
+      : topicIIPanelHtml.indexOf(
+          '<section class="proof-topic-sources"',
+          itemStart,
+        );
+    assert.ok(itemStart >= 0 && itemEnd > itemStart);
+    const itemHtml = topicIIPanelHtml.slice(itemStart, itemEnd);
+    assert.ok(
+      (itemHtml.match(/data-conceptual-layer/g) ?? []).length <= 1,
+      `Topic II item ${itemNumber} has more than one conceptual layer`,
+    );
+  }
 
   const ids = [...topicIIPanelHtml.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
   assert.equal(new Set(ids).size, ids.length, "The proof page has duplicate ids");

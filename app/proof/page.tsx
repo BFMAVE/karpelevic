@@ -210,15 +210,29 @@ export default function ProofPage() {
           <ol>
             {proofReaderTopicLinks.map((link) => (
               <li key={link.topicNumber}>
-                <a
-                  aria-current={link.topicNumber === 1 ? "step" : undefined}
-                  href={sitePath(link.href)}
-                >
-                  <span>
-                    {toRomanNumeral(link.topicNumber) ?? link.topicNumber}
+                {link.available ? (
+                  <a
+                    aria-current={link.topicNumber === 1 ? "step" : undefined}
+                    data-proof-topic-number={link.topicNumber}
+                    href={sitePath(link.href)}
+                  >
+                    <span>
+                      {toRomanNumeral(link.topicNumber) ?? link.topicNumber}
+                    </span>
+                    <strong>{link.title}</strong>
+                  </a>
+                ) : (
+                  <span
+                    className="proof-chapter-unavailable"
+                    data-proof-topic-number={link.topicNumber}
+                  >
+                    <span>
+                      {toRomanNumeral(link.topicNumber) ?? link.topicNumber}
+                    </span>
+                    <strong>{link.title}</strong>
+                    <small>Forthcoming</small>
                   </span>
-                  <strong>{link.title}</strong>
-                </a>
+                )}
               </li>
             ))}
           </ol>
