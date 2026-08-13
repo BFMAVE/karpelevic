@@ -51,7 +51,7 @@ for (const relativePath of [
   assert.match(html, /Forthcoming/);
   assert.doesNotMatch(
     html,
-    /href="\/karpelevic\/proof\/topic-iv\//,
+    /href="\/karpelevic\/proof\/topic-(?:iv|v|vi(?:\/[ab])?|vii|viii|ix|x|xi|xii(?:\/[ab])?|xiii|xiv)\//,
   );
 }
 

@@ -923,7 +923,7 @@ full local source history remain later site milestones.
 - **Next:** author review of Topic III locally. Publish no later topic without
   explicit approval.
 
-## Current milestone — Topic III terminology and layout pass (local only)
+## Current milestone — Topic III terminology and layout pass (published)
 
 - **Layout corrected:** every multi-page proof chapter now has the same
   responsive horizontal gutter. At the reviewed desktop width, Topic III's
@@ -946,5 +946,11 @@ full local source history remain later site milestones.
 - **Verified locally:** the production build and all 29 automated tests pass.
   Chrome shows the revised page without the previous transform overlay, and
   the visible body gutter matches the intended Topic II spacing.
-- **Publication status:** local only. Topic III remains absent from the public
-  Pages package pending author review and explicit approval.
+- **Publication status:** published on 13 August 2026 at
+  <https://bfmave.github.io/karpelevic/proof/topic-iii/> in static Pages commit
+  `db04f7c`. The successful GitHub Pages run was `31730388414`. The live page
+  is byte-for-byte identical to the audited static export. Topics IV–XIV,
+  their routes, forward links, source files, and client bundles remain absent
+  from the public package; Topic IV returns 404.
+- **Next:** author review of Topic IV locally. Publish no later topic without
+  explicit approval.
