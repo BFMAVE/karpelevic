@@ -1196,3 +1196,33 @@ full local source history remain later site milestones.
   public package and navigation.
 - **Next:** continue reviewing Topic V locally. Do not publish any later topic
   without explicit approval.
+
+## Current milestone — Topic IV contact-figure correction (published 14 August 2026)
+
+- **Corollary 4.12 clarified:** its statement now says directly that every
+  image vertex belongs to exactly one half-open side and every half-open side
+  contains exactly one image vertex. The proof and numbering are unchanged.
+- **Equation (4.18) restored on the page:** the Section 5 scope panel now
+  visibly displays (1\leq\kappa<N), with the manuscript's equation number,
+  unique anchor, and permalink.
+- **Plate IV.3 completed:** the lifted-angle diagram is explicitly a
+  schematic example with \(\kappa=3\); the hollow marker is labelled as the
+  excluded left endpoint, and the arrow means addition of the multiplier's
+  argument.
+- **Plate IV.4 corrected:** the impossible displayed contact set
+  \(S=\{1\}\) has been removed. The plate now separates schematic local
+  geometry from the exact symbolic update
+  \(S'=(S\setminus\{i\})\cup\{i+\kappa\}\), shows both cardinality cases,
+  and explicitly states that no numerical contact system is asserted.
+- **Verification:** the canonical TeX compiles and its generated site content
+  is deterministic; all 30 tests, ESLint, `git diff --check`, the GitHub Pages
+  verifier, desktop inspection, and the dedicated 390-pixel plate layouts
+  pass. The deployed Topic IV HTML has SHA-256
+  `26eae38d458f53b28f9d3f27893e4c0d9b0bc86581e9f7df97392c2dafe81056`
+  and is byte-identical to the audited export.
+- **Publication status:** source commit `3a0df1d`; static-only public Pages
+  commit `dbb9fae`. Topic IV is live at
+  <https://bfmave.github.io/karpelevic/proof/topic-iv/>. Topics I–IV return
+  HTTP 200; Topic V returns HTTP 404 and remains unpublished.
+- **Next:** continue reviewing Topic V locally; publish no later topic without
+  explicit approval.
