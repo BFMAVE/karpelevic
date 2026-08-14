@@ -3,11 +3,14 @@ import type {
   GuidedProofStep,
   ProofVocabularyEntry,
 } from "../components/proof/ProofResult";
-import type { AdvancedProofGroup } from "../components/proof/AdvancedProofChapter";
+import type {
+  AdvancedProofGroup,
+  AdvancedProofSetup,
+} from "../components/proof/AdvancedProofChapter";
 import { sitePath } from "../lib/site-path";
 import {
   topicVCorridorDictionary,
-  topicVFormalSetups,
+  topicVFormalSetups as topicVGeneratedFormalSetups,
   topicVReaderHtmlByItem,
   topicVReturnSetup,
 } from "./topic-v-vii-html";
@@ -29,6 +32,56 @@ const step = (
   check?: React.ReactNode,
 ): GuidedProofStep => ({ title, explanation, check });
 
+const topicVContactNotation: AdvancedProofSetup = {
+  id: "topic-v-contact-notation",
+  title: "Polygon and contact notation imported from Topic IV",
+  html: String.raw`
+    <p>
+      Let λ be the nonreal complex multiplier fixed in Topic IV, with
+      |λ|&lt;1, and let
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mi mathvariant="normal">conv</mi><mo stretchy="false">{</mo><msub><mi>x</mi><mn>0</mn></msub><mo>,</mo><mo>…</mo><mo>,</mo><msub><mi>x</mi><mrow><mi>N</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">P=\operatorname{conv}\{x_0,\ldots,x_{N-1}\}</annotation></semantics></math>
+      be the strict invariant polygon obtained in Topic IV. Here “strict” is the
+      custom term from Definition 1.2: the displayed vertices are precisely
+      the extreme points, each listed once; it does not mean that the convex
+      set is strictly convex. The vertices are listed counterclockwise, and
+      every vertex, side, and contact index below is interpreted modulo
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi></math>.
+    </p>
+    <p>
+      Put
+      <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>E</mi><mi>i</mi></msub><mo>=</mo><mo stretchy="false">[</mo><msub><mi>x</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>,</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">]</mo><mo>,</mo><mspace width="1.5em"></mspace><msub><mi>ξ</mi><mi>i</mi></msub><mo>=</mo><mi>λ</mi><msub><mi>x</mi><mrow><mi>i</mi><mo>−</mo><mi>κ</mi></mrow></msub><mo>=</mo><msub><mi>β</mi><mi>i</mi></msub><msub><mi>x</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>α</mi><mi>i</mi></msub><msub><mi>x</mi><mi>i</mi></msub><mo>,</mo></mrow><annotation encoding="application/x-tex">E_i=[x_{i-1},x_i],\qquad \xi_i=\lambda x_{i-\kappa}=\beta_i x_{i-1}+\alpha_i x_i,</annotation></semantics></math>
+      where
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mi>i</mi></msub><mo>&gt;</mo><mn>0</mn><mo>,</mo><mspace width="0.5em"></mspace><msub><mi>β</mi><mi>i</mi></msub><mo>≥</mo><mn>0</mn><mo>,</mo><mspace width="0.5em"></mspace><msub><mi>α</mi><mi>i</mi></msub><mo>+</mo><msub><mi>β</mi><mi>i</mi></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\alpha_i&gt;0,\ \beta_i\geq0,\ \alpha_i+\beta_i=1</annotation></semantics></math>.
+      Thus
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ξ</mi><mi>i</mi></msub><mo>∈</mo><mi mathvariant="normal">relint</mi><mo stretchy="false">(</mo><msub><mi>E</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mo>⇔</mo><msub><mi>β</mi><mi>i</mi></msub><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\xi_i\in\operatorname{relint}(E_i)\iff\beta_i&gt;0</annotation></semantics></math>;
+      when <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>β</mi><mi>i</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\beta_i=0</annotation></semantics></math>,
+      the contact is the included endpoint
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ξ</mi><mi>i</mi></msub><mo>=</mo><msub><mi>x</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\xi_i=x_i</annotation></semantics></math>.
+      The adjective “right-admissible” refers to this fixed orientation,
+      half-open endpoint convention, and common shift
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mi>κ</mi></math>;
+      it is not an additional hypothesis.
+    </p>
+    <p>
+      Define the relative-interior contact indices by
+      <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>=</mo><mo stretchy="false">{</mo><mi>i</mi><mo>:</mo><msub><mi>ξ</mi><mi>i</mi></msub><mo>∈</mo><mi mathvariant="normal">relint</mi><mo stretchy="false">(</mo><msub><mi>E</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mo stretchy="false">}</mo><mo>=</mo><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mo>…</mo><mo>,</mo><mi>φ</mi><mo stretchy="false">}</mo><mo>.</mo></mrow><annotation encoding="application/x-tex">S=\{i:\xi_i\in\operatorname{relint}(E_i)\}=\{1,\ldots,\varphi\}.</annotation></semantics></math>
+      The final equality is the cyclic relabelling and reduction proved in
+      Topic IV. When the first-return map is introduced, the same representative
+      set is denoted by 𝓑={1,…,φ}.
+    </p>
+    <p>
+      If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>φ</mi><mo>&lt;</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">\varphi&lt;N</annotation></semantics></math>,
+      let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mi>h</mi></math>
+      be the least positive integer for which
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mi>h</mi><mi>κ</mi><msub><mo stretchy="false">]</mo><mi>N</mi></msub><mo>∈</mo><mo stretchy="false">{</mo><mi>N</mi><mo>−</mo><mi>φ</mi><mo>,</mo><mo>…</mo><mo>,</mo><mi>N</mi><mo>−</mo><mn>1</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">[h\kappa]_N\in\{N-\varphi,\ldots,N-1\}</annotation></semantics></math>.
+      Topic IV proves the sharper first-entrance identities
+      <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mi>h</mi><mi>κ</mi><msub><mo stretchy="false">]</mo><mi>N</mi></msub><mo>=</mo><mi>N</mi><mo>−</mo><mi>φ</mi><mo>,</mo><mspace width="1.5em"></mspace><mo stretchy="false">[</mo><mi>m</mi><mi>κ</mi><msub><mo stretchy="false">]</mo><mi>N</mi></msub><mo>&lt;</mo><mi>N</mi><mo>−</mo><mi>φ</mi><mspace width="0.5em"></mspace><mo stretchy="false">(</mo><mn>0</mn><mo>≤</mo><mi>m</mi><mo>&lt;</mo><mi>h</mi><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex">[h\kappa]_N=N-\varphi,\qquad[m\kappa]_N&lt;N-\varphi\quad(0\leq m&lt;h).</annotation></semantics></math>
+      If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>φ</mi><mo>=</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">\varphi=N</annotation></semantics></math>,
+      we use <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">h=0</annotation></semantics></math>.
+    </p>
+  `,
+};
+
 const guides: readonly ReaderResultGuide[] = [
   {
     itemNumber: 70,
@@ -44,8 +97,8 @@ const guides: readonly ReaderResultGuide[] = [
         "The set αu+βv with 0≤α,β<1. The open upper edges prevent the same lattice class from being counted twice.",
       ),
       vocabulary(
-        "Quotient lattice",
-        "Two integer points represent the same class modulo Zu+Zv when their difference is an integer combination of u and v.",
+        "Finite quotient group",
+        "Two integer points represent the same coset in ℤ²/(ℤu+ℤv) when their difference is an integer combination of u and v.",
       ),
       vocabulary(
         "Smith normal form",
@@ -76,9 +129,9 @@ const guides: readonly ReaderResultGuide[] = [
     label: "Theorem 6.1",
     vocabulary: [
       vocabulary(
-        "Upper-record time",
-        "A time h for which the representative [hκ]ₙ is larger than every representative seen at earlier times. “Upper” refers to the ordinary order 0,…,N-1.",
-        "For N=13 and κ=5 the residues begin 0,5,10,2,7,12. The upper-record times are 0,1,2,5.",
+        "Record time of the residue sequence",
+        "A time h for which the representative [hκ]ₙ is larger than every representative seen at earlier times.",
+        "For N=13 and κ=5 the residues begin 0,5,10,2,7,12. The record times are 0,1,2,5.",
       ),
       vocabulary(
         "Deficit",
@@ -93,20 +146,16 @@ const guides: readonly ReaderResultGuide[] = [
         "Two integer vectors whose determinant is ±1. Their integer combinations produce every point of Z².",
       ),
       vocabulary(
-        "Return tower",
+        "First-return tower",
         "A base label together with the finite list of its successive κ-rotates before the first return to the base interval. Its height is the number of states in that list.",
       ),
       vocabulary(
         "Equivariant map",
         "A map that respects the dynamics: applying one successor step before or after the map gives the same result.",
       ),
-      vocabulary(
-        "Right-admissible contact system and strict field",
-        "The positively oriented strict invariant polygon and one-sided contact labels fixed in Topic IV. In field i, the contact has the form λxᵢ₋κ=βᵢxᵢ₋₁+αᵢxᵢ with αᵢ>0, βᵢ≥0, and αᵢ+βᵢ=1. The field is strict when βᵢ>0, so the image lies in the side interior; βᵢ=0 is an endpoint contact.",
-      ),
     ],
     intuition:
-      "Successive upper records are adjacent primitive points of a lattice sail. Their determinant-one relation is exactly strong enough to partition every cyclic label into a short or long return tower, without omissions or repetitions.",
+      "Successive record vectors form a primitive unimodular chain. Their determinant-one relation is exactly strong enough to partition every cyclic label into a short or long first-return tower, without omissions or repetitions. A record vector lying inside a straight sail edge is retained in this chain even though it is not itself a sail vertex.",
     figure: "return-towers",
     proofSteps: [
       step(
@@ -135,7 +184,7 @@ const guides: readonly ReaderResultGuide[] = [
         "The base return has δ cycles. Each state cycle has N/δ states by qν+hΔ=N, exactly the length of a κ-orbit. Equivariance and matching residue classes modulo δ make the restriction a bijection on each cycle.",
       ),
       step(
-        "Propagate a unit record edge backwards",
+        "Propagate a consecutive record pair with Δ=1 backwards",
         "When Δ=1, subtract floor(h/q) copies of U. A coefficient argument in the unimodular basis rules out every earlier improving vector and proves the displayed arithmetic run consists of consecutive records.",
       ),
       step(
@@ -151,16 +200,16 @@ const guides: readonly ReaderResultGuide[] = [
     label: "Corollary 6.2",
     vocabulary: [
       vocabulary(
-        "Endpoint padding",
-        "Enlarging the actual strict block to a record interval by inserting fields whose contact point is already the endpoint ξⱼ=xⱼ. Later these are factors (αⱼ,βⱼ)=(1,0), not extra strict contacts.",
+        "Extending the interval by endpoint contacts",
+        "Enlarging the interval of relative-interior contact indices to the record interval by inserting indices whose contact is already the endpoint ξⱼ=xⱼ. Later these give factors (αⱼ,βⱼ)=(1,0); they do not create additional relative-interior contacts.",
       ),
       vocabulary(
-        "Virtual short return",
-        "The short return starting at the cyclic endpoint x₀. It uses the same exact tower identity even though x₀ is written outside the base list 1,…,d.",
+        "Short-return identity at the cyclic endpoint",
+        "The short return starting at x₀. It is a genuine tower identity, even though x₀ is written outside the base list 1,…,d.",
       ),
     ],
     intuition:
-      "A strict block need not fill the entire arithmetic record interval. Empty positions can be completed by exact endpoint cells, giving one uniform return strip without changing the genuine contacts.",
+      "The interval of relative-interior contact indices need not fill the entire arithmetic record interval. The remaining positions are endpoint-contact indices, so the same first-return formulas apply without changing the genuine relative-interior contacts.",
     proofSteps: [
       step(
         "Apply the unit-edge record pair",
@@ -172,15 +221,15 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Force internal endpoint contacts",
-        "All strict fields lie in J. An internal destination cannot lie in J by tower bijectivity, so it is a nonstrict endpoint field.",
+        "All relative-interior contact indices lie in J. An internal destination cannot lie in J by tower bijectivity, so its contact is an endpoint contact.",
       ),
       step(
         "Translate to equations",
-        "The short returns, virtual short return, and closure give equations (6.17)-(6.18). For j outside the actual strict set, right-admissibility gives ξⱼ=xⱼ.",
+        "The short returns, the identity at x₀, and the closing identity give equations (6.17)–(6.18). For j outside the relative-interior contact set, the fixed half-open convention gives ξⱼ=xⱼ.",
       ),
     ],
     takeaway:
-      "Padding changes the length of the algebraic strip, never the set of genuine strict contacts.",
+      "Extending the record interval changes the range of the formulas, not the set of relative-interior contacts.",
   },
   {
     itemNumber: 39,
@@ -188,25 +237,25 @@ const guides: readonly ReaderResultGuide[] = [
     vocabulary: [
       vocabulary(
         "Lattice sail",
-        "The broken boundary formed by primitive visible lattice points between two rays. Here its vertices are exactly the upper-record vectors.",
+        "The relevant boundary of the convex hull of the nonzero lattice points in a cone. The record-vector chain retains collinear intermediate points, so not every record vector is a sail vertex.",
       ),
     ],
     intuition:
-      "Continued fractions are hidden in the record vectors, but the sail description keeps determinant signs, endpoint ownership, and the terminal record in one geometric picture.",
+      "Continued-fraction structure is visible in the record vectors. The record-vector chain, rather than an identification of every record with a sail vertex, is the formal object used in the proof.",
     takeaway:
-      "The lattice sail explains the arithmetic; the direct record proof remains the formal dependency.",
+      "The sail gives geometric context; the direct record argument remains the formal dependency.",
   },
   {
     itemNumber: 40,
     label: "Lemma 7.1",
     vocabulary: [
       vocabulary(
-        "Pulled-back support",
-        "The line Lᵢ=λ^{-Hᵢ} aff(Eᵣ₍ᵢ₎). Applying λ^{Hᵢ} sends it to the line of the side reached by the return, so it supports P at xᵢ.",
+        "Preimage supporting line",
+        "The line Lᵢ=λ^{-Hᵢ} aff(Eᵣ₍ᵢ₎). Applying λ^{Hᵢ} sends it to the line containing the side reached by the return. The lemma proves that Lᵢ supports P and exposes xᵢ.",
       ),
       vocabulary(
-        "Short-long interface",
-        "The unique place in the ordered bases where return height changes from q to q+h.",
+        "Index where the return height changes",
+        "The index φ−Δ is the unique transition in the ordered base set from return height q to return height q+h.",
       ),
     ],
     intuition:
@@ -230,7 +279,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "Every support used by the selected short corridor touches the polygon at one vertex only.",
+      "Every supporting line used along the selected boundary arc exposes exactly one polygon vertex.",
   },
   {
     itemNumber: 41,
@@ -241,8 +290,8 @@ const guides: readonly ReaderResultGuide[] = [
         "A list of distinct consecutive boundary vertices that omits at least one polygon side.",
       ),
       vocabulary(
-        "Forward and reverse corridor",
-        "The two cyclic readings of the return step. The shorter branch is chosen so the displayed chain cannot wrap around the whole polygon.",
+        "The two cyclic orientations",
+        "The selected boundary arc can be read in either cyclic direction. The branch inequality chooses an orientation in which the displayed arc cannot wrap around the entire polygon.",
       ),
     ],
     intuition:
@@ -266,21 +315,39 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "Whichever orientation is selected, the corridor has at least two internal steps and never consumes the complete boundary.",
+      "Whichever orientation is selected, the arc has at least two internal steps and omits at least one polygon side.",
   },
   {
     itemNumber: 42,
     label: "Proposition 7.3",
     vocabulary: [
-      vocabulary("Moved bases M", "The bases whose tower vertices change under the corridor motion."),
-      vocabulary("Supported moved bases M°", "Moved bases constrained to their pulled-back strict support."),
-      vocabulary("Controlled fields D", "Target side lines constructed by the moving corridor recursion."),
-      vocabulary("Return fields R", "Fields reached from supported moved bases; their target side lines remain fixed."),
-      vocabulary("Closing field c", "The unique target field whose return is deliberately left unconstrained."),
-      vocabulary("Fixed remainder A", "Every strict field not belonging to D, R, or {c}."),
+      vocabulary(
+        "The base set 𝓑",
+        "The representative set {1,…,φ} on which the first-return map acts.",
+      ),
+      vocabulary(
+        "The translation r and its inverse s",
+        "The map r adds Δ modulo φ in 𝓑, and s=r⁻¹ subtracts Δ modulo φ.",
+      ),
+      vocabulary(
+        "The sets M and M°",
+        "The displayed formulas choose an interval M of base indices and a distinguished endpoint b*. The set M° is M with b* removed.",
+      ),
+      vocabulary(
+        "The set D",
+        "An explicit interval of target indices in the selected cyclic orientation.",
+      ),
+      vocabulary(
+        "The set R and the index c",
+        "They are the two parts of r(M): R=r(M°) and c=r(b*), so r(M)=R⊔{c}.",
+      ),
+      vocabulary(
+        "The set A",
+        "The remaining target indices: A=𝓑∖(D∪R∪{c}).",
+      ),
     ],
     intuition:
-      "The four-set ledger is a conservation law for incidences. Every top return has one source class and one target-line mechanism, and exactly one return remains available to open.",
+      "The proposition is finite combinatorics. It partitions every target index according to the return translation and records where the corresponding source lies. No polygonal deformation is assumed here.",
     figure: "global-ledger",
     proofSteps: [
       step(
@@ -296,16 +363,16 @@ const guides: readonly ReaderResultGuide[] = [
         "The inverse formula proves sources for D lie outside M, while s(R)=M° and s(c)=b*.",
       ),
       step(
-        "Register forward side lines",
-        "Only bases in M move. Endpoint inspection shows all R∪A lines fixed, D controlled by the chain, and c closing.",
+        "Verify the inverse-source identities",
+        "Apply s=r⁻¹ to D, R, {c}, and A. This proves s(D)∩M=∅, s(R)=M°, s(c)=b*, and s(A)∩M=∅.",
       ),
       step(
         "Repeat in the reverse branch",
-        "There is exactly one modular wrap. The explicit interval gives R, disjointness, inverse sources, and fixed lines Eφ and E₁.",
+        "There is exactly one modular wrap. The explicit interval gives R, disjointness, and the inverse-source identities.",
       ),
     ],
     takeaway:
-      "No return edge is omitted or counted twice; c is the sole unconstrained closing edge.",
+      "Every return incidence is classified exactly once by its target in D, R, {c}, or A, together with the source information recorded by s.",
   },
   {
     itemNumber: 43,
@@ -324,15 +391,15 @@ const guides: readonly ReaderResultGuide[] = [
         "An affine line together with its point at infinity, representing its direction.",
       ),
       vocabulary(
-        "Corridor holonomy",
-        "The return projectivity obtained by projecting successively through all corridor contacts and finally through Xₘ₊₁ to the last contact line.",
+        "Initial and terminal lines",
+        "The construction begins on ℓ₁=aff(X₀,X₁) and ends on ℓₘ₊₁=aff(Cₘ,Cₘ₊₁). These lines need not be the same, so the composition is not yet a self-map.",
       ),
     ],
     intuition:
-      "The corridor packages a long chain of incidence constraints into one map of a line. Topic VI will inspect whether that return map is the identity.",
+      "Successive projections package the incidence constraints into one projectivity Π:ℓ₁→ℓₘ₊₁. Topic VI specifies the identification needed to turn this into a self-map and then studies that self-map.",
     figure: "projective-corridor",
     takeaway:
-      "A projective corridor is exactly the data needed to define one return projectivity without using lengths or angles.",
+      "The selected boundary arc and its projection centres define a projectivity from the initial line to the terminal line without using lengths or angles.",
   },
   {
     itemNumber: 44,
@@ -340,10 +407,10 @@ const guides: readonly ReaderResultGuide[] = [
     vocabulary: [
       vocabulary(
         "Pencil of lines",
-        "All projective lines through one fixed point. Removing finitely many forbidden members still leaves valid choices inside an open interval of strict supports.",
+        "All projective lines through one fixed point. Removing finitely many forbidden members still leaves valid choices among the supporting lines that expose the chosen vertex.",
       ),
       vocabulary(
-        "Projective affine chart",
+        "Affine chart of the projective plane",
         "The affine plane obtained after declaring one projective line to be the line at infinity.",
       ),
       vocabulary(
@@ -356,15 +423,15 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     intuition:
-      "Projective geometry lets us choose coordinates adapted to the proof. Sending the intersection of two endpoint supports to infinity makes them parallel, and the boundary chain becomes an ordinary convex graph whose slopes can be compared.",
+      "Projective geometry lets us choose coordinates adapted to the proof. Sending the intersection of two endpoint supporting lines to infinity makes them parallel, and the selected boundary arc becomes an ordinary convex graph whose slopes can be compared.",
     proofSteps: [
       step(
-        "Choose two generic strict supports",
-        "Fix M₀ at X₀ and vary M₁ at Xₘ₊₁. Excluding finitely many lines keeps their intersection O off every side and corridor line that will be used.",
+        "Choose two generic exposing supporting lines",
+        "Fix M₀ exposing X₀ and vary M₁ among the supporting lines exposing Xₘ₊₁. Excluding the finite family of forbidden choices keeps their intersection O off every side line and every selected supporting line used below.",
       ),
       step(
         "Place O outside the polygon",
-        "If O belonged to P, strictness of M₀ and M₁ would force it to be both distinct endpoint vertices.",
+        "If O belonged to P, the singleton contact conditions M₀∩P={X₀} and M₁∩P={Xₘ₊₁} would force O to equal two distinct endpoint vertices.",
       ),
       step(
         "Separate O from P",
@@ -377,15 +444,15 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Read the new geometry",
-        "The endpoint supports are parallel because they met on J. No chain or corridor line is parallel to them by the genericity choice.",
+        "The endpoint supporting lines are parallel because their intersection lay on J, which is now the line at infinity. By the genericity choice, no side line of the selected arc and no selected supporting line is parallel to them.",
       ),
       step(
         "Make the chain a convex graph",
-        "A transverse coordinate is strictly increasing along each boundary arc. Choose the displayed arc as the lower graph; convexity orders the slopes and strictness prevents equality.",
+        "A transverse coordinate is strictly increasing along the selected boundary arc. Choose the displayed arc as the lower graph. Convexity makes consecutive slopes nondecreasing; equality would make three consecutive listed vertices collinear, so the slopes are strictly increasing.",
       ),
     ],
     takeaway:
-      "The corridor can be studied in an affine chart where its boundary is an increasing-slope graph, without changing any incidence needed later.",
+      "The selected boundary arc can be studied in an affine chart as a graph with strictly increasing edge slopes, without changing any incidence needed later.",
   },
 ] as const;
 
@@ -406,7 +473,7 @@ const take = (numbers: readonly number[]) =>
 export const topicVGroups: readonly AdvancedProofGroup[] = [
   {
     number: "I",
-    title: "Records, lattice cells, and return towers",
+    title: "Records, lattice index, and first-return towers",
     introduction: (
       <p>
         The cyclic orbit is first studied without a polygon. The lattice
@@ -418,37 +485,49 @@ export const topicVGroups: readonly AdvancedProofGroup[] = [
   },
   {
     number: "II",
-    title: "Build the strict return supports",
+    title: "Supporting lines at the return vertices",
     introduction: (
       <p>
-        The tower tops determine pulled-back supports, and the only
-        short-long interface is checked without suppressing an endpoint case.
+        The tower tops determine preimage supporting lines. The only index
+        where the return height changes is checked separately, including its
+        endpoint case.
       </p>
     ),
-    formalSetups: [topicVReturnSetup],
+    formalSetups: [
+      {
+        ...topicVReturnSetup,
+        title: "Return heights, top-level identities, and preimage supporting lines",
+      },
+    ],
     results: take([40]),
   },
   {
     number: "III",
-    title: "Choose the proper branch and close the ledger",
+    title: "Choose a proper boundary arc and classify its return incidences",
     introduction: (
       <p>
-        The shorter cyclic branch is proper. Its exact forward or reverse
-        dictionary then partitions every return edge and leaves one closing
-        field.
+        One of the two cyclic orientations gives a proper consecutive boundary
+        arc. The corresponding index formulas partition every return incidence
+        and record whether its inverse source lies outside M, in M°, or at b*.
       </p>
     ),
-    formalSetups: [topicVCorridorDictionary],
+    formalSetups: [
+      {
+        ...topicVCorridorDictionary,
+        title: "Indexing in the two cyclic orientations",
+      },
+    ],
     results: take([41, 42]),
   },
   {
     number: "IV",
-    title: "The projective object and its admissible chart",
+    title: "Composition of perspectivities and an affine chart",
     introduction: (
       <p>
-        The incidence chain becomes one projectivity. A carefully chosen
-        chart turns the selected polygonal arc into a convex graph with
-        strictly increasing slopes.
+        The successive projections define a projectivity from the initial line
+        to the terminal line. A carefully chosen affine chart turns the
+        selected polygonal arc into a convex graph with strictly increasing
+        slopes.
       </p>
     ),
     results: take([43, 44]),
@@ -463,22 +542,22 @@ export const topicVImported: readonly ProofDependency[] = [
       "A point outside a compact convex polygon can be strictly separated from it; Proposition 7.5 uses this to choose the line sent to infinity.",
   },
   {
-    label: "Topic II: strict supports and the support-face test",
+    label: "Topic II: supporting lines that expose one vertex",
     href: sitePath("/proof/topic-ii/#part-i-item-13"),
     explanation:
-      "A support at a vertex is strict once neither neighbouring vertex lies on its line.",
+      "A supporting line at a polygon vertex exposes that vertex alone once neither neighbouring vertex lies on the line.",
   },
   {
-    label: "Topic III: one-sided endpoint ownership",
+    label: "Topic III: half-open assignment of endpoint contacts",
     href: sitePath("/proof/topic-iii/"),
     explanation:
-      "A nonstrict destination is an exact endpoint contact, so internal tower steps become vertex equalities.",
+      "A contact outside the relative interior is the included endpoint, so internal first-return steps become exact vertex equalities.",
   },
   {
-    label: "Topic IV: reduced strict block",
+    label: "Topic IV: one cyclic interval of relative-interior contact indices",
     href: sitePath("/proof/topic-iv/"),
     explanation:
-      "The strict fields form one cyclic interval, the contact rotation is addition by κ, and its first entrance supplies the record deficit φ.",
+      "The relative-interior contact indices form one cyclic interval, the contact rotation is addition by κ, and Topic IV supplies the exact first-entrance identities restated above.",
   },
 ] as const;
 
@@ -491,7 +570,7 @@ export const topicVBackground: readonly ProofDependency[] = [
   {
     label: "Elementary real projective geometry",
     explanation:
-      "Definition 7.4 introduces perspectivities; Proposition 7.5 proves the exact chart and convexity facts used later.",
+      "Definition 7.4 defines the composition of perspectivities used here; Proposition 7.5 proves the exact chart and convexity facts needed later.",
   },
 ] as const;
 
@@ -499,4 +578,7 @@ export const topicVSourceIds = collectSourceIds(
   topicVGroups.flatMap((group) => group.results),
 );
 
-export { topicVFormalSetups };
+export const topicVFormalSetups: readonly AdvancedProofSetup[] = [
+  topicVContactNotation,
+  ...topicVGeneratedFormalSetups,
+];

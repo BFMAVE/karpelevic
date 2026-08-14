@@ -19,8 +19,8 @@ const publicSite = "https://bfmave.github.io/karpelevic";
 const bundleLinkMode = process.env.PROOF_STANDALONE_BUNDLE_LINKS === "1";
 const reviewBundleFiles = new Map([
   ["/proof/topic-v", "Critical_Invariant_Polygons_Topic_V.html"],
-  ["/proof/topic-vi/a", "Critical_Invariant_Polygons_Topic_VI_Part_A.html"],
-  ["/proof/topic-vi/b", "Critical_Invariant_Polygons_Topic_VI_Part_B.html"],
+  ["/proof/topic-vi/a", "Critical_Invariant_Polygons_Topic_VI.html"],
+  ["/proof/topic-vi/b", "Critical_Invariant_Polygons_Topic_VI.html"],
   ["/proof/topic-vii", "Critical_Invariant_Polygons_Topic_VII.html"],
 ]);
 
@@ -308,7 +308,7 @@ function verifyStandaloneHtml(html) {
         : proofRoute === "/proof/topic-v"
           ? [
               "Topic V",
-              "Rotation arithmetic and the projective corridor",
+              "Rotation records, first-return towers, and projective preparation",
               "Lattice parallelogram count",
               "data-proof-route=\"topic-v\"",
               "Forthcoming",

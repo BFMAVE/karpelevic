@@ -1226,3 +1226,41 @@ full local source history remain later site milestones.
   HTTP 200; Topic V returns HTTP 404 and remains unpublished.
 - **Next:** continue reviewing Topic V locally; publish no later topic without
   explicit approval.
+
+## Current milestone — Topic V rigor and projective preparation (approved for publication 14 August 2026)
+
+- **Rotation arithmetic repaired at source:** Equation (6.2) now carries the
+  strict record inequality. Theorem 6.1 explicitly treats positive return
+  heights, time zero, the terminal index range, and equal-deficit ties. The
+  record-vector chain is distinguished carefully from the vertices of the
+  associated lattice sail.
+- **Dependency boundary made exact:** Topic V states that it prepares the
+  later proof of \(\Delta=1\) but does not prove that conclusion itself.
+  Proposition 7.3 is now purely the finite partition of return incidences; its
+  deformation interpretation has moved to Topic VI, where the required
+  objects are defined. Plate V.3 records only the exact inverse-source
+  identities and asserts no deformation.
+- **Projective definitions typed precisely:** Definition 7.4 defines a
+  projectivity \(\Pi:\ell_1\to\ell_{m+1}\). It is not called a return map or
+  self-map until a separate identification of the terminal and initial lines
+  has been supplied. Proposition 7.5 uses the established strict-polygon
+  terminology and spells out the affine-chart construction.
+- **Educational layer and provenance tightened:** an always-visible panel
+  imports the Topic IV notation, avoidable local jargon has been replaced by
+  literal set and incidence language, and Propositions 7.3 and 7.5 remain
+  conservatively unbadged because the cited sources do not establish those
+  exact displayed formulations.
+- **Four audited mathematical plates:** Plate V.1 separates the unimodular
+  record chain from the Klein sail; Plate V.2 displays the exact two-height
+  return tower; Plate V.3 is the combinatorial incidence partition; and Plate
+  V.4 is generated from an exact projective incidence construction with eight
+  checked incidences. All four have dedicated mobile layouts.
+- **Verified locally:** canonical TeX and generated content have matching hash
+  `579adb67c1b5dfa887b6332c175e22ff9a2f3150dc23d4755a748f999a6304c8`;
+  Tectonic compiles; the generator is deterministic; all 30 automated tests,
+  ESLint, `git diff --check`, the standalone exporter, and the GitHub Pages
+  verifier pass. Desktop and 390-pixel browser checks found no page overflow,
+  duplicate IDs, inaccessible plates, or console errors.
+- **Publication boundary:** the audited Pages package contains Topics I–V
+  only. Topic VI and every later topic remain absent and are shown as
+  Forthcoming. Public deployment is the next approved action.

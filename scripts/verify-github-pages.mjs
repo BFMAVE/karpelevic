@@ -32,6 +32,10 @@ const pages = [
     "From endpoint order to contact reduction",
   ],
   [
+    "proof/topic-v/index.html",
+    "Rotation records, first-return towers, and projective preparation",
+  ],
+  [
     "prerequisites/index.html",
     "The small library this reader assumes",
   ],
@@ -62,12 +66,13 @@ for (const relativePath of [
   "proof/topic-ii/index.html",
   "proof/topic-iii/index.html",
   "proof/topic-iv/index.html",
+  "proof/topic-v/index.html",
 ]) {
   const html = await readFile(path.join(outputRoot, relativePath), "utf8");
   assert.match(html, /Forthcoming/);
   assert.doesNotMatch(
     html,
-    /href="\/karpelevic\/proof\/topic-(?:v|vi(?:\/[ab])?|vii|viii|ix|x|xi|xii(?:\/[ab])?|xiii|xiv)\//,
+    /href="\/karpelevic\/proof\/topic-(?:vi(?:\/[ab])?|vii|viii|ix|x|xi|xii(?:\/[ab])?|xiii|xiv)\//,
   );
 }
 
@@ -133,6 +138,33 @@ for (const relativePath of [
   );
 }
 
+{
+  const html = await readFile(
+    path.join(outputRoot, "proof/topic-v/index.html"),
+    "utf8",
+  );
+  const visibleText = visibleTextFromHtml(html);
+  assert.match(html, /data-proof-route="topic-v"/);
+  assert.match(html, /Polygon and contact notation imported from Topic IV/);
+  assert.match(html, /Theorem 6\.1/);
+  assert.match(html, /Proposition 7\.3/);
+  assert.match(html, /Definition 7\.4/);
+  assert.match(html, /Plate V\.1/);
+  assert.match(html, /Plate V\.4/);
+  assert.match(html, /data-incidence-count="8"/);
+  assert.match(html, /data-incidence-verified="true"/);
+  assert.match(visibleText, /unimodular record-vector chain/i);
+  assert.match(visibleText, /does not yet prove Δ=1/i);
+  assert.doesNotMatch(
+    visibleText,
+    /\b(?:field|fields|ledger|ownership|owned|owns|seed|anchor|anchors|conservation law|virtual short return|corridor holonomy|strict convex polygon|strict convexity)\b/i,
+  );
+  assert.doesNotMatch(
+    visibleText,
+    /vertices are exactly the upper-record vectors|corresponding primitive lattice vectors form the visible sail/i,
+  );
+}
+
 await access(path.join(outputRoot, "favicon.svg"));
 await access(path.join(outputRoot, "contact.js"));
 await access(path.join(outputRoot, "proof.js"));
@@ -141,7 +173,7 @@ await access(path.join(outputRoot, ".nojekyll"));
 
 await assert.rejects(access(path.join(outputRoot, ".vite")));
 await assert.rejects(access(path.join(outputRoot, "code")));
-await assert.rejects(access(path.join(outputRoot, "proof/topic-v")));
+await assert.rejects(access(path.join(outputRoot, "proof/topic-vi")));
 const publicAssetEntries = await readdir(path.join(outputRoot, "assets"));
 assert.equal(
   publicAssetEntries.some((entry) => entry.endsWith(".js")),

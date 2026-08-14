@@ -10,9 +10,9 @@ import {
 import { getPageTimestamp } from "../../lib/git-dates";
 
 export const metadata: Metadata = {
-  title: "Topic V — Rotation Arithmetic and the Projective Corridor",
+  title: "Topic V — Rotation Records, First-Return Towers, and Projective Preparation",
   description:
-    "A complete guided account of finite rotation records, lattice-sail return towers, the exact return-edge ledger, and the projective corridor.",
+    "A complete guided account of finite rotation records, two-height first-return towers, the return-incidence partition, and the projective preparation used in Topic VI.",
 };
 
 const updatedAt = getPageTimestamp("app/data/topic-v-reader.tsx");
@@ -27,18 +27,21 @@ export default function TopicVPage() {
       leadFigure="rotation-records"
       manuscriptPages="31–40; Proposition 7.5 closes on 41; Lemma A.6 on 65"
       overview={[
-        "The reduced strict-contact block is now studied as a finite rotation. Upper records become primitive lattice-sail vertices, and consecutive records produce a bijective two-height return section.",
-        "The tower tops are then read as polygon contacts. A proper short boundary chain and an exhaustive four-set edge ledger leave exactly one closing incidence for the projective argument.",
+        "The cyclic interval of relative-interior contact indices is now studied as a finite rotation. Consecutive record vectors produce a bijective two-height first-return decomposition.",
+        "The tower tops are then read as polygon contacts. A proper consecutive boundary arc and an exhaustive four-set partition prepare the chain of perspectivities used in Topic VI.",
       ]}
       provedHere={
         <p>
-          The page proves the finite rotation return-section theorem,
-          endpoint padding, strict and proper corridor support, the exact
-          return-edge ledger, and the admissible projective chart. Lemma A.6
-          supplies its complete lattice dependency.
+          This topic proves the finite-rotation first-return decomposition,
+          its extension to endpoint-contact indices, the exposing supporting
+          lines and proper boundary arc, the exact return-incidence partition,
+          and an affine chart adapted to the chain of perspectivities. It does
+          not yet prove Δ=1: Topic VI supplies the projective deformation and
+          completes the contradiction under the temporary assumption Δ&gt;1.
+          Lemma A.6 supplies the complete lattice dependency.
         </p>
       }
-      question="How does one reduced contact block determine both a lattice-sail return section and the exact boundary corridor needed for projective no-skipping?"
+      question="How does one cyclic interval of relative-interior contacts determine a finite first-return decomposition and the boundary data needed to prove Δ=1?"
       routeKey="topic-v"
       sourceIds={topicVSourceIds}
       stats={[

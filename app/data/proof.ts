@@ -178,8 +178,8 @@ const karpelevicOnlyAntecedent = new Set([
   3, 32, 33, 34, 35, 36, 37, 38, 40, 41, 47, 49, 50, 55, 56,
 ]);
 const strengthened = new Set([16, 30, 57, 58]);
-const newResults = new Set([4, 42, 45, 48, 59]);
-const unbadgedResults = new Set([27, 28, 31]);
+const newResults = new Set([4, 45, 48, 59]);
+const unbadgedResults = new Set([27, 28, 31, 42, 44]);
 const previouslyKnown = new Set([
   15, 18, 23, 25, 26, 29, 61, 62, 64,
 ]);
@@ -255,6 +255,12 @@ function sourceRelationFor(number: number): string | undefined {
   if (number === 31) {
     return "Hatcher, Algebraic Topology, §1.3, supplies the standard covering-space lift for circle angles, while Schneider, Chapter 1, supplies convex-boundary angular order. These are background tools only; the exact indexed endpoint-path consequence is derived here without a separate classification badge.";
   }
+  if (number === 42) {
+    return "Karpelevič (1951) is the closest structural antecedent. The exact finite partition displayed here is proved on this page and is deliberately left unbadged pending a statement-level literature audit.";
+  }
+  if (number === 44) {
+    return "Coxeter supplies the classical projective background. The precise polygonal chart lemma is proved here and is deliberately left unbadged because the cited source does not state this exact formulation.";
+  }
   if (newResults.has(number)) {
     return "The displayed source is the closest antecedent. The exact statement used here appears to be new, but its older mechanism or conclusion is stated separately.";
   }
@@ -312,14 +318,14 @@ const rawItems: readonly [
   [34, "Corollary", "Geometric realization of every permitted update sequence", "Shows that every permitted finite sequence of updates to S comes from actual invariant polygons."],
   [35, "Corollary", "Realization of the successive updates used in Lemma 5.5", "Applies the finite realization result to the right-to-left update sequences in the reduction argument."],
   [36, "Lemma", "Reduction to one cyclic interval and a first-entrance identity", "Reduces a reachable set S to one cyclic interval and identifies the corresponding first entrance time."],
-  [37, "Theorem", "Finite rotation return-section", "Computes the first-return structure of a finite rational rotation by Euclidean and lattice data."],
-  [38, "Corollary", "Endpoint-padded upper-record sections", "Adds endpoint conventions that make the return sections work uniformly at the boundary cases."],
-  [39, "Remark", "Lattice-sail interpretation", "Reads the record pairs as consecutive edges of a two-dimensional lattice sail."],
-  [40, "Lemma", "Strict supports along a short return corridor", "Verifies the support inequalities needed along the finite corridor before projection begins."],
-  [41, "Lemma", "Proper corridor chain", "Shows that the successive boundary segments form a genuinely nested projective corridor."],
-  [42, "Proposition", "Exact return-edge ledger", "Lists every edge, endpoint, and return time needed by the global deformation with no suppressed cases."],
-  [43, "Definition", "Projective corridor and holonomy", "Names the chain of projections and the return projectivity obtained after one circuit."],
-  [44, "Proposition", "Admissible projective chart", "Chooses a coordinate on the initial side in which the corridor holonomy is fractional-linear and ordered."],
+  [37, "Theorem", "First-return decomposition for a finite cyclic rotation", "Computes the first-return structure of a finite rational rotation from its residue records and lattice data."],
+  [38, "Corollary", "First-return decomposition on an extended record interval", "Extends the formulas across endpoint-contact indices so that all boundary cases use the same first-return description."],
+  [39, "Remark", "Record-vector chain and lattice sail", "Relates the unimodular record-vector chain to the standard convex-hull lattice sail without identifying collinear intermediate records as sail vertices."],
+  [40, "Lemma", "Supporting lines exposing the return vertices", "Proves that each preimage supporting line used along the selected boundary arc exposes the corresponding polygon vertex."],
+  [41, "Lemma", "The selected boundary arc is proper", "Shows that one cyclic orientation gives pairwise distinct consecutive boundary vertices and omits at least one polygon side."],
+  [42, "Proposition", "Partition of the return incidences", "Partitions the target indices under the first-return translation and records the source class of every incidence."],
+  [43, "Definition", "Composition of perspectivities along the selected boundary arc", "Defines a projectivity from the initial line to the terminal line by successive perspectivities."],
+  [44, "Proposition", "Affine chart adapted to the selected boundary arc", "Chooses an affine chart in which the endpoint supports are parallel and the selected boundary arc has strictly increasing edge slopes."],
   [45, "Lemma", "Convex-chain calibration", "Calibrates successive projections so a point can move through the corridor without jumping across a supporting edge."],
   [46, "Lemma", "Fixed-point escape for a projectivity", "Finds a nearby point moved strictly to one side whenever the return projectivity is not the identity."],
   [47, "Theorem", "Projective corridor escape", "Combines the calibrated chain with fixed-point escape to produce a no-skipping deformation."],
@@ -420,12 +426,12 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "rotation",
     eyebrow: "Topic V · 9 items",
-    title: "Rotation arithmetic and the projective corridor",
+    title: "Rotation records, first-return towers, and projective preparation",
     question:
-      "What does the reduced chip block know about Euclidean remainders and return edges?",
+      "How does one cyclic interval of relative-interior contacts determine the arithmetic and boundary data needed to prove Δ=1?",
     overview: [
-      "A finite rotation section converts the reduced block into first-return data. Record pairs, determinant-one lattice cells, and endpoint padding make the arithmetic visible before it is used in geometry.",
-      "The return-edge ledger is the bridge: it lists the exact sequence of supports through which a point must travel. Those supports define the projective corridor and its holonomy.",
+      "A finite cyclic rotation converts the interval from Topic IV into first-return data. Consecutive record vectors and determinant-one lattice pairs produce a two-height tower decomposition.",
+      "The tower identities determine exposing supporting lines along a proper boundary arc. A finite partition of return incidences and a composition of perspectivities prepare the deformation argument completed in Topic VI.",
     ],
     itemNumbers: [37, 38, 39, 40, 41, 42, 43, 44, 70],
     manuscriptPages: "31–40",
