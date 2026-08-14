@@ -1135,21 +1135,23 @@ full local source history remain later site milestones.
 
 ## Current milestone — Topics V–VII portable review editions (local only)
 
-- **Review package:** generated four self-contained HTML files in `share/`:
-  Topic V, Topic VI Part A, Topic VI Part B, and Topic VII. Topic VI remains
-  split because its local-projective and global-admissibility arguments are two
-  separate proof-reader chapters. A ZIP containing all four files preserves
+- **Review package:** generated three self-contained HTML files in `share/`:
+  Topic V, combined Topic VI, and Topic VII. The source arguments of Topic VI
+  remain visibly separated into internal sections “Part A · Local projective
+  escape” and “Part B · Global admissibility and unit return,” but reviewers
+  receive one file as requested. A ZIP containing the three files preserves
   their sibling navigation when the bundle is extracted into one folder.
 - **Portability:** every file embeds its stylesheet, fonts, mathematical
   plates, and proof-chapter controls. It has no root-relative asset dependency
   or external script, so it can be opened directly from disk and sent as an
   ordinary HTML attachment.
-- **Bundle navigation:** links among Topics V, VI-A, VI-B, and VII point to the
-  corresponding sibling HTML filenames. Links to the already published Topics
-  I–IV remain web links. Topics VIII–XIV remain marked Forthcoming.
+- **Bundle navigation:** the combined Topic VI uses internal anchors for its
+  two sections; links among Topics V, VI, and VII point to the corresponding
+  sibling HTML filenames. Links to the already published Topics I–IV remain
+  web links. Topics VIII–XIV remain marked Forthcoming.
 - **Audit:** Topic V contains 9 formal items and 7 complete proof disclosures;
-  VI-A contains 3 and 3; VI-B contains 6 and 4; VII contains 8 and 8. All local
-  fragment targets resolve, no duplicate IDs occur, and all 30 project tests,
-  ESLint, and `git diff --check` pass.
+  combined VI contains 9 and 7; VII contains 8 and 8. All local fragment
+  targets resolve, no duplicate IDs occur, and all 30 project tests, ESLint,
+  and `git diff --check` pass.
 - **Publication status:** local review artifacts only. Nothing from Topics
   V–VII was added to the public GitHub Pages site.
