@@ -76,6 +76,7 @@ test("Topic IV exposes its local setup, typed set-update guide, and five unique 
   const html = await response.text();
   const figureCount = [...html.matchAll(/class="[^"]*\btopic-ii-concept-figure\b[^"]*"/g)].length;
   const deltaIds = [...html.matchAll(/\sid="eq:delta"/g)].length;
+  const properShiftIds = [...html.matchAll(/\sid="eq:kappa-proper"/g)].length;
 
   assert.match(html, /Topic IV at a glance/);
   assert.match(html, /Recall from Topic III/);
@@ -90,6 +91,14 @@ test("Topic IV exposes its local setup, typed set-update guide, and five unique 
   assert.match(html, /Stage 1 · Identify the retained-half-plane intersection/);
   assert.match(html, /Realization of the successive updates used in Lemma 5\.5/);
   assert.match(html, /Reduction to one cyclic interval and a first-entrance identity/);
+  assert.match(html, /Standing assumption for Section 5/);
+  assert.equal(properShiftIds, 1, "equation 4.18 has one permalink target");
+  assert.match(html, /<mn>1<\/mn><mo>≤<\/mo><mi>κ<\/mi><mo>&lt;<\/mo><mi>N<\/mi><mi>\.<\/mi>/);
+  assert.equal(
+    [...html.matchAll(/aria-label="Equation 4\.18, permalink"/g)].length,
+    1,
+    "equation 4.18 is displayed exactly once",
+  );
   const topicIVCard = (number) => {
     const start = html.indexOf(`id="part-i-item-${number}"`);
     const end = html.indexOf(`id="part-i-item-${number + 1}"`, start + 1);
@@ -102,6 +111,14 @@ test("Topic IV exposes its local setup, typed set-update guide, and five unique 
   assert.match(topicIVCard(30), /proof-chapter-provenance[^>]*>Strengthened</);
   assert.doesNotMatch(topicIVCard(31), /proof-chapter-provenance/);
   assert.match(topicIVCard(29), /Supporting Theorem III/);
+  assert.match(
+    topicIVCard(29),
+    /Thus every image vertex belongs to exactly one half-open side, and every half-open side contains exactly one image vertex\./,
+  );
+  assert.doesNotMatch(
+    topicIVCard(29),
+    /Equivalently, no image vertex can be assigned to two sides and no side can receive two image vertices/,
+  );
   assert.match(topicIVCard(30), /Basic Theorem 5\.1/);
   assert.match(topicIVCard(31), /background tools only/);
   assert.equal(deltaIds, 1, "equation 5.11 appears exactly once");
@@ -109,8 +126,11 @@ test("Topic IV exposes its local setup, typed set-update guide, and five unique 
   assert.equal(figureCount, 5, "repeated explanatory figures are references, not copies");
   assert.match(html, /Exact finite example/);
   assert.match(html, /Exact geometric construction/);
-  assert.match(html, /Schematic lifted-angle diagram/);
-  assert.match(html, /Hybrid: schematic geometry · exact set update/);
+  assert.match(html, /Schematic lifted-angle example with κ=3/);
+  assert.match(html, /hollow circle is the excluded left endpoint Θ₂/);
+  assert.match(html, /Schematic local geometry · exact symbolic update/);
+  assert.match(html, /No numerical contact system is asserted by the plate/);
+  assert.doesNotMatch(html, /S=\{1\}/);
   assert.match(html, /Exact finite arithmetic example/);
   assert.match(html, /Q=λP/);
   assert.match(html, /S=\{4,5,6,7\}/);

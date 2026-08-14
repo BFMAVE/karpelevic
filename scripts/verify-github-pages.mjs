@@ -97,17 +97,35 @@ for (const relativePath of [
   assert.match(html, /data-proof-route="topic-iv"/);
   assert.match(html, /Topic IV at a glance/);
   assert.match(html, /Side-continuation bijection b/);
+  assert.match(html, /Standing assumption for Section 5/);
+  assert.equal(
+    [...html.matchAll(/\sid="eq:kappa-proper"/g)].length,
+    1,
+    "Equation 4.18 must have exactly one permalink target.",
+  );
+  assert.equal(
+    [...html.matchAll(/aria-label="Equation 4\.18, permalink"/g)].length,
+    1,
+    "Equation 4.18 must be visibly rendered exactly once.",
+  );
   assert.match(html, /aria-label="Equation 5\.11, permalink"/);
   assert.match(html, /Plate IV\.1/);
   assert.match(html, /Plate IV\.5/);
   assert.match(html, /Exact finite example/);
   assert.match(html, /Exact geometric construction/);
-  assert.match(html, /Schematic lifted-angle diagram/);
-  assert.match(html, /Hybrid: schematic geometry · exact set update/);
+  assert.match(html, /Schematic lifted-angle example with κ=3/);
+  assert.match(html, /hollow circle is the excluded left endpoint Θ₂/);
+  assert.match(html, /Schematic local geometry · exact symbolic update/);
+  assert.match(html, /No numerical contact system is asserted by the plate/);
+  assert.doesNotMatch(html, /S=\{1\}/);
   assert.match(html, /Exact finite arithmetic example/);
   assert.match(html, /Q=λP/);
   assert.match(html, /S=\{4,5,6,7\}/);
   assert.match(html, /θ=arg<sub>\+<\/sub>\(λ\)∈\(0,2π\)/);
+  assert.match(
+    html,
+    /Thus every image vertex belongs to exactly one half-open side, and every half-open side contains exactly one image vertex\./,
+  );
   assert.match(html, /proof-chapter\.js/);
   assert.doesNotMatch(
     visibleText,

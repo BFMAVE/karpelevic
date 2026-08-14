@@ -297,7 +297,7 @@ const selectionResults: readonly ProofResultData[] = [
     purpose: "Turn interlacing into a labelled bijection between the image vertices and the half-open outer sides.",
     manuscriptHtml: completeHtml("29", "cor:global-half-open-ownership"),
     vocabulary: [
-      { term: "One-to-one assignment", definition: <>No image vertex is assigned to two side indices, and no side index receives two image vertices.</> },
+      { term: "Bijection", definition: <>Every image vertex belongs to exactly one half-open side, and every half-open side contains exactly one image vertex.</> },
     ],
     intuition: <>Every side receives at least one image vertex. There are exactly <i>N</i> sides and <i>N</i> image vertices, while disjoint half-open sides prevent duplicate assignment; finite counting forces a bijection.</>,
     proofSteps: [
@@ -325,7 +325,7 @@ const selectionResults: readonly ProofResultData[] = [
       { term: "Lifted polar angle", definition: <>A real angle <i>Θ</i><sub>i</sub>, not just an angle modulo 2π, chosen with <i>Θ</i><sub>i+N</sub>=<i>Θ</i><sub>i</sub>+2π.</> },
       { term: "The integer mᵢ", definition: <>Before the correct real-valued lift has been identified, two representatives of the same cyclic angle may differ by 2π<i>m</i><sub>i</sub> for some integer <i>m</i><sub>i</sub>.</> },
     ],
-    intuition: <>Multiplication by a nonzero complex number preserves cyclic order. Therefore the contact bijection cannot scramble the labels: it shifts all of them by the same <i>κ</i>. Unwrapping the angles shows exactly which interval contains the rotation. In Plate IV.3, ϑ denotes the generic argument of the multiplier in this lemma; after the orientation is fixed, the standing setup renames that quantity θ.</>,
+    intuition: <>Multiplication by a nonzero complex number preserves cyclic order. Therefore the contact bijection cannot scramble the labels: it shifts all of them by the same <i>κ</i>. Unwrapping the angles shows exactly which interval contains the rotation. Plate IV.3 draws the case <i>κ</i>=3 and labels the excluded left endpoint explicitly; its arrow simply means “add the multiplier’s argument.”</>,
     figure: <PlateAnchor id="plate-iv-3-lifted-shift"><OwnershipMutationFigure kind="lifted-shift" id="topic-iv-contact-shift" /></PlateAnchor>,
     proofSteps: [
       { title: "Select one orientation", explanation: <>Keep the area-minimal representative or use its conjugate, according to Lemma 4.11, so every right-half-open side contains one assigned image vertex.</> },
@@ -488,12 +488,36 @@ export const topicIVSourceIds = Array.from(
 
 function ProperShiftBoundary() {
   return (
-    <section className="topic-ii-reader-contract" id="eq:kappa-proper" aria-labelledby="proper-shift-heading">
+    <section className="topic-ii-reader-contract" aria-labelledby="proper-shift-heading">
       <header>
-        <p className="section-label">Equation (4.18) · scope boundary</p>
-        <h3 id="proper-shift-heading">The vertex-replacement argument assumes 1≤κ&lt;N</h3>
+        <p className="section-label">Section 5 · standing assumption</p>
+        <h3 id="proper-shift-heading">Standing assumption for Section 5</h3>
         <p>When κ=N, Lemma 4.13 already shows that every contact lies in a relative interior, so there is no following endpoint contact at which the local replacement can begin. Topic IV makes no replacement claim in that branch and imports no later result to dispose of it.</p>
       </header>
+      <span className="part-i-numbered-equation" id="eq:kappa-proper">
+        <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <mrow>
+              <mn>1</mn>
+              <mo>≤</mo>
+              <mi>κ</mi>
+              <mo>&lt;</mo>
+              <mi>N</mi>
+              <mi>.</mi>
+            </mrow>
+            <annotation encoding="application/x-tex">{String.raw`1\leq\kappa<N.`}</annotation>
+          </semantics>
+        </math>
+        <span className="part-i-equation-numbers">
+          <a
+            className="part-i-equation-number"
+            href="#eq:kappa-proper"
+            aria-label="Equation 4.18, permalink"
+          >
+            (4.18)
+          </a>
+        </span>
+      </span>
     </section>
   );
 }

@@ -617,15 +617,17 @@ function LiftedShift({ markerId }: { markerId: string }) {
   const ticks = [80,184,288,392,496,600];
   return (
     <>
+      <text x="62" y="34" fill={ink} fontSize="14" fontWeight="700">schematic example with κ=3</text>
       <rect x={ticks[2]} y="207" width={ticks[3] - ticks[2]} height="46" rx="5" fill={pale} opacity=".85" />
       <line x1="62" y1="230" x2="618" y2="230" stroke={ink} strokeWidth="2" />
       {ticks.map((x, index) => <g key={index}><line x1={x} y1="215" x2={x} y2="248" stroke={ink} /><text x={x} y="278" fill={ink} fontSize="16" textAnchor="middle">Θ{index}</text></g>)}
       <path d={`M${ticks[0]} 188 Q236 55 ${ticks[3]} 188`} fill="none" stroke={red} strokeWidth="3" markerEnd={`url(#${markerId})`} />
-      <text x="236" y="72" fill={red} fontSize="16" textAnchor="middle">adding ϑ produces the index shift κ</text>
+      <text x="236" y="72" fill={red} fontSize="16" textAnchor="middle">add the multiplier’s argument</text>
       <circle cx={ticks[2]} cy="230" r="7" fill={paper} stroke={red} strokeWidth="3" />
       <circle cx={ticks[3]} cy="230" r="7" fill={red} stroke={red} strokeWidth="3" />
       <polygon points="344,222 352,230 344,238 336,230" fill={accessibleCopper} stroke={paper} strokeWidth="2" />
-      <text x="344" y="199" fill={accessibleCopper} fontSize="14" textAnchor="middle">relative-interior landing</text>
+      <text x="278" y="185" fill={red} fontSize="13" textAnchor="end">excluded left endpoint</text>
+      <text x="360" y="199" fill={accessibleCopper} fontSize="14">relative-interior landing</text>
       <text x="340" y="309" fill={ink} fontSize="16" textAnchor="middle">● endpoint alternative: the lifted angle lands exactly at Θ₃</text>
       <text x="340" y="340" fill={ink} fontSize="15" textAnchor="middle">◆ relative-interior alternative: it lands strictly between Θ₂ and Θ₃</text>
     </>
@@ -636,60 +638,19 @@ function LiftedShiftMobile({ markerId }: { markerId: string }) {
   const ticks = [43,111,179,247,315];
   return (
     <>
+      <text x="25" y="25" fill={ink} fontSize="14" fontWeight="700">schematic example with κ=3</text>
       <rect x={ticks[2]} y="177" width={ticks[3] - ticks[2]} height="44" rx="5" fill={pale} opacity=".85" />
       <line x1="25" y1="199" x2="335" y2="199" stroke={ink} strokeWidth="2.2" />
       {ticks.map((x, index) => <g key={index}><line x1={x} y1="184" x2={x} y2="217" stroke={ink} /><text x={x} y="244" fill={ink} fontSize="15" textAnchor="middle">Θ{index}</text></g>)}
       <path d={`M${ticks[0]} 158 Q145 40 ${ticks[3]} 158`} fill="none" stroke={red} strokeWidth="3" markerEnd={`url(#${markerId})`} />
-      <text x="151" y="57" fill={red} fontSize="15" textAnchor="middle">adding ϑ gives shift κ</text>
+      <text x="151" y="57" fill={red} fontSize="14" textAnchor="middle">add the multiplier’s argument</text>
       <circle cx={ticks[2]} cy="199" r="7" fill={paper} stroke={red} strokeWidth="3" />
       <circle cx={ticks[3]} cy="199" r="7" fill={red} stroke={red} strokeWidth="3" />
       <polygon points="215,192 222,199 215,206 208,199" fill={accessibleCopper} stroke={paper} strokeWidth="2" />
-      <text x="215" y="166" fill={accessibleCopper} fontSize="13" textAnchor="middle">relative interior</text>
+      <text x="170" y="158" fill={red} fontSize="12" textAnchor="end">excluded endpoint</text>
+      <text x="225" y="170" fill={accessibleCopper} fontSize="12">relative interior</text>
       <text x="180" y="283" fill={ink} fontSize="14" textAnchor="middle">● endpoint: landing exactly at Θ₃</text>
       <text x="180" y="310" fill={ink} fontSize="14" textAnchor="middle">◆ relative interior: landing inside (Θ₂,Θ₃)</text>
-    </>
-  );
-}
-
-function StatusStrip({
-  x,
-  y,
-  width,
-  gap,
-  active,
-  activeFill,
-  activeStroke,
-  activeText,
-  label,
-  activeLabel,
-}: {
-  x: number;
-  y: number;
-  width: number;
-  gap: number;
-  active: number;
-  activeFill: string;
-  activeStroke: string;
-  activeText: string;
-  label: string;
-  activeLabel: string;
-}) {
-  const height = 38;
-  const activeCenter = x + active * (width + gap) + width / 2;
-  return (
-    <>
-      <text x={x} y={y - 14} fill={ink} fontSize="15" fontWeight="700">{label}</text>
-      {Array.from({ length: 6 }, (_, index) => {
-        const left = x + index * (width + gap);
-        const occupied = index === active;
-        return (
-          <g key={`${label}-${index}`}>
-            <rect x={left} y={y} width={width} height={height} rx="6" fill={occupied ? activeFill : paper} stroke={occupied ? activeStroke : ink} strokeWidth={occupied ? 2.5 : 1.4} />
-            <text x={left + width / 2} y={y + 25} fill={occupied ? activeText : ink} fontSize="16" textAnchor="middle">{index}</text>
-          </g>
-        );
-      })}
-      <text x={activeCenter} y={y + height + 16} fill={activeStroke} fontSize="12" fontWeight="700" textAnchor="middle">{activeLabel}</text>
     </>
   );
 }
@@ -709,12 +670,24 @@ function Surgery({ markerId }: { markerId: string }) {
       <text x="58" y="302" fill={ink} fontSize="14">solid red = new boundary</text>
 
       <line x1="342" y1="34" x2="342" y2="310" stroke={ink} strokeWidth="1" opacity=".32" />
-      <StatusStrip x={378} y={76} width={38} gap={7} active={1} activeFill={accessibleCopper} activeStroke={accessibleCopper} activeText={paper} label="before: relative-interior indices S" activeLabel="1 ∈ S" />
-      <text x="512" y="150" fill={ink} fontSize="13" textAnchor="middle">2 ∉ S, so replacement at i=1 is permitted</text>
-      <path d="M512 160 L512 194" fill="none" stroke={red} strokeWidth="2.8" markerEnd={`url(#${markerId})`} />
-      <text x="594" y="181" fill={red} fontSize="12.5" textAnchor="middle">i=1 → i+κ=4</text>
-      <StatusStrip x={378} y={220} width={38} gap={7} active={4} activeFill={red} activeStroke={red} activeText={paper} label="after: relative-interior indices S′" activeLabel="4 ∈ S′" />
-      <text x="340" y="342" fill={ink} fontSize="15" textAnchor="middle">exactly: remove 1 from S and add 4 to obtain S′; image vertices stay distinct</text>
+      <text x="370" y="35" fill={ink} fontSize="16" fontWeight="700">symbolic membership update (exact)</text>
+      <rect x="370" y="51" width="278" height="72" rx="7" fill={paper} stroke={accessibleCopper} strokeWidth="1.8" />
+      <text x="384" y="75" fill={ink} fontSize="14" fontWeight="700">Before</text>
+      <text x="450" y="75" fill={ink} fontSize="14">i ∈ S</text>
+      <text x="528" y="75" fill={ink} fontSize="14">i+1 ∉ S</text>
+      <text x="384" y="103" fill={ink} fontSize="13.5">i+κ may or may not already belong to S</text>
+      <path d="M509 130 L509 161" fill="none" stroke={red} strokeWidth="2.8" markerEnd={`url(#${markerId})`} />
+      <text x="577" y="149" fill={red} fontSize="13">replace xᵢ</text>
+      <rect x="370" y="171" width="278" height="70" rx="7" fill="#f7e9e7" stroke={red} strokeWidth="1.8" />
+      <text x="384" y="194" fill={ink} fontSize="14" fontWeight="700">After</text>
+      <text x="449" y="194" fill={ink} fontSize="14">i ∉ S′</text>
+      <text x="528" y="194" fill={ink} fontSize="14">i+κ ∈ S′</text>
+      <text x="509" y="224" fill={red} fontSize="15" fontWeight="700" textAnchor="middle">{"S′=(S∖{i})∪{i+κ}"}</text>
+      <rect x="370" y="254" width="278" height="73" rx="7" fill={pale} stroke={ink} strokeWidth="1.2" />
+      <text x="384" y="276" fill={ink} fontSize="13">All other memberships are unchanged.</text>
+      <text x="384" y="298" fill={ink} fontSize="13">If i+κ ∉ S, then |S′|=|S|.</text>
+      <text x="384" y="318" fill={ink} fontSize="13">If i+κ ∈ S, then |S′|=|S|−1.</text>
+      <text x="340" y="356" fill={ink} fontSize="13.5" textAnchor="middle">No numerical contact system is asserted in this schematic.</text>
     </>
   );
 }
@@ -734,13 +707,25 @@ function SurgeryMobile({ markerId }: { markerId: string }) {
       <text x="170" y="54" fill={accessibleCopper} fontSize="14">xᵢ removed</text>
       <text x="58" y="132" fill={red} fontSize="14">x′ᵢ=ξᵢ</text>
       <text x="180" y="283" fill={ink} fontSize="14" textAnchor="middle">dashed old corner · solid new boundary</text>
-
-      <StatusStrip x={29} y={330} width={42} gap={8} active={1} activeFill={accessibleCopper} activeStroke={accessibleCopper} activeText={paper} label="before: relative-interior indices S" activeLabel="1 ∈ S" />
-      <path d="M180 390 L180 422" fill="none" stroke={red} strokeWidth="2.8" markerEnd={`url(#${markerId})`} />
-      <text x="196" y="414" fill={red} fontSize="13">i=1 → i+κ=4</text>
-      <StatusStrip x={29} y={440} width={42} gap={8} active={4} activeFill={red} activeStroke={red} activeText={paper} label="after: relative-interior indices S′" activeLabel="4 ∈ S′" />
-      <text x="180" y="529" fill={ink} fontSize="14" textAnchor="middle">2 ∉ S, so the replacement is permitted</text>
-      <text x="180" y="550" fill={ink} fontSize="14" textAnchor="middle">remove 1 from S and add 4 to obtain S′</text>
+      <line x1="24" y1="305" x2="336" y2="305" stroke={ink} strokeWidth="1" opacity=".32" />
+      <text x="24" y="334" fill={ink} fontSize="16" fontWeight="700">symbolic membership update (exact)</text>
+      <rect x="24" y="351" width="312" height="86" rx="7" fill={paper} stroke={accessibleCopper} strokeWidth="1.8" />
+      <text x="39" y="376" fill={ink} fontSize="14" fontWeight="700">Before</text>
+      <text x="106" y="376" fill={ink} fontSize="14">i ∈ S</text>
+      <text x="177" y="376" fill={ink} fontSize="14">i+1 ∉ S</text>
+      <text x="39" y="407" fill={ink} fontSize="13.5">i+κ may or may not already belong to S</text>
+      <path d="M180 445 L180 473" fill="none" stroke={red} strokeWidth="2.8" markerEnd={`url(#${markerId})`} />
+      <text x="196" y="463" fill={red} fontSize="13">replace xᵢ</text>
+      <rect x="24" y="485" width="312" height="82" rx="7" fill="#f7e9e7" stroke={red} strokeWidth="1.8" />
+      <text x="39" y="510" fill={ink} fontSize="14" fontWeight="700">After</text>
+      <text x="105" y="510" fill={ink} fontSize="14">i ∉ S′</text>
+      <text x="177" y="510" fill={ink} fontSize="14">i+κ ∈ S′</text>
+      <text x="180" y="544" fill={red} fontSize="15" fontWeight="700" textAnchor="middle">{"S′=(S∖{i})∪{i+κ}"}</text>
+      <rect x="24" y="583" width="312" height="94" rx="7" fill={pale} stroke={ink} strokeWidth="1.2" />
+      <text x="39" y="607" fill={ink} fontSize="13">All other memberships are unchanged.</text>
+      <text x="39" y="632" fill={ink} fontSize="13">If i+κ ∉ S, then |S′|=|S|.</text>
+      <text x="39" y="655" fill={ink} fontSize="13">If i+κ ∈ S, then |S′|=|S|−1.</text>
+      <text x="180" y="704" fill={ink} fontSize="13" textAnchor="middle">No numerical contact system is asserted.</text>
     </>
   );
 }
@@ -853,8 +838,8 @@ const descriptions: Record<FigureKind, { title: string; description: string; cap
   "area-minimizer": { title: "The two-vertex case ruled out by area minimality", description: "A schematic normalized polygon lies inside the unit circle. The vertex v satisfying absolute value v equals one remains after an image-edge chord removes a two-dimensional region whose open boundary arc contains two old vertices.", caption: "Plate III.6. The two-vertex case ruled out by area minimality: the discarded open boundary arc and the removed two-dimensional region are different objects. Because the vertex v satisfying |v|=1 remains in the retained polygon, the clip preserves normalization and strictly lowers area." },
   "endpoint-ledger": { title: "The finite endpoint count", description: "An exact eight-index example with one boundary-arc count equal to two, one equal to zero, a binary endpoint word, and all counts in the opposite half-open convention equal to one.", caption: "Plate IV.1. Exact finite example. Here r=(1,2,1,1,1,0,1,1) and c=(0,0,1,1,1,1,0,0). The unique rise occurs at the 2, the unique fall at the 0, and ℓⱼ=rⱼ+cⱼ−cⱼ₊₁=1 at every side index.", status: "Exact finite example" },
   interlacing: { title: "Global cyclic interlacing", description: "An exact regular-heptagon construction with Q equal to lambda P for lambda equal to cosine pi over seven times exponential i pi over seven. Every y vertex is a side midpoint of P. The boundary arc from y six to y zero is open at y six, closed at y zero, and contains exactly x zero.", caption: "Plate IV.2. Exact regular-heptagon construction. For λ=cos(π/7) exp(iπ/7), Q=λP and yᵢ=(xᵢ+xᵢ₊₁)/2. Thus the highlighted half-open boundary arc (y₆,y₀] contains exactly x₀.", status: "Exact geometric construction" },
-  "lifted-shift": { title: "The cyclic shift on the real angle line", description: "A schematic lifted-angle line shows how addition of the multiplier argument vartheta produces a fixed cyclic shift. A filled circle marks the endpoint alternative at Theta three; a diamond separately marks the relative-interior alternative between Theta two and Theta three.", caption: "Plate IV.3. Schematic lifted-angle diagram. Lifting angles exposes the integer shift κ. The filled circle represents an endpoint landing exactly at Θ₃; the diamond represents the distinct alternative of landing in the relative interior between Θ₂ and Θ₃.", status: "Schematic lifted-angle diagram" },
-  surgery: { title: "One vertex replacement, two synchronized descriptions", description: "A schematic local polygon drawing appears on the left. Exact before and after rows on the right show the set S of indices whose contacts lie in relative interiors changing from membership at index one to membership at index four. Since index two is not in the initial set, replacement at index one is permitted.", caption: "Plate IV.4. Hybrid plate: schematic local geometry and exact index-set update. For i=1 and κ=3, remove 1 from S and add 4 to obtain S′; the separate before/after rows do not depict any coalescence of image vertices.", status: "Hybrid: schematic geometry · exact set update" },
+  "lifted-shift": { title: "The cyclic shift on the real angle line", description: "A schematic lifted-angle example with kappa equal to three. The arrow from Theta zero to Theta three means add the multiplier's argument. A hollow circle at Theta two marks the excluded left endpoint, a filled circle at Theta three marks an endpoint landing, and a diamond strictly between them marks the distinct relative-interior landing.", caption: "Plate IV.3. Schematic lifted-angle example with κ=3. The arrow means “add the multiplier’s argument.” The hollow circle is the excluded left endpoint Θ₂; the filled circle is an endpoint landing at Θ₃; and the diamond is the distinct relative-interior landing in (Θ₂,Θ₃).", status: "Schematic lifted-angle example with κ=3" },
+  surgery: { title: "One vertex replacement and its symbolic membership update", description: "A schematic local polygon drawing is paired with the exact symbolic update S prime equals S without i, union i plus kappa. Before replacement, i belongs to S, i plus one does not belong to S, and i plus kappa may or may not already belong to S. Afterwards, i does not belong to S prime, i plus kappa belongs to S prime, and every other membership is unchanged. The cardinality is preserved if i plus kappa was absent and decreases by one if it was already present. No numerical contact system is asserted.", caption: "Plate IV.4. Schematic local geometry · exact symbolic update. Under the permitted replacement hypotheses i∈S and i+1∉S, one has S′=(S∖{i})∪{i+κ}, with every other membership unchanged. If i+κ∉S, then |S′|=|S|; if i+κ∈S, then |S′|=|S|−1. No numerical contact system is asserted by the plate.", status: "Schematic local geometry · exact symbolic update" },
   "residue-block": { title: "Shift orbits and a reduced cyclic interval", description: "An exact finite example with twelve cyclic side indices and kappa equal to eight. Color and shape jointly encode the four residue classes. The cyclic interval S consists of four, five, six, and seven. An external arrow illustrates the permutation sigma of zero equals eight, not a vertex-replacement update.", caption: "Plate IV.5. Exact finite arithmetic example. For N=12, κ=8, and S={4,5,6,7}, one has φ=|S|=4=δ and N−φ=8=[κ]₁₂. The arrow 0↦8 illustrates the permutation σ(j)=j+κ; it is not itself a permitted update of S.", status: "Exact finite arithmetic example" },
 };
 
@@ -875,7 +860,7 @@ export function OwnershipMutationFigure({ kind, id }: { kind: FigureKind; id: st
     "endpoint-ledger": "0 0 360 505",
     interlacing: "0 0 360 455",
     "lifted-shift": "0 0 360 330",
-    surgery: "0 0 360 570",
+    surgery: "0 0 360 730",
     "residue-block": "0 0 360 470",
   };
   const mobileViewBox = mobileViewBoxes[kind];
