@@ -480,7 +480,7 @@ function EndpointLedger() {
           <text x={x(index)} y="275" fill={ink} textAnchor="middle">{value}</text>
         </g>
       ))}
-      <text x="340" y="336" fill={ink} fontSize="16" textAnchor="middle">one 2 and one 0 become eight 1s after the endpoint correction</text>
+      <text x="340" y="336" fill={ink} fontSize="16" textAnchor="middle">converting to the opposite half-open convention turns the 2/0 pair into eight 1s</text>
     </>
   );
 }
@@ -531,21 +531,15 @@ function EndpointLedgerMobile() {
       <line x1="22" y1="222" x2="338" y2="222" stroke={ink} strokeWidth="1" opacity=".35" />
       <EndpointLedgerMobilePanel start={4} top={236} transition="fall" />
       <text x="180" y="472" fill={ink} fontSize="14" textAnchor="middle">the exceptional 2/0 pair becomes eight 1s</text>
-      <text x="180" y="492" fill={ink} fontSize="14" textAnchor="middle">after the endpoint correction</text>
+      <text x="180" y="492" fill={ink} fontSize="14" textAnchor="middle">after converting to the opposite half-open convention</text>
     </>
   );
 }
 
-function midpointPolygon(points: readonly Point[]): Point[] {
-  return points.map((point, index) => {
-    const next = points[(index + 1) % points.length];
-    return [(point[0] + next[0]) / 2, (point[1] + next[1]) / 2];
-  });
-}
-
 function Interlacing() {
-  const outer: readonly Point[] = [[340,48],[505,104],[556,232],[433,318],[242,322],[101,220],[142,94]];
-  const inner = midpointPolygon(outer);
+  const { vertices: outer, imageVertices: inner } = regularHeptagonClipGeometry(340, 183, 138);
+  const verification = verifyRegularHeptagonInterlacingGeometry();
+  if (!verification.valid) throw new Error("The exact regular-heptagon interlacing plate failed its geometric verification.");
   const selectedStart = inner[6];
   const selectedVertex = outer[0];
   const selectedEnd = inner[0];
@@ -558,18 +552,18 @@ function Interlacing() {
       {outer.map(([x, y], index) => <g key={`outer-${index}`}><Dot x={x} y={y} />{index === 0 ? <circle cx={x} cy={y} r="13" fill="none" stroke={accessibleCopper} strokeWidth="2" /> : null}</g>)}
       {inner.map(([x, y], index) => index === 6 ? <Dot key={`inner-${index}`} x={x} y={y} accent open /> : <Dot key={`inner-${index}`} x={x} y={y} accent />)}
       <text x="327" y="27" fill={ink} fontSize="16">x₀</text>
-      <text x="197" y="110" fill={accessibleCopper} fontSize="14">open y₆</text>
-      <text x="421" y="112" fill={accessibleCopper} fontSize="14">closed y₀</text>
+      <text x="421" y="112" fill={accessibleCopper} fontSize="14">open y₆</text>
+      <text x="197" y="110" fill={accessibleCopper} fontSize="14">closed y₀</text>
       <circle cx="91" cy="52" r="5" fill={ink} /><text x="105" y="57" fill={ink} fontSize="14">outer x-vertices</text>
-      <circle cx="91" cy="78" r="5" fill={red} /><text x="105" y="83" fill={ink} fontSize="14">image y-vertices</text>
-      <text x="340" y="350" fill={ink} fontSize="16" textAnchor="middle">selected half-open gap (y₆,y₀] contains exactly x₀</text>
+      <circle cx="91" cy="78" r="5" fill={red} /><text x="105" y="83" fill={ink} fontSize="14">y-vertices of Q = λP</text>
+      <text x="340" y="337" fill={ink} fontSize="16" textAnchor="middle">for λ = cos(π/7) exp(iπ/7), each yᵢ is the midpoint of [xᵢ,xᵢ₊₁]</text>
+      <text x="340" y="360" fill={ink} fontSize="16" textAnchor="middle">the exact half-open boundary arc (y₆,y₀] contains exactly x₀</text>
     </>
   );
 }
 
 function InterlacingMobile() {
-  const outer: readonly Point[] = [[180,55],[290,100],[315,205],[235,305],[120,295],[45,205],[75,100]];
-  const inner = midpointPolygon(outer);
+  const { vertices: outer, imageVertices: inner } = regularHeptagonClipGeometry(180, 186, 122);
   const selectedStart = inner[6];
   const selectedVertex = outer[0];
   const selectedEnd = inner[0];
@@ -582,14 +576,41 @@ function InterlacingMobile() {
       {outer.map(([x, y], index) => <g key={`mobile-outer-${index}`}><circle cx={x} cy={y} r="5.5" fill={ink} stroke={ink} strokeWidth="2" />{index === 0 ? <circle cx={x} cy={y} r="12" fill="none" stroke={accessibleCopper} strokeWidth="2" /> : null}</g>)}
       {inner.map(([x, y], index) => <circle key={`mobile-inner-${index}`} cx={x} cy={y} r="5.5" fill={index === 6 ? paper : red} stroke={red} strokeWidth="2" />)}
       <text x="170" y="34" fill={ink} fontSize="16">x₀</text>
-      <text x="65" y="124" fill={accessibleCopper} fontSize="14">open y₆</text>
-      <text x="238" y="124" fill={accessibleCopper} fontSize="14">closed y₀</text>
+      <text x="238" y="124" fill={accessibleCopper} fontSize="14">open y₆</text>
+      <text x="65" y="124" fill={accessibleCopper} fontSize="14">closed y₀</text>
       <text x="180" y="347" fill={ink} fontSize="15" textAnchor="middle">the highlighted gap is (y₆,y₀]</text>
       <text x="180" y="370" fill={ink} fontSize="15" textAnchor="middle">and its unique outer vertex is x₀</text>
-      <circle cx="78" cy="397" r="4.5" fill={ink} /><text x="91" y="402" fill={ink} fontSize="13">x-vertices</text>
-      <circle cx="216" cy="397" r="4.5" fill={red} /><text x="229" y="402" fill={ink} fontSize="13">y-vertices</text>
+      <text x="180" y="398" fill={ink} fontSize="14" textAnchor="middle">λ = cos(π/7) exp(iπ/7) and Q = λP</text>
+      <circle cx="78" cy="425" r="4.5" fill={ink} /><text x="91" y="430" fill={ink} fontSize="13">x-vertices</text>
+      <circle cx="216" cy="425" r="4.5" fill={red} /><text x="229" y="430" fill={ink} fontSize="13">y-vertices of Q</text>
     </>
   );
+}
+
+export function verifyRegularHeptagonInterlacingGeometry() {
+  const { cx, cy, vertices, imageVertices } = regularHeptagonClipGeometry();
+  const baseVerification = verifyRegularHeptagonClipGeometry();
+  const tolerance = 1e-8;
+  const twoPi = 2 * Math.PI;
+  const angle = ([x, y]: Point) => {
+    const value = Math.atan2(cy - y, x - cx);
+    return value < 0 ? value + twoPi : value;
+  };
+  const positiveTurn = (from: number, to: number) => (to - from + twoPi) % twoPi;
+  const startAngle = angle(imageVertices[6]);
+  const endAngle = angle(imageVertices[0]);
+  const gapWidth = positiveTurn(startAngle, endAngle);
+  const verticesInHalfOpenGap = vertices.filter((point) => {
+    const turn = positiveTurn(startAngle, angle(point));
+    return turn > tolerance && turn <= gapWidth + tolerance;
+  });
+
+  return {
+    ...baseVerification,
+    verticesInSelectedGap: verticesInHalfOpenGap.length,
+    selectedVertexIsX0: verticesInHalfOpenGap.length === 1 && verticesInHalfOpenGap[0] === vertices[0],
+    valid: baseVerification.valid && verticesInHalfOpenGap.length === 1 && verticesInHalfOpenGap[0] === vertices[0],
+  };
 }
 
 function LiftedShift({ markerId }: { markerId: string }) {
@@ -600,13 +621,13 @@ function LiftedShift({ markerId }: { markerId: string }) {
       <line x1="62" y1="230" x2="618" y2="230" stroke={ink} strokeWidth="2" />
       {ticks.map((x, index) => <g key={index}><line x1={x} y1="215" x2={x} y2="248" stroke={ink} /><text x={x} y="278" fill={ink} fontSize="16" textAnchor="middle">Θ{index}</text></g>)}
       <path d={`M${ticks[0]} 188 Q236 55 ${ticks[3]} 188`} fill="none" stroke={red} strokeWidth="3" markerEnd={`url(#${markerId})`} />
-      <text x="236" y="72" fill={red} fontSize="16" textAnchor="middle">add θ; the labels shift by κ</text>
+      <text x="236" y="72" fill={red} fontSize="16" textAnchor="middle">adding ϑ produces the index shift κ</text>
       <circle cx={ticks[2]} cy="230" r="7" fill={paper} stroke={red} strokeWidth="3" />
       <circle cx={ticks[3]} cy="230" r="7" fill={red} stroke={red} strokeWidth="3" />
-      <circle cx="344" cy="230" r="5" fill={accessibleCopper} stroke={paper} strokeWidth="2" />
-      <text x="344" y="199" fill={accessibleCopper} fontSize="14" textAnchor="middle">strict landing</text>
-      <text x="340" y="309" fill={ink} fontSize="16" textAnchor="middle">open at Θ₂ ○   highlighted interval (Θ₂,Θ₃]   ● closed at Θ₃</text>
-      <text x="340" y="340" fill={ink} fontSize="15" textAnchor="middle">an endpoint lands on Θ₃; a strict contact lands in the interior</text>
+      <polygon points="344,222 352,230 344,238 336,230" fill={accessibleCopper} stroke={paper} strokeWidth="2" />
+      <text x="344" y="199" fill={accessibleCopper} fontSize="14" textAnchor="middle">relative-interior landing</text>
+      <text x="340" y="309" fill={ink} fontSize="16" textAnchor="middle">● endpoint alternative: the lifted angle lands exactly at Θ₃</text>
+      <text x="340" y="340" fill={ink} fontSize="15" textAnchor="middle">◆ relative-interior alternative: it lands strictly between Θ₂ and Θ₃</text>
     </>
   );
 }
@@ -619,13 +640,13 @@ function LiftedShiftMobile({ markerId }: { markerId: string }) {
       <line x1="25" y1="199" x2="335" y2="199" stroke={ink} strokeWidth="2.2" />
       {ticks.map((x, index) => <g key={index}><line x1={x} y1="184" x2={x} y2="217" stroke={ink} /><text x={x} y="244" fill={ink} fontSize="15" textAnchor="middle">Θ{index}</text></g>)}
       <path d={`M${ticks[0]} 158 Q145 40 ${ticks[3]} 158`} fill="none" stroke={red} strokeWidth="3" markerEnd={`url(#${markerId})`} />
-      <text x="151" y="57" fill={red} fontSize="15" textAnchor="middle">add θ; shift by κ</text>
+      <text x="151" y="57" fill={red} fontSize="15" textAnchor="middle">adding ϑ gives shift κ</text>
       <circle cx={ticks[2]} cy="199" r="7" fill={paper} stroke={red} strokeWidth="3" />
       <circle cx={ticks[3]} cy="199" r="7" fill={red} stroke={red} strokeWidth="3" />
-      <circle cx="215" cy="199" r="5" fill={accessibleCopper} stroke={paper} strokeWidth="2" />
-      <text x="215" y="166" fill={accessibleCopper} fontSize="13" textAnchor="middle">strict</text>
-      <text x="180" y="283" fill={ink} fontSize="14" textAnchor="middle">○ open at Θ₂   ·   ● closed at Θ₃</text>
-      <text x="180" y="310" fill={ink} fontSize="14" textAnchor="middle">strict contacts land inside (Θ₂,Θ₃]</text>
+      <polygon points="215,192 222,199 215,206 208,199" fill={accessibleCopper} stroke={paper} strokeWidth="2" />
+      <text x="215" y="166" fill={accessibleCopper} fontSize="13" textAnchor="middle">relative interior</text>
+      <text x="180" y="283" fill={ink} fontSize="14" textAnchor="middle">● endpoint: landing exactly at Θ₃</text>
+      <text x="180" y="310" fill={ink} fontSize="14" textAnchor="middle">◆ relative interior: landing inside (Θ₂,Θ₃)</text>
     </>
   );
 }
@@ -676,7 +697,7 @@ function StatusStrip({
 function Surgery({ markerId }: { markerId: string }) {
   return (
     <>
-      <text x="45" y="35" fill={ink} fontSize="16" fontWeight="700">the same geometric surgery</text>
+      <text x="45" y="35" fill={ink} fontSize="16" fontWeight="700">local vertex replacement (schematic)</text>
       <path d="M42 267 L160 78 L306 178" fill="none" stroke={ink} strokeWidth="2.6" />
       <path d="M42 267 L111 157 L306 178" fill="none" stroke={red} strokeWidth="3.5" />
       <path d="M111 157 L160 78 L306 178" fill="none" stroke={accessibleCopper} strokeWidth="2" strokeDasharray="7 6" />
@@ -688,12 +709,12 @@ function Surgery({ markerId }: { markerId: string }) {
       <text x="58" y="302" fill={ink} fontSize="14">solid red = new boundary</text>
 
       <line x1="342" y1="34" x2="342" y2="310" stroke={ink} strokeWidth="1" opacity=".32" />
-      <StatusStrip x={378} y={76} width={38} gap={7} active={1} activeFill={accessibleCopper} activeStroke={accessibleCopper} activeText={paper} label="before" activeLabel="source" />
-      <text x="512" y="176" fill={ink} fontSize="13" textAnchor="middle">index 2 is empty, so the move is legal</text>
-      <path d="M512 147 L512 200" fill="none" stroke={red} strokeWidth="2.8" markerEnd={`url(#${markerId})`} />
-      <text x="529" y="196" fill={red} fontSize="13">1→4, κ=3</text>
-      <StatusStrip x={378} y={216} width={38} gap={7} active={4} activeFill={red} activeStroke={red} activeText={paper} label="after" activeLabel="target" />
-      <text x="340" y="346" fill={ink} fontSize="15" textAnchor="middle">one status chip moves; the geometric image vertices remain distinct</text>
+      <StatusStrip x={378} y={76} width={38} gap={7} active={1} activeFill={accessibleCopper} activeStroke={accessibleCopper} activeText={paper} label="before: relative-interior indices S" activeLabel="1 ∈ S" />
+      <text x="512" y="150" fill={ink} fontSize="13" textAnchor="middle">2 ∉ S, so replacement at i=1 is permitted</text>
+      <path d="M512 160 L512 194" fill="none" stroke={red} strokeWidth="2.8" markerEnd={`url(#${markerId})`} />
+      <text x="594" y="181" fill={red} fontSize="12.5" textAnchor="middle">i=1 → i+κ=4</text>
+      <StatusStrip x={378} y={220} width={38} gap={7} active={4} activeFill={red} activeStroke={red} activeText={paper} label="after: relative-interior indices S′" activeLabel="4 ∈ S′" />
+      <text x="340" y="342" fill={ink} fontSize="15" textAnchor="middle">exactly: remove 1 from S and add 4 to obtain S′; image vertices stay distinct</text>
     </>
   );
 }
@@ -701,7 +722,7 @@ function Surgery({ markerId }: { markerId: string }) {
 function SurgeryMobile({ markerId }: { markerId: string }) {
   return (
     <>
-      <text x="24" y="28" fill={ink} fontSize="16" fontWeight="700">geometry</text>
+      <text x="24" y="28" fill={ink} fontSize="16" fontWeight="700">local vertex replacement (schematic)</text>
       <path d="M30 250 L157 54 L329 181" fill="none" stroke={ink} strokeWidth="2.8" />
       <path d="M30 250 L105 143 L329 181" fill="none" stroke={red} strokeWidth="3.6" />
       <path d="M105 143 L157 54 L329 181" fill="none" stroke={accessibleCopper} strokeWidth="2" strokeDasharray="7 6" />
@@ -714,11 +735,12 @@ function SurgeryMobile({ markerId }: { markerId: string }) {
       <text x="58" y="132" fill={red} fontSize="14">x′ᵢ=ξᵢ</text>
       <text x="180" y="283" fill={ink} fontSize="14" textAnchor="middle">dashed old corner · solid new boundary</text>
 
-      <StatusStrip x={29} y={330} width={42} gap={8} active={1} activeFill={accessibleCopper} activeStroke={accessibleCopper} activeText={paper} label="before" activeLabel="source" />
+      <StatusStrip x={29} y={330} width={42} gap={8} active={1} activeFill={accessibleCopper} activeStroke={accessibleCopper} activeText={paper} label="before: relative-interior indices S" activeLabel="1 ∈ S" />
       <path d="M180 390 L180 422" fill="none" stroke={red} strokeWidth="2.8" markerEnd={`url(#${markerId})`} />
-      <text x="196" y="414" fill={red} fontSize="13">1→4, κ=3</text>
-      <StatusStrip x={29} y={440} width={42} gap={8} active={4} activeFill={red} activeStroke={red} activeText={paper} label="after" activeLabel="target" />
-      <text x="180" y="529" fill={ink} fontSize="14" textAnchor="middle">index 2 is empty; the move is legal</text>
+      <text x="196" y="414" fill={red} fontSize="13">i=1 → i+κ=4</text>
+      <StatusStrip x={29} y={440} width={42} gap={8} active={4} activeFill={red} activeStroke={red} activeText={paper} label="after: relative-interior indices S′" activeLabel="4 ∈ S′" />
+      <text x="180" y="529" fill={ink} fontSize="14" textAnchor="middle">2 ∉ S, so the replacement is permitted</text>
+      <text x="180" y="550" fill={ink} fontSize="14" textAnchor="middle">remove 1 from S and add 4 to obtain S′</text>
     </>
   );
 }
@@ -756,21 +778,21 @@ function ResidueBlock({ markerId }: { markerId: string }) {
   const cy = 162;
   const radius = 112;
   const nodes = Array.from({ length: 12 }, (_, index) => cyclicPoint(cx, cy, radius, index));
-  const blockStart = cyclicPoint(cx, cy, radius, 4);
-  const blockEnd = cyclicPoint(cx, cy, radius, 8);
+  const intervalStart = cyclicPoint(cx, cy, radius, 4);
+  const intervalEnd = cyclicPoint(cx, cy, radius, 7);
   const startTick = cyclicPoint(cx, cy, 142, 4);
-  const endTick = cyclicPoint(cx, cy, 142, 8);
+  const endTick = cyclicPoint(cx, cy, 142, 7);
   return (
     <>
-      <path d={`M${blockStart[0]} ${blockStart[1]} A${radius} ${radius} 0 0 1 ${blockEnd[0]} ${blockEnd[1]}`} fill="none" stroke="#eadcca" strokeWidth="44" strokeLinecap="round" />
-      <path d={`M${blockStart[0]} ${blockStart[1]} A${radius} ${radius} 0 0 1 ${blockEnd[0]} ${blockEnd[1]}`} fill="none" stroke={accessibleCopper} strokeWidth="2" strokeDasharray="5 5" opacity=".9" />
+      <path d={`M${intervalStart[0]} ${intervalStart[1]} A${radius} ${radius} 0 0 1 ${intervalEnd[0]} ${intervalEnd[1]}`} fill="none" stroke="#eadcca" strokeWidth="44" strokeLinecap="round" />
+      <path d={`M${intervalStart[0]} ${intervalStart[1]} A${radius} ${radius} 0 0 1 ${intervalEnd[0]} ${intervalEnd[1]}`} fill="none" stroke={accessibleCopper} strokeWidth="2" strokeDasharray="5 5" opacity=".9" />
       <path d="M286 35 C150 -5 70 82 169 207 C176 216 183 221 187 223" fill="none" stroke={red} strokeWidth="2.8" markerEnd={`url(#${markerId})`} />
-      <text x="66" y="28" fill={ink} fontSize="14" fontWeight="700">one κ-jump</text>
-      <text x="66" y="48" fill={ink} fontSize="14">0→8 (κ=8)</text>
+      <text x="66" y="28" fill={ink} fontSize="14" fontWeight="700">permutation σ(j)=j+κ</text>
+      <text x="66" y="48" fill={ink} fontSize="14">example: 0↦8 for κ=8</text>
       {nodes.map(([x, y], index) => <ResidueNode key={index} x={x} y={y} index={index} />)}
-      <line x1={blockStart[0] + 17} y1={blockStart[1] + 10} x2={startTick[0]} y2={startTick[1]} stroke={accessibleCopper} strokeWidth="3" />
-      <line x1={blockEnd[0] - 17} y1={blockEnd[1] + 10} x2={endTick[0]} y2={endTick[1]} stroke={accessibleCopper} strokeWidth="3" />
-      <text x={cx} y="322" fill={accessibleCopper} fontSize="15" fontWeight="700" textAnchor="middle">exact strict block: {`{4,5,6,7,8}`}</text>
+      <line x1={intervalStart[0] + 17} y1={intervalStart[1] + 10} x2={startTick[0]} y2={startTick[1]} stroke={accessibleCopper} strokeWidth="3" />
+      <line x1={intervalEnd[0] - 17} y1={intervalEnd[1] + 10} x2={endTick[0]} y2={endTick[1]} stroke={accessibleCopper} strokeWidth="3" />
+      <text x={cx} y="322" fill={accessibleCopper} fontSize="15" fontWeight="700" textAnchor="middle">cyclic interval S = {`{4,5,6,7}`}</text>
 
       <text x="482" y="48" fill={ink} fontSize="15" fontWeight="700">residue mod 4</text>
       {[0,1,2,3].map((residue, row) => (
@@ -779,9 +801,9 @@ function ResidueBlock({ markerId }: { markerId: string }) {
           <text x="529" y={84 + row * 47} fill={ink} fontSize="14">j ≡ {residue}</text>
         </g>
       ))}
-      <text x="480" y="282" fill={ink} fontSize="14">δ=gcd(12,8)=4</text>
-      <text x="480" y="305" fill={ink} fontSize="14">every orbit needs</text>
-      <text x="480" y="326" fill={ink} fontSize="14">a strict side index</text>
+      <text x="480" y="282" fill={ink} fontSize="14">φ=|S|=4=δ</text>
+      <text x="480" y="305" fill={ink} fontSize="14">N−φ=8=[κ]₁₂</text>
+      <text x="480" y="328" fill={ink} fontSize="13">the arrow is σ, not a set update</text>
       <text x="340" y="357" fill={ink} fontSize="14" textAnchor="middle">shape and color both encode the four residue classes</text>
     </>
   );
@@ -792,21 +814,21 @@ function ResidueBlockMobile({ markerId }: { markerId: string }) {
   const cy = 148;
   const radius = 86;
   const nodes = Array.from({ length: 12 }, (_, index) => cyclicPoint(cx, cy, radius, index));
-  const blockStart = cyclicPoint(cx, cy, radius, 4);
-  const blockEnd = cyclicPoint(cx, cy, radius, 8);
+  const intervalStart = cyclicPoint(cx, cy, radius, 4);
+  const intervalEnd = cyclicPoint(cx, cy, radius, 7);
   const startTick = cyclicPoint(cx, cy, 108, 4);
-  const endTick = cyclicPoint(cx, cy, 108, 8);
+  const endTick = cyclicPoint(cx, cy, 108, 7);
   return (
     <>
-      <path d={`M${blockStart[0]} ${blockStart[1]} A${radius} ${radius} 0 0 1 ${blockEnd[0]} ${blockEnd[1]}`} fill="none" stroke="#eadcca" strokeWidth="36" strokeLinecap="round" />
-      <path d={`M${blockStart[0]} ${blockStart[1]} A${radius} ${radius} 0 0 1 ${blockEnd[0]} ${blockEnd[1]}`} fill="none" stroke={accessibleCopper} strokeWidth="2" strokeDasharray="5 5" />
+      <path d={`M${intervalStart[0]} ${intervalStart[1]} A${radius} ${radius} 0 0 1 ${intervalEnd[0]} ${intervalEnd[1]}`} fill="none" stroke="#eadcca" strokeWidth="36" strokeLinecap="round" />
+      <path d={`M${intervalStart[0]} ${intervalStart[1]} A${radius} ${radius} 0 0 1 ${intervalEnd[0]} ${intervalEnd[1]}`} fill="none" stroke={accessibleCopper} strokeWidth="2" strokeDasharray="5 5" />
       <path d="M168 48 C76 8 18 79 78 181 C83 190 88 196 91 198" fill="none" stroke={red} strokeWidth="2.7" markerEnd={`url(#${markerId})`} />
-      <text x="13" y="20" fill={ink} fontSize="13" fontWeight="700">one jump: 0→8</text>
-      <text x="13" y="38" fill={ink} fontSize="13">κ=8</text>
+      <text x="13" y="20" fill={ink} fontSize="13" fontWeight="700">σ(j)=j+κ</text>
+      <text x="13" y="38" fill={ink} fontSize="13">0↦8, κ=8</text>
       {nodes.map(([x, y], index) => <ResidueNode key={index} x={x} y={y} index={index} size={15} fontSize={12} />)}
-      <line x1={blockStart[0] + 14} y1={blockStart[1] + 8} x2={startTick[0]} y2={startTick[1]} stroke={accessibleCopper} strokeWidth="3" />
-      <line x1={blockEnd[0] - 14} y1={blockEnd[1] + 8} x2={endTick[0]} y2={endTick[1]} stroke={accessibleCopper} strokeWidth="3" />
-      <text x="180" y="267" fill={accessibleCopper} fontSize="14" fontWeight="700" textAnchor="middle">strict block {`{4,5,6,7,8}`}</text>
+      <line x1={intervalStart[0] + 14} y1={intervalStart[1] + 8} x2={startTick[0]} y2={startTick[1]} stroke={accessibleCopper} strokeWidth="3" />
+      <line x1={intervalEnd[0] - 14} y1={intervalEnd[1] + 8} x2={endTick[0]} y2={endTick[1]} stroke={accessibleCopper} strokeWidth="3" />
+      <text x="180" y="267" fill={accessibleCopper} fontSize="14" fontWeight="700" textAnchor="middle">cyclic interval S={`{4,5,6,7}`}</text>
 
       <text x="18" y="304" fill={ink} fontSize="14" fontWeight="700">residue mod 4 — shape + color</text>
       {[0,1,2,3].map((residue) => {
@@ -816,24 +838,24 @@ function ResidueBlockMobile({ markerId }: { markerId: string }) {
         const y = 334 + row * 45;
         return <g key={`mobile-legend-${residue}`}><ResidueNode x={x} y={y} index={residue} size={13} fontSize={11} /><text x={x + 25} y={y + 5} fill={ink} fontSize="13">j ≡ {residue}</text></g>;
       })}
-      <text x="180" y="424" fill={ink} fontSize="14" textAnchor="middle">δ=gcd(12,8)=4</text>
-      <text x="180" y="447" fill={ink} fontSize="14" textAnchor="middle">every residue orbit needs a strict index</text>
+      <text x="180" y="424" fill={ink} fontSize="14" textAnchor="middle">φ=4=δ and N−φ=8=[κ]₁₂</text>
+      <text x="180" y="447" fill={ink} fontSize="14" textAnchor="middle">the arrow shows σ, not a set update</text>
     </>
   );
 }
 
-const descriptions: Record<FigureKind, { title: string; description: string; caption: string }> = {
+const descriptions: Record<FigureKind, { title: string; description: string; caption: string; status?: string }> = {
   "half-open": { title: "One endpoint, one half-open side", description: "The right-half-open side E i plus excludes x i minus one, while the preceding half-open side E i minus one plus includes that same vertex.", caption: "Plate III.1. For Eᵢ⁺=(xᵢ₋₁,xᵢ], the shared vertex satisfies xᵢ₋₁ ∉ Eᵢ⁺ but xᵢ₋₁ ∈ Eᵢ₋₁⁺. Thus every polygon vertex belongs to exactly one right-half-open side." },
   "face-rigidity": { title: "A boundary convex combination lies in one face", description: "Two points and their strict convex combination lie on one supporting side of a polygon.", caption: "Plate III.2. Equality in a supporting functional forces both endpoints—and therefore their segment—onto the same exposed side." },
   replacement: { title: "Replacing one vertex by a boundary contact", description: "Before-and-after boundary diagrams show a point in the relative interior of one side replacing the following vertex, together with the resulting two half-open sides.", caption: "Plate III.3. Schematic local replacement: the modified polygon P′ replaces xᵢ by ξᵢ. The point ξᵢ is included in (xᵢ₋₁, ξᵢ] and excluded from (ξᵢ, xᵢ₊₁]." },
   clip: { title: "Clipping along an image edge", description: "An exact regular-heptagon construction in which the image polygon has its vertices at the side midpoints of the outer polygon; one image edge cuts off exactly one old vertex.", caption: "Plate III.4. Exact regular-heptagon model: for λ = cos(π/7) exp(iπ/7), the vertices of Q = λP are the side midpoints of P. The chosen edge of Q cuts off the boundary arc containing exactly one old vertex, while Q remains in the retained half-plane." },
   hausdorff: { title: "Two-sided convergence of polygons", description: "The dashed approximating polygon P k and the solid limit polygon P lie close in both directions; the disk z plus r D bar remains inside the limit.", caption: "Plate III.5. Hausdorff convergence controls both directions between Pₖ and P; the fixed interior disk z+r𝔻̄ supplies the positive area margin." },
   "area-minimizer": { title: "The two-vertex case ruled out by area minimality", description: "A schematic normalized polygon lies inside the unit circle. The vertex v satisfying absolute value v equals one remains after an image-edge chord removes a two-dimensional region whose open boundary arc contains two old vertices.", caption: "Plate III.6. The two-vertex case ruled out by area minimality: the discarded open boundary arc and the removed two-dimensional region are different objects. Because the vertex v satisfying |v|=1 remains in the retained polygon, the clip preserves normalization and strictly lowers area." },
-  "endpoint-ledger": { title: "The finite endpoint count", description: "An eight-index example with one gap count two, one gap count zero, a binary endpoint word, and opposite half-open counts all equal to one.", caption: "Plate IV.1. Here r=(1,2,1,1,1,0,1,1) and c=(0,0,1,1,1,1,0,0). The unique rise occurs at the 2, the unique fall at the 0, and ℓⱼ=rⱼ+cⱼ−cⱼ₊₁=1 at every side index." },
-  interlacing: { title: "Global cyclic interlacing", description: "Vertices of an inner red polygon and an outer navy polygon occur in the same cyclic order. The selected gap from y six to y zero is open at y six, closed at y zero, and contains exactly x zero.", caption: "Plate IV.2. The endpoint count forces one outer vertex in every consistently chosen half-open gap; the highlighted gap (y₆,y₀] makes that convention explicit for x₀." },
-  "lifted-shift": { title: "The cyclic shift on the real angle line", description: "Lifted angle marks and an arc show addition of the multiplier angle followed by a fixed cyclic shift. The highlighted interval is open at Theta two and closed at Theta three; a strict landing is drawn in its interior.", caption: "Plate IV.3. Lifting angles removes hidden multiples of 2π. The open-left and closed-right markers distinguish a strict landing inside (Θ₂,Θ₃] from an endpoint landing at Θ₃." },
-  surgery: { title: "One move, two synchronized descriptions", description: "A polygon corner is clipped on the left. Separate before and after status rows on the right show the chip leaving source index one and appearing at target index four; index two is empty, so the move is legal.", caption: "Plate IV.4. The before/after boards separate the two times in the update 1→4 for κ=3. The chip is only a status marker; no geometric image vertices coalesce." },
-  "residue-block": { title: "Shift orbits and the reduced block", description: "Twelve cyclic side indices use both color and shape for their four residue classes: circles, rounded squares, diamonds, and hexagons. An external arrow shows the jump from zero to eight. A background arc with endpoint ticks marks exactly the strict block from four through eight.", caption: "Plate IV.5. For N=12 and κ=8, δ=4. The exact block {4,5,6,7,8} is highlighted behind the nodes, and every residue orbit must contain a strict side index." },
+  "endpoint-ledger": { title: "The finite endpoint count", description: "An exact eight-index example with one boundary-arc count equal to two, one equal to zero, a binary endpoint word, and all counts in the opposite half-open convention equal to one.", caption: "Plate IV.1. Exact finite example. Here r=(1,2,1,1,1,0,1,1) and c=(0,0,1,1,1,1,0,0). The unique rise occurs at the 2, the unique fall at the 0, and ℓⱼ=rⱼ+cⱼ−cⱼ₊₁=1 at every side index.", status: "Exact finite example" },
+  interlacing: { title: "Global cyclic interlacing", description: "An exact regular-heptagon construction with Q equal to lambda P for lambda equal to cosine pi over seven times exponential i pi over seven. Every y vertex is a side midpoint of P. The boundary arc from y six to y zero is open at y six, closed at y zero, and contains exactly x zero.", caption: "Plate IV.2. Exact regular-heptagon construction. For λ=cos(π/7) exp(iπ/7), Q=λP and yᵢ=(xᵢ+xᵢ₊₁)/2. Thus the highlighted half-open boundary arc (y₆,y₀] contains exactly x₀.", status: "Exact geometric construction" },
+  "lifted-shift": { title: "The cyclic shift on the real angle line", description: "A schematic lifted-angle line shows how addition of the multiplier argument vartheta produces a fixed cyclic shift. A filled circle marks the endpoint alternative at Theta three; a diamond separately marks the relative-interior alternative between Theta two and Theta three.", caption: "Plate IV.3. Schematic lifted-angle diagram. Lifting angles exposes the integer shift κ. The filled circle represents an endpoint landing exactly at Θ₃; the diamond represents the distinct alternative of landing in the relative interior between Θ₂ and Θ₃.", status: "Schematic lifted-angle diagram" },
+  surgery: { title: "One vertex replacement, two synchronized descriptions", description: "A schematic local polygon drawing appears on the left. Exact before and after rows on the right show the set S of indices whose contacts lie in relative interiors changing from membership at index one to membership at index four. Since index two is not in the initial set, replacement at index one is permitted.", caption: "Plate IV.4. Hybrid plate: schematic local geometry and exact index-set update. For i=1 and κ=3, remove 1 from S and add 4 to obtain S′; the separate before/after rows do not depict any coalescence of image vertices.", status: "Hybrid: schematic geometry · exact set update" },
+  "residue-block": { title: "Shift orbits and a reduced cyclic interval", description: "An exact finite example with twelve cyclic side indices and kappa equal to eight. Color and shape jointly encode the four residue classes. The cyclic interval S consists of four, five, six, and seven. An external arrow illustrates the permutation sigma of zero equals eight, not a vertex-replacement update.", caption: "Plate IV.5. Exact finite arithmetic example. For N=12, κ=8, and S={4,5,6,7}, one has φ=|S|=4=δ and N−φ=8=[κ]₁₂. The arrow 0↦8 illustrates the permutation σ(j)=j+κ; it is not itself a permitted update of S.", status: "Exact finite arithmetic example" },
 };
 
 export function OwnershipMutationFigure({ kind, id }: { kind: FigureKind; id: string }) {
@@ -851,16 +873,16 @@ export function OwnershipMutationFigure({ kind, id }: { kind: FigureKind; id: st
     "area-minimizer": "0 0 360 465",
     hausdorff: "0 0 360 420",
     "endpoint-ledger": "0 0 360 505",
-    interlacing: "0 0 360 420",
+    interlacing: "0 0 360 455",
     "lifted-shift": "0 0 360 330",
-    surgery: "0 0 360 550",
-    "residue-block": "0 0 360 465",
+    surgery: "0 0 360 570",
+    "residue-block": "0 0 360 470",
   };
   const mobileViewBox = mobileViewBoxes[kind];
   const hasMobileLayout = Boolean(mobileViewBox);
   return (
     <figure className="topic-ii-concept-figure" id={id}>
-      <div className="topic-ii-concept-heading"><span>{isTopicIIIPlate ? "Mathematical plate" : "Deterministic mathematical plate"}</span><span>{copy.title}</span></div>
+      <div className="topic-ii-concept-heading"><span>{isTopicIIIPlate ? "Mathematical plate" : copy.status}</span><span>{copy.title}</span></div>
       <svg
         role="img"
         aria-labelledby={`${titleId} ${descriptionId}`}

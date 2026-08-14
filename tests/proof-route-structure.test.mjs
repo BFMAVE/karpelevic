@@ -69,7 +69,7 @@ for (const [pathname, expectedResults, expectedProofs] of chapters) {
   });
 }
 
-test("Topic IV exposes its local setup, typed mutation guide, and five unique plates", async () => {
+test("Topic IV exposes its local setup, typed set-update guide, and five unique plates", async () => {
   const response = await render("/proof/topic-iv");
   assert.equal(response.status, 200);
 
@@ -80,12 +80,49 @@ test("Topic IV exposes its local setup, typed mutation guide, and five unique pl
   assert.match(html, /Topic IV at a glance/);
   assert.match(html, /Recall from Topic III/);
   assert.match(html, /Right-admissible means the full one-sided contact data/);
-  assert.match(html, /Blocks and cyclic relabelling/);
+  assert.match(html, /λ=ρe<sup>iθ<\/sup>/);
+  assert.match(html, /θ=arg<sub>\+<\/sub>\(λ\)∈\(0,2π\)/);
+  assert.match(html, /The same contact data in two notations/);
+  assert.match(html, /Connected components and cyclic relabelling/);
+  assert.match(html, /Equivariant form under the side-continuation bijection/);
   assert.match(html, /Side-continuation bijection b/);
   assert.match(html, /correctly typed set/);
+  assert.match(html, /Stage 1 · Identify the retained-half-plane intersection/);
+  assert.match(html, /Realization of the successive updates used in Lemma 5\.5/);
+  assert.match(html, /Reduction to one cyclic interval and a first-entrance identity/);
+  const topicIVCard = (number) => {
+    const start = html.indexOf(`id="part-i-item-${number}"`);
+    const end = html.indexOf(`id="part-i-item-${number + 1}"`, start + 1);
+    assert.notEqual(start, -1, `Topic IV card ${number} exists`);
+    return html.slice(start, end < 0 ? html.length : end);
+  };
+  assert.doesNotMatch(topicIVCard(27), /proof-chapter-provenance/);
+  assert.doesNotMatch(topicIVCard(28), /proof-chapter-provenance/);
+  assert.match(topicIVCard(29), /proof-chapter-provenance[^>]*>Previously known</);
+  assert.match(topicIVCard(30), /proof-chapter-provenance[^>]*>Strengthened</);
+  assert.doesNotMatch(topicIVCard(31), /proof-chapter-provenance/);
+  assert.match(topicIVCard(29), /Supporting Theorem III/);
+  assert.match(topicIVCard(30), /Basic Theorem 5\.1/);
+  assert.match(topicIVCard(31), /background tools only/);
   assert.equal(deltaIds, 1, "equation 5.11 appears exactly once");
   assert.match(html, /aria-label="Equation 5\.11, permalink"/);
   assert.equal(figureCount, 5, "repeated explanatory figures are references, not copies");
+  assert.match(html, /Exact finite example/);
+  assert.match(html, /Exact geometric construction/);
+  assert.match(html, /Schematic lifted-angle diagram/);
+  assert.match(html, /Hybrid: schematic geometry · exact set update/);
+  assert.match(html, /Exact finite arithmetic example/);
+  assert.match(html, /Q=λP/);
+  assert.match(html, /S=\{4,5,6,7\}/);
+  const visibleTopicIVText = html
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<annotation\b[\s\S]*?<\/annotation>/gi, " ")
+    .replace(/<[^>]*>/g, " ");
+  assert.doesNotMatch(
+    visibleTopicIVText,
+    /\b(?:chip|chips|boolean board|mutation|mutations|surgery|surgeries|group|groups|block|blocks|score|scores|collision|collisions|strict landing|strict side|strict sides|strict-index|edge-cap)\b/i,
+  );
   for (let plate = 1; plate <= 5; plate += 1) {
     assert.match(html, new RegExp(`Plate IV\\.${plate}\\.`));
   }

@@ -10,7 +10,7 @@ import { getPageTimestamp } from "../../lib/git-dates";
 export const metadata: Metadata = {
   title: "Topic IV — From Endpoint Order to Contact Reduction",
   description:
-    "A complete, illustrated account of global one-sided contact selection, exact contact surgery, legal chip sequences, and reduction to one strict block.",
+    "A complete, illustrated account of global one-sided contact selection, exact vertex replacement, permitted updates of a cyclic index set, and reduction to one cyclic interval.",
 };
 
 const updatedAt = getPageTimestamp("app/data/proof-topics/topic-iv.tsx");
@@ -21,12 +21,12 @@ export default function TopicIVPage() {
       routeKey="topic-iv"
       updatedAt={updatedAt}
       overview={[
-        "The boundary-interval bound from Topic III and a finite endpoint count select one consistent half-open orientation. Cyclic order turns the global contact assignment into a single shift κ, while lifted angles record that shift without hidden multiples of 2π.",
-        "An exact corner surgery then realizes one legal Boolean move, and finite induction realizes every legal sweep. A lexicographically minimal reachable contact pattern reduces to one strict block. Karpelevič is cited as a historical antecedent where relevant, but an occurrence there alone is not treated as proof that the exact result was previously established.",
+        "The boundary-interval bound from Topic III and a finite endpoint count select one consistent half-open orientation. Cyclic order turns the global contact assignment into a single shift κ, while lifted angles encode that shift without hidden multiples of 2π.",
+        "An exact vertex replacement then realizes one permitted update of the subset S, and finite induction realizes every permitted finite update sequence. A lexicographically minimal reachable set reduces to one cyclic interval. Karpelevič is cited as a historical antecedent where relevant, but an occurrence there alone is not treated as proof that the exact result was previously established.",
       ]}
       stats={[
         { value: 5, label: "selection results" },
-        { value: 5, label: "mutation results" },
+        { value: 5, label: "contact-reduction results" },
       ]}
     >
       <TopicIVChapter />

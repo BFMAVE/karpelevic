@@ -100,10 +100,18 @@ for (const relativePath of [
   assert.match(html, /aria-label="Equation 5\.11, permalink"/);
   assert.match(html, /Plate IV\.1/);
   assert.match(html, /Plate IV\.5/);
+  assert.match(html, /Exact finite example/);
+  assert.match(html, /Exact geometric construction/);
+  assert.match(html, /Schematic lifted-angle diagram/);
+  assert.match(html, /Hybrid: schematic geometry · exact set update/);
+  assert.match(html, /Exact finite arithmetic example/);
+  assert.match(html, /Q=λP/);
+  assert.match(html, /S=\{4,5,6,7\}/);
+  assert.match(html, /θ=arg<sub>\+<\/sub>\(λ\)∈\(0,2π\)/);
   assert.match(html, /proof-chapter\.js/);
   assert.doesNotMatch(
     visibleText,
-    /\b(?:field|fields|ledger|ownership|owned|owns|certificate|audit)\b/i,
+    /\b(?:field|fields|ledger|ownership|owned|owns|certificate|audit|chip|chips|boolean board|mutation|mutations|surgery|surgeries|group|groups|block|blocks|score|scores|collision|collisions|strict landing|strict side|strict sides|strict-index|edge-cap)\b/i,
   );
 }
 

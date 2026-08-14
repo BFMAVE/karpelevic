@@ -177,10 +177,11 @@ export const proofSources: readonly ProofSource[] = [
 const karpelevicOnlyAntecedent = new Set([
   3, 32, 33, 34, 35, 36, 37, 38, 40, 41, 47, 49, 50, 55, 56,
 ]);
-const strengthened = new Set([16, 57, 58]);
+const strengthened = new Set([16, 30, 57, 58]);
 const newResults = new Set([4, 42, 45, 48, 59]);
+const unbadgedResults = new Set([27, 28, 31]);
 const previouslyKnown = new Set([
-  15, 18, 23, 25, 26, 27, 28, 29, 30, 61, 62, 64,
+  15, 18, 23, 25, 26, 29, 61, 62, 64,
 ]);
 
 function provenanceFor(
@@ -190,6 +191,7 @@ function provenanceFor(
   if (kind === "Definition" || kind === "Remark") {
     return undefined;
   }
+  if (unbadgedResults.has(number)) return undefined;
   if (newResults.has(number)) return "New result";
   if (strengthened.has(number)) return "Strengthened";
   if (karpelevicOnlyAntecedent.has(number)) return undefined;
@@ -238,8 +240,20 @@ function sourcesFor(number: number): readonly string[] {
 
 function sourceRelationFor(number: number): string | undefined {
   if ([51, 52].includes(number)) return undefined;
+  if (number === 27) {
+    return "Dmitriev–Dynkin’s one-sided contact argument, available in Swift’s translation, is the historical antecedent. The precise finite endpoint identity used here is proved on this page, so the result is left unbadged.";
+  }
+  if (number === 28) {
+    return "Dmitriev–Dynkin’s supporting one-sided contact theorem, available in Swift’s translation, is the historical antecedent. The complete boundary-interval and endpoint-count argument displayed here is left unbadged.";
+  }
+  if (number === 29) {
+    return "Swift (1972), Appendix A, §2, Supporting Theorem III, together with the proof of Basic Theorem 5.1 at A-16 (PDF p. 119), contains the one-image-per-side result. The present page fixes the labels and half-open convention explicitly.";
+  }
+  if (number === 30) {
+    return "Swift (1972), Appendix A, §2, Basic Theorem 5.1, with the statement at A-5 and the relevant proof at A-16, supplies the one-sided representative. The statement here strengthens it by adding the explicit cyclic shift, the lift check, and the endpoint-equality argument.";
+  }
   if (number === 31) {
-    return "This is a standard application of path lifting for the universal covering ℝ → S¹, combined with the polygonal boundary-order facts cited from convex geometry; the complete specialized argument is included here.";
+    return "Hatcher, Algebraic Topology, §1.3, supplies the standard covering-space lift for circle angles, while Schneider, Chapter 1, supplies convex-boundary angular order. These are background tools only; the exact indexed endpoint-path consequence is derived here without a separate classification badge.";
   }
   if (newResults.has(number)) {
     return "The displayed source is the closest antecedent. The exact statement used here appears to be new, but its older mechanism or conclusion is stated separately.";
@@ -288,16 +302,16 @@ const rawItems: readonly [
   [24, "Lemma", "Side membership after replacing one vertex", "Determines the two local half-open side memberships after one polygon vertex is replaced."],
   [25, "Lemma", "Clipping along an image edge and bounding the number of vertices", "Clips along an image edge while preserving invariance and bounding the number of remaining vertices."],
   [26, "Lemma", "Boundary-arc bound for a least-area normalized polygon", "Uses a least-area normalized invariant N-gon to bound the old vertices on every discarded boundary arc."],
-  [27, "Lemma", "Finite cyclic endpoint ledger", "Records all endpoints on a finite cyclic set without losing the wrap-around case."],
-  [28, "Lemma", "Cyclic interlacing endpoint bookkeeping", "Forces the possible contact endpoints to interlace rather than collide inconsistently."],
-  [29, "Corollary", "Collision-free global half-open ownership", "Chooses one global half-open convention that assigns every contact without collision."],
+  [27, "Lemma", "Finite cyclic endpoint count", "Converts the two possible exceptional boundary-interval counts into a uniform count for the opposite half-open convention."],
+  [28, "Lemma", "Cyclic interlacing with endpoint membership", "Proves that one consistently oriented half-open gap contains exactly one outer vertex everywhere."],
+  [29, "Corollary", "One image vertex in every half-open side", "Chooses one global half-open convention that assigns exactly one image vertex to every side."],
   [30, "Lemma", "One-sided contact representative", "Produces a representative in which all contacts follow the same cyclic direction."],
   [31, "Lemma", "Exact lifted endpoint paths", "Lifts cyclic endpoint motion to real angles so later phase sums have no hidden modular ambiguity."],
-  [32, "Proposition", "Exact contact-surgery certificate", "Replaces one vertex by its contact image while preserving strictness, invariance, and every required label."],
-  [33, "Corollary", "Intrinsic exact mutation law", "Expresses contact surgery as a coordinate-free chip move on the cyclic ownership data."],
-  [34, "Corollary", "Geometric realization of every legal chip sequence", "Shows that every legal combinatorial mutation sequence comes from actual invariant polygons."],
-  [35, "Corollary", "Boolean sweeps are geometrically reachable", "Allows whole legal sweeps of the cyclic chip configuration to be performed geometrically."],
-  [36, "Lemma", "Reduced strict block and first record", "Reduces an arbitrary contact configuration to one consecutive block and identifies its first return record."],
+  [32, "Proposition", "Exact local vertex replacement", "Replaces one vertex by its contact image while preserving strictness, invariance, and every required label."],
+  [33, "Corollary", "Equivariant form under the side-continuation bijection", "Expresses the strict-side update after identifying the old and new side sets by the specified continuation bijection."],
+  [34, "Corollary", "Geometric realization of every permitted update sequence", "Shows that every permitted finite sequence of updates to S comes from actual invariant polygons."],
+  [35, "Corollary", "Realization of the successive updates used in Lemma 5.5", "Applies the finite realization result to the right-to-left update sequences in the reduction argument."],
+  [36, "Lemma", "Reduction to one cyclic interval and a first-entrance identity", "Reduces a reachable set S to one cyclic interval and identifies the corresponding first entrance time."],
   [37, "Theorem", "Finite rotation return-section", "Computes the first-return structure of a finite rational rotation by Euclidean and lattice data."],
   [38, "Corollary", "Endpoint-padded upper-record sections", "Adds endpoint conventions that make the return sections work uniformly at the boundary cases."],
   [39, "Remark", "Lattice-sail interpretation", "Reads the record pairs as consecutive edges of a two-dimensional lattice sail."],
@@ -395,10 +409,10 @@ export const proofTopics: readonly ProofTopic[] = [
     eyebrow: "Topic IV · 10 items",
     title: "From endpoint order to contact reduction",
     question:
-      "How does a geometric contact become a legal move on a finite cyclic board?",
+      "How does a geometric contact become a permitted update of a finite cyclic index set?",
     overview: [
       "The remaining endpoint lemmas finish the one-sided representative. A contacted vertex can then be replaced by its image-contact point without breaking strictness or invariance.",
-      "That exact surgery becomes a chip mutation. Legal sequences are realized geometrically, Boolean sweeps become available, and an arbitrary configuration reduces to one strict consecutive block. Karpelevič’s 1951 proof contains antecedents of these mechanisms, but an occurrence there alone does not earn a “Previously known” badge under this site’s four-category convention.",
+      "The exact vertex replacement updates the subset S of indices whose sides have relative-interior contact. Every permitted finite update sequence is realized geometrically, and a reachable set reduces to one cyclic interval. Karpelevič’s 1951 proof contains antecedents of these mechanisms, but an occurrence there alone does not earn a “Previously known” badge under this site’s four-category convention.",
     ],
     itemNumbers: [27, 28, 29, 30, 31, 32, 33, 34, 35, 36],
     manuscriptPages: "19–30",
