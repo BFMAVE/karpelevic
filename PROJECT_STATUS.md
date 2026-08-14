@@ -1155,3 +1155,44 @@ full local source history remain later site milestones.
   and `git diff --check` pass.
 - **Publication status:** local review artifacts only. Nothing from Topics
   V–VII was added to the public GitHub Pages site.
+
+## Current milestone — Topic IV rigor, provenance, and language refinement (published 14 August 2026)
+
+- **Lemma 4.11 repaired at source:** the identity
+  \(k_j=r_j+c_j\) is now established for every boundary interval before the
+  proof separates supporting and proper cuts. The two-vertex case therefore
+  forces a proper cut without circular reasoning.
+- **Standalone setup completed:** the page displays
+  \(\lambda=\rho e^{i\theta}\),
+  \(\theta=\arg_+(\lambda)\), and the full dictionary between the indexed set
+  \(S\) and the side maps \(I,h,s,\sigma\).
+- **Literal reduction language:** Topic IV now describes vertex replacement,
+  permitted updates of \(S\), connected components of \(C_N[S]\), cyclic
+  intervals, the lexicographic pair
+  \((|S|,\operatorname{comp}(S))\), and first entrance times directly. Result
+  numbers, equation numbers, full proofs, and stable anchors are unchanged.
+- **Provenance corrected:** Lemmas 4.10–4.11 are conservatively unbadged;
+  Corollary 4.12 is pinpointed to Swift's Appendix A; Lemma 4.13 is marked
+  Strengthened; and Lemma 4.14 is unbadged because Hatcher and Schneider
+  provide background rather than the exact indexed statement.
+- **Five audited plates:** Plate IV.2 is now an exact regular-heptagon model
+  with \(Q=\lambda P\); Plate IV.3 is explicitly schematic; Plate IV.4
+  distinguishes schematic geometry from an exact set update; and Plate IV.5
+  uses the arithmetically consistent example
+  \(N=12\), \(\kappa=8\), \(S=\{4,5,6,7\}\), and
+  \(\varphi=\delta=4\). Every plate declares whether it is exact, schematic,
+  or hybrid and has a dedicated mobile layout.
+- **Verified:** the canonical TeX compiles; generated manuscript content is
+  deterministic with hash
+  `878fd9926194a473ed946b3b88967fe624c8864997621f2ba76b57ad95e1ee44`;
+  all 30 tests, ESLint, the GitHub Pages verifier, desktop and 390-pixel
+  browser checks, reading controls, and console checks pass. The live Topic IV
+  file is byte-identical to the audited static export.
+- **Publication status:** source changes are recorded locally in commit
+  `832efb0`; the static-only public Pages tree is commit `8281457` on `main`.
+  Topic IV is live at
+  <https://bfmave.github.io/karpelevic/proof/topic-iv/>. Topics I–IV return
+  HTTP 200, Topic V returns HTTP 404, and Topics V–XIV remain absent from the
+  public package and navigation.
+- **Next:** continue reviewing Topic V locally. Do not publish any later topic
+  without explicit approval.
