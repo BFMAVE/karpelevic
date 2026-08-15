@@ -179,7 +179,7 @@ const karpelevicOnlyAntecedent = new Set([
 ]);
 const strengthened = new Set([16, 30, 57, 58]);
 const newResults = new Set([4, 59]);
-const unbadgedResults = new Set([27, 28, 31, 42, 44, 45, 48]);
+const unbadgedResults = new Set([27, 28, 31, 42, 44, 45, 46, 48]);
 const previouslyKnown = new Set([
   15, 18, 23, 25, 26, 29, 61, 62, 64,
 ]);
@@ -332,7 +332,7 @@ const rawItems: readonly [
   [45, "Lemma", "Location of the final intersection when Z₁ = X₀", "Locates the final intersection produced by the successive perspectivities for the special starting point Z₁=X₀."],
   [46, "Lemma", "Sign of t − u(t) near a fixed point of a real projectivity", "Finds arbitrarily small nonzero t for which t-u(t)>0."],
   [47, "Theorem", "A small deformation moving the final image into the interior half-plane", "For N≥4, converts the scalar inequality τ-u(τ)>0 into the required planar half-plane condition while keeping the displayed vertices distinct, in the same cyclic order, and in convex position."],
-  [48, "Lemma", "Extension of the deformation to all polygon vertices", "Assuming the return-time bijection and four-case partition from Topic V, defines every deformed vertex and verifies all nonclosing incidences and side inequalities."],
+  [48, "Lemma", "Extension of the deformation to all polygon vertices", "Assuming the return-time bijection and four-case partition from Topic V, defines every deformed vertex and verifies every incidence with side index k≠c and all remaining side inequalities."],
   [49, "Theorem", "Existence of an invariant deformation with one interior image vertex", "Chooses one small parameter for which the deformed polygon is invariant and exactly one extreme point of its image lies in the polygon interior."],
   [50, "Theorem", "The first-return step satisfies Δ = 1", "For N≥4, uses Theorem 3.2's conclusion that every image vertex lies on the polygon boundary to prove that the first-return step is Δ=1."],
   [51, "Remark", "Boundary cases in the proof that Δ = 1", "Checks the limiting arithmetic values used in the proof that the first-return step is one."],

@@ -50,7 +50,8 @@ export const topicVISetup: AdvancedProofSetup = {
       displayed cyclic list consists exactly of its distinct extreme points,
       with no redundant listed points. The polygon
       <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mi mathvariant="normal">conv</mi><mo stretchy="false">{</mo><msub><mi>x</mi><mn>0</mn></msub><mo>,</mo><mo>…</mo><mo>,</mo><msub><mi>x</mi><mrow><mi>N</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">P=\operatorname{conv}\{x_0,\ldots,x_{N-1}\}</annotation></semantics></math>
-      has exactly these extreme points in positive cyclic order and satisfies
+      has exactly these extreme points in counterclockwise order for the
+      chosen complex orientation and satisfies
       λP⊆P. Its side with label i is
       <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>E</mi><mi>i</mi></msub><mo>=</mo><mo stretchy="false">[</mo><msub><mi>x</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>,</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">E_i=[x_{i-1},x_i]</annotation></semantics></math>;
       all polygon indices are read modulo N. Write
@@ -101,7 +102,8 @@ export const topicVISetup: AdvancedProofSetup = {
     <p>
       Two earlier results supply the final logical safeguards. Lemma 2.8 from
       Topic II places any specified finite family of nonzero determinant
-      signs, relative-interior incidences, and strict side inequalities on one
+      signs, relative-interior incidences, and strict inequalities defining
+      the required side half-planes on one
       common small parameter interval. Theorem 3.2 says that for every
       invariant polygon Q with at most N vertices, every extreme point of λQ
       lies on ∂Q. Topic VI will construct an invariant polygon violating that
@@ -117,11 +119,11 @@ const guides: readonly ReaderResultGuide[] = [
     vocabulary: [
       vocabulary(
         "Successive perspectivities",
-        "Each step projects from one projective line to the next through the displayed contact point. Their composition is the return projectivity used below.",
+        "Each step projects from one projective line to the next through the displayed contact point. The proof uses their composition as one line-to-line projectivity.",
       ),
       vocabulary(
-        "Supporting line ℒᵢ and its slope ℓᵢ",
-        "ℒᵢ is the line meeting the polygon only at Xᵢ. In the affine chart chosen in Topic V, ℓᵢ denotes its slope; these are different objects.",
+        "Supporting line ℒᵢ",
+        "ℒᵢ is the supporting line whose intersection with the polygon is exactly {Xᵢ}. Its scalar slope in the affine chart is written slope(ℒᵢ), so a line and its slope never share a symbol.",
       ),
       vocabulary(
         "Special final intersection W*",
@@ -133,7 +135,7 @@ const guides: readonly ReaderResultGuide[] = [
     proofSteps: [
       step(
         "Use the affine chart from Topic V",
-        "Write Xᵢ=(tᵢ,fᵢ) with t₀<⋯<tₘ₊₁. Convexity gives strictly increasing side slopes m₁<⋯<mₘ₊₁, and the supporting-line slope satisfies mᵢ<ℓᵢ<mᵢ₊₁.",
+        "Write Xᵢ=(tᵢ,fᵢ) with t₀<⋯<tₘ₊₁. Convexity gives strictly increasing side slopes m₁<⋯<mₘ₊₁, and mᵢ<slope(ℒᵢ)<mᵢ₊₁.",
       ),
       step(
         "Locate the first incoming slope",
@@ -149,11 +151,11 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Continue the induction",
-        "Because ℓᵢ<mᵢ₊₁ and zᵢ<tᵢ, the point Zᵢ lies above the backward extension of the following side, which is precisely the hypothesis required at the next step.",
+        "Because slope(ℒᵢ)<mᵢ₊₁ and zᵢ<tᵢ, the point Zᵢ lies above the backward extension of the following side, which is precisely the hypothesis required at the next step.",
       ),
       step(
         "Locate the final intersection",
-        "The closing slope is a strict convex combination of ℓₘ and mₘ₊₁. Its difference from the contact line has opposite signs at Cₘ and Cₘ₊₁, so the unique zero W* lies in relint[Cₘ,Cₘ₊₁].",
+        "The closing slope is a strict convex combination of slope(ℒₘ) and mₘ₊₁. Its difference from the contact line has opposite signs at Cₘ and Cₘ₊₁, so the unique zero W* lies in relint[Cₘ,Cₘ₊₁].",
       ),
       step(
         "Undo the coordinate change",
@@ -196,6 +198,8 @@ const guides: readonly ReaderResultGuide[] = [
     ],
     takeaway:
       "Every neighbourhood of zero contains a nonzero t with t-u(t)>0; t is not required to be positive.",
+    sourceRelation:
+      "This is an elementary calculation for a fractional-linear map near a fixed point. Coxeter supplies standard projective-line background; no separate priority classification is assigned to this precise formulation.",
   },
   {
     itemNumber: 47,
@@ -210,12 +214,12 @@ const guides: readonly ReaderResultGuide[] = [
         "The composition of all successive perspectivities, followed by the affine coordinate on the final contact line that sends Cₘ₊₁ to 0 and Cₘ to 1.",
       ),
       vocabulary(
-        "Planar line functional 𝒮 and its one-dimensional restriction d",
-        "𝒮(x,τ) is the oriented determinant defined for every planar point x. Its restriction to x=z(t) on the final contact line is d(t,τ). Thus 𝒮>0 defines a planar half-plane, whereas the factorization d(t,τ)=γ(τ)(t-u(τ)) is one-dimensional.",
+        "Affine determinant function 𝒮 and its one-dimensional restriction d",
+        "𝒮(x,τ) is the oriented affine determinant defined for every planar point x. Its restriction to x=z(t) on the final contact line is d(t,τ). Thus 𝒮>0 defines an open half-plane, whereas d(t,τ)=γ(τ)(t-u(τ)) is a one-dimensional factorization.",
       ),
     ],
     intuition:
-      "The successive projections give one scalar projective map u. The inequality u(τ)<τ compares two points on the final contact line. A positive determinant factor converts that line ordering into the statement that Y(τ) lies in the polygon-interior half-plane of the moving closing side.",
+      "The composition of the successive perspectivities gives one scalar projective map u. The inequality u(τ)<τ compares two points on the final contact line. A positive determinant factor places Y(τ) in the open half-plane bounded by the moving closing line that contains Xₘ₋₁(τ).",
     figure: "holonomy-escape",
     proofSteps: [
       step(
@@ -223,11 +227,11 @@ const guides: readonly ReaderResultGuide[] = [
         "Each projection centre lies on neither its source nor its target line, and those lines are distinct. Hence every step is a projective isomorphism.",
       ),
       step(
-        "Compose the return projectivity",
+        "Compose the successive perspectivities",
         "Compactify the starting-parameter line and compose the verified perspectivities. The final affine coordinate gives a real projective automorphism u.",
       ),
       step(
-        "Calibrate u at 0 and 1",
+        "Evaluate u at the reference values 0 and 1",
         "At τ=0 the return is Cₘ₊₁, so u(0)=0. At τ=1, Lemma 7.6 places the return strictly between Cₘ₊₁ and Cₘ, so 0<u(1)<1.",
       ),
       step(
@@ -257,6 +261,29 @@ const guides: readonly ReaderResultGuide[] = [
   {
     itemNumber: 48,
     label: "Lemma 7.9",
+    prelude: (
+      <section aria-label="Index flow and four incidence cases">
+        <p className="section-label">Index flow used in the proof</p>
+        <p>
+          A base index j determines the orbit segment
+          (F(0,j),…,F(H<sub>j</sub>−1,j)) and its return index r(j).
+          The moved bases form M, b<sub>*</sub> is the distinguished moved
+          base, and c=r(b<sub>*</sub>). The partition
+          𝓑=D⊔R⊔&#123;c&#125;⊔A records exactly which endpoint of the final
+          incidence varies:
+        </p>
+        <ul>
+          <li><strong>k∈D:</strong> the point is fixed and its assigned side line varies;</li>
+          <li><strong>k∈R:</strong> the point varies and its assigned side line is fixed;</li>
+          <li><strong>k∈A:</strong> both the point and its assigned side line are fixed;</li>
+          <li><strong>k=c:</strong> this is the sole incidence left to the local half-plane argument.</li>
+        </ul>
+        <p>
+          The complete statement and proof below give the forward and reverse
+          formulas and verify all four cases.
+        </p>
+      </section>
+    ),
     vocabulary: [
       vocabulary(
         "Vertex index ιᵢ",
@@ -276,44 +303,28 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     intuition:
-      "Conditional on the return-time bijection and four-case partition proved in Topic V, moving the selected base vertices determines all N polygon vertices. Exact identities handle internal images and nonclosing final images; continuity preserves the finitely many remaining open conditions. Only the inequality for side c remains to be decided.",
+      "Conditional on the return-time bijection and four-case partition proved in Topic V, moving the selected base vertices determines all N polygon vertices. Exact identities handle internal images and every final image assigned to a side k≠c; continuity preserves the remaining finite family of open conditions. Only the inequality for side c remains to be decided.",
     figure: "topic-vi-return-partition",
     proofSteps: [
       step(
-        "Identify the local chain inside the return-time data",
-        "The explicit forward and reverse formulas show that i↦ιᵢ is a bijection from the moving chain indices to M and that i↦kᵢ is a bijection onto D. They also identify b*, c, and the exponent a=H_b*.",
+        "Match the local chain with the return data",
+        "The forward and reverse formulas identify the moving bases M, the side indices D, the distinguished base b*, its return c, and the exponent a=H_b*. Since F is bijective, x̂_F(t,j)(τ)=λᵗBⱼ(τ) then defines every polygon vertex exactly once.",
       ),
       step(
-        "Define each base point and polygon vertex once",
-        "Use Xᵢ(τ) for bases in M and xⱼ for bases outside M. Since F is bijective, the formula x̂_F(t,j)(τ)=λᵗBⱼ(τ) assigns exactly one continuous point to every polygon index.",
+        "Use exact identities before continuity",
+        "Internal orbit levels satisfy the image relation identically. For k∈D, R, or A, the four-case identities give membership in the assigned side line; continuity is needed only to keep those points in the relative interiors of the corresponding segments.",
       ),
       step(
-        "Preserve the full cyclic vertex list",
-        "At τ=0 the deformed vertices equal the original vertices. Simultaneous convex admissibility yields one interval on which they remain distinct extreme points in the same positive cyclic order.",
+        "Preserve the finite open conditions together",
+        "At τ=0 the vertices are distinct extreme points in counterclockwise order, the required affine coordinates are strictly between 0 and 1, and Y(0) satisfies every side inequality except possibly the one indexed by c. One common interval preserves all these strict inequalities.",
       ),
       step(
-        "Propagate internal orbit levels exactly",
-        "Whenever t+1<Hⱼ, multiplication gives λx̂_F(t,j)(τ)=x̂_F(t+1,j)(τ) identically. No openness argument is involved.",
-      ),
-      step(
-        "Use the four cases for final images",
-        "For k∈D the source is fixed and the assigned line moves; for k∈R the source moves and the assigned line is fixed; for k∈A both stay fixed. In each nonclosing case, the Topic V identities give exact membership in the assigned side line.",
-      ),
-      step(
-        "Upgrade line membership to relative-interior membership",
-        "At τ=0 each nonclosing final image lies in the relative interior of its side. Finitely many open affine-coordinate inequalities preserve all those relative-interior incidences on one common interval.",
-      ),
-      step(
-        "Preserve the other side inequalities for Y(τ)",
-        "At τ=0, Y(0) lies strictly inside every side half-plane except the one with index c. Continuity preserves these N-1 strict inequalities simultaneously.",
-      ),
-      step(
-        "State the exact remaining condition",
-        "The only unchecked inequality is G_c(τ)>0. If it holds, every image vertex lies in Pτ, so λPτ⊆Pτ, while Y(τ) is the unique extreme point of λPτ in int(Pτ).",
+        "Isolate the sole remaining inequality",
+        "The only unchecked condition is G_c(τ)>0. If it holds, λPτ⊆Pτ and Y(τ) is the unique extreme point of λPτ in int(Pτ).",
       ),
     ],
     takeaway:
-      "Using the exact Topic V bijection and partition, the local motion extends to all polygon vertices and leaves only the single inequality G_c(τ)>0 to check.",
+      "Using the exact Topic V bijection and partition, the local motion extends to all polygon vertices and leaves only G_c(τ)>0 to check.",
     sourceRelation:
       "The exact statement and proof are supplied here. The cited literature provides historical context; no priority claim is made for this formulation.",
   },
@@ -413,9 +424,8 @@ const guides: readonly ReaderResultGuide[] = [
     label: "Remark 7.13",
     vocabulary: [],
     intuition:
-      "The choice of τ is local, but its use is global. The local projective map provides τ-u(τ)>0; the return-time bijection, four-case partition, exact incidences, and finite side inequalities ensure that this one change extends to a valid invariant polygon.",
-    takeaway:
-      "The argument uses a local inequality near a fixed point together with separate global indexing, incidence, relative-interior, and side-inequality assertions.",
+      "This remark separates the local inequality τ-u(τ)>0 from the global indexing, incidence, and finite side inequalities required to use it.",
+    takeaway: null,
   },
 ] as const;
 
@@ -607,10 +617,10 @@ export const topicVIImported: readonly ProofDependency[] = [
       "For Δ>1, a proper consecutive boundary chain is selected and 𝓑 is partitioned disjointly as D⊔R⊔{c}⊔A, with the source and assigned side line specified in each case.",
   },
   {
-    label: "Topic II: simultaneous admissibility",
+    label: "Topic II: persistence of finitely many strict conditions under small perturbations",
     href: sitePath("/proof/topic-ii/#lem:simultaneous-convex-openness"),
     explanation:
-      "One common neighbourhood preserves the finite collection of cyclic determinant signs, relative-interior incidences, and strict side inequalities used below.",
+      "One common neighbourhood preserves the finite collection of cyclic determinant signs, relative-interior incidences, and strict inequalities defining the required side half-planes.",
   },
   {
     label: "Topic II: every image vertex lies on the outer boundary",

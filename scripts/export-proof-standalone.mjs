@@ -499,14 +499,19 @@ function verifyStandaloneHtml(html) {
   }
 
   if (proofRoute === "/proof/topic-vi") {
-    if (
-      !/href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-v\//i.test(
-        html,
-      )
-    ) {
-      throw new Error(
-        "Standalone Topic VI must link to the published Topic V prerequisite.",
-      );
+    const requiredPublishedRoutes = [
+      "/proof/",
+      "/proof/topic-ii/",
+      "/proof/topic-iii/",
+      "/proof/topic-iv/",
+      "/proof/topic-v/",
+    ];
+    for (const route of requiredPublishedRoutes) {
+      if (!html.includes(`href="${publicSite}${route}`)) {
+        throw new Error(
+          `Standalone Topic VI must link to the published route ${route}`,
+        );
+      }
     }
     if (
       /href="(?:Critical_Invariant_Polygons_Topic_(?:V|VII)\.html|https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-vii\/)/i.test(

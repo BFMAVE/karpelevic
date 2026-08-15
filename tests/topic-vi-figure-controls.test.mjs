@@ -92,7 +92,8 @@ test("Plate VI.3 uses its own arrow marker and the proof's side index", async ()
     new Set(markerReferences),
     new Set(["advanced-arrow-topic-vi-return-partition"]),
   );
-  assert.match(figure, /target side k∈D/);
+  assert.match(figure, /side index k∈D/);
+  assert.match(figure, /condition on return index s\(k\)=r⁻¹\(k\)/);
   assert.match(figure, /s\(k\)∉M/);
   assert.doesNotMatch(figure, /target j|s\(j\)/);
 });
@@ -111,5 +112,5 @@ test("Plate V.3 retains its notation and its own arrow marker", async () => {
   );
   assert.match(figure, /target j∈D/);
   assert.match(figure, /s\(j\)∉M/);
-  assert.doesNotMatch(figure, /target side k|s\(k\)/);
+  assert.doesNotMatch(figure, /side index k|condition on return index s\(k\)|s\(k\)/);
 });

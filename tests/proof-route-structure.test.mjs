@@ -237,18 +237,20 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.match(topicVIText, /Ext\(Q\) denotes its set of extreme points and int\(Q\) its interior in V/i);
   assert.match(topicVIText, /there are integers q>0 and h≥0 such that every return time H\s*j belongs to \{q,q\+h\}/i);
   assert.match(topicVIText, /Assume N\s*≥\s*4\s*\. If φ\s*>\s*δ , then Δ\s*=\s*1/i);
-  assert.match(topicVIText, /Supporting line ℒᵢ and its slope ℓᵢ/);
+  assert.match(topicVIText, /Supporting line ℒᵢ/);
   assert.match(
     topicVIText,
-    /ℒᵢ is the line meeting the polygon only at Xᵢ[\s\S]*ℓᵢ denotes its slope/i,
+    /ℒᵢ is the supporting line whose intersection with the polygon is exactly \{Xᵢ\}[\s\S]*slope\(ℒᵢ\)/i,
   );
   assert.match(topicVIText, /M∖\{b\*\}/);
   assert.match(topicVIText, /supporting lines ℒ\s*i meeting P only at X\s*i/i);
   assert.match(topicVIText, /These are exactly the boundary-contact data of Definition 7\.4/i);
-  assert.match(topicVIText, /Planar line functional 𝒮 and its one-dimensional restriction d/);
+  assert.match(topicVIText, /Affine determinant function 𝒮 and its one-dimensional restriction d/);
   assert.match(topicVIText, /𝒮\(x,τ\)>0 defines (?:an?|the) open half-plane/);
   assert.match(topicVIText, /d\(t,τ\)=γ\(τ\)\(t[-−]u\(τ\)\)/);
   assert.match(topicVIText, /Side index kᵢ/);
+  assert.match(topicVIText, /Index flow used in the proof/);
+  assert.match(topicVIText, /𝓑=D⊔R⊔\{c\}⊔A records exactly which endpoint of the final incidence varies/);
   assert.match(topicVIText, /u\(τ\)<τ/);
   assert.match(topicVIText, /The first-return step satisfies Δ\s*=\s*1/);
   assert.match(topicVIText, /Contact and first-return structure of an N-critical invariant polygon/);
@@ -286,6 +288,7 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
     return topicVI.slice(start, end < 0 ? topicVI.length : end);
   };
   assert.doesNotMatch(topicVICard(45, 46), /proof-chapter-provenance/);
+  assert.doesNotMatch(topicVICard(46, 47), /proof-chapter-provenance/);
   assert.doesNotMatch(topicVICard(48, 49), /proof-chapter-provenance/);
 
   assert.match(topicVIIText, /Standing scope for critical-polygon monodromy: N\s*≥\s*4/);

@@ -41,20 +41,20 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
       "Plate V.4. Numerical illustration of Definition 7.4. Let P=conv{X₀,…,X₅}. The displayed coordinates were checked consistently for cyclic convexity, the placement Cᵢ∈relint[Xᵢ₋₁,Xᵢ] for 2≤i≤5, the oriented support signs of ℒᵢ for 2≤i≤4, and all eight projection incidences. Their composition is a projectivity from Λ₁=aff(X₀,X₁) to K=aff(C₄,C₅). These numerical checks concern only the internal consistency of the drawing; the projective statements in Proposition 7.5 are proved independently.",
   },
   "topic-vi-projective-chain": {
-    status: "Adapted from Topic V · incidence verified",
+    status: "Adapted numerical incidence illustration",
     title: "Successive perspectivities along the selected boundary chain",
     description:
-      "Plate VI.1 adapts the incidence-verified model from Topic V. A point is projected from the source line Lambda one to the supporting lines script L two, script L three, and script L four, and then to the target line K. The successive projection centres are C two, C three, C four, and X five. The diagram is a selected local boundary arc, not a full polygon.",
+      "Plate VI.1 adapts the numerical incidence illustration from Topic V. A point is projected from the source line Lambda one to the supporting lines script L two, script L three, and script L four, and then to the target line K. The successive projection centres are C two, C three, C four, and X five. The coordinate checks support the internal consistency of this selected local boundary arc; they do not prove the projective statement.",
     caption:
-      "Plate VI.1. Adapted from Plate V.4. In this incidence-verified numerical model, projection through C₂ sends Y₁∈Λ₁ to Y₂∈ℒ₂; projection through C₃ sends Y₂ to Y₃∈ℒ₃; projection through C₄ sends Y₃ to Y₄∈ℒ₄; and the final projection through X₅ sends Y₄ to Y₅∈K=aff(C₄,C₅). The plate illustrates the successive-perspectivity mechanism used here. It shows a selected local boundary arc, not a full polygon or a universal metric configuration; all eight displayed incidence conditions have maximum absolute determinant residual approximately 3.3×10⁻¹¹.",
+      "Plate VI.1. Adapted from Plate V.4. In this numerical incidence illustration, projection through C₂ sends Y₁∈Λ₁ to Y₂∈ℒ₂; projection through C₃ sends Y₂ to Y₃∈ℒ₃; projection through C₄ sends Y₃ to Y₄∈ℒ₄; and the final projection through X₅ sends Y₄ to Y₅∈K=aff(C₄,C₅). It shows a selected local boundary arc, not a full polygon or a universal metric configuration. The maximum absolute determinant residual for the eight displayed incidences is approximately 3.3×10⁻¹¹; this supports the internal consistency of the drawing only, while the projective statement is proved independently.",
   },
   "holonomy-escape": {
     status: "Schematic implication · affine and planar views",
     title: "Scalar order and the corresponding planar half-plane",
     description:
-      "Plate VI.2 has two panels. On the entire affine coordinate line, u of tau lies to the left of tau; neither point is assumed to lie between the calibration points zero and one. In the planar panel, the moving closing line through X sub m of tau and X sub m plus one is the zero set of the signed-side functional script S. The final contact line K equals the affine line through C sub m and C sub m plus one; it contains z of u of tau and Y of tau equals z of tau, with Y in the open half-plane where script S is positive.",
+      "Plate VI.2 has two panels. On the entire affine coordinate line, u of tau lies to the left of tau; neither point is assumed to lie between the reference coordinate values zero and one. In the planar panel, the moving closing line through X sub m of tau and X sub m plus one is the zero set of the signed-side functional script S. The final contact line K equals the affine line through C sub m and C sub m plus one; it contains z of u of tau and Y of tau equals z of tau. Both Y and X sub m minus one lie in the open half-plane where script S is positive, identifying it as the polygon-interior side.",
     caption:
-      "Plate VI.2. In the chosen affine coordinate on the final contact line K=aff(Cₘ,Cₘ₊₁), the selected parameter satisfies u(τ)<τ. Neither point is assumed to lie in [0,1]. The planar inset keeps the two roles visible: 𝒮(x,τ)>0 defines the open half-plane bounded by the moving closing line 𝒮(·,τ)=0, while d(t,τ)=𝒮(z(t),τ) is the restriction to K. Since γ(τ)>0, the scalar inequality gives d(τ,τ)>0 and hence Y(τ)=z(τ) lies in that interior half-plane.",
+      "Plate VI.2. In the chosen affine coordinate on the final contact line K=aff(Cₘ,Cₘ₊₁), the selected parameter satisfies u(τ)<τ. Neither point is assumed to lie in [0,1]; the marked segment merely joins the reference coordinate values 0 and 1. The planar inset keeps the two roles visible: 𝒮(x,τ)>0 defines an open half-plane bounded by the moving closing line 𝒮(·,τ)=0, while d(t,τ)=𝒮(z(t),τ) is its restriction to K. The unchanged cyclic order puts Xₘ₋₁(τ) in this half-plane, so it is the polygon-interior side. Since γ(τ)>0, the scalar inequality gives d(τ,τ)>0 and hence puts Y(τ)=z(τ) there as well.",
   },
   "global-ledger": {
     title: "Partition of the return source–target pairs",
@@ -67,17 +67,17 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
     status: "Adapted from Topic V · exact finite partition",
     title: "Four cases for the assigned side incidences",
     description:
-      "Plate VI.3 displays the disjoint and exhaustive partition of the calligraphic base-index set B into D, R, the singleton c, and A. It records the target class and the position of the inverse source under s for each case.",
+      "Plate VI.3 displays the disjoint and exhaustive partition of the calligraphic base-index set B into D, R, the singleton c, and A. Each row gives the side index k and the corresponding condition on the return index s of k, equal to r inverse of k.",
     caption:
       "Plate VI.3. Adapted from Plate V.3. The partition ℬ=D⊔R⊔{c}⊔A is disjoint and exhaustive. For k∈D, the assigned side line moves and the source is fixed; for k∈R, the source moves and the assigned side line is fixed; for k∈A, both remain fixed; and c is the only side index for which the final incidence is not imposed in advance. The displayed conditions involving s record the corresponding inverse sources. This is combinatorial input to the deformation, not a geometric example of the deformation itself.",
   },
   "unit-return": {
-    status: "Combinatorial incidence schematic · not metric",
+    status: "Logical incidence schematic · no metric realization asserted",
     title: "The forbidden interior image vertex",
     description:
-      "Plate VI.4 is an incidence-only schematic, not a coordinate realization of multiplication by lambda. The other displayed image vertices lie on the boundary of the outer polygon. The highlighted vertex Y of tau remains an extreme point of the image polygon but lies strictly inside the outer polygon.",
+      "Plate VI.4 marks schematic locations representing extreme points of lambda P tau without joining them into an image polygon. Eight displayed locations lie on the boundary of P tau, while the highlighted location Y of tau lies strictly inside P tau. No metric realization of multiplication by lambda is asserted.",
     caption:
-      "Plate VI.4. Combinatorial incidence schematic. The inner polygon is not drawn to scale as the actual linear image λPτ. The diagram records only the incidences used in the contradiction: Y(τ) is an extreme point of λPτ lying in int(Pτ), whereas every other vertex of λPτ lies on ∂Pτ. Topic II proves that every vertex of the image polygon must lie on the outer polygon boundary. The highlighted interior vertex contradicts that conclusion, so Δ=1.",
+      "Plate VI.4. Logical incidence schematic; no metric realization is asserted. The unjoined markers represent locations of extreme points of λPτ: the eight displayed non-highlighted locations lie on ∂Pτ, while Y(τ) lies in int(Pτ). Topic II proves that every extreme point of the image polygon must lie on the outer polygon boundary. The highlighted interior location contradicts that conclusion, so Δ=1.",
   },
   "farey-reflection": {
     title: "A Farey cell and its reflected orientation",
@@ -511,10 +511,12 @@ const extendLine = (a: Point, b: Point, before = 0.12, after = 0.12): readonly [
 function ProjectiveCorridorGeometry({
   markerId,
   mobile = false,
+  topicVI = false,
   verifiedPolygon = false,
 }: {
   markerId: string;
   mobile?: boolean;
+  topicVI?: boolean;
   verifiedPolygon?: boolean;
 }) {
   const transform = (point: Point): Point => mobile
@@ -527,6 +529,37 @@ function ProjectiveCorridorGeometry({
   const terminal = extendLine(centres[2], centres[3], 0.17, 0.17);
   const initial = extendLine(points[0], points[1], 0.1, 0.1);
   const labelScale = mobile ? 0.82 : 1;
+  const separatedMobileLabels = mobile && topicVI;
+  const topicVIMobileSupportLabels: readonly {
+    x: number;
+    y: number;
+    textAnchor?: "start" | "middle" | "end";
+  }[] = [
+    { x: 70, y: 204 },
+    { x: 103, y: 145 },
+    { x: 157, y: 90, textAnchor: "end" },
+  ];
+  const topicVIMobileCentreLabels = [
+    { x: 101, y: 182 },
+    { x: 144, y: 147 },
+    { x: 196, y: 124 },
+    { x: 278, y: 52 },
+  ] as const;
+  const topicVIMobileYLabels = [
+    { x: 70, y: 255 },
+    { x: 132, y: 143 },
+    { x: 171, y: 91 },
+    { x: 215, y: 65 },
+    { x: 292, y: 116 },
+  ] as const;
+  const topicVIMobileXLabels = [
+    { x: 37, y: 298 },
+    { x: 86, y: 224 },
+    { x: 135, y: 169 },
+    { x: 181, y: 139 },
+    { x: 247, y: 134 },
+    { x: 330, y: 84 },
+  ] as const;
 
   return (
     <>
@@ -537,14 +570,16 @@ function ProjectiveCorridorGeometry({
       )}
       <line className="topic-ii-figure-transfer" x1={initial[0][0]} x2={initial[1][0]} y1={initial[0][1]} y2={initial[1][1]} />
       {supports.map(([a, b], index) => {
+        const separatedLabel = topicVIMobileSupportLabels[index];
         return (
           <g key={index}>
             <line className="topic-ii-figure-support" x1={a[0]} x2={b[0]} y1={a[1]} y2={b[1]} />
             <text
               className="topic-ii-figure-small"
               style={mobile ? mobileSmallTextStyle : undefined}
-              x={a[0] + (mobile ? (index === 1 ? -14 : 8) : 16)}
-              y={a[1] - (mobile ? 5 : 16)}
+              textAnchor={separatedMobileLabels ? separatedLabel.textAnchor : undefined}
+              x={separatedMobileLabels ? separatedLabel.x : a[0] + (mobile ? (index === 1 ? -14 : 8) : 16)}
+              y={separatedMobileLabels ? separatedLabel.y : a[1] - (mobile ? 5 : 16)}
             >
               ℒ{index + 2}
             </text>
@@ -555,20 +590,22 @@ function ProjectiveCorridorGeometry({
       <text
         className="topic-ii-figure-small"
         style={mobile ? mobileSmallTextStyle : undefined}
-        x={mobile ? 165 : terminal[0][0]}
+        textAnchor={separatedMobileLabels ? "end" : undefined}
+        x={separatedMobileLabels ? 340 : mobile ? 165 : terminal[0][0]}
         y={mobile ? 24 : 88}
       >
         K = aff(C₄,C₅)
       </text>
       {centres.map(([x, y], index) => {
+        const separatedLabel = topicVIMobileCentreLabels[index];
         return (
           <g key={`centre-${index}`}>
             <circle className="topic-ii-figure-point topic-ii-figure-point-accent" cx={x} cy={y} r="5" />
             <text
               className="topic-ii-figure-small"
               style={mobile ? mobileSmallTextStyle : undefined}
-              x={x + (mobile && index === 0 ? -18 : 7) * labelScale}
-              y={y + (mobile && index === 0 ? 14 : -8) * labelScale}
+              x={separatedMobileLabels ? separatedLabel.x : x + (mobile && index === 0 ? -18 : 7) * labelScale}
+              y={separatedMobileLabels ? separatedLabel.y : y + (mobile && index === 0 ? 14 : -8) * labelScale}
             >
               C{index + 2}
             </text>
@@ -596,34 +633,40 @@ function ProjectiveCorridorGeometry({
         y1={yPoints[3][1]}
         y2={points[5][1]}
       />
-      {yPoints.map(([x, y], index) => (
-        <g key={`y-${index}`}>
-          <circle className="topic-ii-figure-point" cx={x} cy={y} r={mobile ? 5 : 5.5} />
-          <text
-            className="topic-ii-figure-label"
-            style={mobile ? mobileLabelTextStyle : undefined}
-            x={x + (index === 4 ? -28 : index === 2 ? 20 : 7) * labelScale}
-            y={y + (index === 2 ? -12 : index % 2 === 0 ? 20 : -10) * labelScale}
-          >
-            Y{index + 1}
-          </text>
-        </g>
-      ))}
-      {points.map(([x, y], index) => (
-        <g key={`x-${index}`}>
-          {verifiedPolygon ? (
-            <circle className="topic-ii-figure-point" cx={x} cy={y} r={mobile ? 3.5 : 4} />
-          ) : null}
-          <text
-            className="topic-ii-figure-small"
-            style={mobile ? mobileSmallTextStyle : undefined}
-            x={x + (index === 5 ? -7 : -3) * labelScale}
-            y={y + 24 * labelScale}
-          >
-            X{index}
-          </text>
-        </g>
-      ))}
+      {yPoints.map(([x, y], index) => {
+        const separatedLabel = topicVIMobileYLabels[index];
+        return (
+          <g key={`y-${index}`}>
+            <circle className="topic-ii-figure-point" cx={x} cy={y} r={mobile ? 5 : 5.5} />
+            <text
+              className="topic-ii-figure-label"
+              style={mobile ? mobileLabelTextStyle : undefined}
+              x={separatedMobileLabels ? separatedLabel.x : x + (index === 4 ? -28 : index === 2 ? 20 : 7) * labelScale}
+              y={separatedMobileLabels ? separatedLabel.y : y + (index === 2 ? -12 : index % 2 === 0 ? 20 : -10) * labelScale}
+            >
+              Y{index + 1}
+            </text>
+          </g>
+        );
+      })}
+      {points.map(([x, y], index) => {
+        const separatedLabel = topicVIMobileXLabels[index];
+        return (
+          <g key={`x-${index}`}>
+            {verifiedPolygon ? (
+              <circle className="topic-ii-figure-point" cx={x} cy={y} r={mobile ? 3.5 : 4} />
+            ) : null}
+            <text
+              className="topic-ii-figure-small"
+              style={mobile ? mobileSmallTextStyle : undefined}
+              x={separatedMobileLabels ? separatedLabel.x : x + (index === 5 ? -7 : -3) * labelScale}
+              y={separatedMobileLabels ? separatedLabel.y : y + 24 * labelScale}
+            >
+              X{index}
+            </text>
+          </g>
+        );
+      })}
       {verifiedPolygon ? (
         <text
           className="topic-ii-figure-small"
@@ -653,6 +696,7 @@ function ProjectiveCorridorGeometry({
         data-support-contact-max-error={verifiedPolygon ? projectiveSupportContactMaxError : undefined}
         data-support-minimum={verifiedPolygon ? projectiveSupportMinimum : undefined}
         data-supports-verified={verifiedPolygon ? "true" : undefined}
+        data-topic-vi-mobile-labels={separatedMobileLabels ? "separated" : undefined}
       />
     </>
   );
@@ -667,11 +711,11 @@ function ProjectiveCorridorMobile({ markerId }: { markerId: string }) {
 }
 
 function TopicVIProjectiveChain({ markerId }: { markerId: string }) {
-  return <ProjectiveCorridorGeometry markerId={markerId} />;
+  return <ProjectiveCorridorGeometry markerId={markerId} topicVI />;
 }
 
 function TopicVIProjectiveChainMobile({ markerId }: { markerId: string }) {
-  return <ProjectiveCorridorGeometry markerId={markerId} mobile />;
+  return <ProjectiveCorridorGeometry markerId={markerId} mobile topicVI />;
 }
 
 function HolonomyEscape({
@@ -713,7 +757,7 @@ function HolonomyEscape({
         />
         <text className="topic-ii-figure-equation" style={mobileLabelTextStyle} x="94" y="56" textAnchor="middle">u(τ)&lt;τ</text>
         <line className="topic-ii-figure-transfer" x1="192" x2="315" y1="169" y2="169" />
-        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="253" y="192" textAnchor="middle">calibration interval [0,1]</text>
+        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="253" y="192" textAnchor="middle">reference segment from 0 to 1</text>
         <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="180" y="218" textAnchor="middle">Only the order u(τ)&lt;τ is asserted.</text>
         <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="180" y="240" textAnchor="middle">Neither point is assumed to lie in [0,1].</text>
 
@@ -739,10 +783,16 @@ function HolonomyEscape({
         <circle className="topic-ii-figure-point" cx="178" cy="508" r="6" />
         <circle className="topic-ii-figure-point" cx="178" cy="430" r="6" />
         <circle className="topic-ii-figure-point topic-ii-figure-point-accent" cx="286" cy="430" r="8" />
-        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="190" y="334">
+        <g data-half-plane-witness="X_m-1">
+          <circle className="topic-ii-figure-point" cx="300" cy="503" r="6" />
+          <text className="topic-ii-figure-small" style={mobileSmallTextStyle} textAnchor="end" x="326" y="528">
+            X<tspan baselineShift="sub" fontSize="14"> m−1</tspan>(τ)
+          </text>
+        </g>
+        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} textAnchor="end" x="166" y="334">
           X<tspan baselineShift="sub" fontSize="14"> m</tspan>(τ)
         </text>
-        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="190" y="526">
+        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} textAnchor="end" x="166" y="526">
           X<tspan baselineShift="sub" fontSize="14"> m+1</tspan>
         </text>
         <text className="topic-ii-figure-label" style={mobileLabelTextStyle} x="92" y="457">z(u(τ))</text>
@@ -779,7 +829,7 @@ function HolonomyEscape({
       <path className="topic-ii-figure-edge" d="M126 73 L238 73" markerEnd={`url(#${markerId})`} />
       <text className="topic-ii-figure-equation" x="182" y="57" textAnchor="middle">u(τ)&lt;τ</text>
       <line className="topic-ii-figure-transfer" x1="370" x2="630" y1="160" y2="160" />
-      <text className="topic-ii-figure-small" x="500" y="181" textAnchor="middle">calibration interval [0,1]</text>
+      <text className="topic-ii-figure-small" x="500" y="181" textAnchor="middle">reference segment from 0 to 1</text>
       <text className="topic-ii-figure-small" x="38" y="181">Neither point is assumed to lie in [0,1].</text>
 
       <line className="topic-ii-figure-support" x1="28" x2="732" y1="199" y2="199" />
@@ -804,6 +854,10 @@ function HolonomyEscape({
       <circle className="topic-ii-figure-point" cx="412" cy="356" r="6" />
       <circle className="topic-ii-figure-point" cx="412" cy="303" r="6" />
       <circle className="topic-ii-figure-point topic-ii-figure-point-accent" cx="582" cy="303" r="8" />
+      <g data-half-plane-witness="X_m-1">
+        <circle className="topic-ii-figure-point" cx="665" cy="348" r="6" />
+        <text className="topic-ii-figure-small" textAnchor="end" x="654" y="371">Xₘ₋₁(τ)</text>
+      </g>
       <text className="topic-ii-figure-small" x="424" y="246">Xₘ(τ)</text>
       <text className="topic-ii-figure-small" x="424" y="374">Xₘ₊₁</text>
       <text className="topic-ii-figure-label" x="320" y="331">z(u(τ))</text>
@@ -822,7 +876,8 @@ function GlobalLedger({
   indexSymbol: "j" | "k";
   markerId: string;
 }) {
-  const targetLabel = indexSymbol === "k" ? "target side" : "target";
+  const isTopicVI = indexSymbol === "k";
+  const targetLabel = isTopicVI ? "side index" : "target";
   const rows = [
     ["D", `${targetLabel} ${indexSymbol}∈D`, `s(${indexSymbol})∉M`],
     ["R", `${targetLabel} ${indexSymbol}∈R`, `s(${indexSymbol})∈M∖{b*}; s(R)=M∖{b*}`],
@@ -831,8 +886,12 @@ function GlobalLedger({
   ] as const;
   return (
     <>
-      <text className="topic-ii-figure-small" x="157" y="29">target membership</text>
-      <text className="topic-ii-figure-small" x="458" y="29">inverse-source condition</text>
+      <text className="topic-ii-figure-small" x="157" y="29">
+        {isTopicVI ? "side index k" : "target membership"}
+      </text>
+      <text className="topic-ii-figure-small" x="458" y="29">
+        {isTopicVI ? "condition on return index s(k)=r⁻¹(k)" : "inverse-source condition"}
+      </text>
       {rows.map(([label, source, target], index) => {
         const y = 83 + index * 70;
         return (
@@ -851,7 +910,8 @@ function GlobalLedger({
 }
 
 function GlobalLedgerMobile({ indexSymbol }: { indexSymbol: "j" | "k" }) {
-  const targetLabel = indexSymbol === "k" ? "target side" : "target";
+  const isTopicVI = indexSymbol === "k";
+  const targetLabel = isTopicVI ? "side index" : "target";
   const rows = [
     ["D", `${targetLabel} ${indexSymbol}∈D`, `s(${indexSymbol})∉M`],
     ["R", `${targetLabel} ${indexSymbol}∈R`, `s(${indexSymbol})∈M∖{b*}; s(R)=M∖{b*}`],
@@ -861,9 +921,16 @@ function GlobalLedgerMobile({ indexSymbol }: { indexSymbol: "j" | "k" }) {
 
   return (
     <>
-      <text className="topic-ii-figure-equation" x="180" y="30" textAnchor="middle">partition of target indices</text>
+      {isTopicVI ? (
+        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="180" y="22" textAnchor="middle">
+          <tspan x="180">side index k</tspan>
+          <tspan x="180" dy="21">condition on return index s(k)=r⁻¹(k)</tspan>
+        </text>
+      ) : (
+        <text className="topic-ii-figure-equation" x="180" y="30" textAnchor="middle">partition of target indices</text>
+      )}
       {rows.map(([label, source, target], index) => {
-        const y = 54 + index * 118;
+        const y = (isTopicVI ? 64 : 54) + index * 118;
         return (
           <g key={label}>
             <rect
@@ -880,7 +947,7 @@ function GlobalLedgerMobile({ indexSymbol }: { indexSymbol: "j" | "k" }) {
           </g>
         );
       })}
-      <text className="topic-ii-figure-equation" x="180" y="544" textAnchor="middle">ℬ = D ⊔ R ⊔ {"{c}"} ⊔ A</text>
+      <text className="topic-ii-figure-equation" x="180" y={isTopicVI ? 556 : 544} textAnchor="middle">ℬ = D ⊔ R ⊔ {"{c}"} ⊔ A</text>
     </>
   );
 }
@@ -897,7 +964,7 @@ const unitReturnOuter: readonly Point[] = [
   [248, 330],
 ];
 
-const unitReturnImage: readonly Point[] = [
+const unitReturnExtremePointLocations: readonly Point[] = [
   [91, 231],
   [117, 115],
   [240, 50],
@@ -914,41 +981,47 @@ function UnitReturn({ mobile = false }: { mobile?: boolean }) {
     ? [15 + 0.47 * x, 32 + 0.89 * y]
     : [x, y];
   const outer = unitReturnOuter.map(transform);
-  const image = unitReturnImage.map(transform);
-  const contactVertices = image.slice(0, 8);
-  const interiorVertex = image[8];
+  const extremePointLocations = unitReturnExtremePointLocations.map(transform);
+  const boundaryLocations = extremePointLocations.slice(0, 8);
+  const interiorLocation = extremePointLocations[8];
   const points = (vertices: readonly Point[]) => vertices.map((point) => point.join(",")).join(" ");
   const outerLabel = mobile ? { x: 46, y: 63 } : { x: 105, y: 74 };
-  const imageLabel = mobile ? { x: 205, y: 190 } : { x: 455, y: 180 };
   const interiorLabel = mobile
-    ? { x: interiorVertex[0] + 12, y: interiorVertex[1] - 12 }
-    : { x: interiorVertex[0] + 12, y: interiorVertex[1] - 15 };
+    ? { x: interiorLocation[0] + 12, y: interiorLocation[1] - 12 }
+    : { x: interiorLocation[0] + 12, y: interiorLocation[1] - 15 };
 
   return (
     <>
       {mobile ? (
         <>
           <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="180" y="19" textAnchor="middle">
-            incidence only — not a metric realization
+            unjoined incidence markers
           </text>
           <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="180" y="39" textAnchor="middle">
-            of multiplication by λ
+            no metric realization is asserted
           </text>
         </>
       ) : (
         <text className="topic-ii-figure-small" x="380" y="25" textAnchor="middle">
-          incidence only — not a metric realization of multiplication by λ
+          unjoined incidence markers — no metric realization is asserted
         </text>
       )}
       <polygon className="topic-ii-figure-polygon" points={points(outer)} />
-      <polygon className="topic-ii-figure-polar" points={points(image)} />
-      {contactVertices.map(([x, y], index) => (
-        <circle className="topic-ii-figure-point" cx={x} cy={y} key={index} r={mobile ? 5 : 5} />
+      {boundaryLocations.map(([x, y], index) => (
+        <circle
+          className="topic-ii-figure-point"
+          cx={x}
+          cy={y}
+          data-extreme-point-location="boundary"
+          key={index}
+          r="5"
+        />
       ))}
       <circle
         className="topic-ii-figure-point topic-ii-figure-point-accent"
-        cx={interiorVertex[0]}
-        cy={interiorVertex[1]}
+        cx={interiorLocation[0]}
+        cy={interiorLocation[1]}
+        data-extreme-point-location="interior"
         r={mobile ? 8 : 9}
       />
       <text
@@ -958,15 +1031,6 @@ function UnitReturn({ mobile = false }: { mobile?: boolean }) {
         y={outerLabel.y}
       >
         P<tspan baselineShift="sub" fontSize={mobile ? 14 : 12}>τ</tspan>
-      </text>
-      <text
-        className="topic-ii-figure-label"
-        style={mobile ? mobileLabelTextStyle : undefined}
-        x={imageLabel.x}
-        y={imageLabel.y}
-      >
-        λP<tspan baselineShift="sub" fontSize={mobile ? 14 : 12}>τ</tspan>
-        <tspan className="topic-ii-figure-small" dx="8" fontSize={mobile ? 14 : 12}>(schematic)</tspan>
       </text>
       <text
         className="topic-ii-figure-label topic-ii-figure-accent"
@@ -985,7 +1049,12 @@ function UnitReturn({ mobile = false }: { mobile?: boolean }) {
       >
         Y(τ) ∈ Ext(λP<tspan baselineShift="sub" fontSize={mobile ? 14 : 12}>τ</tspan>) ∩ int(P<tspan baselineShift="sub" fontSize={mobile ? 14 : 12}>τ</tspan>)
       </text>
-      <g data-incidence-only="true" data-metric-realization="false" />
+      <g
+        data-extreme-point-location-count={extremePointLocations.length}
+        data-incidence-only="true"
+        data-locations-joined="false"
+        data-metric-realization="false"
+      />
     </>
   );
 }
