@@ -1458,3 +1458,40 @@ full local source history remain later site milestones.
   <https://bfmave.github.io/karpelevic/proof/topic-v/>. The matching Pages
   build is `built`, its CSS asset returns HTTP 200, Topics I–V return HTTP
   200, and Topic VI remains unpublished with HTTP 404.
+
+## Current milestone — conventional terminology across all topics (15 August 2026)
+
+- **The review's central editorial point was accepted:** reader-facing coined
+  labels were replaced by literal convex-geometric, projective, arithmetic,
+  and finite-set language throughout Topics I–XIV, the manuscript, chapter
+  summaries, figures, prerequisites, history, and source headings.
+- **Representative changes:** hereditary saturation is now stated as the
+  boundary-contact conclusion it proves; right-admissibility is expanded into
+  its standing assumptions; contact rotation is a contact permutation or
+  cyclic shift; mutations and surgery are vertex replacements; ledgers are
+  counts, partitions, or case tables; the projective corridor is a
+  boundary-contact chain; the Farey carrier is Farey product data or the
+  relevant boundary arc; and the Jensen sheet is a common continuous argument
+  interval.
+- **Established terms were retained deliberately:** strict polygon,
+  polygonal complexity, (N)-criticality, first-return maps and towers,
+  projectivity, perspectivity, Klein sails, Farey neighbours, and monodromy
+  remain where they are defined and mathematically useful. Stable theorem and
+  equation labels, route keys, figure kinds, and URL fragments were preserved,
+  including three legacy generated heading anchors restored after the final
+  adversarial audit.
+- **The public manuscript was synchronized:** the linked PDF now comes from
+  the same canonical TeX as the reader and has SHA-256
+  `8af67f9d5ebbe3f54b048ee8a4e0262f211ef824c4514db146c46d3476fcd396`.
+  Its extracted text contains none of the retired vocabulary, apart from the
+  official affiliation name “Data Analytics Laboratory.”
+- **Verification:** canonical TeX compiles; the generated metadata and
+  canonical source share SHA-256
+  `fafc80ad45ddd204577d9d077f7845cc0b48fa4ff5283c2375602635d613d186`;
+  all 32 tests, ESLint, deterministic generation, `git diff --check`, static
+  Pages verification, visible-text and privacy scans, internal-fragment
+  checks, and desktop/mobile browser audits pass.
+- **Publication status:** source commit `c9e8bfc`; static-only Pages commits
+  `7d870b1` and corrective PDF release `6d640fd`. Topics I–V return HTTP 200
+  with no retired reader-visible terminology; Topic VI returns HTTP 404, so
+  Topics VI–XIV remain offline and unlinked.
