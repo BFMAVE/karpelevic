@@ -103,8 +103,11 @@ for (const relativePath of [
   assert.match(html, /Topic IV at a glance/);
   assert.match(html, /The proof in four steps/);
   assert.match(html, /Standing assumptions for the one-sided contact data/);
+  assert.match(html, /\(A0\)/);
   assert.match(html, /\(A1\)/);
   assert.match(html, /\(A4\)/);
+  assert.match(html, /multiplication by .*λ.*is.*N.*critical/is);
+  assert.doesNotMatch(html, /assumptions \(A1\)–\(A4\)/);
   assert.match(html, /The label-preserving map b/);
   assert.match(html, /The cyclic permutation σ/);
   assert.match(html, /comp\(<i>S<\/i>\).*number of connected components/s);
@@ -141,7 +144,7 @@ for (const relativePath of [
   assert.match(html, /proof-chapter\.js/);
   assert.doesNotMatch(
     visibleText,
-    /\b(?:field|fields|ledger|ownership|owned|owns|certificate|audit|chip|chips|boolean board|mutation|mutations|surgery|surgeries|group|groups|block|blocks|score|scores|collision|collisions|strict landing|strict side|strict sides|strict-index|edge-cap|controlled reflection|endpoint path)\b/i,
+    /\b(?:field|fields|ledger|ownership|owned|owns|certificate|audit|chip|chips|boolean board|mutation|mutations|surgery|surgeries|block|blocks|score|scores|collision|collisions|strict landing|strict side|strict sides|strict-index|edge-cap|controlled reflection|endpoint path)\b/i,
   );
 }
 

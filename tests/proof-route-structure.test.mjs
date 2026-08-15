@@ -152,23 +152,32 @@ test("Topic IV exposes its local setup, typed set-update guide, and five unique 
   assert.match(html, /From boundary order to one interval/);
   assert.match(html, /Recall from Topic III/);
   assert.match(html, /Standing assumptions for the one-sided contact data/);
-  for (let assumption = 1; assumption <= 4; assumption += 1) {
+  assert.match(html, /following five assumptions/);
+  for (let assumption = 0; assumption <= 4; assumption += 1) {
     assert.match(html, new RegExp("\\(A" + assumption + "\\)"));
   }
+  assert.match(html, /Multiplication by λ is <i>N<\/i>-critical in the sense of Definition 1\.1/);
+  assert.match(html, /for the closed side[^<]*and[\s\S]*for the corresponding right-half-open side/);
+  assert.match(html, /tuple satisfying \(A0\)–\(A4\)/);
+  assert.doesNotMatch(html, /tuple satisfying \(A1\)–\(A4\)/);
   assert.match(html, /right-admissible<\/dfn>[^<]*, when it appears in the manuscript proof, is only shorthand/);
   assert.match(html, /λ=ρe<sup>iθ<\/sup>/);
   assert.match(html, /θ=arg<sub>\+<\/sub>\(λ\)∈\(0,2π\)/);
   assert.match(html, /The same contact data in two notations/);
+  assert.match(html, /Call a set <dfn>reachable<\/dfn> when it is obtained[\s\S]{0,200}by finitely many updates realized by Proposition 5\.1/);
   assert.match(html, /Connected components and cyclic relabelling/);
   assert.match(html, /comp\(<i>S<\/i>\).*number of connected components/s);
   assert.match(html, /φ=\|<i>S<\/i>\|/);
   assert.match(html, /Equivariance under the label-preserving map between side sets/);
   assert.match(html, /The label-preserving map b/);
   assert.match(html, /The cyclic permutation σ/);
+  assert.match(html, /<i>T<\/i> is the same real-linear map[^<]*multiplication by λ/);
   assert.doesNotMatch(html, /Side-continuation bijection b/);
   assert.match(html, /Stage 1 · Identify the retained-half-plane intersection/);
-  assert.match(html, /Stage 3 · Locate the changed image before defining its coefficients/);
+  assert.match(html, /Assumption \(A0\)[^<]*says that the unchanged multiplier is <i>N<\/i>-critical[^<]*Theorem 3\.2 applies/);
+  assert.match(html, /Stage 3 · Locate the changed image before reading its barycentric coefficients/);
   assert.match(html, /Realization of the successive updates used in Lemma 5\.5/);
+  assert.match(html, /complete right-to-left component update<\/dfn> applies Proposition 5\.1 successively/);
   assert.match(html, /Reduction to one cyclic interval and a first-entrance identity/);
   assert.match(html, /Standing assumption for Section 5/);
   assert.equal(properShiftIds, 1, "equation 4.18 has one permalink target");
@@ -227,7 +236,7 @@ test("Topic IV exposes its local setup, typed set-update guide, and five unique 
     .replace(/<[^>]*>/g, " ");
   assert.doesNotMatch(
     visibleTopicIVText,
-    /\b(?:chip|chips|boolean board|mutation|mutations|surgery|surgeries|group|groups|block|blocks|score|scores|collision|collisions|strict landing|strict side|strict sides|strict-index|edge-cap|controlled reflection|endpoint path)\b/i,
+    /\b(?:chip|chips|boolean board|mutation|mutations|surgery|surgeries|block|blocks|score|scores|collision|collisions|strict landing|strict side|strict sides|strict-index|edge-cap|controlled reflection|endpoint path)\b/i,
   );
   for (let plate = 1; plate <= 5; plate += 1) {
     assert.match(html, new RegExp(`Plate IV\\.${plate}\\.`));

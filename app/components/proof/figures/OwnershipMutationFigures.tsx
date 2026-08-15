@@ -443,8 +443,11 @@ function EndpointLedger() {
   return (
     <>
       <text x="64" y="65" fill={ink} fontSize="16">side index j</text>
-      <text x="64" y="132" fill={ink} fontSize="16">gap rⱼ</text>
-      <text x="64" y="205" fill={ink} fontSize="16">flag cⱼ</text>
+      <text x="126" y="118" fill={ink} fontSize="14" textAnchor="end">
+        <tspan x="126">boundary-arc</tspan>
+        <tspan x="126" dy="17">count rⱼ</tspan>
+      </text>
+      <text x="126" y="205" fill={ink} fontSize="15" textAnchor="end">indicator cⱼ</text>
       <text x="64" y="278" fill={ink} fontSize="16">opposite ℓⱼ</text>
       {columns.map((index) => (
         <text key={`j-${index}`} x={x(index)} y="65" fill={ink} textAnchor="middle">{index}</text>
@@ -493,8 +496,15 @@ function EndpointLedgerMobilePanel({ start, top, transition }: { start: number; 
       <text x="24" y={top + 18} fill={ink} fontSize="15" fontWeight="700">indices {start}–{start + 3}</text>
       <text x="120" y={top + 18} fill={red} fontSize="13">{transition === "rise" ? "c₁→c₂ is 0→1" : "c₅→c₆ is 1→0"}</text>
       <text x="35" y={top + 55} fill={ink} fontSize="14">j</text>
-      <text x="35" y={top + 98} fill={ink} fontSize="14">rⱼ</text>
-      <text x="35" y={top + 143} fill={ink} fontSize="14">cⱼ</text>
+      <text x="45" y={top + 77} fill={ink} fontSize="14" textAnchor="middle">
+        <tspan x="45">boundary</tspan>
+        <tspan x="45" dy="14">arc count</tspan>
+        <tspan x="45" dy="14">rⱼ</tspan>
+      </text>
+      <text x="45" y={top + 131} fill={ink} fontSize="14" textAnchor="middle">
+        <tspan x="45">indicator</tspan>
+        <tspan x="45" dy="15">cⱼ</tspan>
+      </text>
       <text x="35" y={top + 188} fill={ink} fontSize="14">ℓⱼ</text>
       {indices.map((index, offset) => (
         <text key={`mobile-j-${index}`} x={x(offset)} y={top + 55} fill={ink} fontSize="15" textAnchor="middle">{index}</text>
@@ -627,9 +637,9 @@ function LiftedShift({ markerId }: { markerId: string }) {
       <circle cx={ticks[3]} cy="230" r="7" fill={red} stroke={red} strokeWidth="3" />
       <polygon points="344,222 352,230 344,238 336,230" fill={accessibleCopper} stroke={paper} strokeWidth="2" />
       <text x="278" y="185" fill={red} fontSize="13" textAnchor="end">excluded left endpoint</text>
-      <text x="360" y="199" fill={accessibleCopper} fontSize="14">relative-interior landing</text>
-      <text x="340" y="309" fill={ink} fontSize="16" textAnchor="middle">● endpoint alternative: the lifted angle lands exactly at Θ₃</text>
-      <text x="340" y="340" fill={ink} fontSize="15" textAnchor="middle">◆ relative-interior alternative: it lands strictly between Θ₂ and Θ₃</text>
+      <text x="360" y="199" fill={accessibleCopper} fontSize="14">relative-interior case</text>
+      <text x="340" y="309" fill={ink} fontSize="16" textAnchor="middle">● endpoint case: the shifted angle equals Θ₃</text>
+      <text x="340" y="340" fill={ink} fontSize="15" textAnchor="middle">◆ relative-interior case: the shifted angle lies in (Θ₂,Θ₃)</text>
     </>
   );
 }
@@ -648,9 +658,9 @@ function LiftedShiftMobile({ markerId }: { markerId: string }) {
       <circle cx={ticks[3]} cy="199" r="7" fill={red} stroke={red} strokeWidth="3" />
       <polygon points="215,192 222,199 215,206 208,199" fill={accessibleCopper} stroke={paper} strokeWidth="2" />
       <text x="170" y="158" fill={red} fontSize="12" textAnchor="end">excluded endpoint</text>
-      <text x="225" y="170" fill={accessibleCopper} fontSize="12">relative interior</text>
-      <text x="180" y="283" fill={ink} fontSize="14" textAnchor="middle">● endpoint: landing exactly at Θ₃</text>
-      <text x="180" y="310" fill={ink} fontSize="14" textAnchor="middle">◆ relative interior: landing inside (Θ₂,Θ₃)</text>
+      <text x="225" y="170" fill={accessibleCopper} fontSize="12">relative-interior case</text>
+      <text x="180" y="283" fill={ink} fontSize="14" textAnchor="middle">● endpoint case: shifted angle = Θ₃</text>
+      <text x="180" y="310" fill={ink} fontSize="14" textAnchor="middle">◆ relative-interior case: shifted angle ∈ (Θ₂,Θ₃)</text>
     </>
   );
 }
@@ -667,7 +677,9 @@ function Surgery({ markerId }: { markerId: string }) {
       <path d="M154 72 L166 84 M166 72 L154 84" stroke={accessibleCopper} strokeWidth="2" />
       <text x="137" y="57" fill={accessibleCopper} fontSize="14">xᵢ removed</text>
       <text x="58" y="148" fill={red} fontSize="14">x′ᵢ=ξᵢ</text>
-      <text x="58" y="302" fill={ink} fontSize="14">solid red = new boundary</text>
+      <text x="16" y="287" fill={ink} fontSize="14">xᵢ₋₁</text>
+      <text x="283" y="204" fill={ink} fontSize="14">xᵢ₊₁</text>
+      <text x="58" y="316" fill={ink} fontSize="14">solid red = new boundary</text>
 
       <line x1="342" y1="34" x2="342" y2="310" stroke={ink} strokeWidth="1" opacity=".32" />
       <text x="370" y="35" fill={ink} fontSize="16" fontWeight="700">symbolic membership update (exact)</text>
@@ -706,7 +718,9 @@ function SurgeryMobile({ markerId }: { markerId: string }) {
       <path d="M151 48 L163 60 M163 48 L151 60" stroke={accessibleCopper} strokeWidth="2" />
       <text x="170" y="54" fill={accessibleCopper} fontSize="14">xᵢ removed</text>
       <text x="58" y="132" fill={red} fontSize="14">x′ᵢ=ξᵢ</text>
-      <text x="180" y="283" fill={ink} fontSize="14" textAnchor="middle">dashed old corner · solid new boundary</text>
+      <text x="20" y="273" fill={ink} fontSize="14">xᵢ₋₁</text>
+      <text x="286" y="205" fill={ink} fontSize="14">xᵢ₊₁</text>
+      <text x="180" y="294" fill={ink} fontSize="14" textAnchor="middle">dashed old corner · solid new boundary</text>
       <line x1="24" y1="305" x2="336" y2="305" stroke={ink} strokeWidth="1" opacity=".32" />
       <text x="24" y="334" fill={ink} fontSize="16" fontWeight="700">symbolic membership update (exact)</text>
       <rect x="24" y="351" width="312" height="86" rx="7" fill={paper} stroke={accessibleCopper} strokeWidth="1.8" />
@@ -836,9 +850,9 @@ const descriptions: Record<FigureKind, { title: string; description: string; cap
   clip: { title: "Clipping along an image edge", description: "An exact regular-heptagon construction in which the image polygon has its vertices at the side midpoints of the outer polygon; one image edge cuts off exactly one old vertex.", caption: "Plate III.4. Exact regular-heptagon model: for λ = cos(π/7) exp(iπ/7), the vertices of Q = λP are the side midpoints of P. The chosen edge of Q cuts off the boundary arc containing exactly one old vertex, while Q remains in the retained half-plane." },
   hausdorff: { title: "Two-sided convergence of polygons", description: "The dashed approximating polygon P k and the solid limit polygon P lie close in both directions; the disk z plus r D bar remains inside the limit.", caption: "Plate III.5. Hausdorff convergence controls both directions between Pₖ and P; the fixed interior disk z+r𝔻̄ supplies the positive area margin." },
   "area-minimizer": { title: "The two-vertex case ruled out by area minimality", description: "A schematic normalized polygon lies inside the unit circle. The vertex v satisfying absolute value v equals one remains after an image-edge chord removes a two-dimensional region whose open boundary arc contains two old vertices.", caption: "Plate III.6. The two-vertex case ruled out by area minimality: the discarded open boundary arc and the removed two-dimensional region are different objects. Because the vertex v satisfying |v|=1 remains in the retained polygon, the clip preserves normalization and strictly lowers area." },
-  "endpoint-ledger": { title: "The finite endpoint count", description: "An exact eight-index example with one boundary-arc count equal to two, one equal to zero, a binary endpoint word, and all counts in the opposite half-open convention equal to one.", caption: "Plate IV.1. Exact finite example. Here r=(1,2,1,1,1,0,1,1) and c=(0,0,1,1,1,1,0,0). The unique rise occurs at the 2, the unique fall at the 0, and ℓⱼ=rⱼ+cⱼ−cⱼ₊₁=1 at every side index.", status: "Exact finite example" },
+  "endpoint-ledger": { title: "The finite endpoint count", description: "An exact eight-index example with one boundary-arc count equal to two, one equal to zero, a binary endpoint-indicator sequence, and all counts in the opposite half-open convention equal to one.", caption: "Plate IV.1. Exact finite example. Here r=(1,2,1,1,1,0,1,1) and c=(0,0,1,1,1,1,0,0). The unique rise occurs at the 2, the unique fall at the 0, and ℓⱼ=rⱼ+cⱼ−cⱼ₊₁=1 at every side index.", status: "Exact finite example" },
   interlacing: { title: "Global cyclic interlacing", description: "An exact regular-heptagon configuration with Q equal to lambda P for lambda equal to cosine pi over seven times exponential i pi over seven. Every y vertex is a side midpoint of P. The boundary arc from y six to y zero is open at y six, closed at y zero, and contains exactly x zero.", caption: "Plate IV.2. Exact regular-heptagon configuration. For λ=cos(π/7) exp(iπ/7), Q=λP and yᵢ=(xᵢ+xᵢ₊₁)/2. Thus the highlighted half-open boundary arc (y₆,y₀] contains exactly x₀.", status: "Exact geometric configuration" },
-  "lifted-shift": { title: "The cyclic shift on the real angle line", description: "A schematic lifted-angle example with kappa equal to three. The arrow from Theta zero to Theta three means add the multiplier's argument. A hollow circle at Theta two marks the excluded left endpoint, a filled circle at Theta three marks an endpoint landing, and a diamond strictly between them marks the distinct relative-interior landing.", caption: "Plate IV.3. Schematic lifted-angle example with κ=3. The arrow means “add the multiplier’s argument.” The hollow circle is the excluded left endpoint Θ₂; the filled circle is an endpoint landing at Θ₃; and the diamond is the distinct relative-interior landing in (Θ₂,Θ₃).", status: "Schematic lifted-angle example with κ=3" },
+  "lifted-shift": { title: "The cyclic shift on the real angle line", description: "A schematic lifted-angle example with kappa equal to three. The arrow from Theta zero to Theta three means add the multiplier's argument. A hollow circle at Theta two marks the excluded left endpoint, a filled circle at Theta three marks the endpoint case, and a diamond strictly between them marks the distinct relative-interior case.", caption: "Plate IV.3. Schematic lifted-angle example with κ=3. The arrow means “add the multiplier’s argument.” The hollow circle is the excluded left endpoint Θ₂; the filled circle marks the endpoint case at Θ₃; and the diamond marks the distinct relative-interior case in (Θ₂,Θ₃).", status: "Schematic lifted-angle example with κ=3" },
   surgery: { title: "One vertex replacement and its symbolic membership update", description: "A schematic local polygon drawing is paired with the exact symbolic update S prime equals S without i, union i plus kappa. Before replacement, i belongs to S, i plus one does not belong to S, and i plus kappa may or may not already belong to S. Afterwards, i does not belong to S prime, i plus kappa belongs to S prime, and every other membership is unchanged. The cardinality is preserved if i plus kappa was absent and decreases by one if it was already present. No numerical contact system is asserted.", caption: "Plate IV.4. Schematic local geometry · exact symbolic update. Under the permitted replacement hypotheses i∈S and i+1∉S, one has S′=(S∖{i})∪{i+κ}, with every other membership unchanged. If i+κ∉S, then |S′|=|S|; if i+κ∈S, then |S′|=|S|−1. No numerical contact system is asserted by the plate.", status: "Schematic local geometry · exact symbolic update" },
   "residue-block": { title: "Shift orbits and a reduced cyclic interval", description: "An exact finite example with twelve cyclic side indices and kappa equal to eight. Color and shape jointly encode the four residue classes. The cyclic interval S consists of four, five, six, and seven. An external arrow illustrates the permutation sigma of zero equals eight, not a vertex-replacement update.", caption: "Plate IV.5. Exact finite arithmetic example. For N=12, κ=8, and S={4,5,6,7}, one has φ=|S|=4=δ and N−φ=8=[κ]₁₂. The arrow 0↦8 illustrates the permutation σ(j)=j+κ; it is not itself a permitted update of S.", status: "Exact finite arithmetic example" },
 };
