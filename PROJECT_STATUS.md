@@ -1497,3 +1497,39 @@ full local source history remain later site milestones.
   release `6d640fd`, and final public copy `b8470c0`. Topics I–V return HTTP
   200 with no retired reader-visible terminology; Topic VI returns HTTP 404,
   so Topics VI–XIV remain offline and unlinked.
+
+## Current milestone — Topic VI reviewed and published (15 August 2026)
+
+- **The unified chapter is now public:** Topic VI remains one continuous page
+  with nine results, seven complete proofs, one prerequisite contract, and four
+  sequential plates. Its local setup now defines the ambient real plane, the
+  linear map and complex coordinate, extreme points and interior, the two
+  possible return heights, and the imported side/contact notation before use.
+- **The review's concrete defects were repaired:** Theorem 1.3 explicitly
+  quantifies the return-height parameters; the planar signed-side functional
+  and its line restriction have distinct notation; the remaining local symbol
+  collisions were removed; Plate VI.2 attaches its zero-set label to the
+  moving closing line; and Plate VI.3 uses its own arrow marker and the side
+  index from the proof. Reading controls now say “Open all proofs” and “Close
+  all proofs.”
+- **Standalone and public links are deliberate:** the one-file reviewer copy
+  is `share/Critical_Invariant_Polygons_Topic_VI.html`, with SHA-256
+  `dba1e3a1c5c454aa6c71f8cf12f76d1e796b31ef3dbc61962750bfba9f90af95`.
+  It links Topics I–V to their public pages, marks Topic VII forthcoming, and
+  has no sibling-file dependency, external asset dependency, duplicate ID, or
+  unresolved fragment.
+- **Verification:** canonical TeX SHA-256 is
+  `dfe1675d3d4a155655b4e0bd06a2a12a99b4b6d1dfe1c6eac75c495f2417b37c`;
+  generated Part I data SHA-256 is
+  `92cd8e60bfbb08c91b23b185f0086325b98595da23f739e53cd278d65c965ffb`.
+  TeX compilation, deterministic generation, all 36 tests, ESLint,
+  `git diff --check`, the static Pages verifier, standalone integrity checks,
+  desktop and 390-pixel browser QA, proof controls, marker references,
+  fragment checks, and the live console all pass. The synchronized public PDF
+  retains SHA-256
+  `8af67f9d5ebbe3f54b048ee8a4e0262f211ef824c4514db146c46d3476fcd396`.
+- **Publication status:** source commit `0428ca4`; static-only Pages commit
+  `9980215b400aa70ab937b24e16ae6a3b8caaad44`. Topic VI is live at
+  <https://bfmave.github.io/karpelevic/proof/topic-vi/>. Topics I–VI return
+  HTTP 200, Topic VII returns HTTP 404, and the proof index exposes VI while
+  keeping VII–XIV unavailable.
