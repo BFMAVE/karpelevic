@@ -57,10 +57,12 @@ const topicVContactNotation: AdvancedProofSetup = {
       when <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>β</mi><mi>i</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\beta_i=0</annotation></semantics></math>,
       the contact is the included endpoint
       <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ξ</mi><mi>i</mi></msub><mo>=</mo><msub><mi>x</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\xi_i=x_i</annotation></semantics></math>.
-      These are the standing contact data: the positive orientation, the
-      half-open endpoint convention, and the common shift
+      These formulas record the parts of Topic IV's standing assumptions used
+      below: the positive orientation, the half-open endpoint convention, and
+      the common shift
       <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mi>κ</mi></math>.
-      No additional admissibility hypothesis is being imposed.
+      They introduce no hypothesis beyond the full assumptions (A0)–(A4)
+      established there.
     </p>
     <p>
       Write

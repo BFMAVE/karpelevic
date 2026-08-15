@@ -340,7 +340,7 @@ const rawItems: readonly [
   [53, "Lemma", "Farey adjacency criterion", "Recognizes neighbouring reduced fractions through a determinant of absolute value one."],
   [54, "Lemma", "Reflection Farey cell", "Reflects a Farey cell across one half-turn while preserving adjacency."],
   [55, "Lemma", "Reflection of a closed backward return-recurrence chain", "Transfers the complete finite return calculation to the reflected orientation, including its closing relation and lifted phase."],
-  [56, "Lemma", "Identity contact permutation closes after reflection", "Shows that the first-return identity Δ=1 makes the reflected contact orbit close with the required arithmetic data."],
+  [56, "Lemma", "Identity contact permutation closes after reflection", "Shows that κ=N gives a closed backward recurrence chain whose reflection yields the required arithmetic data."],
   [57, "Proposition", "More than one relative-interior contact in some orbit", "Derives the varying-factor contact-product relation when some contact-permutation orbit meets the relative-interior contact set more than once."],
   [58, "Proposition", "Exactly one relative-interior contact in each orbit", "Derives the companion product relation when the relative-interior contact set meets every contact-permutation orbit exactly once."],
   [59, "Lemma", "Return factors lie on one common continuous argument interval", "Places all varying contact factors on one continuous argument interval and extracts the scalar Farey equation."],
