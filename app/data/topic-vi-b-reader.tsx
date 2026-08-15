@@ -40,12 +40,16 @@ const guides: readonly ReaderResultGuide[] = [
         "The polygon label carried by Xᵢ: i in the forward branch and φ-i in the reverse branch.",
       ),
       vocabulary(
-        "Contact-field map γᵢ",
-        "The side label carried by Cᵢ. It is a local label map unrelated to an angle gap bearing the same Greek letter elsewhere.",
+        "Contact-side label γᵢ",
+        "The polygon-side label carried by the contact point Cᵢ. It is a local label map unrelated to an angle gap bearing the same Greek letter elsewhere.",
       ),
       vocabulary(
         "Base function Bⱼ(τ)",
         "The moving chain point assigned to a moved base j, and the original fixed vertex xⱼ for every base outside M.",
+      ),
+      vocabulary(
+        "Nonclosing moved bases M∖{b*}",
+        "The moved bases other than the distinguished base index b*. Writing the set explicitly prevents it from being mistaken for an interior or closure operation.",
       ),
       vocabulary(
         "Global vertex function x̂ₖ(τ)",
@@ -53,7 +57,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       vocabulary(
         "Top return V̂ₖ(τ)",
-        "The image after the full height of the unique source tower whose target field is k.",
+        "The image after the full height of the unique source tower whose target side has label k.",
       ),
       vocabulary(
         "Exact collinearity",
@@ -86,7 +90,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Register every strict side line",
-        "Fields D are recursion lines, R∪A remain fixed, and c is the closing line. The disjoint four-set partition accounts for all strict side labels.",
+        "The side labels in D use recursion lines, those in R∪A remain fixed, and c labels the closing line. The disjoint four-set partition accounts for every side carrying a relative-interior contact.",
       ),
       step(
         "Partition every image source",
@@ -94,11 +98,11 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Account for the four top-return classes",
-        "D uses fixed sources on controlled lines, R uses supported moving sources on fixed lines, A is unchanged, and c is the one closing return Y(τ).",
+        "D uses fixed sources on controlled lines, R uses the supported moving sources in M∖{b*} on fixed lines, A is unchanged, and c is the one closing return Y(τ).",
       ),
       step(
         "Upgrade lines to side interiors",
-        "For every nonclosing strict field, exact collinearity holds for all τ and the original contact is in the relative interior. Finite openness preserves all these incidences on one common interval.",
+        "For every nonclosing side label carrying a relative-interior contact, exact collinearity holds for all τ and the original contact is in the relative interior. Finite openness preserves all these incidences on one common interval.",
       ),
       step(
         "Check all nonclosing side inequalities",
@@ -170,7 +174,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Assemble the corridor hypotheses",
-        "Lemma 7.1 gives the required exposing supporting lines, and Proposition 7.3 gives the exact partition of source–target pairs.",
+        "Lemma 7.1 gives the required exposing supporting lines at the selected base vertices, and Proposition 7.3 gives the exact partition of source–target pairs.",
       ),
       step(
         "Run the global deformation",
@@ -203,7 +207,7 @@ const guides: readonly ReaderResultGuide[] = [
       step("Δ=2", "The forward chain still has two internal steps and the same four-set partition."),
       step(
         "2Δ=φ+1",
-        "This equality belongs to the forward branch; the single wrap r(Δ)=1 lands on the fixed anchor line.",
+        "This equality belongs to the forward branch; the single wrap r(Δ)=1 lands on the fixed supporting line.",
       ),
       step(
         "h=0",

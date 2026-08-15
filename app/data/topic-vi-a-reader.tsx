@@ -42,8 +42,8 @@ const guides: readonly ReaderResultGuide[] = [
         "The slope of the side [Xᵢ₋₁,Xᵢ] in the admissible affine chart.",
       ),
       vocabulary(
-        "Support slope ℓᵢ",
-        "The slope of the strict supporting line Lᵢ at Xᵢ. It lies strictly between the two incident side slopes.",
+        "Supporting line ℒᵢ and its slope ℓᵢ",
+        "The symbol ℒᵢ denotes the strict supporting line through Xᵢ, while ℓᵢ is its slope in the admissible affine chart. The slope lies strictly between the two incident side slopes.",
       ),
       vocabulary(
         "Incoming-ray slope rᵢ",
@@ -63,7 +63,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Order side and support slopes",
-        "Write Xᵢ=(tᵢ,fᵢ) with increasing tᵢ. The lower strict convex graph gives s₁<⋯<sₘ₊₁, while strict support gives sᵢ<ℓᵢ<sᵢ₊₁.",
+        "Write Xᵢ=(tᵢ,fᵢ) with increasing tᵢ. The lower strict convex graph gives s₁<⋯<sₘ₊₁, while the strict supporting line ℒᵢ has slope sᵢ<ℓᵢ<sᵢ₊₁.",
       ),
       step(
         "Start the induction",
@@ -75,7 +75,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Locate Zᵢ",
-        "At t=cᵢ the incoming line lies above Lᵢ; at t=tᵢ it lies below. Since rᵢ<ℓᵢ, the unique intersection satisfies cᵢ<zᵢ<tᵢ.",
+        "At t=cᵢ the incoming line lies above ℒᵢ; at t=tᵢ it lies below. Since the incoming slope satisfies rᵢ<ℓᵢ, the unique intersection satisfies cᵢ<zᵢ<tᵢ.",
       ),
       step(
         "Preserve the induction invariant",
@@ -150,7 +150,7 @@ const guides: readonly ReaderResultGuide[] = [
         "The projective coordinate on CₘCₘ₊₁ with υ(Cₘ₊₁)=0 and υ(Cₘ)=1.",
       ),
       vocabulary(
-        "Holonomy coordinate u",
+        "Normalized return projectivity u",
         "The scalar projectivity υ∘H. Its value u(τ) is the normalized location where the moving closing line meets the final contact line.",
       ),
       vocabulary(
@@ -168,7 +168,7 @@ const guides: readonly ReaderResultGuide[] = [
     proofSteps: [
       step(
         "Verify every perspectivity",
-        "Each contact centre lies on neither its source nor target strict support. The final centre Xₘ₊₁ lies on neither Lₘ nor the final contact line. Hence every projection is a projective isomorphism.",
+        "Each contact centre lies on neither its source nor target strict supporting line. The final centre Xₘ₊₁ lies on neither ℒₘ nor the final contact line. Hence every projection is a projective isomorphism.",
       ),
       step(
         "Compose one global projectivity",
@@ -200,7 +200,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "A nonidentity local holonomy can be opened inward by an arbitrarily small signed motion while the displayed chain remains strictly convex.",
+      "A nonidentity return projectivity can be opened inward by an arbitrarily small signed motion while the displayed chain remains strictly convex.",
   },
 ] as const;
 
@@ -223,7 +223,7 @@ export const topicVIAGroups: readonly AdvancedProofGroup[] = [
   },
   {
     number: "II",
-    title: "Open a nonidentity holonomy",
+    title: "Open a nonidentity return projectivity",
     introduction: (
       <p>
         The calibrated return becomes a scalar fractional-linear map. Its
@@ -252,7 +252,7 @@ export const topicVIAImported: readonly ProofDependency[] = [
     label: "Topic V: projective corridor",
     href: sitePath("/proof/topic-v/#def:projective-corridor"),
     explanation:
-      "The chain, contact centres, strict supports, and corridor holonomy are already defined.",
+      "The chain, contact centres, strict supporting lines, and the resulting return projectivity are already defined.",
   },
   {
     label: "Topic V: admissible projective chart",

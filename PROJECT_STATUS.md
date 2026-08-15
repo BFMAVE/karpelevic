@@ -1390,3 +1390,33 @@ full local source history remain later site milestones.
   `53a4372c06358742b845fff869db7e6c65509befe0dd7eae2c6e022aebebba67`.
   Topic V remains live; Topic VI returns HTTP 404, and Topics VI–XIV remain
   absent and unlinked.
+
+## Current milestone — Topic V refinement published; Topic VI notation aligned offline (15 August 2026)
+
+- **Topic V publication completed:** the reviewed Topic V precision, notation,
+  source, and plate corrections are recorded in source commit `6d6a305`; the
+  static-only Pages tree is commit `46ba23092ab19589a11b2ff5a2bf711631f34dab`.
+  Topic V is live at
+  <https://bfmave.github.io/karpelevic/proof/topic-v/>.
+- **Topic VI notation was propagated locally:** the formal and guided versions
+  now distinguish the supporting line \(\mathcal L_i\) from its slope
+  \(\ell_i\), replace \(M^\circ\) by the explicit set
+  \(M\setminus\{b_*\}\), and use literal side-index, distinguished-base,
+  starting-point, accounting, and return-projectivity language. Stable result,
+  equation, and permalink identifiers remain unchanged.
+- **The reviewer copy was refreshed:** both internal Topic VI parts and the
+  combined one-file edition were regenerated from a max-7 local build. The
+  combined file is
+  `share/Critical_Invariant_Polygons_Topic_VI.html`; these portable HTML files
+  remain ignored by Git and are not public routes.
+- **Verified locally:** the canonical TeX compiles and has SHA-256
+  `6384d0182b937a544a8bd8b9fc2381a3336273f6277f3bd2a085171d727e47f7`;
+  the generated Part I data has SHA-256
+  `dd46735435f838adeab3e89bda35b5ad44b0116766db3600825d6e7f2eab5e46`.
+  ESLint, `git diff --check`, all 32 automated tests, both local Topic VI
+  routes, the combined standalone edition, and its internal fragments pass.
+  The browser audit found no duplicate IDs, horizontal overflow, stale visible
+  notation, or runtime errors.
+- **Publication boundary preserved:** `build:pages` remains capped at Topic V;
+  Topic VI is absent from `pages-out`, has no live public link, and its public
+  URL continues to return HTTP 404.

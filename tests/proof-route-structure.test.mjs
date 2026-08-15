@@ -161,6 +161,26 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.match(topicVIAText, /Local Projective Escape for N\s*≥\s*4/);
   assert.match(topicVIBText, /Global Admissibility and Unit Return for N\s*≥\s*4/);
   assert.match(topicVIBText, /Assume N\s*≥\s*4\s*\. If φ\s*>\s*δ , then Δ\s*=\s*1/i);
+  assert.match(topicVIAText, /Supporting line ℒᵢ and its slope ℓᵢ/);
+  assert.match(
+    topicVIAText,
+    /symbol ℒᵢ denotes the strict supporting line through Xᵢ, while ℓᵢ is its slope/i,
+  );
+  assert.match(topicVIBText, /Nonclosing moved bases M∖\{b\*\}/);
+  assert.match(topicVIBText, /exposing supporting lines at the selected base vertices/i);
+  for (const topicVIText of [topicVIAText, topicVIBText]) {
+    assert.doesNotMatch(topicVIText, /M°/);
+    assert.doesNotMatch(
+      topicVIText,
+      /(?:supporting line|strict support)\s+L[ᵢₘ]/i,
+    );
+    assert.doesNotMatch(topicVIText, /contact-field|target field|strict field/i);
+    assert.doesNotMatch(topicVIText, /\bseed\b|\bledger\b|\banchor\b/i);
+    assert.doesNotMatch(
+      topicVIText,
+      /corridor holonomy|local holonomy|nonidentity holonomy|holonomy coordinate/i,
+    );
+  }
 
   assert.match(topicVIIText, /Standing scope for critical-polygon monodromy: N\s*≥\s*4/);
   assert.match(topicVIIText, /The nontransversal case φ\s*>\s*δ[\s\S]*Assume N\s*≥\s*4/i);
