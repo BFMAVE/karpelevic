@@ -37,13 +37,13 @@ const routeByAnchor: Readonly<Record<string, string>> = {
   "prop:return-edge-ledger": "/proof/topic-v/",
   "def:projective-corridor": "/proof/topic-v/",
   "prop:holonomy-chart": "/proof/topic-v/",
-  "lem:holonomy-calibration": "/proof/topic-vi/a/",
-  "lem:projective-fixed-point-escape": "/proof/topic-vi/a/",
-  "thm:projective-corridor-escape": "/proof/topic-vi/a/",
-  "lem:deformation-admissibility": "/proof/topic-vi/b/",
-  "thm:global-return-deformation": "/proof/topic-vi/b/",
-  "thm:unit-return": "/proof/topic-vi/b/",
-  "thm:critical-polygon-normal-form": "/proof/topic-vi/b/",
+  "lem:holonomy-calibration": "/proof/topic-vi/",
+  "lem:projective-fixed-point-escape": "/proof/topic-vi/",
+  "thm:projective-corridor-escape": "/proof/topic-vi/",
+  "lem:deformation-admissibility": "/proof/topic-vi/",
+  "thm:global-return-deformation": "/proof/topic-vi/",
+  "thm:unit-return": "/proof/topic-vi/",
+  "thm:critical-polygon-normal-form": "/proof/topic-vi/",
   "lem:farey-adjacency-expanded": "/proof/topic-vii/",
   "lem:farey-reflection": "/proof/topic-vii/",
   "lem:backward-strip-reflection": "/proof/topic-vii/",
@@ -184,6 +184,8 @@ const topicVIBAnchors = [
   "thm:critical-polygon-normal-form",
 ] as const;
 
+const topicVIAnchors = [...topicVIAAnchors, ...topicVIBAnchors] as const;
+
 const topicVIIAnchors = [
   "lem:farey-adjacency-expanded",
   "lem:farey-reflection",
@@ -305,6 +307,13 @@ const topicVIBStatements = Object.fromEntries(
   [48, 49, 50, 51, 52].map((key) => [String(key), topicVIHtmlByItem[key]]),
 );
 
+const topicVIStatements = Object.fromEntries(
+  [45, 46, 47, 48, 49, 50, 51, 52].map((key) => [
+    String(key),
+    topicVIHtmlByItem[key],
+  ]),
+);
+
 export const topicVIAReaderHtmlByItem = transformMap(
   topicVIAStatements,
   topicVIAAnchors,
@@ -314,6 +323,12 @@ export const topicVIAReaderHtmlByItem = transformMap(
 export const topicVIBReaderHtmlByItem = transformMap(
   topicVIBStatements,
   topicVIBAnchors,
+  topicVIProofIds,
+);
+
+export const topicVIReaderHtmlByItem = transformMap(
+  topicVIStatements,
+  topicVIAnchors,
   topicVIProofIds,
 );
 

@@ -28,8 +28,7 @@ const chapters = [
   ["/proof/topic-iii", 10, 9],
   ["/proof/topic-iv", 10, 10],
   ["/proof/topic-v", 9, 7],
-  ["/proof/topic-vi/a", 3, 3],
-  ["/proof/topic-vi/b", 6, 4],
+  ["/proof/topic-vi", 9, 7],
   ["/proof/topic-vii", 8, 8],
   ["/proof/topic-viii", 7, 6],
   ["/proof/topic-ix", 6, 3],
@@ -69,10 +68,26 @@ for (const [pathname, expectedResults, expectedProofs] of chapters) {
   });
 }
 
+test("legacy Topic VI part routes redirect to the unified chapter", async () => {
+  const aliases = [
+    ["/proof/topic-vi/a", "#lem:holonomy-calibration"],
+    ["/proof/topic-vi/b", "#lem:deformation-admissibility"],
+  ];
+
+  for (const [pathname, fragment] of aliases) {
+    const response = await render(pathname);
+    assert.equal(response.status, 307);
+    assert.equal(
+      new URL(response.headers.get("location")).pathname,
+      "/proof/topic-vi/",
+    );
+    assert.equal(new URL(response.headers.get("location")).hash, fragment);
+  }
+});
+
 test("the N=3 exception and the N>=4 projective scope remain coherent across topics", async () => {
   const topicV = await (await render("/proof/topic-v")).text();
-  const topicVIA = await (await render("/proof/topic-vi/a")).text();
-  const topicVIB = await (await render("/proof/topic-vi/b")).text();
+  const topicVI = await (await render("/proof/topic-vi")).text();
   const topicVII = await (await render("/proof/topic-vii")).text();
   const topicVIII = await (await render("/proof/topic-viii")).text();
   const topicX = await (await render("/proof/topic-x")).text();
@@ -89,8 +104,7 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
       .replaceAll("&amp;", "&")
       .replace(/\s+/g, " ");
   const topicVText = visibleText(topicV);
-  const topicVIAText = visibleText(topicVIA);
-  const topicVIBText = visibleText(topicVIB);
+  const topicVIText = visibleText(topicVI);
   const topicVIIText = visibleText(topicVII);
   const topicVIIIText = visibleText(topicVIII);
   const topicXText = visibleText(topicX);
@@ -158,29 +172,52 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.doesNotMatch(topicVText, /These are all three eigenvalues/i);
   assert.doesNotMatch(topicVText, /M°/);
 
-  assert.match(topicVIAText, /Local Projective Escape for N\s*≥\s*4/);
-  assert.match(topicVIBText, /Global Admissibility and Unit Return for N\s*≥\s*4/);
-  assert.match(topicVIBText, /Assume N\s*≥\s*4\s*\. If φ\s*>\s*δ , then Δ\s*=\s*1/i);
-  assert.match(topicVIAText, /Supporting line ℒᵢ and its slope ℓᵢ/);
+  assert.match(topicVIText, /A projective deformation and the first-return step Δ\s*=\s*1/i);
+  assert.match(topicVIText, /9 results/);
+  assert.match(topicVIText, /7 complete proofs/);
+  assert.match(topicVIText, /Notation and exact facts imported from Topics II–V/);
+  assert.match(topicVIText, /Assume N\s*≥\s*4\s*\. If φ\s*>\s*δ , then Δ\s*=\s*1/i);
+  assert.match(topicVIText, /Supporting line ℒᵢ and its slope ℓᵢ/);
   assert.match(
-    topicVIAText,
-    /symbol ℒᵢ denotes the strict supporting line through Xᵢ, while ℓᵢ is its slope/i,
+    topicVIText,
+    /ℒᵢ is the line meeting the polygon only at Xᵢ[\s\S]*ℓᵢ denotes its slope/i,
   );
-  assert.match(topicVIBText, /Nonclosing moved bases M∖\{b\*\}/);
-  assert.match(topicVIBText, /exposing supporting lines at the selected base vertices/i);
-  for (const topicVIText of [topicVIAText, topicVIBText]) {
-    assert.doesNotMatch(topicVIText, /M°/);
-    assert.doesNotMatch(
-      topicVIText,
-      /(?:supporting line|strict support)\s+L[ᵢₘ]/i,
-    );
-    assert.doesNotMatch(topicVIText, /contact-field|target field|strict field/i);
-    assert.doesNotMatch(topicVIText, /\bseed\b|\bledger\b|\banchor\b/i);
-    assert.doesNotMatch(
-      topicVIText,
-      /corridor holonomy|local holonomy|nonidentity holonomy|holonomy coordinate/i,
-    );
-  }
+  assert.match(topicVIText, /M∖\{b\*\}/);
+  assert.match(topicVIText, /supporting lines ℒ\s*i meeting P only at X\s*i/i);
+  assert.match(topicVIText, /These data are exactly the projective corridor of Definition 7\.4/i);
+  assert.match(topicVIText, /Planar determinant D̃ and its line restriction D/);
+  assert.match(topicVIText, /Side index kᵢ/);
+  assert.match(topicVIText, /u\(τ\)<τ/);
+  assert.match(topicVIText, /The first-return step satisfies Δ\s*=\s*1/);
+  assert.match(topicVIText, /Contact and first-return structure of an N-critical invariant polygon/);
+  assert.match(topicVIText, /A one-sided contact representation is a cyclic-order-preserving bijection χ/);
+  assert.match(topicVIText, /permitted local vertex replacement at e/);
+  assert.match(topicVIText, /side-continuation bijection denoted by b in Theorem 1\.3/);
+  assert.match(topicVIText, /a legal mutation is exactly the permitted local vertex replacement/);
+  assert.match(topicVIText, /the strict set is the relative-interior contact set I/);
+  assert.match(topicVIText, /the contact rotation is the contact permutation σ/);
+  assert.match(topicVIText, /one representative from each σ-orbit means that I meets every orbit/);
+  assert.doesNotMatch(topicVIText, /M°/);
+  assert.doesNotMatch(
+    topicVIText,
+    /(?:supporting line|strict support)\s+L[ᵢₘ]/i,
+  );
+  assert.doesNotMatch(topicVIText, /contact-field|target field|strict field/i);
+  assert.doesNotMatch(topicVIText, /\bseed\b|\bledger\b|\banchor\b/i);
+  assert.doesNotMatch(
+    topicVIText,
+    /corridor holonomy|local holonomy|nonidentity holonomy|holonomy coordinate/i,
+  );
+  assert.doesNotMatch(topicVIText, /Part A|Part B|Topic VI-A|Topic VI-B/i);
+
+  const topicVICard = (number, nextNumber) => {
+    const start = topicVI.indexOf(`id="part-i-item-${number}"`);
+    const end = topicVI.indexOf(`id="part-i-item-${nextNumber}"`, start + 1);
+    assert.notEqual(start, -1, `Topic VI card ${number} exists`);
+    return topicVI.slice(start, end < 0 ? topicVI.length : end);
+  };
+  assert.doesNotMatch(topicVICard(45, 46), /proof-chapter-provenance/);
+  assert.doesNotMatch(topicVICard(48, 49), /proof-chapter-provenance/);
 
   assert.match(topicVIIText, /Standing scope for critical-polygon monodromy: N\s*≥\s*4/);
   assert.match(topicVIIText, /The nontransversal case φ\s*>\s*δ[\s\S]*Assume N\s*≥\s*4/i);

@@ -36,6 +36,8 @@ type AdvancedProofChapterProps = {
   sourceIds: readonly string[];
   formalSetups?: readonly AdvancedProofSetup[];
   leadFigureAfterSetups?: boolean;
+  readingConvention?: React.ReactNode;
+  deck?: React.ReactNode;
 };
 
 function FormalSetup({ setup }: { setup: AdvancedProofSetup }) {
@@ -69,6 +71,8 @@ export function AdvancedProofChapter({
   sourceIds,
   formalSetups = [],
   leadFigureAfterSetups = false,
+  readingConvention,
+  deck,
 }: AdvancedProofChapterProps) {
   return (
     <ProofChapterShell
@@ -78,6 +82,8 @@ export function AdvancedProofChapter({
       routeKey={routeKey}
       stats={stats}
       updatedAt={updatedAt}
+      readingConvention={readingConvention}
+      deck={deck}
     >
       {!leadFigureAfterSetups && <AdvancedProofFigure kind={leadFigure} />}
       <ProofDependencyContract

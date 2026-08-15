@@ -1136,19 +1136,18 @@ full local source history remain later site milestones.
 ## Current milestone — Topics V–VII portable review editions (local only)
 
 - **Review package:** generated three self-contained HTML files in `share/`:
-  Topic V, combined Topic VI, and Topic VII. The source arguments of Topic VI
-  remain visibly separated into internal sections “Part A · Local projective
-  escape” and “Part B · Global admissibility and unit return,” but reviewers
-  receive one file as requested. A ZIP containing the three files preserves
-  their sibling navigation when the bundle is extracted into one folder.
+  Topic V, Topic VI, and Topic VII. Topic VI is now one continuous chapter
+  with one header, one dependency contract, one source shelf, and four
+  ordinarily numbered sections; the former Part A/Part B division is no
+  longer visible. A ZIP containing the three files preserves their sibling
+  navigation when the bundle is extracted into one folder.
 - **Portability:** every file embeds its stylesheet, fonts, mathematical
   plates, and proof-chapter controls. It has no root-relative asset dependency
   or external script, so it can be opened directly from disk and sent as an
   ordinary HTML attachment.
-- **Bundle navigation:** the combined Topic VI uses internal anchors for its
-  two sections; links among Topics V, VI, and VII point to the corresponding
-  sibling HTML filenames. Links to the already published Topics I–IV remain
-  web links. Topics VIII–XIV remain marked Forthcoming.
+- **Bundle navigation:** links among Topics V, VI, and VII point to the
+  corresponding sibling HTML filenames. Links to the already published
+  Topics I–IV remain web links. Topics VIII–XIV remain marked Forthcoming.
 - **Audit:** Topic V contains 9 formal items and 7 complete proof disclosures;
   combined VI contains 9 and 7; VII contains 8 and 8. All local fragment
   targets resolve, no duplicate IDs occur, and all 30 project tests, ESLint,
@@ -1391,32 +1390,37 @@ full local source history remain later site milestones.
   Topic V remains live; Topic VI returns HTTP 404, and Topics VI–XIV remain
   absent and unlinked.
 
-## Current milestone — Topic V refinement published; Topic VI notation aligned offline (15 August 2026)
+## Current milestone — Topic V published; Topic VI unified offline (15 August 2026)
 
 - **Topic V publication completed:** the reviewed Topic V precision, notation,
   source, and plate corrections are recorded in source commit `6d6a305`; the
   static-only Pages tree is commit `46ba23092ab19589a11b2ff5a2bf711631f34dab`.
   Topic V is live at
   <https://bfmave.github.io/karpelevic/proof/topic-v/>.
-- **Topic VI notation was propagated locally:** the formal and guided versions
-  now distinguish the supporting line \(\mathcal L_i\) from its slope
+- **Topic VI is one continuous local chapter:** `/proof/topic-vi/` now has one
+  header, one dependency contract, one source shelf, four ordinarily numbered
+  sections, nine results, and seven complete proofs. The old `/a` and `/b`
+  routes are redirect-only aliases to stable anchors in the unified chapter.
+- **Notation and first-use explanations were tightened:** the formal and guided
+  versions distinguish the supporting line \(\mathcal L_i\) from its slope
   \(\ell_i\), replace \(M^\circ\) by the explicit set
   \(M\setminus\{b_*\}\), and use literal side-index, distinguished-base,
-  starting-point, accounting, and return-projectivity language. Stable result,
-  equation, and permalink identifiers remain unchanged.
-- **The reviewer copy was refreshed:** both internal Topic VI parts and the
-  combined one-file edition were regenerated from a max-7 local build. The
-  combined file is
-  `share/Critical_Invariant_Polygons_Topic_VI.html`; these portable HTML files
-  remain ignored by Git and are not public routes.
-- **Verified locally:** the canonical TeX compiles and has SHA-256
-  `6384d0182b937a544a8bd8b9fc2381a3336273f6277f3bd2a085171d727e47f7`;
+  starting-point, accounting, and return-projectivity language. Before the
+  final assembly, the page now defines a one-sided contact representation, the
+  permitted local vertex replacement and its side-continuation bijection, and
+  one representative from each permutation orbit.
+- **The reviewer copy was refreshed:** one direct max-7 export now produces
+  `share/Critical_Invariant_Polygons_Topic_VI.html`; the obsolete Part A and
+  Part B standalone artifacts and merger script have been retired. The
+  portable HTML remains ignored by Git and is not a public route.
+- **Verified locally:** the canonical TeX has SHA-256
+  `856bc76ad678279f697cfd54a9910f978e6b99e63b2a09559ef1df2c61998fcc`;
   the generated Part I data has SHA-256
-  `dd46735435f838adeab3e89bda35b5ad44b0116766db3600825d6e7f2eab5e46`.
-  ESLint, `git diff --check`, all 32 automated tests, both local Topic VI
-  routes, the combined standalone edition, and its internal fragments pass.
-  The browser audit found no duplicate IDs, horizontal overflow, stale visible
-  notation, or runtime errors.
+  `3e097ceb4c4e001832fb9a7c5a7988217523f5c4026436abf2d15d571a6ca640`.
+  ESLint, `git diff --check`, all 32 automated tests, the unified route, both
+  redirect aliases, and the standalone edition pass. The browser audit found
+  no duplicate IDs, horizontal overflow, stale visible notation, or runtime
+  errors at desktop or phone width.
 - **Publication boundary preserved:** `build:pages` remains capped at Topic V;
   Topic VI is absent from `pages-out`, has no live public link, and its public
   URL continues to return HTTP 404.

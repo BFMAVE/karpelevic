@@ -24,6 +24,8 @@ type ProofChapterShellProps = {
   manuscriptPages?: string;
   updatedAt: string;
   stats?: readonly ChapterStat[];
+  readingConvention?: React.ReactNode;
+  deck?: React.ReactNode;
   children: React.ReactNode;
 };
 
@@ -36,6 +38,8 @@ export function ProofChapterShell({
   manuscriptPages,
   updatedAt,
   stats = [],
+  readingConvention,
+  deck,
   children,
 }: ProofChapterShellProps) {
   const route = getProofReaderRoute(routeKey);
@@ -95,9 +99,13 @@ export function ProofChapterShell({
           </div>
           <div className="proof-hero-copy">
             <p className="proof-deck">
-              A complete, source-aware mathematical reading in which every
-              nonstandard object is defined before it is used and every proof
-              remains available in full.
+              {deck ?? (
+                <>
+                  A complete, source-aware mathematical reading in which every
+                  nonstandard object is defined before it is used and every
+                  proof remains available in full.
+                </>
+              )}
             </p>
             <div className="proof-edition-meta">
               <span>
@@ -187,11 +195,16 @@ export function ProofChapterShell({
                 <p key={paragraph}>{paragraph}</p>
               ))}
               <p>
-                <strong>Reading convention.</strong> Essential definitions
-                appear before the first statement that needs them. Complete
-                manuscript proofs are closed by default. When a result has an
-                added line-by-line explanation, it appears inside the same
-                disclosure as the proof.
+                <strong>Reading convention.</strong>{" "}
+                {readingConvention ?? (
+                  <>
+                    Essential definitions appear before the first statement
+                    that needs them. Complete manuscript proofs are closed by
+                    default. When a result has an added line-by-line
+                    explanation, it appears inside the same disclosure as the
+                    proof.
+                  </>
+                )}
               </p>
             </div>
           </details>

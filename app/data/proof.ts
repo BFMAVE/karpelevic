@@ -178,8 +178,8 @@ const karpelevicOnlyAntecedent = new Set([
   3, 32, 33, 34, 35, 36, 37, 38, 40, 41, 47, 49, 50, 55, 56,
 ]);
 const strengthened = new Set([16, 30, 57, 58]);
-const newResults = new Set([4, 45, 48, 59]);
-const unbadgedResults = new Set([27, 28, 31, 42, 44]);
+const newResults = new Set([4, 59]);
+const unbadgedResults = new Set([27, 28, 31, 42, 44, 45, 48]);
 const previouslyKnown = new Set([
   15, 18, 23, 25, 26, 29, 61, 62, 64,
 ]);
@@ -261,6 +261,9 @@ function sourceRelationFor(number: number): string | undefined {
   if (number === 44) {
     return "Coxeter supplies the classical projective background. The precise polygonal chart lemma is proved here; no claim of priority is made here because the cited source does not state this exact formulation.";
   }
+  if ([45, 48].includes(number)) {
+    return "This formulation and proof are supplied in this manuscript. Karpelevič’s argument contains a related construction, cited below; no claim of priority is made here.";
+  }
   if (newResults.has(number)) {
     return "The displayed source is the closest antecedent. The exact statement used here appears to be new, but its older mechanism or conclusion is stated separately.";
   }
@@ -326,14 +329,14 @@ const rawItems: readonly [
   [42, "Proposition", "Partition of the return source–target pairs", "Partitions the target indices under the first-return translation and records the source class of every pair."],
   [43, "Definition", "Composition of perspectivities along the selected boundary arc", "Defines a projectivity from the initial line to the terminal line by successive perspectivities."],
   [44, "Proposition", "Affine chart adapted to the selected boundary arc", "Chooses an affine chart in which the endpoint supports are parallel and the selected boundary arc has strictly increasing edge slopes."],
-  [45, "Lemma", "Convex-chain calibration", "Calibrates successive projections so a point can move through the corridor without jumping across a supporting edge."],
-  [46, "Lemma", "Fixed-point escape for a projectivity", "Finds a nearby point moved strictly to one side whenever the return projectivity is not the identity."],
-  [47, "Theorem", "Projective corridor escape", "For N≥4, combines the calibrated chain with fixed-point escape to produce the deformation used to rule out a skipped return."],
-  [48, "Lemma", "Global deformation admissibility", "Checks simultaneously that the entire return-corridor deformation remains a strict invariant polygon."],
-  [49, "Theorem", "Global return-corridor deformation", "Assembles the local projection moves into one admissible global deformation."],
-  [50, "Theorem", "Projective unit return", "For N≥4, uses criticality to force the first-return step Δ to equal one."],
-  [51, "Remark", "Boundary cases", "Summarizes which edge checks keep the projective construction on the polygon boundary."],
-  [52, "Remark", "Protective invariant", "Identifies the invariant that prevents the deformation from leaving the admissible class."],
+  [45, "Lemma", "Location of the final intersection when Z₁ = X₀", "Locates the final intersection produced by the successive perspectivities for the special starting point Z₁=X₀."],
+  [46, "Lemma", "Sign of t − u(t) near a fixed point of a real projectivity", "Finds arbitrarily small nonzero t for which t-u(t)>0."],
+  [47, "Theorem", "A small deformation moving the final image into the interior half-plane", "For N≥4, converts the scalar inequality τ-u(τ)>0 into the required planar half-plane condition while preserving strict convex order."],
+  [48, "Lemma", "Extension of the deformation to all polygon vertices", "Assuming the return-time bijection and four-case partition from Topic V, defines every deformed vertex and verifies all nonclosing incidences and side inequalities."],
+  [49, "Theorem", "Existence of an invariant deformation with one interior image vertex", "Chooses one small parameter for which the deformed polygon is invariant and exactly one image-polygon vertex lies in its interior."],
+  [50, "Theorem", "The first-return step satisfies Δ = 1", "For N≥4, uses the boundary conclusion of hereditary saturation to prove that the first-return step is Δ=1."],
+  [51, "Remark", "Boundary cases in the proof that Δ = 1", "Checks the limiting arithmetic values used in the proof that the first-return step is one."],
+  [52, "Remark", "Local and global data used in the deformation argument", "Separates the local projective inequality from the global indexing, incidence, and side-inequality facts needed to use it."],
   [53, "Lemma", "Farey adjacency criterion", "Recognizes neighbouring reduced fractions through a determinant of absolute value one."],
   [54, "Lemma", "Reflection Farey cell", "Reflects a Farey cell across one half-turn while preserving adjacency."],
   [55, "Lemma", "Reflected backward-return strip", "Transfers the finite return calculation to the reflected orientation needed by the contact word."],
@@ -439,13 +442,13 @@ export const proofTopics: readonly ProofTopic[] = [
   },
   {
     slug: "unit-return",
-    eyebrow: "Topic VI · 8 items",
-    title: "Projective escape and unit return for N≥4",
+    eyebrow: "Topic VI · 9 results",
+    title: "A projective deformation and the first-return step Δ = 1",
     question:
-      "For N≥4, why would a first-return step Δ>1 contradict radial criticality?",
+      "For N≥4, why does a hypothetical first-return step Δ>1 produce an invariant polygon forbidden by criticality?",
     overview: [
-      "Successive projections along a convex chain define a projectivity on the starting side. If its holonomy is not the identity, a nearby point escapes its fixed set and initiates a controlled deformation.",
-      "The hard part is global admissibility: every support, label, and strict inequality must survive at once. Once that finite accounting is complete, the deformation contradicts criticality and forces unit return in the stated N≥4 range.",
+      "Successive perspectivities along a convex boundary chain define a real projectivity. Its behaviour near a fixed point supplies a small parameter for which the final image crosses into the polygon-interior half-plane.",
+      "The return-time bijection then defines all N deformed vertices, and finitely many incidence and side inequalities remain valid simultaneously. The resulting invariant polygon has an image-polygon vertex in its interior, contradicting the boundary conclusion proved in Topic II and forcing Δ=1.",
     ],
     itemNumbers: [45, 46, 47, 48, 49, 50, 51, 52],
     manuscriptPages: "41–50",

@@ -2,8 +2,10 @@ export type AdvancedProofFigureKind =
   | "rotation-records"
   | "return-towers"
   | "projective-corridor"
+  | "topic-vi-projective-chain"
   | "holonomy-escape"
   | "global-ledger"
+  | "topic-vi-return-partition"
   | "unit-return"
   | "farey-reflection"
   | "jensen-sheet";
@@ -38,12 +40,21 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
     caption:
       "Plate V.4. Numerically constructed, incidence-verified projective chain on a selected local boundary arc (not a full polygon). The source is A₁=aff(X₀,X₁), and the target is K=aff(C₄,C₅). For 2≤i≤4, the point Yᵢ lies on the supporting line ℒᵢ, while the auxiliary projection line through Yᵢ₋₁ and Yᵢ passes through its centre Cᵢ. The final auxiliary line through Y₄ and Y₅ passes through the last projection centre X₅. All eight tested collinearities pass, with maximum absolute determinant residual approximately 3.3×10⁻¹¹. Composing these perspectivities gives a projectivity A₁→K.",
   },
-  "holonomy-escape": {
-    title: "A scalar projectivity controls the closing half-plane",
+  "topic-vi-projective-chain": {
+    status: "Adapted from Topic V · incidence verified",
+    title: "Successive perspectivities along the selected boundary chain",
     description:
-      "The final contact segment is parameterized from zero to one. The returned intersection u of tau lies before the point tau, placing the latter on the calibrated interior side.",
+      "Plate VI.1 adapts the incidence-verified model from Topic V. A point is projected from the source line A one to the supporting lines script L two, script L three, and script L four, and then to the target line K. The successive projection centres are C two, C three, C four, and X five. The diagram is a selected local boundary arc, not a full polygon.",
     caption:
-      "Plate VI-A.1. Once γ(τ)>0, the planar determinant has the sign of τ-u(τ). The inequality τ-u(τ)>0 therefore opens the closing contact inward.",
+      "Plate VI.1. Adapted from Plate V.4. In this incidence-verified numerical model, projection through C₂ sends Y₁∈A₁ to Y₂∈ℒ₂; projection through C₃ sends Y₂ to Y₃∈ℒ₃; projection through C₄ sends Y₃ to Y₄∈ℒ₄; and the final projection through X₅ sends Y₄ to Y₅∈K=aff(C₄,C₅). The plate illustrates the successive-perspectivity mechanism used here. It shows a selected local boundary arc, not a full polygon or a universal metric configuration; all eight displayed incidence conditions have maximum absolute determinant residual approximately 3.3×10⁻¹¹.",
+  },
+  "holonomy-escape": {
+    status: "Schematic implication · affine and planar views",
+    title: "Scalar order and the corresponding planar half-plane",
+    description:
+      "Plate VI.2 has two panels. On the entire affine coordinate line, u of tau lies to the left of tau; neither point is assumed to lie between the calibration points zero and one. In the planar panel, z of u of tau lies on the moving closing line, while Y of tau equals z of tau and lies in the open half-plane where tilde D is positive.",
+    caption:
+      "Plate VI.2. In the chosen affine coordinate on the final contact line, the selected parameter satisfies u(τ)<τ. Neither point is assumed to lie in [0,1]. The planar inset keeps the separate roles of the determinants visible: D̃(q,τ)>0 defines the open half-plane, while D(t,τ)=D̃(z(t),τ) is its restriction to the final contact line. Since γ(τ)>0, the scalar inequality gives D(τ,τ)>0 and hence Y(τ)=z(τ) lies in that interior half-plane.",
   },
   "global-ledger": {
     title: "Partition of the return source–target pairs",
@@ -52,12 +63,21 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
     caption:
       "Plate V.3. The base-index set ℬ is partitioned as ℬ=D⊔R⊔{c}⊔A. Here M is the selected set of source indices, M∖{b*} is that set without its distinguished endpoint b*, and s is the inverse return map. For j∈D∪A, s(j)∉M; for j∈R, s(j)∈M∖{b*} and indeed s(R)=M∖{b*}; finally s(c)=b*. This classifies the source–target pairs combinatorially; no deformation is assumed.",
   },
-  "unit-return": {
-    title: "Incidence pattern of the forbidden interior image vertex",
+  "topic-vi-return-partition": {
+    status: "Adapted from Topic V · exact finite partition",
+    title: "Four cases for the assigned side incidences",
     description:
-      "A schematic outer polygon and convex image polygon are shown. Eight image vertices lie in outer side interiors while a highlighted ninth image vertex Y lies strictly inside the outer polygon and remains extreme in the image polygon.",
+      "Plate VI.3 displays the disjoint and exhaustive partition of the calligraphic base-index set B into D, R, the singleton c, and A. It records the target class and the position of the inverse source under s for each case.",
     caption:
-      "Plate VI-B.2. This incidence schematic records the contradiction, not metric coordinates for λ: if Δ>1, the deformation produces Y(τ) in Ext(λPτ)∩int(Pτ), while all other image vertices remain on ∂Pτ. Hereditary image-vertex saturation forbids this, so Δ=1.",
+      "Plate VI.3. Adapted from Plate V.3. The partition ℬ=D⊔R⊔{c}⊔A is disjoint and exhaustive. For k∈D, the assigned side line moves and the source is fixed; for k∈R, the source moves and the assigned side line is fixed; for k∈A, both remain fixed; and c is the only side index for which the final incidence is not imposed in advance. The displayed conditions involving s record the corresponding inverse sources. This is combinatorial input to the deformation, not a geometric example of the deformation itself.",
+  },
+  "unit-return": {
+    status: "Combinatorial incidence schematic · not metric",
+    title: "The forbidden interior image vertex",
+    description:
+      "Plate VI.4 is an incidence-only schematic, not a coordinate realization of multiplication by lambda. The other displayed image vertices lie on the boundary of the outer polygon. The highlighted vertex Y of tau remains an extreme point of the image polygon but lies strictly inside the outer polygon.",
+    caption:
+      "Plate VI.4. Combinatorial incidence schematic. The inner polygon is not drawn to scale as the actual linear image λPτ. The diagram records only the incidences used in the contradiction: Y(τ) is an extreme point of λPτ lying in int(Pτ), whereas every other vertex of λPτ lies on ∂Pτ. Topic II proves that every vertex of the image polygon must lie on the outer polygon boundary. The highlighted interior vertex contradicts that conclusion, so Δ=1.",
   },
   "farey-reflection": {
     title: "A Farey cell and its reflected orientation",
@@ -550,28 +570,141 @@ function ProjectiveCorridorGeometry({
   );
 }
 
-function ProjectiveCorridor() {
-  return <ProjectiveCorridorGeometry markerId="advanced-arrow-projective-corridor" />;
+function ProjectiveCorridor({ markerId }: { markerId: string }) {
+  return <ProjectiveCorridorGeometry markerId={markerId} />;
 }
 
 function ProjectiveCorridorMobile({ markerId }: { markerId: string }) {
   return <ProjectiveCorridorGeometry markerId={markerId} mobile />;
 }
 
-function HolonomyEscape() {
+function HolonomyEscape({
+  markerId,
+  mobile = false,
+}: {
+  markerId: string;
+  mobile?: boolean;
+}) {
+  if (mobile) {
+    return (
+      <>
+        <text className="topic-ii-figure-equation" style={mobileLabelTextStyle} x="18" y="29">
+          affine coordinate on the final contact line
+        </text>
+        <line
+          className="topic-ii-figure-ray"
+          markerEnd={`url(#${markerId})`}
+          markerStart={`url(#${markerId})`}
+          x1="20"
+          x2="340"
+          y1="119"
+          y2="119"
+        />
+        <line className="topic-ii-figure-support" x1="192" x2="192" y1="107" y2="131" />
+        <line className="topic-ii-figure-support" x1="315" x2="315" y1="107" y2="131" />
+        <circle className="topic-ii-figure-point" cx="192" cy="119" r="5" />
+        <circle className="topic-ii-figure-point" cx="315" cy="119" r="5" />
+        <circle className="topic-ii-figure-point" cx="59" cy="119" r="6" />
+        <circle className="topic-ii-figure-point topic-ii-figure-point-accent" cx="130" cy="119" r="7" />
+        <text className="topic-ii-figure-label" style={mobileLabelTextStyle} x="42" y="98">u(τ)</text>
+        <text className="topic-ii-figure-label topic-ii-figure-accent" style={mobileLabelTextStyle} x="124" y="98">τ</text>
+        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="188" y="151">0</text>
+        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="311" y="151">1</text>
+        <path
+          className="topic-ii-figure-edge"
+          d="M59 72 L130 72"
+          markerEnd={`url(#${markerId})`}
+        />
+        <text className="topic-ii-figure-equation" style={mobileLabelTextStyle} x="94" y="56" textAnchor="middle">u(τ)&lt;τ</text>
+        <line className="topic-ii-figure-transfer" x1="192" x2="315" y1="169" y2="169" />
+        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="253" y="192" textAnchor="middle">calibration interval [0,1]</text>
+        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="180" y="218" textAnchor="middle">Only the order u(τ)&lt;τ is asserted.</text>
+        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="180" y="240" textAnchor="middle">Neither point is assumed to lie in [0,1].</text>
+
+        <line className="topic-ii-figure-support" x1="18" x2="342" y1="263" y2="263" />
+        <text className="topic-ii-figure-equation" style={mobileLabelTextStyle} x="18" y="292">planar oriented-area test</text>
+        <rect className="topic-ii-figure-half-plane" height="224" width="164" x="178" y="310" />
+        <line className="topic-ii-figure-ray" x1="178" x2="178" y1="306" y2="540" />
+        <line
+          className="topic-ii-figure-support"
+          markerEnd={`url(#${markerId})`}
+          x1="42"
+          x2="334"
+          y1="430"
+          y2="430"
+        />
+        <circle className="topic-ii-figure-point" cx="178" cy="339" r="6" />
+        <circle className="topic-ii-figure-point" cx="178" cy="508" r="6" />
+        <circle className="topic-ii-figure-point" cx="178" cy="430" r="6" />
+        <circle className="topic-ii-figure-point topic-ii-figure-point-accent" cx="286" cy="430" r="8" />
+        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="190" y="334">
+          X<tspan baselineShift="sub" fontSize="14"> m</tspan>(τ)
+        </text>
+        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="190" y="526">
+          X<tspan baselineShift="sub" fontSize="14"> m+1</tspan>
+        </text>
+        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="75" y="415">D̃=0</text>
+        <text className="topic-ii-figure-label" style={mobileLabelTextStyle} x="92" y="457">z(u(τ))</text>
+        <text className="topic-ii-figure-label topic-ii-figure-accent" style={mobileLabelTextStyle} x="222" y="457">Y(τ)=z(τ)</text>
+        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="260" y="367" textAnchor="middle">D̃(q,τ)&gt;0</text>
+        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="260" y="389" textAnchor="middle">open half-plane</text>
+        <text className="topic-ii-figure-equation" style={mobileLabelTextStyle} x="180" y="579" textAnchor="middle">D(τ,τ)=D̃(Y(τ),τ)&gt;0</text>
+      </>
+    );
+  }
+
   return (
     <>
-      <line className="topic-ii-figure-ray" x1="90" x2="680" y1="238" y2="238" />
-      {[150, 620, 330].map((x) => <circle className="topic-ii-figure-point" cx={x} cy="238" key={x} r="7" />)}
-      <circle className="topic-ii-figure-point topic-ii-figure-point-accent" cx="440" cy="238" r="8" />
-      <text className="topic-ii-figure-label" x="140" y="270">Cₘ₊₁: 0</text>
-      <text className="topic-ii-figure-label" x="602" y="270">Cₘ: 1</text>
-      <text className="topic-ii-figure-label" x="300" y="215">u(τ)</text>
-      <text className="topic-ii-figure-label topic-ii-figure-accent" x="430" y="215">τ</text>
-      <path className="topic-ii-figure-edge" d="M330 188 L440 188" markerEnd="url(#advanced-arrow-holonomy-escape)" />
-      <text className="topic-ii-figure-equation" x="385" y="160" textAnchor="middle">τ-u(τ)&gt;0</text>
-      <path className="topic-ii-figure-cone" d="M440 238 L586 65 L692 65 L692 238 Z" />
-      <text className="topic-ii-figure-small" x="603" y="99">calibrated interior side</text>
+      <text className="topic-ii-figure-equation" x="38" y="33">affine coordinate on the final contact line</text>
+      <line
+        className="topic-ii-figure-ray"
+        markerEnd={`url(#${markerId})`}
+        markerStart={`url(#${markerId})`}
+        x1="48"
+        x2="712"
+        y1="113"
+        y2="113"
+      />
+      <line className="topic-ii-figure-support" x1="370" x2="370" y1="101" y2="125" />
+      <line className="topic-ii-figure-support" x1="630" x2="630" y1="101" y2="125" />
+      <circle className="topic-ii-figure-point" cx="370" cy="113" r="5" />
+      <circle className="topic-ii-figure-point" cx="630" cy="113" r="5" />
+      <circle className="topic-ii-figure-point" cx="126" cy="113" r="7" />
+      <circle className="topic-ii-figure-point topic-ii-figure-point-accent" cx="238" cy="113" r="8" />
+      <text className="topic-ii-figure-label" x="102" y="142">u(τ)</text>
+      <text className="topic-ii-figure-label topic-ii-figure-accent" x="230" y="142">τ</text>
+      <text className="topic-ii-figure-small" x="366" y="142">0</text>
+      <text className="topic-ii-figure-small" x="626" y="142">1</text>
+      <path className="topic-ii-figure-edge" d="M126 73 L238 73" markerEnd={`url(#${markerId})`} />
+      <text className="topic-ii-figure-equation" x="182" y="57" textAnchor="middle">u(τ)&lt;τ</text>
+      <line className="topic-ii-figure-transfer" x1="370" x2="630" y1="160" y2="160" />
+      <text className="topic-ii-figure-small" x="500" y="181" textAnchor="middle">calibration interval [0,1]</text>
+      <text className="topic-ii-figure-small" x="38" y="181">Neither point is assumed to lie in [0,1].</text>
+
+      <line className="topic-ii-figure-support" x1="28" x2="732" y1="199" y2="199" />
+      <text className="topic-ii-figure-equation" x="38" y="225">planar oriented-area test</text>
+      <rect className="topic-ii-figure-half-plane" height="145" width="310" x="412" y="232" />
+      <line className="topic-ii-figure-ray" x1="412" x2="412" y1="228" y2="379" />
+      <line
+        className="topic-ii-figure-support"
+        markerEnd={`url(#${markerId})`}
+        x1="245"
+        x2="704"
+        y1="303"
+        y2="303"
+      />
+      <circle className="topic-ii-figure-point" cx="412" cy="250" r="6" />
+      <circle className="topic-ii-figure-point" cx="412" cy="356" r="6" />
+      <circle className="topic-ii-figure-point" cx="412" cy="303" r="6" />
+      <circle className="topic-ii-figure-point topic-ii-figure-point-accent" cx="582" cy="303" r="8" />
+      <text className="topic-ii-figure-small" x="424" y="246">Xₘ(τ)</text>
+      <text className="topic-ii-figure-small" x="424" y="374">Xₘ₊₁</text>
+      <text className="topic-ii-figure-small" x="302" y="287">D̃=0</text>
+      <text className="topic-ii-figure-label" x="320" y="331">z(u(τ))</text>
+      <text className="topic-ii-figure-label topic-ii-figure-accent" x="542" y="331">Y(τ)=z(τ)</text>
+      <text className="topic-ii-figure-equation" x="567" y="261" textAnchor="middle">D̃(q,τ)&gt;0</text>
+      <text className="topic-ii-figure-small" x="567" y="280" textAnchor="middle">open half-plane</text>
+      <text className="topic-ii-figure-equation" x="133" y="332" textAnchor="middle">D(τ,τ)&gt;0</text>
     </>
   );
 }
@@ -638,22 +771,107 @@ function GlobalLedgerMobile() {
   );
 }
 
-function UnitReturn() {
-  const outer = "108,294 74,168 160,62 320,38 520,72 674,188 625,305 438,340 248,330";
-  const image = "91,231 117,115 240,50 420,55 597,130 649.5,246.5 531.5,322.5 343,335 204.08,295.15";
-  const contactVertices = image.split(" ").slice(0, 8);
+const unitReturnOuter: readonly Point[] = [
+  [108, 294],
+  [74, 168],
+  [160, 62],
+  [320, 38],
+  [520, 72],
+  [674, 188],
+  [625, 305],
+  [438, 340],
+  [248, 330],
+];
+
+const unitReturnImage: readonly Point[] = [
+  [91, 231],
+  [117, 115],
+  [240, 50],
+  [420, 55],
+  [597, 130],
+  [649.5, 246.5],
+  [531.5, 322.5],
+  [343, 335],
+  [204.08, 295.15],
+];
+
+function UnitReturn({ mobile = false }: { mobile?: boolean }) {
+  const transform = ([x, y]: Point): Point => mobile
+    ? [15 + 0.47 * x, 32 + 0.89 * y]
+    : [x, y];
+  const outer = unitReturnOuter.map(transform);
+  const image = unitReturnImage.map(transform);
+  const contactVertices = image.slice(0, 8);
+  const interiorVertex = image[8];
+  const points = (vertices: readonly Point[]) => vertices.map((point) => point.join(",")).join(" ");
+  const outerLabel = mobile ? { x: 46, y: 63 } : { x: 105, y: 74 };
+  const imageLabel = mobile ? { x: 205, y: 190 } : { x: 455, y: 180 };
+  const interiorLabel = mobile
+    ? { x: interiorVertex[0] + 12, y: interiorVertex[1] - 12 }
+    : { x: interiorVertex[0] + 12, y: interiorVertex[1] - 15 };
+
   return (
     <>
-      <polygon className="topic-ii-figure-polygon" points={outer} />
-      <polygon className="topic-ii-figure-polar" points={image} />
-      {contactVertices.map((point, index) => {
-        const [x, y] = point.split(",").map(Number);
-        return <circle className="topic-ii-figure-point" cx={x} cy={y} key={index} r="5" />;
-      })}
-      <circle className="topic-ii-figure-point topic-ii-figure-point-accent" cx="204.08" cy="295.15" r="9" />
-      <text className="topic-ii-figure-label topic-ii-figure-accent" x="216" y="280">Y(τ)</text>
-      <text className="topic-ii-figure-small" x="216" y="300">interior to Pτ</text>
-      <text className="topic-ii-figure-equation" x="382" y="365" textAnchor="middle">Y(τ) ∈ Ext(λPτ) ∩ int(Pτ)</text>
+      {mobile ? (
+        <>
+          <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="180" y="19" textAnchor="middle">
+            incidence only — not a metric realization
+          </text>
+          <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="180" y="39" textAnchor="middle">
+            of multiplication by λ
+          </text>
+        </>
+      ) : (
+        <text className="topic-ii-figure-small" x="380" y="25" textAnchor="middle">
+          incidence only — not a metric realization of multiplication by λ
+        </text>
+      )}
+      <polygon className="topic-ii-figure-polygon" points={points(outer)} />
+      <polygon className="topic-ii-figure-polar" points={points(image)} />
+      {contactVertices.map(([x, y], index) => (
+        <circle className="topic-ii-figure-point" cx={x} cy={y} key={index} r={mobile ? 5 : 5} />
+      ))}
+      <circle
+        className="topic-ii-figure-point topic-ii-figure-point-accent"
+        cx={interiorVertex[0]}
+        cy={interiorVertex[1]}
+        r={mobile ? 8 : 9}
+      />
+      <text
+        className="topic-ii-figure-label"
+        style={mobile ? mobileLabelTextStyle : undefined}
+        x={outerLabel.x}
+        y={outerLabel.y}
+      >
+        P<tspan baselineShift="sub" fontSize={mobile ? 14 : 12}>τ</tspan>
+      </text>
+      <text
+        className="topic-ii-figure-label"
+        style={mobile ? mobileLabelTextStyle : undefined}
+        x={imageLabel.x}
+        y={imageLabel.y}
+      >
+        λP<tspan baselineShift="sub" fontSize={mobile ? 14 : 12}>τ</tspan>
+        <tspan className="topic-ii-figure-small" dx="8" fontSize={mobile ? 14 : 12}>(schematic)</tspan>
+      </text>
+      <text
+        className="topic-ii-figure-label topic-ii-figure-accent"
+        style={mobile ? mobileLabelTextStyle : undefined}
+        x={interiorLabel.x}
+        y={interiorLabel.y}
+      >
+        Y(τ)
+      </text>
+      <text
+        className="topic-ii-figure-equation"
+        style={mobile ? mobileLabelTextStyle : undefined}
+        x={mobile ? 180 : 382}
+        y={mobile ? 374 : 365}
+        textAnchor="middle"
+      >
+        Y(τ) ∈ Ext(λP<tspan baselineShift="sub" fontSize={mobile ? 14 : 12}>τ</tspan>) ∩ int(P<tspan baselineShift="sub" fontSize={mobile ? 14 : 12}>τ</tspan>)
+      </text>
+      <g data-incidence-only="true" data-metric-realization="false" />
     </>
   );
 }
@@ -709,7 +927,11 @@ export function AdvancedProofFigure({ kind }: { kind: AdvancedProofFigureKind })
     "rotation-records": "0 0 360 570",
     "return-towers": "0 0 360 480",
     "global-ledger": "0 0 360 570",
+    "topic-vi-return-partition": "0 0 360 570",
     "projective-corridor": "0 0 360 390",
+    "topic-vi-projective-chain": "0 0 360 390",
+    "holonomy-escape": "0 0 360 610",
+    "unit-return": "0 0 360 400",
   };
   const mobileViewBox = mobileViewBoxes[kind];
   const hasMobileLayout = Boolean(mobileViewBox);
@@ -730,15 +952,22 @@ export function AdvancedProofFigure({ kind }: { kind: AdvancedProofFigureKind })
         <title id={"advanced-" + kind + "-title"}>{figure.title}</title>
         <desc id={"advanced-" + kind + "-description"}>{figure.description}</desc>
         <defs>
-          <marker id={markerId} markerHeight="7" markerWidth="8" orient="auto" refX="7" refY="3.5">
+          <marker
+            id={markerId}
+            markerHeight="7"
+            markerWidth="8"
+            orient={kind === "holonomy-escape" ? "auto-start-reverse" : "auto"}
+            refX="7"
+            refY="3.5"
+          >
             <path className="topic-ii-figure-arrow-head" d="M0,0 L8,3.5 L0,7 Z" />
           </marker>
         </defs>
         {kind === "rotation-records" ? <RotationRecords /> : null}
         {kind === "return-towers" ? <ReturnTowers /> : null}
-        {kind === "projective-corridor" ? <ProjectiveCorridor /> : null}
-        {kind === "holonomy-escape" ? <HolonomyEscape /> : null}
-        {kind === "global-ledger" ? <GlobalLedger /> : null}
+        {kind === "projective-corridor" || kind === "topic-vi-projective-chain" ? <ProjectiveCorridor markerId={markerId} /> : null}
+        {kind === "holonomy-escape" ? <HolonomyEscape markerId={markerId} /> : null}
+        {kind === "global-ledger" || kind === "topic-vi-return-partition" ? <GlobalLedger /> : null}
         {kind === "unit-return" ? <UnitReturn /> : null}
         {kind === "farey-reflection" ? <FareyReflection /> : null}
         {kind === "jensen-sheet" ? <JensenSheet /> : null}
@@ -752,14 +981,23 @@ export function AdvancedProofFigure({ kind }: { kind: AdvancedProofFigureKind })
           viewBox={mobileViewBox ?? "0 0 360 480"}
         >
           <defs>
-            <marker id={mobileMarkerId} markerHeight="7" markerWidth="8" orient="auto" refX="7" refY="3.5">
+            <marker
+              id={mobileMarkerId}
+              markerHeight="7"
+              markerWidth="8"
+              orient={kind === "holonomy-escape" ? "auto-start-reverse" : "auto"}
+              refX="7"
+              refY="3.5"
+            >
               <path className="topic-ii-figure-arrow-head" d="M0,0 L8,3.5 L0,7 Z" />
             </marker>
           </defs>
           {kind === "rotation-records" ? <RotationRecordsMobile /> : null}
           {kind === "return-towers" ? <ReturnTowersMobile markerId={mobileMarkerId} /> : null}
-          {kind === "global-ledger" ? <GlobalLedgerMobile /> : null}
-          {kind === "projective-corridor" ? <ProjectiveCorridorMobile markerId={mobileMarkerId} /> : null}
+          {kind === "global-ledger" || kind === "topic-vi-return-partition" ? <GlobalLedgerMobile /> : null}
+          {kind === "projective-corridor" || kind === "topic-vi-projective-chain" ? <ProjectiveCorridorMobile markerId={mobileMarkerId} /> : null}
+          {kind === "holonomy-escape" ? <HolonomyEscape markerId={mobileMarkerId} mobile /> : null}
+          {kind === "unit-return" ? <UnitReturn mobile /> : null}
         </svg>
       ) : null}
       <figcaption>{figure.caption}</figcaption>

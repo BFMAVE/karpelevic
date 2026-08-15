@@ -749,7 +749,7 @@ const topicHtml = {
     section(markers.rotation, markers.noSkipping) +
     section(markers.noSkipping, markers.corridor),
   "unit-return":
-    '<h3 class="continued-heading">Projective no-skipping — continued</h3>' +
+    '<h3 class="continued-heading">Projective deformation and the first-return step — continued</h3>' +
     section(markers.corridor, markers.monodromy),
   "farey-return": section(markers.monodromy, markers.stochastic),
   spectra: html.slice(start(markers.stochastic)),

@@ -491,8 +491,8 @@ export const topicVIIGroups: readonly AdvancedProofGroup[] = [
 
 export const topicVIIImported: readonly ProofDependency[] = [
   {
-    label: "Topic VI-B: completed return dichotomy",
-    href: sitePath("/proof/topic-vi/b/#thm:critical-polygon-normal-form"),
+    label: "Topic VI: completed first-return cases",
+    href: sitePath("/proof/topic-vi/#thm:critical-polygon-normal-form"),
     explanation:
       "For N≥4, identity, transversal, and nontransversal regimes are exhaustive; the nontransversal first return is the adjacent successor.",
   },
@@ -518,7 +518,7 @@ export const topicVIIImported: readonly ProofDependency[] = [
     label: "Topic IV: one-sided contact representative",
     href: sitePath("/proof/topic-iv/#lem:one-sided-contact"),
     explanation:
-      "The return cases start from one fixed contact orientation, multiplier, contact rotation, and strict-field interval.",
+      "The return cases start from one fixed contact orientation, multiplier, contact permutation, and interval of relative-interior contact indices.",
   },
   {
     label: "Topic IV: lifted endpoint paths",

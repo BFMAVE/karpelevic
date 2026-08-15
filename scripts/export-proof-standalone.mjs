@@ -19,8 +19,7 @@ const publicSite = "https://bfmave.github.io/karpelevic";
 const bundleLinkMode = process.env.PROOF_STANDALONE_BUNDLE_LINKS === "1";
 const reviewBundleFiles = new Map([
   ["/proof/topic-v", "Critical_Invariant_Polygons_Topic_V.html"],
-  ["/proof/topic-vi/a", "Critical_Invariant_Polygons_Topic_VI.html"],
-  ["/proof/topic-vi/b", "Critical_Invariant_Polygons_Topic_VI.html"],
+  ["/proof/topic-vi", "Critical_Invariant_Polygons_Topic_VI.html"],
   ["/proof/topic-vii", "Critical_Invariant_Polygons_Topic_VII.html"],
 ]);
 
@@ -153,8 +152,7 @@ function markUnavailableTopicLinks(html) {
     ["/proof/topic-iii", 3],
     ["/proof/topic-iv", 4],
     ["/proof/topic-v", 5],
-    ["/proof/topic-vi/a", 6],
-    ["/proof/topic-vi/b", 6],
+    ["/proof/topic-vi", 6],
     ["/proof/topic-vii", 7],
   ]).get(proofRoute);
   if (routeTopicNumber === undefined) return html;
@@ -313,23 +311,16 @@ function verifyStandaloneHtml(html) {
               "data-proof-route=\"topic-v\"",
               "Forthcoming",
             ]
-          : proofRoute === "/proof/topic-vi/a"
+          : proofRoute === "/proof/topic-vi"
             ? [
                 "Topic VI",
-                "Projective escape and unit return for N≥4 — local projective escape",
-                "Calibrate the projective return",
-                "data-proof-route=\"topic-vi-a\"",
+                "A projective deformation and the first-return step Δ = 1",
+                "Notation and exact facts imported from Topics II–V",
+                "The first-return step satisfies Δ = 1",
+                "data-proof-route=\"topic-vi\"",
                 "Forthcoming",
               ]
-            : proofRoute === "/proof/topic-vi/b"
-              ? [
-                  "Topic VI",
-                  "Projective escape and unit return for N≥4 — global admissibility and unit return",
-                  "Transport the local motion to every label",
-                  "data-proof-route=\"topic-vi-b\"",
-                  "Forthcoming",
-                ]
-              : proofRoute === "/proof/topic-vii"
+            : proofRoute === "/proof/topic-vii"
                 ? [
                     "Topic VII",
                     "The Farey carrier and return monodromy",
