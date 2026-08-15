@@ -1261,6 +1261,12 @@ full local source history remain later site milestones.
   ESLint, `git diff --check`, the standalone exporter, and the GitHub Pages
   verifier pass. Desktop and 390-pixel browser checks found no page overflow,
   duplicate IDs, inaccessible plates, or console errors.
-- **Publication boundary:** the audited Pages package contains Topics I–V
-  only. Topic VI and every later topic remain absent and are shown as
-  Forthcoming. Public deployment is the next approved action.
+- **Publication status:** source changes are recorded locally in commit
+  `faa3646ce863b0e6ab4080dc39c3788324e386fb`; the static-only public Pages
+  tree is commit `b03ed72d88b8a46c4694c86445a5390ef8b07532` on `main`.
+  Topic V is live at
+  <https://bfmave.github.io/karpelevic/proof/topic-v/>. Its deployed HTML is
+  byte-identical to the audited export with SHA-256
+  `1cbd03cfcaa2b896439230a8b919a6f521b062a494f274577ce9f4548ce3fbdf`.
+  The public package contains Topics I–V only; Topic VI returns HTTP 404 and
+  every later topic remains absent and is shown as Forthcoming.
