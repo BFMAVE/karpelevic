@@ -1357,3 +1357,36 @@ full local source history remain later site milestones.
   `52bd444cde88618006d8f3984966149f18440d5bb882ba9b5216f83f4d77198d`.
   Topics I–V return HTTP 200; Topic VI returns HTTP 404 and Topics VI–XIV
   remain absent and unlinked. Next: continue reviewing Topic VI locally.
+
+## Current milestone — Topic IV criticality dependency and clarity pass (published 15 August 2026)
+
+- **The hidden dependency is now explicit:** the standing data begin with
+  (A0), which says that multiplication by \(\lambda\) is an
+  \(N\)-critical elliptic contraction. The page now calls these the five
+  assumptions (A0)–(A4), links directly to Definition 1.1, and explains that
+  (A0) is what permits the use of Theorem 3.2 in Proposition 5.1.
+- **Definitions precede their use:** the side \(E_i\), its half-open version
+  \(E_i^+\), reachable index sets, and complete right-to-left component
+  updates are stated explicitly. Corollary 5.2 also says that its real-linear
+  map \(T\) is the same map represented by multiplication by \(\lambda\).
+- **Formal precision improved:** Lemma 4.11 expands the consecutive-vertex
+  inference, and Lemma 4.13 explicitly invokes Lemmas 2.5 and 2.10 at the
+  origin/angular-monotonicity step. All ten numbered results, complete proofs,
+  equation numbers, and stable anchors remain unchanged.
+- **Reader-facing language and plates tightened:** explanations use literal
+  boundary-arc counts, endpoint indicators, endpoint or relative-interior
+  cases, and removed/added side indices. Plates IV.1, IV.3, and IV.4 carry the
+  corresponding labels in both desktop and mobile layouts.
+- **Verified before publication:** the canonical TeX compiles; two generated
+  content runs are byte-identical; all 32 tests, ESLint, `git diff --check`,
+  the static Pages verifier, desktop controls, the 390-pixel mobile layout,
+  internal fragments, and the live browser console pass. The generated
+  metadata records canonical source hash
+  `413c4e4a7c296c4b728ebfb42627a1d9bf987f50833a37e177b2fe7dafee7de2`.
+- **Publication status:** source commit `0de70df`; static-only public Pages
+  commit `a6d6c96`. Topic IV is live at
+  <https://bfmave.github.io/karpelevic/proof/topic-iv/> and its deployed HTML
+  matches the audited export with SHA-256
+  `53a4372c06358742b845fff869db7e6c65509befe0dd7eae2c6e022aebebba67`.
+  Topic V remains live; Topic VI returns HTTP 404, and Topics VI–XIV remain
+  absent and unlinked.
