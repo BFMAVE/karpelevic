@@ -1424,3 +1424,37 @@ full local source history remain later site milestones.
 - **Publication boundary preserved:** `build:pages` remains capped at Topic V;
   Topic VI is absent from `pages-out`, has no live public link, and its public
   URL continues to return HTTP 404.
+
+## Current milestone — Topic V proof-closure pass published (15 August 2026)
+
+- **Four local rigor issues were closed:** the temporary assumption
+  \(\Delta>1\) now precedes the transported-terminal-side calculation and
+  explicitly makes \(\varphi-1\) a long base; Theorem 6.1 proves both
+  directions of \(h=0\iff\nu=N\); Corollary 6.2 derives
+  \(\gcd(N,\kappa)=1\) before invoking the theorem; and Definition 7.4 uses
+  correctly typed projective completions \(\Lambda_i,K\) and point joins.
+- **Definitions and exposition were tightened:** Topic V imports
+  \(\nu_{\mathrm{poly}}\) and \(N\)-criticality directly from Topic I, gives
+  the visible-boundary definition of the Klein sail, removes glossary entries
+  for temporary letters, and uses literal first-return and selected-boundary-
+  arc wording while preserving the established terminology, numbering, and
+  stable anchors.
+- **Plates were independently checked:** Plate V.1 now says that the sail is
+  not separately drawn; Plate V.2 displays all thirteen evaluated residues;
+  and Plate V.4 is a verified numerical convex hexagon with relative-interior
+  contacts, exposing supporting lines, and eight checked perspectivity
+  incidences. The adapted Topic VI plate remains an open selected-arc diagram
+  and now uses \(\Lambda_1\) consistently.
+- **Verification:** canonical TeX SHA-256 is
+  `13ff942d2766bd736c6880738287f271fa71293cdf5a7ce7337b2b6e4efb3cee`;
+  generated content SHA-256 is
+  `05fa228de77739a9cc3aeef52462f815e77dbbca643b5170ab6ac91a001a1619`.
+  TeX compilation, deterministic generation, all 32 tests, ESLint, static
+  Pages verification, desktop/mobile browser QA, fragment checks, and the
+  standalone audit pass. The refreshed standalone Topic V file has SHA-256
+  `92e6355806f5d82bf7e2f8a9dfb4cebec65733e6bef386859714d4d92e273e28`.
+- **Publication status:** source commit `29d4b04`; static-only Pages commit
+  `c094db04cb0c5bb639a2ed4b9cecfad426a5ace0`. Topic V is live at
+  <https://bfmave.github.io/karpelevic/proof/topic-v/>. The matching Pages
+  build is `built`, its CSS asset returns HTTP 200, Topics I–V return HTTP
+  200, and Topic VI remains unpublished with HTTP 404.
