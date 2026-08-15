@@ -22,6 +22,21 @@ const reviewBundleFiles = new Map([
   ["/proof/topic-vi", "Critical_Invariant_Polygons_Topic_VI.html"],
   ["/proof/topic-vii", "Critical_Invariant_Polygons_Topic_VII.html"],
 ]);
+const proofTopicNumbers = new Map([
+  ["/proof/topic-ii", 2],
+  ["/proof/topic-iii", 3],
+  ["/proof/topic-iv", 4],
+  ["/proof/topic-v", 5],
+  ["/proof/topic-vi", 6],
+  ["/proof/topic-vii", 7],
+  ["/proof/topic-viii", 8],
+  ["/proof/topic-ix", 9],
+  ["/proof/topic-x", 10],
+  ["/proof/topic-xi", 11],
+  ["/proof/topic-xii", 12],
+  ["/proof/topic-xiii", 13],
+  ["/proof/topic-xiv", 14],
+]);
 
 function normalizeRoutePath(routePath) {
   const normalized = routePath.replace(/\/+$/, "");
@@ -147,14 +162,7 @@ function rewriteInternalLinks(html) {
 }
 
 function markUnavailableTopicLinks(html) {
-  const routeTopicNumber = new Map([
-    ["/proof/topic-ii", 2],
-    ["/proof/topic-iii", 3],
-    ["/proof/topic-iv", 4],
-    ["/proof/topic-v", 5],
-    ["/proof/topic-vi", 6],
-    ["/proof/topic-vii", 7],
-  ]).get(proofRoute);
+  const routeTopicNumber = proofTopicNumbers.get(normalizeRoutePath(proofRoute));
   if (routeTopicNumber === undefined) return html;
   const configuredPublicMaximum = Number(
     process.env.PROOF_STANDALONE_TOPIC_MAX ?? "4",
@@ -188,6 +196,59 @@ function markUnavailableTopicLinks(html) {
       }
 
       return `<span${attributes} aria-disabled="true">${children}<small>Forthcoming</small></span>`;
+    },
+  );
+}
+
+function topicNumberFromUrl(url) {
+  let pathname = url;
+  if (/^https?:/i.test(url)) {
+    try {
+      pathname = new URL(url).pathname;
+    } catch {
+      return undefined;
+    }
+  }
+  if (pathname.startsWith("/karpelevic/")) {
+    pathname = pathname.slice("/karpelevic".length);
+  }
+  pathname = normalizeRoutePath(pathname.split(/[?#]/, 1)[0]);
+  return proofTopicNumbers.get(pathname);
+}
+
+function markUnavailableProofAnchors(html) {
+  const routeTopicNumber = proofTopicNumbers.get(normalizeRoutePath(proofRoute));
+  if (routeTopicNumber === undefined) return html;
+  const configuredMaximum = Number(
+    process.env.PROOF_STANDALONE_TOPIC_MAX ?? String(routeTopicNumber),
+  );
+  const availableMaximum = Math.max(
+    routeTopicNumber,
+    Number.isFinite(configuredMaximum) ? configuredMaximum : routeTopicNumber,
+  );
+
+  return html.replace(
+    /<a\b([^>]*\bhref="([^"]+)"[^>]*)>([\s\S]*?)<\/a>/gi,
+    (match, rawAttributes, href, children) => {
+      const topicNumber = topicNumberFromUrl(href);
+      if (topicNumber === undefined || topicNumber <= availableMaximum) {
+        return match;
+      }
+      let attributes = rawAttributes
+        .replace(/\s+href="[^"]*"/i, "")
+        .replace(/\s+aria-current="[^"]*"/i, "");
+      if (/\bclass="[^"]*"/i.test(attributes)) {
+        attributes = attributes.replace(
+          /\bclass="([^"]*)"/i,
+          'class="$1 proof-chapter-unavailable"',
+        );
+      } else {
+        attributes += ' class="proof-chapter-unavailable"';
+      }
+      const forthcoming = /Forthcoming/i.test(children)
+        ? ""
+        : "<small>Forthcoming</small>";
+      return `<span${attributes} aria-disabled="true">${children}${forthcoming}</span>`;
     },
   );
 }
@@ -405,6 +466,32 @@ function verifyStandaloneHtml(html) {
     }
   }
 
+  if (proofRoute === "/proof/topic-vi") {
+    if (
+      !/href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-v\//i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "Standalone Topic VI must link to the published Topic V prerequisite.",
+      );
+    }
+    if (
+      /href="(?:Critical_Invariant_Polygons_Topic_(?:V|VII)\.html|https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-vii\/)/i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "Standalone Topic VI must not require sibling review files or link to unpublished Topic VII.",
+      );
+    }
+    if (!/data-proof-topic-number="7"[\s\S]{0,500}Forthcoming/i.test(html)) {
+      throw new Error(
+        "Standalone Topic VI must mark Topic VII as forthcoming.",
+      );
+    }
+  }
+
   if (
     bundleLinkMode &&
     /href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-(?:v(?:i(?:i)?(?:\/[ab])?)?)(?:\/|#)/i.test(
@@ -447,10 +534,11 @@ html = await inlineCssAssets(html, clientRoot);
 html = removeRuntimeMarkup(html);
 html = rewriteInternalLinks(html);
 html = markUnavailableTopicLinks(html);
+html = markUnavailableProofAnchors(html);
 html = await addStandaloneProofScript(html);
 html = html.replace(
   "<head>",
-  '<head><meta name="generator" content="Portable offline edition generated from the Critical Invariant Polygons companion site"/>',
+  '<head><meta name="generator" content="Standalone HTML edition generated from the Critical Invariant Polygons companion site"/>',
 );
 
 verifyStandaloneHtml(html);

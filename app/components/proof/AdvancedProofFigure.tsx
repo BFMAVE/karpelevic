@@ -52,9 +52,9 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
     status: "Schematic implication · affine and planar views",
     title: "Scalar order and the corresponding planar half-plane",
     description:
-      "Plate VI.2 has two panels. On the entire affine coordinate line, u of tau lies to the left of tau; neither point is assumed to lie between the calibration points zero and one. In the planar panel, z of u of tau lies on the moving closing line, while Y of tau equals z of tau and lies in the open half-plane where tilde D is positive.",
+      "Plate VI.2 has two panels. On the entire affine coordinate line, u of tau lies to the left of tau; neither point is assumed to lie between the calibration points zero and one. In the planar panel, the moving closing line through X sub m of tau and X sub m plus one is the zero set of the signed-side functional script S. The final contact line K equals the affine line through C sub m and C sub m plus one; it contains z of u of tau and Y of tau equals z of tau, with Y in the open half-plane where script S is positive.",
     caption:
-      "Plate VI.2. In the chosen affine coordinate on the final contact line, the selected parameter satisfies u(τ)<τ. Neither point is assumed to lie in [0,1]. The planar inset keeps the separate roles of the determinants visible: D̃(q,τ)>0 defines the open half-plane, while D(t,τ)=D̃(z(t),τ) is its restriction to the final contact line. Since γ(τ)>0, the scalar inequality gives D(τ,τ)>0 and hence Y(τ)=z(τ) lies in that interior half-plane.",
+      "Plate VI.2. In the chosen affine coordinate on the final contact line K=aff(Cₘ,Cₘ₊₁), the selected parameter satisfies u(τ)<τ. Neither point is assumed to lie in [0,1]. The planar inset keeps the two roles visible: 𝒮(x,τ)>0 defines the open half-plane bounded by the moving closing line 𝒮(·,τ)=0, while d(t,τ)=𝒮(z(t),τ) is the restriction to K. Since γ(τ)>0, the scalar inequality gives d(τ,τ)>0 and hence Y(τ)=z(τ) lies in that interior half-plane.",
   },
   "global-ledger": {
     title: "Partition of the return source–target pairs",
@@ -718,17 +718,23 @@ function HolonomyEscape({
         <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="180" y="240" textAnchor="middle">Neither point is assumed to lie in [0,1].</text>
 
         <line className="topic-ii-figure-support" x1="18" x2="342" y1="263" y2="263" />
-        <text className="topic-ii-figure-equation" style={mobileLabelTextStyle} x="18" y="292">planar oriented-area test</text>
+        <text className="topic-ii-figure-equation" style={mobileLabelTextStyle} x="18" y="292">planar signed-side test</text>
         <rect className="topic-ii-figure-half-plane" height="224" width="164" x="178" y="310" />
-        <line className="topic-ii-figure-ray" x1="178" x2="178" y1="306" y2="540" />
-        <line
-          className="topic-ii-figure-support"
-          markerEnd={`url(#${markerId})`}
-          x1="42"
-          x2="334"
-          y1="430"
-          y2="430"
-        />
+        <g data-figure-line="moving-closing-line">
+          <line className="topic-ii-figure-ray" x1="178" x2="178" y1="306" y2="540" />
+          <text className="topic-ii-figure-small" style={mobileSmallTextStyle} textAnchor="end" x="166" y="310">𝒮(·,τ)=0</text>
+        </g>
+        <g data-figure-line="final-contact-line">
+          <line
+            className="topic-ii-figure-support"
+            markerEnd={`url(#${markerId})`}
+            x1="42"
+            x2="334"
+            y1="430"
+            y2="430"
+          />
+          <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="22" y="415">K=aff(Cₘ,Cₘ₊₁)</text>
+        </g>
         <circle className="topic-ii-figure-point" cx="178" cy="339" r="6" />
         <circle className="topic-ii-figure-point" cx="178" cy="508" r="6" />
         <circle className="topic-ii-figure-point" cx="178" cy="430" r="6" />
@@ -739,12 +745,11 @@ function HolonomyEscape({
         <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="190" y="526">
           X<tspan baselineShift="sub" fontSize="14"> m+1</tspan>
         </text>
-        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="75" y="415">D̃=0</text>
         <text className="topic-ii-figure-label" style={mobileLabelTextStyle} x="92" y="457">z(u(τ))</text>
         <text className="topic-ii-figure-label topic-ii-figure-accent" style={mobileLabelTextStyle} x="222" y="457">Y(τ)=z(τ)</text>
-        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="260" y="367" textAnchor="middle">D̃(q,τ)&gt;0</text>
+        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="260" y="367" textAnchor="middle">𝒮(x,τ)&gt;0</text>
         <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="260" y="389" textAnchor="middle">open half-plane</text>
-        <text className="topic-ii-figure-equation" style={mobileLabelTextStyle} x="180" y="579" textAnchor="middle">D(τ,τ)=D̃(Y(τ),τ)&gt;0</text>
+        <text className="topic-ii-figure-equation" style={mobileLabelTextStyle} x="180" y="579" textAnchor="middle">d(τ,τ)=𝒮(Y(τ),τ)&gt;0</text>
       </>
     );
   }
@@ -778,39 +783,51 @@ function HolonomyEscape({
       <text className="topic-ii-figure-small" x="38" y="181">Neither point is assumed to lie in [0,1].</text>
 
       <line className="topic-ii-figure-support" x1="28" x2="732" y1="199" y2="199" />
-      <text className="topic-ii-figure-equation" x="38" y="225">planar oriented-area test</text>
+      <text className="topic-ii-figure-equation" x="38" y="225">planar signed-side test</text>
       <rect className="topic-ii-figure-half-plane" height="145" width="310" x="412" y="232" />
-      <line className="topic-ii-figure-ray" x1="412" x2="412" y1="228" y2="379" />
-      <line
-        className="topic-ii-figure-support"
-        markerEnd={`url(#${markerId})`}
-        x1="245"
-        x2="704"
-        y1="303"
-        y2="303"
-      />
+      <g data-figure-line="moving-closing-line">
+        <line className="topic-ii-figure-ray" x1="412" x2="412" y1="228" y2="379" />
+        <text className="topic-ii-figure-small" textAnchor="end" x="400" y="244">𝒮(·,τ)=0</text>
+      </g>
+      <g data-figure-line="final-contact-line">
+        <line
+          className="topic-ii-figure-support"
+          markerEnd={`url(#${markerId})`}
+          x1="245"
+          x2="704"
+          y1="303"
+          y2="303"
+        />
+        <text className="topic-ii-figure-small" x="245" y="287">K=aff(Cₘ,Cₘ₊₁)</text>
+      </g>
       <circle className="topic-ii-figure-point" cx="412" cy="250" r="6" />
       <circle className="topic-ii-figure-point" cx="412" cy="356" r="6" />
       <circle className="topic-ii-figure-point" cx="412" cy="303" r="6" />
       <circle className="topic-ii-figure-point topic-ii-figure-point-accent" cx="582" cy="303" r="8" />
       <text className="topic-ii-figure-small" x="424" y="246">Xₘ(τ)</text>
       <text className="topic-ii-figure-small" x="424" y="374">Xₘ₊₁</text>
-      <text className="topic-ii-figure-small" x="302" y="287">D̃=0</text>
       <text className="topic-ii-figure-label" x="320" y="331">z(u(τ))</text>
       <text className="topic-ii-figure-label topic-ii-figure-accent" x="542" y="331">Y(τ)=z(τ)</text>
-      <text className="topic-ii-figure-equation" x="567" y="261" textAnchor="middle">D̃(q,τ)&gt;0</text>
+      <text className="topic-ii-figure-equation" x="567" y="261" textAnchor="middle">𝒮(x,τ)&gt;0</text>
       <text className="topic-ii-figure-small" x="567" y="280" textAnchor="middle">open half-plane</text>
-      <text className="topic-ii-figure-equation" x="133" y="332" textAnchor="middle">D(τ,τ)&gt;0</text>
+      <text className="topic-ii-figure-equation" x="133" y="332" textAnchor="middle">d(τ,τ)&gt;0</text>
     </>
   );
 }
 
-function GlobalLedger() {
+function GlobalLedger({
+  indexSymbol,
+  markerId,
+}: {
+  indexSymbol: "j" | "k";
+  markerId: string;
+}) {
+  const targetLabel = indexSymbol === "k" ? "target side" : "target";
   const rows = [
-    ["D", "target j∈D", "s(j)∉M"],
-    ["R", "target j∈R", "s(j)∈M∖{b*}; s(R)=M∖{b*}"],
-    ["{c}", "target j=c", "s(c)=b*"],
-    ["A", "target j∈A", "s(j)∉M"],
+    ["D", `${targetLabel} ${indexSymbol}∈D`, `s(${indexSymbol})∉M`],
+    ["R", `${targetLabel} ${indexSymbol}∈R`, `s(${indexSymbol})∈M∖{b*}; s(R)=M∖{b*}`],
+    ["{c}", `${targetLabel} ${indexSymbol}=c`, "s(c)=b*"],
+    ["A", `${targetLabel} ${indexSymbol}∈A`, `s(${indexSymbol})∉M`],
   ] as const;
   return (
     <>
@@ -823,7 +840,7 @@ function GlobalLedger() {
             <rect className={label === "{c}" ? "topic-ii-figure-polar" : "topic-ii-figure-polygon"} x="52" y={y - 30} width="650" height="52" />
             <text className="topic-ii-figure-label" x="79" y={y + 3}>{label}</text>
             <text className="topic-ii-figure-small" x="157" y={y + 1}>{source}</text>
-            <path className="topic-ii-figure-transfer" d={"M345 " + (y - 5) + " L430 " + (y - 5)} markerEnd="url(#advanced-arrow-global-ledger)" />
+            <path className="topic-ii-figure-transfer" d={"M345 " + (y - 5) + " L430 " + (y - 5)} markerEnd={`url(#${markerId})`} />
             <text className="topic-ii-figure-small" x="458" y={y + 1}>{target}</text>
           </g>
         );
@@ -833,12 +850,13 @@ function GlobalLedger() {
   );
 }
 
-function GlobalLedgerMobile() {
+function GlobalLedgerMobile({ indexSymbol }: { indexSymbol: "j" | "k" }) {
+  const targetLabel = indexSymbol === "k" ? "target side" : "target";
   const rows = [
-    ["D", "target j∈D", "s(j)∉M"],
-    ["R", "target j∈R", "s(j)∈M∖{b*}; s(R)=M∖{b*}"],
-    ["{c}", "target j=c", "s(c)=b*"],
-    ["A", "target j∈A", "s(j)∉M"],
+    ["D", `${targetLabel} ${indexSymbol}∈D`, `s(${indexSymbol})∉M`],
+    ["R", `${targetLabel} ${indexSymbol}∈R`, `s(${indexSymbol})∈M∖{b*}; s(R)=M∖{b*}`],
+    ["{c}", `${targetLabel} ${indexSymbol}=c`, "s(c)=b*"],
+    ["A", `${targetLabel} ${indexSymbol}∈A`, `s(${indexSymbol})∉M`],
   ] as const;
 
   return (
@@ -1033,6 +1051,7 @@ export function AdvancedProofFigure({ kind }: { kind: AdvancedProofFigureKind })
   const hasMobileLayout = Boolean(mobileViewBox);
   const markerId = "advanced-arrow-" + kind;
   const mobileMarkerId = markerId + "-mobile";
+  const returnPartitionIndex = kind === "topic-vi-return-partition" ? "k" : "j";
   return (
     <figure className="topic-ii-concept-figure">
       <div className="topic-ii-concept-heading">
@@ -1064,7 +1083,9 @@ export function AdvancedProofFigure({ kind }: { kind: AdvancedProofFigureKind })
         {kind === "projective-corridor" ? <ProjectiveCorridor markerId={markerId} /> : null}
         {kind === "topic-vi-projective-chain" ? <TopicVIProjectiveChain markerId={markerId} /> : null}
         {kind === "holonomy-escape" ? <HolonomyEscape markerId={markerId} /> : null}
-        {kind === "global-ledger" || kind === "topic-vi-return-partition" ? <GlobalLedger /> : null}
+        {kind === "global-ledger" || kind === "topic-vi-return-partition" ? (
+          <GlobalLedger indexSymbol={returnPartitionIndex} markerId={markerId} />
+        ) : null}
         {kind === "unit-return" ? <UnitReturn /> : null}
         {kind === "farey-reflection" ? <FareyReflection /> : null}
         {kind === "jensen-sheet" ? <JensenSheet /> : null}
@@ -1091,7 +1112,9 @@ export function AdvancedProofFigure({ kind }: { kind: AdvancedProofFigureKind })
           </defs>
           {kind === "rotation-records" ? <RotationRecordsMobile /> : null}
           {kind === "return-towers" ? <ReturnTowersMobile markerId={mobileMarkerId} /> : null}
-          {kind === "global-ledger" || kind === "topic-vi-return-partition" ? <GlobalLedgerMobile /> : null}
+          {kind === "global-ledger" || kind === "topic-vi-return-partition" ? (
+            <GlobalLedgerMobile indexSymbol={returnPartitionIndex} />
+          ) : null}
           {kind === "projective-corridor" ? <ProjectiveCorridorMobile markerId={mobileMarkerId} /> : null}
           {kind === "topic-vi-projective-chain" ? <TopicVIProjectiveChainMobile markerId={mobileMarkerId} /> : null}
           {kind === "holonomy-escape" ? <HolonomyEscape markerId={mobileMarkerId} mobile /> : null}

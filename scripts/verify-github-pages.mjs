@@ -36,6 +36,10 @@ const pages = [
     "Rotation arithmetic, the first-return decomposition, and projective preparation",
   ],
   [
+    "proof/topic-vi/index.html",
+    "A projective deformation and the first-return step Δ = 1",
+  ],
+  [
     "prerequisites/index.html",
     "The small library this reader assumes",
   ],
@@ -67,12 +71,40 @@ for (const relativePath of [
   "proof/topic-iii/index.html",
   "proof/topic-iv/index.html",
   "proof/topic-v/index.html",
+  "proof/topic-vi/index.html",
 ]) {
   const html = await readFile(path.join(outputRoot, relativePath), "utf8");
   assert.match(html, /Forthcoming/);
   assert.doesNotMatch(
     html,
-    /href="\/karpelevic\/proof\/topic-(?:vi(?:\/[ab])?|vii|viii|ix|x|xi|xii(?:\/[ab])?|xiii|xiv)\//,
+    /href="\/karpelevic\/proof\/topic-(?:vii|viii|ix|x|xi|xii(?:\/[ab])?|xiii|xiv)\//,
+  );
+}
+
+{
+  const html = await readFile(
+    path.join(outputRoot, "proof/topic-vi/index.html"),
+    "utf8",
+  );
+  const visibleText = visibleTextFromHtml(html);
+  assert.match(html, /data-proof-route="topic-vi"/);
+  assert.match(html, /Notation and exact facts imported from Topics II–V/);
+  assert.match(
+    visibleText,
+    /Let V be the underlying\s+two-dimensional real vector space/i,
+  );
+  assert.match(
+    visibleText,
+    /there are integers q\s*(?:>|&gt;)\s*0 and\s+h\s*≥\s*0/i,
+  );
+  assert.match(html, /Plate VI\.1/);
+  assert.match(html, /Plate VI\.4/);
+  assert.match(html, /Open all proofs/);
+  assert.match(html, /Close all proofs/);
+  assert.doesNotMatch(html, /advanced-arrow-global-ledger[^"']*\)/);
+  assert.doesNotMatch(
+    visibleText,
+    /projective corridor|hereditary saturation|legal mutation|contact surgery|side-continuation|contact rotation|four-set accounting|first principal theorem|image-polygon vertex|invariant replacement polygon/i,
   );
 }
 
@@ -205,7 +237,18 @@ await access(path.join(outputRoot, ".nojekyll"));
 
 await assert.rejects(access(path.join(outputRoot, ".vite")));
 await assert.rejects(access(path.join(outputRoot, "code")));
-await assert.rejects(access(path.join(outputRoot, "proof/topic-vi")));
+for (const futureTopic of [
+  "topic-vii",
+  "topic-viii",
+  "topic-ix",
+  "topic-x",
+  "topic-xi",
+  "topic-xii",
+  "topic-xiii",
+  "topic-xiv",
+]) {
+  await assert.rejects(access(path.join(outputRoot, `proof/${futureTopic}`)));
+}
 const publicAssetEntries = await readdir(path.join(outputRoot, "assets"));
 assert.equal(
   publicAssetEntries.some((entry) => entry.endsWith(".js")),

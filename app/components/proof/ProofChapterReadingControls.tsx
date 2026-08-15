@@ -34,10 +34,10 @@ export function ProofChapterReadingControls() {
         <div role="group" aria-label="Complete proofs">
           <span>Proofs</span>
           <button data-chapter-proofs="open" type="button">
-            Open all
+            Open all proofs
           </button>
           <button data-chapter-proofs="close" disabled type="button">
-            Close all
+            Close all proofs
           </button>
         </div>
       </div>

@@ -262,7 +262,7 @@ function sourceRelationFor(number: number): string | undefined {
     return "Coxeter supplies the classical projective background. The precise polygonal chart lemma is proved here; no claim of priority is made here because the cited source does not state this exact formulation.";
   }
   if ([45, 48].includes(number)) {
-    return "This formulation and proof are supplied in this manuscript. Karpelevič’s argument contains a related construction, cited below; no claim of priority is made here.";
+    return "The exact statement and proof are supplied here. The cited literature provides historical context; no priority claim is made for this formulation.";
   }
   if (newResults.has(number)) {
     return "The displayed source is the closest antecedent. The exact statement used here appears to be new, but its older mechanism or conclusion is stated separately.";
@@ -331,9 +331,9 @@ const rawItems: readonly [
   [44, "Proposition", "Affine chart adapted to the selected boundary arc", "Chooses an affine chart in which the endpoint supporting lines are parallel and the selected boundary arc has strictly increasing edge slopes."],
   [45, "Lemma", "Location of the final intersection when Z₁ = X₀", "Locates the final intersection produced by the successive perspectivities for the special starting point Z₁=X₀."],
   [46, "Lemma", "Sign of t − u(t) near a fixed point of a real projectivity", "Finds arbitrarily small nonzero t for which t-u(t)>0."],
-  [47, "Theorem", "A small deformation moving the final image into the interior half-plane", "For N≥4, converts the scalar inequality τ-u(τ)>0 into the required planar half-plane condition while preserving strict convex order."],
+  [47, "Theorem", "A small deformation moving the final image into the interior half-plane", "For N≥4, converts the scalar inequality τ-u(τ)>0 into the required planar half-plane condition while keeping the displayed vertices distinct, in the same cyclic order, and in convex position."],
   [48, "Lemma", "Extension of the deformation to all polygon vertices", "Assuming the return-time bijection and four-case partition from Topic V, defines every deformed vertex and verifies all nonclosing incidences and side inequalities."],
-  [49, "Theorem", "Existence of an invariant deformation with one interior image vertex", "Chooses one small parameter for which the deformed polygon is invariant and exactly one image-polygon vertex lies in its interior."],
+  [49, "Theorem", "Existence of an invariant deformation with one interior image vertex", "Chooses one small parameter for which the deformed polygon is invariant and exactly one extreme point of its image lies in the polygon interior."],
   [50, "Theorem", "The first-return step satisfies Δ = 1", "For N≥4, uses Theorem 3.2's conclusion that every image vertex lies on the polygon boundary to prove that the first-return step is Δ=1."],
   [51, "Remark", "Boundary cases in the proof that Δ = 1", "Checks the limiting arithmetic values used in the proof that the first-return step is one."],
   [52, "Remark", "Local and global data used in the deformation argument", "Separates the local projective inequality from the global indexing, incidence, and side-inequality facts needed to use it."],
@@ -448,7 +448,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "For N≥4, why does a hypothetical first-return step Δ>1 produce an invariant polygon forbidden by criticality?",
     overview: [
       "Successive perspectivities along a convex boundary chain define a real projectivity. Its behaviour near a fixed point supplies a small parameter for which the final image crosses into the polygon-interior half-plane.",
-      "The return-time bijection then defines all N deformed vertices, and finitely many incidence and side inequalities remain valid simultaneously. The resulting invariant polygon has an image-polygon vertex in its interior, contradicting the boundary conclusion proved in Topic II and forcing Δ=1.",
+      "The return-time bijection then defines all N deformed vertices, and finitely many incidence and side inequalities remain valid simultaneously. The resulting invariant polygon has an extreme point of its image in the polygon interior, contradicting the boundary conclusion proved in Topic II and forcing Δ=1.",
     ],
     itemNumbers: [45, 46, 47, 48, 49, 50, 51, 52],
     manuscriptPages: "41–50",

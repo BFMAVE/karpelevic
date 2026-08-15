@@ -12,7 +12,7 @@ import { getPageTimestamp } from "../../lib/git-dates";
 export const metadata: Metadata = {
   title: "Topic VI — A Projective Deformation and the First-Return Step Δ = 1",
   description:
-    "For N≥4, one continuous chapter proving that a small projective deformation and the boundary condition for invariant replacement polygons force the first-return step to be one.",
+    "For N≥4, one continuous chapter proving that a small projective deformation and the boundary condition for invariant polygons force the first-return step to be one.",
 };
 
 const updatedAt = getPageTimestamp("app/data/topic-vi-reader.tsx");
@@ -37,7 +37,7 @@ export default function TopicVIPage() {
       manuscriptPages="41–51"
       overview={[
         "Under the standing assumption N≥4, an affine projective chart turns the selected boundary chain into a convex graph. Successive perspectivities define a real projective map, and its behaviour near a fixed point supplies a small signed deformation into the polygon-interior half-plane.",
-        "The return-time bijection defines all N deformed vertices. Exact identities and finitely many open inequalities make the resulting polygon invariant, while one image-polygon vertex lies in its interior. Topic II rules this out for an N-critical map, so the first-return step is Δ=1.",
+        "The return-time bijection defines all N deformed vertices. Exact identities and finitely many open inequalities make the resulting polygon invariant, while one extreme point of its image lies in the polygon interior. Topic II rules this out for an N-critical map, so the first-return step is Δ=1.",
       ]}
       provedHere={
         <p>

@@ -216,6 +216,10 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.match(topicVIText, /9 results/);
   assert.match(topicVIText, /7 complete proofs/);
   assert.match(topicVIText, /Notation and exact facts imported from Topics II–V/);
+  assert.match(topicVIText, /Let V be the underlying two-dimensional real vector space/i);
+  assert.match(topicVIText, /let T:V→V be the fixed invertible real-linear contraction/i);
+  assert.match(topicVIText, /Ext\(Q\) denotes its set of extreme points and int\(Q\) its interior in V/i);
+  assert.match(topicVIText, /there are integers q>0 and h≥0 such that every return time H\s*j belongs to \{q,q\+h\}/i);
   assert.match(topicVIText, /Assume N\s*≥\s*4\s*\. If φ\s*>\s*δ , then Δ\s*=\s*1/i);
   assert.match(topicVIText, /Supporting line ℒᵢ and its slope ℓᵢ/);
   assert.match(
@@ -225,13 +229,18 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.match(topicVIText, /M∖\{b\*\}/);
   assert.match(topicVIText, /supporting lines ℒ\s*i meeting P only at X\s*i/i);
   assert.match(topicVIText, /These are exactly the boundary-contact data of Definition 7\.4/i);
-  assert.match(topicVIText, /Planar determinant D̃ and its line restriction D/);
+  assert.match(topicVIText, /Planar line functional 𝒮 and its one-dimensional restriction d/);
+  assert.match(topicVIText, /𝒮\(x,τ\)>0 defines (?:an?|the) open half-plane/);
+  assert.match(topicVIText, /d\(t,τ\)=γ\(τ\)\(t[-−]u\(τ\)\)/);
   assert.match(topicVIText, /Side index kᵢ/);
   assert.match(topicVIText, /u\(τ\)<τ/);
   assert.match(topicVIText, /The first-return step satisfies Δ\s*=\s*1/);
   assert.match(topicVIText, /Contact and first-return structure of an N-critical invariant polygon/);
+  assert.match(topicVIText, /First-return cases/);
   assert.match(topicVIText, /A half-open contact assignment is a cyclic-order-preserving bijection χ/);
   assert.match(topicVIText, /permitted local vertex replacement at e/);
+  assert.match(topicVIText, /replaces head\(e\) by v′/);
+  assert.doesNotMatch(topicVIText, /replaces h\(e\) by/);
   assert.match(topicVIText, /induced bijection between the old and new side sets, denoted by b in Theorem 1\.3/);
   assert.match(topicVIText, /formal theorem calls this operation a permitted local vertex replacement/);
   assert.match(topicVIText, /relative-interior contact set is I/);
@@ -249,6 +258,10 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
     /corridor holonomy|local holonomy|nonidentity holonomy|holonomy coordinate/i,
   );
   assert.doesNotMatch(topicVIText, /Part A|Part B|Topic VI-A|Topic VI-B/i);
+  assert.doesNotMatch(
+    topicVIText,
+    /first principal theorem|four-set accounting|image-polygon vertex|invariant replacement polygon|strict convex order/i,
+  );
 
   const topicVICard = (number, nextNumber) => {
     const start = topicVI.indexOf(`id="part-i-item-${number}"`);
