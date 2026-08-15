@@ -1311,7 +1311,7 @@ full local source history remain later site milestones.
   Topics I–V return HTTP 200; Topic VI returns HTTP 404, and Topics VI–XIV
   remain absent from the public package.
 
-## Current milestone — Topic V small-order scope and the critical-triangle exception (local, 15 August 2026)
+## Current milestone — Topic V small-order scope and the critical-triangle exception (published 15 August 2026)
 
 - **The scope split is now explicit:** the finite-rotation theorem remains
   valid for (N\geq2), while the projective no-skipping and return-monodromy
@@ -1350,6 +1350,10 @@ full local source history remain later site milestones.
   `6e709415df42345e2b182ae2565aab8971e28f2c8d1a43740fe9a583c1a6c337`;
   all 32 tests, ESLint, `git diff --check`, the max-5 GitHub Pages verifier,
   and the max-7 standalone-export audit pass.
-- **Publication status:** local only. The current public site remains at its
-  previously approved state; this scope correction has not yet been pushed.
-  Next: author review of Topic V at <http://localhost:3000/proof/topic-v>.
+- **Publication status:** source commit `b83de86`; static-only public Pages
+  commit `3c6bb3c`. Topic V is live at
+  <https://bfmave.github.io/karpelevic/proof/topic-v/> and is byte-identical
+  to the audited export with SHA-256
+  `52bd444cde88618006d8f3984966149f18440d5bb882ba9b5216f83f4d77198d`.
+  Topics I–V return HTTP 200; Topic VI returns HTTP 404 and Topics VI–XIV
+  remain absent and unlinked. Next: continue reviewing Topic VI locally.
