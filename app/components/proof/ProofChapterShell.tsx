@@ -205,7 +205,7 @@ export function ProofChapterShell({
               <span>
                 End of Topic {roman}{partLabel}
               </span>
-              <strong>This chapter is complete</strong>
+              <strong>All results assigned to this topic are proved</strong>
             </div>
             {neighbours.previous &&
             isProofTopicAvailable(neighbours.previous.topicNumber) ? (

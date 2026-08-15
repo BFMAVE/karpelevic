@@ -100,6 +100,19 @@ const topicVContactNotation: AdvancedProofSetup = {
       we use <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">h=0</annotation></semantics></math>.
     </p>
     <p>
+      This is the precise bridge to the record terminology used below. If
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>φ</mi><mo>&lt;</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">\varphi&lt;N</annotation></semantics></math>,
+      then <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">h&gt;0</annotation></semantics></math>
+      is a record time: its residue is
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>−</mo><mi>φ</mi></mrow><annotation encoding="application/x-tex">N-\varphi</annotation></semantics></math>,
+      every earlier residue is smaller, and its deficit is therefore
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mi>φ</mi></math>.
+      If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>φ</mi><mo>=</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">\varphi=N</annotation></semantics></math>,
+      then <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">h=0</annotation></semantics></math>
+      is the declared time-zero record, whose deficit is
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mi>φ</mi></mrow><annotation encoding="application/x-tex">N=\varphi</annotation></semantics></math>.
+    </p>
+    <p>
       Plate V.1 also mentions the <strong>Klein sail</strong>. In this planar
       setting it is the relevant boundary of the convex hull of the nonzero
       lattice points in the cone between two rays. The proof uses the complete
@@ -155,8 +168,8 @@ const topicVProjectiveScope: AdvancedProofSetup = {
         <p>
           Let e₀,e₁,e₂ be the standard coordinate vectors of ℝ³, let
           H={u∈ℝ³:u₀+u₁+u₂=0}, let 𝟙=(1,1,1), and put xᵢ=eᵢ−𝟙/3. The
-          triangle Pₐ=conv{x₀,x₁,x₂} lies in H. Because Bₐ is
-          doubly stochastic, it preserves H and fixes 𝟙. Its restriction
+          triangle P=conv{x₀,x₁,x₂} lies in H; it is independent of a.
+          Because Bₐ is doubly stochastic, it preserves H and fixes 𝟙. Its restriction
           Tₐ=Bₐ|H therefore satisfies
         </p>
         <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><mrow><msub><mi>T</mi><mi>a</mi></msub><msub><mi>x</mi><mn>0</mn></msub><mo>=</mo><mi>a</mi><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>a</mi><mo>)</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo></mrow></mtd></mtr><mtr><mtd><mrow><msub><mi>T</mi><mi>a</mi></msub><msub><mi>x</mi><mn>1</mn></msub><mo>=</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>a</mi><mo>)</mo><msub><mi>x</mi><mn>0</mn></msub><mo>+</mo><mi>a</mi><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo></mrow></mtd></mtr><mtr><mtd><mrow><msub><mi>T</mi><mi>a</mi></msub><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><mi>a</mi><msub><mi>x</mi><mn>0</mn></msub><mo>+</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>a</mi><mo>)</mo><msub><mi>x</mi><mn>1</mn></msub><mo>.</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}T_ax_0&amp;=ax_1+(1-a)x_2,\\T_ax_1&amp;=(1-a)x_0+ax_2,\\T_ax_2&amp;=ax_0+(1-a)x_1.\end{aligned}</annotation></semantics></math>
@@ -170,7 +183,7 @@ const topicVProjectiveScope: AdvancedProofSetup = {
           Tₐx<sub>i−2</sub>∈relint[x<sub>i−1</sub>,x<sub>i</sub>] for every
           cyclic label i. Hence all three contacts lie in relative interiors,
           and the page&apos;s convention gives (φ,κ)=(3,2). Thus Tₐ is a nonreal
-          contraction and TₐPₐ⊆Pₐ, so three vertices suffice.
+          contraction and TₐP⊆P, so three vertices suffice.
           No nondegenerate polygon has fewer than three vertices, hence
           ν<sub>poly</sub>(Tₐ)=3.
         </p>
@@ -184,14 +197,18 @@ const topicVProjectiveScope: AdvancedProofSetup = {
           the identity AC=tTₐA makes ker(A) invariant under C, and the induced
           map on ℝ³/ker(A) is conjugate to tTₐ. It therefore has eigenvalues
           tλₐ and tλ̄ₐ. Column sums equal to one give 𝟙ᵀC=𝟙ᵀ, so 1 is a left
-          eigenvalue of C and hence an eigenvalue of C. These are all three
-          eigenvalues of the 3×3 matrix C, and therefore
+          eigenvalue of C and hence an eigenvalue of C. Counted with algebraic
+          multiplicity, 1, tλₐ, and tλ̄ₐ are all three eigenvalues of the
+          3×3 matrix C, and therefore
         </p>
         <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><mrow><mi mathvariant="normal">tr</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo>+</mo><mi>t</mi><msub><mi>λ</mi><mi>a</mi></msub><mo>+</mo><mi>t</mi><msub><mover><mi>λ</mi><mo>¯</mo></mover><mi>a</mi></msub></mrow></mtd></mtr><mtr><mtd><mrow><mo>=</mo><mn>1</mn><mo>+</mo><mn>2</mn><mi>t</mi><mi mathvariant="normal">Re</mi><mo stretchy="false">(</mo><msub><mi>λ</mi><mi>a</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo>&lt;</mo><mn>0</mn><mo>.</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}\operatorname{tr}(C)&amp;=1+t\lambda_a+t\overline\lambda_a,\\&amp;=1+2t\operatorname{Re}(\lambda_a)=1-t&lt;0.\end{aligned}</annotation></semantics></math>
         <p>
           This is impossible because the trace of a nonnegative matrix is the
           sum of its nonnegative diagonal entries. Therefore no outward
           enlargement tTₐ has an invariant triangle, and Tₐ is 3-critical.
+          Explicitly: P is an invariant triangle for Tₐ, whereas for every
+          t&gt;1 the map tTₐ admits no invariant polygon with at most three
+          vertices.
         </p>
         <p>
           Finally, the residues for (N,κ)=(3,2) begin 0,2,1,0. Time zero has
@@ -376,7 +393,7 @@ const guides: readonly ReaderResultGuide[] = [
     vocabulary: [
       vocabulary(
         "Preimage supporting line",
-        "The line Lᵢ=λ^{-Hᵢ} aff(Eᵣ₍ᵢ₎). Applying λ^{Hᵢ} sends it to the line containing the side reached by the return. The lemma proves that Lᵢ supports P and exposes xᵢ.",
+        "The line ℓᵢ=λ^{-Hᵢ} aff(Eᵣ₍ᵢ₎). Applying λ^{Hᵢ} sends it to the line containing the side reached by the return. The lemma proves that ℓᵢ supports P and exposes xᵢ.",
       ),
       vocabulary(
         "Index where the return height changes",
@@ -387,12 +404,12 @@ const guides: readonly ReaderResultGuide[] = [
       "For most indices, neighbouring bases return to neighbouring sides, which immediately shows that the supporting line exposes one vertex. Only the interface between short and long towers can break that pattern, so the proof isolates and checks it directly.",
     proofSteps: [
       step(
-        "Use the support-face test",
-        "A supporting line at xᵢ is strict once neither neighbouring vertex lies on it.",
+        "Check the two adjacent vertices",
+        "A supporting line through xᵢ exposes only xᵢ exactly when neither adjacent vertex xᵢ₋₁ nor xᵢ₊₁ lies on that line.",
       ),
       step(
         "Transport the question forward",
-        "Because λ^{Hᵢ} is invertible, test the neighbour images against the line of Eᵣ₍ᵢ₎ instead of testing the original vertices against Lᵢ.",
+        "Because λ^{Hᵢ} is invertible, test the neighbour images against the line of Eᵣ₍ᵢ₎ instead of testing the original vertices against ℓᵢ.",
       ),
       step(
         "Handle equal-height neighbours",
@@ -440,7 +457,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "Whichever orientation is selected, the arc has at least two internal steps and omits at least one polygon side.",
+      "In the orientation determined by the applicable branch inequality, the arc has at least two internal steps and omits at least one polygon side.",
   },
   {
     itemNumber: 42,
@@ -455,8 +472,8 @@ const guides: readonly ReaderResultGuide[] = [
         "The map r adds Δ modulo φ in 𝓑, and s=r⁻¹ subtracts Δ modulo φ.",
       ),
       vocabulary(
-        "The sets M and M°",
-        "The displayed formulas choose an interval M of base indices and a distinguished endpoint b*. The set M° is M with b* removed.",
+        "The set M and its distinguished endpoint",
+        "The displayed formulas choose an interval M of base indices and one distinguished endpoint b*. Whenever that endpoint is omitted, the set is written explicitly as M∖{b*}.",
       ),
       vocabulary(
         "The set D",
@@ -464,7 +481,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       vocabulary(
         "The set R and the index c",
-        "They are the two parts of r(M): R=r(M°) and c=r(b*), so r(M)=R⊔{c}.",
+        "They are the two parts of r(M): R=r(M∖{b*}) and c=r(b*), so r(M)=R⊔{c}.",
       ),
       vocabulary(
         "The set A",
@@ -481,15 +498,15 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Compute the forward image",
-        "On M° the labels advance without wrap except at the explicit equality 2Δ=φ+1. This gives R and isolates r(b*)=c.",
+        "On M∖{b*} the labels advance without wrap except at the explicit equality 2Δ=φ+1. This gives R and isolates r(b*)=c.",
       ),
       step(
         "Compute inverse sources",
-        "The inverse formula proves sources for D lie outside M, while s(R)=M° and s(c)=b*.",
+        "The inverse formula proves sources for D lie outside M, while s(R)=M∖{b*} and s(c)=b*.",
       ),
       step(
         "Verify the inverse-source identities",
-        "Apply s=r⁻¹ to D, R, {c}, and A. This proves s(D)∩M=∅, s(R)=M°, s(c)=b*, and s(A)∩M=∅.",
+        "Apply s=r⁻¹ to D, R, {c}, and A. This proves s(D)∩M=∅, s(R)=M∖{b*}, s(c)=b*, and s(A)∩M=∅.",
       ),
       step(
         "Repeat in the reverse branch",
@@ -568,8 +585,8 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Send J to infinity",
-        "Use a projective automorphism Φ(z)=(Az+b)/ω(z). The affine denominator ω has one constant sign on P and, because P is compact and disjoint from its zero line, |ω| is bounded away from zero there. After changing the homogeneous representative's sign, take ω>0 on P. Formula (7.22) then writes every image of a segment point as a positive convex combination of endpoint images.",
-        "The strict positivity and positive lower bound for ω are what keep the map finite on P and preserve the relevant segments and their relative interiors.",
+        "Use a projective automorphism Φ(z)=(Az+b)/ω(z). The affine denominator ω has one constant sign on P and, because P is compact and disjoint from its zero line, |ω| is bounded away from zero there. After changing the homogeneous representative's sign, take ω>0 on P and choose ε₀>0 with ω(z)≥ε₀ for every z∈P. Formula (7.22) then writes every image of a segment point as a positive convex combination of endpoint images.",
+        "The uniform bound ω≥ε₀ keeps the map finite on P and preserves the relevant segments and their relative interiors.",
       ),
       step(
         "Read the new geometry",
@@ -613,8 +630,26 @@ export const topicVGroups: readonly AdvancedProofGroup[] = [
     results: take([70, 37, 38, 39]),
   },
   {
+    number: "Interlude",
+    title: "Exceptional case N=3",
+    introduction: (
+      <p>
+        The projective unit-return argument requires N≥4. Before imposing
+        that standing assumption, this complete calculation shows why: a
+        3-critical triangle can have first-return step Δ=2.
+      </p>
+    ),
+    formalSetups: [
+      {
+        ...topicVProjectiveScope,
+        title: "A complete 3-critical example with Δ=2",
+      },
+    ],
+    results: [],
+  },
+  {
     number: "II",
-    title: "Supporting lines at the return vertices",
+    title: "Supporting lines at the base vertices",
     introduction: (
       <p>
         The tower tops determine preimage supporting lines. The only index
@@ -627,7 +662,6 @@ export const topicVGroups: readonly AdvancedProofGroup[] = [
         ...topicVReturnSetup,
         title: "Scope N≥4, return heights, and preimage supporting lines",
       },
-      topicVProjectiveScope,
       topicVArithmeticGeometryDictionary,
     ],
     results: take([40]),
@@ -639,7 +673,7 @@ export const topicVGroups: readonly AdvancedProofGroup[] = [
       <p>
         One of the two cyclic orientations gives consecutive boundary vertices
         while omitting at least one side. The corresponding index formulas partition every source–target pair
-        and record whether its inverse source lies outside M, in M°, or at b*.
+        and record whether its inverse source lies outside M, in {"M∖{b*}"}, or at b*.
       </p>
     ),
     formalSetups: [

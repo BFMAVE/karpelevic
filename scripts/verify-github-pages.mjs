@@ -106,11 +106,14 @@ for (const relativePath of [
   assert.match(html, /\(A0\)/);
   assert.match(html, /\(A1\)/);
   assert.match(html, /\(A4\)/);
-  assert.match(html, /multiplication by .*λ.*is.*N.*critical/is);
+  assert.match(html, /Multiplication by λ is <i>N<\/i>-critical/);
   assert.doesNotMatch(html, /assumptions \(A1\)–\(A4\)/);
   assert.match(html, /The label-preserving map b/);
   assert.match(html, /The cyclic permutation σ/);
-  assert.match(html, /comp\(<i>S<\/i>\).*number of connected components/s);
+  assert.match(
+    visibleText,
+    /Write\s+comp\(\s*S\s*\)\s+for the number of connected components/i,
+  );
   assert.match(html, /φ=\|<i>S<\/i>\|/);
   assert.match(html, /Standing assumption for Section 5/);
   assert.equal(
@@ -165,6 +168,25 @@ for (const relativePath of [
   assert.match(html, /data-incidence-verified="true"/);
   assert.match(visibleText, /unimodular record-vector chain/i);
   assert.match(visibleText, /does not yet prove Δ=1/i);
+  assert.match(visibleText, /Exceptional case N=3/);
+  assert.match(
+    visibleText,
+    /This is the precise bridge to the record terminology used below/i,
+  );
+  assert.match(
+    visibleText,
+    /every earlier residue is smaller, and its deficit is therefore\s+φ/i,
+  );
+  assert.match(
+    visibleText,
+    /declared time-zero record, whose deficit is\s+N\s*=\s*φ/i,
+  );
+  assert.match(visibleText, /M∖\{b\*\}/);
+  assert.match(visibleText, /ω\(z\)≥ε₀ for every z∈P/);
+  assert.match(visibleText, /All results assigned to this topic are proved/);
+  assert.doesNotMatch(visibleText, /Supporting lines at the return vertices/i);
+  assert.doesNotMatch(visibleText, /These are all three eigenvalues/i);
+  assert.doesNotMatch(visibleText, /M°/);
   assert.doesNotMatch(
     visibleText,
     /\b(?:field|fields|ledger|ownership|owned|owns|seed|anchor|anchors|conservation law|virtual short return|corridor holonomy|strict convex polygon|strict convexity)\b/i,

@@ -45,7 +45,7 @@ export default function TopicVPage() {
           Lemma A.6 supplies the complete lattice dependency.
         </p>
       }
-      question="How does one cyclic interval determine its first-return towers, and why does the projective argument force Δ=1 only when N≥4?"
+      question="How does one cyclic interval determine its first-return towers, and how does Topic V prepare the N≥4 proof of Δ=1 completed in Topic VI?"
       routeKey="topic-v"
       sourceIds={topicVSourceIds}
       stats={[

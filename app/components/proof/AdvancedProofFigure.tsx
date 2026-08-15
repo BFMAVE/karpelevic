@@ -12,29 +12,31 @@ type FigureCopy = {
   title: string;
   description: string;
   caption: string;
+  status?: string;
 };
 
 const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
   "rotation-records": {
     title: "Upper records of the rotation by five modulo thirteen",
     description:
-      "A residue strip highlights record residues zero, five, ten, and twelve. A second panel plots the corresponding integer record vectors zero one, one one, two one, and five two beside the boundary ray on which L of h comma b equals zero.",
+      "A residue strip uses labelled horizontal reference guides at residues zero, five, ten, and twelve, the four record levels. A second panel plots the corresponding integer record vectors zero one, one one, two one, and five two beside the boundary ray on which L of h comma b equals zero.",
     caption:
-      "Plate V.1. For N=13 and κ=5, the upper-record times are 0, 1, 2, and 5, with deficits 13, 8, 3, and 1. The lower panel shows their unimodular record-vector chain beside the boundary ray L(h,b)=0 of the relevant cone. The Klein sail is the corresponding convex-hull boundary; the record-vector chain retains collinear intermediate points, which need not be sail vertices.",
+      "Plate V.1. For N=13 and κ=5, the upper-record times are 0, 1, 2, and 5, with residues 0, 5, 10, and 12 and deficits 13, 8, 3, and 1. The labelled horizontal lines are residue-scale guides. The lower panel shows the corresponding unimodular record-vector chain beside the boundary ray L(h,b)=0 of the relevant cone. The Klein sail is the corresponding convex-hull boundary; the record-vector chain retains collinear intermediate points, which need not be sail vertices.",
   },
   "return-towers": {
     title: "The two-height return section",
     description:
-      "Eight base columns contain three towers explicitly labelled H sub i equals one and five towers explicitly labelled H sub i equals two, giving thirteen states. One arrow illustrates addition of five modulo eight on the base-index set.",
+      "Eight base columns contain three towers of height one and five towers of height two, giving thirteen cells. Every cell is labelled by its state F of t comma i, and each tower is labelled by its height. One arrow illustrates addition of five modulo eight on the base-index set.",
     caption:
-      "Plate V.2. The record pair V=(1,1), V′=(2,1) gives ν=8, Δ=5, q=1, and h=1. Three base indices have return height Hᵢ=q=1, while five have Hᵢ=q+h=2. Thus qν+hΔ=13 appears as three one-cell towers plus five two-cell towers.",
+      "Plate V.2. The record pair V=(1,1), V′=(2,1) gives ν=8, Δ=5, q=1, and h=1. Three base indices have return height Hᵢ=q=1, while five have Hᵢ=q+h=2. Each cell carries its actual label F(t,i)=[i+5t]₁₃. Thus qν+hΔ=13 appears as three one-cell towers plus five two-cell towers.",
   },
   "projective-corridor": {
-    title: "Composition of perspectivities along the boundary arc",
+    status: "Numerically constructed · incidence verified",
+    title: "Numerically constructed, incidence-verified projective chain",
     description:
-      "An exact incidence construction maps the source line A one through X zero and X one to the target line K through C four and C five. For i from two through four, Y i lies on the supporting line script L i, while the auxiliary projection line through Y i minus one and Y i passes through the centre C i. The final auxiliary projection line passes through X five.",
+      "A numerically constructed, incidence-verified diagram maps the source line A one through X zero and X one to the target line K through C four and C five. Its eight tested collinearities have maximum absolute determinant residual about 3.3 times ten to the minus eleven. It displays a selected local boundary arc, not a full polygon.",
     caption:
-      "Plate V.4. Exact incidence construction. The source is A₁=aff(X₀,X₁), and the target is K=aff(C₄,C₅). For 2≤i≤4, the point Yᵢ lies on the supporting line ℒᵢ, while the auxiliary projection line through Yᵢ₋₁ and Yᵢ passes through its centre Cᵢ. The final auxiliary line through Y₄ and Y₅ passes through the last projection centre X₅. Composing these perspectivities gives a projectivity A₁→K.",
+      "Plate V.4. Numerically constructed, incidence-verified projective chain on a selected local boundary arc (not a full polygon). The source is A₁=aff(X₀,X₁), and the target is K=aff(C₄,C₅). For 2≤i≤4, the point Yᵢ lies on the supporting line ℒᵢ, while the auxiliary projection line through Yᵢ₋₁ and Yᵢ passes through its centre Cᵢ. The final auxiliary line through Y₄ and Y₅ passes through the last projection centre X₅. All eight tested collinearities pass, with maximum absolute determinant residual approximately 3.3×10⁻¹¹. Composing these perspectivities gives a projectivity A₁→K.",
   },
   "holonomy-escape": {
     title: "A scalar projectivity controls the closing half-plane",
@@ -48,7 +50,7 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
     description:
       "The base-index set ℬ, calligraphic B, is partitioned into D, R, the singleton containing c, and A. Each row states both the target-membership condition and the exact condition on its inverse source under s.",
     caption:
-      "Plate V.3. The base-index set ℬ is partitioned as ℬ=D⊔R⊔{c}⊔A. Here M is the selected set of source indices, M° is that set without its distinguished endpoint b*, and s is the inverse return map. For j∈D∪A, s(j)∉M; for j∈R, s(j)∈M° and indeed s(R)=M°; finally s(c)=b*. This classifies the source–target pairs combinatorially; no deformation is assumed.",
+      "Plate V.3. The base-index set ℬ is partitioned as ℬ=D⊔R⊔{c}⊔A. Here M is the selected set of source indices, M∖{b*} is that set without its distinguished endpoint b*, and s is the inverse return map. For j∈D∪A, s(j)∉M; for j∈R, s(j)∈M∖{b*} and indeed s(R)=M∖{b*}; finally s(c)=b*. This classifies the source–target pairs combinatorially; no deformation is assumed.",
   },
   "unit-return": {
     title: "Incidence pattern of the forbidden interior image vertex",
@@ -73,6 +75,10 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
   },
 };
 
+const recordResidueGuides = [0, 5, 10, 12] as const;
+const mobileSmallTextStyle = { fontSize: 14 } as const;
+const mobileLabelTextStyle = { fontSize: 15 } as const;
+
 function RotationRecords() {
   const residues = Array.from({ length: 13 }, (_, time) => (5 * time) % 13);
   const recordTimes = [0, 1, 2, 5] as const;
@@ -93,7 +99,23 @@ function RotationRecords() {
 
   return (
     <>
-      <line className="topic-ii-figure-support" x1="58" x2="702" y1="105" y2="105" />
+      {recordResidueGuides.map((residue) => {
+        const y = 105 - 3.2 * residue;
+        const labelOnRight = residue === 10;
+        return (
+          <g data-residue-guide={residue} key={`residue-guide-${residue}`}>
+            <line className="topic-ii-figure-support" x1="58" x2="702" y1={y} y2={y} />
+            <text
+              className="topic-ii-figure-small"
+              x={labelOnRight ? 712 : 48}
+              y={y + 4}
+              textAnchor={labelOnRight ? "start" : "end"}
+            >
+              {residue}
+            </text>
+          </g>
+        );
+      })}
       {residues.map((residue, time) => {
         const x = 68 + time * 51;
         const isRecord = recordTimes.includes(time as (typeof recordTimes)[number]);
@@ -110,7 +132,7 @@ function RotationRecords() {
           </g>
         );
       })}
-      <text className="topic-ii-figure-small" x="55" y="51">residue [5t]₁₃</text>
+      <text className="topic-ii-figure-small" x="58" y="43">residue [5t]₁₃</text>
       <text className="topic-ii-figure-small" x="380" y="151" textAnchor="middle">time t</text>
       <line className="topic-ii-figure-ray" x1={latticeOrigin.x} x2="394" y1={latticeOrigin.y} y2={latticeOrigin.y} />
       <line className="topic-ii-figure-ray" x1={latticeOrigin.x} x2={latticeOrigin.x} y1={latticeOrigin.y} y2="181" />
@@ -170,12 +192,30 @@ function RotationRecordsMobile() {
   return (
     <>
       <text className="topic-ii-figure-equation" x="18" y="26">residue orbit [5t]₁₃</text>
+      <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="18" y="52">labelled residue guides</text>
       {rows.map((row, rowIndex) => {
         const firstTime = rowIndex === 0 ? 0 : 7;
         const baseline = rowIndex === 0 ? 140 : 286;
         return (
           <g key={rowIndex}>
-            <line className="topic-ii-figure-support" x1="36" x2="326" y1={baseline} y2={baseline} />
+            {recordResidueGuides.map((residue) => {
+              const y = baseline - 5.4 * residue;
+              const labelOnRight = residue === 10;
+              return (
+                <g data-residue-guide={residue} key={`mobile-residue-guide-${rowIndex}-${residue}`}>
+                  <line className="topic-ii-figure-support" x1="36" x2="326" y1={y} y2={y} />
+                  <text
+                    className="topic-ii-figure-small"
+                    style={mobileSmallTextStyle}
+                    x={labelOnRight ? 331 : 31}
+                    y={y + 5}
+                    textAnchor={labelOnRight ? "start" : "end"}
+                  >
+                    {residue}
+                  </text>
+                </g>
+              );
+            })}
             {row.map((residue, index) => {
               const time = firstTime + index;
               const x = 46 + index * 46;
@@ -188,18 +228,19 @@ function RotationRecordsMobile() {
                     cy={baseline - 5.4 * residue}
                     r={isRecord ? 6 : 3.5}
                   />
-                  <text className="topic-ii-figure-small" x={x} y={baseline + 20} textAnchor="middle">{time}</text>
+                  <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x={x} y={baseline + 21} textAnchor="middle">{time}</text>
                 </g>
               );
             })}
-            <text className="topic-ii-figure-small" x="328" y={baseline + 20} textAnchor="end">t</text>
+            <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="347" y={baseline + 21} textAnchor="middle">t</text>
           </g>
         );
       })}
       <text className="topic-ii-figure-equation" x="18" y="347">record-vector chain</text>
-      <text className="topic-ii-figure-small" x="18" y="370">L(h,b)=5h−13b; boundary ray: L(h,b)=0</text>
+      <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="18" y="370">L(h,b)=5h−13b</text>
+      <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="18" y="390">boundary ray: L(h,b)=0</text>
       <line className="topic-ii-figure-ray" x1={origin.x} x2="338" y1={origin.y} y2={origin.y} />
-      <line className="topic-ii-figure-ray" x1={origin.x} x2={origin.x} y1={origin.y} y2="390" />
+      <line className="topic-ii-figure-ray" x1={origin.x} x2={origin.x} y1={origin.y} y2="405" />
       <line className="topic-ii-figure-support" x1={origin.x} x2={coneEnd.x} y1={origin.y} y2={coneEnd.y} />
       <path
         className="topic-ii-figure-edge"
@@ -213,12 +254,12 @@ function RotationRecordsMobile() {
         return (
           <g key={record.time}>
             <circle className="topic-ii-figure-point topic-ii-figure-point-accent" cx={p.x} cy={p.y} r="6" />
-            <text className="topic-ii-figure-small" x={p.x + 8} y={p.y - 10}>({record.time},{record.b})</text>
+            <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x={p.x + 8} y={p.y - 10}>({record.time},{record.b})</text>
           </g>
         );
       })}
-      <text className="topic-ii-figure-small" x="42" y="397">b</text>
-      <text className="topic-ii-figure-small" x="342" y="556">h</text>
+      <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="42" y="416">b</text>
+      <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="342" y="556">h</text>
     </>
   );
 }
@@ -232,10 +273,13 @@ function ReturnTowers() {
         return (
           <g key={index}>
             {Array.from({ length: height }, (_, level) => (
-              <rect className={level === 0 ? "topic-ii-figure-polygon" : "topic-ii-figure-polar"} height="42" key={level} width="48" x={x} y={272 - level * 48} />
+              <g data-tower-state={`F(${level},${index + 1})`} key={level}>
+                <rect className={level === 0 ? "topic-ii-figure-polygon" : "topic-ii-figure-polar"} height="42" width="48" x={x} y={272 - level * 48} />
+                <text className="topic-ii-figure-small" x={x + 24} y={299 - level * 48} textAnchor="middle">F({level},{index + 1})</text>
+              </g>
             ))}
-            <text className="topic-ii-figure-small" x={x + 24} y="333" textAnchor="middle">{index + 1}</text>
-            <text className="topic-ii-figure-small" x={x + 24} y="298" textAnchor="middle">Hᵢ={height}</text>
+            <text className="topic-ii-figure-small" x={x + 24} y={272 - (height - 1) * 48 - 12} textAnchor="middle">Hᵢ={height}</text>
+            <text className="topic-ii-figure-small" x={x + 24} y="333" textAnchor="middle">i={index + 1}</text>
           </g>
         );
       })}
@@ -259,23 +303,25 @@ function ReturnTowersMobile({ markerId }: { markerId: string }) {
   return (
     <>
       <text className="topic-ii-figure-equation" x="180" y="34" textAnchor="middle">3·1 + 5·2 = 13</text>
-      <text className="topic-ii-figure-small" x="180" y="60" textAnchor="middle">base return: i ↦ i+5 (mod 8)</text>
+      <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="180" y="60" textAnchor="middle">base return: i ↦ i+5 (mod 8)</text>
       {heights.map((height, index) => {
         const { x, y } = position(index);
         return (
           <g key={index}>
             {Array.from({ length: height }, (_, level) => (
-              <rect
-                className={level === 0 ? "topic-ii-figure-polygon" : "topic-ii-figure-polar"}
-                height="42"
-                key={level}
-                width="52"
-                x={x - 26}
-                y={y - level * 48}
-              />
+              <g data-tower-state={`F(${level},${index + 1})`} key={level}>
+                <rect
+                  className={level === 0 ? "topic-ii-figure-polygon" : "topic-ii-figure-polar"}
+                  height="42"
+                  width="52"
+                  x={x - 26}
+                  y={y - level * 48}
+                />
+                <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x={x} y={y - level * 48 + 27} textAnchor="middle">F({level},{index + 1})</text>
+              </g>
             ))}
-            <text className="topic-ii-figure-small" x={x} y={y + 65} textAnchor="middle">base {index + 1}</text>
-            <text className="topic-ii-figure-small" x={x} y={y + 27} textAnchor="middle">Hᵢ={height}</text>
+            <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x={x} y={y - (height - 1) * 48 - 12} textAnchor="middle">Hᵢ={height}</text>
+            <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x={x} y={y + 65} textAnchor="middle">i={index + 1}</text>
           </g>
         );
       })}
@@ -284,7 +330,7 @@ function ReturnTowersMobile({ markerId }: { markerId: string }) {
         d={`M${first.x} ${first.y + 50} C${first.x - 6} ${first.y + 105}, ${sixth.x - 45} ${sixth.y + 45}, ${sixth.x} ${sixth.y + 48}`}
         markerEnd={`url(#${markerId})`}
       />
-      <text className="topic-ii-figure-small" x="180" y="318" textAnchor="middle">one illustrated return: 1 ↦ 6</text>
+      <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="180" y="294" textAnchor="middle">one illustrated return: 1 ↦ 6</text>
       <g data-state-count={heights.reduce((sum, value) => sum + value, 0)} />
     </>
   );
@@ -409,8 +455,8 @@ function ProjectiveCorridorGeometry({
             <line className="topic-ii-figure-support" x1={a[0]} x2={b[0]} y1={a[1]} y2={b[1]} />
             <text
               className="topic-ii-figure-small"
-              fontSize={mobile ? 13 : undefined}
-              x={a[0] + (mobile ? 8 : 16)}
+              style={mobile ? mobileSmallTextStyle : undefined}
+              x={a[0] + (mobile ? (index === 1 ? -14 : 8) : 16)}
               y={a[1] - (mobile ? 5 : 16)}
             >
               ℒ{index + 2}
@@ -421,7 +467,7 @@ function ProjectiveCorridorGeometry({
       <line className="topic-ii-figure-transfer" x1={terminal[0][0]} x2={terminal[1][0]} y1={terminal[0][1]} y2={terminal[1][1]} />
       <text
         className="topic-ii-figure-small"
-        fontSize={mobile ? 13 : undefined}
+        style={mobile ? mobileSmallTextStyle : undefined}
         x={mobile ? 165 : terminal[0][0]}
         y={mobile ? 24 : 88}
       >
@@ -433,9 +479,9 @@ function ProjectiveCorridorGeometry({
             <circle className="topic-ii-figure-point topic-ii-figure-point-accent" cx={x} cy={y} r="5" />
             <text
               className="topic-ii-figure-small"
-              fontSize={mobile ? 13 : undefined}
-              x={x + 7 * labelScale}
-              y={y - 8 * labelScale}
+              style={mobile ? mobileSmallTextStyle : undefined}
+              x={x + (mobile && index === 0 ? -18 : 7) * labelScale}
+              y={y + (mobile && index === 0 ? 14 : -8) * labelScale}
             >
               C{index + 2}
             </text>
@@ -468,7 +514,7 @@ function ProjectiveCorridorGeometry({
           <circle className="topic-ii-figure-point" cx={x} cy={y} r={mobile ? 5 : 5.5} />
           <text
             className="topic-ii-figure-label"
-            fontSize={mobile ? 15 : undefined}
+            style={mobile ? mobileLabelTextStyle : undefined}
             x={x + (index === 4 ? -28 : index === 2 ? 20 : 7) * labelScale}
             y={y + (index === 2 ? -12 : index % 2 === 0 ? 20 : -10) * labelScale}
           >
@@ -479,7 +525,7 @@ function ProjectiveCorridorGeometry({
       {points.map(([x, y], index) => (
         <text
           className="topic-ii-figure-small"
-          fontSize={mobile ? 12 : undefined}
+          style={mobile ? mobileSmallTextStyle : undefined}
           key={`x-${index}`}
           x={x + (index === 5 ? -7 : -3) * labelScale}
           y={y + 24 * labelScale}
@@ -489,9 +535,9 @@ function ProjectiveCorridorGeometry({
       ))}
       <text
         className="topic-ii-figure-small"
-        fontSize={mobile ? 12 : undefined}
+        style={mobile ? mobileSmallTextStyle : undefined}
         x={initial[0][0]}
-        y={initial[0][1] + (mobile ? 26 : 34)}
+        y={initial[0][1] + (mobile ? 32 : 34)}
       >
         A₁ = aff(X₀,X₁)
       </text>
@@ -533,7 +579,7 @@ function HolonomyEscape() {
 function GlobalLedger() {
   const rows = [
     ["D", "target j∈D", "s(j)∉M"],
-    ["R", "target j∈R", "s(j)∈M°; s(R)=M°"],
+    ["R", "target j∈R", "s(j)∈M∖{b*}; s(R)=M∖{b*}"],
     ["{c}", "target j=c", "s(c)=b*"],
     ["A", "target j∈A", "s(j)∉M"],
   ] as const;
@@ -561,7 +607,7 @@ function GlobalLedger() {
 function GlobalLedgerMobile() {
   const rows = [
     ["D", "target j∈D", "s(j)∉M"],
-    ["R", "target j∈R", "s(j)∈M°; s(R)=M°"],
+    ["R", "target j∈R", "s(j)∈M∖{b*}; s(R)=M∖{b*}"],
     ["{c}", "target j=c", "s(c)=b*"],
     ["A", "target j∈A", "s(j)∉M"],
   ] as const;
@@ -581,9 +627,9 @@ function GlobalLedgerMobile() {
               y={y}
             />
             <text className="topic-ii-figure-label" x="42" y={y + 31}>{label}</text>
-            <text className="topic-ii-figure-small" x="94" y={y + 29}>{source}</text>
+            <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="94" y={y + 29}>{source}</text>
             <line className="topic-ii-figure-support" x1="94" x2="315" y1={y + 45} y2={y + 45} />
-            <text className="topic-ii-figure-small" x="94" y={y + 72}>{target}</text>
+            <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="94" y={y + 72}>{target}</text>
           </g>
         );
       })}
@@ -672,7 +718,7 @@ export function AdvancedProofFigure({ kind }: { kind: AdvancedProofFigureKind })
   return (
     <figure className="topic-ii-concept-figure">
       <div className="topic-ii-concept-heading">
-        <span>Deterministic mathematical plate</span>
+        <span>{figure.status ?? "Deterministic mathematical plate"}</span>
         <span>{figure.title}</span>
       </div>
       <svg

@@ -102,16 +102,37 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
     /The cyclic arithmetic is isolated in this section[\s\S]*Fix integers N\s*≥\s*2/i,
   );
   assert.match(topicVText, /Throughout this section assume N\s*≥\s*4/i);
-  assert.match(topicVText, /Why projective unit return requires N\s*≥\s*4: an explicit critical triangle/i);
+  assert.match(topicVText, /A complete 3-critical example with Δ=2/i);
+  assert.match(topicVText, /Why projective unit return requires N\s*≥\s*4/i);
+  assert.match(topicVText, /Exceptional case N=3/);
+  assert.match(
+    topicVText,
+    /This is the precise bridge to the record terminology used below/i,
+  );
+  assert.match(
+    topicVText,
+    /every earlier residue is smaller, and its deficit is therefore φ/i,
+  );
+  assert.match(
+    topicVText,
+    /declared time-zero record, whose deficit is N\s*=\s*φ/i,
+  );
+  assert.match(
+    topicVText,
+    /how does Topic V prepare the N≥4 proof of Δ=1 completed in Topic VI/i,
+  );
   assert.match(topicV, /B_a=\\begin\{pmatrix\}0&amp;1-a&amp;a/);
   assert.match(topicVText, /\(φ,κ\)=\(3,2\)/);
   assert.match(topicVText, /Δ=3−1=2/);
   assert.match(topicVText, /Topic XIII is forthcoming on the public site/);
+  const exceptionalCaseStart = topicV.indexOf("Exceptional case N=3");
   const projectiveScopeStart = topicV.indexOf('id="topic-v-return-setup"');
   const lemmaSevenOneStart = topicV.indexOf('id="part-i-item-40"');
   assert.ok(
-    projectiveScopeStart >= 0 && projectiveScopeStart < lemmaSevenOneStart,
-    "the projective scope boundary precedes Lemma 7.1",
+    exceptionalCaseStart >= 0 &&
+      exceptionalCaseStart < projectiveScopeStart &&
+      projectiveScopeStart < lemmaSevenOneStart,
+    "the N=3 interlude is separate from the N>=4 scope preceding Lemma 7.1",
   );
   const kleinSailDefinition = topicV.indexOf("Klein sail");
   const plateVOne = topicV.indexOf("Plate V.1.");
@@ -123,6 +144,19 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.match(topicVText, /e₀,e₁,e₂ be the standard coordinate vectors of ℝ³/);
   assert.match(topicVText, /Barycentric coordinates are nonnegative coefficients summing to one/);
   assert.match(topicVText, /the induced map on ℝ³\/ker\(A\) is conjugate to tT/);
+  assert.match(topicVText, /P=conv\{x₀,x₁,x₂\} lies in H; it is independent of a/);
+  assert.match(topicVText, /Counted with algebraic multiplicity/);
+  assert.match(
+    topicVText,
+    /for every t\s*>\s*1 the map tTₐ admits no invariant polygon with at most three vertices/i,
+  );
+  assert.match(topicVText, /ℓᵢ=λ\^\{-Hᵢ\} aff\(Eᵣ₍ᵢ₎\)/);
+  assert.match(topicVText, /M∖\{b\*\}/);
+  assert.match(topicVText, /ω\(z\)≥ε₀ for every z∈P/);
+  assert.match(topicVText, /All results assigned to this topic are proved/);
+  assert.doesNotMatch(topicVText, /Supporting lines at the return vertices/i);
+  assert.doesNotMatch(topicVText, /These are all three eigenvalues/i);
+  assert.doesNotMatch(topicVText, /M°/);
 
   assert.match(topicVIAText, /Local Projective Escape for N\s*≥\s*4/);
   assert.match(topicVIBText, /Global Admissibility and Unit Return for N\s*≥\s*4/);
