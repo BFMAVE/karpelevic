@@ -105,26 +105,25 @@ function TopicIIIRecall() {
   );
 }
 
-function RightAdmissibleSetup() {
+function StandingContactAssumptions() {
   return (
     <section className="proof-chapter-local-setup proof-chapter-standing-setup" aria-labelledby="right-admissible-setup-heading">
       <p className="section-label">Standing setup · unnumbered</p>
-      <h4 id="right-admissible-setup-heading">Right-admissible means the full one-sided contact data</h4>
+      <h4 id="right-admissible-setup-heading">Standing assumptions for the one-sided contact data</h4>
       <p>
         After the possible conjugation in Lemma 4.13, rename the selected
         multiplier λ and keep that orientation fixed. Write
         {" "}<span>λ=ρe<sup>iθ</sup></span>, where
-        {" "}<span>θ=arg<sub>+</sub>(λ)∈(0,2π)</span>. A <dfn>right-admissible
-        contact system</dfn> is the tuple
-        {" "}<span>(<i>P</i>,λ,κ;(<i>α</i><sub>i</sub>,<i>β</i><sub>i</sub>))</span>
-        {" "}with all of the following data—not merely the coefficient formula.
+        {" "}<span>θ=arg<sub>+</sub>(λ)∈(0,2π)</span>. The arguments below use the
+        following four assumptions.
       </p>
-      <ul>
-        <li><i>P</i> is a positively oriented strict invariant <i>N</i>-gon for the fixed <i>N</i>-critical map.</li>
-        <li>Equation (4.12) holds at every side index with the same integer shift κ.</li>
-        <li>Every right-half-open side contains exactly one assigned image vertex.</li>
-        <li>The full side and image-vertex touching from Theorem 3.2 remains part of the setup.</li>
-      </ul>
+      <ol>
+        <li><strong>(A1)</strong> <i>P</i>=conv{"{"}<i>x</i><sub>0</sub>,…,<i>x</i><sub><i>N</i>−1</sub>{"}"} is an invariant convex <i>N</i>-gon, and the displayed list contains exactly its extreme points in positive cyclic order.</li>
+        <li><strong>(A2)</strong> λ<i>P</i>⊆<i>P</i> with 0&lt;|λ|&lt;1; every side of <i>P</i> intersects λ<i>P</i>, and every vertex of λ<i>P</i> lies on ∂<i>P</i>.</li>
+        <li><strong>(A3)</strong> One representative κ∈{"{1,…,N}"} is fixed, and <span>ξ<sub>i</sub>=λ<i>x</i><sub>i−κ</sub>∈<i>E</i><sub>i</sub><sup>+</sup></span> for every <i>i</i>. Thus every right-half-open side contains exactly one assigned image vertex, and equation (4.12) supplies its coefficients.</li>
+        <li><strong>(A4)</strong> <span><i>S</i>={"{"}<i>i</i>∈ℤ/<i>N</i>ℤ:ξ<sub>i</sub>∈relint(<i>E</i><sub>i</sub>){"}"}</span> records exactly the sides whose assigned image vertex lies in the relative interior.</li>
+      </ol>
+      <p>The phrase <dfn>right-admissible</dfn>, when it appears in the manuscript proof, is only shorthand for a tuple satisfying (A1)–(A4).</p>
       <p>No later vertex replacement silently reverses the orientation or changes the side labels.</p>
     </section>
   );
@@ -188,6 +187,27 @@ function CyclicIntervalReminder() {
         relabelling</dfn> adds one fixed index to every label modulo <i>N</i>;
         it changes where the list begins, not the polygon or its cyclic order.
       </p>
+      <p>
+        Write <span>comp(<i>S</i>)</span> for the number of connected components
+        of the induced graph <span><i>C</i><sub>N</sub>[<i>S</i>]</span>. Once the
+        proof has reduced <i>S</i> to one cyclic interval, <span>φ=|<i>S</i>|</span>
+        denotes the number of indices in that interval.
+      </p>
+    </section>
+  );
+}
+
+function TopicIVProofSpine() {
+  return (
+    <section className="proof-chapter-local-setup" aria-labelledby="topic-iv-proof-spine-heading">
+      <p className="section-label">The proof in four steps</p>
+      <h3 id="topic-iv-proof-spine-heading">From boundary order to one interval</h3>
+      <ol>
+        <li><strong>Choose one half-open convention.</strong> Endpoint counts and cyclic order place exactly one image vertex in every half-open side.</li>
+        <li><strong>Identify one cyclic shift.</strong> The side assignment is order preserving, so it is the permutation <span><i>E</i><sub>i</sub>↦<i>E</i><sub>i+κ</sub></span>; lifted angles locate κ without an unaccounted multiple of 2π.</li>
+        <li><strong>Realize one index-set update.</strong> Proposition 5.1 replaces one polygon vertex and proves the exact change <span><i>S</i>↦(<i>S</i>∖{"{i}"})∪{"{i+κ}"}</span>.</li>
+        <li><strong>Minimize among realizable sets.</strong> Repeating that geometric update produces a reachable set <i>S</i> consisting of one cyclic interval.</li>
+      </ol>
     </section>
   );
 }
@@ -207,7 +227,7 @@ function TopicIVContents() {
             <li><a href="#part-i-item-28"><span>4.11</span> Cyclic interlacing</a></li>
             <li><a href="#part-i-item-29"><span>4.12</span> One image per side</a></li>
             <li><a href="#part-i-item-30"><span>4.13</span> One cyclic shift</a></li>
-            <li><a href="#part-i-item-31"><span>4.14</span> Lifted endpoint paths</a></li>
+            <li><a href="#part-i-item-31"><span>4.14</span> Iterated endpoint equalities</a></li>
           </ol>
         </section>
         <section aria-labelledby="topic-iv-contents-b">
@@ -228,11 +248,11 @@ function TopicIVContents() {
 const dmitriev = ["dmitriev-dynkin-1946", "swift-1972"] as const;
 const karpelevicOnly = ["karpelevic-1951"] as const;
 const karpelevicHistory = {
-  surgery: <>Karpelevič (1951), §3, Lemma 1, contains a vertex-replacement antecedent. The exact side labels, complete coincidence cases, and proof of every global incidence given here are fuller; under the author’s rule, this source alone does not justify a “Previously known” badge.</>,
-  intrinsic: <>Karpelevič (1951), §3, contains an antecedent of the indexed set update. The equivariant formulation using the side-continuation bijection is the manuscript’s packaging, so the item remains deliberately unbadged.</>,
-  sequences: <>Karpelevič (1951), §3, uses admissible finite index configurations as the historical antecedent. The exact finite realization induction is proved here and receives no badge on that source alone.</>,
-  sweeps: <>Karpelevič (1951), §3, contains the successive-update mechanism. The proof here that every step comes from an actual polygon vertex replacement remains deliberately unbadged.</>,
-  block: <>Karpelevič (1951), §3, Lemma 3 and Theorems I–II, contain the reduction antecedent. The repeatability, residue, and first-entrance arguments here are substantially fuller, so no “Previously known” badge is inferred from that source alone.</>,
+  surgery: <>Karpelevič (1951), §3, Lemma 1, contains an antecedent of the vertex replacement. The proof here supplies the exact side labels, all coincidence cases, and every global incidence used later.</>,
+  intrinsic: <>Karpelevič (1951), §3, contains an antecedent of the indexed set update. This corollary records the corresponding equivariant formula after the old and new labelled side sets are identified.</>,
+  sequences: <>Karpelevič (1951), §3, uses admissible finite index configurations as a historical antecedent. The finite induction realizing every stated update by invariant polygons is proved here.</>,
+  sweeps: <>Karpelevič (1951), §3, contains the successive-update mechanism. This corollary verifies that every step used in Lemma 5.5 is realized by an actual polygon vertex replacement.</>,
+  block: <>Karpelevič (1951), §3, Lemma 3 and Theorems I–II, contain antecedents of the reduction mechanism. The repeatability, orbit, and least-first-entrance arguments used here are supplied in full.</>,
 };
 
 const selectionResults: readonly ProofResultData[] = [
@@ -259,7 +279,7 @@ const selectionResults: readonly ProofResultData[] = [
     ],
     takeaway: <>The exceptional 2/0 pair disappears when the other half-open endpoint convention is used.</>,
     sourceIds: dmitriev,
-    sourceRelation: <>Dmitriev–Dynkin’s one-sided contact argument, available in Swift’s translation, is the historical antecedent. The precise finite <i>r</i>–<i>c</i>–<i>ℓ</i> identity used here is proved on this page, so the result is left unbadged.</>,
+    sourceRelation: <>Dmitriev–Dynkin’s one-sided contact argument, available in Swift’s translation, is the historical antecedent. The precise finite <i>r</i>–<i>c</i>–<i>ℓ</i> identity used here is proved on this page.</>,
   },
   {
     id: "part-i-item-28",
@@ -285,9 +305,9 @@ const selectionResults: readonly ProofResultData[] = [
       { title: "Translate gaps into sides", explanation: <>The unique outer vertex in each image gap gives one image vertex in each outer half-open side.</> },
       { title: "Repair the other orientation", explanation: <>If the first alternative holds, conjugate and reindex. Track the included and excluded endpoints explicitly to obtain right-half-open sides in positive order.</> },
     ],
-    takeaway: <>After at most one controlled reflection, the entire polygon uses one right-half-open contact convention.</>,
+    takeaway: <>After complex conjugation and positive reindexing when necessary, the entire polygon uses one right-half-open endpoint convention.</>,
     sourceIds: dmitriev,
-    sourceRelation: <>Dmitriev–Dynkin’s supporting one-sided contact theorem, available in Swift’s translation, is the historical antecedent. The complete boundary-interval and endpoint-count argument displayed here is left unbadged.</>,
+    sourceRelation: <>Dmitriev–Dynkin’s supporting one-sided contact theorem, available in Swift’s translation, is the historical antecedent. The complete boundary-interval and endpoint-count argument used here is proved on this page.</>,
   },
   {
     id: "part-i-item-29",
@@ -296,16 +316,6 @@ const selectionResults: readonly ProofResultData[] = [
     title: "One image vertex in every half-open side",
     purpose: "Turn interlacing into a labelled bijection between the image vertices and the half-open outer sides.",
     manuscriptHtml: completeHtml("29", "cor:global-half-open-ownership"),
-    vocabulary: [
-      { term: "Bijection", definition: <>Every image vertex belongs to exactly one half-open side, and every half-open side contains exactly one image vertex.</> },
-    ],
-    intuition: <>Every side receives at least one image vertex. There are exactly <i>N</i> sides and <i>N</i> image vertices, while disjoint half-open sides prevent duplicate assignment; finite counting forces a bijection.</>,
-    proofSteps: [
-      { title: "Use the half-open partition", explanation: <>Topic III proved that the sides are disjoint and cover the boundary.</> },
-      { title: "Use interlacing", explanation: <>The chosen orientation supplies at least one image vertex in each of the <i>N</i> sides.</> },
-      { title: "Compare cardinalities", explanation: <>A surjection between two <i>N</i>-element sets is a bijection; disjointness prevents duplicate assignment.</> },
-      { title: "Fix the labels", explanation: <>Call the unique image in <i>E</i><sub>i</sub><sup>+</sup> the point <i>ξ</i><sub>i</sub>.</> },
-    ],
     takeaway: <>Every side index has exactly one assigned image vertex, so source and target labels can now be compared globally.</>,
     provenance: "Previously known",
     sourceIds: dmitriev,
@@ -321,7 +331,6 @@ const selectionResults: readonly ProofResultData[] = [
     vocabulary: [
       { term: "Cyclic-order-preserving bijection", definition: <>A bijection sending each successor to the successor of its image. Once the image of one index is known, all others follow, so the map is a single translation modulo <i>N</i>.</> },
       { term: "Integer representative κ", definition: <>The cyclic shift is initially defined modulo <i>N</i>. The choice <i>κ∈</i>{"{1,…,N}"} is the representative compatible with the positive argument of the multiplier.</> },
-      { term: "Greatest common divisor", definition: <><span>gcd(<i>N</i>,<i>κ</i>)</span> is the largest positive integer dividing both <i>N</i> and <i>κ</i>. Repeated addition of <i>κ</i> modulo <i>N</i> returns after exactly <i>N</i>/gcd(<i>N</i>,<i>κ</i>) steps.</> },
       { term: "Lifted polar angle", definition: <>A real angle <i>Θ</i><sub>i</sub>, not just an angle modulo 2π, chosen with <i>Θ</i><sub>i+N</sub>=<i>Θ</i><sub>i</sub>+2π.</> },
       { term: "The integer mᵢ", definition: <>Before the correct real-valued lift has been identified, two representatives of the same cyclic angle may differ by 2π<i>m</i><sub>i</sub> for some integer <i>m</i><sub>i</sub>.</> },
     ],
@@ -334,9 +343,9 @@ const selectionResults: readonly ProofResultData[] = [
       { title: "Introduce and eliminate winding", explanation: <>Side incidence first gives equation (4.14) with 2π<i>m</i><sub>i</sub>. If <i>κ&lt;N</i>, the difference spans fewer than all angular gaps; if <i>κ=N</i>, its endpoints are computed directly. In either case only <i>m</i><sub>i</sub>=0 is compatible with 0&lt;<i>ϑ</i>&lt;2π.</> },
       { title: "Sum one complete period", explanation: <>The two shifted angle sums differ from Σ<i>Θ</i><sub>i</sub> by 2π<i>κ</i> and 2π. This gives the weak upper bound and strict lower bound.</> },
       { title: "Make the upper bound strict", explanation: <>Equality would make every contact an endpoint. Following a shift orbit gives <span>x<sub>i</sub>=μ<sup>N/gcd(N,κ)</sup>x<sub>i</sub></span>, impossible because vertices are nonzero and |μ|&lt;1.</> },
-      { title: "Handle κ=N", explanation: <>An endpoint would give μ<i>x</i><sub>i</sub>=<i>x</i><sub>i</sub>, the same contraction contradiction; every contact is strict.</> },
+      { title: "Handle κ=N", explanation: <>An endpoint would give μ<i>x</i><sub>i</sub>=<i>x</i><sub>i</sub>, the same contraction contradiction; therefore every assigned image vertex lies in the relative interior of its side.</> },
     ],
-    takeaway: <>The contact system is now encoded by one integer shift <i>κ</i>, side coefficients, and the strict inequality <span>(κ−1)/N&lt;ϑ/(2π)&lt;κ/N</span>.</>,
+    takeaway: <>The side assignment is now encoded by the representative <i>κ</i> of its cyclic shift, the side coefficients, and the strict inequality <span>(κ−1)/N&lt;ϑ/(2π)&lt;κ/N</span>.</>,
     provenance: "Strengthened",
     sourceIds: [...dmitriev, "karpelevic-1951"],
     sourceRelation: <>Swift (1972), Appendix A, §2, Basic Theorem 5.1, with the statement at A-5 and the relevant proof at A-16, supplies the one-sided representative. Karpelevič (1951), §2, quotes and uses that contact theorem. The statement here strengthens that antecedent by adding the explicit cyclic shift, the lift check, and the endpoint-equality argument.</>,
@@ -345,13 +354,10 @@ const selectionResults: readonly ProofResultData[] = [
     id: "part-i-item-31",
     label: "Lemma 4.14",
     kind: "Lemma",
-    title: "Exact lifted endpoint paths",
-    purpose: "Iterate endpoint contacts on the real angle line without overlooking a multiple of 2π.",
+    title: "Iteration of endpoint equalities for lifted arguments",
+    purpose: "Iterate endpoint contacts on the real angle line after resolving the integer ambiguity in the chosen arguments.",
     manuscriptHtml: completeHtml("31", "lem:lifted-endpoint-paths"),
-    prelude: <RightAdmissibleSetup />,
-    vocabulary: [
-      { term: "Endpoint path", definition: <>A sequence of destination side indices whose contacts are all endpoints, so each angular side inequality becomes an exact equality.</> },
-    ],
+    prelude: <StandingContactAssumptions />,
     intuition: <>Endpoint contacts telescope exactly. The first relative-interior contact breaks the equality and places the final lifted angle strictly between the two endpoint angles of its side.</>,
     figure: <PlateReference href="#plate-iv-3-lifted-shift" label="See Plate IV.3 above.">The same lifted angle line shows both one endpoint step and a sequence of exact endpoint landings.</PlateReference>,
     proofSteps: [
@@ -362,7 +368,7 @@ const selectionResults: readonly ProofResultData[] = [
     ],
     takeaway: <>The later return calculation can add contact angles as ordinary real numbers rather than congruence classes.</>,
     sourceIds: ["standard-covering-spaces", "standard-convexity"],
-    sourceRelation: <>Hatcher, <cite>Algebraic Topology</cite>, §1.3, supplies the standard covering-space lift for circle angles; Schneider, Chapter 1, supplies convex-boundary angular order. These are background tools only. The exact indexed endpoint-path consequence is derived here, without a separate novelty claim or classification badge.</>,
+    sourceRelation: <>Hatcher, <cite>Algebraic Topology</cite>, §1.3, supplies the standard covering-space lift for circle angles; Schneider, Chapter 1, supplies convex-boundary angular order. The exact consequence for an iterated sequence of endpoint equalities is derived here.</>,
   },
 ];
 
@@ -381,15 +387,15 @@ const mutationResults: readonly ProofResultData[] = [
       { term: "Source and destination indices", definition: <>The update removes <i>i</i> from <i>S</i> and includes <i>i+κ</i>. These are changes of side-index membership; no geometric image vertices merge.</> },
       { term: "Decrease in cardinality", definition: <>If <i>i+κ</i> already belongs to <i>S</i>, then removing <i>i</i> and re-including <i>i+κ</i> decreases |<i>S</i>| by one.</> },
     ],
-    intuition: <>This proposition justifies working with the finite subset <i>S</i>. It separately checks the retained-half-plane intersection, strict convex position, invariance, changed image, every unchanged label, coefficient update, and the same integer shift.</>,
+    intuition: <>This proposition justifies working with the finite subset <i>S</i>. It separately checks the retained-half-plane intersection, that the displayed points remain exactly the extreme points in positive cyclic order, invariance, the changed image, every unchanged label, the coefficient update, and preservation of the representative κ of the cyclic shift.</>,
     figure: <PlateAnchor id="plate-iv-4-contact-surgery"><OwnershipMutationFigure kind="surgery" id="topic-iv-contact-surgery" /></PlateAnchor>,
     proofSteps: [
-      { title: "Stage 1 · Identify the retained-half-plane intersection", explanation: <>The hypotheses make <i>ξ</i><sub>i</sub> a relative-interior contact and give <i>ξ</i><sub>i+1</sub>=<i>x</i><sub>i+1</sub>. The image-edge line through these points bounds a half-plane containing <i>Q=λP</i>. Determinants (5.3)–(5.4) show that intersecting <i>P</i> with this half-plane discards only <i>x</i><sub>i</sub>. The three changed turn determinants remain positive, and Theorem 3.2 restores full side and image-vertex touching.</> },
+      { title: "Stage 1 · Identify the retained-half-plane intersection", explanation: <>The hypotheses make <i>ξ</i><sub>i</sub> a relative-interior contact and give <i>ξ</i><sub>i+1</sub>=<i>x</i><sub>i+1</sub>. The image-edge line through these points bounds a half-plane containing <i>Q=λP</i>. Determinants (5.3)–(5.4) show that intersecting <i>P</i> with this half-plane discards only <i>x</i><sub>i</sub>. The three changed turn determinants remain positive; Theorem 3.2 then shows that every side meets the new image polygon and every image vertex lies on the new boundary.</> },
       { title: "Stage 2 · Account for every unchanged source and destination side", explanation: <>The incidence table separates index <i>i</i>, index <i>i+1</i> when κ≠1, the changed destination <i>j</i><sub>0</sub>=<i>i+κ</i>, and every other index. At <i>N=3</i>, the κ=2 row also covers κ=<i>N−1</i>.</> },
-      { title: "Stage 3 · Locate the changed image on its only possible side", explanation: <>Write <i>A=λx</i><sub>i−1</sub>, <i>B=λx</i><sub>i</sub>, and <i>η</i><sub>j0</sub>=β<i>A</i>+α<i>B</i>. Lemma 4.5 forces <i>A=x′</i><sub>j0−1</sub> and [<i>A,B</i>] onto <i>E′</i><sub>j0</sub>. This also forces the necessary preceding endpoint identity. Parameterizing <i>B</i> then gives the coefficients in (5.1) and the set update in (5.2).</> },
-      { title: "Stage 4 · Complete the assignment and check every side inequality", explanation: <>The half-open partition makes the assignment one-to-one. Lemma 4.6 supplies every side inequality, while <span>η<sub>j</sub>=λx′<sub>j−κ</sub></span> shows that the same integer shift κ still describes all labels.</> },
+      { title: "Stage 3 · Locate the changed image before defining its coefficients", explanation: <>Write <i>A=λx</i><sub>i−1</sub>, <i>B=λx</i><sub>i</sub>, and <i>η</i><sub>j0</sub>=β<i>A</i>+α<i>B</i>. Lemma 4.5 first places <i>A=x′</i><sub>j0−1</sub> and the whole segment [<i>A,B</i>] on <i>E′</i><sub>j0</sub>. Thus <i>η</i><sub>j0</sub> belongs to that new half-open side; only then are its unique side coefficients read off, yielding (5.1) and the set update (5.2).</> },
+      { title: "Stage 4 · Complete the assignment and check every side inequality", explanation: <>The half-open partition makes the assignment one-to-one. Lemma 4.6 supplies every side inequality, while <span>η<sub>j</sub>=λx′<sub>j−κ</sub></span> shows that the same representative κ of the cyclic shift still describes all labels.</> },
     ],
-    takeaway: <>Every permitted set update is backed by a new right-admissible strict invariant polygon for which <span><i>S</i><sup>′</sup>=(<i>S</i>∖{"{i}"})∪{"{i+κ}"}</span>.</>,
+    takeaway: <>Every update at an index satisfying <span><i>i</i>∈<i>S</i></span> and <span><i>i</i>+1∉<i>S</i></span> is realized by a new invariant convex <i>N</i>-gon satisfying (A1)–(A4), with <span><i>S</i><sup>′</sup>=(<i>S</i>∖{"{i}"})∪{"{i+κ}"}</span>.</>,
     sourceIds: karpelevicOnly,
     sourceRelation: karpelevicHistory.surgery,
   },
@@ -397,23 +403,15 @@ const mutationResults: readonly ProofResultData[] = [
     id: "part-i-item-33",
     label: "Corollary 5.2",
     kind: "Corollary",
-    title: "Equivariant form under the side-continuation bijection",
-    purpose: "Rewrite the indexed update using successor, contact rotation, and the specified bijection between the old and new side sets.",
+    title: "Equivariance under the label-preserving map between side sets",
+    purpose: "Rewrite the indexed update after identifying each old labelled side with the correspondingly labelled new side.",
     manuscriptHtml: completeHtml("33", "cor:intrinsic-mutation-law"),
     vocabulary: [
-      { term: "One-sided representation and successor", definition: <><i>χ</i> pairs each source vertex with the unique half-open side containing its assigned image. The successor <i>s(e)</i> is the next oriented side after <i>e</i>.</> },
-      { term: "Contact rotation σ", definition: <>The side reached by applying the contact assignment to the head vertex of the current side.</> },
-      { term: "Side-continuation bijection b", definition: <>The specified identification from the old side set to the new one after vertex replacement: <i>b</i>(<i>E</i><sub>j</sub>)=<i>E</i><sub>j</sub><sup>′</sup>. It is needed because the unprimed and primed maps have different side sets as domains.</> },
+      { term: "The maps χ and s", definition: <><i>χ</i> assigns to each source vertex the unique half-open side containing its image. The successor <i>s(E</i><sub>i</sub>)=<i>E</i><sub>i+1</sub> is the next side in positive cyclic order.</> },
+      { term: "The cyclic permutation σ", definition: <><i>σ(E</i><sub>i</sub>)=<i>E</i><sub>i+κ</sub> is the permutation of side labels induced by the contact assignment.</> },
+      { term: "The label-preserving map b", definition: <><i>b</i>(<i>E</i><sub>j</sub>)=<i>E</i><sub>j</sub><sup>′</sup> identifies each old side with the new side carrying the same index. This map is needed because the unprimed and primed maps have different side sets as domains.</> },
     ],
-    intuition: <>Positive indexing turns “next side” into +1 and contact rotation into +κ. Because vertex replacement changes the side set, <i>b</i> first identifies every old side with its primed continuation. The well-typed update is <span>{"I′ = b((I ∖ {e}) ∪ {σ(e)})"}</span>, while <span>σ′=<i>b</i>σ<i>b</i><sup>−1</sup></span>.</>,
-    proofSteps: [
-      { title: "Translate successor", explanation: <>By definition of positive indexing, <i>s(E</i><sub>i</sub>)=<i>E</i><sub>i+1</sub>.</> },
-      { title: "Translate contact rotation", explanation: <>The head of <i>E</i><sub>i</sub> is <i>x</i><sub>i</sub>, and its assigned target side is <i>E</i><sub>i+κ</sub>.</> },
-      { title: "Identify the two side sets", explanation: <>The side-continuation map <i>b</i> sends each old labelled side <i>E</i><sub>j</sub> to the new side <i>E</i><sub>j</sub><sup>′</sup>, so <i>b</i>∘<i>s</i>=<i>s</i><sup>′</sup>∘<i>b</i>.</> },
-      { title: "Translate the hypothesis and update", explanation: <>The sides in <i>I</i> are exactly those with relative-interior contact, so “<i>i∈S</i>, <i>i+1∉S</i>” becomes “<i>e∈I</i>, <i>s(e)∉I</i>.” Applying <i>b</i> to the indexed update gives the correctly typed set <span><i>I</i><sup>′</sup>=<i>b</i>((<i>I</i>∖{"{e}"})∪{"{σ(e)}"})</span>.</> },
-      { title: "Transport contact rotation and conjugacy", explanation: <>The primed contact rotation is <i>σ</i><sup>′</sup>=<i>b</i>∘<i>σ</i>∘<i>b</i><sup>−1</sup>. Topic I’s covariance result transports this identity together with the successor maps and the sets <i>I</i> and <i>I</i><sup>′</sup>; no sign change is introduced.</> },
-    ],
-    takeaway: <>After the old and new side sets are identified by <i>b</i>, the update is equivariant under real-linear changes of coordinates.</>,
+    takeaway: <>With <i>b</i>(<i>E</i><sub>j</sub>)=<i>E</i><sub>j</sub><sup>′</sup>, one has <span><i>b</i>∘<i>s</i>=<i>s</i><sup>′</sup>∘<i>b</i></span>, <span><i>σ</i><sup>′</sup>=<i>b</i>∘<i>σ</i>∘<i>b</i><sup>−1</sup></span>, and the stated set update.</>,
     sourceIds: karpelevicOnly,
     sourceRelation: karpelevicHistory.intrinsic,
   },
@@ -424,13 +422,13 @@ const mutationResults: readonly ProofResultData[] = [
     title: "Geometric realization of every permitted update sequence",
     purpose: "Guarantee an actual invariant polygon after every step of any finite sequence of permitted updates to the subset S.",
     manuscriptHtml: completeHtml("34", "cor:legal-chip-sequence"),
-    prelude: <ProperShiftReminder>Each stage begins and ends with the right-admissible data fixed above.</ProperShiftReminder>,
-    intuition: <>Proposition 5.1 returns exactly the same kind of right-admissible object it receives. It can therefore be applied again, with the same shift and half-open side assignment.</>,
+    prelude: <ProperShiftReminder>Each stage begins and ends with a tuple satisfying (A1)–(A4).</ProperShiftReminder>,
+    intuition: <>Proposition 5.1 preserves assumptions (A1)–(A4), including the representative κ of the cyclic shift and the half-open side assignment. It can therefore be applied again.</>,
     proofSteps: [
       { title: "Induct on sequence length", explanation: <>The empty sequence is the starting polygon.</> },
       { title: "Identify set-theoretic and geometric conditions", explanation: <>At each stage, <i>i∈S</i> and <i>i+1∉S</i> mean exactly that the source side has relative-interior contact and its next side has endpoint contact.</> },
-      { title: "Apply the exact vertex replacement", explanation: <>The new polygon is right-admissible, preserves κ, and replaces <i>S</i> by <span>(<i>S</i>∖{"{i}"})∪{"{i+κ}"}</span>.</> },
-      { title: "Continue in the same labels", explanation: <>The preserved side assignment and integer lift make the next proposed move meaningful without relabelling.</> },
+      { title: "Apply the exact vertex replacement", explanation: <>The new polygon satisfies (A1)–(A4), preserves κ, and replaces <i>S</i> by <span>(<i>S</i>∖{"{i}"})∪{"{i+κ}"}</span>.</> },
+      { title: "Continue in the same labels", explanation: <>The preserved side assignment and the same representative κ make the next proposed update meaningful without relabelling.</> },
     ],
     takeaway: <>Every finite sequence of permitted set updates corresponds to a genuine sequence of invariant polygons.</>,
     sourceIds: karpelevicOnly,
@@ -444,8 +442,6 @@ const mutationResults: readonly ProofResultData[] = [
     purpose: "Apply Corollary 5.3 to the finite right-to-left update sequences used in the reduction argument.",
     manuscriptHtml: completeHtml("35", "cor:boolean-sweeps-geometric"),
     prelude: <ProperShiftReminder>The same fixed shift κ is used at every step. This corollary is the direct specialization of Corollary 5.3 needed in Lemma 5.5.</ProperShiftReminder>,
-    figure: <PlateReference href="#plate-iv-4-contact-surgery" label="See Plate IV.4 above.">Apply the same local vertex replacement successively at the listed source indices.</PlateReference>,
-    takeaway: <>The finite set updates used in Lemma 5.5 require no extra reachability assumption: each of them comes from an actual polygon vertex replacement.</>,
     sourceIds: karpelevicOnly,
     sourceRelation: karpelevicHistory.sweeps,
   },
@@ -466,14 +462,14 @@ const mutationResults: readonly ProofResultData[] = [
     intuition: <>If an update sends one index to a destination already in <i>S</i>, then |<i>S</i>| decreases. If a translated connected component joins another component without decreasing cardinality, then the number of components decreases. A lexicographically minimal reachable set permits neither event. Repeated updates then force distinct components to occupy disjoint residue classes, which is incompatible with meeting every shift orbit unless there is only one component.</>,
     figure: <PlateAnchor id="plate-iv-5-residue-block"><OwnershipMutationFigure kind="residue-block" id="topic-iv-residue-block" /></PlateAnchor>,
     proofSteps: [
-      { title: "Choose a reachable minimizer", explanation: <>The reachable sets <i>S</i> lie in the finite power set of the cyclic indices, so the ordered pair <span>(|<i>S</i>|, comp(<i>C</i><sub>N</sub>[<i>S</i>]))</span> attains a lexicographic minimum.</> },
+      { title: "Choose a reachable minimizer", explanation: <>The reachable sets <i>S</i> lie in the finite power set of the cyclic indices, so the ordered pair <span>(|<i>S</i>|, comp(<i>S</i>))</span> attains a lexicographic minimum.</> },
       { title: "Update one connected component from right to left", explanation: <>The first source has a following index outside <i>S</i> by maximality; every later source sees the index removed one step earlier. If a destination had already belonged to <i>S</i>, cardinality would have decreased already.</> },
       { title: "List the three possible outcomes", explanation: <>A destination already in <i>S</i> lowers |<i>S</i>|; a disjoint translate adjacent to another component lowers the component count; a disjoint nonadjacent translate preserves both entries. Minimality permits only the third outcome.</> },
-      { title: "Make the successive updates repeatable", explanation: <>After a permitted complete update, the translated component is again maximal, disjoint, and nonadjacent to the unchanged remainder. Induction therefore permits arbitrarily many complete translates.</> },
-      { title: "Force every residue orbit to meet S", explanation: <>If one κ-orbit contained only endpoint contacts, iterating their exact identities around its length <i>N/δ</i> would give <span>x<sub>j</sub>=λ<sup>N/δ</sup>x<sub>j</sub></span>, impossible for a nonzero vertex and |λ|&lt;1.</> },
+      { title: "Make the successive updates repeatable", explanation: <>After each complete update, the translated interval is again a connected component of <span><i>C</i><sub>N</sub>[<i>S</i>]</span>, disjoint from and nonadjacent to every unchanged component. Induction therefore permits arbitrarily many complete translates.</> },
+      { title: "Force every orbit of addition by κ to meet S", explanation: <>If one orbit of <span><i>j</i>↦<i>j</i>+κ</span> contained only endpoint contacts, iterating their exact identities around its length <i>N/δ</i> would give <span>x<sub>j</sub>=λ<sup>N/δ</sup>x<sub>j</sub></span>, impossible for a nonzero vertex and |λ|&lt;1.</> },
       { title: "Separate residues of distinct components", explanation: <>If two components contained indices congruent modulo δ, repeated complete updates would send an index of one component to an index of the other, or would improve the lexicographic pair earlier. Both contradict minimality.</> },
       { title: "Force one connected component", explanation: <>A component of length at least δ already meets every residue. If all components are shorter, their disjoint residue intervals cover the residue circle; suitable κ-translates make two consecutive intervals adjacent, decreasing the component count.</> },
-      { title: "Bound the cyclic interval length", explanation: <>The unique component must meet every one of the δ residues, so after cyclic relabelling it is <span>{`{1,…,φ}`}</span> with φ≥δ.</> },
+      { title: "Bound the cyclic interval length", explanation: <>The unique component must meet every one of the δ residues, so after cyclic relabelling it is <span>{"{1,…,φ}"}</span>, where <span>φ=|<i>S</i>|≥δ</span>.</> },
       { title: "Extract the first-entrance identity without Topic V", explanation: <>When φ&lt;<i>N</i>, update only the terminal index. Before its first entry into <span>{`{N−φ,…,N−1}`}</span>, its following index is outside <i>S</i>; entering the fixed part above its left endpoint would decrease cardinality. Hence the first entry is exactly <i>N−φ</i>, with every earlier residue smaller. The case φ=<i>N</i> uses the separate initial value <i>h</i>=0.</> },
     ],
     takeaway: <>The reachable set <i>S</i> has been reduced to one cyclic interval, together with one exact first-entrance relation for addition by κ modulo <i>N</i>.</>,
@@ -559,34 +555,35 @@ export function TopicIVChapter() {
   return (
     <>
       <TopicIVContents />
+      <TopicIVProofSpine />
 
       <ProofDependencyContract
         imported={[
-          { label: "Definition 1.2", href: sitePath("/proof/#part-i-item-2"), explanation: <>oriented sides, one-sided contact representations, successors, and contact rotation.</> },
+          { label: "Definition 1.2", href: sitePath("/proof/#part-i-item-2"), explanation: <>oriented sides, assignment to half-open sides, successors, and the induced cyclic permutation of side labels.</> },
           { label: "Proposition 2.3", href: sitePath("/proof/#part-i-item-7"), explanation: <>real-linear covariance of contact geometry.</> },
           { label: "Lemma 2.4", href: sitePath("/proof/#part-i-item-8"), explanation: <>the exact effect of complex conjugation on orientation and handedness.</> },
           { label: "Lemma 2.5", href: sitePath("/proof/#part-i-item-9"), explanation: <>the origin lies in the interior of the invariant polygon.</> },
           { label: "Lemma 2.6", href: sitePath("/proof/#part-i-item-10"), explanation: <>positive cyclic order on a convex boundary.</> },
           { label: "Lemma 2.7", href: sitePath("/proof/topic-ii/#part-i-item-11"), explanation: <>positive triple determinants characterize strict convex position.</> },
           { label: "Lemma 2.10", href: sitePath("/proof/topic-ii/#part-i-item-14"), explanation: <>lifted polar angles increase along the positively oriented boundary.</> },
-          { label: "Theorem 3.2", href: sitePath("/proof/topic-ii/#part-i-item-16"), explanation: <>hereditary side and image-vertex touching.</> },
+          { label: "Theorem 3.2", href: sitePath("/proof/topic-ii/#part-i-item-16"), explanation: <>every side meets the image polygon, and every image vertex lies on the outer boundary.</> },
           { label: "Lemma 4.1", href: sitePath("/proof/topic-ii/#part-i-item-18"), explanation: <>a vertex witness on every touched side.</> },
           { label: "Definition 4.2 and Lemmas 4.3–4.9", href: sitePath("/proof/topic-iii/#part-i-item-19"), explanation: <>half-open side assignment, boundary rigidity, labelled side inequalities, exact image-edge clipping, and the least-area boundary-interval bound.</> },
         ]}
-        provedHere={<p>Lemmas 4.10–4.14, Proposition 5.1, Corollaries 5.2–5.4, and Lemma 5.5. The cyclic transitions, greatest common divisor, residue orbits, and first-entrance relation are all defined and proved locally; no Topic V result is imported. These are exactly the global selection and contact-reduction results on manuscript pages 19–30.</p>}
+        provedHere={<p>Lemmas 4.10–4.14, Proposition 5.1, Corollaries 5.2–5.4, and Lemma 5.5. The cyclic transitions, orbits of addition by κ, and least-first-entrance relation are all defined and proved locally; no Topic V result is imported. These are exactly the endpoint-selection, vertex-replacement, and interval-reduction results on manuscript pages 19–30.</p>}
       />
 
       <ProofResultGroup
         number="IV-A · Endpoint order"
         title="Turn local boundary-interval counts into one global contact shift"
-        introduction={<p>A finite endpoint count chooses the correct half-open orientation. Cyclic order then turns the contact bijection into one shift κ, and lifted angles encode it without hidden turns.</p>}
+        introduction={<p>A finite endpoint count chooses the right-half-open endpoint convention. Cyclic order then turns the contact assignment into the permutation <span><i>E</i><sub>i</sub>↦<i>E</i><sub>i+κ</sub></span>, and lifted angles encode it without an unaccounted multiple of 2π.</p>}
         results={selectionResults}
       />
 
       <ProperShiftBoundary />
 
       <ProofResultGroup
-        number="IV-B · Contact reduction"
+        number="IV-B · Reduction to one interval"
         title="Prove the set update geometrically, then reduce to one cyclic interval"
         introduction={<p>The polygon and the subset <i>S</i> remain synchronized. Proposition 5.1 proves one vertex replacement in full; its corollaries justify finite sequences of the same update; Lemma 5.5 uses only the sets <i>S</i> reached in this way.</p>}
         prelude={<ShiftBoundaryRegister />}

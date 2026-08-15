@@ -79,16 +79,26 @@ test("Topic IV exposes its local setup, typed set-update guide, and five unique 
   const properShiftIds = [...html.matchAll(/\sid="eq:kappa-proper"/g)].length;
 
   assert.match(html, /Topic IV at a glance/);
+  assert.match(html, /The proof in four steps/);
+  assert.match(html, /From boundary order to one interval/);
   assert.match(html, /Recall from Topic III/);
-  assert.match(html, /Right-admissible means the full one-sided contact data/);
+  assert.match(html, /Standing assumptions for the one-sided contact data/);
+  for (let assumption = 1; assumption <= 4; assumption += 1) {
+    assert.match(html, new RegExp("\\(A" + assumption + "\\)"));
+  }
+  assert.match(html, /right-admissible<\/dfn>[^<]*, when it appears in the manuscript proof, is only shorthand/);
   assert.match(html, /λ=ρe<sup>iθ<\/sup>/);
   assert.match(html, /θ=arg<sub>\+<\/sub>\(λ\)∈\(0,2π\)/);
   assert.match(html, /The same contact data in two notations/);
   assert.match(html, /Connected components and cyclic relabelling/);
-  assert.match(html, /Equivariant form under the side-continuation bijection/);
-  assert.match(html, /Side-continuation bijection b/);
-  assert.match(html, /correctly typed set/);
+  assert.match(html, /comp\(<i>S<\/i>\).*number of connected components/s);
+  assert.match(html, /φ=\|<i>S<\/i>\|/);
+  assert.match(html, /Equivariance under the label-preserving map between side sets/);
+  assert.match(html, /The label-preserving map b/);
+  assert.match(html, /The cyclic permutation σ/);
+  assert.doesNotMatch(html, /Side-continuation bijection b/);
   assert.match(html, /Stage 1 · Identify the retained-half-plane intersection/);
+  assert.match(html, /Stage 3 · Locate the changed image before defining its coefficients/);
   assert.match(html, /Realization of the successive updates used in Lemma 5\.5/);
   assert.match(html, /Reduction to one cyclic interval and a first-entrance identity/);
   assert.match(html, /Standing assumption for Section 5/);
@@ -111,6 +121,8 @@ test("Topic IV exposes its local setup, typed set-update guide, and five unique 
   assert.match(topicIVCard(30), /proof-chapter-provenance[^>]*>Strengthened</);
   assert.doesNotMatch(topicIVCard(31), /proof-chapter-provenance/);
   assert.match(topicIVCard(29), /Supporting Theorem III/);
+  assert.doesNotMatch(topicIVCard(29), /<dt>Bijection<\/dt>/);
+  assert.doesNotMatch(topicIVCard(29), /proof-chapter-guided-proof/);
   assert.match(
     topicIVCard(29),
     /Thus every image vertex belongs to exactly one half-open side, and every half-open side contains exactly one image vertex\./,
@@ -120,12 +132,17 @@ test("Topic IV exposes its local setup, typed set-update guide, and five unique 
     /Equivalently, no image vertex can be assigned to two sides and no side can receive two image vertices/,
   );
   assert.match(topicIVCard(30), /Basic Theorem 5\.1/);
-  assert.match(topicIVCard(31), /background tools only/);
+  assert.doesNotMatch(topicIVCard(30), /<dt>Greatest common divisor<\/dt>/);
+  assert.match(topicIVCard(31), /standard covering-space lift/);
+  assert.match(topicIVCard(31), /Iteration of endpoint equalities for lifted arguments/);
+  assert.doesNotMatch(topicIVCard(31), /<dt>Endpoint path<\/dt>/);
+  assert.doesNotMatch(topicIVCard(33), /proof-chapter-guided-proof/);
+  assert.doesNotMatch(topicIVCard(35), /proof-chapter-guided-proof/);
   assert.equal(deltaIds, 1, "equation 5.11 appears exactly once");
   assert.match(html, /aria-label="Equation 5\.11, permalink"/);
   assert.equal(figureCount, 5, "repeated explanatory figures are references, not copies");
   assert.match(html, /Exact finite example/);
-  assert.match(html, /Exact geometric construction/);
+  assert.match(html, /Exact geometric configuration/);
   assert.match(html, /Schematic lifted-angle example with κ=3/);
   assert.match(html, /hollow circle is the excluded left endpoint Θ₂/);
   assert.match(html, /Schematic local geometry · exact symbolic update/);
@@ -141,19 +158,19 @@ test("Topic IV exposes its local setup, typed set-update guide, and five unique 
     .replace(/<[^>]*>/g, " ");
   assert.doesNotMatch(
     visibleTopicIVText,
-    /\b(?:chip|chips|boolean board|mutation|mutations|surgery|surgeries|group|groups|block|blocks|score|scores|collision|collisions|strict landing|strict side|strict sides|strict-index|edge-cap)\b/i,
+    /\b(?:chip|chips|boolean board|mutation|mutations|surgery|surgeries|group|groups|block|blocks|score|scores|collision|collisions|strict landing|strict side|strict sides|strict-index|edge-cap|controlled reflection|endpoint path)\b/i,
   );
   for (let plate = 1; plate <= 5; plate += 1) {
     assert.match(html, new RegExp(`Plate IV\\.${plate}\\.`));
   }
   assert.match(html, /href="#plate-iv-3-lifted-shift"/);
-  assert.match(html, /href="#plate-iv-4-contact-surgery"/);
+  assert.match(html, /id="plate-iv-4-contact-surgery"/);
   assert.match(html, /Hatcher[^<]*Algebraic Topology/);
   assert.match(html, /<h3 id="topic-iv-sources">References<\/h3>/);
   assert.equal(
     [...html.matchAll(/class="proof-chapter-scope-reminder"/g)].length,
     2,
-    "both sweep corollaries repeat the proper-shift scope",
+    "both finite-update corollaries repeat the proper-shift scope",
   );
 });
 

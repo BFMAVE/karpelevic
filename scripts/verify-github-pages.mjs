@@ -29,7 +29,7 @@ const pages = [
   ],
   [
     "proof/topic-iv/index.html",
-    "From endpoint order to contact reduction",
+    "From endpoint order to one interval of relative-interior contacts",
   ],
   [
     "proof/topic-v/index.html",
@@ -101,7 +101,14 @@ for (const relativePath of [
   const visibleText = visibleTextFromHtml(html);
   assert.match(html, /data-proof-route="topic-iv"/);
   assert.match(html, /Topic IV at a glance/);
-  assert.match(html, /Side-continuation bijection b/);
+  assert.match(html, /The proof in four steps/);
+  assert.match(html, /Standing assumptions for the one-sided contact data/);
+  assert.match(html, /\(A1\)/);
+  assert.match(html, /\(A4\)/);
+  assert.match(html, /The label-preserving map b/);
+  assert.match(html, /The cyclic permutation σ/);
+  assert.match(html, /comp\(<i>S<\/i>\).*number of connected components/s);
+  assert.match(html, /φ=\|<i>S<\/i>\|/);
   assert.match(html, /Standing assumption for Section 5/);
   assert.equal(
     [...html.matchAll(/\sid="eq:kappa-proper"/g)].length,
@@ -117,7 +124,7 @@ for (const relativePath of [
   assert.match(html, /Plate IV\.1/);
   assert.match(html, /Plate IV\.5/);
   assert.match(html, /Exact finite example/);
-  assert.match(html, /Exact geometric construction/);
+  assert.match(html, /Exact geometric configuration/);
   assert.match(html, /Schematic lifted-angle example with κ=3/);
   assert.match(html, /hollow circle is the excluded left endpoint Θ₂/);
   assert.match(html, /Schematic local geometry · exact symbolic update/);
@@ -134,7 +141,7 @@ for (const relativePath of [
   assert.match(html, /proof-chapter\.js/);
   assert.doesNotMatch(
     visibleText,
-    /\b(?:field|fields|ledger|ownership|owned|owns|certificate|audit|chip|chips|boolean board|mutation|mutations|surgery|surgeries|group|groups|block|blocks|score|scores|collision|collisions|strict landing|strict side|strict sides|strict-index|edge-cap)\b/i,
+    /\b(?:field|fields|ledger|ownership|owned|owns|certificate|audit|chip|chips|boolean board|mutation|mutations|surgery|surgeries|group|groups|block|blocks|score|scores|collision|collisions|strict landing|strict side|strict sides|strict-index|edge-cap|controlled reflection|endpoint path)\b/i,
   );
 }
 

@@ -1270,3 +1270,36 @@ full local source history remain later site milestones.
   `1cbd03cfcaa2b896439230a8b919a6f521b062a494f274577ce9f4548ce3fbdf`.
   The public package contains Topics I–V only; Topic VI returns HTTP 404 and
   every later topic remains absent and is shown as Forthcoming.
+
+## Current milestone — Topic IV notation and reading-path refinement (approved for publication 15 August 2026)
+
+- **Boundary-order notation made literal:** Lemma 4.11 now says that at least
+  one of its two assertions holds and expresses side membership through the
+  positive boundary interval rather than an undefined cyclic inequality.
+- **First-use notation completed:** the page now gives four explicit standing
+  assumptions for the one-sided contact data, defines
+  \(\operatorname{comp}(S)\) and \(\varphi=|S|\), and describes
+  \(\kappa\) as the chosen representative of a cyclic shift.
+- **Contact language tightened:** Topic IV uses endpoint contact and
+  relative-interior contact literally. Lemma 4.14 is now titled “Iteration of
+  endpoint equalities for lifted arguments,” and its multiplier angle is
+  defined directly.
+- **Vertex-replacement statement reordered:** Proposition 5.1 first establishes
+  membership of every changed image point in its assigned half-open side and
+  only then introduces the unique side coefficients. The PDF-safe reference
+  now says “the final item” rather than relying on alphabetic or numeric list
+  rendering.
+- **Reading route simplified:** a compact four-step proof spine precedes the
+  ten numbered results; elementary duplicate glossary and walkthrough layers
+  were removed where the full statement and proof already give the argument.
+  Every numbered statement, complete proof, equation number, and stable anchor
+  is preserved.
+- **Plate wording polished:** Plate IV.2 is described as an exact
+  regular-heptagon configuration; its verified geometry is unchanged.
+- **Verified locally:** the canonical TeX compiles; generated content is
+  deterministic and records canonical source hash
+  `f334e7138f745aa3099b6d9ab64e572ea523935e1ceefe993fef851e12b53753`;
+  all 30 tests, ESLint, `git diff --check`, and the GitHub Pages export verifier
+  pass.
+- **Publication status:** approved and awaiting the final static-only Pages
+  deployment. Topics VI–XIV must remain absent from the public package.

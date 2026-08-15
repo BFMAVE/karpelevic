@@ -241,10 +241,10 @@ function sourcesFor(number: number): readonly string[] {
 function sourceRelationFor(number: number): string | undefined {
   if ([51, 52].includes(number)) return undefined;
   if (number === 27) {
-    return "Dmitriev–Dynkin’s one-sided contact argument, available in Swift’s translation, is the historical antecedent. The precise finite endpoint identity used here is proved on this page, so the result is left unbadged.";
+    return "Dmitriev–Dynkin’s one-sided contact argument, available in Swift’s translation, is the historical antecedent. The precise finite endpoint identity used here is proved on this page.";
   }
   if (number === 28) {
-    return "Dmitriev–Dynkin’s supporting one-sided contact theorem, available in Swift’s translation, is the historical antecedent. The complete boundary-interval and endpoint-count argument displayed here is left unbadged.";
+    return "Dmitriev–Dynkin’s supporting one-sided contact theorem, available in Swift’s translation, is the historical antecedent. The complete boundary-interval and endpoint-count argument used here is proved on this page.";
   }
   if (number === 29) {
     return "Swift (1972), Appendix A, §2, Supporting Theorem III, together with the proof of Basic Theorem 5.1 at A-16 (PDF p. 119), contains the one-image-per-side result. The present page fixes the labels and half-open convention explicitly.";
@@ -253,7 +253,7 @@ function sourceRelationFor(number: number): string | undefined {
     return "Swift (1972), Appendix A, §2, Basic Theorem 5.1, with the statement at A-5 and the relevant proof at A-16, supplies the one-sided representative. The statement here strengthens it by adding the explicit cyclic shift, the lift check, and the endpoint-equality argument.";
   }
   if (number === 31) {
-    return "Hatcher, Algebraic Topology, §1.3, supplies the standard covering-space lift for circle angles, while Schneider, Chapter 1, supplies convex-boundary angular order. These are background tools only; the exact indexed endpoint-path consequence is derived here without a separate classification badge.";
+    return "Hatcher, Algebraic Topology, §1.3, supplies the standard covering-space lift for circle angles, while Schneider, Chapter 1, supplies convex-boundary angular order. The exact consequence for an iterated sequence of endpoint equalities is derived here.";
   }
   if (number === 42) {
     return "Karpelevič (1951) is the closest structural antecedent. The exact finite partition displayed here is proved on this page and is deliberately left unbadged pending a statement-level literature audit.";
@@ -312,9 +312,9 @@ const rawItems: readonly [
   [28, "Lemma", "Cyclic interlacing with endpoint membership", "Proves that one consistently oriented half-open gap contains exactly one outer vertex everywhere."],
   [29, "Corollary", "One image vertex in every half-open side", "Chooses one global half-open convention that assigns exactly one image vertex to every side."],
   [30, "Lemma", "One-sided contact representative", "Produces a representative in which all contacts follow the same cyclic direction."],
-  [31, "Lemma", "Exact lifted endpoint paths", "Lifts cyclic endpoint motion to real angles so later phase sums have no hidden modular ambiguity."],
+  [31, "Lemma", "Iteration of endpoint equalities for lifted arguments", "Iterates endpoint equalities on the real angle line after resolving the integer ambiguity in the chosen arguments."],
   [32, "Proposition", "Exact local vertex replacement", "Replaces one vertex by its contact image while preserving strictness, invariance, and every required label."],
-  [33, "Corollary", "Equivariant form under the side-continuation bijection", "Expresses the strict-side update after identifying the old and new side sets by the specified continuation bijection."],
+  [33, "Corollary", "Equivariance under the label-preserving map between side sets", "Expresses the relative-interior-contact update after identifying old and new sides by their unchanged labels."],
   [34, "Corollary", "Geometric realization of every permitted update sequence", "Shows that every permitted finite sequence of updates to S comes from actual invariant polygons."],
   [35, "Corollary", "Realization of the successive updates used in Lemma 5.5", "Applies the finite realization result to the right-to-left update sequences in the reduction argument."],
   [36, "Lemma", "Reduction to one cyclic interval and a first-entrance identity", "Reduces a reachable set S to one cyclic interval and identifies the corresponding first entrance time."],
@@ -413,12 +413,12 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "mutation",
     eyebrow: "Topic IV · 10 items",
-    title: "From endpoint order to contact reduction",
+    title: "From endpoint order to one interval of relative-interior contacts",
     question:
       "How does a geometric contact become a permitted update of a finite cyclic index set?",
     overview: [
       "The remaining endpoint lemmas finish the one-sided representative. A contacted vertex can then be replaced by its image-contact point without breaking strictness or invariance.",
-      "The exact vertex replacement updates the subset S of indices whose sides have relative-interior contact. Every permitted finite update sequence is realized geometrically, and a reachable set reduces to one cyclic interval. Karpelevič’s 1951 proof contains antecedents of these mechanisms, but an occurrence there alone does not earn a “Previously known” badge under this site’s four-category convention.",
+      "The exact vertex replacement updates the subset S of indices whose sides have relative-interior contact. Every permitted finite update sequence is realized geometrically, and a reachable set reduces to one cyclic interval. The source notes distinguish Karpelevič’s antecedent mechanisms from the exact statements proved here.",
     ],
     itemNumbers: [27, 28, 29, 30, 31, 32, 33, 34, 35, 36],
     manuscriptPages: "19–30",
