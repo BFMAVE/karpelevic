@@ -1533,3 +1533,48 @@ full local source history remain later site milestones.
   <https://bfmave.github.io/karpelevic/proof/topic-vi/>. Topics I–VI return
   HTTP 200, Topic VII returns HTTP 404, and the proof index exposes VI while
   keeping VII–XIV unavailable.
+
+## Current milestone — Topic V precision review integrated (15 August 2026)
+
+- **The arithmetic proof was made more explicit without changing its
+  structure:** Theorem 6.1 now defines consecutive upper-record vectors,
+  spells out the determinant-to-residue inference, explains the
+  \(\Delta/\delta\) long-base count in each cycle, and connects a hypothetical
+  earlier improving time to its lattice vector. All theorem, equation, and
+  permalink identifiers are unchanged.
+- **Two local claims were tightened:** Remark 6.3 now records only the proved
+  primitive and unimodular properties instead of asserting an unproved exact
+  refinement relation with the Klein sail. Lemma 7.1 states that both range
+  conclusions hold in the equality case while the later construction chooses
+  the forward orientation. Proposition 7.5 now refers precisely to the images
+  of the labelled vertices and sides and to cyclic order up to simultaneous
+  reversal.
+- **The guided reader is more self-contained:** the opening displays
+  \(\lambda P\subseteq P\), Theorem 6.1 has a four-stage roadmap rather than
+  new result numbers, and its guided proof is reduced from eight overlapping
+  steps to four. The order-three exception is a prominent unnumbered,
+  unbadged proposition titled “Critical invariant triangles with
+  \(\Delta=2\),” with the exact radial criticality inequality stated in place
+  of shorthand.
+- **Plate V.4 now makes the epistemic boundary explicit:** it is a numerical
+  illustration with consistently checked incidences and support signs, while
+  the caption states that Proposition 7.5 is proved independently of the
+  computation.
+- **Standalone and manuscript artifacts are synchronized:** the independent
+  Topic V HTML links published Topics I–VI to the public site, marks Topic VII
+  forthcoming, and has SHA-256
+  `f63e36015fc4cb28994f60a1d8faeef887e0029f19157cbdceed8d0d9737f49e`.
+  The public PDF and compiled canonical manuscript are byte-identical with
+  SHA-256
+  `da2b60b48ae0ab0321cc72c929b29595a40d3484d22c07c2f5f15b1a6997cdce`.
+- **Verification:** canonical TeX SHA-256 is
+  `932889fd52aa284e9e2d8eefac2f04eff7c515308c177e1fe24baaecaa839db7`;
+  generated Part I data SHA-256 is
+  `e8abf3cc4775946333a942b348a6a35586971ff4fde921f2e8e5757a7a9e2587`.
+  TeX compilation, deterministic generation, all 36 tests, ESLint,
+  `git diff --check`, static Pages verification, standalone integrity checks,
+  fragment and privacy scans, proof-control checks, and desktop/390-pixel
+  browser QA pass.
+- **Publication status:** source commit `a4bd770`; static-only Pages commit
+  `c4c543a2962597e7c6b9fb83b2e0845253fba656`. Topic V and the synchronized
+  PDF are live; Topics I–VI return HTTP 200 and Topic VII remains unavailable.
