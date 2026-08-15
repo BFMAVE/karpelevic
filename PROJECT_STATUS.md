@@ -1474,7 +1474,7 @@ full local source history remain later site milestones.
   relevant boundary arc; and the Jensen sheet is a common continuous argument
   interval.
 - **Established terms were retained deliberately:** strict polygon,
-  polygonal complexity, (N)-criticality, first-return maps and towers,
+  polygonal complexity, \(N\)-criticality, first-return maps and towers,
   projectivity, perspectivity, Klein sails, Farey neighbours, and monodromy
   remain where they are defined and mathematically useful. Stable theorem and
   equation labels, route keys, figure kinds, and URL fragments were preserved,
@@ -1491,7 +1491,9 @@ full local source history remain later site milestones.
   all 32 tests, ESLint, deterministic generation, `git diff --check`, static
   Pages verification, visible-text and privacy scans, internal-fragment
   checks, and desktop/mobile browser audits pass.
-- **Publication status:** source commit `c9e8bfc`; static-only Pages commits
-  `7d870b1` and corrective PDF release `6d640fd`. Topics I–V return HTTP 200
-  with no retired reader-visible terminology; Topic VI returns HTTP 404, so
-  Topics VI–XIV remain offline and unlinked.
+- **Publication status:** the main migration is source commit `c9e8bfc`, with
+  the final identity-case correction in `e25388c` and Topic X wording polish
+  in `03876c4`. Static-only Pages commits are `7d870b1`, corrective PDF
+  release `6d640fd`, and final public copy `b8470c0`. Topics I–V return HTTP
+  200 with no retired reader-visible terminology; Topic VI returns HTTP 404,
+  so Topics VI–XIV remain offline and unlinked.
