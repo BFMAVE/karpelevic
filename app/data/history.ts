@@ -400,7 +400,7 @@ export const historyContent = {
       label: "This manuscript",
       title: "Returning to the invariant polygon",
       text:
-        "Our manuscript starts from a radially critical elliptic contraction and studies the contact geometry of an invariant polygon. Contact mutation, a finite rotation section, lattice-sail data, and projective no-skipping produce a return normal form; its scalar shadow is a heterogeneous Ito product. The aim is a new geometric route to the already classical Farey–Ito boundary, not a claim that the boundary theorem itself is new.",
+        "Our manuscript starts from a radially critical elliptic contraction and studies the contact geometry of an invariant polygon. Contact mutation and a finite rotation section are followed, for N≥4, by a projective argument ruling out skipped returns; the resulting normal form has a heterogeneous Ito product as its scalar shadow. The aim is a new geometric route to the already classical Farey–Ito boundary, not a claim that the boundary theorem itself is new.",
       citations: ["verbeken-ginis-2026"],
     },
   ],

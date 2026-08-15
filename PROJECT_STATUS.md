@@ -1310,3 +1310,46 @@ full local source history remain later site milestones.
   `ea80e71f1deb2dcf71742a3526110b1bcd0df7bb5a50d49a7ecdee3c89a8ad77`.
   Topics I–V return HTTP 200; Topic VI returns HTTP 404, and Topics VI–XIV
   remain absent from the public package.
+
+## Current milestone — Topic V small-order scope and the critical-triangle exception (local, 15 August 2026)
+
+- **The scope split is now explicit:** the finite-rotation theorem remains
+  valid for (N\geq2), while the projective no-skipping and return-monodromy
+  arguments are stated only for (N\geq4). Orders one, two, and three enter
+  the stochastic theorem through the direct small-order proof.
+- **The order-three exception is proved, not merely mentioned:** Topic V gives
+  an explicit doubly stochastic family (B_a), identifies its planar
+  multiplier, verifies all three relative-interior contacts, proves
+  3-criticality by the trace obstruction, and computes
+  ((\varphi,\kappa,\delta,\Delta)=(3,2,1,2)). Thus
+  (\varphi>\delta) does not imply (\Delta=1) at order three.
+- **Defined-before-use standard restored:** the triangle discussion defines
+  doubly and column stochastic matrices, the standard coordinate vectors,
+  barycentric coordinates, the quotient map, the complex coordinate on the
+  zero-sum plane, and the record-deficit calculation. Its three image formulas
+  are split into separate rows for mobile reading.
+- **Consequences propagated through every topic:** the abstract, Part I and
+  Part II proof spines, concluding summary, Topics V–XIII, atlas summaries,
+  companion guide, prerequisites, and navigation metadata now distinguish the
+  direct small-order branch from the (N\geq4) projective branch. A final
+  audit found no downstream theorem that silently applies unit return or
+  monodromy to (N=3).
+- **Projective details completed:** Proposition 7.5 explicitly quantifies its
+  supporting lines, uses Φ for the projectivity and ω for its affine
+  denominator, and records the constant-sign and compact lower-bound facts.
+  Lemma A.6 now states why the reduced representatives remain integral.
+- **Plates and portable editions refreshed:** Plates V.1–V.4 use literal
+  labels, checked incidences, and dedicated mobile layouts. The standalone
+  Topic V, combined Topic VI, and Topic VII files have been regenerated from a
+  max-7 build; their metadata is scoped correctly and they contain no dead
+  links to unpublished topics.
+- **Verified locally:** the canonical TeX compiles; two content generations
+  are byte-identical; the generated metadata records canonical source hash
+  `32d63e959e979e46768fd946782d25b939baf8cb707e8dfbaa479b7eb0c2bc2c`;
+  the generated TypeScript file has SHA-256
+  `6e709415df42345e2b182ae2565aab8971e28f2c8d1a43740fe9a583c1a6c337`;
+  all 32 tests, ESLint, `git diff --check`, the max-5 GitHub Pages verifier,
+  and the max-7 standalone-export audit pass.
+- **Publication status:** local only. The current public site remains at its
+  previously approved state; this scope correction has not yet been pushed.
+  Next: author review of Topic V at <http://localhost:3000/proof/topic-v>.

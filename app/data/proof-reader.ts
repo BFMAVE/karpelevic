@@ -75,7 +75,7 @@ export const proofReaderRoutes: readonly ProofReaderRoute[] = [
     part: "A",
     href: "/proof/topic-vi/a/",
     title: `${topicTitle(6)} — local projective escape`,
-    shortTitle: "Projective escape",
+    shortTitle: "Projective escape (N≥4)",
   },
   {
     key: "topic-vi-b",
@@ -83,7 +83,7 @@ export const proofReaderRoutes: readonly ProofReaderRoute[] = [
     part: "B",
     href: "/proof/topic-vi/b/",
     title: `${topicTitle(6)} — global admissibility and unit return`,
-    shortTitle: "Unit return",
+    shortTitle: "Unit return (N≥4)",
   },
   {
     key: "topic-vii",

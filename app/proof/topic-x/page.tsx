@@ -17,7 +17,7 @@ export default function TopicXPage() {
       routeKey="topic-x"
       manuscriptPages="73–76"
       overview={[
-        "Part I supplies a heterogeneous monodromy product, a lifted phase identity, and one common argument sheet. A reflection dictionary makes those data independent of which adapted complex orientation was selected.",
+        "For the new-shell regime N≥4, Part I supplies a heterogeneous monodromy product, a lifted phase identity, and one common argument sheet. A reflection dictionary makes those data independent of which adapted complex orientation was selected.",
         "A strictly convex log-sine potential proves that every heterogeneous profile lies radially inside the constant profile. This page proves only that upper comparison; stochastic attainment and the final equality conclusion are deliberately deferred to Topic XI.",
       ]}
       updatedAt={updatedAt}

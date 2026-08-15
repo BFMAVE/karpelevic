@@ -308,7 +308,7 @@ function verifyStandaloneHtml(html) {
         : proofRoute === "/proof/topic-v"
           ? [
               "Topic V",
-              "Rotation records, first-return towers, and projective preparation",
+              "Rotation arithmetic, first-return towers, and the projective boundary argument",
               "Lattice parallelogram count",
               "data-proof-route=\"topic-v\"",
               "Forthcoming",
@@ -316,7 +316,7 @@ function verifyStandaloneHtml(html) {
           : proofRoute === "/proof/topic-vi/a"
             ? [
                 "Topic VI",
-                "Projective escape and unit return — local projective escape",
+                "Projective escape and unit return for N≥4 — local projective escape",
                 "Calibrate the projective return",
                 "data-proof-route=\"topic-vi-a\"",
                 "Forthcoming",
@@ -324,7 +324,7 @@ function verifyStandaloneHtml(html) {
             : proofRoute === "/proof/topic-vi/b"
               ? [
                   "Topic VI",
-                  "Projective escape and unit return — global admissibility and unit return",
+                  "Projective escape and unit return for N≥4 — global admissibility and unit return",
                   "Transport the local motion to every label",
                   "data-proof-route=\"topic-vi-b\"",
                   "Forthcoming",

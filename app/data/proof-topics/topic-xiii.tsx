@@ -261,7 +261,7 @@ const mainTheorem: ProofResultData = {
     },
     {
       title: "Resolve the new-shell branch",
-      explanation: <>If the actual outer point is absent from Θ<sub>n−1</sub>, it satisfies the exact new-shell hypotheses. Topic XI’s equality-profile corollary says its modulus is the unique scalar equality radius on this ray, namely <i>K</i><sub>n</sub>(θ).</>,
+      explanation: <>At this induction stage <i>n</i>≥4. If the actual outer point is absent from Θ<sub>n−1</sub>, it satisfies the exact new-shell hypotheses, so the N≥4 critical-polygon machinery applies. Topic XI’s equality-profile corollary says its modulus is the unique scalar equality radius on this ray, namely <i>K</i><sub>n</sub>(θ).</>,
     },
     {
       title: "Freeze the inherited branch",
@@ -312,7 +312,7 @@ export function TopicXIIIContent() {
           {
             label: "Topic X · Sharp upper comparison",
             href: sitePath("/proof/topic-x/"),
-            explanation: <>proves that every heterogeneous critical-polygon profile lies no farther out than the equal scalar profile.</>,
+            explanation: <>for the induction range <i>n</i>≥4, proves that every heterogeneous critical-polygon profile lies no farther out than the equal scalar profile.</>,
           },
           {
             label: "Topic XI · Attainment and the equality profile",

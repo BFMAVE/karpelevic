@@ -18,7 +18,7 @@ export default function TopicVIIIPage() {
       manuscriptPages="71–73"
       overview={[
         "This topic reattaches the intrinsic polygon geometry to row-stochastic matrices. It proves both directions of the invariant-polygon criterion rather than treating the dictionary as a heuristic.",
-        "Compactness, radial filling, and the unit-circle classification make radial extrema precise. A genuinely new order-N shell is then shown to satisfy exactly the N-critical hypothesis required by Part I.",
+        "Compactness, radial filling, and the unit-circle classification make radial extrema precise. For N≥4, a genuinely new order-N shell is shown to satisfy exactly the N-critical hypothesis required by Part I; orders one, two, and three are reserved for the direct proof in Topic XIII.",
       ]}
       updatedAt={updatedAt}
       stats={[

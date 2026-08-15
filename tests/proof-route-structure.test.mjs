@@ -69,6 +69,75 @@ for (const [pathname, expectedResults, expectedProofs] of chapters) {
   });
 }
 
+test("the N=3 exception and the N>=4 projective scope remain coherent across topics", async () => {
+  const topicV = await (await render("/proof/topic-v")).text();
+  const topicVIA = await (await render("/proof/topic-vi/a")).text();
+  const topicVIB = await (await render("/proof/topic-vi/b")).text();
+  const topicVII = await (await render("/proof/topic-vii")).text();
+  const topicVIII = await (await render("/proof/topic-viii")).text();
+  const topicX = await (await render("/proof/topic-x")).text();
+  const topicXI = await (await render("/proof/topic-xi")).text();
+  const topicXIII = await (await render("/proof/topic-xiii")).text();
+  const visibleText = (html) =>
+    html
+      .replace(/<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<annotation\b[\s\S]*?<\/annotation>/gi, " ")
+      .replace(/<[^>]*>/g, " ")
+      .replaceAll("&gt;", ">")
+      .replaceAll("&lt;", "<")
+      .replaceAll("&amp;", "&")
+      .replace(/\s+/g, " ");
+  const topicVText = visibleText(topicV);
+  const topicVIAText = visibleText(topicVIA);
+  const topicVIBText = visibleText(topicVIB);
+  const topicVIIText = visibleText(topicVII);
+  const topicVIIIText = visibleText(topicVIII);
+  const topicXText = visibleText(topicX);
+  const topicXIText = visibleText(topicXI);
+  const topicXIIIText = visibleText(topicXIII);
+
+  assert.match(
+    topicVText,
+    /The cyclic arithmetic is isolated in this section[\s\S]*Fix integers N\s*≥\s*2/i,
+  );
+  assert.match(topicVText, /Throughout this section assume N\s*≥\s*4/i);
+  assert.match(topicVText, /Why projective unit return requires N\s*≥\s*4: an explicit critical triangle/i);
+  assert.match(topicV, /B_a=\\begin\{pmatrix\}0&amp;1-a&amp;a/);
+  assert.match(topicVText, /\(φ,κ\)=\(3,2\)/);
+  assert.match(topicVText, /Δ=3−1=2/);
+  assert.match(topicVText, /Topic XIII is forthcoming on the public site/);
+  const projectiveScopeStart = topicV.indexOf('id="topic-v-return-setup"');
+  const lemmaSevenOneStart = topicV.indexOf('id="part-i-item-40"');
+  assert.ok(
+    projectiveScopeStart >= 0 && projectiveScopeStart < lemmaSevenOneStart,
+    "the projective scope boundary precedes Lemma 7.1",
+  );
+  const kleinSailDefinition = topicV.indexOf("Klein sail");
+  const plateVOne = topicV.indexOf("Plate V.1.");
+  assert.ok(
+    kleinSailDefinition >= 0 && kleinSailDefinition < plateVOne,
+    "the Klein sail is defined before Plate V.1",
+  );
+  assert.match(topicVText, /A matrix is doubly stochastic when its entries are nonnegative/);
+  assert.match(topicVText, /e₀,e₁,e₂ be the standard coordinate vectors of ℝ³/);
+  assert.match(topicVText, /Barycentric coordinates are nonnegative coefficients summing to one/);
+  assert.match(topicVText, /the induced map on ℝ³\/ker\(A\) is conjugate to tT/);
+
+  assert.match(topicVIAText, /Local Projective Escape for N\s*≥\s*4/);
+  assert.match(topicVIBText, /Global Admissibility and Unit Return for N\s*≥\s*4/);
+  assert.match(topicVIBText, /Assume N\s*≥\s*4\s*\. If φ\s*>\s*δ , then Δ\s*=\s*1/i);
+
+  assert.match(topicVIIText, /Standing scope for critical-polygon monodromy: N\s*≥\s*4/);
+  assert.match(topicVIIText, /The nontransversal case φ\s*>\s*δ[\s\S]*Assume N\s*≥\s*4/i);
+  assert.match(topicVIIText, /The return factors lie on the Jensen sheet[\s\S]*Assume N\s*≥\s*4/i);
+
+  assert.match(topicVIIIText, /orders one, two, and three are reserved for the direct proof in Topic XIII/i);
+  assert.match(topicXText, /new-shell regime N\s*≥\s*4/i);
+  assert.match(topicXIText, /Orders at most three are handled independently in Topic XIII/i);
+  assert.match(topicXIIIText, /At this induction stage n\s*≥\s*4/i);
+});
+
 test("Topic IV exposes its local setup, typed set-update guide, and five unique plates", async () => {
   const response = await render("/proof/topic-iv");
   assert.equal(response.status, 200);

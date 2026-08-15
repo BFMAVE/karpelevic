@@ -560,7 +560,7 @@ const markers = {
     '<div id="lem:proper-corridor-chain" class="lemma">',
   returnEdgeLedger:
     '<div id="prop:return-edge-ledger" class="proposition">',
-  corridor: '<h4 id="the-projective-corridor-theorem">',
+  corridor: '<h4 id="from-the-boundary-chain-to-a-projectivity">',
   projectiveCorridor:
     '<div id="def:projective-corridor" class="definition">',
   holonomyChart:

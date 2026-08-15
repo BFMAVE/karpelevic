@@ -44,12 +44,12 @@ export const homeContent = {
     {
       label: "Part I",
       title: "Critical polygon geometry",
-      text: "The manuscript develops an intrinsic contact theory for radially critical elliptic contractions, passing through hereditary saturation, one-sided contacts and mutations, a finite rotation section, and projective no-skipping.",
+      text: "The manuscript develops an intrinsic contact theory for radially critical elliptic contractions, passing through hereditary saturation, one-sided contacts and mutations, a finite rotation section, and, for N≥4, a projective argument ruling out skipped returns.",
     },
     {
       label: "Part II",
       title: "Return to stochastic spectra",
-      text: "The resulting monodromy is combined with a sharp scalar comparison, explicit sparse realizations, and Farey refinement to derive the Farey–Ito boundary from invariant polygons.",
+      text: "For orders at least four, the resulting monodromy is combined with a sharp scalar comparison, explicit sparse realizations, and Farey refinement; the smaller orders are treated directly. Together these arguments derive the Farey–Ito boundary from invariant polygons.",
     },
   ],
   noveltyLedger: [
@@ -70,7 +70,7 @@ export const homeContent = {
     },
   ],
   paperSummary:
-    "The paper studies the least polygonal complexity of an elliptic contraction and develops a contact-return normal form at radial criticality. It then applies that structure to the possible eigenvalues of real row-stochastic matrices, producing a geometric derivation of the classical Farey–Ito boundary.",
+    "The paper studies the least polygonal complexity of an elliptic contraction and, for complexities at least four, develops a contact-return normal form at radial criticality. Combined with a direct treatment of the smaller orders, this produces a geometric derivation of the classical Farey–Ito boundary for real row-stochastic matrices.",
   personalPrompt:
     "Author prompt — replace before publication: How did you first encounter the Karpelevič region? What feature of the problem made you keep returning to it, and when did invariant polygons become the decisive point of view?",
   manuscript: {

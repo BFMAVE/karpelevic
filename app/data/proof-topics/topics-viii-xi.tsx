@@ -352,7 +352,7 @@ export function TopicXChapter() {
             label: "Topic VII — complex monodromy and Farey carrier",
             href: sitePath("/proof/topic-vii/"),
             explanation:
-              "supplies the heterogeneous product, lifted phase identity, and common argument sheet obtained from critical polygons.",
+              "supplies, for N≥4, the heterogeneous product, lifted phase identity, and common argument sheet obtained from critical polygons.",
           },
           {
             label: "Topic VIII — new-shell criticality",
@@ -392,8 +392,10 @@ export function TopicXChapter() {
       <SetupBlock eyebrow="Scope boundary" title="This chapter proves an upper comparison—nothing is realized here">
         <p>
           Let <span className="math-inline">λ=ρeⁱθ</span> be a new-shell radial
-          extremum. Topic VII may choose either λ or its conjugate as the
-          multiplier μ best adapted to the oriented contact system. Theorem
+          extremum. By Topic VIII&apos;s definition this chapter is in the range
+          <span className="math-inline"> N≥4</span>. Topic VII may choose either
+          λ or its conjugate as the multiplier μ best adapted to the oriented
+          contact system. Theorem
           II.5.1 records every output of that choice; Lemma II.5.2 later returns
           the conclusion to the original upper-half-plane orientation.
         </p>

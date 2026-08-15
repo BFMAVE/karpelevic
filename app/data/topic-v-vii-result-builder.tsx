@@ -46,7 +46,7 @@ export function makeReaderResult(
     sourceRelation:
       guide.sourceRelation ??
       (unverifiedAntecedent
-        ? "Karpelevič’s original argument contains an antecedent of this mechanism. Under this site’s four-category convention, that occurrence alone does not justify a “Previously known” label, so the statement is deliberately left unbadged."
+        ? "Karpelevič’s original argument contains an antecedent of this mechanism. That occurrence alone does not justify a “Previously known” label, so no category or priority claim is assigned here."
         : item.sourceRelation),
   };
 }

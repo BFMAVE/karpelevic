@@ -81,7 +81,7 @@ function replacePartsNavigation(shell) {
   }
   return shell.replace(
     navigationPattern,
-    '<nav class="proof-chapter-parts" aria-label="Parts of Topic VI"><a aria-current="page" href="#topic-vi-part-a"><span>Part A</span><strong>local projective escape</strong></a><a href="#topic-vi-part-b"><span>Part B</span><strong>global admissibility and unit return</strong></a></nav>',
+    '<nav class="proof-chapter-parts" aria-label="Parts of Topic VI"><a aria-current="page" href="#topic-vi-part-a"><span>Part A</span><strong>local projective escape for N≥4</strong></a><a href="#topic-vi-part-b"><span>Part B</span><strong>global admissibility and unit return for N≥4</strong></a></nav>',
   );
 }
 
@@ -124,7 +124,7 @@ const partBCore = partBChapter.core
     'aria-labelledby="chapter-contract-heading-b"',
   );
 
-const combinedArticle = `<article class="proof-topic-panel proof-chapter-panel" data-chapter-reading-mode="guided" data-proof-chapter data-proof-route="topic-vi" data-topic-tone="oxblood"><header class="proof-topic-header proof-chapter-heading"><p class="section-label">Topic VI · Manuscript pages 41–50</p><h2>Projective escape and unit return</h2><p class="proof-topic-question">How can a local projective escape be transported through every label until radial criticality forces unit return?</p></header><details class="proof-topic-overview proof-chapter-orientation"><summary><span>Topic orientation</span>What this chapter proves and why it comes here</summary><div><p>Topic VI combines two linked arguments. Part A calibrates a projective corridor and proves that a nonidentity return map can be opened inward by a small signed motion.</p><p>Part B transports that motion through every polygon label, checks every boundary case, and assembles the contradiction with hereditary saturation. The two parts are shown together here so the complete mechanism can be read as one chapter.</p><p><strong>Reading convention.</strong> Essential definitions appear before the first statement that needs them. Complete manuscript proofs are closed by default. When a result has an added line-by-line explanation, it appears inside the same disclosure as the proof.</p></div></details>${partAChapter.controls}<section class="topic-i-textbook proof-chapter-group" id="topic-vi-part-a"><header><div><p class="section-label">Part A · Local projective escape</p><h3>Calibrate the projective return</h3></div><div><p>The admissible chart turns convexity into ordered slopes. A carefully chosen seed then returns strictly between the final contacts.</p></div></header>${partACore}</section><section class="topic-i-textbook proof-chapter-group" id="topic-vi-part-b"><header><div><p class="section-label">Part B · Global admissibility and unit return</p><h3>Transport the escape through every label</h3></div><div><p>The local motion is propagated through the return towers, every strict inequality is checked, and the resulting invariant replacement contradicts hereditary saturation unless the return step is one.</p></div></header>${partBCore}</section><nav class="proof-topic-controls proof-topic-controls-with-previous" aria-label="Proof chapter navigation"><div class="proof-topic-complete"><span>End of Topic VI</span><strong>This combined chapter is complete</strong></div><a class="proof-topic-control proof-topic-control-previous" href="Critical_Invariant_Polygons_Topic_V.html"><span>Previous</span><strong>Rotation records, first-return towers, and projective preparation</strong></a><a class="proof-topic-control proof-topic-control-next" href="Critical_Invariant_Polygons_Topic_VII.html"><span>Next</span><strong>The Farey carrier and return monodromy</strong></a></nav></article>`;
+const combinedArticle = `<article class="proof-topic-panel proof-chapter-panel" data-chapter-reading-mode="guided" data-proof-chapter data-proof-route="topic-vi" data-topic-tone="oxblood"><header class="proof-topic-header proof-chapter-heading"><p class="section-label">Topic VI · Manuscript pages 41–50</p><h2>Projective escape and unit return for N≥4</h2><p class="proof-topic-question">For N≥4, how can a local projective escape be transported through every label until hereditary saturation forces the first-return step to equal one?</p></header><details class="proof-topic-overview proof-chapter-orientation"><summary><span>Topic orientation</span>What this chapter proves and why it comes here</summary><div><p>Topic VI combines two linked arguments under the standing assumption N≥4. Part A calibrates a chain of perspectivities and proves that a nonidentity return map can be opened inward by a small signed motion.</p><p>Part B transports that motion through every polygon label, checks every boundary case in this scope, and assembles the contradiction with hereditary saturation. The explicit N=3 exception is displayed in Topic V and is not used here.</p><p><strong>Reading convention.</strong> Essential definitions appear before the first statement that needs them. Complete manuscript proofs are closed by default. When a result has an added line-by-line explanation, it appears inside the same disclosure as the proof.</p></div></details>${partAChapter.controls}<section class="topic-i-textbook proof-chapter-group" id="topic-vi-part-a"><header><div><p class="section-label">Part A · Local projective escape for N≥4</p><h3>Calibrate the projective return</h3></div><div><p>The admissible chart turns convexity into ordered slopes. A carefully chosen starting point then returns strictly between the final contacts.</p></div></header>${partACore}</section><section class="topic-i-textbook proof-chapter-group" id="topic-vi-part-b"><header><div><p class="section-label">Part B · Global admissibility and unit return for N≥4</p><h3>Transport the escape through every label</h3></div><div><p>The local motion is propagated through the return towers, every strict inequality is checked, and the resulting invariant replacement contradicts hereditary saturation unless the return step is one.</p></div></header>${partBCore}</section><nav class="proof-topic-controls proof-topic-controls-with-previous" aria-label="Proof chapter navigation"><div class="proof-topic-complete"><span>End of Topic VI</span><strong>This combined chapter is complete</strong></div><a class="proof-topic-control proof-topic-control-previous" href="Critical_Invariant_Polygons_Topic_V.html"><span>Previous</span><strong>Rotation arithmetic, first-return towers, and the projective boundary argument</strong></a><a class="proof-topic-control proof-topic-control-next" href="Critical_Invariant_Polygons_Topic_VII.html"><span>Next</span><strong>The Farey carrier and return monodromy for N≥4</strong></a></nav></article>`;
 
 const responsibilityStart = requiredIndex(
   partA,
@@ -133,10 +133,21 @@ const responsibilityStart = requiredIndex(
 );
 const combinedTail = partA.slice(responsibilityStart);
 let output = `${partA.slice(0, partA.indexOf("<main"))}${shell}${combinedArticle}${combinedTail}`;
-output = output.replace(
-  "Topic VI, Part A — The Local Projective Escape · Critical Invariant Polygons",
-  "Topic VI — Projective Escape and Unit Return · Critical Invariant Polygons",
-);
+const partATitle =
+  "Topic VI, Part A — The Local Projective Escape for N≥4 · Critical Invariant Polygons";
+const combinedTitle =
+  "Topic VI — Projective Escape and Unit Return for N≥4 · Critical Invariant Polygons";
+const partADescription =
+  "For N≥4, a complete guided proof of convex-chain calibration, fixed-point escape for a projectivity, and the local projective escape theorem.";
+const combinedDescription =
+  "For N≥4, a complete guided proof of local projective escape, global admissibility, and the argument forcing the first-return step to equal one.";
+
+if (!output.includes(partATitle) || !output.includes(partADescription)) {
+  throw new Error("The Topic VI shell metadata no longer matches the merger.");
+}
+output = output
+  .replace(partATitle, combinedTitle)
+  .replace(partADescription, combinedDescription);
 
 const ids = [...output.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
 const duplicateIds = [...new Set(ids.filter((id, index) => ids.indexOf(id) !== index))];

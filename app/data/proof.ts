@@ -256,10 +256,10 @@ function sourceRelationFor(number: number): string | undefined {
     return "Hatcher, Algebraic Topology, §1.3, supplies the standard covering-space lift for circle angles, while Schneider, Chapter 1, supplies convex-boundary angular order. The exact consequence for an iterated sequence of endpoint equalities is derived here.";
   }
   if (number === 42) {
-    return "Karpelevič (1951) is the closest structural antecedent. The exact finite partition displayed here is proved on this page and is deliberately left unbadged pending a statement-level literature audit.";
+    return "Karpelevič (1951) is the closest structural antecedent. The exact finite partition displayed here is proved on this page; no claim of priority is made here.";
   }
   if (number === 44) {
-    return "Coxeter supplies the classical projective background. The precise polygonal chart lemma is proved here and is deliberately left unbadged because the cited source does not state this exact formulation.";
+    return "Coxeter supplies the classical projective background. The precise polygonal chart lemma is proved here; no claim of priority is made here because the cited source does not state this exact formulation.";
   }
   if (newResults.has(number)) {
     return "The displayed source is the closest antecedent. The exact statement used here appears to be new, but its older mechanism or conclusion is stated separately.";
@@ -268,7 +268,7 @@ function sourceRelationFor(number: number): string | undefined {
     return "The cited source contains the earlier result; this manuscript states a strictly stronger version.";
   }
   if (karpelevicOnlyAntecedent.has(number)) {
-    return "Karpelevič’s original argument contains an antecedent of this mechanism. Under this site’s four-category convention, that occurrence alone does not justify a “Previously known” label, so the statement is deliberately left unbadged.";
+    return "Karpelevič’s original argument contains an antecedent of this mechanism. That occurrence alone does not justify a “Previously known” label, so no category or priority claim is assigned here.";
   }
   if (previouslyKnown.has(number)) {
     return "The mathematical result is available in the cited literature; the manuscript includes it as part of a self-contained route.";
@@ -284,8 +284,8 @@ const rawItems: readonly [
 ][] = [
   [1, "Definition", "Radial polygonal criticality", "Defines N-criticality by requiring N to be the least invariant-polygon vertex count for T and requiring every tT with t>1 to need more than N vertices."],
   [2, "Definition", "Strict polygon", "Rules out repeated vertices and flat turns so that every side and cyclic order used later is unambiguous."],
-  [3, "Theorem", "Critical-polygon contact-return normal form", "Collects the geometric reduction: a critical invariant polygon admits a rigid one-sided contact system and a finite return description."],
-  [4, "Theorem", "Complex monodromy and Farey carrier", "Converts the geometric return into a branch-controlled product identity whose carrier is a Farey cell."],
+  [3, "Theorem", "Critical-polygon contact-return normal form", "For N≥4, collects the geometric reduction: a critical invariant polygon admits a rigid one-sided contact system and a finite return description."],
+  [4, "Theorem", "Complex monodromy and Farey carrier", "For N≥4, converts the geometric return into a branch-controlled product identity whose carrier is a Farey cell."],
   [5, "Proposition", "Adapted complex structures", "Identifies an elliptic real-linear map with multiplication by one of its two conjugate complex eigenvalues."],
   [6, "Proposition", "Real-linear invariance of polygonal complexity", "Shows that changing real coordinates does not alter the least number of vertices needed for an invariant polygon."],
   [7, "Lemma", "Real-linear covariance of contact geometry", "Carries vertices, sides, contacts, and their labels faithfully through an invertible real-linear change of coordinates."],
@@ -323,16 +323,16 @@ const rawItems: readonly [
   [39, "Remark", "Record-vector chain and lattice sail", "Relates the unimodular record-vector chain to the standard convex-hull lattice sail without identifying collinear intermediate records as sail vertices."],
   [40, "Lemma", "Supporting lines exposing the return vertices", "Proves that each preimage supporting line used along the selected boundary arc exposes the corresponding polygon vertex."],
   [41, "Lemma", "The selected boundary arc is proper", "Shows that one cyclic orientation gives pairwise distinct consecutive boundary vertices and omits at least one polygon side."],
-  [42, "Proposition", "Partition of the return incidences", "Partitions the target indices under the first-return translation and records the source class of every incidence."],
+  [42, "Proposition", "Partition of the return source–target pairs", "Partitions the target indices under the first-return translation and records the source class of every pair."],
   [43, "Definition", "Composition of perspectivities along the selected boundary arc", "Defines a projectivity from the initial line to the terminal line by successive perspectivities."],
   [44, "Proposition", "Affine chart adapted to the selected boundary arc", "Chooses an affine chart in which the endpoint supports are parallel and the selected boundary arc has strictly increasing edge slopes."],
   [45, "Lemma", "Convex-chain calibration", "Calibrates successive projections so a point can move through the corridor without jumping across a supporting edge."],
   [46, "Lemma", "Fixed-point escape for a projectivity", "Finds a nearby point moved strictly to one side whenever the return projectivity is not the identity."],
-  [47, "Theorem", "Projective corridor escape", "Combines the calibrated chain with fixed-point escape to produce a no-skipping deformation."],
+  [47, "Theorem", "Projective corridor escape", "For N≥4, combines the calibrated chain with fixed-point escape to produce the deformation used to rule out a skipped return."],
   [48, "Lemma", "Global deformation admissibility", "Checks simultaneously that the entire return-corridor deformation remains a strict invariant polygon."],
   [49, "Theorem", "Global return-corridor deformation", "Assembles the local projection moves into one admissible global deformation."],
-  [50, "Theorem", "Projective unit return", "Uses criticality to force the final return projectivity to be the identity."],
-  [51, "Remark", "Boundary ledger", "Summarizes which edge checks keep the projective construction on the polygon boundary."],
+  [50, "Theorem", "Projective unit return", "For N≥4, uses criticality to force the first-return step Δ to equal one."],
+  [51, "Remark", "Boundary cases", "Summarizes which edge checks keep the projective construction on the polygon boundary."],
   [52, "Remark", "Protective invariant", "Identifies the invariant that prevents the deformation from leaving the admissible class."],
   [53, "Lemma", "Farey adjacency criterion", "Recognizes neighbouring reduced fractions through a determinant of absolute value one."],
   [54, "Lemma", "Reflection Farey cell", "Reflects a Farey cell across one half-turn while preserving adjacency."],
@@ -426,12 +426,12 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "rotation",
     eyebrow: "Topic V · 9 items",
-    title: "Rotation records, first-return towers, and projective preparation",
+    title: "Rotation arithmetic, first-return towers, and the projective boundary argument",
     question:
-      "How does one cyclic interval of relative-interior contacts determine the arithmetic and boundary data needed to prove Δ=1?",
+      "How does one cyclic interval determine its first-return towers, and why does the projective argument force Δ=1 only when N≥4?",
     overview: [
       "A finite cyclic rotation converts the interval from Topic IV into first-return data. Consecutive record vectors and determinant-one lattice pairs produce a two-height tower decomposition.",
-      "The tower identities determine exposing supporting lines along a proper boundary arc. A finite partition of return incidences and a composition of perspectivities prepare the deformation argument completed in Topic VI.",
+      "For N≥4, the tower identities determine exposing supporting lines along a boundary arc that omits at least one side. A finite partition of return source–target pairs and a composition of perspectivities prepare the deformation argument completed in Topic VI; the page exhibits the N=3 exception separately.",
     ],
     itemNumbers: [37, 38, 39, 40, 41, 42, 43, 44, 70],
     manuscriptPages: "31–40",
@@ -440,12 +440,12 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "unit-return",
     eyebrow: "Topic VI · 8 items",
-    title: "Projective escape and unit return",
+    title: "Projective escape and unit return for N≥4",
     question:
-      "Why would a nonidentity return map contradict radial criticality?",
+      "For N≥4, why would a first-return step Δ>1 contradict radial criticality?",
     overview: [
       "Successive projections along a convex chain define a projectivity on the starting side. If its holonomy is not the identity, a nearby point escapes its fixed set and initiates a controlled deformation.",
-      "The hard part is global admissibility: every support, label, and strict inequality must survive at once. Once that ledger is closed, the deformation contradicts criticality and forces unit return.",
+      "The hard part is global admissibility: every support, label, and strict inequality must survive at once. Once that finite accounting is complete, the deformation contradicts criticality and forces unit return in the stated N≥4 range.",
     ],
     itemNumbers: [45, 46, 47, 48, 49, 50, 51, 52],
     manuscriptPages: "41–50",
@@ -453,9 +453,9 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "farey-return",
     eyebrow: "Topic VII · 7 items",
-    title: "The Farey carrier and return monodromy",
+    title: "The Farey carrier and return monodromy for N≥4",
     question:
-      "How does the identity return become the scalar equation of a Farey boundary arc?",
+      "For N≥4, how does the identity return become the scalar equation of a Farey boundary arc?",
     overview: [
       "Determinant-one adjacency identifies the relevant Farey cell, and reflection aligns the rotation arithmetic with the chosen contact orientation.",
       "The proof then separates transversal from nontransversal return. Both produce a heterogeneous product of contact factors; a controlled logarithmic branch places those factors on one Jensen sheet and yields the Farey carrier.",
@@ -471,7 +471,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "How does a stochastic radial extremum become a critical planar contraction?",
     overview: [
       "This topic reattaches the geometry to row-stochastic matrices. The invariant-polygon criterion passes in both directions between a stochastic eigenvalue and a polygon with at most the prescribed number of vertices.",
-      "Compactness, radial filling, and the unit-circle classification isolate new-shell radial extrema. The criticality bridge then turns such an extremum into the intrinsic monodromy data proved in Part I. This is the complete interface needed by the five proof chapters that follow.",
+      "Compactness, radial filling, and the unit-circle classification isolate new-shell radial extrema. For N≥4, the criticality bridge then turns such an extremum into the intrinsic monodromy data proved in Part I; orders at most three use the direct small-order argument. This is the complete interface needed by the five proof chapters that follow.",
     ],
     itemNumbers: [3, 4, 60, 61, 62, 63, 64],
     manuscriptPages: "3–5, 59–60, 66, and 71–75",
@@ -496,7 +496,7 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "Why can no stochastic eigenvalue lie beyond its candidate Farey–Ito arc?",
     overview: [
-      "The critical-polygon monodromy from Part I supplies a heterogeneous Ito product and places all return factors on one controlled Jensen sheet.",
+      "For new-shell orders N≥4, the critical-polygon monodromy from Part I supplies a heterogeneous Ito product and places all return factors on one controlled Jensen sheet; orders at most three have already been treated directly.",
       "A strictly convex log-sine potential equalizes those factors. Its equality case identifies the unique outermost radial profile and proves the sharp cellwise upper bound.",
     ],
     itemNumbers: [],
@@ -563,7 +563,7 @@ export const proofContent = {
   deck:
     "A fourteen-topic route from intrinsic polygon geometry to the Karpelevič–Ito theorem. Each chapter preserves the manuscript’s formal statements and complete proofs, then adds definitions, dependency maps, guided explanations, and verified mathematical plates. Topic XIV is a worked example rather than a proof dependency.",
   auditNote:
-    "The four labels—Classical result, Previously known, Strengthened, and New result—classify mathematical statements, not proofs. A Karpelevič-only antecedent is cited but deliberately left unbadged. The classifications remain open to correction.",
+    "The four labels—Classical result, Previously known, Strengthened, and New result—classify mathematical statements, not proofs. A Karpelevič-only antecedent may be cited without assigning a category or priority claim. The classifications remain open to correction.",
   criticalPath:
     "5 → 16 → 30 → 32 → 36 → 37 → 42 → 48 → 50 → (57, 58) → 59 → 4 → 64",
 } as const;

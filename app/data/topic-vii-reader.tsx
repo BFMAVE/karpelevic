@@ -220,6 +220,10 @@ const guides: readonly ReaderResultGuide[] = [
     label: "Proposition 8.5",
     vocabulary: [
       vocabulary(
+        "Standing scope N≥4",
+        "This nontransversal construction invokes the projective unit-return theorem. It therefore belongs to the N≥4 part of the argument; the N=3 case is proved directly in Topic XIII.",
+      ),
+      vocabulary(
         "Nontransversal regime",
         "The strict interval contains more points than the number δ of contact-rotation orbits: φ>δ.",
       ),
@@ -237,7 +241,7 @@ const guides: readonly ReaderResultGuide[] = [
     proofSteps: [
       step(
         "Force one orbit",
-        "Theorem 7.11 gives Δ=1. The record identity gcd(Δ,φ)=δ therefore gives δ=1.",
+        "Because N≥4, Theorem 7.11 applies and gives Δ=1. The record identity gcd(Δ,φ)=δ therefore gives δ=1.",
       ),
       step(
         "Treat the full block",
@@ -265,7 +269,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "A nontransversal critical return yields a determinant-one Farey cell, a complete heterogeneous product, and an exact phase.",
+      "For N≥4, a nontransversal critical return yields a determinant-one Farey cell, a complete heterogeneous product, and an exact phase.",
   },
   {
     itemNumber: 58,
@@ -379,7 +383,7 @@ const theorem14: ProofResultData = {
   kind: "Theorem",
   title: theorem14Item.title,
   purpose:
-    "This theorem eliminates all case-specific return variables and exports one selected eigenvalue, one ordered Farey cell, one heterogeneous product, and one exact phase identity.",
+    "For N≥4, this theorem eliminates all case-specific return variables and exports one selected eigenvalue, one ordered Farey cell, one heterogeneous product, and one exact phase identity.",
   manuscriptHtml: theorem14CompleteHtml,
   vocabulary: [
     vocabulary(
@@ -408,7 +412,7 @@ const theorem14: ProofResultData = {
     ),
     step(
       "Nontransversal case",
-      "Choose μ=λ and use Proposition 8.5 plus unit return; the right endpoint denominator is N.",
+      "In the standing N≥4 range, choose μ=λ and use Proposition 8.5 plus unit return; the right endpoint denominator is N.",
     ),
     step(
       "Transversal with δ≥2",
@@ -454,6 +458,22 @@ export const topicVIIGroups: readonly AdvancedProofGroup[] = [
         and explicitly.
       </p>
     ),
+    formalSetups: [
+      {
+        id: "topic-vii-n-ge-4-scope",
+        title: "Standing scope for critical-polygon monodromy: N≥4",
+        html: String.raw`
+          <p>
+            Proposition 8.5 invokes projective unit return, and Theorem 1.4
+            assembles the resulting contact-return normal form. Both are used
+            here only for <strong>N≥4</strong>. The finite Farey lemmas above do
+            not require that restriction. The stochastic regions of orders
+            one, two, and three are established by a separate direct proof in
+            Topic XIII, which is forthcoming on the public site.
+          </p>
+        `,
+      },
+    ],
     results: coreResults.slice(3, 6),
   },
   {
@@ -474,7 +494,7 @@ export const topicVIIImported: readonly ProofDependency[] = [
     label: "Topic VI-B: completed return dichotomy",
     href: sitePath("/proof/topic-vi/b/#thm:critical-polygon-normal-form"),
     explanation:
-      "Identity, transversal, and nontransversal regimes are exhaustive; the nontransversal first return is the adjacent successor.",
+      "For N≥4, identity, transversal, and nontransversal regimes are exhaustive; the nontransversal first return is the adjacent successor.",
   },
   {
     label: "Topic V: unit record section and padding",

@@ -9,9 +9,9 @@ import {
 import { getPageTimestamp } from "../../lib/git-dates";
 
 export const metadata: Metadata = {
-  title: "Topic VII — The Farey Carrier and Return Monodromy",
+  title: "Topic VII — The Farey Carrier and Return Monodromy for N≥4",
   description:
-    "A complete guided derivation of Farey adjacency, reflected return strips, heterogeneous Ito products, exact lifted phase, and the Jensen sheet.",
+    "For N≥4, a complete guided derivation of Farey adjacency, reflected return strips, heterogeneous Ito products, exact lifted phase, and the Jensen sheet.",
 };
 
 const updatedAt = getPageTimestamp("app/data/topic-vii-reader.tsx");
@@ -26,16 +26,17 @@ export default function TopicVIIPage() {
       manuscriptPages="51–58; Lemma 8.7 and Theorem 1.4 close on 59"
       overview={[
         "The adjacent return edge is read as a determinant-one Farey cell. Reflection is handled at the level of the complete return strip, including closure exponent and lifted phase.",
-        "Identity, nontransversal, and transversal returns each produce a finite heterogeneous product. Consecutive vertex angles place every factor on one upper-half-plane argument branch, completing the complex monodromy theorem.",
+        "For N≥4, identity, nontransversal, and transversal returns each produce a finite heterogeneous product. Consecutive vertex angles place every factor on one upper-half-plane argument branch, completing the complex monodromy theorem.",
       ]}
       provedHere={
         <p>
           This page proves the Farey criterion, exact strip reflection, every
           return-regime product, the common Jensen sheet, and the complete
-          assembly of Theorem 1.4.
+          assembly of Theorem 1.4 for its stated range N≥4. Orders one, two,
+          and three are handled directly in Topic XIII.
         </p>
       }
-      question="How does adjacent projective return become one Farey cell, one heterogeneous Ito product, and one exact phase identity?"
+      question="For N≥4, how does adjacent projective return become one Farey cell, one heterogeneous Ito product, and one exact phase identity?"
       routeKey="topic-vii"
       sourceIds={topicVIISourceIds}
       stats={[

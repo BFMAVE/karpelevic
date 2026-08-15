@@ -18,23 +18,23 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
   "rotation-records": {
     title: "Upper records of the rotation by five modulo thirteen",
     description:
-      "A residue strip highlights record residues zero, five, ten, and twelve. A second panel plots the record vectors zero one, one one, two one, and five two against the exact cone boundary L of h b equals zero.",
+      "A residue strip highlights record residues zero, five, ten, and twelve. A second panel plots the corresponding integer record vectors zero one, one one, two one, and five two beside the boundary ray on which L of h comma b equals zero.",
     caption:
-      "Plate V.1. For N=13 and κ=5, the upper-record times are 0, 1, 2, and 5, with deficits 13, 8, 3, and 1. The lower panel shows their unimodular record-vector chain and the exact cone boundary L(h,b)=0. Collinear intermediate record vectors are retained and need not be vertices of the Klein sail.",
+      "Plate V.1. For N=13 and κ=5, the upper-record times are 0, 1, 2, and 5, with deficits 13, 8, 3, and 1. The lower panel shows their unimodular record-vector chain beside the boundary ray L(h,b)=0 of the relevant cone. The Klein sail is the corresponding convex-hull boundary; the record-vector chain retains collinear intermediate points, which need not be sail vertices.",
   },
   "return-towers": {
     title: "The two-height return section",
     description:
-      "Eight base columns contain three towers of height one and five towers of height two, giving thirteen states. One arrow illustrates addition of five modulo eight on the base set.",
+      "Eight base columns contain three towers explicitly labelled H sub i equals one and five towers explicitly labelled H sub i equals two, giving thirteen states. One arrow illustrates addition of five modulo eight on the base-index set.",
     caption:
-      "Plate V.2. The record pair V=(1,1), V′=(2,1) gives ν=8, Δ=5, q=1, h=1. The identity qν+hΔ=13 is visible as three short states plus ten long states.",
+      "Plate V.2. The record pair V=(1,1), V′=(2,1) gives ν=8, Δ=5, q=1, and h=1. Three base indices have return height Hᵢ=q=1, while five have Hᵢ=q+h=2. Thus qν+hΔ=13 appears as three one-cell towers plus five two-cell towers.",
   },
   "projective-corridor": {
     title: "Composition of perspectivities along the boundary arc",
     description:
-      "An exact incidence construction on a convex polygonal arc. For i from two through four, Y i lies on the supporting line L i and Y i minus one, C i, Y i are collinear. The final line through Y four and Y five passes through X five, and Y five lies on the terminal line through C four and C five.",
+      "An exact incidence construction maps the source line A one through X zero and X one to the target line K through C four and C five. For i from two through four, Y i lies on the supporting line script L i, while the auxiliary projection line through Y i minus one and Y i passes through the centre C i. The final auxiliary projection line passes through X five.",
     caption:
-      "Plate V.4. Exact incidence construction. For 2≤i≤4, the point Yᵢ lies on ℒᵢ and the line through Yᵢ₋₁ and Yᵢ passes through Cᵢ. The final line through Y₄ and Y₅ passes through X₅, while Y₅ lies on aff(C₄,C₅). Their composition is a projectivity from the initial line to the terminal line.",
+      "Plate V.4. Exact incidence construction. The source is A₁=aff(X₀,X₁), and the target is K=aff(C₄,C₅). For 2≤i≤4, the point Yᵢ lies on the supporting line ℒᵢ, while the auxiliary projection line through Yᵢ₋₁ and Yᵢ passes through its centre Cᵢ. The final auxiliary line through Y₄ and Y₅ passes through the last projection centre X₅. Composing these perspectivities gives a projectivity A₁→K.",
   },
   "holonomy-escape": {
     title: "A scalar projectivity controls the closing half-plane",
@@ -44,11 +44,11 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
       "Plate VI-A.1. Once γ(τ)>0, the planar determinant has the sign of τ-u(τ). The inequality τ-u(τ)>0 therefore opens the closing contact inward.",
   },
   "global-ledger": {
-    title: "Partition of the return incidences",
+    title: "Partition of the return source–target pairs",
     description:
-      "The target-index set script B is partitioned into D, R, the singleton c, and A. Each row records the exact inverse-source statement proved for that target class.",
+      "The base-index set ℬ, calligraphic B, is partitioned into D, R, the singleton containing c, and A. Each row states both the target-membership condition and the exact condition on its inverse source under s.",
     caption:
-      "Plate V.3. The target-index set ℬ is partitioned as ℬ=D⊔R⊔{c}⊔A. For j∈D∪A, the inverse source s(j) lies outside M; the identity s(R)=M° describes the sources of targets in R; and s(c)=b*. This is a combinatorial classification of return incidences; no deformation is assumed.",
+      "Plate V.3. The base-index set ℬ is partitioned as ℬ=D⊔R⊔{c}⊔A. Here M is the selected set of source indices, M° is that set without its distinguished endpoint b*, and s is the inverse return map. For j∈D∪A, s(j)∉M; for j∈R, s(j)∈M° and indeed s(R)=M°; finally s(c)=b*. This classifies the source–target pairs combinatorially; no deformation is assumed.",
   },
   "unit-return": {
     title: "Incidence pattern of the forbidden interior image vertex",
@@ -142,7 +142,7 @@ function RotationRecords() {
       />
       <text className="topic-ii-figure-small" x="66" y="185">b</text>
       <text className="topic-ii-figure-small" x="405" y="361">h</text>
-      <text className="topic-ii-figure-small" x="210" y="320">dashed ray: L(h,b)=0</text>
+      <text className="topic-ii-figure-small" x="210" y="320">boundary ray: L(h,b)=0</text>
       <text className="topic-ii-figure-equation" x="485" y="246">L(h,b)=5h−13b</text>
       <text className="topic-ii-figure-small" x="485" y="276">record deficits: 13, 8, 3, 1</text>
       <g data-records={records.map((record) => record.time + ":" + record.residue + ":" + record.deficit).join(",")} />
@@ -197,7 +197,7 @@ function RotationRecordsMobile() {
         );
       })}
       <text className="topic-ii-figure-equation" x="18" y="347">record-vector chain</text>
-      <text className="topic-ii-figure-small" x="18" y="370">L(h,b)=5h−13b; dashed: L(h,b)=0</text>
+      <text className="topic-ii-figure-small" x="18" y="370">L(h,b)=5h−13b; boundary ray: L(h,b)=0</text>
       <line className="topic-ii-figure-ray" x1={origin.x} x2="338" y1={origin.y} y2={origin.y} />
       <line className="topic-ii-figure-ray" x1={origin.x} x2={origin.x} y1={origin.y} y2="390" />
       <line className="topic-ii-figure-support" x1={origin.x} x2={coneEnd.x} y1={origin.y} y2={coneEnd.y} />
@@ -235,7 +235,7 @@ function ReturnTowers() {
               <rect className={level === 0 ? "topic-ii-figure-polygon" : "topic-ii-figure-polar"} height="42" key={level} width="48" x={x} y={272 - level * 48} />
             ))}
             <text className="topic-ii-figure-small" x={x + 24} y="333" textAnchor="middle">{index + 1}</text>
-            <text className="topic-ii-figure-small" x={x + 24} y="298" textAnchor="middle">{height}</text>
+            <text className="topic-ii-figure-small" x={x + 24} y="298" textAnchor="middle">Hᵢ={height}</text>
           </g>
         );
       })}
@@ -275,7 +275,7 @@ function ReturnTowersMobile({ markerId }: { markerId: string }) {
               />
             ))}
             <text className="topic-ii-figure-small" x={x} y={y + 65} textAnchor="middle">base {index + 1}</text>
-            <text className="topic-ii-figure-label" x={x} y={y + 27} textAnchor="middle">{height}</text>
+            <text className="topic-ii-figure-small" x={x} y={y + 27} textAnchor="middle">Hᵢ={height}</text>
           </g>
         );
       })}
@@ -411,7 +411,7 @@ function ProjectiveCorridorGeometry({
               className="topic-ii-figure-small"
               fontSize={mobile ? 13 : undefined}
               x={a[0] + (mobile ? 8 : 16)}
-              y={a[1] - (mobile ? 5 : 8)}
+              y={a[1] - (mobile ? 5 : 16)}
             >
               ℒ{index + 2}
             </text>
@@ -422,10 +422,10 @@ function ProjectiveCorridorGeometry({
       <text
         className="topic-ii-figure-small"
         fontSize={mobile ? 13 : undefined}
-        x={terminal[0][0]}
-        y={terminal[0][1] - (mobile ? 9 : 12)}
+        x={mobile ? 165 : terminal[0][0]}
+        y={mobile ? 24 : 88}
       >
-        aff(C₄,C₅)
+        K = aff(C₄,C₅)
       </text>
       {centres.map(([x, y], index) => {
         return (
@@ -469,8 +469,8 @@ function ProjectiveCorridorGeometry({
           <text
             className="topic-ii-figure-label"
             fontSize={mobile ? 15 : undefined}
-            x={x + (index === 4 ? -28 : 7) * labelScale}
-            y={y + (index % 2 === 0 ? 20 : -10) * labelScale}
+            x={x + (index === 4 ? -28 : index === 2 ? 20 : 7) * labelScale}
+            y={y + (index === 2 ? -12 : index % 2 === 0 ? 20 : -10) * labelScale}
           >
             Y{index + 1}
           </text>
@@ -482,9 +482,9 @@ function ProjectiveCorridorGeometry({
           fontSize={mobile ? 12 : undefined}
           key={`x-${index}`}
           x={x + (index === 5 ? -7 : -3) * labelScale}
-          y={y + (index === 5 ? -13 : 24) * labelScale}
+          y={y + 24 * labelScale}
         >
-          X{index}{index === 5 ? " (final centre)" : ""}
+          X{index}
         </text>
       ))}
       <text
@@ -493,7 +493,7 @@ function ProjectiveCorridorGeometry({
         x={initial[0][0]}
         y={initial[0][1] + (mobile ? 26 : 34)}
       >
-        initial line
+        A₁ = aff(X₀,X₁)
       </text>
       <g
         data-incidence-count={projectiveIncidenceResiduals.length}
@@ -533,14 +533,14 @@ function HolonomyEscape() {
 function GlobalLedger() {
   const rows = [
     ["D", "target j∈D", "s(j)∉M"],
-    ["R", "target j∈R", "s(R)=M°"],
-    ["{c}", "target c", "s(c)=b*"],
+    ["R", "target j∈R", "s(j)∈M°; s(R)=M°"],
+    ["{c}", "target j=c", "s(c)=b*"],
     ["A", "target j∈A", "s(j)∉M"],
   ] as const;
   return (
     <>
-      <text className="topic-ii-figure-small" x="157" y="29">target class</text>
-      <text className="topic-ii-figure-small" x="458" y="29">inverse-source statement</text>
+      <text className="topic-ii-figure-small" x="157" y="29">target membership</text>
+      <text className="topic-ii-figure-small" x="458" y="29">inverse-source condition</text>
       {rows.map(([label, source, target], index) => {
         const y = 83 + index * 70;
         return (
@@ -561,8 +561,8 @@ function GlobalLedger() {
 function GlobalLedgerMobile() {
   const rows = [
     ["D", "target j∈D", "s(j)∉M"],
-    ["R", "target j∈R", "s(R)=M°"],
-    ["{c}", "target c", "s(c)=b*"],
+    ["R", "target j∈R", "s(j)∈M°; s(R)=M°"],
+    ["{c}", "target j=c", "s(c)=b*"],
     ["A", "target j∈A", "s(j)∉M"],
   ] as const;
 

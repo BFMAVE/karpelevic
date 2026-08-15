@@ -63,11 +63,31 @@ const topicVContactNotation: AdvancedProofSetup = {
       it is not an additional hypothesis.
     </p>
     <p>
+      Write
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><mo>=</mo><mi mathvariant="normal">gcd</mi><mo stretchy="false">(</mo><mi>N</mi><mo>,</mo><mi>κ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\delta=\gcd(N,\kappa)</annotation></semantics></math>.
+      This is the number of orbits of addition by
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mi>κ</mi></math>
+      on the cyclic labels. When two consecutive record deficits are
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ν</mi><mo>&gt;</mo><msup><mi>ν</mi><mo>′</mo></msup></mrow><annotation encoding="application/x-tex">\nu&gt;\nu'</annotation></semantics></math>,
+      their difference
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mo>=</mo><mi>ν</mi><mo>−</mo><msup><mi>ν</mi><mo>′</mo></msup></mrow><annotation encoding="application/x-tex">\Delta=\nu-\nu'</annotation></semantics></math>
+      will be the first-return step on the base interval. These symbols are
+      defined again in the formal rotation statement where their identities
+      are proved.
+    </p>
+    <p>
       Define the relative-interior contact indices by
       <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>=</mo><mo stretchy="false">{</mo><mi>i</mi><mo>:</mo><msub><mi>ξ</mi><mi>i</mi></msub><mo>∈</mo><mi mathvariant="normal">relint</mi><mo stretchy="false">(</mo><msub><mi>E</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mo stretchy="false">}</mo><mo>=</mo><mo stretchy="false">{</mo><mn>1</mn><mo>,</mo><mo>…</mo><mo>,</mo><mi>φ</mi><mo stretchy="false">}</mo><mo>.</mo></mrow><annotation encoding="application/x-tex">S=\{i:\xi_i\in\operatorname{relint}(E_i)\}=\{1,\ldots,\varphi\}.</annotation></semantics></math>
       The final equality is the cyclic relabelling and reduction proved in
       Topic IV. When the first-return map is introduced, the same representative
       set is denoted by 𝓑={1,…,φ}.
+    </p>
+    <p>
+      The display 𝓑={1,…,φ} is a list of cyclic labels, not an ordinary
+      interval of new integers. In the full-length case φ=N, the terminal
+      label N denotes the same residue as 0 modulo N, so the list still
+      contains exactly N labels. The same convention applies to every
+      full-length interval written below.
     </p>
     <p>
       If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>φ</mi><mo>&lt;</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">\varphi&lt;N</annotation></semantics></math>,
@@ -79,6 +99,111 @@ const topicVContactNotation: AdvancedProofSetup = {
       If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>φ</mi><mo>=</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">\varphi=N</annotation></semantics></math>,
       we use <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">h=0</annotation></semantics></math>.
     </p>
+    <p>
+      Plate V.1 also mentions the <strong>Klein sail</strong>. In this planar
+      setting it is the relevant boundary of the convex hull of the nonzero
+      lattice points in the cone between two rays. The proof uses the complete
+      record-vector chain, including any record vector lying in the interior
+      of a straight sail edge; it never assumes that every record vector is a
+      corner of the sail.
+    </p>
+  `,
+};
+
+const topicVArithmeticGeometryDictionary: AdvancedProofSetup = {
+  id: "topic-v-arithmetic-geometry-dictionary",
+  title: "How the return arithmetic becomes polygon geometry",
+  html: String.raw`
+    <p>
+      The rotation theorem is first proved without a polygon. The following
+      dictionary states exactly how its symbols are used once the polygon is
+      restored.
+    </p>
+    <details class="proof-item-commentary proof-item-explainer">
+      <summary><span>Arithmetic-to-geometry dictionary</span>Open the five correspondences</summary>
+      <div class="proof-item-explainer-body">
+        <ul>
+          <li><strong>Base i.</strong> The cyclic label i names the polygon vertex xᵢ from which one return tower starts.</li>
+          <li><strong>Height Hᵢ.</strong> This is the number of multiplications by λ made before the orbit first returns to the base interval.</li>
+          <li><strong>Target r(i).</strong> The top of the tower issued from i lands on the side Eᵣ₍ᵢ₎.</li>
+          <li><strong>Top identity.</strong> The equality λᴴⁱxᵢ=ξᵣ₍ᵢ₎ says that the returned image point is exactly the contact assigned to that side.</li>
+          <li><strong>Internal levels.</strong> Every state before the top lies outside the relative-interior contact interval and therefore gives an endpoint identity, not an additional relative-interior contact.</li>
+        </ul>
+      </div>
+    </details>
+  `,
+};
+
+const topicVProjectiveScope: AdvancedProofSetup = {
+  id: "topic-v-projective-scope",
+  title: "Why projective unit return requires N≥4: an explicit critical triangle",
+  html: String.raw`
+    <p>
+      The assumption N≥4 is essential. The following family is 3-critical,
+      places all three image vertices in the relative interiors of their
+      assigned sides, and has (φ,κ,Δ)=(3,2,2).
+    </p>
+    <details class="proof-item-commentary proof-item-explainer">
+      <summary><span>Why projective unit return requires N≥4</span>Open the explicit critical-triangle calculation</summary>
+      <div class="proof-item-explainer-body">
+        <p>
+          Fix 1/2&lt;a&lt;1. A matrix is <dfn>doubly stochastic</dfn> when its
+          entries are nonnegative and every row and every column sums to one.
+          Consider
+        </p>
+        <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>B</mi><mi>a</mi></msub><mo>=</mo><mrow><mo>(</mo><mtable><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn><mo>−</mo><mi>a</mi></mtd><mtd><mi>a</mi></mtd></mtr><mtr><mtd><mi>a</mi></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn><mo>−</mo><mi>a</mi></mtd></mtr><mtr><mtd><mn>1</mn><mo>−</mo><mi>a</mi></mtd><mtd><mi>a</mi></mtd><mtd><mn>0</mn></mtd></mtr></mtable><mo>)</mo></mrow><mo>.</mo></mrow><annotation encoding="application/x-tex">B_a=\begin{pmatrix}0&amp;1-a&amp;a\\a&amp;0&amp;1-a\\1-a&amp;a&amp;0\end{pmatrix}.</annotation></semantics></math>
+        <p>
+          Let e₀,e₁,e₂ be the standard coordinate vectors of ℝ³, let
+          H={u∈ℝ³:u₀+u₁+u₂=0}, let 𝟙=(1,1,1), and put xᵢ=eᵢ−𝟙/3. The
+          triangle Pₐ=conv{x₀,x₁,x₂} lies in H. Because Bₐ is
+          doubly stochastic, it preserves H and fixes 𝟙. Its restriction
+          Tₐ=Bₐ|H therefore satisfies
+        </p>
+        <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><mrow><msub><mi>T</mi><mi>a</mi></msub><msub><mi>x</mi><mn>0</mn></msub><mo>=</mo><mi>a</mi><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>a</mi><mo>)</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo></mrow></mtd></mtr><mtr><mtd><mrow><msub><mi>T</mi><mi>a</mi></msub><msub><mi>x</mi><mn>1</mn></msub><mo>=</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>a</mi><mo>)</mo><msub><mi>x</mi><mn>0</mn></msub><mo>+</mo><mi>a</mi><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo></mrow></mtd></mtr><mtr><mtd><mrow><msub><mi>T</mi><mi>a</mi></msub><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><mi>a</mi><msub><mi>x</mi><mn>0</mn></msub><mo>+</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>a</mi><mo>)</mo><msub><mi>x</mi><mn>1</mn></msub><mo>.</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}T_ax_0&amp;=ax_1+(1-a)x_2,\\T_ax_1&amp;=(1-a)x_0+ax_2,\\T_ax_2&amp;=ax_0+(1-a)x_1.\end{aligned}</annotation></semantics></math>
+        <p>
+          Identify H with ℂ by sending xⱼ to exp(2πij/3). Substitution in the
+          three displayed formulas shows that Tₐ is multiplication by
+        </p>
+        <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><mrow><msub><mi>λ</mi><mi>a</mi></msub><mo>=</mo><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>+</mo><mi>i</mi><mfrac><msqrt><mn>3</mn></msqrt><mn>2</mn></mfrac><mo>(</mo><mn>2</mn><mi>a</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>,</mo></mrow></mtd></mtr><mtr><mtd><mrow><msup><mrow><mo>|</mo><msub><mi>λ</mi><mi>a</mi></msub><mo>|</mo></mrow><mn>2</mn></msup><mo>=</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mo>+</mo><mfrac><mn>3</mn><mn>4</mn></mfrac><msup><mrow><mo>(</mo><mn>2</mn><mi>a</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mn>2</mn></msup><mo>&lt;</mo><mn>1</mn><mo>.</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}\lambda_a&amp;=-\frac12+i\frac{\sqrt3}{2}(2a-1),\\ |\lambda_a|^2&amp;=\frac14+\frac34(2a-1)^2&lt;1.\end{aligned}</annotation></semantics></math>
+        <p>
+          The displayed vertex formulas also say
+          Tₐx<sub>i−2</sub>∈relint[x<sub>i−1</sub>,x<sub>i</sub>] for every
+          cyclic label i. Hence all three contacts lie in relative interiors,
+          and the page&apos;s convention gives (φ,κ)=(3,2). Thus Tₐ is a nonreal
+          contraction and TₐPₐ⊆Pₐ, so three vertices suffice.
+          No nondegenerate polygon has fewer than three vertices, hence
+          ν<sub>poly</sub>(Tₐ)=3.
+        </p>
+        <p>
+          It remains to check radial criticality. Suppose t&gt;1 and some
+          nondegenerate triangle R=conv{q₀,q₁,q₂} satisfied tTₐR⊆R. Barycentric
+          coordinates are nonnegative coefficients summing to one. Writing
+          every image vertex in those coordinates gives tTₐA=AC, where
+          A:ℝ³→H sends c to Σⱼcⱼqⱼ and C is nonnegative with every column
+          summing to one (that is, column-stochastic). The map A is surjective,
+          the identity AC=tTₐA makes ker(A) invariant under C, and the induced
+          map on ℝ³/ker(A) is conjugate to tTₐ. It therefore has eigenvalues
+          tλₐ and tλ̄ₐ. Column sums equal to one give 𝟙ᵀC=𝟙ᵀ, so 1 is a left
+          eigenvalue of C and hence an eigenvalue of C. These are all three
+          eigenvalues of the 3×3 matrix C, and therefore
+        </p>
+        <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><mrow><mi mathvariant="normal">tr</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo>+</mo><mi>t</mi><msub><mi>λ</mi><mi>a</mi></msub><mo>+</mo><mi>t</mi><msub><mover><mi>λ</mi><mo>¯</mo></mover><mi>a</mi></msub></mrow></mtd></mtr><mtr><mtd><mrow><mo>=</mo><mn>1</mn><mo>+</mo><mn>2</mn><mi>t</mi><mi mathvariant="normal">Re</mi><mo stretchy="false">(</mo><msub><mi>λ</mi><mi>a</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo>&lt;</mo><mn>0</mn><mo>.</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}\operatorname{tr}(C)&amp;=1+t\lambda_a+t\overline\lambda_a,\\&amp;=1+2t\operatorname{Re}(\lambda_a)=1-t&lt;0.\end{aligned}</annotation></semantics></math>
+        <p>
+          This is impossible because the trace of a nonnegative matrix is the
+          sum of its nonnegative diagonal entries. Therefore no outward
+          enlargement tTₐ has an invariant triangle, and Tₐ is 3-critical.
+        </p>
+        <p>
+          Finally, the residues for (N,κ)=(3,2) begin 0,2,1,0. Time zero has
+          the declared deficit 3; time one reaches residue 2 and therefore has
+          deficit 1. Thus δ=gcd(3,2)=1 and
+          Δ=3−1=2. Hence φ&gt;δ but Δ≠1. Topic XIII proves the stochastic
+          eigenvalue region for orders one, two, and three directly; it does
+          not pass this exceptional triangle through the projective unit-return
+          argument. <strong>Topic XIII is forthcoming on the public site.</strong>
+        </p>
+      </div>
+    </details>
   `,
 };
 
@@ -122,7 +247,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "A determinant larger than one always leaves a visible nonzero lattice representative inside the half-open cell.",
+      "A determinant larger than one always leaves a nonzero integer representative inside the half-open cell.",
   },
   {
     itemNumber: 37,
@@ -168,7 +293,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Exclude a determinant gap",
-        "If consecutive records V,V′ enclosed determinant area larger than one, Lemma A.6 would supply a nonzero lattice point in their fundamental parallelogram. Primitivity excludes the radial edges; reflecting the point if needed puts it in the record triangle.",
+        "If consecutive records V,V′ enclosed determinant area larger than one, Lemma A.6 would supply a nonzero lattice point in their fundamental parallelogram. Primitivity excludes the radial edges; reflecting the point if needed puts it in conv{0,V,V′}.",
         "That point has time strictly before h′ and deficit strictly smaller than ν, contradicting consecutiveness.",
       ),
       step(
@@ -212,8 +337,8 @@ const guides: readonly ReaderResultGuide[] = [
       "The interval of relative-interior contact indices need not fill the entire arithmetic record interval. The remaining positions are endpoint-contact indices, so the same first-return formulas apply without changing the genuine relative-interior contacts.",
     proofSteps: [
       step(
-        "Apply the unit-edge record pair",
-        "Use Theorem 6.1 with V=E and V′=E+U, so ν=d, Δ=1, and h=e.",
+        "Apply the consecutive record vectors",
+        "Use Theorem 6.1 with V=E and V′=E+U, where U=(q,p) and qκ−pN=1. Thus ν=d, Δ=1, and h=e.",
       ),
       step(
         "Read the section",
@@ -259,7 +384,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     intuition:
-      "Most strictness checks are automatic because neighbouring bases return to neighbouring sides. Only the interface between short and long towers can break that pattern, so the proof isolates and checks it directly.",
+      "For most indices, neighbouring bases return to neighbouring sides, which immediately shows that the supporting line exposes one vertex. Only the interface between short and long towers can break that pattern, so the proof isolates and checks it directly.",
     proofSteps: [
       step(
         "Use the support-face test",
@@ -372,7 +497,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "Every return incidence is classified exactly once by its target in D, R, {c}, or A, together with the source information recorded by s.",
+      "Every source–target pair (i,r(i)) is classified exactly once by its target in D, R, {c}, or A, together with the source information recorded by s.",
   },
   {
     itemNumber: 43,
@@ -418,6 +543,10 @@ const guides: readonly ReaderResultGuide[] = [
         "The projective line containing one point for every affine direction. Lines meeting there appear parallel in the affine chart.",
       ),
       vocabulary(
+        "Homogeneous-coordinate model of a projective automorphism",
+        "An invertible 3×3 matrix acts on projective points, and multiplying that matrix by a nonzero scalar does not change the projective map. In an affine chart the map has the form Φ(z)=(Az+b)/ω(z); the zero line of the affine function ω is exactly the line sent to infinity.",
+      ),
+      vocabulary(
         "Convex piecewise-linear graph",
         "A boundary arc written as height versus a strictly increasing transverse coordinate; its consecutive slopes are nondecreasing, and here strictly increasing.",
       ),
@@ -439,8 +568,8 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Send J to infinity",
-        "Use a projective automorphism T(z)=(Az+b)/d(z), with d positive on P. Formula (7.22) writes every image of a segment point as a positive convex combination of endpoint images.",
-        "The positivity of d is the precise reason the relevant segments and relative interiors are preserved.",
+        "Use a projective automorphism Φ(z)=(Az+b)/ω(z). The affine denominator ω has one constant sign on P and, because P is compact and disjoint from its zero line, |ω| is bounded away from zero there. After changing the homogeneous representative's sign, take ω>0 on P. Formula (7.22) then writes every image of a segment point as a positive convex combination of endpoint images.",
+        "The strict positivity and positive lower bound for ω are what keep the map finite on P and preserve the relevant segments and their relative interiors.",
       ),
       step(
         "Read the new geometry",
@@ -496,18 +625,20 @@ export const topicVGroups: readonly AdvancedProofGroup[] = [
     formalSetups: [
       {
         ...topicVReturnSetup,
-        title: "Return heights, top-level identities, and preimage supporting lines",
+        title: "Scope N≥4, return heights, and preimage supporting lines",
       },
+      topicVProjectiveScope,
+      topicVArithmeticGeometryDictionary,
     ],
     results: take([40]),
   },
   {
     number: "III",
-    title: "Choose a proper boundary arc and classify its return incidences",
+    title: "Choose a boundary arc and classify its source–target pairs",
     introduction: (
       <p>
-        One of the two cyclic orientations gives a proper consecutive boundary
-        arc. The corresponding index formulas partition every return incidence
+        One of the two cyclic orientations gives consecutive boundary vertices
+        while omitting at least one side. The corresponding index formulas partition every source–target pair
         and record whether its inverse source lies outside M, in M°, or at b*.
       </p>
     ),

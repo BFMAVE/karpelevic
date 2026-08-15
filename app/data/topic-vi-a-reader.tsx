@@ -51,11 +51,11 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       vocabulary(
         "Calibrated return W*",
-        "The final intersection ZₘXₘ₊₁∩CₘCₘ₊₁ when the seed is Z₁=X₀. Calibration means this chosen test seed, not numerical approximation.",
+        "The final intersection ZₘXₘ₊₁∩CₘCₘ₊₁ when the chosen starting point is Z₁=X₀. Calibration means this exact test point, not numerical approximation.",
       ),
     ],
     intuition:
-      "In the chart from Proposition 7.5, convexity is an ordering of slopes. Each projected point is found between two horizontal coordinates because two line differences have opposite signs. Repeating that comparison forces the final return strictly between the last two contacts.",
+      "For N≥4, the chart from Proposition 7.5 turns convexity into an ordering of slopes. Each projected point is found between two horizontal coordinates because two line differences have opposite signs. Repeating that comparison forces the final return strictly between the last two contacts.",
     proofSteps: [
       step(
         "Enter the admissible chart",
@@ -91,7 +91,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "The specially seeded corridor returns to a point with normalized coordinate strictly between zero and one.",
+      "The return chain started at the chosen test point ends with normalized coordinate strictly between zero and one.",
   },
   {
     itemNumber: 46,
@@ -131,19 +131,19 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "Escape parameters occur arbitrarily close to the fixed seed, on whichever signed side the projectivity permits.",
+      "Escape parameters occur arbitrarily close to the fixed starting point, on whichever signed side the projectivity permits.",
   },
   {
     itemNumber: 47,
     label: "Theorem 7.8",
     vocabulary: [
       vocabulary(
-        "Signed seed parameter",
+        "Signed starting-point parameter",
         "The affine parameter in X₁(τ)=(1-τ)X₁+τX₀. Positive τ moves toward X₀; negative τ continues through X₁ in the opposite direction.",
       ),
       vocabulary(
-        "Corridor projectivity H",
-        "The global composition from the compactified seed-parameter line to the final contact line.",
+        "Return projectivity H",
+        "The global composition from the compactified starting-parameter line to the final contact line.",
       ),
       vocabulary(
         "Normalized coordinate υ",
@@ -172,11 +172,11 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Compose one global projectivity",
-        "Compactify the affine seed parameter and compose all verified perspectivities to obtain H:P¹(R)→CₘCₘ₊₁.",
+        "Compactify the affine starting-point parameter and compose all verified perspectivities to obtain H:P¹(R)→CₘCₘ₊₁.",
       ),
       step(
         "Calibrate zero and one",
-        "At τ=0 the return is Cₘ₊₁, so u(0)=0. At τ=1 the seed is X₀ and Lemma 7.6 identifies the return with W*, so 0<u(1)<1.",
+        "At τ=0 the return is Cₘ₊₁, so u(0)=0. At τ=1 the starting point is X₀ and Lemma 7.6 identifies the return with W*, so 0<u(1)<1.",
       ),
       step(
         "Remove every local pole",
@@ -215,7 +215,7 @@ export const topicVIAGroups: readonly AdvancedProofGroup[] = [
     introduction: (
       <p>
         The admissible chart turns convexity into ordered slopes. One
-        carefully chosen seed then returns strictly between the final
+        carefully chosen starting point then returns strictly between the final
         contacts.
       </p>
     ),
@@ -236,6 +236,12 @@ export const topicVIAGroups: readonly AdvancedProofGroup[] = [
 ] as const;
 
 export const topicVIAImported: readonly ProofDependency[] = [
+  {
+    label: "Topic V: the N≥4 scope boundary",
+    href: sitePath("/proof/topic-v/#topic-v-projective-scope"),
+    explanation:
+      "The projective construction begins only after N≥4 is imposed; the finite-rotation arithmetic before that boundary remains valid for N=3.",
+  },
   {
     label: "Topic I: oriented boundary order",
     href: sitePath("/proof/#lem:oriented-boundary-order"),

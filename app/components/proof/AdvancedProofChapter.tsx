@@ -35,6 +35,7 @@ type AdvancedProofChapterProps = {
   groups: readonly AdvancedProofGroup[];
   sourceIds: readonly string[];
   formalSetups?: readonly AdvancedProofSetup[];
+  leadFigureAfterSetups?: boolean;
 };
 
 function FormalSetup({ setup }: { setup: AdvancedProofSetup }) {
@@ -67,6 +68,7 @@ export function AdvancedProofChapter({
   groups,
   sourceIds,
   formalSetups = [],
+  leadFigureAfterSetups = false,
 }: AdvancedProofChapterProps) {
   return (
     <ProofChapterShell
@@ -77,7 +79,7 @@ export function AdvancedProofChapter({
       stats={stats}
       updatedAt={updatedAt}
     >
-      <AdvancedProofFigure kind={leadFigure} />
+      {!leadFigureAfterSetups && <AdvancedProofFigure kind={leadFigure} />}
       <ProofDependencyContract
         background={background}
         imported={imported}
@@ -86,6 +88,7 @@ export function AdvancedProofChapter({
       {formalSetups.map((setup) => (
         <FormalSetup key={setup.id} setup={setup} />
       ))}
+      {leadFigureAfterSetups && <AdvancedProofFigure kind={leadFigure} />}
       {groups.map((group) => (
         <ProofResultGroup
           introduction={group.introduction}

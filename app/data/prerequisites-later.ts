@@ -517,13 +517,13 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
       {
         label: "Topic VI",
         text:
-          "The corridor holonomy and fixed-point escape prove projective no-skipping.",
+          "For N≥4, the return projectivity and fixed-point escape rule out a first-return step larger than one.",
         href: "/proof/#topic-unit-return",
       },
       {
         label: "Topic VII",
         text:
-          "Unimodular return data becomes a Farey carrier and complex monodromy identity.",
+          "For N≥4, unimodular return data becomes a Farey carrier and complex monodromy identity; the smaller orders are treated directly.",
         href: "/proof/#topic-farey-return",
       },
       {

@@ -65,7 +65,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     intuition:
-      "The tower bijection is a labelling machine. Moving only the corridor bases determines every polygon vertex by powers of λ. The four-set ledger then assigns each top return one and only one geometric mechanism, leaving the closing image as the sole free incidence.",
+      "The tower bijection assigns every label exactly once. Moving only the selected bases determines every polygon vertex by powers of λ. The four disjoint target sets then assign each top return one and only one geometric mechanism, leaving the closing image as the sole unresolved incidence.",
     figure: "global-ledger",
     proofSteps: [
       step(
@@ -94,7 +94,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Account for the four top-return classes",
-        "D uses fixed sources on controlled lines, R uses supported moving sources on fixed lines, A is unchanged, and c is the seed return Y(τ).",
+        "D uses fixed sources on controlled lines, R uses supported moving sources on fixed lines, A is unchanged, and c is the one closing return Y(τ).",
       ),
       step(
         "Upgrade lines to side interiors",
@@ -162,15 +162,15 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     intuition:
-      "Skipping gives enough corridor length to create one interior image vertex. Criticality has already been strengthened into a statement that forbids that phenomenon for every replacement polygon, so the return step must be one.",
+      "For N≥4, a skipped return gives a proper boundary chain long enough to create one interior image vertex. Criticality has already been strengthened into a statement that forbids that phenomenon for every replacement polygon, so the return step must be one.",
     proofSteps: [
       step(
-        "Assume a skip",
-        "Take Δ>1. Lemma 7.2 supplies a proper chain, including every boundary parameter case.",
+        "Assume a skip in the N≥4 regime",
+        "Take N≥4 and Δ>1. Lemma 7.2 supplies a proper chain, including every boundary parameter case.",
       ),
       step(
         "Assemble the corridor hypotheses",
-        "Lemma 7.1 gives strict supports and Proposition 7.3 gives the exact return-edge ledger.",
+        "Lemma 7.1 gives the required exposing supporting lines, and Proposition 7.3 gives the exact partition of source–target pairs.",
       ),
       step(
         "Run the global deformation",
@@ -182,25 +182,25 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Conclude unit return",
-        "The contradiction excludes Δ>1. Since Δ is a positive integer, Δ=1.",
+        "Within the standing N≥4 scope, the contradiction excludes Δ>1. Since Δ is a positive integer, Δ=1.",
       ),
     ],
     takeaway:
-      "Every nontransversal first return advances to the adjacent strict base.",
+      "For every N≥4 critical polygon, a nontransversal first return advances to the adjacent base.",
   },
   {
     itemNumber: 51,
     label: "Remark 7.12",
     vocabulary: [
       vocabulary(
-        "Boundary-value ledger",
+        "Boundary-case accounting",
         "An explicit check that limiting arithmetic values do not collapse labels, erase a support, or create an unlisted deformation case.",
       ),
     ],
     intuition:
       "No generic-position phrase is hiding an exceptional case. The shortest corridor, the equality branch, time-zero record, and arbitrary orbit number all remain literal.",
     proofSteps: [
-      step("Δ=2", "The forward corridor still has two internal steps and the same four-set ledger."),
+      step("Δ=2", "The forward chain still has two internal steps and the same four-set partition."),
       step(
         "2Δ=φ+1",
         "This equality belongs to the forward branch; the single wrap r(Δ)=1 lands on the fixed anchor line.",
@@ -215,7 +215,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "The unit-return proof has no suppressed endpoint or orbit exception.",
+      "Within its stated N≥4 scope, the unit-return proof has no suppressed endpoint or orbit exception.",
   },
   {
     itemNumber: 52,
@@ -231,9 +231,9 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     intuition:
-      "The projective germ creates the escape, but the proof is safe only because the global ledger proves there is exactly one freedom and checks every other condition before using it.",
+      "The projective germ creates the escape, but the proof is safe only because the global incidence accounting proves there is exactly one freedom and checks every other condition before using it.",
     takeaway:
-      "Local holonomy plus exhaustive global accounting is the reusable no-skipping mechanism.",
+      "The local return projectivity plus exhaustive global accounting is the mechanism that rules out a skipped return.",
   },
 ] as const;
 
@@ -287,14 +287,14 @@ const theorem13: ProofResultData = {
     ),
     step(
       "Nontransversal return",
-      "If φ>δ, Theorem 6.1 supplies a two-height return by Δ and Theorem 7.11 forces Δ=1.",
+      "For N≥4, if φ>δ, Theorem 6.1 supplies a two-height return by Δ and Theorem 7.11 forces Δ=1. The N=3 critical-triangle exception lies outside Theorem 1.3.",
     ),
   ],
   takeaway:
     "The intrinsic polygonal engine is complete; no stochastic boundary theorem or Farey formula has been used.",
   sourceIds: theorem13Item.sourceIds,
   sourceRelation:
-    "The theorem assembles a strengthened saturation statement with contact and no-skipping mechanisms having antecedents in Dmitriev-Dynkin and Karpelevič. A Karpelevič antecedent alone is not displayed as “Previously known.”",
+    "The theorem assembles a strengthened saturation statement with contact and first-return mechanisms having antecedents in Dmitriev-Dynkin and Karpelevič. A Karpelevič antecedent alone is not displayed as “Previously known.”",
 };
 
 export const topicVIBGroups: readonly AdvancedProofGroup[] = [
@@ -337,6 +337,12 @@ export const topicVIBGroups: readonly AdvancedProofGroup[] = [
 
 export const topicVIBImported: readonly ProofDependency[] = [
   {
+    label: "Topic V: projective scope N≥4",
+    href: sitePath("/proof/topic-v/#topic-v-projective-scope"),
+    explanation:
+      "The local and global projective deformation is used only for N≥4; Topic V displays the critical-triangle exception separately.",
+  },
+  {
     label: "Topic I: adapted complex coordinates",
     href: sitePath("/proof/#prop:adapted-complex"),
     explanation:
@@ -367,7 +373,7 @@ export const topicVIBImported: readonly ProofDependency[] = [
       "Arbitrarily small signed parameters open the closing contact toward the preceding-chain side while preserving local strict convexity.",
   },
   {
-    label: "Topic V: tower bijection and exact ledger",
+    label: "Topic V: tower bijection and exact incidence partition",
     href: sitePath("/proof/topic-v/#prop:return-edge-ledger"),
     explanation:
       "Every polygon label has one tower state and every strict top return has one of four disjoint mechanisms.",

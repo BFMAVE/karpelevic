@@ -9,9 +9,9 @@ import {
 import { getPageTimestamp } from "../../../lib/git-dates";
 
 export const metadata: Metadata = {
-  title: "Topic VI, Part B — Global Admissibility and Unit Return",
+  title: "Topic VI, Part B — Global Admissibility and Unit Return for N≥4",
   description:
-    "A complete guided proof that the local corridor motion extends to every polygon label and forces adjacent first return by hereditary saturation.",
+    "For N≥4, a complete guided proof that the local projective motion extends to every polygon label and forces adjacent first return by hereditary saturation.",
 };
 
 const updatedAt = getPageTimestamp("app/data/topic-vi-b-reader.tsx");
@@ -26,16 +26,17 @@ export default function TopicVIBGlobalPage() {
       manuscriptPages="45–51"
       overview={[
         "The local motion is propagated through the bijective return towers to all N polygon vertices. Every internal image, top return, side line, and nonclosing side inequality receives one explicit mechanism.",
-        "The sole closing return is opened inward. This creates an invariant replacement polygon with one interior image vertex, contradicting hereditary saturation and forcing the first-return step to equal one.",
+        "For N≥4, the sole closing return is opened inward. This creates an invariant replacement polygon with one interior image vertex, contradicting hereditary saturation and forcing the first-return step to equal one.",
       ]}
       provedHere={
         <p>
           This page proves global deformation admissibility, the
-          return-corridor deformation, projective unit return, every boundary
-          case, and the complete assembly of Theorem 1.3.
+          return-corridor deformation, projective unit return for N≥4, every
+          boundary case in that scope, and the complete assembly of Theorem
+          1.3. The exceptional N=3 case is not used here.
         </p>
       }
-      question="How can a motion of one short corridor be transported to all N vertices without losing a single label, incidence, or side inequality?"
+      question="For N≥4, how can one local projective motion be transported to all N vertices without losing a single label, incidence, or side inequality?"
       routeKey="topic-vi-b"
       sourceIds={topicVIBSourceIds}
       stats={[

@@ -155,9 +155,9 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
           "Saturation says a side meets TP. Because TP is the convex hull of the images of the vertices, face rigidity shows that some image vertex itself lies on that side.",
       },
       {
-        title: "Vertices create an ownership ambiguity",
+        title: "Vertices create an assignment ambiguity",
         body:
-          "If Tv lands in the relative interior of a side, ownership is clear. If it lands at a polygon vertex, it belongs to both adjacent closed sides. Half-open sides make the choice unique.",
+          "If Tv lands in the relative interior of a side, its side assignment is clear. If it lands at a polygon vertex, it belongs to both adjacent closed sides. Half-open sides make the assignment unique.",
       },
       {
         title: "Clipping rules out incompatible endpoint patterns",
@@ -167,7 +167,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         title: "Local choices become one global direction",
         body:
-          "The finite endpoint ledger shows that every contact can be owned consistently by right-half-open sides, after reversing orientation if necessary. This produces the one-sided contact representative.",
+          "The finite endpoint count shows that every contact can be assigned consistently to right-half-open sides, after reversing orientation if necessary. This produces the one-sided contact representation.",
       },
     ],
     glossary: [
@@ -266,12 +266,12 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         title: "Translate arithmetic back into edges",
         body:
-          "Every tower level corresponds to a polygon vertex and every tower top corresponds to a return edge. The exact ledger accounts for all labels once and separates moving, rigid, closing, and anchor fields.",
+          "Every tower level corresponds to a polygon vertex and every tower top corresponds to a return edge. The exact four-set partition accounts for every label once and separates the incidences by how they behave under the later motion.",
       },
       {
-        title: "The ledger defines a corridor",
+        title: "The return data defines a projection chain",
         body:
-          "Ordered supports along the short-return orbit form a chain of boundary segments. Successive projections through this chain create the projective holonomy used in Topic VI.",
+          "Ordered supports along the short-return orbit form a chain of boundary segments. Successive projections through this chain create the return projectivity used in Topic VI.",
       },
     ],
     glossary: [
@@ -293,13 +293,14 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
     ],
     checkpoint: {
       question:
-        "Why is a complete return-edge ledger mathematically necessary?",
+        "Why must every return source–target pair be classified before the polygon is moved?",
       answer:
         "The later deformation moves several bases at once. To prove the new polygon stays invariant, every image vertex and every receiving edge must be accounted for exactly once, including boundary cases.",
     },
   },
   "unit-return": {
     prerequisites: [
+      "The projective unit-return argument is used only for N≥4; Topic V displays an explicit 3-critical triangle with Δ=2.",
       "Projection from one line to another through a fixed point is projective.",
       "A composition of projectivities on a line is fractional-linear.",
       "A nonidentity fractional-linear map has isolated fixed points.",
@@ -316,14 +317,14 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
           "If H is not the identity, a nearby point is moved strictly to one side of itself. Convex-chain calibration ensures that its intermediate projections stay in the correct edge intervals.",
       },
       {
-        title: "Propagate the seed through the whole polygon",
+        title: "Propagate the starting-point motion through the whole polygon",
         body:
-          "The global admissibility theorem moves all affected tower bases and reconstructs every orbit vertex. It checks strict convexity, side ownership, image incidences, and closure simultaneously.",
+          "The global admissibility theorem moves all affected tower bases and reconstructs every orbit vertex. It checks the strict-polygon conditions, side assignments, image incidences, and closure simultaneously.",
       },
       {
         title: "Criticality forces H = id",
         body:
-          "The escape deformation would create radial slack and hence permit an enlargement tT with the same vertex budget. N-criticality forbids this. Therefore the return holonomy must be the identity: the return cannot skip.",
+          "For N≥4, the escape deformation would create an invariant replacement polygon with an interior image vertex, contradicting hereditary saturation. Therefore the first-return step cannot skip and must equal one.",
       },
     ],
     glossary: [
@@ -340,18 +341,19 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         term: "No-skipping",
         definition:
-          "In the nontransversal case, first return moves to the adjacent base of I rather than jumping over one or more bases.",
+          "For N≥4, in the nontransversal case, first return moves to the adjacent base of I rather than jumping over one or more bases.",
       },
     ],
     checkpoint: {
       question:
         "Where exactly does radial criticality enter the projective argument?",
       answer:
-        "It enters at the end: once a nonidentity holonomy has produced a globally admissible deformation with radial slack, criticality rules that deformation out and therefore forces identity holonomy.",
+        "It enters at the end: once a skipped return has produced a globally admissible deformation with an interior image vertex, hereditary saturation rules that deformation out. This conclusion is restricted to N≥4.",
     },
   },
   "farey-return": {
     prerequisites: [
+      "This return-monodromy module is used for N≥4. Orders at most three are handled by the direct small-order argument.",
       "Reduced fractions p/q and r/s are Farey neighbours when qr − ps = 1 in the chosen order.",
       "Arguments of complex numbers add under multiplication, once a common branch is fixed.",
       "A convex combination on a side supplies coefficients α + β = 1.",
@@ -427,7 +429,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         title: "Apply the intrinsic theorem only at a new shell",
         body:
-          "For λ in ΘN but not ΘN−1 at radial maximum, multiplication by λ is N-critical. The critical-polygon theorem therefore supplies the Farey carrier and monodromy. This recovers the classical carrier statement; Part II supplies the sharp scalar boundary and realization.",
+          "For λ in ΘN but not ΘN−1 at radial maximum, multiplication by λ is N-critical. When N≥4, the critical-polygon theorem supplies the Farey carrier and monodromy. Orders at most three are handled directly. Part II then supplies the sharp scalar boundary and realization.",
       },
     ],
     glossary: [
@@ -451,7 +453,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       question:
         "Does Part I by itself prove every radial boundary formula of the Karpelevič–Ito theorem?",
       answer:
-        "No. Part I supplies the critical-polygon return normal form and Farey carrier. Part II adds the sharp log-sine inequality, explicit stochastic realization, and nesting needed for the full boundary theorem.",
+        "No. For N≥4, Part I supplies the critical-polygon return normal form and Farey carrier; the small orders are treated directly. Part II adds the sharp log-sine inequality, explicit stochastic realization, and nesting needed for the full boundary theorem.",
     },
   },
 };
