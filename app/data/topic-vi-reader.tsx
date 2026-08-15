@@ -76,8 +76,10 @@ export const topicVISetup: AdvancedProofSetup = {
       vertices X<sub>0</sub>,…,X<sub>m+1</sub> that do not traverse the whole
       polygon, contact points C<sub>i</sub> in
       relint[X<sub>i−1</sub>,X<sub>i</sub>], and supporting lines
-      ℒ<sub>i</sub> meeting P only at X<sub>i</sub>. These data are exactly the
-      <a href="${sitePath("/proof/topic-v/#def:projective-corridor")}">projective corridor of Definition 7.4</a>.
+      ℒ<sub>i</sub> meeting P only at X<sub>i</sub>. These are exactly the
+      <a href="${sitePath("/proof/topic-v/#def:projective-corridor")}">boundary-contact data of Definition 7.4</a>,
+      whose successive perspectivities define the line-to-line projectivity
+      used below.
       Topic V also selects a set M of moved base indices, one distinguished
       base b<sub>*</sub>, and a disjoint exhaustive partition
       <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">B</mi><mo>=</mo><mi>D</mi><mo>⊔</mo><mi>R</mi><mo>⊔</mo><mo stretchy="false">{</mo><mi>c</mi><mo stretchy="false">}</mo><mo>⊔</mo><mi>A</mi><mo>,</mo><mspace width="1.5em"></mspace><mi>c</mi><mo>=</mo><mi>r</mi><mo stretchy="false">(</mo><msub><mi>b</mi><mo>*</mo></msub><mo stretchy="false">)</mo><mo>.</mo></mrow><annotation encoding="application/x-tex">\mathcal B=D\mathbin{\dot\cup}R\mathbin{\dot\cup}\{c\}\mathbin{\dot\cup}A,\qquad c=r(b_*).</annotation></semantics></math>
@@ -357,7 +359,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Apply the exact Topic II conclusion",
-        "The hereditary boundary theorem applies to every invariant replacement polygon with at most N vertices and requires Ext(λPτ)⊆∂Pτ.",
+        "Theorem 3.2 applies to every invariant replacement polygon with at most N vertices and requires every extreme point of λPτ to lie on ∂Pτ.",
       ),
       step(
         "Derive the contradiction",
@@ -369,7 +371,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "For every N≥4 critical polygon in the nontransversal case, the first return reaches the next base index: Δ=1.",
+      "For every N≥4 critical polygon whose relative-interior contact set meets some contact-permutation orbit more than once, the first return reaches the next base index: Δ=1.",
   },
   {
     itemNumber: 51,
@@ -441,7 +443,7 @@ const theorem13: ProofResultData = {
   proofSteps: [
     step(
       "Choose the fixed coordinate and contact data",
-      "Topic I gives the complex coordinate; Topics II–IV give the boundary contacts, their consistent orientation, and the permitted local replacement rule.",
+      "Topic I gives the complex coordinate; Topics II–IV give the boundary contacts, their consistent orientation, and the permitted local vertex-replacement rule.",
     ),
     step(
       "Handle the identity contact permutation",
@@ -475,7 +477,7 @@ const assemblySetup: AdvancedProofSetup = {
       Let ℰ(P) be the cyclic set of sides of P. For an oriented side e, write
       t(e) and h(e) for its tail and head and put
       e<sup>▷</sup>=(t(e),h(e)], the side with its tail deleted and its head
-      retained. A <dfn>one-sided contact representation</dfn> is a
+      retained. A <dfn>half-open contact assignment</dfn> is a
       cyclic-order-preserving bijection χ from the vertices of P to ℰ(P)
       such that Tv belongs to χ(v)<sup>▷</sup> for every vertex v. Thus χ
       specifies exactly which oriented half-open side receives each image
@@ -489,14 +491,13 @@ const assemblySetup: AdvancedProofSetup = {
       v′=Tχ<sup>−1</sup>(e). The induced bijection
       b<sub>e</sub>:ℰ(P)→ℰ(P′) sends e to [t(e),v′], sends s(e) to
       [v′,h(s(e))], and identifies every other side with its unchanged
-      boundary segment. This is the side-continuation bijection denoted by b
-      in Theorem 1.3.
+      boundary segment. This is the induced bijection between the old and new
+      side sets, denoted by b in Theorem 1.3.
     </p>
     <p>
-      In the terminology of the formal theorem, a <dfn>legal mutation</dfn>
-      is exactly the permitted local vertex replacement just described, the
-      <dfn>strict set</dfn> is the relative-interior contact set I, and the
-      <dfn>contact rotation</dfn> is the contact permutation σ.
+      The formal theorem calls this operation a <dfn>permitted local vertex
+      replacement</dfn>. Its <dfn>relative-interior contact set</dfn> is I,
+      and its <dfn>contact permutation</dfn> is σ.
     </p>
     <p>
       The phrase <dfn>one representative from each σ-orbit</dfn> means that
@@ -575,7 +576,7 @@ export const topicVIImported: readonly ProofDependency[] = [
       "N-criticality is defined by the minimal invariant-polygon vertex count and its failure under every radial enlargement; the elliptic contraction is represented here by multiplication by λ.",
   },
   {
-    label: "Topic IV: one interval of relative-interior contact indices",
+    label: "Topic IV: one cyclic interval of relative-interior contact indices",
     href: sitePath("/proof/topic-iv/#lem:one-block"),
     explanation:
       "After permitted local replacements and cyclic relabelling, the contact indices are 𝓑={1,…,φ}, with φ at least the orbit count δ.",
@@ -604,10 +605,10 @@ export const topicVIImported: readonly ProofDependency[] = [
       "One common neighbourhood preserves the finite collection of cyclic determinant signs, relative-interior incidences, and strict side inequalities used below.",
   },
   {
-    label: "Topic II: boundary condition for every invariant replacement polygon",
+    label: "Topic II: every image vertex lies on the outer boundary",
     href: sitePath("/proof/topic-ii/#thm:hereditary-saturation"),
     explanation:
-      "If R is an invariant polygon with at most N vertices for an N-critical map, every extreme point of λR lies on ∂R.",
+      "Theorem 3.2 says literally: if R is an invariant polygon with at most N vertices for an N-critical map, every extreme point of λR lies on ∂R.",
   },
 ] as const;
 

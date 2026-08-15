@@ -87,7 +87,7 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
       "Plate VII.1. The original endpoints satisfy 3·2-1·5=1 and 3+5=8>7. Reflection preserves adjacency and swaps the endpoint denominators.",
   },
   "jensen-sheet": {
-    title: "All heterogeneous factors share one upper-half-plane branch",
+    title: "All varying factors share one continuous upper-half-plane argument interval",
     description:
       "A horizontal segment in the open upper half-plane traces mu to the q minus beta. Rays from the origin have arguments from A up to but not including M.",
     caption:

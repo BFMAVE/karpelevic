@@ -286,7 +286,7 @@ export default function HistoryPage() {
           <header className="history-wide-heading history-references-heading">
             <div>
               <p className="section-number">V</p>
-              <p className="section-label">Source ledger</p>
+              <p className="section-label">References</p>
             </div>
             <div>
               <h2 id="references-heading">References and further reading</h2>

@@ -43,7 +43,7 @@ export function BoundaryExplorer() {
     <section className="boundary-laboratory" aria-labelledby="boundary-laboratory-heading">
       <header>
         <div>
-          <p className="section-label">Interactive boundary laboratory</p>
+          <p className="section-label">Interactive boundary explorer</p>
           <h3 id="boundary-laboratory-heading">Choose an order and draw Θ<sub>n</sub></h3>
         </div>
         <label>
@@ -141,7 +141,7 @@ export function BoundaryExplorer() {
         <aside>
           <section>
             <p className="section-label">Exact input</p>
-            <h4>Farey cells and carrier data</h4>
+            <h4>Farey cells and Ito-polynomial data</h4>
             <p>
               Fractions, denominator order, the repeat count <i>d</i>, the
               closing exponent <i>e</i>, and every endpoint angle are computed
@@ -170,7 +170,7 @@ export function BoundaryExplorer() {
           </section>
           {cells.length > 0 ? (
             <details>
-              <summary>Open the complete cell ledger for n={normalizedOrder}</summary>
+              <summary>Open the complete cell table for n={normalizedOrder}</summary>
               <div className="boundary-cell-ledger">
                 {cells.map((cell) => (
                   <div key={`${cell.left.numerator}/${cell.left.denominator}-${cell.right.numerator}/${cell.right.denominator}`}>

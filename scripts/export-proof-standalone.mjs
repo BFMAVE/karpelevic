@@ -300,7 +300,7 @@ function verifyStandaloneHtml(html) {
       : proofRoute === "/proof/topic-iv"
         ? [
             "Topic IV",
-            "From endpoint order to contact reduction",
+            "From endpoint order to one interval of relative-interior contacts",
             "data-proof-route=\"topic-iv\"",
           ]
         : proofRoute === "/proof/topic-v"
@@ -323,25 +323,23 @@ function verifyStandaloneHtml(html) {
             : proofRoute === "/proof/topic-vii"
                 ? [
                     "Topic VII",
-                    "The Farey carrier and return monodromy",
+                    "Farey product data and return monodromy",
                     "Farey adjacency and exact reflection",
                     "data-proof-route=\"topic-vii\"",
                     "Forthcoming",
                   ]
         : [
             "How the Proof Works",
+            "Definition 1.1",
+            "Definition 1.2",
             "Proposition 2.1",
+            "Proposition 2.2",
+            "Proposition 2.3",
+            "Lemma 2.4",
+            "Lemma 2.5",
             "Lemma 2.6",
             "Lemma A.2",
-            "Lemma 2.7",
-            "Proposition 3.1",
-            "Lemma A.1",
-            "Lemma A.3",
-            "Theorem 3.2",
-            "Remark 3.3",
-            "Lemma 4.1",
-            "What is allowed into Topic II",
-            "data-topic-slug=\"active-sides\"",
+            "data-topic-slug=\"language\"",
             "equation (2.3)",
             "What does it mean for a functional to expose a face?",
             "data-reading-mode-button",

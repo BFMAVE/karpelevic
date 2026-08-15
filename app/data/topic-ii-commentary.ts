@@ -28,7 +28,7 @@ export const topicIICommentary: Readonly<
   },
   65: {
     intuition:
-      "The saturation argument needs Perron vectors without assuming that its nonnegative transfer matrix is irreducible. This appendix lemma supplies exactly that strength and proves it from finite-dimensional compactness and approximation by strictly positive matrices.",
+      "The every-side contact argument needs Perron vectors without assuming that its nonnegative coefficient matrix is irreducible. This appendix lemma supplies exactly that strength and proves it from finite-dimensional compactness and approximation by strictly positive matrices.",
     architecture: [
       "A positive comparison vector x turns Bx≤cx into an operator-norm bound, hence spr(B)≤c.",
       "For a strictly positive matrix, minimise maxᵢ(Ax)ᵢ/xᵢ on the open probability simplex; the minimiser cannot approach the boundary and must satisfy Ax=Mx.",

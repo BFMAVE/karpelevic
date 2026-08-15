@@ -100,7 +100,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         title: "Move from vertices to supporting normals",
         body:
-          "The normal-fan transfer replaces the inclusion TP ⊆ P by inequalities between the supporting functionals of P. The resulting nonnegative matrix records how T* moves the normals.",
+          "In a fixed normal fan, the inclusion TP ⊆ P becomes a system of inequalities between the supporting functionals of P. The resulting nonnegative coefficient matrix records how T* moves the normals.",
       },
       {
         title: "Slack would permit radial enlargement",
@@ -113,14 +113,14 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
           "The propagated slack would allow tT for some t > 1 to preserve a polygon with at most N sides. That contradicts N-criticality. Hence every side must be active.",
       },
       {
-        title: "Heredity makes the conclusion reusable",
+        title: "The conclusion applies to every polygon within the bound",
         body:
-          "The same argument applies to every invariant polygon with at most N vertices, not just the first chosen P. This is essential because contact surgery repeatedly replaces P by another invariant polygon.",
+          "The same argument applies to every invariant polygon with at most N vertices, not just the first chosen P. This is essential because later vertex replacements produce other invariant polygons.",
       },
     ],
     glossary: [
       {
-        term: "Active or saturated side",
+        term: "Side meeting the image polygon",
         definition:
           "A side of P that meets TP; its supporting inequality is attained.",
       },
@@ -137,9 +137,9 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
     ],
     checkpoint: {
       question:
-        "Why does the theorem say hereditary saturation rather than ordinary saturation?",
+        "Why does the theorem quantify over every invariant polygon with at most N vertices?",
       answer:
-        "Later mutations change the polygon. The proof needs the active-side conclusion to remain true for each new admissible polygon, so the theorem quantifies over all of them from the start.",
+        "Later vertex replacements change the polygon. The proof needs the side-contact and image-vertex boundary conclusions for each resulting polygon, so the theorem quantifies over all of them from the start.",
     },
   },
   ownership: {
@@ -152,7 +152,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         title: "Every side has a witness",
         body:
-          "Saturation says a side meets TP. Because TP is the convex hull of the images of the vertices, face rigidity shows that some image vertex itself lies on that side.",
+          "Theorem 3.2 says a side meets TP. Because TP is the convex hull of the images of the vertices, the boundary convex-combination lemma shows that some image vertex itself lies on that side.",
       },
       {
         title: "Vertices create an assignment ambiguity",
@@ -162,12 +162,12 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         title: "Clipping rules out incompatible endpoint patterns",
         body:
-          "If the endpoint choices interlace incorrectly, one can clip an edge cap and retain an invariant polygon with the same vertex budget but smaller area. An area-minimal representative forbids this.",
+          "If the endpoint choices interlace incorrectly, one can clip along an image edge and retain an invariant polygon with the same vertex bound but smaller area. An area-minimal representative forbids this.",
       },
       {
         title: "Local choices become one global direction",
         body:
-          "The finite endpoint count shows that every contact can be assigned consistently to right-half-open sides, after reversing orientation if necessary. This produces the one-sided contact representation.",
+          "The finite endpoint count shows that every contact can be assigned consistently to right-half-open sides, after reversing orientation if necessary. Thus there is an order-preserving contact bijection χ from the vertices to the half-open sides, with Tv∈χ(v).",
       },
     ],
     glossary: [
@@ -182,7 +182,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
           "A vertex v of P whose image Tv lies on a specified side.",
       },
       {
-        term: "Face rigidity",
+        term: "Boundary convex-combination property",
         definition:
           "If a convex combination lies on an exposed face, every positively weighted point in that combination lies on the same face.",
       },
@@ -196,54 +196,54 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
   },
   mutation: {
     prerequisites: [
-      "The one-sided contact representative labels each image vertex by a unique side.",
-      "The strict-contact set I records which contacts lie in side interiors.",
-      "The contact rotation σ is a translation of the finite cyclic side set.",
+      "The contact bijection χ assigns each image vertex to a unique half-open side.",
+      "The set I records which contacts lie in the relative interiors of their assigned sides.",
+      "The contact permutation σ is translation by κ on the finite cyclic side set.",
     ],
     steps: [
       {
-        title: "A strict contact permits surgery",
+        title: "A relative-interior contact permits vertex replacement",
         body:
-          "When Tv lies strictly inside its owned side, the appropriate adjacent polygon vertex can be replaced by Tv. The exact certificate checks convexity, invariance, the number of vertices, and every ownership label.",
+          "When Tv lies in the relative interior of its assigned side, the appropriate adjacent polygon vertex can be replaced by Tv. The proposition checks convexity, invariance, the number of vertices, and every side assignment.",
       },
       {
-        title: "Surgery becomes a chip move",
+        title: "The geometry gives an exact set update",
         body:
-          "Place a chip at each side in the strict set I. A legal mutation moves one chip from e to σ(e), provided the target is empty. The geometry and the finite board now carry the same information.",
+          "If e belongs to I and σ(e) does not, the permitted vertex replacement changes I to (I∖{e})∪{σ(e)}. The geometric operation and the finite-set update now carry the same information.",
       },
       {
-        title: "Sweeps reduce disorder",
+        title: "Ordered updates reduce the number of components",
         body:
-          "Because every legal chip sequence is geometrically realizable, the proof may use combinatorial sweeps. Moving chips in a controlled order reduces the number of separated groups.",
+          "Because every permitted sequence of set updates is geometrically realizable, the proof may perform them in a controlled order that reduces the number of connected components.",
       },
       {
         title: "The terminal form is one interval",
         body:
-          "After finitely many sweeps, the strict contacts form one nonempty cyclic interval. The first return to this interval is the arithmetic object studied in the next topics.",
+          "After finitely many updates, the relative-interior contact indices form one nonempty cyclic interval. The first return to this interval is the arithmetic object studied in the next topics.",
       },
     ],
     glossary: [
       {
-        term: "Strict contact",
+        term: "Relative-interior contact",
         definition:
-          "A contact point lying in the relative interior of its owned side rather than at an endpoint.",
+          "A contact point lying in the relative interior of its assigned side rather than at an endpoint.",
       },
       {
-        term: "Legal mutation",
+        term: "Permitted vertex replacement",
         definition:
-          "A move e ↦ σ(e) for which e is occupied by a strict contact and σ(e) is not.",
+          "The replacement corresponding to an index e∈I for which σ(e)∉I; on the index set it sends I to (I∖{e})∪{σ(e)}.",
       },
       {
-        term: "Boolean sweep",
+        term: "Ordered update sequence",
         definition:
-          "A simultaneous-looking update implemented as an ordered sequence of legal zero-or-one chip moves.",
+          "A finite list of permitted single-index updates performed in a specified order.",
       },
     ],
     checkpoint: {
       question:
-        "What justifies replacing the geometric problem by a chip game?",
+        "What justifies using the finite-set update in place of the geometry?",
       answer:
-        "The contact-surgery certificate proves both directions needed here: each legal move preserves the geometric hypotheses, and every finite legal chip sequence has a geometric realization.",
+        "The vertex-replacement proposition proves both directions needed here: each permitted replacement preserves the geometric hypotheses, and every finite permitted update sequence has a geometric realization.",
     },
   },
   rotation: {
@@ -256,7 +256,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         title: "The contact map is a rational rotation",
         body:
-          "After labeling sides by ℤ/Nℤ, σ is addition by a fixed step κ. The strict set I is now one interval, so the question is purely finite: where does each point of I return first?",
+          "After labeling sides by ℤ/Nℤ, σ is addition by a fixed step κ. The relative-interior contact set I is now one interval, so the question is purely finite: where does each point of I return first?",
       },
       {
         title: "Only two tower heights occur",
@@ -307,12 +307,12 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
     ],
     steps: [
       {
-        title: "Compose the corridor projections",
+        title: "Compose the projections along the boundary chain",
         body:
-          "The return corridor sends a point on the first edge successively through later edges and finally back to the first supporting line. This composition is the holonomy H.",
+          "Successive central projections send a point on the first edge through the later edges and finally back to the first supporting line. Their composition is the return projectivity H.",
       },
       {
-        title: "A nonidentity holonomy has an escape direction",
+        title: "A nonidentity return projectivity moves nearby points",
         body:
           "If H is not the identity, a nearby point is moved strictly to one side of itself. Convex-chain calibration ensures that its intermediate projections stay in the correct edge intervals.",
       },
@@ -324,31 +324,31 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         title: "Criticality forces H = id",
         body:
-          "For N≥4, the escape deformation would create an invariant replacement polygon with an interior image vertex, contradicting hereditary saturation. Therefore the first-return step cannot skip and must equal one.",
+          "For N≥4, the deformation would create an invariant replacement polygon with an image vertex in its interior, contradicting Theorem 3.2, which places every image vertex on the boundary of every invariant polygon within the vertex bound. Therefore the first-return step cannot skip and must equal one.",
       },
     ],
     glossary: [
       {
-        term: "Projective corridor",
+        term: "Boundary-contact chain",
         definition:
           "An ordered chain of boundary segments connected by central projections through prescribed vertices.",
       },
       {
-        term: "Holonomy",
+        term: "Return projectivity",
         definition:
-          "The return map obtained by composing all corridor projections back to the starting line.",
+          "The map obtained by composing all projections along the boundary chain back to the starting line.",
       },
       {
-        term: "No-skipping",
+        term: "Cyclic-successor conclusion",
         definition:
-          "For N≥4, in the nontransversal case, first return moves to the adjacent base of I rather than jumping over one or more bases.",
+          "For N≥4, when some contact-permutation orbit meets I more than once, the first return moves to the next base of I rather than jumping over one or more bases.",
       },
     ],
     checkpoint: {
       question:
         "Where exactly does radial criticality enter the projective argument?",
       answer:
-        "It enters at the end: once a skipped return has produced a globally admissible deformation with an interior image vertex, hereditary saturation rules that deformation out. This conclusion is restricted to N≥4.",
+        "It enters at the end: once a skipped return has produced a globally admissible deformation with an interior image vertex, the boundary conclusion of Theorem 3.2 rules that deformation out. This conclusion is restricted to N≥4.",
     },
   },
   "farey-return": {
@@ -367,24 +367,24 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         title: "Each return contributes a contact factor",
         body:
-          "A contact equation has the form μ^q − βj after normalization, where βj is the endpoint weight and αj = 1 − βj. Multiplying around the closed return strip gives the heterogeneous Ito product.",
+          "A contact equation has the form μ^q − βj after normalization, where βj is the endpoint weight and αj = 1 − βj. Multiplying around the closed return-recurrence chain gives the product of the possibly varying Ito factors.",
       },
       {
-        title: "The two return regimes give compatible products",
+        title: "The two contact-distribution cases give compatible products",
         body:
-          "The nontransversal case and the transversal case have different closing exponents, but the homogeneous identity treats both without pretending that the signed exponent is always nonnegative.",
+          "The case with more than one relative-interior contact in some orbit and the case with exactly one in each orbit have different closing exponents, but the homogeneous identity treats both without pretending that the signed exponent is always nonnegative.",
       },
       {
-        title: "One argument sheet controls the phase",
+        title: "One continuous argument interval controls the phase",
         body:
-          "The Jensen-sheet lemma places every normalized factor argument uj in one interval [A, M). The exact lifted phase identity then records the winding number without losing multiples of 2π.",
+          "The common-argument lemma places every normalized factor argument uj in one interval [A, M). The exact lifted phase identity then records the integer multiple of 2π without losing it.",
       },
     ],
     glossary: [
       {
-        term: "Farey carrier",
+        term: "Farey product data",
         definition:
-          "The neighbouring fractions p/q < r/s whose cell contains the normalized rotation angle.",
+          "The neighbouring fractions p/q < r/s, the associated exponents, and the factor coefficients selected by the return recurrence.",
       },
       {
         term: "Heterogeneous product",
@@ -392,7 +392,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
           "A product in which different returns may carry different contact weights βj.",
       },
       {
-        term: "Jensen sheet",
+        term: "Common argument interval",
         definition:
           "A common branch interval for the factor arguments, chosen so convexity can later be applied without branch jumps.",
       },
@@ -401,7 +401,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       question:
         "Why is the phase identity more than taking the argument of the product modulo 2π?",
       answer:
-        "Because the later sharp inequality needs the actual lifted sum of arguments. The common Jensen sheet identifies the correct integer winding and prevents an unnoticed 2π error.",
+        "Because the later sharp inequality needs the actual lifted sum of arguments. The common interval identifies the correct integer multiple of 2π and prevents a branch jump from going unnoticed.",
     },
   },
   spectra: {
@@ -424,12 +424,12 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         title: "Basic geometry fills the region",
         body:
-          "Convex combinations with the identity give radial filling, compactness closes the set, conjugation gives reflection symmetry, and the unit-circle equality case leaves only roots of unity of order at most N.",
+          "Convex combinations with the identity prove star-shapedness with respect to the origin, compactness closes the set, conjugation gives reflection symmetry, and the unit-circle equality case leaves only roots of unity of order at most N.",
       },
       {
-        title: "Apply the intrinsic theorem only at a new shell",
+        title: "Apply the critical-polygon theorem at a non-inherited radial maximum",
         body:
-          "For λ in ΘN but not ΘN−1 at radial maximum, multiplication by λ is N-critical. When N≥4, the critical-polygon theorem supplies the Farey carrier and monodromy. Orders at most three are handled directly. Part II then supplies the sharp scalar boundary and realization.",
+          "For a radial maximum λ∈ΘN∖ΘN−1, multiplication by λ is N-critical. When N≥4, the critical-polygon theorem supplies the Farey product data and monodromy. Orders at most three are handled directly. Part II then supplies the sharp scalar boundary and realization.",
       },
     ],
     glossary: [
@@ -444,16 +444,16 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
           "The set of all complex numbers occurring as eigenvalues of real row-stochastic N × N matrices.",
       },
       {
-        term: "New shell",
+        term: "Non-inherited radial maximum",
         definition:
-          "The part of ΘN not already present in ΘN−1; only there must the least invariant-polygon complexity equal N.",
+          "A radial maximum in ΘN that does not already belong to ΘN−1; only there must the least invariant-polygon complexity equal N.",
       },
     ],
     checkpoint: {
       question:
         "Does Part I by itself prove every radial boundary formula of the Karpelevič–Ito theorem?",
       answer:
-        "No. For N≥4, Part I supplies the critical-polygon return normal form and Farey carrier; the small orders are treated directly. Part II adds the sharp log-sine inequality, explicit stochastic realization, and nesting needed for the full boundary theorem.",
+        "No. For N≥4, Part I supplies the critical-polygon contact and first-return structure together with Farey product data; the small orders are treated directly. Part II adds the sharp log-sine inequality, explicit stochastic realization, and nesting needed for the full boundary theorem.",
     },
   },
 };

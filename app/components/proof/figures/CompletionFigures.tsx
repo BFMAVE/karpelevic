@@ -69,7 +69,7 @@ function Induction() {
       <polygon points="190,190 198,173 206,190" fill={ink} />
       <polygon points="490,190 474,181 477,198" fill={ink} />
       <rect x="70" y="195" width="240" height="82" rx="5" fill={paper} stroke={red} strokeWidth="3" />
-      <text x="97" y="226" fill={red}>new shell</text>
+      <text x="97" y="226" fill={red}>non-inherited maximum</text>
       <text x="97" y="252" fill={ink}>λₙ ∉ Θₙ₋₁</text>
       <text x="97" y="272" fill={ink}>Topic XI: Rₙ=Kₙ</text>
       <rect x="370" y="195" width="240" height="82" rx="5" fill={paper} stroke={teal} strokeWidth="3" />
@@ -87,8 +87,8 @@ function Induction() {
 const copy: Record<CompletionFigureKind, { title: string; description: string; caption: string }> = {
   "radial-boundary": {
     title: "A continuous radial maximum is the boundary",
-    description: "A radially filled compact set surrounds the origin, with rays from the origin ending on one continuous closed curve.",
-    caption: "Plate XIII.1. Radial filling identifies each ray segment; continuity gives a two-dimensional neighborhood below the graph. The outer endpoint on every ray—and only that endpoint—belongs to the topological boundary.",
+    description: "A compact set star-shaped with respect to the origin has rays ending on one continuous closed curve.",
+    caption: "Plate XIII.1. Star-shapedness with respect to the origin identifies each ray segment; continuity gives a two-dimensional neighborhood below the graph. The outer endpoint on every ray—and only that endpoint—belongs to the topological boundary.",
   },
   "order-three": {
     title: "The exceptional region at order three",
@@ -97,8 +97,8 @@ const copy: Record<CompletionFigureKind, { title: string; description: string; c
   },
   induction: {
     title: "The two-branch induction on one ray",
-    description: "An outermost order n point splits into a new-shell branch and an inherited branch; both conclude that the actual and candidate radii agree.",
-    caption: "Plate XIII.3. A new-shell extremum is controlled by the sharp equality theorem. An inherited extremum is squeezed by order embedding, the induction hypothesis, candidate nesting, and attainment.",
+    description: "An order-n radial maximum splits into a non-inherited case and an inherited case; both conclude that the actual and candidate radii agree.",
+    caption: "Plate XIII.3. A non-inherited radial maximum is controlled by the sharp constant-parameter theorem. An inherited maximum is squeezed by order embedding, the induction hypothesis, candidate nesting, and attainment.",
   },
 };
 

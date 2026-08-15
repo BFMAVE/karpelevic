@@ -60,7 +60,7 @@ export const proofReaderRoutes: readonly ProofReaderRoute[] = [
     topicNumber: 4,
     href: "/proof/topic-iv/",
     title: topicTitle(4),
-    shortTitle: "Mutations",
+    shortTitle: "Vertex replacement",
   },
   {
     key: "topic-v",
@@ -95,7 +95,7 @@ export const proofReaderRoutes: readonly ProofReaderRoute[] = [
     topicNumber: 9,
     href: "/proof/topic-ix/",
     title: topicTitle(9),
-    shortTitle: "Candidate boundary",
+    shortTitle: "Candidate curves",
   },
   {
     key: "topic-x",
@@ -139,7 +139,7 @@ export const proofReaderRoutes: readonly ProofReaderRoute[] = [
     topicNumber: 14,
     href: "/proof/topic-xiv/",
     title: topicTitle(14),
-    shortTitle: "Order seven",
+    shortTitle: "Order-seven explorer",
   },
 ] as const;
 

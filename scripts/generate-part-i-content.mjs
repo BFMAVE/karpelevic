@@ -735,7 +735,7 @@ const topicHtml = {
     [11, 12, 13, 14]
       .map((itemNumber) => topicIIHtmlByItem[itemNumber])
       .join("") +
-    '<h3 id="topic-ii-hereditary-saturation">Hereditary saturation</h3>' +
+    '<h3 id="topic-ii-hereditary-saturation">Contact on every side and at every image vertex</h3>' +
     topicIISetupHtml +
     [15, 65, 67, 16, 17, 18]
       .map((itemNumber) => topicIIHtmlByItem[itemNumber])

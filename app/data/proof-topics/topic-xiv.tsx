@@ -24,13 +24,13 @@ export function TopicXIVContent() {
             label: "Topic XI · Sparse stochastic realization",
             href: sitePath("/proof/topic-xi/"),
             explanation:
-              "turns a carrier polynomial into an explicit row-stochastic matrix that has the selected boundary point as an eigenvalue.",
+              "turns a reduced Ito polynomial into an explicit row-stochastic matrix that has the selected boundary point as an eigenvalue.",
           },
           {
             label: "Topic XIII · Karpelevič–Ito theorem",
             href: sitePath("/proof/topic-xiii/"),
             explanation:
-              "justifies interpreting the assembled carrier chain as the complete boundary rather than merely a candidate curve.",
+              "justifies interpreting the assembled boundary arc chain as the complete boundary rather than merely a candidate curve.",
           },
         ]}
         background={[
@@ -58,7 +58,7 @@ export function TopicXIVContent() {
       <section className="topic-i-textbook proof-chapter-group topic-xiv-atlas">
         <header>
           <div>
-            <p className="section-label">1 · The exact atlas</p>
+            <p className="section-label">1 · The complete order-seven Farey table</p>
             <h3>Nine cells cover the upper half-turn</h3>
           </div>
           <div>
@@ -140,7 +140,7 @@ export function TopicXIVContent() {
               <p>
                 The order is <i>n</i>=7, so <i>d</i>=⌊7/3⌋=2 and{" "}
                 <i>e</i>=5−2·3=−1. A negative closing exponent is allowed; it
-                tells us which homogeneous form of the carrier equation to
+                tells us which homogeneous form of the reduced Ito equation to
                 use, not that any return time is negative.
               </p>
             </div>
@@ -180,7 +180,7 @@ export function TopicXIVContent() {
           <li>
             <span>5</span>
             <div>
-              <h4>Recover the boundary point and carrier weights</h4>
+              <h4>Recover the boundary point and coefficients α, β</h4>
               <p>
                 Using the manuscript’s higher-precision radius gives
                 α=0.655850787368397414… and
@@ -196,9 +196,9 @@ export function TopicXIVContent() {
             <div>
               <h4>Realize the point by a stochastic matrix</h4>
               <p>
-                Topic XI’s sparse carrier construction gives a six-state
+                Topic XI’s sparse stochastic realization gives a six-state
                 active block. Adding one absorbing state pads it to order
-                seven. Cycle-cover bookkeeping factors its characteristic
+                seven. The cycle-cover expansion factors its characteristic
                 polynomial as (t−1)((t<sup>3</sup>−β)<sup>2</sup>−α
                 <sup>2</sup>t), so λ is verified directly as an eigenvalue.
               </p>

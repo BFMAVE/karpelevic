@@ -3,7 +3,7 @@ import { getProofSource } from "../../data/proof";
 export function ProofSourceShelf({
   sourceIds,
   headingId,
-  heading = "Source shelf",
+  heading = "References",
 }: {
   sourceIds: readonly string[];
   headingId: string;

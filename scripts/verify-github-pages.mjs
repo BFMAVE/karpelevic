@@ -102,13 +102,13 @@ for (const relativePath of [
   assert.match(html, /data-proof-route="topic-iv"/);
   assert.match(html, /Topic IV at a glance/);
   assert.match(html, /The proof in four steps/);
-  assert.match(html, /Standing assumptions for the one-sided contact data/);
+  assert.match(html, /Standing assumptions for the half-open contact data/);
   assert.match(html, /\(A0\)/);
   assert.match(html, /\(A1\)/);
   assert.match(html, /\(A4\)/);
   assert.match(html, /Multiplication by λ is <i>N<\/i>-critical/);
   assert.doesNotMatch(html, /assumptions \(A1\)–\(A4\)/);
-  assert.match(html, /The label-preserving map b/);
+  assert.match(html, /The label-preserving bijection b/);
   assert.match(html, /The cyclic permutation σ/);
   assert.match(
     visibleText,

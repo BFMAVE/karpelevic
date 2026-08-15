@@ -74,30 +74,30 @@ const figureCopy: Readonly<
     ),
   },
   ownership: {
-    title: "Half-open ownership at a vertex contact",
+    title: "Half-open side assignment at a vertex contact",
     description:
       "A contact at a polygon vertex belongs to two closed sides, but to exactly one side after the boundary is partitioned into half-open sides.",
     caption:
       "Plate III. The filled endpoint belongs to the displayed half-open side; the open endpoint does not. This removes vertex-contact ambiguity globally.",
   },
   mutation: {
-    title: "A geometric contact mutation and its chip move",
+    title: "A vertex replacement and its index-set update",
     description:
-      "A strict contact replaces a polygon vertex. On the cyclic board the corresponding occupied side moves forward by the contact rotation.",
+      "A relative-interior contact replaces a polygon vertex. In the corresponding finite set, the removed side index is replaced by its image under the cyclic contact permutation.",
     caption:
-      "Plate IV. The surgery and chip pictures encode the same move: e leaves the strict set and σ(e) enters it.",
+      "Plate IV. The geometric replacement and the set update encode the same operation: e leaves the relative-interior contact set and σ(e) enters it.",
   },
   rotation: {
     title: "First returns of a finite rotation",
     description:
-      "Eleven points on a circle are visited by repeatedly adding four modulo eleven. A highlighted interval is the return section.",
+      "Eleven points on a circle are visited by repeatedly adding four modulo eleven. The highlighted interval is the set to which first returns are measured.",
     caption:
       "Plate V. For N = 11 and step κ = 4, the orbit is 0, 4, 8, 1, 5, 9, 2, 6, 10, 3, 7, 0. First returns to the highlighted interval form finite towers.",
   },
   "unit-return": {
-    title: "A projective corridor and its holonomy",
+    title: "A boundary chain and its return projectivity",
     description:
-      "Successive projections carry a seed point through an ordered chain of boundary segments and return it to the starting line.",
+      "Successive projections carry a distinguished starting point through an ordered chain of boundary segments and return it to the starting line.",
     caption:
       "Plate VI. The dashed projection rays define a fractional-linear return map H. Criticality forces H to be the identity.",
   },
@@ -168,7 +168,7 @@ function RotationFigure() {
         I = {"{0,1,2,3}"}
       </text>
       <text className="proof-figure-note" x="555" y="190" textAnchor="middle">
-        return section
+        selected interval I
       </text>
     </>
   );
@@ -345,7 +345,7 @@ function FigureDrawing({ slug }: { slug: string }) {
               </text>
             </g>
           ))}
-          <text className="proof-figure-label" x="593" y="72" textAnchor="middle">projective corridor</text>
+          <text className="proof-figure-label" x="593" y="72" textAnchor="middle">boundary-contact chain</text>
           <text className="proof-figure-note" x="593" y="102" textAnchor="middle">criticality forces H(x) = x</text>
         </>
       );

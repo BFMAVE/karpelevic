@@ -111,6 +111,21 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   const topicXIText = visibleText(topicXI);
   const topicXIIIText = visibleText(topicXIII);
 
+  const supersededTopicVToVIIITerms =
+    /right-admissible|one-sided contact|projective corridor|\bcorridor\b|\bledger\b|hereditary saturation|contact rotation|side[- ]continuation|legal mutation|\bstrict set\b|\bunit return\b|return strip|Jensen sheet|Farey carrier|\bnew-shell\b|radial filling|stochastic.?polygon dictionary|no-skipping|\bnontransversal\b|(?:strict|endpoint|padding) fields?|return section/i;
+  for (const [topic, text] of [
+    ["V", topicVText],
+    ["VI", topicVIText],
+    ["VII", topicVIIText],
+    ["VIII", topicVIIIText],
+  ]) {
+    assert.doesNotMatch(
+      text,
+      supersededTopicVToVIIITerms,
+      `Topic ${topic} still exposes superseded private terminology`,
+    );
+  }
+
   assert.match(
     topicVText,
     /The cyclic arithmetic is isolated in this section[\s\S]*Fix integers N\s*≥\s*2/i,
@@ -186,7 +201,7 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.match(topicVText, /M∖\{b\*\}/);
   assert.match(topicVText, /The selected boundary arc omits at least one side/);
   assert.match(topicVText, /The two cyclic-orientation cases/);
-  assert.match(topicVText, /Projective corridor The page(?:'|&#x27;)s shorthand for the displayed consecutive vertices/);
+  assert.match(topicVText, /Boundary-contact projection chain The consecutive vertices/);
   assert.match(topicVText, /Π:Λ₁→K/);
   assert.match(topicVText, /Choose endpoint supporting lines outside a finite exceptional set/);
   assert.doesNotMatch(topicVText, /An explicit interval of target indices in the selected cyclic orientation/);
@@ -209,18 +224,18 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   );
   assert.match(topicVIText, /M∖\{b\*\}/);
   assert.match(topicVIText, /supporting lines ℒ\s*i meeting P only at X\s*i/i);
-  assert.match(topicVIText, /These data are exactly the projective corridor of Definition 7\.4/i);
+  assert.match(topicVIText, /These are exactly the boundary-contact data of Definition 7\.4/i);
   assert.match(topicVIText, /Planar determinant D̃ and its line restriction D/);
   assert.match(topicVIText, /Side index kᵢ/);
   assert.match(topicVIText, /u\(τ\)<τ/);
   assert.match(topicVIText, /The first-return step satisfies Δ\s*=\s*1/);
   assert.match(topicVIText, /Contact and first-return structure of an N-critical invariant polygon/);
-  assert.match(topicVIText, /A one-sided contact representation is a cyclic-order-preserving bijection χ/);
+  assert.match(topicVIText, /A half-open contact assignment is a cyclic-order-preserving bijection χ/);
   assert.match(topicVIText, /permitted local vertex replacement at e/);
-  assert.match(topicVIText, /side-continuation bijection denoted by b in Theorem 1\.3/);
-  assert.match(topicVIText, /a legal mutation is exactly the permitted local vertex replacement/);
-  assert.match(topicVIText, /the strict set is the relative-interior contact set I/);
-  assert.match(topicVIText, /the contact rotation is the contact permutation σ/);
+  assert.match(topicVIText, /induced bijection between the old and new side sets, denoted by b in Theorem 1\.3/);
+  assert.match(topicVIText, /formal theorem calls this operation a permitted local vertex replacement/);
+  assert.match(topicVIText, /relative-interior contact set is I/);
+  assert.match(topicVIText, /contact permutation is σ/);
   assert.match(topicVIText, /one representative from each σ-orbit means that I meets every orbit/);
   assert.doesNotMatch(topicVIText, /M°/);
   assert.doesNotMatch(
@@ -245,11 +260,11 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.doesNotMatch(topicVICard(48, 49), /proof-chapter-provenance/);
 
   assert.match(topicVIIText, /Standing scope for critical-polygon monodromy: N\s*≥\s*4/);
-  assert.match(topicVIIText, /The nontransversal case φ\s*>\s*δ[\s\S]*Assume N\s*≥\s*4/i);
-  assert.match(topicVIIText, /The return factors lie on the Jensen sheet[\s\S]*Assume N\s*≥\s*4/i);
+  assert.match(topicVIIText, /More than one relative-interior contact in some orbit:?\s*φ\s*>\s*δ[\s\S]*Assume N\s*≥\s*4/i);
+  assert.match(topicVIIText, /Return factors lie on (?:one|the) common continuous argument interval[\s\S]*Assume N\s*≥\s*4/i);
 
   assert.match(topicVIIIText, /orders one, two, and three are reserved for the direct proof in Topic XIII/i);
-  assert.match(topicXText, /new-shell regime N\s*≥\s*4/i);
+  assert.match(topicXText, /non-inherited radial maximum[\s\S]*N\s*≥\s*4/i);
   assert.match(topicXIText, /Orders at most three are handled independently in Topic XIII/i);
   assert.match(topicXIIIText, /At this induction stage n\s*≥\s*4/i);
 });
@@ -267,7 +282,7 @@ test("Topic IV exposes its local setup, typed set-update guide, and five unique 
   assert.match(html, /The proof in four steps/);
   assert.match(html, /From boundary order to one interval/);
   assert.match(html, /Recall from Topic III/);
-  assert.match(html, /Standing assumptions for the one-sided contact data/);
+  assert.match(html, /Standing assumptions for the half-open contact data/);
   assert.match(html, /following five assumptions/);
   for (let assumption = 0; assumption <= 4; assumption += 1) {
     assert.match(html, new RegExp("\\(A" + assumption + "\\)"));
@@ -276,7 +291,7 @@ test("Topic IV exposes its local setup, typed set-update guide, and five unique 
   assert.match(html, /for the closed side[^<]*and[\s\S]*for the corresponding right-half-open side/);
   assert.match(html, /tuple satisfying \(A0\)–\(A4\)/);
   assert.doesNotMatch(html, /tuple satisfying \(A1\)–\(A4\)/);
-  assert.match(html, /right-admissible<\/dfn>[^<]*, when it appears in the manuscript proof, is only shorthand/);
+  assert.match(html, /standing contact data<\/dfn> means precisely a tuple satisfying \(A0\)–\(A4\)/);
   assert.match(html, /λ=ρe<sup>iθ<\/sup>/);
   assert.match(html, /θ=arg<sub>\+<\/sub>\(λ\)∈\(0,2π\)/);
   assert.match(html, /The same contact data in two notations/);
@@ -284,8 +299,8 @@ test("Topic IV exposes its local setup, typed set-update guide, and five unique 
   assert.match(html, /Connected components and cyclic relabelling/);
   assert.match(html, /comp\(<i>S<\/i>\).*number of connected components/s);
   assert.match(html, /φ=\|<i>S<\/i>\|/);
-  assert.match(html, /Equivariance under the label-preserving map between side sets/);
-  assert.match(html, /The label-preserving map b/);
+  assert.match(html, /Equivariance under the label-preserving bijection between old and new side sets/);
+  assert.match(html, /The label-preserving bijection b/);
   assert.match(html, /The cyclic permutation σ/);
   assert.match(html, /<i>T<\/i> is the same real-linear map[^<]*multiplication by λ/);
   assert.doesNotMatch(html, /Side-continuation bijection b/);
@@ -352,7 +367,7 @@ test("Topic IV exposes its local setup, typed set-update guide, and five unique 
     .replace(/<[^>]*>/g, " ");
   assert.doesNotMatch(
     visibleTopicIVText,
-    /\b(?:chip|chips|boolean board|mutation|mutations|surgery|surgeries|block|blocks|score|scores|collision|collisions|strict landing|strict side|strict sides|strict-index|edge-cap|controlled reflection|endpoint path)\b/i,
+    /\b(?:chip|chips|boolean board|mutation|mutations|surgery|surgeries|ledger|one-sided|right-admissible|block|blocks|score|scores|collision|collisions|strict landing|strict side|strict sides|strict-index|edge-cap|controlled reflection|endpoint path)\b|intrinsic contact rotation|contact rotation|side continuation/i,
   );
   for (let plate = 1; plate <= 5; plate += 1) {
     assert.match(html, new RegExp(`Plate IV\\.${plate}\\.`));
@@ -418,7 +433,7 @@ test("Topic III states half-open side membership without invented boundary jargo
   );
 });
 
-test("Topic XIV provides the complete example and executable boundary lab", async () => {
+test("Topic XIV provides the complete example and executable boundary explorer", async () => {
   const response = await render("/proof/topic-xiv");
   assert.equal(response.status, 200);
 
@@ -426,7 +441,7 @@ test("Topic XIV provides the complete example and executable boundary lab", asyn
   assert.match(html, /complete order-seven/i);
   assert.match(html, /worked direction[^<]*x=3\/8/i);
   assert.match(html, /Download the [^<]*boundary generator/i);
-  assert.match(html, /Interactive boundary laboratory/i);
+  assert.match(html, /Interactive boundary explorer/i);
   assert.match(html, /<time dateTime="[^"]+"/);
   assert.doesNotMatch(html, /Unhandled Script Error|Internal Server Error/i);
 });

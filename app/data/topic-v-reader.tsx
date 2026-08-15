@@ -57,10 +57,10 @@ const topicVContactNotation: AdvancedProofSetup = {
       when <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>β</mi><mi>i</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\beta_i=0</annotation></semantics></math>,
       the contact is the included endpoint
       <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ξ</mi><mi>i</mi></msub><mo>=</mo><msub><mi>x</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\xi_i=x_i</annotation></semantics></math>.
-      The adjective “right-admissible” refers to this fixed orientation,
-      half-open endpoint convention, and common shift
-      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mi>κ</mi></math>;
-      it is not an additional hypothesis.
+      These are the standing contact data: the positive orientation, the
+      half-open endpoint convention, and the common shift
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mi>κ</mi></math>.
+      No additional admissibility hypothesis is being imposed.
     </p>
     <p>
       Write
@@ -536,8 +536,8 @@ const guides: readonly ReaderResultGuide[] = [
         "The construction begins on Λ₁, the projective completion of aff(X₀,X₁), and ends on K, the projective completion of aff(Cₘ,Cₘ₊₁). These lines need not be the same, so the composition is not yet a self-map.",
       ),
       vocabulary(
-        "Projective corridor",
-        "The page's shorthand for the displayed consecutive vertices, relative-interior contact points, and exposing supporting lines. Definition 7.4 lists the exact data; the phrase adds no further hypothesis.",
+        "Boundary-contact projection chain",
+        "The consecutive vertices, relative-interior contact points, and exposing supporting lines listed in Definition 7.4. Successive projections through the contact points associate a line-to-line projectivity with these data.",
       ),
     ],
     intuition:
@@ -695,10 +695,10 @@ export const topicVGroups: readonly AdvancedProofGroup[] = [
         Lemma 7.1 supplies supporting lines exposing the intermediate vertices,
         Lemma 7.2 guarantees that the displayed sides do not exhaust the
         polygon, and Proposition 7.3 separates one source–target pair from the
-        remaining pairs. Definition 7.4 calls these exact data a projective
-        corridor and composes its perspectivities. A carefully chosen affine
-        chart then turns the selected polygonal arc into a convex graph with
-        strictly increasing slopes.
+        remaining pairs. Definition 7.4 composes the perspectivities associated
+        with this boundary-contact chain. A carefully chosen affine chart then
+        turns the selected polygonal arc into a convex graph with strictly
+        increasing slopes.
       </p>
     ),
     results: take([43, 44]),
@@ -734,7 +734,7 @@ export const topicVImported: readonly ProofDependency[] = [
     label: "Topic IV: one cyclic interval of relative-interior contact indices",
     href: sitePath("/proof/topic-iv/"),
     explanation:
-      "The relative-interior contact indices form one cyclic interval, the contact rotation is addition by κ, and Topic IV supplies the exact first-entrance identities restated above.",
+      "The relative-interior contact indices form one cyclic interval, the contact permutation is the cyclic shift by κ, and Topic IV supplies the exact first-entrance identities restated above.",
   },
 ] as const;
 

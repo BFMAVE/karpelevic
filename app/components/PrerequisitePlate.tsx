@@ -64,12 +64,12 @@ const plateCopy: Readonly<
   "cyclic-arithmetic": {
     title: "First returns for addition by four modulo eleven",
     description:
-      "Eleven residues lie on a circle. Repeated addition of four creates one orbit, and the highlighted interval zero through three is the return section.",
+      "Eleven residues lie on a circle. Repeated addition of four creates one orbit, and first returns are measured to the highlighted interval from zero through three.",
     caption:
-      "Plate III. The section I = {0,1,2,3} has return heights 3, 3, 3, and 2. Its four return towers therefore account for all eleven residues exactly once.",
+      "Plate III. The interval I = {0,1,2,3} has return heights 3, 3, 3, and 2. Its four return towers therefore account for all eleven residues exactly once.",
   },
   "projective-farey": {
-    title: "A projective corridor beside a Farey cell",
+    title: "A chain of perspectivities beside a Farey cell",
     description:
       "Successive central projections carry a point through three lines. Beside them, the Farey neighbours one third and two fifths enclose their mediant three eighths.",
     caption:
@@ -554,7 +554,7 @@ function ProjectiveFareyDrawing() {
     <>
       <ArrowMarker id="prerequisite-arrow-projective" />
       <text className="prerequisite-svg-kicker" x="208" y="42" textAnchor="middle">
-        PROJECTIVE CORRIDOR
+        SUCCESSIVE PERSPECTIVITIES
       </text>
       <line className="prerequisite-corridor-line" x1="60" x2="302" y1="285" y2="250" />
       <line className="prerequisite-corridor-line" x1="96" x2="331" y1="194" y2="152" />

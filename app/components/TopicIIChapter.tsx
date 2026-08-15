@@ -547,7 +547,7 @@ export function TopicIIChapter() {
             inequalities: strict polygonal convex position, persistence under
             perturbation, strict support, and monotonic polar angle. The
             contraction <i>T</i> and the minimal vertex count enter only in
-            the later saturation theorem. There <i>N := ν</i>
+            the later every-side and image-vertex contact theorem. There <i>N := ν</i>
             <sub>poly</sub>(<i>T</i>) is the smallest number of vertices among
             all <i>T</i>-invariant polygons, and the theorem formally assumes
             that this number is finite and that <i>T</i> is <i>N</i>-critical.
@@ -565,7 +565,7 @@ export function TopicIIChapter() {
         <header>
           <p className="section-label">2 · Support coordinates</p>
           <h3 id="topic-ii-normal-fan-heading">
-            The normal fan and its transfer matrix
+            The normal fan and its coefficient matrix
           </h3>
           <p>
             We now work in the adapted Euclidean coordinate supplied by
@@ -629,7 +629,7 @@ export function TopicIIChapter() {
         <header>
           <div>
             <p className="section-label">3 · Geometry becomes a matrix inequality</p>
-            <h3 id="topic-ii-transfer-heading">The normal-fan transfer</h3>
+            <h3 id="topic-ii-transfer-heading">The support-function criterion in a fixed normal fan</h3>
           </div>
           <p>
             One proposition translates polygon invariance into finitely many
@@ -651,7 +651,7 @@ export function TopicIIChapter() {
         <header>
           <p className="section-label">4 · Foundations at the point of use</p>
           <h3 id="topic-ii-foundations-heading">
-            Two appendix lemmas before saturation
+            Two appendix lemmas before the contact theorem
           </h3>
           <p>
             The PDF proves these tools in Appendix A. This reader places
@@ -672,7 +672,7 @@ export function TopicIIChapter() {
           <div>
             <p className="section-label">5 · The structural conclusion</p>
             <h3 id="topic-ii-saturation-heading">
-              Hereditary side and vertex saturation
+              Contact on every side and at every image vertex
             </h3>
           </div>
           <p>

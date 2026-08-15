@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const manuscriptPath =
   process.env.PART_II_TEX_PATH ??
-  "/Users/brechtverbeken/Desktop/research/Karp/Files and check/arxiv/Complete_Karp_arXiv.tex";
+  "/Users/brechtverbeken/Desktop/research/on arxiv or submitted/Karp/Files and check/arxiv/Complete_Karp_arXiv.tex";
 const outputPath = path.join(projectRoot, "app/data/part-ii-content.generated.ts");
 
 const source = readFileSync(manuscriptPath, "utf8");

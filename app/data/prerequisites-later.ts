@@ -196,7 +196,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
       {
         label: "Topic II",
         text:
-          "The weighted spectral-radius bound and Perron vectors drive hereditary saturation.",
+          "The weighted spectral-radius bound and Perron vectors prove contact with every side and boundary placement of every image vertex.",
         href: "/proof/#topic-active-sides",
       },
       {
@@ -293,7 +293,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
         },
       ],
       conclusion:
-        "This elementary equality argument turns the global statement “TP meets E” into the discrete contact witness needed by the ownership ledger.",
+        "This elementary equality argument turns the global statement “TP meets E” into an image vertex lying on E, which is the discrete contact needed for the half-open side assignment.",
     },
     partIUse: [
       {
@@ -311,7 +311,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
       {
         label: "Topic VI",
         text:
-          "Strict support inequalities keep the global corridor deformation admissible.",
+          "Strict support inequalities keep the global boundary-chain deformation admissible.",
         href: "/proof/#topic-unit-return",
       },
     ],
@@ -342,7 +342,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
       {
         term: "Return tower",
         definition:
-          "The orbit segment i,σ(i),…,σ^{H(i)−1}(i). Towers based at the return section partition the cyclic state space.",
+          "The orbit segment i,σ(i),…,σ^{H(i)−1}(i). Towers based at the selected first-return interval partition the cyclic state space.",
       },
     ],
     facts: [
@@ -408,13 +408,13 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
       {
         label: "Topic IV",
         text:
-          "The contact rotation becomes a translation after the strict contacts form one interval.",
+          "The cyclic permutation of the side labels becomes translation by κ after the relative-interior contact indices form one interval.",
         href: "/proof/#topic-mutation",
       },
       {
         label: "Topic V",
         text:
-          "The finite rotation theorem and lattice sail produce the return-edge ledger.",
+          "The finite rotation theorem and lattice sail produce the exact first-return partition.",
         href: "/proof/#topic-rotation",
       },
       {
@@ -460,7 +460,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
         statement:
           "After choosing affine coordinates on the source and target lines, a central projection is represented by (at+b)/(ct+d).",
         explanation:
-          "Compositions remain of the same form, so an entire corridor has one fractional-linear holonomy.",
+          "Compositions remain of the same form, so the complete chain of central projections has one fractional-linear return map.",
       },
       {
         title: "A nonidentity projectivity has isolated fixed points",
@@ -523,7 +523,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
       {
         label: "Topic VII",
         text:
-          "For N≥4, unimodular return data becomes a Farey carrier and complex monodromy identity; the smaller orders are treated directly.",
+          "For N≥4, unimodular return data determines Farey product data and a complex monodromy identity; the smaller orders are treated directly.",
         href: "/proof/#topic-farey-return",
       },
       {

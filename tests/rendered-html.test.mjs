@@ -892,7 +892,10 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(topicIIPanelHtml, /Output 3 — the prescribed determinant signs remain strict/);
   assert.match(topicIIPanelHtml, /Why adjacent normals determine one support value/);
   assert.match(topicIIPanelHtml, /Boundedness, contact, and complementarity unpacked/);
-  assert.match(topicIIPanelHtml, /Two appendix lemmas before saturation/);
+  assert.match(topicIIPanelHtml, /Two appendix lemmas before the contact theorem/);
+  assert.match(topicIIPanelHtml, /The support-function criterion in a fixed normal fan/);
+  assert.match(topicIIPanelHtml, /Contact on every side and at every image vertex/);
+  assert.doesNotMatch(topicIIPanelHtml, /Normal-fan transfer|Hereditary saturation|Why heredity matters/);
   assert.match(topicIIPanelHtml, /Their labels A\.1 and A\.3 are retained/);
   assert.match(topicIIPanelHtml, /id="eq:sine-coefficients"/);
   assert.match(topicIIPanelHtml, /id="eq:fan-containment"/);

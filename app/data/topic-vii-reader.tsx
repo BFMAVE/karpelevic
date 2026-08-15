@@ -124,8 +124,8 @@ const guides: readonly ReaderResultGuide[] = [
     label: "Lemma 8.3",
     vocabulary: [
       vocabulary(
-        "Backward return strip",
-        "A chain of recurrences (λ^q-bᵢ)zᵢ=aᵢzᵢ₋₁ closed by λ^h z_d=z₀.",
+        "Closed backward return-recurrence chain",
+        "The recurrences (λ^q-bᵢ)zᵢ=aᵢzᵢ₋₁ together with the closing relation λ^h z_d=z₀.",
       ),
       vocabulary(
         "Lifted arguments Θᵢ",
@@ -156,7 +156,7 @@ const guides: readonly ReaderResultGuide[] = [
         "Conjugating λ^h z_d=z₀ gives μ^h w₀=w_d. Since μ≠0, rewrite it as μ^{-h}w_d=w₀, so e=-h.",
       ),
       step(
-        "Multiply the strip",
+        "Multiply the closed recurrence chain",
         "Multiply all forward cell equations, cancel the nonzero endpoint vertices with the signed closure, and obtain the Laurent product.",
       ),
       step(
@@ -173,19 +173,19 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "Reflection preserves the complete strip, including its product and exact lifted phase, while selecting the conjugate eigenvalue.",
+      "Reflection preserves the complete closed recurrence chain, including its product and exact lifted phase, while selecting the conjugate eigenvalue.",
   },
   {
     itemNumber: 56,
     label: "Lemma 8.4",
     vocabulary: [
       vocabulary(
-        "Identity contact rotation",
-        "The integer lift is κ=N, so every side returns to itself and every contact is strict.",
+        "Identity contact permutation",
+        "The integer lift is κ=N, so the contact permutation fixes every side and every contact lies in the relative interior of its side.",
       ),
       vocabulary(
-        "Monodromy output",
-        "The selected eigenvalue, Farey cell, product parameters, and exact lifted phase obtained after multiplying one closed return strip.",
+        "Closed-return monodromy data",
+        "The selected eigenvalue, Farey cell, product parameters, and exact lifted phase obtained by multiplying the recurrence factors around one closed return chain. This closed product is what the page calls monodromy.",
       ),
       vocabulary(
         "Output orientation",
@@ -193,14 +193,14 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     intuition:
-      "When every contact returns to its own side, the recurrences naturally point backwards around one full polygon turn. Reflection turns them into the required forward strip and places the output angle in the first Farey cell.",
+      "When every contact returns to its own side, the recurrences naturally point backwards around one full polygon turn. Reflection turns them into the required forward recurrence chain and places the output angle in the first Farey cell.",
     proofSteps: [
       step(
-        "Build the backward strip",
+        "Build the backward recurrence chain",
         "Rearrange λxᵢ=βᵢxᵢ₋₁+αᵢxᵢ as (λ-αᵢ)zᵢ=βᵢzᵢ₋₁ and lift one complete boundary turn.",
       ),
       step(
-        "Apply strip reflection",
+        "Reflect the recurrence chain",
         "Use Lemma 8.3 with q=1,d=N,h=0,m=1 and reversed coefficients.",
       ),
       step(
@@ -213,7 +213,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "The identity return produces the carrier after one exact orientation reflection.",
+      "The identity return produces the Farey product data after one exact orientation reflection.",
   },
   {
     itemNumber: 57,
@@ -221,31 +221,31 @@ const guides: readonly ReaderResultGuide[] = [
     vocabulary: [
       vocabulary(
         "Standing scope N≥4",
-        "This nontransversal construction invokes the projective unit-return theorem. It therefore belongs to the N≥4 part of the argument; the N=3 case is proved directly in Topic XIII.",
+        "This construction uses Theorem 7.11, which proves that the first-return step is Δ=1. It therefore belongs to the N≥4 part of the argument; the N=3 case is proved directly in Topic XIII.",
       ),
       vocabulary(
-        "Nontransversal regime",
-        "The strict interval contains more points than the number δ of contact-rotation orbits: φ>δ.",
+        "More than one relative-interior contact in some orbit",
+        "The relative-interior contact interval has φ>δ indices, where δ is the number of contact-permutation orbits. Thus at least one orbit contributes more than one such index.",
       ),
       vocabulary(
         "Heterogeneous contact factors",
-        "The factors λ^q-βⱼ may have different βⱼ. Each comes from one strict or padded return cell.",
+        "The factors λ^q-βⱼ may have different βⱼ. Each comes from one relative-interior contact or one padded return factor.",
       ),
       vocabulary(
-        "Algebraic padding",
-        "Endpoint cells use (αⱼ,βⱼ)=(1,0) to complete the record interval. They are not new strict contacts.",
+        "Zero-factor padding",
+        "Endpoint-contact indices use (αⱼ,βⱼ)=(1,0) to complete the record interval. They do not create new relative-interior contacts.",
       ),
     ],
     intuition:
-      "Unit return turns every base-to-successor recurrence into one factor. Multiplying the complete padded strip cancels the vertices, while the determinant-one record edge identifies the exact Farey endpoints.",
+      "The identity Δ=1 turns every base-to-successor recurrence into one factor. Multiplying the complete padded recurrence chain cancels the vertices, while the determinant-one record edge identifies the exact Farey endpoints.",
     proofSteps: [
       step(
         "Force one orbit",
         "Because N≥4, Theorem 7.11 applies and gives Δ=1. The record identity gcd(Δ,φ)=δ therefore gives δ=1.",
       ),
       step(
-        "Treat the full block",
-        "If φ=N, the initial record pair and unit return force κ=1; take q=1,p=0,d=N,e=0.",
+        "Treat the full interval",
+        "If φ=N, the initial record pair and Δ=1 force κ=1; take q=1,p=0,d=N,e=0.",
       ),
       step(
         "Extend a proper block",
@@ -253,14 +253,14 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Build the padded recurrences",
-        "Corollary 6.2 gives λ^q xⱼ₋₁=ξⱼ and λ^e x_d=x₀. Substitute contact coefficients on strict fields and (1,0) on padding fields.",
+        "Corollary 6.2 gives λ^q xⱼ₋₁=ξⱼ and λ^e x_d=x₀. Substitute the contact coefficients at relative-interior contact indices and (1,0) at the padded endpoint-contact indices.",
       ),
       step(
         "Multiply and cancel",
         "The nonzero vertices cancel around the strip. The closure gives the Laurent product, and N=qd+e gives its homogeneous form.",
       ),
       step(
-        "Find the Farey carrier",
+        "Identify the Farey product data",
         "The determinant qκ-pN=1 and denominator sum q+N>N make p/q and κ/N Farey neighbours. The lifted q-step return places x strictly between them.",
       ),
       step(
@@ -269,15 +269,15 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "For N≥4, a nontransversal critical return yields a determinant-one Farey cell, a complete heterogeneous product, and an exact phase.",
+      "For N≥4, the case with more than one relative-interior contact in some orbit yields a determinant-one Farey cell, a complete heterogeneous product, and an exact phase.",
   },
   {
     itemNumber: 58,
     label: "Proposition 8.6",
     vocabulary: [
       vocabulary(
-        "Transversal regime",
-        "The strict block has exactly one field in each contact-rotation orbit: φ=δ.",
+        "One relative-interior contact in each orbit",
+        "The relative-interior contact interval contains exactly one index from each contact-permutation orbit: φ=δ. In standard orbit terminology it is an orbit transversal.",
       ),
       vocabulary(
         "Orbit length L and reduced step K",
@@ -285,7 +285,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       vocabulary(
         "Integers S and R",
-        "Local arithmetic symbols S=N-h and R=κ-b. On this result card they are integers, not a strict-field set or a polygon.",
+        "Local arithmetic symbols S=N-h and R=κ-b. On this result card they are integers, not a contact-index set or a polygon.",
       ),
       vocabulary(
         "Genuine factor versus padded factor",
@@ -293,15 +293,15 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     intuition:
-      "A transversal has one strict return per orbit, so the common orbit length supplies a backward strip. Whether to reflect depends on which endpoint denominator is already smaller; δ≥2 and δ=1 make opposite choices.",
+      "When there is exactly one relative-interior contact in each orbit, the common orbit length supplies a backward recurrence chain. Whether to reflect depends on which endpoint denominator is already smaller; δ≥2 and δ=1 make opposite choices.",
     proofSteps: [
       step(
         "Build the common orbit recurrence",
-        "The first L-1 destination fields are endpoints and the L-th return is strict, giving λ^Lxᵢ=ξᵢ for each of the δ strict fields.",
+        "The first L-1 destination indices are endpoint contacts and the L-th return is a relative-interior contact, giving λ^Lxᵢ=ξᵢ for each of the δ relative-interior contact indices.",
       ),
       step(
         "Close the strip",
-        "Choose h with Kh≡-1 mod L. The orbit from xδ reaches x₀ through endpoint fields, so λ^h xδ=x₀.",
+        "Choose h with Kh≡-1 mod L. The orbit from xδ reaches x₀ through endpoint-contact indices, so λ^h xδ=x₀.",
       ),
       step(
         "Prove the Farey determinant",
@@ -325,15 +325,15 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "Every transversal return also has an ordered Farey carrier, including the reflected negative-exponent case and the singly genuine padded case.",
+      "The case with exactly one relative-interior contact in each orbit also has ordered Farey product data, including the reflected negative-exponent case and the singly genuine padded case.",
   },
   {
     itemNumber: 59,
     label: "Lemma 8.7",
     vocabulary: [
       vocabulary(
-        "Jensen sheet",
-        "The single argument branch [A,M) inside the open upper half-plane on which every factor μ^q-βⱼ lies. Jensen's inequality is not used until a later topic.",
+        "Common continuous argument interval",
+        "The interval [A,M) in the open upper half-plane containing the continuously chosen argument of every factor μ^q-βⱼ. Jensen's inequality is not used until a later topic.",
       ),
       vocabulary(
         "Left factor angle A",
@@ -362,7 +362,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Match geometric and analytic branches",
-        "Direct vertex gaps handle the nontransversal case, strip reflection handles both reflected cases, and the δ=1 transversal construction assigns A to its padded factors.",
+        "Direct vertex gaps handle the case with more than one relative-interior contact in some orbit. Reflection of the recurrence chain handles both reflected cases, and the δ=1 one-contact-per-orbit construction assigns A to its padded factors.",
       ),
     ],
     takeaway:
@@ -381,18 +381,18 @@ const theorem14: ProofResultData = {
   id: "part-i-item-4",
   label: "Theorem 1.4",
   kind: "Theorem",
-  title: theorem14Item.title,
+  title: "Complex monodromy and Farey product data",
   purpose:
     "For N≥4, this theorem eliminates all case-specific return variables and exports one selected eigenvalue, one ordered Farey cell, one heterogeneous product, and one exact phase identity.",
   manuscriptHtml: theorem14CompleteHtml,
   vocabulary: [
     vocabulary(
       "Output eigenvalue μ",
-      "One of the conjugate eigenvalues λ or λ̄, selected only after the return regime is known and then kept fixed through every product and phase identity.",
+      "One of the conjugate eigenvalues λ or λ̄, selected only after the return case is known and then kept fixed through every product and phase identity.",
     ),
     vocabulary(
-      "Farey carrier",
-      "The ordered neighbouring fractions p/q<y<r/s together with the finite factor data that carry the monodromy relation.",
+      "Farey product data",
+      "The ordered neighbouring fractions p/q<y<r/s together with the finite factors in the closed-return monodromy relation.",
     ),
     vocabulary(
       "Signed remainder e",
@@ -400,26 +400,26 @@ const theorem14: ProofResultData = {
     ),
   ],
   intuition:
-    "The theorem is a disciplined case assembly. Each return regime chooses its orientation exactly once, then hands the same selected multiplier to the product, phase, and Jensen-sheet statements.",
+    "The theorem is a disciplined case assembly. Each return case chooses its orientation exactly once, then hands the same selected multiplier to the product, phase, and common-argument-interval statements.",
   proofSteps: [
     step(
       "Keep the contact orientation provisional",
-      "Apply the one-sided contact theorem but postpone selecting μ until the return regime is known.",
+      "Apply the half-open contact-assignment theorem but postpone selecting μ until the return case is known.",
     ),
     step(
       "Identity case",
       "Choose μ=λ̄ and use Lemma 8.4; the ordered cell has denominators 1<N.",
     ),
     step(
-      "Nontransversal case",
-      "In the standing N≥4 range, choose μ=λ and use Proposition 8.5 plus unit return; the right endpoint denominator is N.",
+      "More than one relative-interior contact in some orbit",
+      "In the standing N≥4 range, choose μ=λ and use Proposition 8.5 together with the first-return identity Δ=1; the right endpoint denominator is N.",
     ),
     step(
-      "Transversal with δ≥2",
+      "One relative-interior contact per orbit, δ≥2",
       "Choose μ=λ̄ and Proposition 8.6(a); reflection orders the denominators and gives negative e.",
     ),
     step(
-      "Transversal with δ=1",
+      "One relative-interior contact per orbit, δ=1",
       "Keep μ=λ and use Proposition 8.6(b); the original cell already has the smaller denominator first.",
     ),
     step(
@@ -428,11 +428,11 @@ const theorem14: ProofResultData = {
     ),
   ],
   takeaway:
-    "The complete critical-polygon geometry is compressed into a finite scalar carrier without changing orientation after the output has been selected.",
+    "The complete critical-polygon geometry is compressed into finite Farey product data without changing orientation after the output has been selected.",
   provenance: theorem14Item.provenance === "New result" ? "New result" : undefined,
   sourceIds: theorem14Item.sourceIds,
   sourceRelation:
-    "The exact intrinsic carrier theorem, including orientation selection, signed closing exponent, and common Jensen sheet, is new in the manuscript's audit. The classical Karpelevič-Ito boundary and older product formulations are explicitly not claimed as new.",
+    "The exact intrinsic product theorem, including orientation selection, signed closing exponent, and common continuous argument interval, is new in the manuscript's audit. The classical Karpelevič-Ito boundary and older product formulations are explicitly not claimed as new.",
 };
 
 export const topicVIIGroups: readonly AdvancedProofGroup[] = [
@@ -442,7 +442,7 @@ export const topicVIIGroups: readonly AdvancedProofGroup[] = [
     introduction: (
       <p>
         Lattice determinant one identifies neighbouring fractions. Reflection
-        then transports a complete return strip, including its lifted phase,
+        then transports a complete closed return-recurrence chain, including its lifted phase,
         to the opposite complex orientation.
       </p>
     ),
@@ -450,11 +450,12 @@ export const topicVIIGroups: readonly AdvancedProofGroup[] = [
   },
   {
     number: "II",
-    title: "Build the carrier in every return regime",
+    title: "Build the Farey product data in every return case",
     introduction: (
       <p>
-        Identity, nontransversal, and transversal returns each produce a
-        product. The orientation and signed exponent are decided separately
+        The identity case, the case with more than one relative-interior
+        contact in some orbit, and the one-contact-per-orbit case each produce
+        a product. The orientation and signed exponent are decided separately
         and explicitly.
       </p>
     ),
@@ -464,8 +465,9 @@ export const topicVIIGroups: readonly AdvancedProofGroup[] = [
         title: "Standing scope for critical-polygon monodromy: N≥4",
         html: String.raw`
           <p>
-            Proposition 8.5 invokes projective unit return, and Theorem 1.4
-            assembles the resulting contact-return normal form. Both are used
+            Proposition 8.5 invokes Theorem 7.11, which proves that the
+            first-return step is Δ=1, and Theorem 1.4 assembles the resulting
+            contact-return normal form. Both are used
             here only for <strong>N≥4</strong>. The finite Farey lemmas above do
             not require that restriction. The stochastic regions of orders
             one, two, and three are established by a separate direct proof in
@@ -478,11 +480,12 @@ export const topicVIIGroups: readonly AdvancedProofGroup[] = [
   },
   {
     number: "III",
-    title: "One argument sheet and one theorem output",
+    title: "One continuous argument interval and one theorem output",
     introduction: (
       <p>
-        The Farey cell places all factors on one upper-half-plane branch. The
-        case constructions then assemble into the complex monodromy theorem.
+        The Farey cell places all factors on one upper-half-plane argument
+        interval. The case constructions then assemble into the complex
+        monodromy theorem.
       </p>
     ),
     results: [coreResults[6], theorem14],
@@ -494,10 +497,10 @@ export const topicVIIImported: readonly ProofDependency[] = [
     label: "Topic VI: completed first-return cases",
     href: sitePath("/proof/topic-vi/#thm:critical-polygon-normal-form"),
     explanation:
-      "For N≥4, identity, transversal, and nontransversal regimes are exhaustive; the nontransversal first return is the adjacent successor.",
+      "For N≥4, the identity case, the one-contact-per-orbit case, and the case with more than one contact in some orbit are exhaustive; in the last case the first return is the adjacent successor.",
   },
   {
-    label: "Topic V: unit record section and padding",
+    label: "Topic V: determinant-one return interval and endpoint padding",
     href: sitePath("/proof/topic-v/#cor:endpoint-padded-section"),
     explanation:
       "The determinant-one record edge supplies q,p,d,e and endpoint padding supplies exact zero factors.",
@@ -515,7 +518,7 @@ export const topicVIIImported: readonly ProofDependency[] = [
       "The real-linear contraction is multiplication by one of two conjugate complex eigenvalues.",
   },
   {
-    label: "Topic IV: one-sided contact representative",
+    label: "Topic IV: half-open contact assignment",
     href: sitePath("/proof/topic-iv/#lem:one-sided-contact"),
     explanation:
       "The return cases start from one fixed contact orientation, multiplier, contact permutation, and interval of relative-interior contact indices.",

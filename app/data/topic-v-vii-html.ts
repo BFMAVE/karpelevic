@@ -293,7 +293,7 @@ export const topicVReturnSetup = {
 
 export const topicVCorridorDictionary = {
   id: "topic-v-corridor-dictionary",
-  title: "The forward and reverse corridor dictionary",
+  title: "The forward and reverse orientation cases",
   html: qualifyCrossTopicLinks(corridorDictionaryRaw, topicVLocal),
 } as const;
 

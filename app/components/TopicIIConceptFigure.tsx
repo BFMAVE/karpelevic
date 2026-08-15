@@ -15,7 +15,7 @@ const copy = {
   },
   "normal-fan": {
     qualification: "Verified geometric plate",
-    title: "One row of the normal-fan transfer matrix",
+    title: "One row of the fixed-normal-fan coefficient matrix",
     description:
       "The direction at thirty degrees lies in the cone between adjacent unit normals at zero and sixty degrees and is their nonnegative linear combination.",
     caption:

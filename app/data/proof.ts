@@ -241,16 +241,16 @@ function sourcesFor(number: number): readonly string[] {
 function sourceRelationFor(number: number): string | undefined {
   if ([51, 52].includes(number)) return undefined;
   if (number === 27) {
-    return "Dmitriev–Dynkin’s one-sided contact argument, available in Swift’s translation, is the historical antecedent. The precise finite endpoint identity used here is proved on this page.";
+    return "Dmitriev–Dynkin’s half-open contact argument, available in Swift’s translation, is the historical antecedent. The precise finite endpoint identity used here is proved on this page.";
   }
   if (number === 28) {
-    return "Dmitriev–Dynkin’s supporting one-sided contact theorem, available in Swift’s translation, is the historical antecedent. The complete boundary-interval and endpoint-count argument used here is proved on this page.";
+    return "Dmitriev–Dynkin’s theorem assigning contacts to half-open sides, available in Swift’s translation, is the historical antecedent. The complete boundary-interval and endpoint-count argument used here is proved on this page.";
   }
   if (number === 29) {
     return "Swift (1972), Appendix A, §2, Supporting Theorem III, together with the proof of Basic Theorem 5.1 at A-16 (PDF p. 119), contains the one-image-per-side result. The present page fixes the labels and half-open convention explicitly.";
   }
   if (number === 30) {
-    return "Swift (1972), Appendix A, §2, Basic Theorem 5.1, with the statement at A-5 and the relevant proof at A-16, supplies the one-sided representative. The statement here strengthens it by adding the explicit cyclic shift, the lift check, and the endpoint-equality argument.";
+    return "Swift (1972), Appendix A, §2, Basic Theorem 5.1, with the statement at A-5 and the relevant proof at A-16, supplies the half-open contact assignment. The statement here strengthens it by adding the explicit cyclic shift, the lift check, and the endpoint-equality argument.";
   }
   if (number === 31) {
     return "Hatcher, Algebraic Topology, §1.3, supplies the standard covering-space lift for circle angles, while Schneider, Chapter 1, supplies convex-boundary angular order. The exact consequence for an iterated sequence of endpoint equalities is derived here.";
@@ -287,8 +287,8 @@ const rawItems: readonly [
 ][] = [
   [1, "Definition", "Radial polygonal criticality", "Defines N-criticality by requiring N to be the least invariant-polygon vertex count for T and requiring every tT with t>1 to need more than N vertices."],
   [2, "Definition", "Strict polygon", "Rules out repeated vertices and flat turns so that every side and cyclic order used later is unambiguous."],
-  [3, "Theorem", "Critical-polygon contact-return normal form", "For N≥4, collects the geometric reduction: a critical invariant polygon admits a rigid one-sided contact system and a finite return description."],
-  [4, "Theorem", "Complex monodromy and Farey carrier", "For N≥4, converts the geometric return into a branch-controlled product identity whose carrier is a Farey cell."],
+  [3, "Theorem", "Boundary contact, vertex replacement, and first returns", "For N≥4, collects the geometric reduction: a critical invariant polygon admits an order-preserving half-open contact bijection and a finite return description."],
+  [4, "Theorem", "Complex monodromy and Farey product data", "For N≥4, converts the geometric return into a product identity associated with one Farey cell, with every factor argument chosen on one continuous interval."],
   [5, "Proposition", "Adapted complex structures", "Identifies an elliptic real-linear map with multiplication by one of its two conjugate complex eigenvalues."],
   [6, "Proposition", "Real-linear invariance of polygonal complexity", "Shows that changing real coordinates does not alter the least number of vertices needed for an invariant polygon."],
   [7, "Lemma", "Real-linear covariance of contact geometry", "Carries vertices, sides, contacts, and their labels faithfully through an invertible real-linear change of coordinates."],
@@ -299,9 +299,9 @@ const rawItems: readonly [
   [12, "Lemma", "Simultaneous preservation of convexity and side conditions under perturbation", "Shows that finitely many convexity, relative-interior, and strict determinant conditions persist during a sufficiently small deformation."],
   [13, "Lemma", "Support-face test for strict polygons", "Tests whether a supporting line touches a strict polygon only at the chosen vertex."],
   [14, "Lemma", "Angular monotonicity", "Shows that the argument of points on the boundary of a strict polygon increases in boundary order."],
-  [15, "Proposition", "Normal-fan transfer", "Translates invariance of a polygon into a compatible nonnegative action on its supporting normals."],
-  [16, "Theorem", "Hereditary saturation", "Proves that for every invariant polygon with at most N vertices, the image polygon intersects every side and all of its vertices lie on the outer boundary."],
-  [17, "Remark", "Why heredity matters", "Explains that the theorem applies again whenever a modified polygon remains an invariant N-gon."],
+  [15, "Proposition", "Support-function criterion in a fixed normal fan", "Translates invariance of a polygon into a compatible nonnegative coefficient matrix on its supporting normals."],
+  [16, "Theorem", "Contact on every side and at every image vertex", "Proves that for every invariant polygon with at most N vertices, the image polygon intersects every side and all of its vertices lie on the outer boundary."],
+  [17, "Remark", "Why the theorem applies after a polygon is modified", "Explains that the theorem applies again whenever a modified polygon remains an invariant N-gon."],
   [18, "Lemma", "A side intersecting a polygon contains one of its vertices", "Proves directly that if a side E of P intersects Q⊆P, then E contains a vertex of Q."],
   [19, "Definition", "Assignment to half-open sides", "Defines which incident half-open side contains a boundary contact that is exactly a polygon vertex."],
   [20, "Lemma", "Half-open sides partition the boundary", "Proves that every boundary point belongs to exactly one consistently oriented half-open side."],
@@ -314,10 +314,10 @@ const rawItems: readonly [
   [27, "Lemma", "Finite cyclic endpoint count", "Converts the two possible exceptional boundary-interval counts into a uniform count for the opposite half-open convention."],
   [28, "Lemma", "Cyclic interlacing with endpoint membership", "Proves that one consistently oriented half-open gap contains exactly one outer vertex everywhere."],
   [29, "Corollary", "One image vertex in every half-open side", "Chooses one global half-open convention that assigns exactly one image vertex to every side."],
-  [30, "Lemma", "One-sided contact representative", "Produces a representative in which all contacts follow the same cyclic direction."],
+  [30, "Lemma", "Order-preserving half-open contact assignment", "Produces a representative in which the image vertices are assigned bijectively to half-open sides by one cyclic shift."],
   [31, "Lemma", "Iteration of endpoint equalities for lifted arguments", "Iterates endpoint equalities on the real angle line after resolving the integer ambiguity in the chosen arguments."],
   [32, "Proposition", "Exact local vertex replacement", "Replaces one vertex by its contact image while preserving strictness, invariance, and every required label."],
-  [33, "Corollary", "Equivariance under the label-preserving map between side sets", "Expresses the relative-interior-contact update after identifying old and new sides by their unchanged labels."],
+  [33, "Corollary", "Equivariance under the label-preserving bijection between old and new side sets", "Expresses the relative-interior-contact update after identifying old and new sides by their unchanged labels."],
   [34, "Corollary", "Geometric realization of every permitted update sequence", "Shows that every permitted finite sequence of updates to S comes from actual invariant polygons."],
   [35, "Corollary", "Realization of the successive updates used in Lemma 5.5", "Applies the finite realization result to the right-to-left update sequences in the reduction argument."],
   [36, "Lemma", "Reduction to one cyclic interval and a first-entrance identity", "Reduces a reachable set S to one cyclic interval and identifies the corresponding first entrance time."],
@@ -334,19 +334,19 @@ const rawItems: readonly [
   [47, "Theorem", "A small deformation moving the final image into the interior half-plane", "For N≥4, converts the scalar inequality τ-u(τ)>0 into the required planar half-plane condition while preserving strict convex order."],
   [48, "Lemma", "Extension of the deformation to all polygon vertices", "Assuming the return-time bijection and four-case partition from Topic V, defines every deformed vertex and verifies all nonclosing incidences and side inequalities."],
   [49, "Theorem", "Existence of an invariant deformation with one interior image vertex", "Chooses one small parameter for which the deformed polygon is invariant and exactly one image-polygon vertex lies in its interior."],
-  [50, "Theorem", "The first-return step satisfies Δ = 1", "For N≥4, uses the boundary conclusion of hereditary saturation to prove that the first-return step is Δ=1."],
+  [50, "Theorem", "The first-return step satisfies Δ = 1", "For N≥4, uses Theorem 3.2's conclusion that every image vertex lies on the polygon boundary to prove that the first-return step is Δ=1."],
   [51, "Remark", "Boundary cases in the proof that Δ = 1", "Checks the limiting arithmetic values used in the proof that the first-return step is one."],
   [52, "Remark", "Local and global data used in the deformation argument", "Separates the local projective inequality from the global indexing, incidence, and side-inequality facts needed to use it."],
   [53, "Lemma", "Farey adjacency criterion", "Recognizes neighbouring reduced fractions through a determinant of absolute value one."],
   [54, "Lemma", "Reflection Farey cell", "Reflects a Farey cell across one half-turn while preserving adjacency."],
-  [55, "Lemma", "Reflected backward-return strip", "Transfers the finite return calculation to the reflected orientation needed by the contact word."],
-  [56, "Lemma", "Identity-contact rotation closes after reflection", "Shows that unit projective return makes the reflected contact orbit close with the required arithmetic data."],
-  [57, "Proposition", "Nontransversal case", "Derives the heterogeneous contact-product relation when the lifted return angle is strictly larger than the step."],
-  [58, "Proposition", "Transversal case", "Derives the companion product relation when the lifted return angle equals the step."],
-  [59, "Lemma", "Return factors lie on the Jensen sheet", "Places all heterogeneous contact factors on one controlled logarithmic sheet and extracts the scalar carrier equation."],
+  [55, "Lemma", "Reflection of a closed backward return-recurrence chain", "Transfers the complete finite return calculation to the reflected orientation, including its closing relation and lifted phase."],
+  [56, "Lemma", "Identity contact permutation closes after reflection", "Shows that the first-return identity Δ=1 makes the reflected contact orbit close with the required arithmetic data."],
+  [57, "Proposition", "More than one relative-interior contact in some orbit", "Derives the varying-factor contact-product relation when some contact-permutation orbit meets the relative-interior contact set more than once."],
+  [58, "Proposition", "Exactly one relative-interior contact in each orbit", "Derives the companion product relation when the relative-interior contact set meets every contact-permutation orbit exactly once."],
+  [59, "Lemma", "Return factors lie on one common continuous argument interval", "Places all varying contact factors on one continuous argument interval and extracts the scalar Farey equation."],
   [60, "Proposition", "Compactness, conjugation, and disk bound", "Collects the elementary closure, symmetry, and unit-disk constraints on stochastic spectra."],
   [61, "Theorem", "Invariant-polygon criterion", "Equates stochastic eigenvalue realizability with the existence of a finite invariant polygon."],
-  [62, "Corollary", "Radial filling", "Shows that every radial segment from the origin to an attainable eigenvalue remains attainable."],
+  [62, "Corollary", "Star-shapedness with respect to the origin", "Shows that every radial segment from the origin to an attainable eigenvalue remains attainable."],
   [63, "Proposition", "Unit-circle points", "Identifies the attainable points of modulus one as roots of unity of order at most the matrix size."],
   [64, "Corollary", "Representative-selection Farey compression", "Applies the polygon theorem to recover the classical Farey-indexed boundary of the stochastic eigenvalue region."],
   [65, "Lemma", "Weighted spectral-radius bound and Perron vectors", "Supplies the left and right Perron vectors used in the proof of Theorem 3.2."],
@@ -393,7 +393,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "Why must the image polygon TR intersect every side of an invariant polygon for an N-critical map?",
     overview: [
       "The determinant inequalities for a strict polygon turn cyclic order into finitely many sign conditions. Proposition 3.1 then rewrites polygon invariance as the componentwise support inequality ρBΦ(θ)h≤h.",
-      "A left Perron vector forces every support inequality to be attained, so TR intersects every side of R; polarity proves that every vertex of TR lies on the boundary of R. The manuscript calls the fact that these conclusions hold for every invariant polygon with at most N vertices hereditary saturation.",
+      "A left Perron vector forces every support inequality to be attained, so TR intersects every side of R; polarity proves that every vertex of TR lies on the boundary of R. These conclusions hold for every invariant polygon with at most N vertices, not only for one initially chosen polygon.",
     ],
     itemNumbers: [11, 12, 13, 14, 15, 16, 17, 18, 65, 67],
     manuscriptPages: "10–15",
@@ -420,7 +420,7 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "How does a geometric contact become a permitted update of a finite cyclic index set?",
     overview: [
-      "The remaining endpoint lemmas finish the one-sided representative. A contacted vertex can then be replaced by its image-contact point without breaking strictness or invariance.",
+      "The remaining endpoint lemmas finish the order-preserving half-open contact assignment. A contacted vertex can then be replaced by its image-contact point without breaking strictness or invariance.",
       "The exact vertex replacement updates the subset S of indices whose sides have relative-interior contact. Every permitted finite update sequence is realized geometrically, and a reachable set reduces to one cyclic interval. The source notes distinguish Karpelevič’s antecedent mechanisms from the exact statements proved here.",
     ],
     itemNumbers: [27, 28, 29, 30, 31, 32, 33, 34, 35, 36],
@@ -456,12 +456,12 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "farey-return",
     eyebrow: "Topic VII · 7 items",
-    title: "The Farey carrier and return monodromy for N≥4",
+    title: "Farey product data and return monodromy for N≥4",
     question:
       "For N≥4, how does the identity return become the scalar equation of a Farey boundary arc?",
     overview: [
       "Determinant-one adjacency identifies the relevant Farey cell, and reflection aligns the rotation arithmetic with the chosen contact orientation.",
-      "The proof then separates transversal from nontransversal return. Both produce a heterogeneous product of contact factors; a controlled logarithmic branch places those factors on one Jensen sheet and yields the Farey carrier.",
+      "The proof then separates the case with exactly one relative-interior contact in each orbit from the case with more than one in some orbit. Both produce a product of varying contact factors; a continuous argument interval controls their phases and yields the Farey product data.",
     ],
     itemNumbers: [53, 54, 55, 56, 57, 58, 59],
     manuscriptPages: "51–58",
@@ -474,7 +474,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "How does a stochastic radial extremum become a critical planar contraction?",
     overview: [
       "This topic reattaches the geometry to row-stochastic matrices. The invariant-polygon criterion passes in both directions between a stochastic eigenvalue and a polygon with at most the prescribed number of vertices.",
-      "Compactness, radial filling, and the unit-circle classification isolate new-shell radial extrema. For N≥4, the criticality bridge then turns such an extremum into the intrinsic monodromy data proved in Part I; orders at most three use the direct small-order argument. This is the complete interface needed by the five proof chapters that follow.",
+      "Compactness, star-shapedness with respect to the origin, and the unit-circle classification isolate non-inherited radial maxima. For N≥4, the proof then shows directly that multiplication by such a maximum is an N-critical planar contraction, so Part I applies; orders at most three use the direct small-order argument. This is the complete interface needed by the five proof chapters that follow.",
     ],
     itemNumbers: [3, 4, 60, 61, 62, 63, 64],
     manuscriptPages: "3–5, 59–60, 66, and 71–75",
@@ -482,11 +482,11 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "candidate-boundary",
     eyebrow: "Topic IX · candidate construction",
-    title: "The candidate Farey–Ito boundary",
+    title: "Constructing the Farey–Ito candidate curves",
     question:
       "What is the exact boundary curve that the stochastic spectrum is supposed to attain?",
     overview: [
-      "Consecutive Farey fractions determine one cell at a time. On each ray in that cell, a scalar radius equation selects a unique candidate point and connects it to the corresponding Ito carrier polynomial.",
+      "Consecutive Farey fractions determine one cell at a time. On each ray in that cell, a scalar radius equation selects a unique candidate point and connects it to the corresponding reduced Ito polynomial.",
       "Endpoint limits and the exceptional terminal behaviour at order three are handled explicitly. The formal Karpelevič–Ito theorem is deliberately reserved for Topic XIII; this topic constructs only the candidate that later chapters must bound and realize.",
     ],
     itemNumbers: [],
@@ -499,8 +499,8 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "Why can no stochastic eigenvalue lie beyond its candidate Farey–Ito arc?",
     overview: [
-      "For new-shell orders N≥4, the critical-polygon monodromy from Part I supplies a heterogeneous Ito product and places all return factors on one controlled Jensen sheet; orders at most three have already been treated directly.",
-      "A strictly convex log-sine potential equalizes those factors. Its equality case identifies the unique outermost radial profile and proves the sharp cellwise upper bound.",
+      "For non-inherited radial maxima of orders N≥4, the critical-polygon monodromy from Part I supplies an Ito product with varying parameters and places all return factors in one common continuous argument interval; orders at most three have already been treated directly.",
+      "A strictly convex log-sine potential makes those parameters constant. Its equality case identifies the unique outermost radial candidate and proves the sharp cellwise upper bound.",
     ],
     itemNumbers: [],
     manuscriptPages: "73–77",
@@ -512,7 +512,7 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "How can every candidate boundary point be realized by an actual stochastic matrix?",
     overview: [
-      "A sparse directed block graph turns the Ito carrier into a row-stochastic matrix. Cycle-cover bookkeeping computes its characteristic polynomial without importing the upper-bound argument.",
+      "A sparse realization graph turns the reduced Ito polynomial into a row-stochastic matrix. A cycle-cover expansion computes its characteristic polynomial without importing the upper-bound argument.",
       "The resulting construction proves the reverse inclusion independently: every scalar equality point is genuinely attained in the stochastic spectrum.",
     ],
     itemNumbers: [],
@@ -526,7 +526,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "Why does increasing the matrix order enlarge the candidate region in the correct way?",
     overview: [
       "Mediant insertion refines one Farey cell into smaller cells. Log-line comparison, multiplicity padding, and an exhaustive denominator split compare the corresponding radial candidates.",
-      "The candidate-nesting theorem is the global arithmetic step that lets the final proof pass from new-shell extrema to all stochastic eigenvalues by induction on the order.",
+      "The candidate-nesting theorem is the global arithmetic step that lets the final proof pass from non-inherited radial maxima to all stochastic eigenvalues by induction on the order.",
     ],
     itemNumbers: [],
     manuscriptPages: "79–85",
@@ -539,21 +539,21 @@ export const proofTopics: readonly ProofTopic[] = [
       "How do the upper bound, attainment, and nesting assemble into the complete stochastic eigenvalue region?",
     overview: [
       "The small orders are proved directly. For every later order, each ray is either genuinely new or inherited from the preceding order; the sharp inequality and nesting identify the same candidate radius in both cases.",
-      "Continuity of the radial graph, conjugation, radial filling, and the unit-circle classification then identify the carrier chain with the full topological boundary. This is where the classical theorem is finally stated and proved.",
+      "Continuity of the radial graph, conjugation, star-shapedness with respect to the origin, and the unit-circle classification then identify the concatenated candidate curves with the full topological boundary. This is where the classical theorem is finally stated and proved.",
     ],
     itemNumbers: [],
     manuscriptPages: "71 and 85–89",
   },
   {
     slug: "order-seven",
-    eyebrow: "Topic XIV · worked example and computational laboratory",
-    title: "The complete order-seven example and boundary laboratory",
+    eyebrow: "Topic XIV · worked example and interactive computation",
+    title: "The complete order-seven example and boundary explorer",
     question:
       "What does the theorem produce at one concrete order, and how can a reader draw further orders for themselves?",
     overview: [
-      "Order seven turns the abstract carrier chain into a finite atlas of explicit cells, equations, and boundary arcs. The worked ray at x = 3/8 shows the scalar construction numerically from beginning to end.",
+      "Order seven turns the abstract boundary arc chain into a complete table of explicit cells, equations, and boundary arcs. The worked ray at x = 3/8 shows the scalar construction numerically from beginning to end.",
       "The chapter will also document the verified boundary-generation routine and publish that code through the project’s GitHub repository. Its final section will provide a widget in which the reader selects n and receives the corresponding drawing, with exact Farey data kept visibly distinct from numerical root-finding and plotting.",
-      "This computational laboratory illustrates the theorem but is not part of its logical proof. Topic XIII remains the endpoint of the necessary argument; Topic XIV lets readers inspect the complete machinery at order seven and then explore other orders themselves.",
+      "This interactive computation illustrates the theorem but is not part of its logical proof. Topic XIII remains the endpoint of the necessary argument; Topic XIV lets readers inspect the complete construction at order seven and then explore other orders themselves.",
     ],
     itemNumbers: [],
     manuscriptPages: "89–90",

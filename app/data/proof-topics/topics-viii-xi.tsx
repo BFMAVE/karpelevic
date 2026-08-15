@@ -23,7 +23,7 @@ function ExactSourceShelf({
   return (
     <section className="proof-topic-sources" aria-labelledby={headingId}>
       <p className="section-label">Sources cited in this topic</p>
-      <h3 id={headingId}>Exact source shelf</h3>
+      <h3 id={headingId}>Sources and provenance</h3>
       <p>
         These entries support inherited statements and historical classifications.
         A classification describes the result, not the originality of the proof
@@ -97,10 +97,11 @@ export function TopicVIIIChapter() {
         ]}
         provedHere={
           <p>
-            We prove compactness and radial filling of Θ<sub>n</sub>, the exact
-            stochastic–polygon dictionary, the unit-circle classification, the
-            interior-origin lemma, and the bridge from a new-shell radial
-            extremum to an <var>N</var>-critical planar contraction.
+            We prove compactness and star-shapedness of Θ<sub>n</sub>, the exact
+            equivalence between stochastic eigenpairs and invariant polygons,
+            the unit-circle classification, the interior-origin lemma, and the
+            implication from a non-inherited radial maximum to an
+            <var>N</var>-critical planar contraction.
           </p>
         }
       />
@@ -140,7 +141,7 @@ export function TopicVIIIChapter() {
 
       <ProofResultGroup
         number="VIII.A"
-        title="The stochastic–polygon dictionary"
+        title="The stochastic–polygon equivalence"
         introduction={
           <p>
             The first five statements establish the global shape of Θ<sub>n</sub>
@@ -151,11 +152,11 @@ export function TopicVIIIChapter() {
         results={topicVIIIResults.slice(0, 5)}
       />
 
-      <SetupBlock eyebrow="The extremal condition" title="What ‘new shell’ means before it is used">
+      <SetupBlock eyebrow="The extremal condition" title="A radial maximum not inherited from order N−1">
         <p>
           Fix an order <span className="math-inline">N≥4</span> and an angle
           {" "}<span className="math-inline">0&lt;θ&lt;π</span>. A point is a
-          <strong> new-shell extremum</strong> when it satisfies
+          <strong> non-inherited radial maximum</strong> when it satisfies
         </p>
         <p id="karp:eq:new-shell" className="display-equation proof-setup-equation">
           <span className="math-inline">
@@ -172,9 +173,10 @@ export function TopicVIIIChapter() {
           inherited from a smaller stochastic matrix.
         </p>
         <p>
-          There are two independent extremal statements. “New shell” rules out
-          every polygon with at most <var>N</var>−1 vertices. “Outermost on its
-          ray” rules out every outward enlargement that still has an invariant
+          There are two independent extremal statements. Non-inheritance from
+          order <var>N</var>−1 rules out every polygon with at most
+          <var>N</var>−1 vertices. Being outermost on the order-<var>N</var> ray
+          rules out every outward enlargement that still has an invariant
           polygon with at most <var>N</var> vertices. Proposition II.4.7 matches
           these clauses, one by one, with radial polygonal criticality.
         </p>
@@ -183,7 +185,7 @@ export function TopicVIIIChapter() {
 
       <ProofResultGroup
         number="VIII.B"
-        title="From a new spectral shell to critical geometry"
+        title="From a non-inherited radial maximum to critical geometry"
         introduction={
           <p>
             The definition is repeated here deliberately: the final proposition
@@ -282,7 +284,7 @@ export function TopicIXChapter() {
 
       <ProofResultGroup
         number="IX.A"
-        title="The cell and its polynomial carrier"
+        title="The Farey cell and its Ito polynomial"
         introduction={
           <p>
             Determinant-one arithmetic identifies adjacent fractions. The Ito
@@ -304,9 +306,9 @@ export function TopicIXChapter() {
         </p>
         <p>
           The associated point is <span className="math-inline">λ=ρe²πⁱˣ</span>.
-          The proof constructs complementary weights α and β, fixes one
-          fractional-power sheet by an explicit exponential, and derives the
-          rooted chord identity. No phrase such as “take the principal root” is
+          The proof constructs complementary coefficients α and β, fixes one
+          fractional-power branch by an explicit exponential, and derives the
+          reciprocal-coordinate identity. No phrase such as “take the principal root” is
           left implicit.
         </p>
         <StochasticFareyFigure kind="rooted-chord" />
@@ -314,12 +316,12 @@ export function TopicIXChapter() {
 
       <ProofResultGroup
         number="IX.B"
-        title="Unique raywise radius and closed carrier"
+        title="Unique raywise candidate and its closed cell curve"
         introduction={
           <p>
             The next statements prove existence, uniqueness, algebraic
             membership, endpoint continuity, and the exact exceptional real
-            segment before the carrier receives its final name.
+            segment before the candidate curve receives its formal definition.
           </p>
         }
         results={topicIXResults.slice(2, 5)}
@@ -349,13 +351,13 @@ export function TopicXChapter() {
       <ProofDependencyContract
         imported={[
           {
-            label: "Topic VII — complex monodromy and Farey carrier",
+            label: "Topic VII — complex monodromy and the Farey equation",
             href: sitePath("/proof/topic-vii/"),
             explanation:
-              "supplies, for N≥4, the heterogeneous product, lifted phase identity, and common argument sheet obtained from critical polygons.",
+              "supplies, for N≥4, the varying-parameter product, lifted phase identity, and common continuous argument interval obtained from critical polygons.",
           },
           {
-            label: "Topic VIII — new-shell criticality",
+            label: "Topic VIII — criticality of a non-inherited radial maximum",
             href: sitePath("/proof/topic-viii/"),
             explanation:
               "turns the stochastic extremum into the critical planar contraction required by Topic VII.",
@@ -383,16 +385,16 @@ export function TopicXChapter() {
           <p>
             We transfer Part I monodromy to the stochastic extremum, audit both
             possible complex orientations, construct the log-sine potential,
-            and prove that every heterogeneous profile has radius no larger than
-            the constant profile.
+            and prove that every varying parameter list has radius no larger than
+            the constant-parameter case.
           </p>
         }
       />
 
       <SetupBlock eyebrow="Scope boundary" title="This chapter proves an upper comparison—nothing is realized here">
         <p>
-          Let <span className="math-inline">λ=ρeⁱθ</span> be a new-shell radial
-          extremum. By Topic VIII&apos;s definition this chapter is in the range
+          Let <span className="math-inline">λ=ρeⁱθ</span> be a non-inherited radial
+          maximum. By Topic VIII&apos;s definition this chapter is in the range
           <span className="math-inline"> N≥4</span>. Topic VII may choose either
           λ or its conjugate as the multiplier μ best adapted to the oriented
           contact system. Theorem
@@ -412,7 +414,7 @@ export function TopicXChapter() {
         <p>
           The result of this page is the one-sided inequality
           {" "}<span className="math-inline">ρ≤ρ*</span>, where ρ* is Topic
-          IX&apos;s unique constant-profile radius. We do <strong>not</strong> yet
+          IX&apos;s unique constant-parameter radius. We do <strong>not</strong> yet
           know from this argument that ρ* is an eigenvalue of a stochastic
           matrix. That independent construction belongs to Topic XI, and only
           then may the equality conclusion be closed.
@@ -433,7 +435,7 @@ export function TopicXChapter() {
         results={topicXResults.slice(0, 2)}
       />
 
-      <SetupBlock eyebrow="The analytic engine" title="Why one convex function controls every factor">
+      <SetupBlock eyebrow="The convexity argument" title="Why one convex function controls every factor">
         <p>
           In the abstract analytic theorem, write the multiplier being analysed
           as <span className="math-inline">λ=ρe<sup>2πix</sup></span>. In the application
@@ -455,7 +457,7 @@ export function TopicXChapter() {
           positive and satisfy <span className="math-inline">A+B&lt;π</span>.
           Choose
           {" "}<span className="math-inline">M=Arg(μᑫ−1)</span> on the common
-          sheet supplied by Theorem II.5.1, where
+          continuous argument interval supplied by Theorem II.5.1, where
           {" "}<span className="math-inline">A&lt;M&lt;π</span>. For a factor
           parameter β, let <span className="math-inline">u=Arg(μᑫ−β)</span> on
           that same continuous branch and define
@@ -468,7 +470,7 @@ export function TopicXChapter() {
           throughout the selected interval: <var>F</var> is strictly convex.
           The lifted monodromy phase fixes the average of the factor arguments,
           while the product identity fixes the sum of their potentials. Jensen
-          then compares every heterogeneous list with the equal list.
+          then compares every varying parameter list with the constant list.
         </p>
         <p id="karp:eq:rhoq-sine" className="display-equation proof-setup-equation">
           At β=0, the same triangle gives
@@ -482,7 +484,7 @@ export function TopicXChapter() {
 
       <ProofResultGroup
         number="X.B"
-        title="The heterogeneous sharp inequality"
+        title="The sharp inequality for varying parameters"
         introduction={
           <p>
             Every sign, branch, and equality condition is part of the formal
@@ -505,7 +507,7 @@ export function TopicXIChapter() {
       <ProofDependencyContract
         imported={[
           {
-            label: "Topic IX — scalar candidate and complementary weights",
+            label: "Topic IX — scalar candidate and complementary coefficients",
             href: sitePath("/proof/topic-ix/"),
             explanation:
               "supplies the reduced Ito polynomial, the candidate root, and parameters α,β with α+β=1.",
@@ -532,10 +534,10 @@ export function TopicXIChapter() {
         provedHere={
           <p>
             We derive the cycle-cover coefficient rule, classify every directed
-            cycle of the sparse graph, compute its characteristic polynomial in
+            cycle of the sparse realization graph, compute its characteristic polynomial in
             both signs of <span className="math-inline">s−dq</span>, realize
             every scalar candidate at order at most <var>n</var>, and only then
-            close the equality profile deferred from Topic X.
+            close the constant-parameter conclusion deferred from Topic X.
           </p>
         }
       />
@@ -574,12 +576,12 @@ export function TopicXIChapter() {
 
       <ProofResultGroup
         number="XI.A"
-        title="The complete cycle ledger"
+        title="Cycle-cover classification"
         introduction={
           <>
             <p>
               First the determinant rule is proved from Leibniz. Then the sparse
-              block graph is audited so that no unlisted directed cycle can
+              realization graph is checked so that no unlisted directed cycle can
               contribute to its characteristic polynomial.
             </p>
             <p>
@@ -605,8 +607,8 @@ export function TopicXIChapter() {
           changes the local <var>q</var>-cycles.
         </p>
         <p>
-          The <strong>active order</strong> is
-          {" "}<span className="math-inline">N₀=max(dq,s)</span>. Farey
+          The construction uses
+          {" "}<span className="math-inline">N₀=max(dq,s)</span> states before padding. Farey
           arithmetic gives both <span className="math-inline">dq≤n</span> and
           {" "}<span className="math-inline">s≤n</span>, so the construction
           never uses more than <var>n</var> states. Absorbing-state padding then
@@ -617,7 +619,7 @@ export function TopicXIChapter() {
 
       <ProofResultGroup
         number="XI.B"
-        title="Sparse realization and attainment"
+        title="Sparse stochastic realization and attainment"
         introduction={
           <p>
             The theorem handles both regimes with an explicit graph, checks
@@ -636,14 +638,14 @@ export function TopicXIChapter() {
           {" "}<span className="math-inline">ρ=Rᴺ(θ)</span> gives the reverse
           inequality <span className="math-inline">ρ*≤ρ</span>. Equality is
           therefore forced, and the strict equality condition in Jensen forces
-          all heterogeneous parameters to coincide.
+          all varying parameters to coincide.
         </p>
         <StochasticFareyFigure kind="squeeze" />
       </SetupBlock>
 
       <ProofResultGroup
         number="XI.C"
-        title="The outermost profile is the Ito profile"
+        title="The outermost parameters are constant"
         introduction={
           <p>
             Corollary II.6.2 appears here rather than in Topic X because its

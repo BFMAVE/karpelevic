@@ -9,7 +9,7 @@ import { getPageTimestamp } from "../../lib/git-dates";
 export const metadata: Metadata = {
   title: "Topic II — From Convex Order to Contact on Every Side",
   description:
-    "A complete, annotated account of determinant criteria for convex position, normal-fan transfer, and hereditary saturation.",
+    "A complete, annotated account of determinant criteria for convex position, the fixed-normal-fan support criterion, and contact on every side and at every image vertex.",
 };
 
 const topic = proofTopics[1];

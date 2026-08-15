@@ -4,7 +4,7 @@ import { TopicIXChapter } from "../../data/proof-topics/topics-viii-xi";
 import { getPageTimestamp } from "../../lib/git-dates";
 
 export const metadata: Metadata = {
-  title: "Topic IX — The Candidate Farey–Ito Boundary",
+  title: "Topic IX — Constructing the Farey–Ito Candidate Curves",
   description:
     "A complete, illustrated construction of the unique scalar candidate on each Farey cell, including endpoint limits and the order-three exception.",
 };
@@ -17,8 +17,8 @@ export default function TopicIXPage() {
       routeKey="topic-ix"
       manuscriptPages="67–70"
       overview={[
-        "Consecutive Farey fractions determine one arithmetic cell. On each open ray in that cell, a strictly monotone scalar equation selects one radius and an explicitly anchored root sheet connects it to the reduced Ito polynomial.",
-        "Endpoint limits and the exceptional order-three real segment are proved before the candidate is packaged as a closed carrier. No stochastic realization and no boundary theorem are assumed here.",
+        "Consecutive Farey fractions determine one arithmetic cell. On each open ray in that cell, a strictly monotone scalar equation selects one radius and an explicitly anchored fractional-power branch connects it to the reduced Ito polynomial.",
+        "Endpoint limits and the exceptional order-three real segment are proved before the candidate is packaged as a closed cellwise curve. No stochastic realization and no boundary theorem are assumed here.",
       ]}
       updatedAt={updatedAt}
       stats={[

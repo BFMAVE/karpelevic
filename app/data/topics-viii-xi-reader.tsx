@@ -65,6 +65,31 @@ function completeHtml(label: PartIILabel): string {
   );
 }
 
+function rewriteTopicVIIIVisibleTerminology(html: string): string {
+  const replacements = [
+    ["New-shell extrema are polygonally critical", "Non-inherited radial maxima are polygonally critical"],
+    ["new-shell radial extremum", "non-inherited radial maximum"],
+    ["new-shell extremum", "non-inherited radial maximum"],
+    ["Radial filling", "Star-shapedness with respect to the origin"],
+    ["radial filling", "star-shapedness with respect to the origin"],
+  ] as const;
+
+  return html
+    .split(/(<[^>]+>)/g)
+    .map((part) => {
+      if (part.startsWith("<")) return part;
+      return replacements.reduce(
+        (text, [from, to]) => text.replaceAll(from, to),
+        part,
+      );
+    })
+    .join("");
+}
+
+function completeTopicVIIIHtml(label: PartIILabel): string {
+  return rewriteTopicVIIIVisibleTerminology(completeHtml(label));
+}
+
 export const topicVIIIResults: readonly ProofResultData[] = [
   {
     id: "topic-viii-compact",
@@ -72,7 +97,7 @@ export const topicVIIIResults: readonly ProofResultData[] = [
     kind: "Proposition",
     title: "Compactness, conjugation, and disk bound",
     purpose: "Establishes the three global facts needed before a radial maximum can even be defined.",
-    manuscriptHtml: completeHtml("karp:prop:compact"),
+    manuscriptHtml: completeTopicVIIIHtml("karp:prop:compact"),
     vocabulary: [
       {
         term: "Row-stochastic matrix",
@@ -107,8 +132,8 @@ export const topicVIIIResults: readonly ProofResultData[] = [
     label: "Theorem II.4.2",
     kind: "Theorem",
     title: "Invariant-polygon criterion",
-    purpose: "Builds the exact two-way dictionary between a stochastic eigenpair and a finite invariant polygon.",
-    manuscriptHtml: completeHtml("karp:thm:polygon-criterion"),
+    purpose: "Proves the exact equivalence between a stochastic eigenpair and a finite invariant polygon.",
+    manuscriptHtml: completeTopicVIIIHtml("karp:thm:polygon-criterion"),
     vocabulary: [
       {
         term: "Convex hull",
@@ -138,11 +163,11 @@ export const topicVIIIResults: readonly ProofResultData[] = [
     id: "topic-viii-radial-filling",
     label: "Corollary II.4.3",
     kind: "Corollary",
-    title: "Radial filling",
+    title: "Star-shapedness with respect to the origin",
     purpose: "Shows that every attainable point brings the entire segment from the origin with it.",
-    manuscriptHtml: completeHtml("karp:cor:radial-filling"),
+    manuscriptHtml: completeTopicVIIIHtml("karp:cor:radial-filling"),
     vocabulary: [
-      { term: "Radial filling", definition: <>If λ belongs to the region, then so does every <span className="math-inline">tλ</span> for <span className="math-inline">0≤t≤1</span>.</> },
+      { term: "Star-shapedness with respect to the origin", definition: <>If λ belongs to the region, then so does every <span className="math-inline">tλ</span> for <span className="math-inline">0≤t≤1</span>.</> },
       { term: "Star-shaped with respect to zero", definition: <>Every line segment joining zero to a point of the set stays inside the set. For Θₙ this is exactly the radial-filling statement.</> },
       { term: "Strict area monotonicity", definition: <>If one planar convex body with interior is properly contained in another, its area is strictly smaller. This was proved in Topic II.</> },
     ],
@@ -166,7 +191,7 @@ export const topicVIIIResults: readonly ProofResultData[] = [
     kind: "Proposition",
     title: "Unit-circle points",
     purpose: "Identifies exactly which attainable eigenvalues can have modulus one.",
-    manuscriptHtml: completeHtml("karp:prop:unit-circle"),
+    manuscriptHtml: completeTopicVIIIHtml("karp:prop:unit-circle"),
     vocabulary: [
       { term: "Root of unity of order k", definition: <>A complex number λ with <span className="math-inline">λᵏ=1</span>, where the least positive such k is its order.</> },
       { term: "Cyclic permutation matrix", definition: <>A stochastic matrix that moves each basis state to the next and the last back to the first. Its eigenvalues are the corresponding roots of unity.</> },
@@ -190,7 +215,7 @@ export const topicVIIIResults: readonly ProofResultData[] = [
     kind: "Lemma",
     title: "Interior origin for a nonreal contraction",
     purpose: "Ensures that every invariant polygon relevant to an open upper-half-plane ray is genuinely two-dimensional and surrounds zero.",
-    manuscriptHtml: completeHtml("karp:lem:origin-interior"),
+    manuscriptHtml: completeTopicVIIIHtml("karp:lem:origin-interior"),
     vocabulary: [
       { term: "Supporting functional at zero", definition: <>A nonzero real-linear map ℓ whose nonnegative half-plane contains the polygon and whose zero line passes through the boundary point zero.</> },
       { term: "Finite versus irrational rotation", definition: <>A rotation either closes after finitely many steps or its powers are dense on the unit circle.</> },
@@ -215,7 +240,7 @@ export const topicVIIIResults: readonly ProofResultData[] = [
     kind: "Definition",
     title: "Polygonal complexity and radial criticality",
     purpose: "Restates the intrinsic language at the exact point where stochastic extrema will enter it.",
-    manuscriptHtml: completeHtml("karp:def:polygonal-criticality"),
+    manuscriptHtml: completeTopicVIIIHtml("karp:def:polygonal-criticality"),
     vocabulary: [
       { term: "Polygonal complexity νpoly(A)", definition: <>The least number of extreme vertices among nondegenerate compact convex polygons P satisfying AP⊆P; infinity if none exists.</> },
       { term: "N-critical", definition: <>Exactly N vertices suffice for T, but more than N are required for every outward enlargement tT with t&gt;1.</> },
@@ -229,12 +254,12 @@ export const topicVIIIResults: readonly ProofResultData[] = [
     id: "topic-viii-new-shell-critical",
     label: "Proposition II.4.7",
     kind: "Proposition",
-    title: "New-shell extrema are polygonally critical",
+    title: "Non-inherited radial maxima are polygonally critical",
     purpose: "Converts the two stochastic extremality clauses into the two intrinsic criticality clauses.",
-    manuscriptHtml: completeHtml("karp:prop:new-shell-critical"),
+    manuscriptHtml: completeTopicVIIIHtml("karp:prop:new-shell-critical"),
     vocabulary: [
-      { term: "Radial maximum Rₙ(θ)", definition: <>The largest radius ρ for which <span className="math-inline">ρeⁱθ∈Θₙ</span>. Compactness and radial filling ensure that the maximum exists.</> },
-      { term: "New-shell extremum", definition: <>An outermost point of Θᴺ on its ray that does not already belong to Θᴺ⁻¹, with modulus strictly between zero and one.</> },
+      { term: "Radial maximum Rₙ(θ)", definition: <>The largest radius ρ for which <span className="math-inline">ρeⁱθ∈Θₙ</span>. Compactness and star-shapedness with respect to the origin ensure that the maximum exists.</> },
+      { term: "Non-inherited radial maximum", definition: <>An outermost point of Θᴺ on its ray that does not already belong to Θᴺ⁻¹, with modulus strictly between zero and one.</> },
       { term: "Elliptic real-linear map", definition: <>A planar real-linear map whose characteristic discriminant is negative. Multiplication by a nonreal complex number has this form.</> },
     ],
     intuition: <>Not belonging to order N−1 says fewer than N vertices cannot work. Being outermost on the order-N ray says no outward enlargement can still work with N vertices.</>,
@@ -242,14 +267,14 @@ export const topicVIIIResults: readonly ProofResultData[] = [
       { title: "Write the real matrix", explanation: <>Multiplication by λ has matrix with real and imaginary parts in the basis (1,i).</> },
       { title: "Check ellipticity and contraction", explanation: <>Its discriminant is <span className="math-inline">−4(Im λ)²&lt;0</span>, while its spectral radius is |λ|∈(0,1).</> },
       { title: "At most N vertices", explanation: <>Membership in Θᴺ gives an invariant polygon with at most N vertices. Lemma II.4.5 makes it nondegenerate.</> },
-      { title: "Not at most N−1", explanation: <>Otherwise the polygon criterion would place λ in Θᴺ⁻¹, contradicting new-shell membership.</> },
+      { title: "Not at most N−1", explanation: <>Otherwise the polygon criterion would place λ in Θᴺ⁻¹, contradicting the assumption that the radial maximum is not inherited from order N−1.</> },
       { title: "No outward N-vertex witness", explanation: <>For t&gt;1 the point tλ lies beyond the maximal radius Rᴺ(θ), so it is not in Θᴺ. An invariant polygon with at most N vertices would contradict the polygon criterion.</> },
       { title: "Match the definition", explanation: <>The preceding two conclusions are exactly <span className="math-inline">νpoly(Tλ)=N</span> and <span className="math-inline">νpoly(tTλ)&gt;N</span> for all t&gt;1.</> },
     ],
-    takeaway: <>For N≥4, every genuinely new stochastic radial extremum satisfies the full intrinsic hypothesis needed by Part I monodromy. The smaller orders are not routed through this bridge.</>,
+    takeaway: <>For N≥4, every non-inherited stochastic radial maximum satisfies the full intrinsic hypothesis needed by Part I monodromy. The smaller orders are handled separately.</>,
     provenance: "New result",
     sourceIds: ["dmitriev-dynkin-1946", "karpelevic-1951"],
-    sourceRelation: <>The exact stochastic-to-criticality bridge is manuscript-specific; the cited works are its closest invariant-polygon and radial-extremality antecedents.</>,
+    sourceRelation: <>The exact implication from a non-inherited radial maximum to polygonal criticality is manuscript-specific; the cited works are its closest invariant-polygon and radial-extremality antecedents.</>,
   },
 ] as const;
 
@@ -290,7 +315,7 @@ export const topicIXResults: readonly ProofResultData[] = [
     manuscriptHtml: completeHtml("karp:def:ito-family"),
     vocabulary: [
       { term: "Denominator-based labels", definition: <>The endpoint with smaller denominator is p/q and the other is r/s, so q≤s. This need not agree with left-to-right order.</> },
-      { term: "Signed exponent e=s−dq", definition: <>A bookkeeping integer that may be negative. The reduced carrier is written in two cases so that both sides remain polynomials.</> },
+      { term: "Signed exponent e=s−dq", definition: <>An integer that may be negative. The reduced Ito polynomial is written in two cases so that both sides remain polynomials.</> },
       { term: "Polynomial family versus root branch", definition: <>A polynomial can have several roots. Naming the family does not yet choose a continuous root as α varies.</> },
     ],
     intuition: <>The uncancelled identity works for either sign of e. Cancelling only for λ≠0 exposes the actual reduced polynomial without silently leaving a negative exponent.</>,
@@ -303,10 +328,10 @@ export const topicIXResults: readonly ProofResultData[] = [
     label: "Proposition II.2.3",
     kind: "Proposition",
     title: "One scalar equation per ray",
-    purpose: "Selects one and only one carrier point on each open ray without presupposing a polynomial root branch.",
+    purpose: "Selects one and only one candidate point on each open ray without presupposing a polynomial root branch.",
     manuscriptHtml: completeHtml("karp:prop:scalar-ray"),
     vocabulary: [
-      { term: "Root sheet", definition: <>A continuous choice of argument used to interpret a fractional power. Here it is anchored explicitly at the endpoint r/s.</> },
+      { term: "Chosen fractional-power branch", definition: <>A continuous choice of argument used to interpret a fractional power. Here it is anchored explicitly at the endpoint r/s.</> },
       { term: "Scalar residual", definition: <>The left side of equation (II.2.8) minus its right side, viewed as a real function of ρ on [0,1].</> },
     ],
     intuition: <>Two complex vectors at opposite signed angles A and B can have their vertical components cancel. The scalar equation is precisely what makes the recovered coefficients α and β add to one.</>,
@@ -314,7 +339,7 @@ export const topicIXResults: readonly ProofResultData[] = [
       { title: "First prove the angle range", explanation: <>Determinant one gives explicit barycentric formulas for |qx−p| and |sx−r|. They imply A&gt;0, B&gt;0, and A+B&lt;π.</> },
       { title: "A monotone scalar function", explanation: <>Both exponents are positive and both sine coefficients are positive, so the left side is continuous and strictly increasing in ρ.</> },
       { title: "Bracket the unique root", explanation: <>At ρ=0 the left side is zero. At ρ=1 it exceeds sin(A+B) by the positive three-sine identity printed in the proof.</> },
-      { title: "Recover complementary weights", explanation: <>Equation (II.2.8) makes the two positive quantities in (II.2.9) sum to one.</> },
+      { title: "Recover complementary coefficients", explanation: <>Equation (II.2.8) makes the two positive quantities in (II.2.9) sum to one.</> },
       { title: "Fix the fractional-power branch", explanation: <>Set z to the inverse conjugate of λ and define ωzˢ⁄ᵈ by an explicit exponential anchored at r/s. No implicit principal-root convention is used.</> },
       { title: "Cancel transverse components", explanation: <>The endpoint errors qx−p and sx−r have opposite signs. The sine-weighted vectors therefore have equal and opposite imaginary parts and real parts summing to one.</> },
       { title: "Return to the polynomial", explanation: <>Raise the rooted identity to the d-th power, use ωᵈ=1, clear inverse powers, and conjugate. This proves that the constructed λ satisfies the Ito equation.</> },
@@ -322,7 +347,7 @@ export const topicIXResults: readonly ProofResultData[] = [
     takeaway: <>Every open ray of a Farey cell has one explicit scalar candidate and one branch-controlled rooted identity.</>,
     provenance: "Strengthened",
     sourceIds: ["ito-1997"],
-    sourceRelation: <>Ito supplies the polynomial family. The manuscript strengthens its usable form by proving unique radial selection and an explicit continuous root sheet.</>,
+    sourceRelation: <>Ito supplies the polynomial family. The manuscript strengthens its usable form by proving unique radial selection and an explicit continuous fractional-power branch.</>,
   },
   {
     id: "topic-ix-endpoints",
@@ -348,20 +373,20 @@ export const topicIXResults: readonly ProofResultData[] = [
     takeaway: <>All ordinary candidate arcs meet their endpoint roots of unity; the order-three terminal graph meets −1/2 instead.</>,
     provenance: "Strengthened",
     sourceIds: ["ito-1997"],
-    sourceRelation: <>The carrier family and exceptional order-three boundary are classical; the manuscript derives the exact endpoint behavior directly from its scalar equation.</>,
+    sourceRelation: <>The Ito polynomial family and exceptional order-three boundary are classical; the manuscript derives the exact endpoint behavior directly from its scalar equation.</>,
   },
   {
     id: "topic-ix-carrier",
     label: "Definition II.2.5",
     kind: "Definition",
-    title: "Farey-Ito carrier",
-    purpose: "Packages the raywise candidates into one closed cell carrier without assuming an α-parametrized algebraic branch.",
+    title: "Cellwise Farey–Ito candidate curve",
+    purpose: "Packages the raywise candidates into one closed cellwise curve without assuming an α-parametrized algebraic branch.",
     manuscriptHtml: completeHtml("karp:def:carrier"),
     vocabulary: [
       { term: "Closure", definition: <>The curve together with every limit point approached by sequences on it.</> },
-      { term: "Exceptional real segment", definition: <>For n=3 the carrier includes [−1,−1/2], which belongs to the same algebraic family after setting α=−λ(λ+1).</> },
+      { term: "Exceptional real segment", definition: <>For n=3 the candidate curve includes [−1,−1/2], which belongs to the same algebraic family after setting α=−λ(λ+1).</> },
     ],
-    intuition: <>The carrier is defined geometrically as a radial graph. The exceptional real segment is added only after its polynomial identity is checked.</>,
+    intuition: <>The candidate curve is defined geometrically as a radial graph. The exceptional real segment is added only after its polynomial identity is checked.</>,
     takeaway: <>The complete scalar candidate is now a closed chain from one Farey endpoint toward the next, with the order-three correction included.</>,
     sourceIds: ["ito-1997"],
     sourceRelation: <>The polynomial family is Ito’s; the radial-graph definition is the manuscript’s branch-safe packaging. Definitions receive no novelty classification.</>,
@@ -376,7 +401,7 @@ export const topicIXResults: readonly ProofResultData[] = [
     vocabulary: [
       { term: "Bisection", definition: <>A guaranteed root-finding method that repeatedly halves an interval whose endpoint residuals have opposite signs.</> },
       { term: "Newton iteration", definition: <>A root-finding method that replaces the current guess by the intercept of the tangent line. It is faster near a regular root, but bisection is the guaranteed fallback here.</> },
-      { term: "Candidate status", definition: <>At this stage the point is proved unique on the scalar carrier and proved to satisfy its polynomial; attainment and outer-boundary status come later.</> },
+      { term: "Candidate status", definition: <>At this stage the point is proved unique on the scalar candidate curve and proved to satisfy its polynomial; attainment and outer-boundary status come later.</> },
     ],
     intuition: <>Farey data stay exact. Only the one-dimensional root solve is numerical, and its monotonicity provides a certified bracket.</>,
     takeaway: <>Topic IX has constructed the candidate; Topics X-XIII must still bound, realize, nest, and identify it as the actual boundary.</>,
@@ -391,33 +416,33 @@ export const topicXResults: readonly ProofResultData[] = [
     label: "Theorem II.5.1",
     kind: "Theorem",
     title: "Part I critical-polygon monodromy",
-    purpose: "For N≥4, states the complete data packet imported from the geometric engine and verifies that a new-shell extremum satisfies its hypotheses.",
+    purpose: "For N≥4, states the complete list of data imported from the Part I geometric results and verifies that a non-inherited radial maximum satisfies its hypotheses.",
     manuscriptHtml: completeHtml("karp:thm:compression"),
     vocabulary: [
       { term: "Selected multiplier μ", definition: <>One of λ and its complex conjugate, chosen by the adapted complex orientation in which Part I produces the monodromy data.</> },
       { term: "Positive lifted argument", definition: <>The representative in (0,2π), retained as a real angle rather than reduced modulo 2π.</> },
-      { term: "Heterogeneous profile", definition: <>Complementary parameters αⱼ=1−βⱼ that may differ from return block to return block.</> },
-      { term: "Jensen sheet", definition: <>One real interval [A,M) containing every selected factor argument uⱼ, so that their arithmetic mean is meaningful.</> },
-      { term: "Algebraic padding", definition: <>A zero factor inserted to complete a return strip algebraically; it is not asserted to be another strict geometric contact.</> },
+      { term: "Varying parameter list", definition: <>Complementary parameters αⱼ=1−βⱼ that may differ from return block to return block.</> },
+      { term: "Common continuous argument interval", definition: <>One real interval [A,M) containing every selected factor argument uⱼ, so that their arithmetic mean is meaningful.</> },
+      { term: "Algebraic padding", definition: <>A zero factor inserted to complete the product algebraically; it is not asserted to be another relative-interior contact.</> },
     ],
     intuition: <>For N≥4, Topics I–VII are compressed into a product identity, a lifted phase identity, and a common argument interval. No uniqueness of the polygon, contacts, or realizer is required.</>,
     proofSteps: [
-      { title: "Supply criticality", explanation: <>Proposition II.4.7 turns the new-shell point into an N-critical elliptic contraction.</> },
-      { title: "Invoke the completed geometric engine", explanation: <>The new-shell setup already fixes N≥4, so Part I Theorem 1.4 applies. As proved in Topic VII, it selects one adapted orientation and returns the Farey and monodromy data.</> },
+      { title: "Supply criticality", explanation: <>Proposition II.4.7 turns the non-inherited radial maximum into an N-critical elliptic contraction.</> },
+      { title: "Use the Part I geometric theorem", explanation: <>The non-inherited-radial-maximum setup already fixes N≥4, so Part I Theorem 1.4 applies. As proved in Topic VII, it selects one adapted orientation and returns the Farey and monodromy data.</> },
       { title: "Name the two orientations", explanation: <>The two adapted complex structures correspond exactly to multiplication by λ and by its conjugate, hence μ is either λ or λ̄.</> },
       { title: "Identify Farey adjacency", explanation: <>Lemma II.2.1 turns consecutiveness into rq−ps=1 in the selected left-to-right orientation.</> },
-      { title: "Record every output used later", explanation: <>The wrapper retains both product forms, the signed e, complementary parameters, the sheet bounds, and the exact lifted phase. No realization or nesting result enters.</> },
+      { title: "Record every output used later", explanation: <>The theorem retains both product forms, the signed e, complementary parameters, the common argument-interval bounds, and the exact lifted phase. No realization or nesting result enters.</> },
     ],
     takeaway: <>The deep geometry has now been reduced to precisely the scalar data needed for convex equalization.</>,
     provenance: "New result",
     sourceIds: ["karpelevic-1951", "ito-1997"],
-    sourceRelation: <>The heterogeneous monodromy and common-sheet statement come from the manuscript’s new Part I theorem; Karpelevič and Ito are the classical carrier antecedents.</>,
+    sourceRelation: <>The varying-parameter monodromy and common-argument-interval statement come from the manuscript’s new Part I theorem; Karpelevič and Ito are the classical boundary-arc antecedents.</>,
   },
   {
     id: "topic-x-reflection",
     label: "Lemma II.5.2",
     kind: "Lemma",
-    title: "Reflection dictionary for the selected orientation",
+    title: "Reflection of the selected Farey data",
     purpose: "Returns the existentially selected complex orientation to the original upper-half-plane ray.",
     manuscriptHtml: completeHtml("karp:lem:reflection-dictionary"),
     vocabulary: [
@@ -430,39 +455,39 @@ export const topicXResults: readonly ProofResultData[] = [
       { title: "Preserve denominator data", explanation: <>The transformation changes numerators but leaves q and s unchanged; therefore d and e are unchanged.</> },
       { title: "Compute both signs", explanation: <>Substitution gives qx−(q−p)=p−qy&lt;0 and sx−(s−r)=r−sy&gt;0.</> },
       { title: "Recover the same A and B", explanation: <>Absolute values turn those expressions into exactly the selected orientation’s positive angles.</> },
-      { title: "Conjugate the constant profile", explanation: <>The real parameters and integer exponents are unchanged, so conjugation returns the Ito identity for the original cell.</> },
+      { title: "Conjugate the constant parameter list", explanation: <>The real parameters and integer exponents are unchanged, so conjugation returns the Ito identity for the original cell.</> },
     ],
-    takeaway: <>Every scalar inequality proved for the selected μ transfers exactly to the original λ.</>,
+    takeaway: <>The reflection formulas transfer every scalar inequality proved for the selected μ exactly to the original λ.</>,
     provenance: "Classical result",
     sourceIds: ["standard-farey", "standard-linear-algebra"],
-    sourceRelation: <>The ingredients are classical Farey reflection and complex conjugation; the explicit dictionary prevents an orientation gap in this proof.</>,
+    sourceRelation: <>The ingredients are classical Farey reflection and complex conjugation; the explicit formulas prevent an orientation gap in this proof.</>,
   },
   {
     id: "topic-x-heterogeneous",
     label: "Theorem II.6.1",
     kind: "Theorem",
-    title: "Heterogeneous sharp inequality",
-    purpose: "Uses one strictly convex log-sine potential to put every heterogeneous profile inside the equal profile.",
+    title: "Sharp inequality for varying parameters",
+    purpose: "Uses one strictly convex log-sine potential to put every varying parameter list inside the constant-parameter case.",
     manuscriptHtml: completeHtml("karp:thm:hetero-sharp"),
     vocabulary: [
       { term: "Factor argument u", definition: <>The continuously selected angle Arg(λᑫ−β) on [A,M), where moving β along [0,1) moves the vector horizontally without crossing zero.</> },
       { term: "Factor potential F", definition: <>The logarithmic ratio <span className="math-inline">log(|λᑫ−β|/(1−β))</span>, rewritten as <span className="math-inline">log sin M−log sin(M−u)</span>.</> },
       { term: "Strict Jensen equality", definition: <>For F″&gt;0, equality in Jensen occurs exactly when all input arguments coincide.</> },
     ],
-    intuition: <>The lifted phase fixes the average of the factor arguments at A+B. Taking moduli and logarithms of the product fixes their total potential. Strict convexity then makes the common argument the unique equality profile.</>,
+    intuition: <>The lifted phase fixes the average of the factor arguments at A+B. Taking moduli and logarithms of the product fixes their total potential. Strict convexity then makes the common argument the unique constant-parameter case.</>,
     proofSteps: [
       { title: "Build the common factor potential", explanation: <>The triangle with vertices β, 1, and λᑫ gives F(u)=log sin M−log sin(M−u), hence F″(u)=csc²(M−u)&gt;0.</> },
       { title: "Compute the mean argument", explanation: <>Substitute e=s−dq into the lifted phase identity and expand d(A+B). Both expressions are <span className="math-inline">2π(r−dp)−eθ</span>.</> },
       { title: "Turn the product into a sum", explanation: <>Take moduli and logarithms. Since αⱼ=1−βⱼ&gt;0, this gives <span className="math-inline">ΣF(uⱼ)=(dq−s)logρ</span>.</> },
-      { title: "Apply strict Jensen on one sheet", explanation: <>Every uⱼ and their mean A+B lie in [A,M), where F is strictly convex. This proves equation (II.6.9).</> },
+      { title: "Apply strict Jensen on one interval", explanation: <>Every uⱼ and their mean A+B lie in the common interval [A,M), where F is strictly convex. This proves equation (II.6.9).</> },
       { title: "Identify equality", explanation: <>Jensen equality means all uⱼ agree. The derivative of β↦Arg(λᑫ−β) is positive, so this is equivalent to all βⱼ agreeing.</> },
-      { title: "Exponentiate without changing signs", explanation: <>Substituting F and exponentiating yields the sine-ratio inequality. All sine factors used as denominators are positive on the chosen sheet.</> },
+      { title: "Exponentiate without changing signs", explanation: <>Substituting F and exponentiating yields the sine-ratio inequality. All sine factors used as denominators are positive on the chosen argument interval.</> },
       { title: "Use the trigonometric reduction", explanation: <>Equation (II.6.10), together with ρᑫ=sin M/sin(M−A), converts the sine-ratio inequality into the scalar radial inequality (II.6.7).</> },
     ],
-    takeaway: <>For every admissible monodromy profile the radius is at most the unique scalar equality radius; equality among profiles requires β₁=···=βd.</>,
+    takeaway: <>For every admissible monodromy parameter list the radius is at most the unique scalar equality radius; equality requires β₁=···=βd.</>,
     provenance: "New result",
     sourceIds: ["karpelevic-1951", "ito-1997"],
-    sourceRelation: <>The heterogeneous log-sine inequality is new to the manuscript’s monodromy route. Jensen’s inequality is the classical analytic ingredient.</>,
+    sourceRelation: <>The varying-parameter log-sine inequality is new to the manuscript’s monodromy argument. Jensen’s inequality is the classical analytic ingredient.</>,
   },
 ] as const;
 
@@ -498,7 +523,7 @@ export const topicXIResults: readonly ProofResultData[] = [
     id: "topic-xi-cycle-collections",
     label: "Lemma II.7.2",
     kind: "Lemma",
-    title: "Cycle collections in the sparse block graph",
+    title: "Cycle collections in the sparse realization graph",
     purpose: "Proves that the designed graph has no cycles beyond the local q-cycles and one global s-cycle.",
     manuscriptHtml: completeHtml("karp:lem:sparse-cycle-collections"),
     vocabulary: [
@@ -524,29 +549,29 @@ export const topicXIResults: readonly ProofResultData[] = [
     id: "topic-xi-sparse-realization",
     label: "Theorem II.7.3",
     kind: "Theorem",
-    title: "Sparse carrier realization",
-    purpose: "Constructs a row-stochastic matrix whose characteristic polynomial is exactly the reduced carrier in both signs of s−dq.",
+    title: "Sparse stochastic realization of the reduced Ito polynomial",
+    purpose: "Constructs a row-stochastic matrix whose characteristic polynomial is exactly the reduced Ito polynomial in both signs of s−dq.",
     manuscriptHtml: completeHtml("karp:thm:sparse-realization"),
     vocabulary: [
-      { term: "Active order N₀", definition: <>The larger of <span className="math-inline">dq</span> and <var>s</var>: the number of vertices actually used by the sparse carrier graph before optional absorbing-state padding.</> },
+      { term: "States before padding", definition: <>The larger of <span className="math-inline">dq</span> and <var>s</var>: the number of states used by the sparse realization graph before optional absorbing-state padding.</> },
       { term: "Sparse", definition: <>Most matrix entries are zero: nonterminal rows have one nonzero entry and terminal rows have at most two.</> },
       { term: "Edge subdivision", definition: <>Replacing one edge by a path through K new vertices, increasing every cycle through it by K.</> },
     ],
     intuition: <>Design the graph so local cycles reproduce the binomial (tᑫ−β)ᵈ and the one global cycle supplies the remaining αᵈ monomial. The two signs of s−dq correspond to shortening the route inside blocks or lengthening one cross edge.</>,
     proofSteps: [
       { title: "Build d length-q blocks", explanation: <>Internal edges have weight one. Each terminal has a local β-return and an α-cross edge, so its outgoing total is α+β=1.</> },
-      { title: "Check the active-order bound", explanation: <>The floor gives <span className="math-inline">dq ≤ n</span> and the Farey denominator gives <span className="math-inline">s ≤ n</span>, so the larger of <span className="math-inline">dq</span> and <var>s</var> is also at most <var>n</var>.</> },
+      { title: "Check the state-count bound", explanation: <>The floor gives <span className="math-inline">dq ≤ n</span> and the Farey denominator gives <span className="math-inline">s ≤ n</span>, so the larger of <span className="math-inline">dq</span> and <var>s</var> is also at most <var>n</var>.</> },
       { title: "Case s≤dq: choose entry depths", explanation: <>Farey adjacency implies s&gt;(d−1)q. Set ℓ₁=s−(d−1)q and the remaining ℓⱼ=q; their sum is s.</> },
       { title: "Read the first characteristic polynomial", explanation: <>Local subsets give (tᑫ−β)ᵈ. The global length-s cycle contributes −αᵈtᵈᑫ⁻ˢ, yielding equation (II.7.3).</> },
       { title: "Case s&gt;dq: lengthen one cross edge", explanation: <>Insert K=s−dq deterministic vertices. Local subsets leave them unused and gain tᴷ; the global cycle uses them and has length s.</> },
       { title: "Read the second characteristic polynomial", explanation: <>The contributions are tˢ⁻ᵈᑫ(tᑫ−β)ᵈ and −αᵈ, giving equation (II.7.4).</> },
       { title: "Verify stochasticity and endpoints", explanation: <>All weights are nonnegative and every outgoing total is one. At α=0 or β=0, retain zero-weight formal edges or extend the polynomial identity from the open parameter interval.</> },
-      { title: "Pad to order n", explanation: <>Absorbing states preserve every carrier root. Nonzero roots of the homogeneous equation are roots of the reduced polynomial after the cancelled zero powers are removed.</> },
+      { title: "Pad to order n", explanation: <>Absorbing states preserve every root of the reduced Ito polynomial. Nonzero roots of the homogeneous equation remain after the cancelled zero powers are removed.</> },
     ],
-    takeaway: <>Every reduced carrier has an explicit sparse row-stochastic realization of order at most n.</>,
+    takeaway: <>Every reduced Ito polynomial has an explicit sparse row-stochastic realization of order at most n.</>,
     provenance: "Previously known",
     sourceIds: ["ito-1997", "johnson-paparella-2017", "kirkland-smigoc-2022"],
-    sourceRelation: <>Explicit reduced-Ito realizations are known from Johnson-Paparella (2017) and Kirkland-Šmigoc (2022). This manuscript proves one uniform active-order construction directly.</>,
+    sourceRelation: <>Explicit reduced-Ito realizations are known from Johnson-Paparella (2017) and Kirkland-Šmigoc (2022). This manuscript directly proves one uniform construction using at most <var>n</var> states.</>,
   },
   {
     id: "topic-xi-attainment",
@@ -558,42 +583,42 @@ export const topicXIResults: readonly ProofResultData[] = [
     vocabulary: [
       { term: "Attainment", definition: <>The candidate is not merely a polynomial root: it is an eigenvalue of an actual row-stochastic matrix of the required order.</> },
     ],
-    intuition: <>Topic IX already computed complementary weights and proved the candidate satisfies the carrier. The realization theorem now turns that algebraic fact into matrix membership.</>,
+    intuition: <>Topic IX already computed complementary coefficients and proved that the candidate satisfies the Ito equation. The realization theorem now turns that algebraic fact into matrix membership.</>,
     proofSteps: [
-      { title: "Take the raywise weights", explanation: <>Equation (II.2.9) supplies α,β∈[0,1] with α+β=1.</> },
-      { title: "Use the carrier identity", explanation: <>Proposition II.2.3 proves that the candidate is a nonzero root of the Ito carrier.</> },
+      { title: "Take the raywise coefficients", explanation: <>Equation (II.2.9) supplies α,β∈[0,1] with α+β=1.</> },
+      { title: "Use the Ito identity", explanation: <>Proposition II.2.3 proves that the candidate is a nonzero root of the Ito polynomial.</> },
       { title: "Apply the sparse theorem", explanation: <>Theorem II.7.3 realizes that root in a row-stochastic matrix of order at most n and pads if needed.</> },
       { title: "Read the definition of Θₙ", explanation: <>Being such an eigenvalue is exactly membership in Θₙ.</> },
     ],
     takeaway: <>Every open-ray scalar candidate belongs to Θₙ. Boundary status still waits for the outer comparison and final topology.</>,
     provenance: "Previously known",
     sourceIds: ["ito-1997", "johnson-paparella-2017", "kirkland-smigoc-2022"],
-    sourceRelation: <>Attainment of the classical Ito carriers is known through Johnson–Paparella’s explicit matrices and later realization work; this corollary uses the independent construction just proved.</>,
+    sourceRelation: <>Attainment of the classical Karpelevič arcs is known through Johnson–Paparella’s explicit matrices and later realization work; this corollary uses the independent construction just proved.</>,
   },
   {
     id: "topic-xi-equal-profile",
     label: "Corollary II.6.2",
     kind: "Corollary",
-    title: "Outermost equality profile",
+    title: "Constant parameters at an outer radial maximum",
     purpose: "Closes the deliberately deferred equality argument by squeezing the actual extremum and the now-attained scalar candidate.",
     manuscriptHtml: completeHtml("karp:cor:equal-profile"),
     vocabulary: [
       { term: "Two-inequality squeeze", definition: <>If ρ≤ρ* and an independent argument gives ρ*≤ρ, then both are equal and every strict equality condition used in the first inequality is activated.</> },
-      { term: "Constant profile", definition: <>All monodromy parameters agree: β₁=⋯=βd and therefore α₁=⋯=αd.</> },
+      { term: "Constant parameter list", definition: <>All monodromy parameters agree: β₁=⋯=βd and therefore α₁=⋯=αd.</> },
     ],
     intuition: <>Topic X placed the actual extremum inside the candidate. Attainment places the candidate inside the actual radial maximum. Equality follows, and strict Jensen forces one common contact parameter.</>,
     proofSteps: [
-      { title: "Apply the upper inequality to the selected μ", explanation: <>Theorem II.5.1 supplies exactly the product, phase, and sheet hypotheses of Theorem II.6.1.</> },
-      { title: "Return to the original ray", explanation: <>If μ=λ, nothing changes; if μ=λ̄, the reflection dictionary identifies the same absolute A,B and modulus.</> },
+      { title: "Apply the upper inequality to the selected μ", explanation: <>Theorem II.5.1 supplies exactly the product, phase, and common-argument-interval hypotheses of Theorem II.6.1.</> },
+      { title: "Return to the original ray", explanation: <>If μ=λ, nothing changes; if μ=λ̄, the reflection formulas identify the same absolute A,B and modulus.</> },
       { title: "First inequality", explanation: <>Strict increase of the scalar left side turns Theorem II.6.1 into <span className="math-inline">ρ≤ρ*</span>, where ρ* is Topic IX’s equality radius.</> },
       { title: "Independent reverse inequality", explanation: <>Corollary II.7.4 puts ρ*eⁱθ in Θᴺ. Since ρ=Rᴺ(θ) is the maximal attainable radius, <span className="math-inline">ρ*≤ρ</span>.</> },
       { title: "Activate strict Jensen equality", explanation: <>Thus ρ=ρ*, so equality holds in Theorem II.6.1 and all βⱼ coincide.</> },
-      { title: "Recover the original Ito carrier", explanation: <>The constant product is direct when μ=λ and is conjugated back by Lemma II.5.2 when μ=λ̄.</> },
+      { title: "Recover the original Ito equation", explanation: <>The constant-parameter product is direct when μ=λ and is conjugated back by Lemma II.5.2 when μ=λ̄.</> },
     ],
-    takeaway: <>For N≥4, every new-shell radial extremum is exactly the scalar Farey–Ito candidate and has a constant monodromy profile. Orders at most three are handled independently in Topic XIII.</>,
+    takeaway: <>For N≥4, every non-inherited radial maximum is exactly the scalar Farey–Ito candidate and has constant monodromy parameters. Orders at most three are handled independently in Topic XIII.</>,
     provenance: "New result",
     sourceIds: ["karpelevic-1951", "ito-1997"],
-    sourceRelation: <>The classical boundary is known, but the conclusion that a heterogeneous critical-polygon monodromy profile must equalize is specific to this manuscript’s proof route.</>,
+    sourceRelation: <>The classical boundary is known, but the conclusion that varying critical-polygon monodromy parameters must all coincide is specific to this manuscript’s proof.</>,
   },
 ] as const;
 
@@ -611,9 +636,9 @@ export const topicIXExactSources = [
 ] as const;
 
 export const topicXExactSources = [
-  "Part I, Theorem 1.4, ‘Complex monodromy and Farey carrier,’ proved in Topic VII of this reader.",
+  "Part I, Theorem 1.4, ‘Complex monodromy and the Farey equation,’ proved in Topic VII of this reader.",
   "J. L. W. V. Jensen, ‘Sur les fonctions convexes et les inégalités entre les valeurs moyennes,’ Acta Mathematica 30 (1906), 175-193.",
-  "F. I. Karpelevič (1951) and H. Ito (1997), cited as classical boundary antecedents rather than sources of the heterogeneous monodromy inequality.",
+  "F. I. Karpelevič (1951) and H. Ito (1997), cited as classical boundary antecedents rather than sources of the varying-parameter monodromy inequality.",
 ] as const;
 
 export const topicXIExactSources = [

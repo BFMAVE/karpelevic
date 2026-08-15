@@ -111,7 +111,7 @@ function StandingContactAssumptions() {
   return (
     <section className="proof-chapter-local-setup proof-chapter-standing-setup" aria-labelledby="right-admissible-setup-heading">
       <p className="section-label">Standing setup · unnumbered</p>
-      <h4 id="right-admissible-setup-heading">Standing assumptions for the one-sided contact data</h4>
+      <h4 id="right-admissible-setup-heading">Standing assumptions for the half-open contact data</h4>
       <p>
         After the possible conjugation in Lemma 4.13, rename the selected
         multiplier λ and keep that orientation fixed. Write
@@ -130,7 +130,7 @@ function StandingContactAssumptions() {
         <li><strong>(A3)</strong> One representative κ∈{"{1,…,N}"} is fixed, and <span>ξ<sub>i</sub>=λ<i>x</i><sub>i−κ</sub>∈<i>E</i><sub>i</sub><sup>+</sup></span> for every <i>i</i>. Thus every right-half-open side contains exactly one assigned image vertex, and equation (4.12) supplies its barycentric coefficients.</li>
         <li><strong>(A4)</strong> <span><i>S</i>={"{"}<i>i</i>∈ℤ/<i>N</i>ℤ:ξ<sub>i</sub>∈relint(<i>E</i><sub>i</sub>){"}"}</span> records exactly the sides whose assigned image vertex lies in the relative interior.</li>
       </ol>
-      <p>The phrase <dfn>right-admissible</dfn>, when it appears in the manuscript proof, is only shorthand for a tuple satisfying (A0)–(A4).</p>
+      <p>Every later reference to the <dfn>standing contact data</dfn> means precisely a tuple satisfying (A0)–(A4).</p>
       <p>No later vertex replacement silently reverses the orientation or changes the side labels.</p>
     </section>
   );
@@ -228,7 +228,7 @@ function TopicIVContents() {
       </div>
       <div>
         <section aria-labelledby="topic-iv-contents-a">
-          <h4 id="topic-iv-contents-a">IV-A · Choose one contact shift</h4>
+          <h4 id="topic-iv-contents-a">IV-A · Choose one cyclic shift of the side labels</h4>
           <ol>
             <li><a href="#part-i-item-27"><span>4.10</span> Endpoint counts</a></li>
             <li><a href="#part-i-item-28"><span>4.11</span> Cyclic interlacing</a></li>
@@ -286,7 +286,7 @@ const selectionResults: readonly ProofResultData[] = [
     ],
     takeaway: <>The exceptional 2/0 pair disappears when the other half-open endpoint convention is used.</>,
     sourceIds: dmitriev,
-    sourceRelation: <>Dmitriev–Dynkin’s one-sided contact argument, available in Swift’s translation, is the historical antecedent. The precise finite <i>r</i>–<i>c</i>–<i>ℓ</i> identity used here is proved on this page.</>,
+    sourceRelation: <>Dmitriev–Dynkin’s half-open contact argument, available in Swift’s translation, is the historical antecedent. The precise finite <i>r</i>–<i>c</i>–<i>ℓ</i> identity used here is proved on this page.</>,
   },
   {
     id: "part-i-item-28",
@@ -314,7 +314,7 @@ const selectionResults: readonly ProofResultData[] = [
     ],
     takeaway: <>After complex conjugation and positive reindexing when necessary, the entire polygon uses one right-half-open endpoint convention.</>,
     sourceIds: dmitriev,
-    sourceRelation: <>Dmitriev–Dynkin’s supporting one-sided contact theorem, available in Swift’s translation, is the historical antecedent. The complete boundary-interval and endpoint-count argument used here is proved on this page.</>,
+    sourceRelation: <>Dmitriev–Dynkin’s theorem assigning contacts to half-open sides, available in Swift’s translation, is the historical antecedent. The complete boundary-interval and endpoint-count argument used here is proved on this page.</>,
   },
   {
     id: "part-i-item-29",
@@ -332,7 +332,7 @@ const selectionResults: readonly ProofResultData[] = [
     id: "part-i-item-30",
     label: "Lemma 4.13",
     kind: "Lemma",
-    title: "One-sided contact representative",
+    title: "Order-preserving half-open contact assignment",
     purpose: "Show that every vertex-to-side contact label is one fixed cyclic shift and place the argument of the multiplier in its corresponding rational interval.",
     manuscriptHtml: completeHtml("30", "lem:one-sided-contact"),
     vocabulary: [
@@ -355,7 +355,7 @@ const selectionResults: readonly ProofResultData[] = [
     takeaway: <>The side assignment is now encoded by the representative <i>κ</i> of its cyclic shift, the barycentric coefficients, and the strict inequality <span>(κ−1)/N&lt;ϑ/(2π)&lt;κ/N</span>.</>,
     provenance: "Strengthened",
     sourceIds: [...dmitriev, "karpelevic-1951"],
-    sourceRelation: <>Swift (1972), Appendix A, §2, Basic Theorem 5.1, with the statement at A-5 and the relevant proof at A-16, supplies the one-sided representative. Karpelevič (1951), §2, quotes and uses that contact theorem. The statement here strengthens that antecedent by adding the explicit cyclic shift, the lift check, and the endpoint-equality argument.</>,
+    sourceRelation: <>Swift (1972), Appendix A, §2, Basic Theorem 5.1, with the statement at A-5 and the relevant proof at A-16, supplies the half-open contact assignment. Karpelevič (1951), §2, quotes and uses that contact theorem. The statement here strengthens that antecedent by adding the explicit cyclic shift, the lift check, and the endpoint-equality argument.</>,
   },
   {
     id: "part-i-item-31",
@@ -410,14 +410,14 @@ const mutationResults: readonly ProofResultData[] = [
     id: "part-i-item-33",
     label: "Corollary 5.2",
     kind: "Corollary",
-    title: "Equivariance under the label-preserving map between side sets",
+    title: "Equivariance under the label-preserving bijection between old and new side sets",
     purpose: "Rewrite the indexed update after identifying each old labelled side with the correspondingly labelled new side.",
     manuscriptHtml: completeHtml("33", "cor:intrinsic-mutation-law"),
     prelude: <p>In this corollary, <i>T</i> is the same real-linear map that the present complex coordinates write as multiplication by λ. Only the notation changes; the map does not.</p>,
     vocabulary: [
       { term: "The maps χ and s", definition: <><i>χ</i> assigns to each polygon vertex the unique half-open side containing its image. The successor <i>s(E</i><sub>i</sub>)=<i>E</i><sub>i+1</sub> is the next side in positive cyclic order.</> },
       { term: "The cyclic permutation σ", definition: <><i>σ(E</i><sub>i</sub>)=<i>E</i><sub>i+κ</sub> is the permutation of side labels induced by the contact assignment.</> },
-      { term: "The label-preserving map b", definition: <><i>b</i>(<i>E</i><sub>j</sub>)=<i>E</i><sub>j</sub><sup>′</sup> identifies each old side with the new side carrying the same index. This map is needed because the unprimed and primed maps have different side sets as domains.</> },
+      { term: "The label-preserving bijection b", definition: <><i>b</i>(<i>E</i><sub>j</sub>)=<i>E</i><sub>j</sub><sup>′</sup> identifies each old side with the new side carrying the same index. This bijection is needed because the unprimed and primed maps have different side sets as domains.</> },
     ],
     takeaway: <>With <i>b</i>(<i>E</i><sub>j</sub>)=<i>E</i><sub>j</sub><sup>′</sup>, one has <span><i>b</i>∘<i>s</i>=<i>s</i><sup>′</sup>∘<i>b</i></span>, <span><i>σ</i><sup>′</sup>=<i>b</i>∘<i>σ</i>∘<i>b</i><sup>−1</sup></span>, and the stated set update.</>,
     sourceIds: karpelevicOnly,
@@ -578,7 +578,7 @@ export function TopicIVChapter() {
 
       <ProofResultGroup
         number="IV-A · Endpoint order"
-        title="Turn local boundary-interval counts into one global contact shift"
+        title="Turn local boundary-interval counts into one cyclic shift of the side labels"
         introduction={<p>A finite endpoint count chooses the right-half-open endpoint convention. Cyclic order then turns the contact assignment into the permutation <span><i>E</i><sub>i</sub>↦<i>E</i><sub>i+κ</sub></span>, and lifted angles encode it without an unaccounted multiple of 2π.</p>}
         results={selectionResults}
       />

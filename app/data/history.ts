@@ -400,7 +400,7 @@ export const historyContent = {
       label: "This manuscript",
       title: "Returning to the invariant polygon",
       text:
-        "Our manuscript starts from a radially critical elliptic contraction and studies the contact geometry of an invariant polygon. Contact mutation and a finite rotation section are followed, for N≥4, by a projective argument ruling out skipped returns; the resulting normal form has a heterogeneous Ito product as its scalar shadow. The aim is a new geometric route to the already classical Farey–Ito boundary, not a claim that the boundary theorem itself is new.",
+        "Our manuscript starts from a radially critical elliptic contraction and studies the contact geometry of an invariant polygon. Permitted vertex replacements and a finite first-return decomposition are followed, for N≥4, by a projective argument ruling out skipped returns; the resulting structure has a product of possibly varying Ito factors as its scalar consequence. The aim is a new geometric route to the already classical Farey–Ito boundary, not a claim that the boundary theorem itself is new.",
       citations: ["verbeken-ginis-2026"],
     },
   ],
@@ -468,5 +468,5 @@ export const historyContent = {
     },
   ],
   sourceNote:
-    "The 1946 and 1951 papers were published in Russian; the English titles used here follow their bibliographic records. For claims about how the formulations relate, this page also cites later papers that explicitly compare them. This bibliography is a working source ledger and should grow when a missing branch of the story becomes relevant.",
+    "The 1946 and 1951 papers were published in Russian; the English titles used here follow their bibliographic records. For claims about how the formulations relate, this page also cites later papers that explicitly compare them. This working bibliography should grow when a missing branch of the story becomes relevant.",
 } as const;

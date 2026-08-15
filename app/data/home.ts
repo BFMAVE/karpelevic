@@ -2,7 +2,7 @@ export const homeContent = {
   title:
     "Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic Spectra",
   subtitle:
-    "Contact Return Normal Forms, Projective Holonomy, and the Karpelevič–Ito Theorem",
+    "Boundary Contacts, First Returns, and the Karpelevič–Ito Theorem",
   authors: ["Brecht Verbeken", "Vincent Ginis"],
   descriptor:
     "A geometric route from invariant polygons to the classical boundary of stochastic spectra.",
@@ -44,7 +44,7 @@ export const homeContent = {
     {
       label: "Part I",
       title: "Critical polygon geometry",
-      text: "The manuscript develops an intrinsic contact theory for radially critical elliptic contractions, passing through hereditary saturation, one-sided contacts and mutations, a finite rotation section, and, for N≥4, a projective argument ruling out skipped returns.",
+      text: "For a radially critical elliptic contraction, the manuscript proves contact with every side and boundary placement of every image vertex for all invariant polygons within the vertex bound. It then fixes a consistent half-open side assignment, studies permitted vertex replacements and a finite first-return decomposition, and, for N≥4, uses a projective argument to rule out skipped returns.",
     },
     {
       label: "Part II",

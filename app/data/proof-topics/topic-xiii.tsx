@@ -46,14 +46,14 @@ const radialLemma: ProofResultData = {
   id: "topic-xiii-radial-boundary",
   label: "Lemma II.9.1",
   kind: "Lemma",
-  title: "Compact radial sets with continuous radius",
-  purpose: "Bridge the last logical gap: prove that the outer point on every ray is the complete topological boundary, not merely a collection of radial maxima.",
+  title: "Compact star-shaped sets with continuous radial function",
+  purpose: "Prove the final topological step: the outer point on every ray forms the complete topological boundary, not merely a collection of radial maxima.",
   manuscriptHtml: exactResult("karp:lem:continuous-radial-boundary"),
   vocabulary: [
     {
-      term: "Radially filled",
-      definition: <>A set <i>S</i> is radially filled when <i>z∈S</i> and 0≤<i>t</i>≤1 imply <i>tz∈S</i>. Every attained point brings the entire segment from 0 to that point with it.</>,
-      example: <>A closed disk centred at 0 is radially filled. An annulus is not, because points near its outer circle do not bring the missing segment near 0.</>,
+      term: "Star-shaped with respect to 0",
+      definition: <>A set <i>S</i> is star-shaped with respect to 0 when <i>z∈S</i> and 0≤<i>t</i>≤1 imply <i>tz∈S</i>. Every attained point brings the entire segment from 0 to that point with it.</>,
+      example: <>A closed disk centred at 0 is star-shaped with respect to 0. An annulus is not, because points near its outer circle do not bring the missing segment near 0.</>,
     },
     {
       term: "Radial maximum rₛ(φ)",
@@ -80,12 +80,12 @@ const radialLemma: ProofResultData = {
       definition: <>A continuous real-valued function on a compact set attains both a minimum and a maximum. Applied to the circle, it turns pointwise positivity of <i>r</i><sub>S</sub> into one uniform positive lower bound.</>,
     },
   ],
-  intuition: <>Radial filling settles each individual ray, but topology also sees nearby directions. Continuity supplies that transverse control: a point strictly below the graph has room both radially and angularly, so it lies inside a small disk contained in <i>S</i>. An outer endpoint has no such disk because moving slightly farther along its ray leaves <i>S</i>.</>,
+  intuition: <>Star-shapedness with respect to 0 settles each individual ray, but topology also sees nearby directions. Continuity supplies that transverse control: a point strictly below the graph has room both radially and angularly, so it lies inside a small disk contained in <i>S</i>. An outer endpoint has no such disk because moving slightly farther along its ray leaves <i>S</i>.</>,
   figure: <CompletionFigure kind="radial-boundary" />,
   proofSteps: [
     {
       title: "Describe every ray section exactly",
-      explanation: <>Compactness attains <i>r</i><sub>S</sub>(φ), and radial filling contains every smaller radius. Maximality excludes every larger radius. Thus the intersection with one ray is precisely the closed segment from 0 to the displayed outer point.</>,
+      explanation: <>Compactness attains <i>r</i><sub>S</sub>(φ), and star-shapedness with respect to 0 contains every smaller radius. Maximality excludes every larger radius. Thus the intersection with one ray is precisely the closed segment from 0 to the displayed outer point.</>,
     },
     {
       title: "Exclude an outer point from the interior",
@@ -156,14 +156,14 @@ const smallOrders: ProofResultData = {
     },
     {
       term: "Terminal cell",
-      definition: <>The last upper Farey interval [1/3,1/2]. Its nonreal carrier approaches −1/2 rather than the endpoint root −1, so the real segment [−1,−1/2] must be included separately.</>,
+      definition: <>The last upper Farey interval [1/3,1/2]. Its nonreal candidate curve approaches −1/2 rather than the endpoint root −1, so the real segment [−1,−1/2] must be included separately.</>,
     },
     {
       term: "Characteristic polynomial",
       definition: <>det(<i>tI−A</i>). Its roots, with multiplicity, are exactly the eigenvalues of <i>A</i>.</>,
     },
   ],
-  intuition: <>Orders one and two are elementary. At order three, trace inequalities trap every nonreal eigenvalue inside an equilateral triangle. Two explicit stochastic families attain the triangle’s boundary and the extra negative-real segment. Matching those pieces to the scalar carrier proves exactly the base identity the order-four induction will use.</>,
+  intuition: <>Orders one and two are elementary. At order three, trace inequalities trap every nonreal eigenvalue inside an equilateral triangle. Two explicit stochastic families attain the triangle’s boundary and the extra negative-real segment. Matching those pieces to the scalar candidate curve proves exactly the base identity the order-four induction will use.</>,
   figure: <CompletionFigure kind="order-three" />,
   proofSteps: [
     {
@@ -180,18 +180,18 @@ const smallOrders: ProofResultData = {
     },
     {
       title: "Attain the first two triangular sides",
-      explanation: <>The convex matrix family (1−α)<i>I+αC</i><sub>3</sub> has eigenvalue (1−α)+αω, which runs along the chord [1,ω]. Real matrices give the conjugate chord [1,ω̄]. Radial filling supplies every point between these boundary chords and 0.</>,
+      explanation: <>The convex matrix family (1−α)<i>I+αC</i><sub>3</sub> has eigenvalue (1−α)+αω, which runs along the chord [1,ω]. Real matrices give the conjugate chord [1,ω̄]. Star-shapedness with respect to 0 supplies every point between these boundary chords and 0.</>,
     },
     {
       title: "Attain the terminal arc and real segment",
       explanation: <>Topic XI’s terminal sparse matrix has characteristic factor λ²+λ+α. For 0≤α≤1/4 its lower real root runs from −1 to −1/2. For 1/4&lt;α≤1 the upper root has real part −1/2 and rises to ω; conjugation supplies the lower branch.</>,
     },
     {
-      title: "Identify the first scalar carrier",
+      title: "Identify the first scalar candidate curve",
       explanation: <>On [0,1/3], the cell data reduce the scalar equation to the ray equation for the straight chord β+αω. Its argument increases strictly with α, so each open ray meets it once and Topic IX’s unique radius must be that chord radius.</>,
     },
     {
-      title: "Identify the terminal scalar carrier",
+      title: "Identify the terminal scalar candidate curve",
       explanation: <>On [1/3,1/2], the scalar equation is equivalent to λ(λ²−β)=α. Along λ=−1/2+<i>iy</i>, the argument decreases strictly from π to 2π/3 as <i>y</i> rises, so again every open ray is met exactly once. The real interval is an endpoint-ray addition, not part of that open-cell branch.</>,
     },
     {
@@ -202,7 +202,7 @@ const smallOrders: ProofResultData = {
   takeaway: <>The theorem is completely proved for <i>n≤3</i>, and the exact equality <i>R</i><sub>3</sub>=<i>K</i><sub>3</sub> is ready for the induction step.</>,
   provenance: "Previously known",
   sourceIds: ["dmitriev-dynkin-1946", "karpelevic-1951", "ito-1997"],
-  sourceRelation: <>The small stochastic regions and the exceptional order-three carrier belong to the classical theory. The proposition includes the direct calculation needed by this manuscript’s induction.</>,
+  sourceRelation: <>The small stochastic regions and the exceptional order-three candidate curve belong to the classical theory. The proposition includes the direct calculation needed by this manuscript’s induction.</>,
 };
 
 const mainTheorem: ProofResultData = {
@@ -210,7 +210,7 @@ const mainTheorem: ProofResultData = {
   label: "Theorem II.3.1",
   kind: "Theorem",
   title: "Karpelevič–Ito, standalone form",
-  purpose: "Identify every boundary arc, the complete radially filled region, and all unit-circle points for every matrix order.",
+  purpose: "Identify every boundary arc, the complete region star-shaped with respect to 0, and all unit-circle points for every matrix order.",
   manuscriptHtml: relinkCrossTopicReferences(
     partIIHtmlByLabel["karp:thm:main"] + partIIMainTheoremProofHtml,
   ),
@@ -228,11 +228,11 @@ const mainTheorem: ProofResultData = {
       definition: <>Given an (<i>n−1</i>)×(<i>n−1</i>) row-stochastic matrix <i>A</i>, the block diagonal matrix <i>A⊕[1]</i> is row-stochastic of order <i>n</i> and retains every eigenvalue of <i>A</i>. Hence Θ<sub>n−1</sub>⊆Θ<sub>n</sub>.</>,
     },
     {
-      term: "New-shell versus inherited",
-      definition: <>An order-<i>n</i> outer point is new-shell if it is not in Θ<sub>n−1</sub>; it is inherited if it does belong to Θ<sub>n−1</sub>. These alternatives are exhaustive.</>,
+      term: "Non-inherited versus inherited",
+      definition: <>An order-<i>n</i> radial maximum is non-inherited if it is not in Θ<sub>n−1</sub>; it is inherited if it does belong to Θ<sub>n−1</sub>. These alternatives are exhaustive.</>,
     },
     {
-      term: "Ordered carrier chain",
+      term: "Concatenated candidate curves",
       definition: <>The continuous concatenation of the cellwise curves Γ<sub>f,g</sub><sup>(n)</sup> in increasing Farey order, beginning at 1 and ending at −1 in the upper half-plane.</>,
     },
     {
@@ -260,8 +260,8 @@ const mainTheorem: ProofResultData = {
       explanation: <>Topic XI constructs an order-<i>n</i> stochastic matrix with eigenvalue <i>K</i><sub>n</sub>(θ)<i>e</i><sup>iθ</sup>. Thus 0&lt;<i>K</i><sub>n</sub>(θ)≤<i>R</i><sub>n</sub>(θ). On an open cell the unit direction is not a root of unity of permitted order, so Topic VIII’s unit-circle result also gives <i>R</i><sub>n</sub>(θ)&lt;1.</>,
     },
     {
-      title: "Resolve the new-shell branch",
-      explanation: <>At this induction stage <i>n</i>≥4. If the actual outer point is absent from Θ<sub>n−1</sub>, it satisfies the exact new-shell hypotheses, so the N≥4 critical-polygon machinery applies. Topic XI’s equality-profile corollary says its modulus is the unique scalar equality radius on this ray, namely <i>K</i><sub>n</sub>(θ).</>,
+      title: "Resolve the non-inherited case",
+      explanation: <>At this induction stage <i>n</i>≥4. If the actual radial maximum is absent from Θ<sub>n−1</sub>, it satisfies the exact non-inherited-radial-maximum hypotheses, so the N≥4 critical-polygon results apply. Topic XI’s constant-parameter corollary says its modulus is the unique scalar equality radius on this ray, namely <i>K</i><sub>n</sub>(θ).</>,
     },
     {
       title: "Freeze the inherited branch",
@@ -276,19 +276,19 @@ const mainTheorem: ProofResultData = {
       explanation: <>At an endpoint <i>p/q</i> with <i>q≤n</i>, the order-<i>q</i> cyclic permutation matrix realizes <i>e</i><sup>2πip/q</sup>; absorbing-state padding reaches order <i>n</i>. The unit-disk bound prevents a larger radius, so both actual and candidate radii equal 1.</>,
     },
     {
-      title: "Assemble the upper and lower carrier chains",
+      title: "Assemble the upper and lower boundary arc chains",
       explanation: <>Topic IX’s endpoint continuity joins the open-cell graphs from 1 to −1. Equality <i>R</i><sub>n</sub>=<i>K</i><sub>n</sub> says no upper-half-plane stochastic eigenvalue lies beyond that chain. Real coefficients supply its complex-conjugate lower chain.</>,
     },
     {
       title: "Pass from outer points to the topological boundary",
-      explanation: <>Reflect <i>K</i><sub>n</sub> to a positive continuous full-circle radial maximum. Topic VIII gives compactness and radial filling of Θ<sub>n</sub>. Lemma II.9.1 now identifies the radial graph with ∂Θ<sub>n</sub> and its radial hull with the complete set Θ<sub>n</sub>.</>,
+      explanation: <>Reflect <i>K</i><sub>n</sub> to a positive continuous full-circle radial maximum. Topic VIII gives compactness and star-shapedness of Θ<sub>n</sub> with respect to 0. Lemma II.9.1 now identifies the radial graph with ∂Θ<sub>n</sub> and its radial hull with the complete set Θ<sub>n</sub>.</>,
     },
     {
       title: "Attach the unit-circle and order-three clauses",
       explanation: <>Topic VIII already classified unit-modulus points as roots of unity of order at most <i>n</i>. Proposition II.9.2 handled the only discontinuous terminal graph, so the continuous-radius lemma is never applied where its hypothesis fails.</>,
     },
   ],
-  takeaway: <>The candidate carrier is now the actual boundary on every ray, its radial hull is exactly Θ<sub>n</sub>, and the Karpelevič–Ito theorem is complete.</>,
+  takeaway: <>The candidate curve is now the actual boundary on every ray, its radial hull is exactly Θ<sub>n</sub>, and the Karpelevič–Ito theorem is complete.</>,
   provenance: "Classical result",
   sourceIds: ["karpelevic-1951", "ito-1997"],
   sourceRelation: <>The eigenvalue-region theorem is classical: Karpelevič proved the original form and Ito supplied the modern polynomial-arc formulation. This manuscript gives the displayed self-contained route through critical invariant polygons; the classification applies to the theorem’s statement, not to its proof.</>,
@@ -302,22 +302,22 @@ export function TopicXIIIContent() {
           {
             label: "Topic VIII · Stochastic spectra and criticality",
             href: sitePath("/proof/topic-viii/"),
-            explanation: <>defines Θ<sub>n</sub> and <i>R</i><sub>n</sub>, proves compactness, conjugation symmetry, radial filling, the unit-circle classification, and the new-shell critical-polygon input.</>,
+            explanation: <>defines Θ<sub>n</sub> and <i>R</i><sub>n</sub>, proves compactness, conjugation symmetry, star-shapedness with respect to the origin, the unit-circle classification, and the critical-polygon input for a non-inherited radial maximum.</>,
           },
           {
-            label: "Topic IX · Farey–Ito candidates",
+            label: "Topic IX · Farey–Ito candidate curves",
             href: sitePath("/proof/topic-ix/"),
-            explanation: <>constructs the scalar candidate on each open ray, the carriers Γ<sub>f,g</sub><sup>(n)</sup>, and their endpoint continuity.</>,
+            explanation: <>constructs the scalar candidate on each open ray, the candidate curves Γ<sub>f,g</sub><sup>(n)</sup>, and their endpoint continuity.</>,
           },
           {
             label: "Topic X · Sharp upper comparison",
             href: sitePath("/proof/topic-x/"),
-            explanation: <>for the induction range <i>n</i>≥4, proves that every heterogeneous critical-polygon profile lies no farther out than the equal scalar profile.</>,
+            explanation: <>for the induction range <i>n</i>≥4, proves that every varying critical-polygon parameter list lies no farther out than the constant-parameter scalar candidate.</>,
           },
           {
-            label: "Topic XI · Attainment and the equality profile",
+            label: "Topic XI · Attainment and constant parameters",
             href: sitePath("/proof/topic-xi/"),
-            explanation: <>independently constructs a stochastic matrix attaining every candidate, then identifies a new-shell extremum with the scalar equality profile.</>,
+            explanation: <>independently constructs a stochastic matrix attaining every candidate, then identifies a non-inherited radial maximum with the scalar constant-parameter candidate.</>,
           },
           {
             label: "Topic XII · Candidate nesting",
@@ -337,7 +337,7 @@ export function TopicXIIIContent() {
       <section className="topic-i-textbook proof-chapter-group">
         <header>
           <div>
-            <p className="section-label">The final assembly map</p>
+            <p className="section-label">Structure of the final proof</p>
             <h3>Three tasks remain—and only three</h3>
           </div>
           <div><p>Every deep geometric and analytic estimate has already been proved. This chapter supplies one topological lemma, checks the base orders, and runs one two-branch induction.</p></div>
@@ -350,7 +350,7 @@ export function TopicXIIIContent() {
       </section>
 
       <ProofResultGroup
-        number="I · The topological bridge"
+        number="I · The topological lemma"
         title="Outer on every ray becomes boundary everywhere"
         introduction={<p>Radial maximality is a one-dimensional statement. This lemma adds exactly the continuity needed to recover the two-dimensional topological boundary.</p>}
         results={[radialLemma]}
@@ -365,7 +365,7 @@ export function TopicXIIIContent() {
 
       <ProofResultGroup
         number="III · The classical theorem"
-        title="Every ray, every carrier, the full boundary"
+        title="Every ray and the full boundary"
         introduction={<p>The theorem is stated with its original manuscript number from Section II.3. Its complete proof appears here only after all later ingredients have been established, matching the logical rather than the printed order.</p>}
         results={[mainTheorem]}
       />

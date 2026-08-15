@@ -100,7 +100,7 @@ function TerminalThree() {
       <Dot x={245} y={95} color={ink} />
       <text x="165" y="282" fill={ink}>−1</text><text x="370" y="282" fill={ink}>−1/2</text>
       <text x="218" y="68" fill={ink}>e²πⁱ⁄³</text>
-      <text x="110" y="330" fill={ink}>the nonreal graph tends to −1/2; the real carrier continues to −1</text>
+      <text x="110" y="330" fill={ink}>the nonreal graph tends to −1/2; the real candidate curve continues to −1</text>
     </>
   );
 }
@@ -189,14 +189,14 @@ function Squeeze({ marker }: { marker: string }) {
 
 const copy: Record<FigureKind, { title: string; description: string; caption: string }> = {
   eigenpolygon: { title: "An eigenvector draws an invariant polygon", description: "A large triangular convex hull contains a smaller red transformed triangle.", caption: "Plate VIII.1. Each stochastic row expresses λvᵢ as a convex average, so the transformed coordinate hull lies inside the original hull." },
-  "new-shell": { title: "Two meanings of new-shell extremality", description: "Two nested radial regions and one ray ending at a point on the larger region but outside the smaller region.", caption: "Plate VIII.2. Order-newness rules out N−1 vertices; radial maximality rules out every outward N-vertex witness. The curves are a logical schematic, not a computed spectrum." },
+  "new-shell": { title: "Two conditions at a non-inherited radial maximum", description: "Two nested radial regions and one ray ending at a point on the larger region but outside the smaller region.", caption: "Plate VIII.2. Non-inheritance from order N−1 rules out polygons with at most N−1 vertices; radial maximality rules out every outward N-vertex invariant polygon. The curves are a logical schematic, not a computed spectrum." },
   "farey-five": { title: "The upper Farey sequence of order five", description: "A number line marks the six reduced fractions from zero to one half and highlights the cell from one third to two fifths.", caption: "Plate IX.1. Exact rational arithmetic selects the cell before any numerical radius is computed." },
-  "rooted-chord": { title: "The rooted chord identity", description: "Two colored vectors at angles A and minus B join head to tail and sum to the unit real vector.", caption: "Plate IX.2. The definitions of α and β cancel the vertical components and make the horizontal components sum to one on the anchored root sheet." },
-  "terminal-three": { title: "The order-three terminal carrier", description: "A nonreal curve approaches minus one half and a real segment continues from minus one half to minus one.", caption: "Plate IX.3. The exceptional nonreal graph tends to −1/2, while the same algebraic family supplies the segment [−1,−1/2]. The curved interpolation is schematic." },
+  "rooted-chord": { title: "The reciprocal-coordinate Ito identity", description: "Two colored vectors at angles A and minus B join head to tail and sum to the unit real vector.", caption: "Plate IX.2. The definitions of α and β cancel the vertical components and make the horizontal components sum to one on the chosen fractional-power branch." },
+  "terminal-three": { title: "The order-three terminal candidate curve", description: "A nonreal curve approaches minus one half and a real segment continues from minus one half to minus one.", caption: "Plate IX.3. The exceptional nonreal graph tends to −1/2, while the same algebraic family supplies the segment [−1,−1/2]. The curved interpolation is schematic." },
   reflection: { title: "Returning from the selected orientation", description: "A Farey interval reflects about one half while a complex point reflects across the real axis.", caption: "Plate X.1. Reflection reverses order but preserves denominators, modulus, d, e, and the absolute scalar equation." },
-  jensen: { title: "Strict convexity equalizes the factors", description: "A strictly convex graph, two separated sample points, and their mean below the joining chord.", caption: "Plate X.2. The lifted phase fixes the mean argument; strict Jensen makes a common argument the unique equality profile." },
+  jensen: { title: "Strict convexity makes the parameters constant", description: "A strictly convex graph, two separated sample points, and their mean below the joining chord.", caption: "Plate X.2. The lifted phase fixes the mean argument; strict Jensen makes a common argument the unique constant-parameter case." },
   "cycle-ledger": { title: "Local cycles or one global cycle", description: "Three deterministic blocks have local return arcs and one highlighted route through every block terminal.", caption: "Plate XI.1. Any subset of local cycles is vertex-disjoint, but the global cycle meets every terminal and cannot coexist with a local cycle." },
-  "sparse-cases": { title: "The two active-order graph regimes", description: "One graph routes a cross edge into the interior of a block, while another inserts a subdivision vertex on a cross edge.", caption: "Plate XI.2. When s≤dq the entry positions shorten the global route to s; when s>dq subdivision vertices lengthen it to s." },
+  "sparse-cases": { title: "The two graph regimes before padding", description: "One graph routes a cross edge into the interior of a block, while another inserts a subdivision vertex on a cross edge.", caption: "Plate XI.2. When s≤dq the entry positions shorten the global route to s; when s>dq subdivision vertices lengthen it to s." },
   squeeze: { title: "Attainment closes the upper comparison", description: "Opposing arrows show rho at most rho star and rho star at most rho, meeting at equality.", caption: "Plate XI.3. Topic X supplies one inequality; the independently constructed stochastic realizer supplies the other." },
 };
 

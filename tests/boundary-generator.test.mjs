@@ -10,7 +10,7 @@ import {
   upperFarey,
 } from "../public/code/karpelevic-boundary.js";
 
-test("order-seven Farey ledger is exact", () => {
+test("order-seven Farey table is exact", () => {
   const fractions = upperFarey(7);
   assert.equal(fractions.length, 10);
   assert.deepEqual(fractions[0], { numerator: 0, denominator: 1 });

@@ -41,16 +41,16 @@ const commonImports = [
     href: sitePath("/proof/topic-ix/"),
     explanation: (
       <>
-        defines consecutive Farey endpoints, the denominator labels <i>q</i>, <i>s</i>, the multiplicity ⌊<i>n/q</i>⌋, the angles <i>A</i>, <i>B</i>, and the unique equal-profile radius on each open ray.
+        defines consecutive Farey endpoints, the denominator labels <i>q</i>, <i>s</i>, the multiplicity ⌊<i>n/q</i>⌋, the angles <i>A</i>, <i>B</i>, and the unique constant-parameter radius on each open ray.
       </>
     ),
   },
   {
-    label: "Topic X · Heterogeneous sharp inequality",
+    label: "Topic X · Sharp inequality for varying parameters",
     href: sitePath("/proof/topic-x/"),
     explanation: (
       <>
-        proves that a heterogeneous product on one controlled argument sheet lies no farther out than its equal-profile counterpart, with strictness unless all factor parameters agree.
+        proves that a product with varying parameters on one common continuous argument interval lies no farther out than its constant-parameter counterpart, with strictness unless all factor parameters agree.
       </>
     ),
   },
@@ -62,7 +62,7 @@ const partAResults: readonly ProofResultData[] = [
     label: "Lemma II.8.1",
     kind: "Lemma",
     title: "Mediant chord expansion in both denominator orientations",
-    purpose: "Show that when a new denominator splits one old Farey cell, each new rooted chord moves outward relative to the old candidate on the same ray.",
+    purpose: "Show that when a new denominator splits one old Farey cell, each new reciprocal chord moves outward relative to the old candidate on the same ray.",
     manuscriptHtml: exactResult("karp:lem:mediant-expansion"),
     vocabulary: [
       {
@@ -75,8 +75,8 @@ const partAResults: readonly ProofResultData[] = [
         example: <>Between 1/3 and 2/5 the mediant is 3/8. Its denominator 8 explains why it first appears at order eight.</>,
       },
       {
-        term: "Rooted chord",
-        definition: <>After taking the explicitly chosen root of the Ito carrier identity and replacing the old radius ρ by its reciprocal <i>R</i>, the equation has the form 1=β<i>U</i>+α<i>V</i>. The two complex endpoints <i>U,V</i> determine the rooted chord used in this comparison.</>,
+        term: "Reciprocal chord",
+        definition: <>After taking the explicitly chosen root of the Ito identity and replacing the old radius ρ by its reciprocal <i>R</i>, the equation has the form 1=β<i>U</i>+α<i>V</i>. The two complex endpoints <i>U,V</i> determine the reciprocal-coordinate chord used in this comparison.</>,
       },
       {
         term: "Relative interior of a segment",
@@ -94,7 +94,7 @@ const partAResults: readonly ProofResultData[] = [
         term: "Reciprocal radius",
         definition: (
           <>
-            If the old candidate radius is ρ with 0&lt;ρ&lt;1, the proof writes <i>R</i>=1/ρ&gt;1. Taking reciprocals turns the carrier equation into a chord whose positive-real intercept can be compared with 1.
+            If the old candidate radius is ρ with 0&lt;ρ&lt;1, the proof writes <i>R</i>=1/ρ&gt;1. Taking reciprocals turns the Ito equation into a chord whose positive-real intercept can be compared with 1.
           </>
         ),
       },
@@ -156,7 +156,7 @@ const partAResults: readonly ProofResultData[] = [
     takeaway: <>Whenever order <i>n</i> inserts a mediant, both new candidate arcs lie strictly outside the old candidate arc on their open rays.</>,
     provenance: "New result",
     sourceIds: ["standard-farey", "ito-1997"],
-    sourceRelation: <>Farey mediants and Ito’s cellwise carriers are established ingredients. The two-orientation signed chord comparison is the manuscript’s new nesting mechanism.</>,
+    sourceRelation: <>Farey mediants and Ito’s cellwise candidate curves are established ingredients. The two-orientation signed chord comparison is the manuscript’s new nesting mechanism.</>,
   },
   {
     id: "topic-xii-multiplicity-padding",
@@ -175,7 +175,7 @@ const partAResults: readonly ProofResultData[] = [
         definition: <>The greatest integer no larger than the real number <i>y</i>. For example, ⌊7/3⌋=2.</>,
       },
       {
-        term: "Equal profile",
+        term: "Constant parameter list",
         definition: <>All factor parameters β<sub>1</sub>,…,β<sub>m</sub> are the same number β, and therefore all α<sub>j</sub>=1−β are also equal. Topic X proved that this symmetric choice uniquely maximizes the radius under the phase constraint.</>,
       },
       {
@@ -184,7 +184,7 @@ const partAResults: readonly ProofResultData[] = [
         example: <>This is analogous to appending a factor 1 to an ordinary product: the expression is unchanged, but it is now represented with one more factor.</>,
       },
       {
-        term: "Jensen sheet",
+        term: "Common continuous argument interval",
         definition: <>The single continuous branch of the argument function on which Topic X’s strict-convexity inequality applies. Placing every factor argument in [<i>A</i>,<i>M</i><sub>*</sub>) prevents hidden additions of 2π.</>,
       },
       {
@@ -192,15 +192,15 @@ const partAResults: readonly ProofResultData[] = [
         definition: <>An ordinary complex argument is determined only modulo 2π. A lifted argument chooses one continuous real-valued representative <i>u</i>, so the proof can add arguments as real numbers and record the winding integer explicitly.</>,
       },
       {
-        term: "Heterogeneous product",
-        definition: <>A product in which the factor parameters β<sub>j</sub> are allowed to differ. An equal profile is the special homogeneous case β<sub>1</sub>=⋯=β<sub>M</sub>.</>,
+        term: "Varying-parameter product",
+        definition: <>A product in which the factor parameters β<sub>j</sub> are allowed to differ. The constant-parameter case has β<sub>1</sub>=⋯=β<sub>M</sub>.</>,
       },
       {
-        term: "Scalar defect",
+        term: "Scalar residual",
         definition: <>The left side minus the right side of the scalar radius equation. It is strictly increasing in the positive radius, so a negative value means that the tested radius lies below the unique equality radius.</>,
       },
     ],
-    intuition: <>Keep the old equal product, append one factor equal to 1, and reinterpret the result as an order-<i>n</i> heterogeneous product. Because the new parameter list contains both β and 0, it is not equal. Topic X’s strict inequality therefore says that equalizing the <i>M</i> factors must move the candidate radius outward.</>,
+    intuition: <>Keep the old constant-parameter product, append one factor equal to 1, and reinterpret the result as an order-<i>n</i> varying-parameter product. Because the new parameter list contains both β and 0, it is not constant. Topic X’s strict inequality therefore says that making the <i>M</i> factors constant must move the candidate radius outward.</>,
     figure: <NestingFigure kind="padding" />,
     proofSteps: [
       {
@@ -220,18 +220,18 @@ const partAResults: readonly ProofResultData[] = [
         explanation: <>Subtracting <i>qϑ</i> from the old phase and adding <i>A=qϑ−2πp</i> changes the integer winding from <i>r−mp</i> to <i>r−Mp</i>. This proves the new phase identity with no untracked multiple of 2π.</>,
       },
       {
-        title: "Keep every factor on the permitted sheet",
-        explanation: <>For 0&lt;β&lt;1 the map <i>t</i>↦Arg(μ<sup>q</sup>−<i>t</i>) increases strictly. The old arguments lie strictly between <i>A</i> and the sheet endpoint; the new zero factor has argument exactly <i>A</i>. Hence Topic X applies to the full padded list.</>,
+        title: "Keep every factor in the permitted interval",
+        explanation: <>For 0&lt;β&lt;1 the map <i>t</i>↦Arg(μ<sup>q</sup>−<i>t</i>) increases strictly. The old arguments lie strictly between <i>A</i> and the interval endpoint; the new zero factor has argument exactly <i>A</i>. Hence Topic X applies to the full padded list.</>,
       },
       {
         title: "Use strictness, not merely the weak inequality",
-        explanation: <>The padded list has <i>m</i> copies of β∈(0,1) and one copy of 0. It cannot be an equal profile, so the scalar defect at the old radius is strictly negative. Since the new defect is strictly increasing and vanishes at the new candidate, the old radius is strictly smaller.</>,
+        explanation: <>The padded list has <i>m</i> copies of β∈(0,1) and one copy of 0. It is not constant, so the scalar residual at the old radius is strictly negative. Since the new residual is strictly increasing and vanishes at the new candidate, the old radius is strictly smaller.</>,
       },
     ],
     takeaway: <>If only the multiplicity rises, the candidate radius rises strictly on every open ray even though the Farey endpoints do not change.</>,
     provenance: "New result",
     sourceIds: ["ito-1997"],
-    sourceRelation: <>Ito’s polynomial family supplies the equal-profile carrier. Appending the zero parameter and using the manuscript’s sharp heterogeneous inequality to prove strict order growth is new here.</>,
+    sourceRelation: <>Ito’s polynomial family supplies the constant-parameter candidate curve. Appending the zero parameter and using the manuscript’s sharp varying-parameter inequality to prove strict order growth is new here.</>,
   },
 ] as const;
 
@@ -296,7 +296,7 @@ const partBResults: readonly ProofResultData[] = [
     takeaway: <>The two local comparisons from Part A cover every open-ray change; endpoint rays require only their defining value 1.</>,
     provenance: "Classical result",
     sourceIds: ["standard-farey"],
-    sourceRelation: <>The determinant-one and mediant refinement properties are classical Farey arithmetic. The four-case ledger is the manuscript’s explicit organization of those standard facts for the nesting proof.</>,
+    sourceRelation: <>The determinant-one and mediant refinement properties are classical Farey arithmetic. The exhaustive four-case classification is the manuscript’s explicit organization of those standard facts for the nesting proof.</>,
   },
   {
     id: "topic-xii-candidate-nesting",
@@ -311,7 +311,7 @@ const partBResults: readonly ProofResultData[] = [
         definition: <>On an open Farey-cell ray it is the unique scalar equality radius from Topic IX. At every Farey endpoint below π, and separately at θ=π, it is defined to be 1.</>,
       },
       {
-        term: "Order-n scalar defect Fₙ,θ(t)",
+        term: "Order-n scalar residual Fₙ,θ(t)",
         definition: <>The left side of the order-<i>n</i> scalar radius equation minus its right side, evaluated at a test radius <i>t</i>. Formula (II.8.22) shows that its derivative is positive for <i>t&gt;0</i>.</>,
         example: <>If F<sub>n,θ</sub>(0.8)&lt;0 and its unique zero is 0.9, strict increase certifies 0.8&lt;0.9 without solving the equation again.</>,
       },
@@ -320,7 +320,7 @@ const partBResults: readonly ProofResultData[] = [
         definition: <>Reflecting a complex number across the real axis changes θ to −θ but preserves its modulus. Thus a radius comparison in the upper half-plane automatically gives the lower-half-plane comparison.</>,
       },
     ],
-    intuition: <>Instead of comparing two complicated curves directly, insert the old radius into the new scalar equation. The four-case ledger shows that the new defect there is always nonpositive. Because the new defect increases strictly and crosses zero exactly once, its zero must lie at or to the right of the old radius.</>,
+    intuition: <>Instead of comparing two complicated curves directly, insert the old radius into the new scalar equation. The exhaustive four-case classification shows that the new residual there is always nonpositive. Because the new residual increases strictly and crosses zero exactly once, its zero must lie at or to the right of the old radius.</>,
     figure: <NestingFigure kind="defect" />,
     proofSteps: [
       {
@@ -328,8 +328,8 @@ const partBResults: readonly ProofResultData[] = [
         explanation: <>For a fixed open ray, define F<sub>n,θ</sub>(<i>t</i>) from the order-<i>n</i> scalar equation. The two sine coefficients and both exponents are positive, so the displayed derivative is positive for every <i>t&gt;0</i>. Topic IX identifies <i>K</i><sub>n</sub>(θ) as its unique zero.</>,
       },
       {
-        title: "Test the old radius in an unchanged profile",
-        explanation: <>If neither the cell nor its multiplicity changes, the scalar equation is literally the same. Hence the new defect at ρ<sub>−</sub>=<i>K</i><sub>n−1</sub>(θ) equals zero.</>,
+        title: "Test the old radius in an unchanged parameter case",
+        explanation: <>If neither the cell nor its multiplicity changes, the scalar equation is literally the same. Hence the new residual at ρ<sub>−</sub>=<i>K</i><sub>n−1</sub>(θ) equals zero.</>,
       },
       {
         title: "Test the old radius after multiplicity padding",
@@ -337,7 +337,7 @@ const partBResults: readonly ProofResultData[] = [
       },
       {
         title: "Test the old radius in a mediant-split cell",
-        explanation: <>Lemma II.8.1 makes the reciprocal rooted chord’s intercept <i>I</i><sub>R</sub> exceed 1. Identity (II.8.23) expresses <i>I</i><sub>R</sub>−1 as a positive factor times −F<sub>n,θ</sub>(ρ<sub>−</sub>), so the defect is again strictly negative.</>,
+        explanation: <>Lemma II.8.1 makes the reciprocal chord’s intercept <i>I</i><sub>R</sub> exceed 1. Identity (II.8.23) expresses <i>I</i><sub>R</sub>−1 as a positive factor times −F<sub>n,θ</sub>(ρ<sub>−</sub>), so the residual is again strictly negative.</>,
       },
       {
         title: "Read the sign against the unique zero",
@@ -385,7 +385,7 @@ export function TopicXIIAContent() {
             <h3>Why reciprocal chords can compare radii</h3>
           </div>
           <div>
-            <p>On a fixed ray, a smaller original radius means a larger reciprocal radius. The old candidate becomes a rooted chord through 1. Both lemmas ask where the new rooted chord crosses the same positive real axis.</p>
+            <p>On a fixed ray, a smaller original radius means a larger reciprocal radius. The old candidate becomes a reciprocal chord through 1. Both lemmas ask where the new reciprocal chord crosses the same positive real axis.</p>
           </div>
         </header>
         <div className="proof-chapter-reading-note">
@@ -446,7 +446,7 @@ export function TopicXIIBContent() {
           {
             label: "Topic XII-A · The two local expansion mechanisms",
             href: sitePath("/proof/topic-xii/a/"),
-            explanation: <>supplies the strict reciprocal-chord comparison for a mediant split and the strict scalar-defect sign for a multiplicity increase.</>,
+            explanation: <>supplies the strict reciprocal-chord comparison for a mediant split and the strict scalar-residual sign for a multiplicity increase.</>,
           },
         ]}
         background={[
@@ -459,7 +459,7 @@ export function TopicXIIBContent() {
             explanation: <>if a strictly increasing function is nonpositive at <i>a</i> and vanishes at <i>b</i>, then <i>a≤b</i>.</>,
           },
         ]}
-        provedHere={<p>Lemma II.8.3 proves that the refinement ledger is exhaustive. Theorem II.8.4 applies one scalar sign test in every case and obtains the global candidate-nesting inequality.</p>}
+        provedHere={<p>Lemma II.8.3 proves that the Farey refinement case split is exhaustive. Theorem II.8.4 applies one scalar sign test in every case and obtains the global candidate-nesting inequality.</p>}
       />
 
       <section className="topic-i-textbook proof-chapter-group" aria-labelledby="candidate-radius-heading">
@@ -482,7 +482,7 @@ export function TopicXIIBContent() {
       <ProofResultGroup
         number="Part B · Exhaustion and assembly"
         title="From two local signs to one global nesting theorem"
-        introduction={<p>The case split first proves that every ray is accounted for. The theorem then evaluates the new scalar defect at the old candidate and reads the sign against a unique zero.</p>}
+        introduction={<p>The case split first proves that every ray is accounted for. The theorem then evaluates the new scalar residual at the old candidate and reads the sign against a unique zero.</p>}
         results={partBResults}
       />
     </>
