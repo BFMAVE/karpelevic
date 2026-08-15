@@ -427,7 +427,8 @@ export function TopicXChapter() {
         title="Compress the geometry and repair orientation"
         introduction={
           <p>
-            The wrapper theorem states exactly which Part I conclusions enter.
+            The imported monodromy theorem states exactly which Part I
+            conclusions enter.
             The reflection lemma shows that an existential orientation choice
             cannot change the modulus comparison.
           </p>
