@@ -1578,3 +1578,39 @@ full local source history remain later site milestones.
 - **Publication status:** source commit `a4bd770`; static-only Pages commit
   `c4c543a2962597e7c6b9fb83b2e0845253fba656`. Topic V and the synchronized
   PDF are live; Topics I–VI return HTTP 200 and Topic VII remains unavailable.
+
+## Current milestone — Topic VI notation and figure truthfulness pass (15 August 2026)
+
+- **The formal notation is type-correct:** the scalar slope formerly denoted
+  by `ell_i` is now written as the slope of the supporting line
+  `mathcal L_i`, while Lemma 7.9 writes the pulled-back line explicitly.
+  Topic VI also uses literal exposing-line, convex-position, affine-determinant,
+  half-plane, and boundary-case wording. Every theorem, equation, label,
+  permalink, and the numbered Remark 7.13 is preserved.
+- **The geometric plates now state exactly what they show:** Plate VI.1 treats
+  its coordinates as a consistency-checked illustration and has separated
+  mobile labels; Plate VI.2 displays `X_{m-1}(tau)` as the witness identifying
+  the polygon-interior half-plane; Plate VI.3 names the side index and return
+  index literally; and Plate VI.4 uses unjoined incidence markers instead of
+  drawing an unrelated closed polygon as `lambda P_tau`.
+- **The reader is leaner and more explicit:** Lemma 7.9 has one always-visible
+  index-flow and four-case map, while its guided explanation is reduced from
+  eight steps to four. Lemma 7.7 is unbadged and described as an elementary
+  fractional-linear calculation. The standalone verifier requires public
+  links to Topics I–V and keeps Topic VII unavailable.
+- **Artifacts are synchronized:** canonical TeX SHA-256 is
+  `9fab546ed7e1628d9dff426e8ebdabf1813a35cced4eb4dc5991a426ffc713a8`;
+  generated Part I data SHA-256 is
+  `59b97f4cb9cab4d9408883580a6b4c20df8686d339b95dc15a2a9495a07dfda6`;
+  and the compiled/public 100-page PDF SHA-256 is
+  `d3017f3527816e27551ccb499fe23913c48b9c81bd143de4adf065b32ca4a133`.
+  The refreshed standalone Topic VI HTML has SHA-256
+  `e4e1b135213edc783d4c927862c4b6e5d8db0faaef226869c6c70b8ea333858c`.
+- **Verification:** Tectonic compiles without layout or reference warnings;
+  generation is deterministic; all 40 tests, ESLint, `git diff --check`, the
+  Pages verifier, standalone link/fragment/privacy checks, and figure
+  truthfulness regressions pass. The public route has nine results, seven
+  proofs, and Plates VI.1–VI.4, with no false inner image polygon.
+- **Publication status:** source commit `9241ff2`; static-only Pages commit
+  `055623bd558cd86ac7dab0cca4819bc3e761d6a0`. Topics I–VI return HTTP 200,
+  Topic VII returns HTTP 404, and the synchronized manuscript PDF is live.
