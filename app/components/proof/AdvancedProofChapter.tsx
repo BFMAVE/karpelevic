@@ -19,6 +19,7 @@ export type AdvancedProofSetup = {
   id: string;
   title: string;
   html: string;
+  eyebrow?: string;
 };
 
 type AdvancedProofChapterProps = {
@@ -46,7 +47,9 @@ function FormalSetup({ setup }: { setup: AdvancedProofSetup }) {
       className="topic-i-formal proof-chapter-formal proof-chapter-setup"
       id={setup.id}
     >
-      <p className="section-label">Formal setup used below</p>
+      <p className="section-label">
+        {setup.eyebrow ?? "Formal setup used below"}
+      </p>
       <h2>{setup.title}</h2>
       <div
         className="part-i-manuscript topic-i-formal-text"

@@ -131,7 +131,12 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
     /The cyclic arithmetic is isolated in this section[\s\S]*Fix integers N\s*≥\s*2/i,
   );
   assert.match(topicVText, /Throughout this section assume N\s*≥\s*4/i);
-  assert.match(topicVText, /A complete 3-critical example with Δ=2/i);
+  assert.match(topicVText, /Critical invariant triangles with Δ=2/i);
+  assert.match(topicVText, /Exceptional order N=3 · unnumbered proposition/i);
+  assert.match(
+    topicVText,
+    /Unnumbered proposition\. For every 1\/2<a<1,[\s\S]*\(φ,κ,δ,Δ\)=\(3,2,1,2\)/i,
+  );
   assert.match(topicVText, /Why the projective proof that Δ=1 requires N\s*≥\s*4/i);
   assert.match(topicVText, /Exceptional case N=3/);
   assert.match(
@@ -139,6 +144,17 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
     /ν\s*poly\s*\(T\) as the minimum number of vertices[\s\S]*calls T N-critical/i,
   );
   assert.match(topicV, /href="\/proof\/#def:N-critical"/);
+  assert.match(topicV, /\\lambda P\\subseteq P/);
+  assert.match(
+    topicVText,
+    /ν\s*poly\s*\(tTₐ\)>3 for every t>1/i,
+  );
+  assert.doesNotMatch(topicVText, /check radial criticality/i);
+  assert.match(topicVText, /Four-stage roadmap/i);
+  assert.match(
+    topicVText,
+    /Record vectors → first-return bijection → the Δ=1 progression → polygon contact identities/i,
+  );
   assert.match(topicVText, /H₀=\{u∈ℝ³:u₀\+u₁\+u₂=0\}/);
   assert.match(topicVText, /tTₐQ=QΓ/);
   assert.match(topicVText, /ker\(Q\) invariant under Γ/);

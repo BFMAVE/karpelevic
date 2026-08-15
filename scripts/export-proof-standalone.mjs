@@ -16,6 +16,7 @@ const outputPath = path.resolve(
 );
 const proofRoute = process.env.PROOF_ROUTE ?? "/proof";
 const publicSite = "https://bfmave.github.io/karpelevic";
+const publishedTopicMaximum = 6;
 const bundleLinkMode = process.env.PROOF_STANDALONE_BUNDLE_LINKS === "1";
 const reviewBundleFiles = new Map([
   ["/proof/topic-v", "Critical_Invariant_Polygons_Topic_V.html"],
@@ -165,7 +166,7 @@ function markUnavailableTopicLinks(html) {
   const routeTopicNumber = proofTopicNumbers.get(normalizeRoutePath(proofRoute));
   if (routeTopicNumber === undefined) return html;
   const configuredPublicMaximum = Number(
-    process.env.PROOF_STANDALONE_TOPIC_MAX ?? "4",
+    process.env.PROOF_STANDALONE_TOPIC_MAX ?? String(publishedTopicMaximum),
   );
   const availableTopicMaximum = Math.max(
     routeTopicNumber,
@@ -220,7 +221,7 @@ function markUnavailableProofAnchors(html) {
   const routeTopicNumber = proofTopicNumbers.get(normalizeRoutePath(proofRoute));
   if (routeTopicNumber === undefined) return html;
   const configuredMaximum = Number(
-    process.env.PROOF_STANDALONE_TOPIC_MAX ?? String(routeTopicNumber),
+    process.env.PROOF_STANDALONE_TOPIC_MAX ?? String(publishedTopicMaximum),
   );
   const availableMaximum = Math.max(
     routeTopicNumber,
@@ -462,6 +463,37 @@ function verifyStandaloneHtml(html) {
     ) {
       throw new Error(
         "Standalone Topic III still contains avoidable reader-facing jargon.",
+      );
+    }
+  }
+
+  if (proofRoute === "/proof/topic-v") {
+    const requiredPublishedRoutes = [
+      "/proof/",
+      "/proof/topic-ii/",
+      "/proof/topic-iii/",
+      "/proof/topic-iv/",
+      "/proof/topic-vi/",
+    ];
+    for (const route of requiredPublishedRoutes) {
+      if (!html.includes(`href="${publicSite}${route}`)) {
+        throw new Error(
+          `Standalone Topic V must link to the published route ${route}`,
+        );
+      }
+    }
+    if (
+      /href="(?:Critical_Invariant_Polygons_Topic_(?:V|VI|VII)\.html|https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-vii\/)/i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "Standalone Topic V must not require sibling review files or link to unpublished Topic VII.",
+      );
+    }
+    if (!/data-proof-topic-number="7"[\s\S]{0,500}Forthcoming/i.test(html)) {
+      throw new Error(
+        "Standalone Topic V must mark Topic VII as forthcoming.",
       );
     }
   }

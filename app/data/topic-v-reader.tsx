@@ -40,7 +40,9 @@ const topicVContactNotation: AdvancedProofSetup = {
       Let λ be the nonreal complex multiplier fixed in Topic IV, with
       |λ|&lt;1, and let
       <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mi mathvariant="normal">conv</mi><mo stretchy="false">{</mo><msub><mi>x</mi><mn>0</mn></msub><mo>,</mo><mo>…</mo><mo>,</mo><msub><mi>x</mi><mrow><mi>N</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">P=\operatorname{conv}\{x_0,\ldots,x_{N-1}\}</annotation></semantics></math>
-      be the strict invariant polygon obtained in Topic IV. Here “strict” is the
+      be the strict invariant polygon obtained in Topic IV, so in particular
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mi>P</mi><mo>⊆</mo><mi>P</mi></mrow><annotation encoding="application/x-tex">\lambda P\subseteq P</annotation></semantics></math>.
+      Here “strict” is the
       custom term from Definition 1.2: the displayed vertices are precisely
       the extreme points, each listed once; it does not mean that the convex
       set is strictly convex. The vertices are listed counterclockwise, and
@@ -153,7 +155,8 @@ const topicVArithmeticGeometryDictionary: AdvancedProofSetup = {
 
 const topicVProjectiveScope: AdvancedProofSetup = {
   id: "topic-v-projective-scope",
-  title: "Why the projective proof that Δ=1 requires N≥4: an explicit critical triangle",
+  eyebrow: "Exceptional order N=3 · unnumbered proposition",
+  title: "Critical invariant triangles with Δ=2",
   html: String.raw`
     <p>
       Topic I defines ν<sub>poly</sub>(T) as the minimum number of vertices
@@ -163,10 +166,18 @@ const topicVProjectiveScope: AdvancedProofSetup = {
       exactly these definitions from
       <a href="${sitePath("/proof/#def:N-critical")}">Definition 1.1</a>.
     </p>
+    <div class="proposition">
+      <p>
+        <strong>Unnumbered proposition.</strong> For every 1/2&lt;a&lt;1, the
+        map Tₐ below is 3-critical, the displayed triangle is Tₐ-invariant
+        with all three image vertices in the relative interiors of their
+        assigned sides, and
+        (φ,κ,δ,Δ)=(3,2,1,2). In particular, the conclusion Δ=1 is false
+        for N=3.
+      </p>
+    </div>
     <p>
-      The assumption N≥4 is essential. The following family is 3-critical,
-      places all three image vertices in the relative interiors of their
-      assigned sides, and has (φ,κ,Δ)=(3,2,2).
+      The complete construction and proof follow.
     </p>
     <details class="proof-item-commentary proof-item-explainer">
       <summary><span>Why the projective proof that Δ=1 requires N≥4</span>Open the explicit critical-triangle calculation</summary>
@@ -200,7 +211,8 @@ const topicVProjectiveScope: AdvancedProofSetup = {
           ν<sub>poly</sub>(Tₐ)=3.
         </p>
         <p>
-          It remains to check radial criticality. Suppose t&gt;1 and some
+          It remains to prove the second 3-criticality inequality
+          ν<sub>poly</sub>(tTₐ)&gt;3 for every t&gt;1. Suppose t&gt;1 and some
           nondegenerate triangle R=conv{q₀,q₁,q₂} satisfied tTₐR⊆R. Barycentric
           coordinates are nonnegative coefficients summing to one. Writing
           every image vertex in those coordinates gives tTₐQ=QΓ, where
@@ -282,6 +294,24 @@ const guides: readonly ReaderResultGuide[] = [
   {
     itemNumber: 37,
     label: "Theorem 6.1",
+    prelude: (
+      <div
+        className="proof-critical-path"
+        aria-label="Four-stage roadmap for Theorem 6.1"
+      >
+        <p className="section-label">Four-stage roadmap</p>
+        <p>
+          Record vectors → first-return bijection → the Δ=1 progression →
+          polygon contact identities
+        </p>
+        <p>
+          The proof first establishes the lattice properties of consecutive
+          records, then builds the two-height return map, treats the special
+          determinant-one progression, and only in the final stage restores
+          the polygon geometry.
+        </p>
+      </div>
+    ),
     vocabulary: [
       vocabulary(
         "Record time of the residue sequence",
@@ -314,36 +344,20 @@ const guides: readonly ReaderResultGuide[] = [
     figure: "return-towers",
     proofSteps: [
       step(
-        "Locate the terminal record",
-        "After dividing by δ=gcd(N,κ), multiplication by κ/δ permutes residues modulo N/δ. Thus the largest attainable residue is N-δ and the final deficit is δ.",
+        "Establish the lattice geometry of consecutive records",
+        "The attainable residues identify the terminal deficit δ. Each record vector is primitive, and Lemma A.6 rules out determinant area larger than one between consecutive records. The resulting unimodular basis yields L(U)=Δ, qν+hΔ=N, and gcd(Δ,ν)=δ.",
+        "The extra lattice point supplied by a larger determinant would occur before h′ with a strictly better residue, contradicting consecutiveness.",
       ),
       step(
-        "Prove record vectors are primitive",
-        "If V=gW with g>1, the integer vector W has an earlier time and deficit ν/g, which would already improve the record.",
-      ),
-      step(
-        "Exclude a determinant gap",
-        "If consecutive records V,V′ enclosed determinant area larger than one, Lemma A.6 would supply a nonzero lattice point in their fundamental parallelogram. Primitivity excludes the radial edges; reflecting the point if needed puts it in conv{0,V,V′}.",
-        "That point has time strictly before h′ and deficit strictly smaller than ν, contradicting consecutiveness.",
-      ),
-      step(
-        "Derive the arithmetic identities",
-        "With U=V′-V=(q,p), linearity gives L(U)=Δ and determinant expansion gives qν+hΔ=N. The unimodular basis also gives gcd(Δ,ν)=δ.",
-      ),
-      step(
-        "Build the two-height successor",
-        "Give bases 1,…,ν height q or q+h. The successor advances one tower level, then returns the top base by addition of Δ modulo ν.",
-      ),
-      step(
-        "Prove the tower map is bijective",
-        "The base return has δ cycles. Each state cycle has N/δ states by qν+hΔ=N, exactly the length of a κ-orbit. Equivariance and matching residue classes modulo δ make the restriction a bijection on each cycle.",
+        "Build and prove the first-return bijection",
+        "Give each base label height q or q+h. The successor advances one level and returns the top by addition of Δ modulo ν. Its δ state cycles have the same length and residue classes as the δ orbits of addition by κ, so equivariance makes F bijective.",
       ),
       step(
         "Propagate a consecutive record pair with Δ=1 backwards",
         "When Δ=1, subtract floor(h/q) copies of U. A coefficient argument in the unimodular basis rules out every earlier improving vector and proves the displayed arithmetic run consists of consecutive records.",
       ),
       step(
-        "Read the towers geometrically",
+        "Restore the polygon contact identities",
         "An internal state cannot return to the base interval without giving the bijection two preimages. It is therefore an endpoint contact, so repeated multiplication gives the exact vertex identities and the two top relations.",
       ),
     ],
@@ -647,7 +661,6 @@ export const topicVGroups: readonly AdvancedProofGroup[] = [
     formalSetups: [
       {
         ...topicVProjectiveScope,
-        title: "A complete 3-critical example with Δ=2",
       },
     ],
     results: [],

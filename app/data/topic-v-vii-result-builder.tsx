@@ -9,6 +9,7 @@ import { getProofItems } from "./proof";
 export type ReaderResultGuide = {
   itemNumber: number;
   label: string;
+  prelude?: React.ReactNode;
   vocabulary?: readonly ProofVocabularyEntry[];
   intuition: React.ReactNode;
   proofSteps?: readonly GuidedProofStep[];
@@ -36,6 +37,7 @@ export function makeReaderResult(
     title: item.title,
     purpose: item.reading,
     manuscriptHtml,
+    prelude: guide.prelude,
     vocabulary: guide.vocabulary,
     intuition: guide.intuition,
     proofSteps: guide.proofSteps,

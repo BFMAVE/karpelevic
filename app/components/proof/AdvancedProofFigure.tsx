@@ -33,12 +33,12 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
       "Plate V.2. The record pair V=(1,1), V′=(2,1) gives ν=8, Δ=5, q=1, and h=1. Three base indices have return height Hᵢ=q=1, while five have Hᵢ=q+h=2. In each cell the large label is the evaluated residue F(t,i)=[i+5t]₁₃, and the smaller pair below it is the domain coordinate (t,i). Thus qν+hΔ=13 appears as three one-cell towers plus five two-cell towers.",
   },
   "projective-corridor": {
-    status: "Numerical convex hexagon · geometry verified",
-    title: "A verified sequence of perspectivities",
+    status: "Numerical illustration · incidences checked",
+    title: "Successive perspectivities in a numerical example",
     description:
-      "The convex hexagon P equals the convex hull of X zero through X five. The points C two through C five lie in the relative interiors of their indicated sides, and each line script L two through script L four supports P while exposing only its named vertex. The eight tested projection incidences have maximum absolute determinant residual about 3.3 times ten to the minus eleven.",
+      "The convex hexagon P is the convex hull of X zero through X five. In the displayed coordinates, the oriented convexity and support signs, the positions of C two through C five on their indicated sides, and the eight projection incidences were checked consistently. These coordinate checks keep the illustration internally consistent; the proof of Proposition 7.5 is independent of them.",
     caption:
-      "Plate V.4. Verified numerical example of Definition 7.4. Let P=conv{X₀,…,X₅}. Every vertex lies strictly to the left of each nonincident oriented side (minimum signed determinant 1400), so the displayed cyclic list defines a convex hexagon. The points Cᵢ are constructed in relint[Xᵢ₋₁,Xᵢ] for 2≤i≤5. For 2≤i≤4, all other polygon vertices lie strictly on one side of ℒᵢ (minimum absolute signed determinant 1972), so ℒᵢ supports P and exposes Xᵢ. The eight required projection incidences have maximum absolute determinant residual approximately 3.3×10⁻¹¹. Their composition is a projectivity from Λ₁=aff(X₀,X₁) to K=aff(C₄,C₅).",
+      "Plate V.4. Numerical illustration of Definition 7.4. Let P=conv{X₀,…,X₅}. The displayed coordinates were checked consistently for cyclic convexity, the placement Cᵢ∈relint[Xᵢ₋₁,Xᵢ] for 2≤i≤5, the oriented support signs of ℒᵢ for 2≤i≤4, and all eight projection incidences. Their composition is a projectivity from Λ₁=aff(X₀,X₁) to K=aff(C₄,C₅). These numerical checks concern only the internal consistency of the drawing; the projective statements in Proposition 7.5 are proved independently.",
   },
   "topic-vi-projective-chain": {
     status: "Adapted from Topic V · incidence verified",
