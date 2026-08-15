@@ -325,10 +325,10 @@ const rawItems: readonly [
   [38, "Corollary", "First-return decomposition on an extended record interval", "Extends the formulas across endpoint-contact indices so that all boundary cases use the same first-return description."],
   [39, "Remark", "Record-vector chain and lattice sail", "Relates the unimodular record-vector chain to the standard convex-hull lattice sail without identifying collinear intermediate records as sail vertices."],
   [40, "Lemma", "Supporting lines exposing the base vertices", "Proves that each preimage supporting line used along the selected boundary arc exposes the corresponding polygon vertex."],
-  [41, "Lemma", "The selected boundary arc is proper", "Shows that one cyclic orientation gives pairwise distinct consecutive boundary vertices and omits at least one polygon side."],
+  [41, "Lemma", "The selected boundary arc omits at least one side", "Shows that one cyclic orientation gives pairwise distinct consecutive boundary vertices whose displayed sides do not exhaust the sides of the polygon."],
   [42, "Proposition", "Partition of the return source–target pairs", "Partitions the target indices under the first-return translation and records the source class of every pair."],
   [43, "Definition", "Composition of perspectivities along the selected boundary arc", "Defines a projectivity from the initial line to the terminal line by successive perspectivities."],
-  [44, "Proposition", "Affine chart adapted to the selected boundary arc", "Chooses an affine chart in which the endpoint supports are parallel and the selected boundary arc has strictly increasing edge slopes."],
+  [44, "Proposition", "Affine chart adapted to the selected boundary arc", "Chooses an affine chart in which the endpoint supporting lines are parallel and the selected boundary arc has strictly increasing edge slopes."],
   [45, "Lemma", "Location of the final intersection when Z₁ = X₀", "Locates the final intersection produced by the successive perspectivities for the special starting point Z₁=X₀."],
   [46, "Lemma", "Sign of t − u(t) near a fixed point of a real projectivity", "Finds arbitrarily small nonzero t for which t-u(t)>0."],
   [47, "Theorem", "A small deformation moving the final image into the interior half-plane", "For N≥4, converts the scalar inequality τ-u(τ)>0 into the required planar half-plane condition while preserving strict convex order."],
@@ -429,9 +429,9 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "rotation",
     eyebrow: "Topic V · 9 items",
-    title: "Rotation arithmetic, first-return towers, and the projective boundary argument",
+    title: "Rotation arithmetic, the first-return decomposition, and projective preparation",
     question:
-      "How does one cyclic interval determine its first-return towers, and how does Topic V prepare the N≥4 proof of Δ=1 completed in Topic VI?",
+      "How does one cyclic interval determine its first-return decomposition, and how does Topic V prepare the N≥4 proof of Δ=1 completed in Topic VI?",
     overview: [
       "A finite cyclic rotation converts the interval from Topic IV into first-return data. Consecutive record vectors and determinant-one lattice pairs produce a two-height tower decomposition.",
       "For N≥4, the tower identities determine exposing supporting lines along a boundary arc that omits at least one side. A finite partition of return source–target pairs and a composition of perspectivities prepare the deformation argument completed in Topic VI; the page exhibits the N=3 exception separately.",

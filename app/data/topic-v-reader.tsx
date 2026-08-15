@@ -113,12 +113,14 @@ const topicVContactNotation: AdvancedProofSetup = {
       <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mi>φ</mi></mrow><annotation encoding="application/x-tex">N=\varphi</annotation></semantics></math>.
     </p>
     <p>
-      Plate V.1 also mentions the <strong>Klein sail</strong>. In this planar
-      setting it is the relevant boundary of the convex hull of the nonzero
-      lattice points in the cone between two rays. The proof uses the complete
-      record-vector chain, including any record vector lying in the interior
-      of a straight sail edge; it never assumes that every record vector is a
-      corner of the sail.
+      Plate V.1 also mentions the <strong>Klein sail</strong>. Let C be the
+      closed cone bounded by the positive b-axis and the ray L(h,b)=0. The
+      Klein sail of C is the boundary visible from the origin of
+      conv((C∩ℤ²)∖{0}). The proof uses the complete polygonal chain
+      through the lattice vectors associated with successive upper-record
+      times, including any such vector lying in the relative interior of a
+      straight sail edge; it never assumes that every record vector is a
+      vertex of the sail.
     </p>
   `,
 };
@@ -149,15 +151,23 @@ const topicVArithmeticGeometryDictionary: AdvancedProofSetup = {
 
 const topicVProjectiveScope: AdvancedProofSetup = {
   id: "topic-v-projective-scope",
-  title: "Why projective unit return requires N≥4: an explicit critical triangle",
+  title: "Why the projective proof that Δ=1 requires N≥4: an explicit critical triangle",
   html: String.raw`
+    <p>
+      Topic I defines ν<sub>poly</sub>(T) as the minimum number of vertices
+      of a nondegenerate polygon P satisfying TP⊆P. It calls T
+      <em>N-critical</em> when ν<sub>poly</sub>(T)=N but
+      ν<sub>poly</sub>(tT)&gt;N for every t&gt;1. The calculation below uses
+      exactly these definitions from
+      <a href="${sitePath("/proof/#def:N-critical")}">Definition 1.1</a>.
+    </p>
     <p>
       The assumption N≥4 is essential. The following family is 3-critical,
       places all three image vertices in the relative interiors of their
       assigned sides, and has (φ,κ,Δ)=(3,2,2).
     </p>
     <details class="proof-item-commentary proof-item-explainer">
-      <summary><span>Why projective unit return requires N≥4</span>Open the explicit critical-triangle calculation</summary>
+      <summary><span>Why the projective proof that Δ=1 requires N≥4</span>Open the explicit critical-triangle calculation</summary>
       <div class="proof-item-explainer-body">
         <p>
           Fix 1/2&lt;a&lt;1. A matrix is <dfn>doubly stochastic</dfn> when its
@@ -167,14 +177,14 @@ const topicVProjectiveScope: AdvancedProofSetup = {
         <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>B</mi><mi>a</mi></msub><mo>=</mo><mrow><mo>(</mo><mtable><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn><mo>−</mo><mi>a</mi></mtd><mtd><mi>a</mi></mtd></mtr><mtr><mtd><mi>a</mi></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn><mo>−</mo><mi>a</mi></mtd></mtr><mtr><mtd><mn>1</mn><mo>−</mo><mi>a</mi></mtd><mtd><mi>a</mi></mtd><mtd><mn>0</mn></mtd></mtr></mtable><mo>)</mo></mrow><mo>.</mo></mrow><annotation encoding="application/x-tex">B_a=\begin{pmatrix}0&amp;1-a&amp;a\\a&amp;0&amp;1-a\\1-a&amp;a&amp;0\end{pmatrix}.</annotation></semantics></math>
         <p>
           Let e₀,e₁,e₂ be the standard coordinate vectors of ℝ³, let
-          H={u∈ℝ³:u₀+u₁+u₂=0}, let 𝟙=(1,1,1), and put xᵢ=eᵢ−𝟙/3. The
-          triangle P=conv{x₀,x₁,x₂} lies in H; it is independent of a.
-          Because Bₐ is doubly stochastic, it preserves H and fixes 𝟙. Its restriction
-          Tₐ=Bₐ|H therefore satisfies
+          H₀={u∈ℝ³:u₀+u₁+u₂=0}, let 𝟙=(1,1,1), and put xᵢ=eᵢ−𝟙/3. The
+          triangle P=conv{x₀,x₁,x₂} lies in H₀; it is independent of a.
+          Because Bₐ is doubly stochastic, it preserves H₀ and fixes 𝟙. Its restriction
+          Tₐ=Bₐ|H₀ therefore satisfies
         </p>
         <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><mrow><msub><mi>T</mi><mi>a</mi></msub><msub><mi>x</mi><mn>0</mn></msub><mo>=</mo><mi>a</mi><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>a</mi><mo>)</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo></mrow></mtd></mtr><mtr><mtd><mrow><msub><mi>T</mi><mi>a</mi></msub><msub><mi>x</mi><mn>1</mn></msub><mo>=</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>a</mi><mo>)</mo><msub><mi>x</mi><mn>0</mn></msub><mo>+</mo><mi>a</mi><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo></mrow></mtd></mtr><mtr><mtd><mrow><msub><mi>T</mi><mi>a</mi></msub><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><mi>a</mi><msub><mi>x</mi><mn>0</mn></msub><mo>+</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>a</mi><mo>)</mo><msub><mi>x</mi><mn>1</mn></msub><mo>.</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}T_ax_0&amp;=ax_1+(1-a)x_2,\\T_ax_1&amp;=(1-a)x_0+ax_2,\\T_ax_2&amp;=ax_0+(1-a)x_1.\end{aligned}</annotation></semantics></math>
         <p>
-          Identify H with ℂ by sending xⱼ to exp(2πij/3). Substitution in the
+          Identify H₀ with ℂ by sending xⱼ to exp(2πij/3). Substitution in the
           three displayed formulas shows that Tₐ is multiplication by
         </p>
         <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><mrow><msub><mi>λ</mi><mi>a</mi></msub><mo>=</mo><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>+</mo><mi>i</mi><mfrac><msqrt><mn>3</mn></msqrt><mn>2</mn></mfrac><mo>(</mo><mn>2</mn><mi>a</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>,</mo></mrow></mtd></mtr><mtr><mtd><mrow><msup><mrow><mo>|</mo><msub><mi>λ</mi><mi>a</mi></msub><mo>|</mo></mrow><mn>2</mn></msup><mo>=</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mo>+</mo><mfrac><mn>3</mn><mn>4</mn></mfrac><msup><mrow><mo>(</mo><mn>2</mn><mi>a</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mn>2</mn></msup><mo>&lt;</mo><mn>1</mn><mo>.</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}\lambda_a&amp;=-\frac12+i\frac{\sqrt3}{2}(2a-1),\\ |\lambda_a|^2&amp;=\frac14+\frac34(2a-1)^2&lt;1.\end{aligned}</annotation></semantics></math>
@@ -191,21 +201,22 @@ const topicVProjectiveScope: AdvancedProofSetup = {
           It remains to check radial criticality. Suppose t&gt;1 and some
           nondegenerate triangle R=conv{q₀,q₁,q₂} satisfied tTₐR⊆R. Barycentric
           coordinates are nonnegative coefficients summing to one. Writing
-          every image vertex in those coordinates gives tTₐA=AC, where
-          A:ℝ³→H sends c to Σⱼcⱼqⱼ and C is nonnegative with every column
-          summing to one (that is, column-stochastic). The map A is surjective,
-          the identity AC=tTₐA makes ker(A) invariant under C, and the induced
-          map on ℝ³/ker(A) is conjugate to tTₐ. It therefore has eigenvalues
-          tλₐ and tλ̄ₐ. Column sums equal to one give 𝟙ᵀC=𝟙ᵀ, so 1 is a left
-          eigenvalue of C and hence an eigenvalue of C. Counted with algebraic
+          every image vertex in those coordinates gives tTₐQ=QΓ, where
+          Q:ℝ³→H₀ sends c to Σⱼcⱼqⱼ and Γ is nonnegative with every column
+          summing to one (that is, column-stochastic). The map Q is surjective,
+          the identity QΓ=tTₐQ makes ker(Q) invariant under Γ, and the induced
+          map on ℝ³/ker(Q) is conjugate to tTₐ. It therefore has eigenvalues
+          tλₐ and tλ̄ₐ. Column sums equal to one give 𝟙ᵀΓ=𝟙ᵀ, so 1 is a left
+          eigenvalue of Γ and hence an eigenvalue of Γ. Counted with algebraic
           multiplicity, 1, tλₐ, and tλ̄ₐ are all three eigenvalues of the
-          3×3 matrix C, and therefore
+          3×3 matrix Γ, and therefore
         </p>
-        <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><mrow><mi mathvariant="normal">tr</mi><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo>+</mo><mi>t</mi><msub><mi>λ</mi><mi>a</mi></msub><mo>+</mo><mi>t</mi><msub><mover><mi>λ</mi><mo>¯</mo></mover><mi>a</mi></msub></mrow></mtd></mtr><mtr><mtd><mrow><mo>=</mo><mn>1</mn><mo>+</mo><mn>2</mn><mi>t</mi><mi mathvariant="normal">Re</mi><mo stretchy="false">(</mo><msub><mi>λ</mi><mi>a</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo>&lt;</mo><mn>0</mn><mo>.</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}\operatorname{tr}(C)&amp;=1+t\lambda_a+t\overline\lambda_a,\\&amp;=1+2t\operatorname{Re}(\lambda_a)=1-t&lt;0.\end{aligned}</annotation></semantics></math>
+        <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable columnalign="left"><mtr><mtd><mrow><mi mathvariant="normal">tr</mi><mo stretchy="false">(</mo><mi>Γ</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo>+</mo><mi>t</mi><msub><mi>λ</mi><mi>a</mi></msub><mo>+</mo><mi>t</mi><msub><mover><mi>λ</mi><mo>¯</mo></mover><mi>a</mi></msub></mrow></mtd></mtr><mtr><mtd><mrow><mo>=</mo><mn>1</mn><mo>+</mo><mn>2</mn><mi>t</mi><mi mathvariant="normal">Re</mi><mo stretchy="false">(</mo><msub><mi>λ</mi><mi>a</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo>&lt;</mo><mn>0</mn><mo>.</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}\operatorname{tr}(\Gamma)&amp;=1+t\lambda_a+t\overline\lambda_a,\\&amp;=1+2t\operatorname{Re}(\lambda_a)=1-t&lt;0.\end{aligned}</annotation></semantics></math>
         <p>
           This is impossible because the trace of a nonnegative matrix is the
-          sum of its nonnegative diagonal entries. Therefore no outward
-          enlargement tTₐ has an invariant triangle, and Tₐ is 3-critical.
+          sum of its nonnegative diagonal entries. Therefore, for no t&gt;1 does
+          the scalar multiple tTₐ admit an invariant triangle, and Tₐ is
+          3-critical.
           Explicitly: P is an invariant triangle for Tₐ, whereas for every
           t&gt;1 the map tTₐ admits no invariant polygon with at most three
           vertices.
@@ -216,8 +227,8 @@ const topicVProjectiveScope: AdvancedProofSetup = {
           deficit 1. Thus δ=gcd(3,2)=1 and
           Δ=3−1=2. Hence φ&gt;δ but Δ≠1. Topic XIII proves the stochastic
           eigenvalue region for orders one, two, and three directly; it does
-          not pass this exceptional triangle through the projective unit-return
-          argument. <strong>Topic XIII is forthcoming on the public site.</strong>
+          not pass this exceptional triangle through the projective-geometric
+          proof that Δ=1. <strong>Topic XIII is forthcoming on the public site.</strong>
         </p>
       </div>
     </details>
@@ -236,7 +247,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       vocabulary(
         "Half-open fundamental parallelogram",
-        "The set αu+βv with 0≤α,β<1. The open upper edges prevent the same lattice class from being counted twice.",
+        "The set αu+βv with 0≤α,β<1. The edges corresponding to α=1 or β=1 are excluded, so every lattice coset has exactly one representative.",
       ),
       vocabulary(
         "Finite quotient group",
@@ -358,7 +369,7 @@ const guides: readonly ReaderResultGuide[] = [
         "Use Theorem 6.1 with V=E and V′=E+U, where U=(q,p) and qκ−pN=1. Thus ν=d, Δ=1, and h=e.",
       ),
       step(
-        "Read the section",
+        "Read the first-return decomposition",
         "The first d-1 bases have height q, the last has height q+e, and the first return is the successor.",
       ),
       step(
@@ -379,11 +390,11 @@ const guides: readonly ReaderResultGuide[] = [
     vocabulary: [
       vocabulary(
         "Lattice sail",
-        "The relevant boundary of the convex hull of the nonzero lattice points in a cone. The record-vector chain retains collinear intermediate points, so not every record vector is a sail vertex.",
+        "For the closed cone C bounded by the positive b-axis and the ray L(h,b)=0, the Klein sail is the boundary visible from the origin of conv((C∩ℤ²)∖{0}). The chain through the vectors associated with successive upper-record times retains collinear intermediate points, so not every such vector is a sail vertex.",
       ),
     ],
     intuition:
-      "Continued-fraction structure is visible in the record vectors. The record-vector chain, rather than an identification of every record with a sail vertex, is the formal object used in the proof.",
+      "Continued-fraction structure is visible in the record vectors. The polygonal chain through the vectors associated with successive upper-record times, rather than an identification of every record with a sail vertex, is the formal object used in the proof.",
     takeaway:
       "The sail gives geometric context; the direct record argument remains the formal dependency.",
   },
@@ -428,8 +439,8 @@ const guides: readonly ReaderResultGuide[] = [
     label: "Lemma 7.2",
     vocabulary: [
       vocabulary(
-        "Proper boundary chain",
-        "A list of distinct consecutive boundary vertices that omits at least one polygon side.",
+        "The displayed boundary arc",
+        "The consecutive vertices X₀,…,Xₘ₊₁ and the sides between them. The lemma proves that these sides do not exhaust the sides of P.",
       ),
       vocabulary(
         "The two cyclic orientations",
@@ -437,7 +448,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     intuition:
-      "The projective construction needs room outside its moving chain. The branch inequality chooses the shorter arc and the proof checks that even the limiting parameter values leave at least one side unused.",
+      "The construction in Definition 7.4 requires at least one side of P not belonging to the displayed boundary arc. The applicable inequality chooses an orientation and the proof checks that even the limiting parameter values leave at least one side unused.",
     proofSteps: [
       step(
         "Forward branch",
@@ -472,24 +483,12 @@ const guides: readonly ReaderResultGuide[] = [
         "The map r adds Δ modulo φ in 𝓑, and s=r⁻¹ subtracts Δ modulo φ.",
       ),
       vocabulary(
-        "The set M and its distinguished endpoint",
-        "The displayed formulas choose an interval M of base indices and one distinguished endpoint b*. Whenever that endpoint is omitted, the set is written explicitly as M∖{b*}.",
-      ),
-      vocabulary(
-        "The set D",
-        "An explicit interval of target indices in the selected cyclic orientation.",
-      ),
-      vocabulary(
-        "The set R and the index c",
-        "They are the two parts of r(M): R=r(M∖{b*}) and c=r(b*), so r(M)=R⊔{c}.",
-      ),
-      vocabulary(
-        "The set A",
-        "The remaining target indices: A=𝓑∖(D∪R∪{c}).",
+        "The interval M, its distinguished source, and its target",
+        "The displayed formulas choose an interval M of base indices, one distinguished source b*, and its target c=r(b*). Whenever that source is omitted, the set is written explicitly as M∖{b*}.",
       ),
     ],
     intuition:
-      "The proposition is finite combinatorics. It partitions every target index according to the return translation and records where the corresponding source lies. No polygonal deformation is assumed here.",
+      "The proposition is finite combinatorics. It separates the targets whose inverse lies in M∖{b*}, the single target c=r(b*), and the remaining targets, then records the four disjoint sets displayed in the statement. No polygonal deformation is assumed here.",
     figure: "global-ledger",
     proofSteps: [
       step(
@@ -533,12 +532,16 @@ const guides: readonly ReaderResultGuide[] = [
         "An affine line together with its point at infinity, representing its direction.",
       ),
       vocabulary(
-        "Initial and terminal lines",
-        "The construction begins on ℓ₁=aff(X₀,X₁) and ends on ℓₘ₊₁=aff(Cₘ,Cₘ₊₁). These lines need not be the same, so the composition is not yet a self-map.",
+        "Initial and terminal projective lines",
+        "The construction begins on Λ₁, the projective completion of aff(X₀,X₁), and ends on K, the projective completion of aff(Cₘ,Cₘ₊₁). These lines need not be the same, so the composition is not yet a self-map.",
+      ),
+      vocabulary(
+        "Projective corridor",
+        "The page's shorthand for the displayed consecutive vertices, relative-interior contact points, and exposing supporting lines. Definition 7.4 lists the exact data; the phrase adds no further hypothesis.",
       ),
     ],
     intuition:
-      "Successive projections package the incidence constraints into one projectivity Π:ℓ₁→ℓₘ₊₁. Topic VI specifies the identification needed to turn this into a self-map and then studies that self-map.",
+      "Successive projections package the incidence constraints into one projectivity Π:Λ₁→K. Topic VI specifies the identification needed to turn this into a self-map and then studies that self-map.",
     figure: "projective-corridor",
     takeaway:
       "The selected boundary arc and its projection centres define a projectivity from the initial line to the terminal line without using lengths or angles.",
@@ -572,7 +575,7 @@ const guides: readonly ReaderResultGuide[] = [
       "Projective geometry lets us choose coordinates adapted to the proof. Sending the intersection of two endpoint supporting lines to infinity makes them parallel, and the selected boundary arc becomes an ordinary convex graph whose slopes can be compared.",
     proofSteps: [
       step(
-        "Choose two generic exposing supporting lines",
+        "Choose endpoint supporting lines outside a finite exceptional set",
         "Fix M₀ exposing X₀ and vary M₁ among the supporting lines exposing Xₘ₊₁. Excluding the finite family of forbidden choices keeps their intersection O off every side line and every selected supporting line used below.",
       ),
       step(
@@ -590,7 +593,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Read the new geometry",
-        "The endpoint supporting lines are parallel because their intersection lay on J, which is now the line at infinity. By the genericity choice, no side line of the selected arc and no selected supporting line is parallel to them.",
+        "The endpoint supporting lines are parallel because their intersection lay on J, which is now the line at infinity. By the finite-exception choice, no side line of the selected arc and no selected supporting line is parallel to them.",
       ),
       step(
         "Make the chain a convex graph",
@@ -619,7 +622,7 @@ const take = (numbers: readonly number[]) =>
 export const topicVGroups: readonly AdvancedProofGroup[] = [
   {
     number: "I",
-    title: "Records, lattice index, and first-return towers",
+    title: "Records, lattice index, and the first-return decomposition",
     introduction: (
       <p>
         The cyclic orbit is first studied without a polygon. The lattice
@@ -634,7 +637,7 @@ export const topicVGroups: readonly AdvancedProofGroup[] = [
     title: "Exceptional case N=3",
     introduction: (
       <p>
-        The projective unit-return argument requires N≥4. Before imposing
+        The projective-geometric proof that Δ=1 requires N≥4. Before imposing
         that standing assumption, this complete calculation shows why: a
         3-critical triangle can have first-return step Δ=2.
       </p>
@@ -668,7 +671,7 @@ export const topicVGroups: readonly AdvancedProofGroup[] = [
   },
   {
     number: "III",
-    title: "Choose a boundary arc and classify its source–target pairs",
+    title: "Select a boundary arc that omits a side and classify its source–target pairs",
     introduction: (
       <p>
         One of the two cyclic orientations gives consecutive boundary vertices
@@ -679,7 +682,7 @@ export const topicVGroups: readonly AdvancedProofGroup[] = [
     formalSetups: [
       {
         ...topicVCorridorDictionary,
-        title: "Indexing in the two cyclic orientations",
+        title: "The two cyclic-orientation cases",
       },
     ],
     results: take([41, 42]),
@@ -689,10 +692,13 @@ export const topicVGroups: readonly AdvancedProofGroup[] = [
     title: "Composition of perspectivities and an affine chart",
     introduction: (
       <p>
-        The successive projections define a projectivity from the initial line
-        to the terminal line. A carefully chosen affine chart turns the
-        selected polygonal arc into a convex graph with strictly increasing
-        slopes.
+        Lemma 7.1 supplies supporting lines exposing the intermediate vertices,
+        Lemma 7.2 guarantees that the displayed sides do not exhaust the
+        polygon, and Proposition 7.3 separates one source–target pair from the
+        remaining pairs. Definition 7.4 calls these exact data a projective
+        corridor and composes its perspectivities. A carefully chosen affine
+        chart then turns the selected polygonal arc into a convex graph with
+        strictly increasing slopes.
       </p>
     ),
     results: take([43, 44]),
@@ -700,6 +706,12 @@ export const topicVGroups: readonly AdvancedProofGroup[] = [
 ] as const;
 
 export const topicVImported: readonly ProofDependency[] = [
+  {
+    label: "Topic I: minimum invariant-polygon vertex count and N-criticality",
+    href: sitePath("/proof/#def:N-critical"),
+    explanation:
+      "Definition 1.1 defines νpoly(T) as the minimum number of vertices of a nondegenerate T-invariant polygon and defines N-criticality by νpoly(T)=N together with νpoly(tT)>N for every t>1.",
+  },
   {
     label: "Topic I: strict separation",
     href: sitePath("/proof/#lem:strict-separation"),

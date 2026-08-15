@@ -23,30 +23,30 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
     description:
       "A residue strip uses labelled horizontal reference guides at residues zero, five, ten, and twelve, the four record levels. A second panel plots the corresponding integer record vectors zero one, one one, two one, and five two beside the boundary ray on which L of h comma b equals zero.",
     caption:
-      "Plate V.1. For N=13 and κ=5, the upper-record times are 0, 1, 2, and 5, with residues 0, 5, 10, and 12 and deficits 13, 8, 3, and 1. The labelled horizontal lines are residue-scale guides. The lower panel shows the corresponding unimodular record-vector chain beside the boundary ray L(h,b)=0 of the relevant cone. The Klein sail is the corresponding convex-hull boundary; the record-vector chain retains collinear intermediate points, which need not be sail vertices.",
+      "Plate V.1. For N=13 and κ=5, the upper-record times are 0, 1, 2, and 5, with residues 0, 5, 10, and 12 and deficits 13, 8, 3, and 1. The labelled horizontal lines are residue-scale guides. The lower panel shows the polygonal chain through the lattice vectors associated with the upper-record times beside the boundary ray L(h,b)=0. The Klein sail is defined in Remark 6.3 and is not separately drawn; the displayed chain may contain lattice points in the relative interiors of sail edges.",
   },
   "return-towers": {
-    title: "The two-height return section",
+    title: "Two-height first-return decomposition",
     description:
-      "Eight base columns contain three towers of height one and five towers of height two, giving thirteen cells. Every cell is labelled by its state F of t comma i, and each tower is labelled by its height. One arrow illustrates addition of five modulo eight on the base-index set.",
+      "Eight base columns contain three towers of height one and five towers of height two, giving thirteen cells. Every cell displays the evaluated residue F of t comma i prominently, with its domain coordinate t comma i underneath. Each tower is labelled by its height, and one arrow illustrates addition of five modulo eight on the base-index set.",
     caption:
-      "Plate V.2. The record pair V=(1,1), V′=(2,1) gives ν=8, Δ=5, q=1, and h=1. Three base indices have return height Hᵢ=q=1, while five have Hᵢ=q+h=2. Each cell carries its actual label F(t,i)=[i+5t]₁₃. Thus qν+hΔ=13 appears as three one-cell towers plus five two-cell towers.",
+      "Plate V.2. The record pair V=(1,1), V′=(2,1) gives ν=8, Δ=5, q=1, and h=1. Three base indices have return height Hᵢ=q=1, while five have Hᵢ=q+h=2. In each cell the large label is the evaluated residue F(t,i)=[i+5t]₁₃, and the smaller pair below it is the domain coordinate (t,i). Thus qν+hΔ=13 appears as three one-cell towers plus five two-cell towers.",
   },
   "projective-corridor": {
-    status: "Numerically constructed · incidence verified",
-    title: "Numerically constructed, incidence-verified projective chain",
+    status: "Numerical convex hexagon · geometry verified",
+    title: "A verified sequence of perspectivities",
     description:
-      "A numerically constructed, incidence-verified diagram maps the source line A one through X zero and X one to the target line K through C four and C five. Its eight tested collinearities have maximum absolute determinant residual about 3.3 times ten to the minus eleven. It displays a selected local boundary arc, not a full polygon.",
+      "The convex hexagon P equals the convex hull of X zero through X five. The points C two through C five lie in the relative interiors of their indicated sides, and each line script L two through script L four supports P while exposing only its named vertex. The eight tested projection incidences have maximum absolute determinant residual about 3.3 times ten to the minus eleven.",
     caption:
-      "Plate V.4. Numerically constructed, incidence-verified projective chain on a selected local boundary arc (not a full polygon). The source is A₁=aff(X₀,X₁), and the target is K=aff(C₄,C₅). For 2≤i≤4, the point Yᵢ lies on the supporting line ℒᵢ, while the auxiliary projection line through Yᵢ₋₁ and Yᵢ passes through its centre Cᵢ. The final auxiliary line through Y₄ and Y₅ passes through the last projection centre X₅. All eight tested collinearities pass, with maximum absolute determinant residual approximately 3.3×10⁻¹¹. Composing these perspectivities gives a projectivity A₁→K.",
+      "Plate V.4. Verified numerical example of Definition 7.4. Let P=conv{X₀,…,X₅}. Every vertex lies strictly to the left of each nonincident oriented side (minimum signed determinant 1400), so the displayed cyclic list defines a convex hexagon. The points Cᵢ are constructed in relint[Xᵢ₋₁,Xᵢ] for 2≤i≤5. For 2≤i≤4, all other polygon vertices lie strictly on one side of ℒᵢ (minimum absolute signed determinant 1972), so ℒᵢ supports P and exposes Xᵢ. The eight required projection incidences have maximum absolute determinant residual approximately 3.3×10⁻¹¹. Their composition is a projectivity from Λ₁=aff(X₀,X₁) to K=aff(C₄,C₅).",
   },
   "topic-vi-projective-chain": {
     status: "Adapted from Topic V · incidence verified",
     title: "Successive perspectivities along the selected boundary chain",
     description:
-      "Plate VI.1 adapts the incidence-verified model from Topic V. A point is projected from the source line A one to the supporting lines script L two, script L three, and script L four, and then to the target line K. The successive projection centres are C two, C three, C four, and X five. The diagram is a selected local boundary arc, not a full polygon.",
+      "Plate VI.1 adapts the incidence-verified model from Topic V. A point is projected from the source line Lambda one to the supporting lines script L two, script L three, and script L four, and then to the target line K. The successive projection centres are C two, C three, C four, and X five. The diagram is a selected local boundary arc, not a full polygon.",
     caption:
-      "Plate VI.1. Adapted from Plate V.4. In this incidence-verified numerical model, projection through C₂ sends Y₁∈A₁ to Y₂∈ℒ₂; projection through C₃ sends Y₂ to Y₃∈ℒ₃; projection through C₄ sends Y₃ to Y₄∈ℒ₄; and the final projection through X₅ sends Y₄ to Y₅∈K=aff(C₄,C₅). The plate illustrates the successive-perspectivity mechanism used here. It shows a selected local boundary arc, not a full polygon or a universal metric configuration; all eight displayed incidence conditions have maximum absolute determinant residual approximately 3.3×10⁻¹¹.",
+      "Plate VI.1. Adapted from Plate V.4. In this incidence-verified numerical model, projection through C₂ sends Y₁∈Λ₁ to Y₂∈ℒ₂; projection through C₃ sends Y₂ to Y₃∈ℒ₃; projection through C₄ sends Y₃ to Y₄∈ℒ₄; and the final projection through X₅ sends Y₄ to Y₅∈K=aff(C₄,C₅). The plate illustrates the successive-perspectivity mechanism used here. It shows a selected local boundary arc, not a full polygon or a universal metric configuration; all eight displayed incidence conditions have maximum absolute determinant residual approximately 3.3×10⁻¹¹.",
   },
   "holonomy-escape": {
     status: "Schematic implication · affine and planar views",
@@ -284,20 +284,36 @@ function RotationRecordsMobile() {
   );
 }
 
+const returnTowerHeights = [1, 1, 1, 2, 2, 2, 2, 2] as const;
+
+const returnTowerState = (time: number, baseIndex: number) => ({
+  domain: `(${time},${baseIndex})`,
+  residue: (baseIndex + 5 * time) % 13,
+});
+
 function ReturnTowers() {
-  const heights = [1, 1, 1, 2, 2, 2, 2, 2] as const;
   return (
     <>
-      {heights.map((height, index) => {
+      {returnTowerHeights.map((height, index) => {
         const x = 88 + index * 76;
         return (
           <g key={index}>
-            {Array.from({ length: height }, (_, level) => (
-              <g data-tower-state={`F(${level},${index + 1})`} key={level}>
-                <rect className={level === 0 ? "topic-ii-figure-polygon" : "topic-ii-figure-polar"} height="42" width="48" x={x} y={272 - level * 48} />
-                <text className="topic-ii-figure-small" x={x + 24} y={299 - level * 48} textAnchor="middle">F({level},{index + 1})</text>
-              </g>
-            ))}
+            {Array.from({ length: height }, (_, level) => {
+              const state = returnTowerState(level, index + 1);
+              const y = 272 - level * 48;
+              return (
+                <g
+                  data-domain={state.domain}
+                  data-residue={state.residue}
+                  data-tower-state={`F${state.domain}=${state.residue}`}
+                  key={level}
+                >
+                  <rect className={level === 0 ? "topic-ii-figure-polygon" : "topic-ii-figure-polar"} height="42" width="48" x={x} y={y} />
+                  <text className="topic-ii-figure-label" x={x + 24} y={y + 18} textAnchor="middle">F={state.residue}</text>
+                  <text className="topic-ii-figure-small" x={x + 24} y={y + 35} textAnchor="middle">{state.domain}</text>
+                </g>
+              );
+            })}
             <text className="topic-ii-figure-small" x={x + 24} y={272 - (height - 1) * 48 - 12} textAnchor="middle">Hᵢ={height}</text>
             <text className="topic-ii-figure-small" x={x + 24} y="333" textAnchor="middle">i={index + 1}</text>
           </g>
@@ -306,13 +322,12 @@ function ReturnTowers() {
       <path className="topic-ii-figure-edge" d="M112 350 C230 382 436 382 492 350" markerEnd="url(#advanced-arrow-return-towers)" />
       <text className="topic-ii-figure-equation" x="380" y="77" textAnchor="middle">3·1 + 5·2 = 13</text>
       <text className="topic-ii-figure-small" x="380" y="105" textAnchor="middle">base return: i ↦ i+5 (mod 8)</text>
-      <g data-state-count={heights.reduce((sum, value) => sum + value, 0)} />
+      <g data-state-count={returnTowerHeights.reduce((sum, value) => sum + value, 0)} />
     </>
   );
 }
 
 function ReturnTowersMobile({ markerId }: { markerId: string }) {
-  const heights = [1, 1, 1, 2, 2, 2, 2, 2] as const;
   const position = (index: number) => ({
     x: 42 + (index % 4) * 82,
     y: index < 4 ? 190 : 382,
@@ -324,22 +339,32 @@ function ReturnTowersMobile({ markerId }: { markerId: string }) {
     <>
       <text className="topic-ii-figure-equation" x="180" y="34" textAnchor="middle">3·1 + 5·2 = 13</text>
       <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="180" y="60" textAnchor="middle">base return: i ↦ i+5 (mod 8)</text>
-      {heights.map((height, index) => {
+      {returnTowerHeights.map((height, index) => {
         const { x, y } = position(index);
         return (
           <g key={index}>
-            {Array.from({ length: height }, (_, level) => (
-              <g data-tower-state={`F(${level},${index + 1})`} key={level}>
-                <rect
-                  className={level === 0 ? "topic-ii-figure-polygon" : "topic-ii-figure-polar"}
-                  height="42"
-                  width="52"
-                  x={x - 26}
-                  y={y - level * 48}
-                />
-                <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x={x} y={y - level * 48 + 27} textAnchor="middle">F({level},{index + 1})</text>
-              </g>
-            ))}
+            {Array.from({ length: height }, (_, level) => {
+              const state = returnTowerState(level, index + 1);
+              const cellY = y - level * 48;
+              return (
+                <g
+                  data-domain={state.domain}
+                  data-residue={state.residue}
+                  data-tower-state={`F${state.domain}=${state.residue}`}
+                  key={level}
+                >
+                  <rect
+                    className={level === 0 ? "topic-ii-figure-polygon" : "topic-ii-figure-polar"}
+                    height="42"
+                    width="52"
+                    x={x - 26}
+                    y={cellY}
+                  />
+                  <text className="topic-ii-figure-label" style={mobileLabelTextStyle} x={x} y={cellY + 17} textAnchor="middle">F={state.residue}</text>
+                  <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x={x} y={cellY + 35} textAnchor="middle">{state.domain}</text>
+                </g>
+              );
+            })}
             <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x={x} y={y - (height - 1) * 48 - 12} textAnchor="middle">Hᵢ={height}</text>
             <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x={x} y={y + 65} textAnchor="middle">i={index + 1}</text>
           </g>
@@ -351,7 +376,7 @@ function ReturnTowersMobile({ markerId }: { markerId: string }) {
         markerEnd={`url(#${markerId})`}
       />
       <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="180" y="294" textAnchor="middle">one illustrated return: 1 ↦ 6</text>
-      <g data-state-count={heights.reduce((sum, value) => sum + value, 0)} />
+      <g data-state-count={returnTowerHeights.reduce((sum, value) => sum + value, 0)} />
     </>
   );
 }
@@ -396,11 +421,13 @@ const corridorPoints: readonly Point[] = [
   [660, 120],
 ];
 
+const corridorContactParameters = [0.55, 0.45, 0.4, 0.7] as const;
+
 const corridorCentres: readonly Point[] = [
-  interpolate(corridorPoints[1], corridorPoints[2], 0.55),
-  interpolate(corridorPoints[2], corridorPoints[3], 0.45),
-  interpolate(corridorPoints[3], corridorPoints[4], 0.4),
-  interpolate(corridorPoints[4], corridorPoints[5], 0.7),
+  interpolate(corridorPoints[1], corridorPoints[2], corridorContactParameters[0]),
+  interpolate(corridorPoints[2], corridorPoints[3], corridorContactParameters[1]),
+  interpolate(corridorPoints[3], corridorPoints[4], corridorContactParameters[2]),
+  interpolate(corridorPoints[4], corridorPoints[5], corridorContactParameters[3]),
 ];
 
 const corridorSupports = [
@@ -438,6 +465,40 @@ const projectiveIncidenceMaxError = Math.max(
   ...projectiveIncidenceResiduals.map((value) => Math.abs(value)),
 );
 
+const corridorPolygonSideMargins = corridorPoints.flatMap((point, index) => {
+  const nextIndex = (index + 1) % corridorPoints.length;
+  return corridorPoints
+    .filter((_, candidateIndex) => candidateIndex !== index && candidateIndex !== nextIndex)
+    .map((candidate) => cross(point, corridorPoints[nextIndex], candidate));
+});
+
+const corridorConvexityMinimum = Math.min(...corridorPolygonSideMargins);
+
+const projectiveSupportContactResiduals = corridorSupports.map(
+  ([a, b], index) => Math.abs(cross(a, b, corridorPoints[index + 2])),
+);
+
+const projectiveSupportMargins = corridorSupports.flatMap(([a, b], index) =>
+  corridorPoints
+    .filter((_, candidateIndex) => candidateIndex !== index + 2)
+    .map((candidate) => cross(a, b, candidate)),
+);
+
+const projectiveSupportMinimum = Math.min(...projectiveSupportMargins);
+const projectiveSupportContactMaxError = Math.max(...projectiveSupportContactResiduals);
+
+if (corridorContactParameters.some((parameter) => parameter <= 0 || parameter >= 1)) {
+  throw new Error("The deterministic projective plate has a side-contact point outside a relative interior.");
+}
+
+if (corridorConvexityMinimum <= 0) {
+  throw new Error("The deterministic projective plate failed its convex-hexagon check.");
+}
+
+if (projectiveSupportContactMaxError > 1e-7 || projectiveSupportMinimum <= 0) {
+  throw new Error("The deterministic projective plate failed its exposing-support check.");
+}
+
 if (projectiveIncidenceMaxError > 1e-7) {
   throw new Error("The deterministic projective plate failed its incidence check.");
 }
@@ -450,9 +511,11 @@ const extendLine = (a: Point, b: Point, before = 0.12, after = 0.12): readonly [
 function ProjectiveCorridorGeometry({
   markerId,
   mobile = false,
+  verifiedPolygon = false,
 }: {
   markerId: string;
   mobile?: boolean;
+  verifiedPolygon?: boolean;
 }) {
   const transform = (point: Point): Point => mobile
     ? [12 + 0.45 * point[0], 50 + 1.25 * (point[1] - 100)]
@@ -467,7 +530,11 @@ function ProjectiveCorridorGeometry({
 
   return (
     <>
-      <polyline className="topic-ii-figure-polygon" fill="none" points={points.map((point) => point.join(",")).join(" ")} />
+      {verifiedPolygon ? (
+        <polygon className="topic-ii-figure-polygon" points={points.map((point) => point.join(",")).join(" ")} />
+      ) : (
+        <polyline className="topic-ii-figure-polygon" fill="none" points={points.map((point) => point.join(",")).join(" ")} />
+      )}
       <line className="topic-ii-figure-transfer" x1={initial[0][0]} x2={initial[1][0]} y1={initial[0][1]} y2={initial[1][1]} />
       {supports.map(([a, b], index) => {
         return (
@@ -543,38 +610,67 @@ function ProjectiveCorridorGeometry({
         </g>
       ))}
       {points.map(([x, y], index) => (
+        <g key={`x-${index}`}>
+          {verifiedPolygon ? (
+            <circle className="topic-ii-figure-point" cx={x} cy={y} r={mobile ? 3.5 : 4} />
+          ) : null}
+          <text
+            className="topic-ii-figure-small"
+            style={mobile ? mobileSmallTextStyle : undefined}
+            x={x + (index === 5 ? -7 : -3) * labelScale}
+            y={y + 24 * labelScale}
+          >
+            X{index}
+          </text>
+        </g>
+      ))}
+      {verifiedPolygon ? (
         <text
           className="topic-ii-figure-small"
           style={mobile ? mobileSmallTextStyle : undefined}
-          key={`x-${index}`}
-          x={x + (index === 5 ? -7 : -3) * labelScale}
-          y={y + 24 * labelScale}
+          x={mobile ? 178 : 474}
+          y={mobile ? 348 : 348}
+          textAnchor="middle"
         >
-          X{index}
+          P = conv{'{'}X₀,…,X₅{'}'}
         </text>
-      ))}
+      ) : null}
       <text
         className="topic-ii-figure-small"
         style={mobile ? mobileSmallTextStyle : undefined}
         x={initial[0][0]}
         y={initial[0][1] + (mobile ? 32 : 34)}
       >
-        A₁ = aff(X₀,X₁)
+        Λ₁ = aff(X₀,X₁)
       </text>
       <g
+        data-convex-hexagon-verified={verifiedPolygon ? "true" : undefined}
+        data-convexity-minimum={verifiedPolygon ? corridorConvexityMinimum : undefined}
+        data-contact-parameters={verifiedPolygon ? corridorContactParameters.join(",") : undefined}
         data-incidence-count={projectiveIncidenceResiduals.length}
         data-incidence-max-error={projectiveIncidenceMaxError}
         data-incidence-verified="true"
+        data-support-contact-max-error={verifiedPolygon ? projectiveSupportContactMaxError : undefined}
+        data-support-minimum={verifiedPolygon ? projectiveSupportMinimum : undefined}
+        data-supports-verified={verifiedPolygon ? "true" : undefined}
       />
     </>
   );
 }
 
 function ProjectiveCorridor({ markerId }: { markerId: string }) {
-  return <ProjectiveCorridorGeometry markerId={markerId} />;
+  return <ProjectiveCorridorGeometry markerId={markerId} verifiedPolygon />;
 }
 
 function ProjectiveCorridorMobile({ markerId }: { markerId: string }) {
+  return <ProjectiveCorridorGeometry markerId={markerId} mobile verifiedPolygon />;
+}
+
+function TopicVIProjectiveChain({ markerId }: { markerId: string }) {
+  return <ProjectiveCorridorGeometry markerId={markerId} />;
+}
+
+function TopicVIProjectiveChainMobile({ markerId }: { markerId: string }) {
   return <ProjectiveCorridorGeometry markerId={markerId} mobile />;
 }
 
@@ -965,7 +1061,8 @@ export function AdvancedProofFigure({ kind }: { kind: AdvancedProofFigureKind })
         </defs>
         {kind === "rotation-records" ? <RotationRecords /> : null}
         {kind === "return-towers" ? <ReturnTowers /> : null}
-        {kind === "projective-corridor" || kind === "topic-vi-projective-chain" ? <ProjectiveCorridor markerId={markerId} /> : null}
+        {kind === "projective-corridor" ? <ProjectiveCorridor markerId={markerId} /> : null}
+        {kind === "topic-vi-projective-chain" ? <TopicVIProjectiveChain markerId={markerId} /> : null}
         {kind === "holonomy-escape" ? <HolonomyEscape markerId={markerId} /> : null}
         {kind === "global-ledger" || kind === "topic-vi-return-partition" ? <GlobalLedger /> : null}
         {kind === "unit-return" ? <UnitReturn /> : null}
@@ -995,7 +1092,8 @@ export function AdvancedProofFigure({ kind }: { kind: AdvancedProofFigureKind })
           {kind === "rotation-records" ? <RotationRecordsMobile /> : null}
           {kind === "return-towers" ? <ReturnTowersMobile markerId={mobileMarkerId} /> : null}
           {kind === "global-ledger" || kind === "topic-vi-return-partition" ? <GlobalLedgerMobile /> : null}
-          {kind === "projective-corridor" || kind === "topic-vi-projective-chain" ? <ProjectiveCorridorMobile markerId={mobileMarkerId} /> : null}
+          {kind === "projective-corridor" ? <ProjectiveCorridorMobile markerId={mobileMarkerId} /> : null}
+          {kind === "topic-vi-projective-chain" ? <TopicVIProjectiveChainMobile markerId={mobileMarkerId} /> : null}
           {kind === "holonomy-escape" ? <HolonomyEscape markerId={mobileMarkerId} mobile /> : null}
           {kind === "unit-return" ? <UnitReturn mobile /> : null}
         </svg>

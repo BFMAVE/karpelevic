@@ -33,7 +33,7 @@ const pages = [
   ],
   [
     "proof/topic-v/index.html",
-    "Rotation arithmetic, first-return towers, and the projective boundary argument",
+    "Rotation arithmetic, the first-return decomposition, and projective preparation",
   ],
   [
     "prerequisites/index.html",

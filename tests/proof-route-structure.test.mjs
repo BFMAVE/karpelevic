@@ -117,8 +117,17 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   );
   assert.match(topicVText, /Throughout this section assume N\s*≥\s*4/i);
   assert.match(topicVText, /A complete 3-critical example with Δ=2/i);
-  assert.match(topicVText, /Why projective unit return requires N\s*≥\s*4/i);
+  assert.match(topicVText, /Why the projective proof that Δ=1 requires N\s*≥\s*4/i);
   assert.match(topicVText, /Exceptional case N=3/);
+  assert.match(
+    topicVText,
+    /ν\s*poly\s*\(T\) as the minimum number of vertices[\s\S]*calls T N-critical/i,
+  );
+  assert.match(topicV, /href="\/proof\/#def:N-critical"/);
+  assert.match(topicVText, /H₀=\{u∈ℝ³:u₀\+u₁\+u₂=0\}/);
+  assert.match(topicVText, /tTₐQ=QΓ/);
+  assert.match(topicVText, /ker\(Q\) invariant under Γ/);
+  assert.doesNotMatch(topicVText, /tTₐA=AC|ker\(A\) invariant under C/);
   assert.match(
     topicVText,
     /This is the precise bridge to the record terminology used below/i,
@@ -154,11 +163,20 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
     kleinSailDefinition >= 0 && kleinSailDefinition < plateVOne,
     "the Klein sail is defined before Plate V.1",
   );
+  assert.match(
+    topicVText,
+    /closed cone bounded by the positive b-axis and the ray L\(h,b\)=0[\s\S]*boundary visible from the origin/i,
+  );
+  assert.match(
+    topicVText,
+    /edges corresponding to α=1 or β=1 are excluded[\s\S]*every lattice coset has exactly one representative/i,
+  );
+  assert.doesNotMatch(topicVText, /open upper edges/i);
   assert.match(topicVText, /A matrix is doubly stochastic when its entries are nonnegative/);
   assert.match(topicVText, /e₀,e₁,e₂ be the standard coordinate vectors of ℝ³/);
   assert.match(topicVText, /Barycentric coordinates are nonnegative coefficients summing to one/);
-  assert.match(topicVText, /the induced map on ℝ³\/ker\(A\) is conjugate to tT/);
-  assert.match(topicVText, /P=conv\{x₀,x₁,x₂\} lies in H; it is independent of a/);
+  assert.match(topicVText, /the induced map on ℝ³\/ker\(Q\) is conjugate to tT/);
+  assert.match(topicVText, /P=conv\{x₀,x₁,x₂\} lies in H₀; it is independent of a/);
   assert.match(topicVText, /Counted with algebraic multiplicity/);
   assert.match(
     topicVText,
@@ -166,6 +184,13 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   );
   assert.match(topicVText, /ℓᵢ=λ\^\{-Hᵢ\} aff\(Eᵣ₍ᵢ₎\)/);
   assert.match(topicVText, /M∖\{b\*\}/);
+  assert.match(topicVText, /The selected boundary arc omits at least one side/);
+  assert.match(topicVText, /The two cyclic-orientation cases/);
+  assert.match(topicVText, /Projective corridor The page(?:'|&#x27;)s shorthand for the displayed consecutive vertices/);
+  assert.match(topicVText, /Π:Λ₁→K/);
+  assert.match(topicVText, /Choose endpoint supporting lines outside a finite exceptional set/);
+  assert.doesNotMatch(topicVText, /An explicit interval of target indices in the selected cyclic orientation/);
+  assert.doesNotMatch(topicVText, /The remaining target indices:/);
   assert.match(topicVText, /ω\(z\)≥ε₀ for every z∈P/);
   assert.match(topicVText, /All results assigned to this topic are proved/);
   assert.doesNotMatch(topicVText, /Supporting lines at the return vertices/i);

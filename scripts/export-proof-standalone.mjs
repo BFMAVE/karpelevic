@@ -306,7 +306,7 @@ function verifyStandaloneHtml(html) {
         : proofRoute === "/proof/topic-v"
           ? [
               "Topic V",
-              "Rotation arithmetic, first-return towers, and the projective boundary argument",
+              "Rotation arithmetic, the first-return decomposition, and projective preparation",
               "Lattice parallelogram count",
               "data-proof-route=\"topic-v\"",
               "Forthcoming",
