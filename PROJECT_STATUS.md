@@ -1271,7 +1271,7 @@ full local source history remain later site milestones.
   The public package contains Topics I–V only; Topic VI returns HTTP 404 and
   every later topic remains absent and is shown as Forthcoming.
 
-## Current milestone — Topic IV notation and reading-path refinement (approved for publication 15 August 2026)
+## Current milestone — Topic IV notation and reading-path refinement (published 15 August 2026)
 
 - **Boundary-order notation made literal:** Lemma 4.11 now says that at least
   one of its two assertions holds and expresses side membership through the
@@ -1301,5 +1301,12 @@ full local source history remain later site milestones.
   `f334e7138f745aa3099b6d9ab64e572ea523935e1ceefe993fef851e12b53753`;
   all 30 tests, ESLint, `git diff --check`, and the GitHub Pages export verifier
   pass.
-- **Publication status:** approved and awaiting the final static-only Pages
-  deployment. Topics VI–XIV must remain absent from the public package.
+- **Publication status:** source changes are recorded locally in commit
+  `adc632eb0e60713bd9532e9331527137e4111f17`; the static-only public Pages
+  tree is commit `998ded5522babe5cde21b9b284bc43320a52c7af` on `main`.
+  Topic IV is live at
+  <https://bfmave.github.io/karpelevic/proof/topic-iv/>. Its deployed HTML is
+  byte-identical to the audited export with SHA-256
+  `ea80e71f1deb2dcf71742a3526110b1bcd0df7bb5a50d49a7ecdee3c89a8ad77`.
+  Topics I–V return HTTP 200; Topic VI returns HTTP 404, and Topics VI–XIV
+  remain absent from the public package.
