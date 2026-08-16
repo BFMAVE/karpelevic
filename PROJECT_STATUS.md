@@ -1740,5 +1740,7 @@ full local source history remain later site milestones.
   and `f55d88322827c964d1b9e54a1a87ead3d277a88d55cfc8e257b619a51d3b1bf0`;
   the compiled/public PDF SHA-256 is
   `8f1f6f212acd98bc5f9501ce4c211d5601eb1e0064ffbba40c03239bb2728965`.
-- **Publication status:** the coordinated source, PDF, and standalone artifacts
-  are updated locally. No online publication was performed in this pass.
+- **Publication status:** source implementation commit `5d9e9a5`; static-only
+  Pages commit `ca56019`. Topics I–VI and the synchronized manuscript PDF are
+  live, Topic VII remains HTTP 404, and the owner-only hosted production copy
+  has also been updated.
