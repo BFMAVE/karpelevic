@@ -1686,3 +1686,27 @@ full local source history remain later site milestones.
 - **Publication status:** source implementation commit `6e0c55d`; static-only
   Pages commit `bc1f568`. Topics I–VI return HTTP 200, Topic VII returns HTTP
   404, and the synchronized manuscript PDF is live.
+
+## Current milestone — Publication-date semantics (16 August 2026)
+
+- **Reader-facing dates now describe publication history rather than build
+  machinery:** public pages show an immutable `First published` date and a
+  content-derived `Last revised` date. The former `Site build` and `Last
+  updated` labels have been removed, and public footers say `Website online
+  since 28 July 2026`.
+- **The manuscript dates are unambiguous:** the archival Zenodo record is dated
+  24 July 2026 and identified as the 93-page edition. The linked website
+  edition is separately identified as the 100-page PDF last revised on
+  16 August 2026.
+- **First-publication dates are centralized:** Home, History, and Journey use
+  28 July; Prerequisites and Topic I use 29 July; Topic II uses 6 August;
+  Topics III–IV use 13 August; Topic V uses 14 August; and Topic VI uses
+  15 August, all in 2026. Offline Topics VII–XIV deliberately receive no false
+  publication date.
+- **Verification and publication:** ESLint, the production and capped Pages
+  builds, all 43 tests, the Pages verifier, date-label scans, route-boundary
+  checks, and live HTTP checks pass. Topics I–VI return HTTP 200, Topic VII
+  returns HTTP 404, and the live PDF retains SHA-256
+  `a0ecbaa4ebcda7bbc6ddcc07834bcf10e4768d6269cb0d899f1c97f48b72a323`.
+  Source implementation commit: `5aff28d`; static-only Pages commit:
+  `dc6d0ee`.
