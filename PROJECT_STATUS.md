@@ -1653,3 +1653,36 @@ full local source history remain later site milestones.
 - **Publication status:** source implementation commit `7ec1661`; static-only
   Pages commit `5f84e91`. Topics I–VI return HTTP 200, Topic VII remains HTTP
   404, and the synchronized manuscript PDF is live.
+
+## Current milestone — Topics IV–VI precision and navigation pass (16 August 2026)
+
+- **Topic IV now states its imported facts and cyclic conventions literally:**
+  the reader uses `head` and `succ`, calls \(\sigma\) a side-label translation,
+  records the exact half-open boundary-count estimates used from Topic III,
+  and explains why the elliptic multiplier has a positive argument in
+  \((0,2\pi)\). Plate IV.5 now uses the same counterclockwise orientation as the
+  earlier exact configuration.
+- **Topic V's arithmetic and projective interfaces are easier to verify:**
+  Remark 6.3 links and displays Theorem 6.1 correctly, Lemma A.6 starts with an
+  integral vector and proves the integral representative directly, and the
+  forward/reverse data of Proposition 7.3 have a compact always-visible map.
+  Plates V.1–V.3 are labelled as exact diagrams; Plate V.4 remains explicitly
+  numerical.
+- **Topic VI's hypotheses and presentation are literal:** Theorem 1.3 now
+  quantifies the invariant polygon and orientation grammatically, and the
+  boundary-chain arguments state the exact non-exhaustion hypothesis instead
+  of relying on the word “proper.” Its four plates are classified as numerical,
+  exact, or schematic according to what they actually display.
+- **Compatibility and publication boundary:** the unified Topic VI remains the
+  only public chapter UI. Static `/proof/topic-vi/a/` and `/b/` aliases redirect
+  to the corresponding stable anchors. Topics VII--XIV remain non-navigable and
+  no unpublished theorem content or application bundle is present in the
+  public tree.
+- **Verification and artifacts:** all 42 tests, ESLint, deterministic
+  extraction, Tectonic compilation, Pages verification, 912 internal-link and
+  fragment checks, privacy scans, proof controls, and desktop/390-pixel browser
+  QA pass. The canonical/public 100-page PDF SHA-256 is
+  `a0ecbaa4ebcda7bbc6ddcc07834bcf10e4768d6269cb0d899f1c97f48b72a323`.
+- **Publication status:** source implementation commit `6e0c55d`; static-only
+  Pages commit `bc1f568`. Topics I–VI return HTTP 200, Topic VII returns HTTP
+  404, and the synchronized manuscript PDF is live.
