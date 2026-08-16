@@ -68,7 +68,7 @@ export const topicIResultGuides: Readonly<
       {
         term: "The side data in equation (2.3)",
         definition:
-          "The set ℰ(P) consists of the oriented sides of P, and s(e) is the next side. The map χ assigns each vertex v to a side containing Tv. The set I consists of those assigned sides for which Tv lies in the relative interior, while h(e) is the ending vertex of e and σ(e)=χ(h(e)) is a cyclic shift of the side labels. Finally, A_ℰ sends each side e of P to the side Ae of AP.",
+          "The set ℰ(P) consists of the oriented sides of P, and succ(e) is the next side. The map χ assigns each vertex v to a side containing Tv. The set I consists of those assigned sides for which Tv lies in the relative interior, while head(e) is the terminal endpoint of e and σ(e)=χ(head(e)) is a cyclic shift of the side labels. Finally, A_ℰ sends each side e of P to the side Ae of AP.",
       },
     ],
   },

@@ -46,14 +46,14 @@ export const proofReaderRoutes: readonly ProofReaderRoute[] = [
     topicNumber: 2,
     href: "/proof/topic-ii/",
     title: topicTitle(2),
-    shortTitle: "Side contact",
+    shortTitle: "Boundary contact",
   },
   {
     key: "topic-iii",
     topicNumber: 3,
     href: "/proof/topic-iii/",
     title: topicTitle(3),
-    shortTitle: "Boundary assignment",
+    shortTitle: "Half-open sides",
   },
   {
     key: "topic-iv",

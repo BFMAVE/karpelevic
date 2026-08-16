@@ -39,16 +39,21 @@ function Dot({ x, y, accent = false, open = false }: { x: number; y: number; acc
 function HalfOpen() {
   return (
     <>
-      <path d="M90 225 L310 105 L545 205" {...line} />
-      <path d="M90 225 L310 105" {...accentLine} />
-      <Dot x={90} y={225} open accent />
-      <Dot x={310} y={105} accent />
-      <Dot x={545} y={205} />
-      <text x="55" y="255" fill={red}>xᵢ₋₁ ∉ Eᵢ⁺</text>
-      <text x="43" y="283" fill={accessibleCopper}>xᵢ₋₁ ∈ Eᵢ₋₁⁺</text>
-      <text x="268" y="80" fill={red}>xᵢ ∈ Eᵢ⁺</text>
-      <text x="430" y="244" fill={ink}>outgoing side Eᵢ₊₁</text>
-      <text x="340" y="315" fill={ink} fontSize="18" textAnchor="middle">Eᵢ⁺ = (xᵢ₋₁, xᵢ]</text>
+      <path d="M42 305 L125 218 L322 105 L560 205" {...line} />
+      <path d="M42 305 L125 218" fill="none" stroke={accessibleCopper} strokeWidth="4" />
+      <path d="M125 218 L322 105" {...accentLine} />
+      <circle cx="42" cy="305" r="6" fill={paper} stroke={accessibleCopper} strokeWidth="2" />
+      <Dot x={125} y={218} open accent />
+      <circle cx="125" cy="218" r="3" fill={accessibleCopper} />
+      <Dot x={322} y={105} accent />
+      <Dot x={560} y={205} />
+      <text x="8" y="337" fill={accessibleCopper}>xᵢ₋₂</text>
+      <text x="18" y="176" fill={accessibleCopper} fontSize="16">Eᵢ₋₁⁺ = (xᵢ₋₂, xᵢ₋₁]</text>
+      <text x="95" y="253" fill={red}>xᵢ₋₁ ∉ Eᵢ⁺</text>
+      <text x="95" y="280" fill={accessibleCopper}>xᵢ₋₁ ∈ Eᵢ₋₁⁺</text>
+      <text x="280" y="80" fill={red}>xᵢ ∈ Eᵢ⁺</text>
+      <text x="450" y="244" fill={ink}>outgoing side Eᵢ₊₁</text>
+      <text x="430" y="322" fill={ink} fontSize="18" textAnchor="middle">Eᵢ⁺ = (xᵢ₋₁, xᵢ]</text>
     </>
   );
 }
@@ -56,16 +61,21 @@ function HalfOpen() {
 function HalfOpenMobile() {
   return (
     <>
-      <path d="M34 205 L180 82 L326 196" {...line} />
-      <path d="M34 205 L180 82" {...accentLine} />
-      <Dot x={34} y={205} open accent />
-      <Dot x={180} y={82} accent />
-      <Dot x={326} y={196} />
-      <text x="180" y="42" fill={red} fontSize="17" textAnchor="middle">xᵢ ∈ Eᵢ⁺</text>
-      <text x="180" y="258" fill={ink} fontSize="18" textAnchor="middle">Eᵢ⁺ = (xᵢ₋₁, xᵢ]</text>
-      <text x="180" y="305" fill={red} fontSize="17" textAnchor="middle">xᵢ₋₁ ∉ Eᵢ⁺</text>
-      <text x="180" y="336" fill={accessibleCopper} fontSize="17" textAnchor="middle">xᵢ₋₁ ∈ Eᵢ₋₁⁺</text>
-      <text x="180" y="378" fill={ink} fontSize="15" textAnchor="middle">the shared endpoint belongs to the incoming side</text>
+      <path d="M22 235 L92 175 L210 70 L338 178" {...line} />
+      <path d="M22 235 L92 175" fill="none" stroke={accessibleCopper} strokeWidth="4" />
+      <path d="M92 175 L210 70" {...accentLine} />
+      <circle cx="22" cy="235" r="6" fill={paper} stroke={accessibleCopper} strokeWidth="2" />
+      <Dot x={92} y={175} open accent />
+      <circle cx="92" cy="175" r="3" fill={accessibleCopper} />
+      <Dot x={210} y={70} accent />
+      <Dot x={338} y={178} />
+      <text x="180" y="34" fill={red} fontSize="17" textAnchor="middle">xᵢ ∈ Eᵢ⁺</text>
+      <text x="8" y="266" fill={accessibleCopper} fontSize="16">xᵢ₋₂</text>
+      <text x="180" y="300" fill={accessibleCopper} fontSize="15" textAnchor="middle">Eᵢ₋₁⁺ = (xᵢ₋₂, xᵢ₋₁]</text>
+      <text x="180" y="332" fill={ink} fontSize="16" textAnchor="middle">Eᵢ⁺ = (xᵢ₋₁, xᵢ]</text>
+      <text x="180" y="377" fill={red} fontSize="17" textAnchor="middle">xᵢ₋₁ ∉ Eᵢ⁺</text>
+      <text x="180" y="407" fill={accessibleCopper} fontSize="17" textAnchor="middle">xᵢ₋₁ ∈ Eᵢ₋₁⁺</text>
+      <text x="180" y="450" fill={ink} fontSize="15" textAnchor="middle">the shared endpoint belongs to the incoming side</text>
     </>
   );
 }
@@ -844,7 +854,7 @@ function ResidueBlockMobile({ markerId }: { markerId: string }) {
 }
 
 const descriptions: Record<FigureKind, { title: string; description: string; caption: string; status?: string }> = {
-  "half-open": { title: "One endpoint, one half-open side", description: "The right-half-open side E i plus excludes x i minus one, while the preceding half-open side E i minus one plus includes that same vertex.", caption: "Plate III.1. For Eᵢ⁺=(xᵢ₋₁,xᵢ], the shared vertex satisfies xᵢ₋₁ ∉ Eᵢ⁺ but xᵢ₋₁ ∈ Eᵢ₋₁⁺. Thus every polygon vertex belongs to exactly one right-half-open side." },
+  "half-open": { title: "One endpoint and its two adjacent half-open sides", description: "Four consecutive polygon vertices are shown. The incoming side from x i minus two to x i minus one is E i minus one, and the next side from x i minus one to x i is E i. In the right-half-open convention, x i minus one is included in E i minus one plus and excluded from E i plus.", caption: "Plate III.1. The predecessor xᵢ₋₂ and both adjacent sides are drawn explicitly. For Eᵢ⁺=(xᵢ₋₁,xᵢ], the shared vertex satisfies xᵢ₋₁ ∉ Eᵢ⁺ but xᵢ₋₁ ∈ Eᵢ₋₁⁺. Thus every polygon vertex belongs to exactly one right-half-open side." },
   "face-rigidity": { title: "A boundary convex combination lies in one face", description: "Two points and their strict convex combination lie on one supporting side of a polygon.", caption: "Plate III.2. Equality in a supporting functional forces both endpoints—and therefore their segment—onto the same exposed side." },
   replacement: { title: "Replacing one vertex by a boundary contact", description: "Before-and-after boundary diagrams show a point in the relative interior of one side replacing the following vertex, together with the resulting two half-open sides.", caption: "Plate III.3. Schematic local replacement: the modified polygon P′ replaces xᵢ by ξᵢ. The point ξᵢ is included in (xᵢ₋₁, ξᵢ] and excluded from (ξᵢ, xᵢ₊₁]." },
   clip: { title: "Clipping along an image edge", description: "An exact regular-heptagon construction in which the image polygon has its vertices at the side midpoints of the outer polygon; one image edge cuts off exactly one old vertex.", caption: "Plate III.4. Exact regular-heptagon model: for λ = cos(π/7) exp(iπ/7), the vertices of Q = λP are the side midpoints of P. The chosen edge of Q cuts off the boundary arc containing exactly one old vertex, while Q remains in the retained half-plane." },
@@ -865,7 +875,7 @@ export function OwnershipMutationFigure({ kind, id }: { kind: FigureKind; id: st
   const markerId = `${id}-arrow`;
   const mobileMarkerId = `${markerId}-mobile`;
   const mobileViewBoxes: Partial<Record<FigureKind, string>> = {
-    "half-open": "0 0 360 405",
+    "half-open": "0 0 360 470",
     "face-rigidity": "0 0 360 415",
     replacement: "0 0 360 610",
     clip: "0 0 360 455",

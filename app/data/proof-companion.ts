@@ -100,7 +100,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         title: "Move from vertices to supporting normals",
         body:
-          "In a fixed normal fan, the inclusion TP ⊆ P becomes a system of inequalities between the supporting functionals of P. The resulting nonnegative coefficient matrix records how T* moves the normals.",
+          "In a fixed normal fan—the zero cone, the outward-normal rays, and the two-dimensional cones between adjacent rays—the inclusion TP ⊆ P becomes a system of inequalities between the supporting functionals of P. The resulting nonnegative coefficient matrix uses the cyclically ordered unit ray generators to record how T* moves the normals.",
       },
       {
         title: "Slack would permit radial enlargement",
@@ -127,7 +127,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         term: "Normal fan",
         definition:
-          "The cyclic collection of outward supporting directions of a polygon.",
+          "The fan consisting of {0}, the outward-normal rays of the polygon, and the two-dimensional cones spanned by each adjacent pair of rays. Its cyclically ordered unit ray generators supply the vectors used in the coefficient matrix B.",
       },
       {
         term: "Polar polygon",

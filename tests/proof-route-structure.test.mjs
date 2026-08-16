@@ -425,8 +425,8 @@ test("Topic III states half-open side membership without invented boundary jargo
     .replace(/<style[\s\S]*?<\/style>/gi, "")
     .replace(/<annotation\b[\s\S]*?<\/annotation>/gi, "");
   const visibleText = documentHtml.replace(/<[^>]*>/g, " ");
-  assert.match(html, /Half-open boundary assignments and edge clipping/);
-  assert.match(html, /Assignment to half-open sides/);
+  assert.match(html, /Half-open sides and image-edge half-plane intersections/);
+  assert.match(html, /Right-half-open side convention/);
   assert.match(html, /This is only the membership statement/);
   assert.match(visibleText, /indices are read modulo/);
   assert.match(visibleText, /Positive closed and open boundary arcs/);
@@ -454,8 +454,14 @@ test("Topic III states half-open side membership without invented boundary jargo
   const lemma43Html = html.match(/id="part-i-item-20"[\s\S]*?id="part-i-item-21"/)?.[0] ?? "";
   assert.match(lemma43Html, /Classical result/);
   assert.doesNotMatch(lemma43Html, /Previously known/);
+  assert.doesNotMatch(lemma43Html, /<dt>Partition<\/dt>/);
   assert.match(lemma43Html, /Open the complete manuscript proof/);
   assert.doesNotMatch(lemma43Html, /Open the manuscript proof and its guided explanation/);
+
+  const lemmaA5Html =
+    html.match(/id="part-i-item-69"[\s\S]*?id="topic-iii-sources"/)?.[0] ?? "";
+  assert.ok(lemmaA5Html.length > 0);
+  assert.doesNotMatch(lemmaA5Html, /<dt>Proper inclusion<\/dt>/);
 
   const lemma47Html = html.match(/id="part-i-item-24"[\s\S]*?id="part-i-item-25"/)?.[0] ?? "";
   assert.match(lemma47Html, /Open the manuscript proof and its guided explanation/);

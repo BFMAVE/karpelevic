@@ -11,6 +11,7 @@ const displaySerif = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
+  fallback: ["Georgia", "Times New Roman"],
 });
 
 const readingSerif = Source_Serif_4({
@@ -18,6 +19,7 @@ const readingSerif = Source_Serif_4({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
   style: ["normal", "italic"],
+  fallback: ["Georgia", "Times New Roman"],
 });
 
 export const metadata: Metadata = {

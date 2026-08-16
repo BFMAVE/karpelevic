@@ -6,7 +6,7 @@ const figureCopy = {
   "adapted-complex": {
     title: "Constructing the adapted complex structure",
     description:
-      "The elliptic map is decomposed into a real scalar part and a normalized quarter-turn J. The two signs of J give conjugate complex multipliers and opposite orientations.",
+      "The elliptic map is decomposed into a real scalar part and a complex structure J satisfying J²=−I. The two signs of J give conjugate complex multipliers and opposite orientations.",
     caption:
       "Figure I.1. Cayley–Hamilton turns the traceless part of T into a complex structure: J²=−I and T=ρ(cos θ I+sin θ J).",
   },

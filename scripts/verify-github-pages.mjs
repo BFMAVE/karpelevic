@@ -21,11 +21,11 @@ const pages = [
   ["proof/index.html", "How the Proof Works"],
   [
     "proof/topic-ii/index.html",
-    "From convex order to contact on every side",
+    "Support inequalities and boundary contact",
   ],
   [
     "proof/topic-iii/index.html",
-    "Half-open boundary assignments and edge clipping",
+    "Half-open sides and image-edge half-plane intersections",
   ],
   [
     "proof/topic-iv/index.html",
@@ -115,7 +115,7 @@ for (const relativePath of [
   );
   const visibleText = visibleTextFromHtml(html);
   assert.match(html, /data-proof-route="topic-iii"/);
-  assert.match(html, /Assignment to half-open sides/);
+  assert.match(html, /Right-half-open side convention/);
   assert.match(html, /This is only the membership statement/);
   assert.match(html, /Positive closed and open boundary arcs/);
   assert.match(html, /Discarded arc and old-vertex count/);

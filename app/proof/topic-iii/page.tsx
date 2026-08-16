@@ -8,12 +8,19 @@ import {
 import { getPageTimestamp } from "../../lib/git-dates";
 
 export const metadata: Metadata = {
-  title: "Topic III — Half-Open Boundary Assignments and Edge Clipping",
+  title: "Topic III — Half-Open Sides and Image-Edge Half-Plane Intersections",
   description:
-    "A complete, illustrated account of assigning boundary contacts to half-open sides, invariant edge clipping, Hausdorff compactness, and the least-area boundary-arc bound.",
+    "A complete, illustrated account of assigning boundary contacts to half-open sides, intersecting with image-edge half-planes, Hausdorff compactness, and the least-area boundary-arc bound.",
 };
 
-const updatedAt = getPageTimestamp("app/data/proof-topics/topic-iii.tsx");
+const updatedAt = getPageTimestamp([
+  "app/proof/topic-iii/page.tsx",
+  "app/data/proof-topics/topic-iii.tsx",
+  "app/data/part-i-content.generated.ts",
+  "app/data/proof.ts",
+  "app/components/proof/ProofResult.tsx",
+  "app/components/proof/figures/OwnershipMutationFigures.tsx",
+]);
 
 export default function TopicIIIPage() {
   return (

@@ -10,11 +10,16 @@ function isIsoDate(value: string): boolean {
   return !Number.isNaN(Date.parse(value));
 }
 
-export function getPageTimestamp(sourceFile: string): string {
+export function getPageTimestamp(
+  sourceFile: string | readonly string[],
+): string {
+  const sourceFiles =
+    typeof sourceFile === "string" ? [sourceFile] : [...sourceFile];
+
   try {
     const timestamp = execFileSync(
       "git",
-      ["log", "-1", "--format=%cI", "--", sourceFile],
+      ["log", "-1", "--format=%cI", "--", ...sourceFiles],
       {
         cwd: process.cwd(),
         encoding: "utf8",

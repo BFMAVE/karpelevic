@@ -7,7 +7,7 @@ import { getProofItems, proofTopics } from "../../data/proof";
 import { getPageTimestamp } from "../../lib/git-dates";
 
 export const metadata: Metadata = {
-  title: "Topic II — From Convex Order to Contact on Every Side",
+  title: "Topic II — Support Inequalities and Boundary Contact",
   description:
     "A complete, annotated account of determinant criteria for convex position, the fixed-normal-fan support criterion, and contact on every side and at every image vertex.",
 };

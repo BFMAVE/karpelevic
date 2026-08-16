@@ -177,11 +177,13 @@ export const proofSources: readonly ProofSource[] = [
 const karpelevicOnlyAntecedent = new Set([
   3, 32, 33, 34, 35, 36, 37, 38, 40, 41, 47, 49, 50, 55, 56,
 ]);
-const strengthened = new Set([16, 30, 57, 58]);
+const strengthened = new Set([30, 57, 58]);
 const newResults = new Set([4, 59]);
-const unbadgedResults = new Set([27, 28, 31, 42, 44, 45, 46, 48]);
+const unbadgedResults = new Set([
+  15, 16, 27, 28, 31, 42, 44, 45, 46, 48,
+]);
 const previouslyKnown = new Set([
-  15, 18, 23, 25, 26, 29, 61, 62, 64,
+  18, 23, 25, 26, 29, 61, 62, 64,
 ]);
 
 function provenanceFor(
@@ -240,6 +242,12 @@ function sourcesFor(number: number): readonly string[] {
 
 function sourceRelationFor(number: number): string | undefined {
   if ([51, 52].includes(number)) return undefined;
+  if (number === 15) {
+    return "Bitsoris gives a broader polyhedral-invariance antecedent. The exact planar adjacent-normal coefficient formula and eigenvector identity used here are proved on this page; no claim is made that this precise proposition appears in the cited source.";
+  }
+  if (number === 16) {
+    return "Dmitriev–Dynkin, as translated by Swift, provides an earlier antecedent for side-intersection arguments. The full conclusion stated here—for every invariant polygon within the vertex bound, including the boundary location of every image vertex—is proved on this page, without assigning a priority category absent a precise statement-level match.";
+  }
   if (number === 27) {
     return "Dmitriev–Dynkin’s half-open contact argument, available in Swift’s translation, is the historical antecedent. The precise finite endpoint identity used here is proved on this page.";
   }
@@ -291,7 +299,7 @@ const rawItems: readonly [
   [4, "Theorem", "Complex monodromy and Farey product data", "For N≥4, converts the geometric return into a product identity associated with one Farey cell, with every factor argument chosen on one continuous interval."],
   [5, "Proposition", "Adapted complex structures", "Identifies an elliptic real-linear map with multiplication by one of its two conjugate complex eigenvalues."],
   [6, "Proposition", "Real-linear invariance of polygonal complexity", "Shows that changing real coordinates does not alter the least number of vertices needed for an invariant polygon."],
-  [7, "Lemma", "Real-linear covariance of contact geometry", "Carries vertices, sides, contacts, and their labels faithfully through an invertible real-linear change of coordinates."],
+  [7, "Lemma", "Real-linear covariance of faces and boundary incidences", "Carries vertices, sides, faces, boundary incidences, and their labels faithfully through an invertible real-linear change of coordinates."],
   [8, "Lemma", "Coordinate reversal, orientation, and endpoint assignment", "Records how orientation, the chosen complex eigenvalue, and half-open endpoint membership change under a reversing coordinate map."],
   [9, "Lemma", "Origin is interior for a nonreal contraction", "Ensures that the invariant polygon surrounds the origin, making angular order and polarity available."],
   [10, "Lemma", "Oriented order on a convex boundary", "Relates the cyclic order of vertices and sides to the orientation seen from an interior point."],
@@ -303,7 +311,7 @@ const rawItems: readonly [
   [16, "Theorem", "Contact on every side and at every image vertex", "Proves that for every invariant polygon with at most N vertices, the image polygon intersects every side and all of its vertices lie on the outer boundary."],
   [17, "Remark", "Why the theorem applies after a polygon is modified", "Explains that the theorem applies again whenever a modified polygon remains an invariant N-gon."],
   [18, "Lemma", "A side intersecting a polygon contains one of its vertices", "Proves directly that if a side E of P intersects Q⊆P, then E contains a vertex of Q."],
-  [19, "Definition", "Assignment to half-open sides", "Defines which incident half-open side contains a boundary contact that is exactly a polygon vertex."],
+  [19, "Definition", "Right-half-open side convention", "Defines which incident right-half-open side contains a boundary contact that is exactly a polygon vertex."],
   [20, "Lemma", "Half-open sides partition the boundary", "Proves that every boundary point belongs to exactly one consistently oriented half-open side."],
   [21, "Lemma", "A boundary convex combination lies on one side", "Forces both endpoints onto the same exposed side when a strict convex combination reaches the boundary."],
   [22, "Lemma", "Locating the common side from adjacent half-open memberships", "Determines the common side and endpoint from two adjacent half-open side memberships."],
@@ -388,7 +396,7 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "active-sides",
     eyebrow: "Topic II · 7 core results · 2 foundational lemmas · 1 remark",
-    title: "From convex order to contact on every side",
+    title: "Support inequalities and boundary contact",
     question:
       "Why must the image polygon TR intersect every side of an invariant polygon for an N-critical map?",
     overview: [
@@ -402,7 +410,7 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "ownership",
     eyebrow: "Topic III · 1 definition · 9 results",
-    title: "Half-open boundary assignments and edge clipping",
+    title: "Half-open sides and image-edge half-plane intersections",
     question:
       "When a contact lands at a vertex, how do we assign it to exactly one of the two incident sides?",
     overview: [

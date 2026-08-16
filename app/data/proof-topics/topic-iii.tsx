@@ -23,7 +23,11 @@ function repairCrossTopicLinks(html: string): string {
     /<a\b[^>]*href="#lem:contact-surgery"[^>]*>[\s\S]*?<\/a>/g,
     '<span class="proof-forthcoming-reference">Topic IV, forthcoming</span>',
   );
-  return withoutUnpublishedLink.replace(/href="#([^"]+)"/g, (match, id: string) => {
+  const withReaderTitles = withoutUnpublishedLink.replaceAll(
+    "Assignment to half-open sides",
+    "Right-half-open side convention",
+  );
+  return withReaderTitles.replace(/href="#([^"]+)"/g, (match, id: string) => {
     const href = crossTopicLinks[id];
     return href ? `href="${href}"` : match;
   });
@@ -74,7 +78,7 @@ const localResults: readonly ProofResultData[] = [
     id: "part-i-item-19",
     label: "Definition 4.2",
     kind: "Definition",
-    title: "Assignment to half-open sides",
+    title: "Right-half-open side convention",
     purpose: "Define which one of the two incident sides receives a boundary point that is exactly a polygon vertex.",
     manuscriptHtml: completeHtml("19", "ownership", "def:ownership-word"),
     vocabulary: [
@@ -120,10 +124,6 @@ const localResults: readonly ProofResultData[] = [
       {
         term: "Indices of side lines through z",
         definition: <><span><i>Z</i>(<i>z</i>)=&#123;<i>r</i> : <i>D</i><sub>r</sub>(<i>z</i>)=0&#125;</span> is the set of side indices whose lines contain <i>z</i>. A point in the relative interior of one side gives one index; a vertex gives the two indices of its incident sides.</>,
-      },
-      {
-        term: "Partition",
-        definition: <>A family of pairwise disjoint sets whose union is the whole set under discussion.</>,
       },
     ],
     intuition: <>The equations <i>D</i><sub>r</sub>(<i>z</i>)=0 say exactly which side lines pass through <i>z</i>. One vanishing determinant identifies a side-interior point; two adjacent ones identify a vertex. At that vertex, the half-open convention retains only the incoming side.</>,
@@ -265,9 +265,6 @@ const compactnessResults: readonly ProofResultData[] = [
     title: "Strict area monotonicity",
     purpose: "Show that proper inclusion of two full-dimensional planar convex bodies creates a strictly positive area gain.",
     manuscriptHtml: completeHtml("69", "spectra", "lem:strict-area-monotonicity"),
-    vocabulary: [
-      { term: "Proper inclusion", definition: <><i>K⊊L</i> means every point of <i>K</i> belongs to <i>L</i>, but at least one point of <i>L</i> is missing from <i>K</i>.</> },
-    ],
     intuition: <>Separate one new point of the larger body from the smaller body. Moving a small interior disk toward that point produces a smaller disk of positive area inside the larger body but outside the smaller one.</>,
     proofSteps: [
       { title: "Choose and separate a new point", explanation: <>Take <i>y∈L\K</i> and a functional whose value at <i>y</i> is strictly above its maximum on <i>K</i>.</> },

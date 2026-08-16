@@ -346,7 +346,7 @@ function verifyStandaloneHtml(html) {
     proofRoute === "/proof/topic-iii"
       ? [
           "Topic III",
-          "Half-open boundary assignments and edge clipping",
+          "Half-open sides and image-edge half-plane intersections",
           "Hausdorff convergence",
           "Old-vertex bound on discarded boundary arcs",
           "Forthcoming",
@@ -355,7 +355,7 @@ function verifyStandaloneHtml(html) {
       : proofRoute === "/proof/topic-ii"
         ? [
             "Topic II",
-            "From convex order to contact on every side",
+            "Support inequalities and boundary contact",
             "data-proof-route=\"topic-ii\"",
             "Forthcoming",
           ]

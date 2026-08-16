@@ -69,7 +69,12 @@ const topicIRoadmapRoutes: Readonly<Record<string, string>> = {
 };
 
 function qualifyTopicIRoadmapLinks(html: string): string {
-  return html.replace(/href="#([^"]+)"/g, (match, anchor: string) => {
+  const readerHtml = html.replaceAll(
+    "Real-linear covariance of contact geometry",
+    "Real-linear covariance of faces and boundary incidences",
+  );
+
+  return readerHtml.replace(/href="#([^"]+)"/g, (match, anchor: string) => {
     const route = topicIRoadmapRoutes[anchor];
     return route ? `href="${sitePath(`${route}#${anchor}`)}"` : match;
   });
@@ -543,12 +548,15 @@ export default function ProofPage() {
                         <dd>
                           A supporting line touches a convex set while the set
                           remains in one closed half-plane. The touched points
-                          form an exposed face. At a vertex, the supporting
-                          nonzero linear functionals in the dual plane{" "}
-                          <i>V</i>
-                          <sup>*</sup> form its normal cone. After choosing an
-                          auxiliary inner product, these covectors may be
-                          drawn as familiar normal arrows.
+                          form an exposed face. At a vertex <i>x</i> of a
+                          polygon <i>P</i>, the normal cone is{" "}
+                          <i>N</i><sub><i>P</i></sub>(<i>x</i>)={"{"}ℓ∈<i>V</i>
+                          <sup>*</sup> : ℓ(<i>y</i>−<i>x</i>)≤0 for every{" "}
+                          <i>y</i>∈<i>P</i>{"}"}. It contains the zero
+                          functional; each nonzero member determines a
+                          supporting line through <i>x</i>. After choosing an
+                          auxiliary inner product, these covectors may be drawn
+                          as familiar normal arrows.
                         </dd>
                       </div>
                       <div>
@@ -1005,7 +1013,7 @@ export default function ProofPage() {
                       >
                         <span>Next</span>
                         <strong>
-                          Topic II · From convex order to contact on every side
+                          Topic II · Support inequalities and boundary contact
                         </strong>
                       </a>
                     )}

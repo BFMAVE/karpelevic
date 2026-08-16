@@ -18,7 +18,7 @@ const figureCopy: Readonly<
   language: {
     title: "An invariant polygon and its contracted rotated image",
     description:
-      "A strict outer polygon P contains a smaller rotated polygon T P. The origin lies in the interior.",
+      "A qualitative schematic of a strict outer polygon P containing a smaller rotated polygon labelled T P. The inner polygon is not computed as the image of P under a specified transformation. The origin lies in the interior.",
     caption:
       "Plate I. The intrinsic starting point: T acts as a rotation-contraction in adapted coordinates, while polygonal complexity counts the vertices of P.",
   },
@@ -67,7 +67,7 @@ const figureCopy: Readonly<
         </math>{" "}
         sends every vertex to the midpoint of the next side. Thus every side
         has nonempty intersection with <i>TP</i>. The theorem proves the same
-        side-intersection conclusion for every invariant polygon with at most
+        side-intersection conclusion for every invariant polygon with at most{" "}
         <i>N</i> vertices under an <i>N</i>-critical map, not only this
         symmetric example.
       </>
@@ -273,10 +273,10 @@ function FigureDrawing({ slug }: { slug: string }) {
             d="M332 230 Q353 133 390 54"
             markerEnd={`url(#proof-arrow-${slug})`}
           />
-          <text className="proof-figure-label" x="294" y="79">e▷ = (tail, head]</text>
+          <text className="proof-figure-label" x="294" y="79">Eᵢ⁺ = (xᵢ₋₁, xᵢ]</text>
           <text className="proof-figure-small-label" x="309" y="264">v</text>
           <text className="proof-figure-small-label" x="410" y="36">Tv</text>
-          <text className="proof-figure-note" x="520" y="104">owned exactly once</text>
+          <text className="proof-figure-note" x="520" y="104">belongs to exactly one half-open side</text>
         </>
       );
     case "mutation":
@@ -290,7 +290,7 @@ function FigureDrawing({ slug }: { slug: string }) {
           <circle className="proof-figure-contact" cx="255" cy="258" r="7" />
           <circle className="proof-figure-source" cx="292" cy="280" r="7" />
           <path className="proof-figure-arrow" d="M286 274 L261 262" markerEnd={`url(#proof-arrow-${slug})`} />
-          <text className="proof-figure-small-label" x="292" y="300">h(e)</text>
+          <text className="proof-figure-small-label" x="292" y="300">xᵢ</text>
           <text className="proof-figure-small-label" x="225" y="247">Tχ⁻¹(e)</text>
 
           <path className="proof-figure-transfer" d="M347 180 L411 180" markerEnd={`url(#proof-arrow-${slug})`} />

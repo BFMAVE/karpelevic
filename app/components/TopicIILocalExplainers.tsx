@@ -106,7 +106,8 @@ export function NormalFanExplainer() {
           This support-function calculation is standard convex geometry;
           see Schneider, <cite>Convex Bodies</cite>, Chapter 1, §§1.3 and
           1.7, and Chapter 2, §§2.1 and 2.4. Proposition 3.1 proves the
-          particular coefficient formula used here.
+          exact planar adjacent-normal coefficient formula used here; its
+          source relation is recorded separately below.
         </p>
       </div>
     </details>

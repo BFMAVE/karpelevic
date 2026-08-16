@@ -23,7 +23,10 @@ function resultNumber(label: string): string {
 
 function sourceRelation(itemNumber: number, fallback?: string): string | undefined {
   if (itemNumber === 15) {
-    return "Bitsoris gives the previously known nonnegative-matrix criterion for invariance of a polyhedron described by linear inequalities. Proposition 3.1 proves the planar formula for a polygon with a fixed cyclic list of outward normal rays and records the eigenvector identity used here.";
+    return "Bitsoris gives a broader polyhedral-invariance antecedent. Proposition 3.1 proves the exact planar adjacent-normal coefficient formula and eigenvector identity used here; no claim is made that this precise proposition appears in the cited source.";
+  }
+  if (itemNumber === 16) {
+    return "Dmitriev–Dynkin, as translated by Swift, provides an earlier antecedent for side-intersection arguments. The full every-polygon conclusion and the boundary location of every image vertex are proved here; no priority category is assigned without a precise statement-level match.";
   }
   if (itemNumber === 18) {
     return "Dmitriev–Dynkin, as translated in Swift’s thesis, is the historical antecedent for side-intersection arguments in this problem. The precise conclusion used here—that a side intersecting the inner polygon contains one of its vertices—is also an elementary exposed-face consequence and is proved completely on this page.";
@@ -344,13 +347,12 @@ function TopicIIResult({ itemNumber }: { itemNumber: number }) {
         </details>
       ) : null}
 
-      {itemNumber !== 15 &&
-      !isRemark &&
-      (item.provenance || sources.length > 0) ? (
+      {!isRemark &&
+      (item.provenance || sources.length > 0 || item.sourceRelation) ? (
         <details className="proof-chapter-source-note">
           <summary>
             <span>Classification and sources</span>
-            Why this mathematical statement carries its displayed label
+            How this statement relates to the cited sources
           </summary>
           <div>
             {item.provenance ? (
@@ -359,6 +361,8 @@ function TopicIIResult({ itemNumber }: { itemNumber: number }) {
                 {sourceRelation(itemNumber, item.sourceRelation) ??
                   "The classification concerns the mathematical statement, not the proof reproduced on this page."}
               </p>
+            ) : sourceRelation(itemNumber, item.sourceRelation) ? (
+              <p>{sourceRelation(itemNumber, item.sourceRelation)}</p>
             ) : null}
             {sources.length > 0 ? (
               <ul>
@@ -597,12 +601,15 @@ export function TopicIIChapter() {
             </dd>
           </div>
           <div>
-            <dt>Cone between adjacent normal rays</dt>
+            <dt>Normal fan Φ</dt>
             <dd>
-              The nonnegative cone spanned by two adjacent normal rays.
-              Every nonzero direction belongs to at least one such cone,
-              and every direction not itself a fan ray belongs to exactly
-              one.
+              The normal fan consists of the zero cone {"{"}0{"}"}, the rays{" "}
+              <i>r</i><sub>i</sub>=ℝ<sub>≥0</sub><i>u</i><sub>i</sub>,
+              and the two-dimensional cones spanned by adjacent rays. Every
+              nonzero direction belongs to a ray or to an adjacent
+              two-dimensional cone. The cyclically ordered unit ray
+              generators <i>u</i><sub>i</sub> are the vectors used to form{" "}
+              <i>B</i><sub>Φ</sub>(<i>θ</i>).
             </dd>
           </div>
           <div>
