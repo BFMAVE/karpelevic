@@ -1614,3 +1614,42 @@ full local source history remain later site milestones.
 - **Publication status:** source commit `9241ff2`; static-only Pages commit
   `055623bd558cd86ac7dab0cca4819bc3e761d6a0`. Topics I–VI return HTTP 200,
   Topic VII returns HTTP 404, and the synchronized manuscript PDF is live.
+
+## Current milestone — Topics I–III standards and presentation pass (16 August 2026)
+
+- **Three standard convex-geometric points were corrected without changing the
+  proof chain:** normal cones explicitly include the zero functional;
+  Proposition 2.3 now says that every nonempty proper face is exposed by a
+  nonzero functional; and the normal fan is the full collection of the zero
+  cone, edge-normal rays, and adjacent two-dimensional vertex cones. The
+  ordered ray generators still define the same coefficient matrix.
+- **Local rigor and notation were tightened:** the successor conjugacy is now
+  type-correct, Theorem 3.2 cites the openness assertion used in its support
+  perturbation, Lemma 4.7 identifies the determinant as affine in the moving
+  point, and the closed unit disk is defined before first use. All 267
+  generated IDs, theorem numbers, equation numbers, and inbound anchors are
+  unchanged.
+- **The public reader is more literal:** Topics II and III have descriptive
+  titles, Proposition 2.3 no longer uses the unrelated phrase “contact
+  geometry,” and items 15–16 are conservatively unbadged while retaining exact
+  source-comparison notes. Elementary glossary entries were trimmed, while
+  full statements and proofs remain.
+- **Figures and accessibility were repaired:** Plate III.1 now draws the
+  predecessor vertex and both adjacent half-open sides on desktop and mobile;
+  the Topic II caption spacing and Topic I complex-structure description are
+  correct; the main Topic I plate is explicitly schematic; and both reading
+  fonts now have genuine Georgia/Times serif fallbacks. A regression test
+  protects machine-readable TeX annotations against newline-corrupted control
+  sequences.
+- **Verification and artifacts:** Tectonic produced a clean 100-page PDF;
+  canonical TeX SHA-256 is
+  `8be482b94ca1ea5a7c0d5c9fd56facbbc4f47ae177d68d45d6df7d4b2f61bb49`,
+  generated Part I data SHA-256 is
+  `d9f2325d4335b51caff021eb8c722baf8716d4d3f21bba692cf9cb2ce05d92d0`,
+  and the compiled/public PDF SHA-256 is
+  `90b621fbc10cc3884dd6b60c729c3661a0f0fe5e32f37d67abfcf977196ca234`.
+  ESLint, all 41 tests, deterministic generation, Pages verification,
+  duplicate-ID/fragment/privacy checks, and desktop/mobile figure QA pass.
+- **Publication status:** source implementation commit `7ec1661`; static-only
+  Pages commit `5f84e91`. Topics I–VI return HTTP 200, Topic VII remains HTTP
+  404, and the synchronized manuscript PDF is live.
