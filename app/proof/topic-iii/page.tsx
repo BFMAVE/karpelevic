@@ -5,6 +5,7 @@ import {
   TopicIIIChapter,
   topicIIISourceIds,
 } from "../../data/proof-topics/topic-iii";
+import { publicationDates } from "../../data/publication-dates";
 import { getPageTimestamp } from "../../lib/git-dates";
 
 export const metadata: Metadata = {
@@ -21,10 +22,12 @@ const updatedAt = getPageTimestamp([
   "app/components/proof/ProofResult.tsx",
   "app/components/proof/figures/OwnershipMutationFigures.tsx",
 ]);
+const firstPublishedAt = publicationDates.pages.topicIII;
 
 export default function TopicIIIPage() {
   return (
     <ProofChapterShell
+      firstPublishedAt={firstPublishedAt}
       routeKey="topic-iii"
       updatedAt={updatedAt}
       overview={[

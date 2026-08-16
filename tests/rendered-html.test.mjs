@@ -23,6 +23,24 @@ async function render(pathname = "/") {
   );
 }
 
+function visibleText(html) {
+  return html
+    .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+    .replace(/<!--[\s\S]*?-->/g, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function assertPageDateSemantics(html, firstPublished) {
+  const text = visibleText(html);
+  assert.match(text, new RegExp(`First published ${firstPublished}`));
+  assert.match(text, /Last revised \d{1,2} [A-Z][a-z]+ 2026/);
+  assert.match(text, /Website online since 28 July 2026/);
+  assert.doesNotMatch(text, /Site build|Last updated/);
+}
+
 test("server-renders the scholarly Home page", async () => {
   const response = await render();
   assert.equal(response.status, 200);
@@ -63,8 +81,19 @@ test("server-renders the scholarly Home page", async () => {
   assert.match(html, /Why is this paper not on arXiv/);
   assert.match(html, /currently in the moderation queue/);
   assert.match(html, /href="https:\/\/zenodo\.org\/records\/21529144"/);
-  assert.match(html, /Zenodo record/);
-  assert.match(html, /93(?:<!-- -->)? pages/);
+  const homeText = visibleText(html);
+  assert.match(homeText, /Archival Zenodo record/);
+  assert.match(homeText, /Published on Zenodo 24 July 2026/);
+  assert.match(homeText, /Zenodo edition 93 pages/);
+  assert.match(
+    homeText,
+    /Website edition Last revised 16 August 2026 ↗ 100-page site-hosted PDF/,
+  );
+  assert.match(
+    html,
+    /href="(?:\/karpelevic)?\/paper\/critical-invariant-polygons\.pdf"/,
+  );
+  assertPageDateSemantics(html, "28 July 2026");
   assert.match(
     html,
     /aria-current="page" href="(?:\/karpelevic)?\/">Problem<\/a>/,
@@ -141,6 +170,7 @@ test("server-renders the sourced History page", async () => {
   assert.match(html, /href="https:\/\/doi\.org\/10\.1016\/j\.laa\.2017\.01\.009"/);
   assert.match(html, /href="https:\/\/doi\.org\/10\.5281\/zenodo\.21529144"/);
   assert.match(html, /<time dateTime="[^"]+"/);
+  assertPageDateSemantics(html, "28 July 2026");
   assert.match(html, /generative-AI assistance/);
   assert.match(html, /To the top/);
 });
@@ -188,6 +218,7 @@ test("server-renders the personal Journey page", async () => {
     /aria-current="page" href="(?:\/karpelevic)?\/journey\/">My Journey/,
   );
   assert.match(html, /<time dateTime="[^"]+"/);
+  assertPageDateSemantics(html, "28 July 2026");
   assert.match(html, /generative-AI assistance/);
   assert.match(html, /To the top/);
   assert.doesNotMatch(html, /pull quote/i);
@@ -845,6 +876,7 @@ test("server-renders the Part I proof reader", async () => {
     /aria-current="page" href="(?:\/karpelevic)?\/proof\/">The Proof/,
   );
   assert.match(html, /<time dateTime="[^"]+"/);
+  assertPageDateSemantics(html, "29 July 2026");
   assert.match(html, /generative-AI assistance/);
   assert.match(html, /To the top/);
   assert.doesNotMatch(html, /evidence status/i);
@@ -1103,6 +1135,7 @@ test("server-renders the illustrated prerequisite library", async () => {
   assert.doesNotMatch(html, /Projective geometry and Farey cells/);
   assert.doesNotMatch(html, /The cell from 1\/3 to 2\/5/);
   assert.match(html, /<time dateTime="[^"]+"/);
+  assertPageDateSemantics(html, "29 July 2026");
   assert.match(html, /generative-AI assistance/);
   assert.match(html, /To the top/);
   assert.doesNotMatch(html, /analytics|google-analytics|googletagmanager/i);

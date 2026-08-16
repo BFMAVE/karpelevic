@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { primaryNavigation } from "../data/home";
+import { publicationDates } from "../data/publication-dates";
 import {
   journeyContent,
   journeyReferences,
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
 
 const pageTimestamp = getPageTimestamp("app/data/journey.ts");
 const buildTimestamp = getBuildTimestamp();
+const firstPublished = publicationDates.pages.journey;
 const referenceNumbers = new Map(
   journeyReferences.map((reference, index) => [reference.id, index + 1]),
 );
@@ -126,9 +128,15 @@ export default function JourneyPage() {
           <aside className="journey-scope" aria-label="Scope of this personal account">
             <p className="section-label">A personal account</p>
             <p>{journeyContent.disclaimer}</p>
-            <time dateTime={pageTimestamp}>
-              Last updated {formatDate(pageTimestamp)}.
-            </time>
+            <p className="page-publication-meta">
+              <time dateTime={firstPublished}>
+                First published {formatDate(firstPublished)}
+              </time>{" "}
+              <span aria-hidden="true">·</span>{" "}
+              <time dateTime={pageTimestamp}>
+                Last revised {formatDate(pageTimestamp)}
+              </time>
+            </p>
           </aside>
         </header>
 
@@ -293,11 +301,9 @@ export default function JourneyPage() {
           </p>
         </div>
         <div className="footer-meta">
-          <time dateTime={pageTimestamp}>
-            Last updated {formatDate(pageTimestamp)}.
-          </time>
-          <time dateTime={buildTimestamp}>
-            Site build {formatDate(buildTimestamp)}.
+          <time dateTime={publicationDates.websiteOnlineSince}>
+            Website online since{" "}
+            {formatDate(publicationDates.websiteOnlineSince)}.
           </time>
           <span>© {new Date(buildTimestamp).getUTCFullYear()} The authors</span>
           <a className="to-top" href="#top">

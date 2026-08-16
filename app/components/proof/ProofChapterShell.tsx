@@ -1,4 +1,5 @@
 import { primaryNavigation } from "../../data/home";
+import { publicationDates } from "../../data/publication-dates";
 import { proofTopics } from "../../data/proof";
 import {
   getProofReaderNeighbours,
@@ -8,7 +9,7 @@ import {
   proofReaderTopicLinks,
   toRomanNumeral,
 } from "../../data/proof-reader";
-import { formatDate, getBuildTimestamp } from "../../lib/git-dates";
+import { formatDate } from "../../lib/git-dates";
 import { sitePath } from "../../lib/site-path";
 import { ProofChapterReadingControls } from "./ProofChapterReadingControls";
 
@@ -22,6 +23,7 @@ type ProofChapterShellProps = {
   question?: string;
   overview?: readonly string[];
   manuscriptPages?: string;
+  firstPublishedAt?: string;
   updatedAt: string;
   stats?: readonly ChapterStat[];
   readingConvention?: React.ReactNode;
@@ -29,13 +31,12 @@ type ProofChapterShellProps = {
   children: React.ReactNode;
 };
 
-const buildTimestamp = getBuildTimestamp();
-
 export function ProofChapterShell({
   routeKey,
   question,
   overview,
   manuscriptPages,
+  firstPublishedAt,
   updatedAt,
   stats = [],
   readingConvention,
@@ -116,8 +117,13 @@ export function ProofChapterShell({
                   {stat.value} {stat.label}
                 </span>
               ))}
+              {firstPublishedAt ? (
+                <time dateTime={firstPublishedAt}>
+                  First published {formatDate(firstPublishedAt)}.
+                </time>
+              ) : null}
               <time dateTime={updatedAt}>
-                Last updated {formatDate(updatedAt)}.
+                Last revised {formatDate(updatedAt)}.
               </time>
             </div>
           </div>
@@ -272,12 +278,13 @@ export function ProofChapterShell({
       <footer className="site-footer">
         <div className="footer-meta">
           <time dateTime={updatedAt}>
-            Last updated {formatDate(updatedAt)}.
+            Last revised {formatDate(updatedAt)}.
           </time>
-          <time dateTime={buildTimestamp}>
-            Site build {formatDate(buildTimestamp)}.
+          <time dateTime={publicationDates.websiteOnlineSince}>
+            Website online since{" "}
+            {formatDate(publicationDates.websiteOnlineSince)}.
           </time>
-          <span>© {new Date(buildTimestamp).getUTCFullYear()} The authors</span>
+          <span>© {new Date(updatedAt).getUTCFullYear()} The authors</span>
           <a className="to-top" href="#top">
             To the top ↑
           </a>

@@ -45,10 +45,33 @@ const pages = [
   ],
 ];
 
+const firstPublicationDates = new Map([
+  ["index.html", "28 July 2026"],
+  ["history/index.html", "28 July 2026"],
+  ["journey/index.html", "28 July 2026"],
+  ["prerequisites/index.html", "29 July 2026"],
+  ["proof/index.html", "29 July 2026"],
+  ["proof/topic-ii/index.html", "6 August 2026"],
+  ["proof/topic-iii/index.html", "13 August 2026"],
+  ["proof/topic-iv/index.html", "13 August 2026"],
+  ["proof/topic-v/index.html", "14 August 2026"],
+  ["proof/topic-vi/index.html", "15 August 2026"],
+]);
+
 for (const [relativePath, expectedText] of pages) {
   const html = await readFile(path.join(outputRoot, relativePath), "utf8");
+  const visibleText = visibleTextFromHtml(html);
 
   assert.match(html, new RegExp(expectedText));
+  assert.match(visibleText, /Website online since\s+28 July 2026/);
+  assert.match(visibleText, /Last revised\s+\d{1,2} [A-Z][a-z]+ 20\d{2}/);
+  assert.doesNotMatch(visibleText, /Site build|Last updated/);
+  if (firstPublicationDates.has(relativePath)) {
+    assert.match(
+      visibleText,
+      new RegExp(`First published\\s+${firstPublicationDates.get(relativePath)}`),
+    );
+  }
   assert.doesNotMatch(html, /(?:href|src)="\/assets\//);
   assert.doesNotMatch(html, /<script\b[^>]*>self\.__VINEXT/);
   assert.match(html, /\/karpelevic\/assets\//);
@@ -63,6 +86,16 @@ for (const [relativePath, expectedText] of pages) {
   } else {
     assert.doesNotMatch(html, /\/karpelevic\/proof-chapter\.js/);
   }
+}
+
+{
+  const html = await readFile(path.join(outputRoot, "index.html"), "utf8");
+  const visibleText = visibleTextFromHtml(html);
+  assert.match(visibleText, /Published on Zenodo/);
+  assert.match(visibleText, /24 July 2026/);
+  assert.match(visibleText, /Website edition/);
+  assert.match(visibleText, /Last revised\s+16 August 2026/);
+  assert.doesNotMatch(html, />Prepared</);
 }
 
 for (const [relativePath, target] of [

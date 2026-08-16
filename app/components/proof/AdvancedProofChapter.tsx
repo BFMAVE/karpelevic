@@ -24,6 +24,7 @@ export type AdvancedProofSetup = {
 
 type AdvancedProofChapterProps = {
   routeKey: string;
+  firstPublishedAt?: string;
   updatedAt: string;
   question: string;
   overview: readonly string[];
@@ -61,6 +62,7 @@ function FormalSetup({ setup }: { setup: AdvancedProofSetup }) {
 
 export function AdvancedProofChapter({
   routeKey,
+  firstPublishedAt,
   updatedAt,
   question,
   overview,
@@ -81,6 +83,7 @@ export function AdvancedProofChapter({
     <ProofChapterShell
       manuscriptPages={manuscriptPages}
       overview={overview}
+      firstPublishedAt={firstPublishedAt}
       question={question}
       routeKey={routeKey}
       stats={stats}

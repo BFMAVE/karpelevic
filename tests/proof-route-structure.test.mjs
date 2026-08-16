@@ -41,6 +41,15 @@ const chapters = [
 
 const proofRoutes = ["/proof", ...chapters.map(([pathname]) => pathname), "/proof/topic-xiv"];
 
+const publicTopicPublicationDates = [
+  ["/proof", "2026-07-29", "29 July 2026"],
+  ["/proof/topic-ii", "2026-08-06", "6 August 2026"],
+  ["/proof/topic-iii", "2026-08-13", "13 August 2026"],
+  ["/proof/topic-iv", "2026-08-13", "13 August 2026"],
+  ["/proof/topic-v", "2026-08-14", "14 August 2026"],
+  ["/proof/topic-vi", "2026-08-15", "15 August 2026"],
+];
+
 for (const [pathname, expectedResults, expectedProofs] of chapters) {
   test(`${pathname} preserves its complete formal structure`, async () => {
     const response = await render(pathname);
@@ -67,6 +76,50 @@ for (const [pathname, expectedResults, expectedProofs] of chapters) {
     assert.doesNotMatch(html, /Unhandled Script Error|Internal Server Error/i);
   });
 }
+
+test("proof-reader dates distinguish publication, revision, and website launch", async () => {
+  for (const [pathname, isoDate, displayDate] of publicTopicPublicationDates) {
+    const html = await (await render(pathname)).text();
+    const markup = html.replace(/<script[\s\S]*?<\/script>/gi, "");
+
+    assert.match(
+      markup,
+      new RegExp(
+        `<time dateTime="${isoDate}">First published (?:<!-- -->)?${displayDate}(?:<!-- -->)?\\.<\\/time>`,
+      ),
+      `${pathname} shows its actual first-publication date`,
+    );
+    assert.equal(
+      [...markup.matchAll(/First published/g)].length,
+      1,
+      `${pathname} shows first publication in the chapter hero only`,
+    );
+    assert.match(
+      markup,
+      /Last revised (?:<!-- -->)?\d{1,2} [A-Z][a-z]+ 20\d{2}(?:<!-- -->)?\./,
+    );
+    assert.match(
+      markup,
+      /<time dateTime="2026-07-28">Website online since(?:<!-- -->|\s)*28 July 2026(?:<!-- -->)?\.<\/time>/,
+    );
+    assert.doesNotMatch(markup, /Site build|Last updated/);
+  }
+
+  for (const pathname of proofRoutes.filter(
+    (route) =>
+      !publicTopicPublicationDates.some(
+        ([publishedRoute]) => publishedRoute === route,
+      ),
+  )) {
+    const html = await (await render(pathname)).text();
+    const markup = html.replace(/<script[\s\S]*?<\/script>/gi, "");
+    assert.doesNotMatch(
+      markup,
+      /First published/,
+      `${pathname} is not falsely presented as already published`,
+    );
+  }
+});
 
 test("legacy Topic VI part routes redirect to the unified chapter", async () => {
   const aliases = [

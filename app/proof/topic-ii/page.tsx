@@ -4,6 +4,7 @@ import { TopicIIChapter } from "../../components/TopicIIChapter";
 import { ProofChapterShell } from "../../components/proof/ProofChapterShell";
 import { ProofSourceShelf } from "../../components/proof/ProofSourceShelf";
 import { getProofItems, proofTopics } from "../../data/proof";
+import { publicationDates } from "../../data/publication-dates";
 import { getPageTimestamp } from "../../lib/git-dates";
 
 export const metadata: Metadata = {
@@ -16,10 +17,12 @@ const topic = proofTopics[1];
 const items = getProofItems(topic.itemNumbers);
 const sourceIds = items.flatMap((item) => item.sourceIds);
 const updatedAt = getPageTimestamp("app/data/topic-ii-result-guide.ts");
+const firstPublishedAt = publicationDates.pages.topicII;
 
 export default function TopicIIPage() {
   return (
     <ProofChapterShell
+      firstPublishedAt={firstPublishedAt}
       routeKey="topic-ii"
       updatedAt={updatedAt}
       stats={[

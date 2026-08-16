@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ContactForm } from "./components/ContactForm";
 import { ThetaAtlasPlate } from "./components/ThetaAtlasPlate";
 import { homeContent, primaryNavigation } from "./data/home";
+import { publicationDates } from "./data/publication-dates";
 import {
   formatDate,
   getBuildTimestamp,
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
 
 const pageTimestamp = getPageTimestamp("app/data/home.ts");
 const buildTimestamp = getBuildTimestamp();
+const firstPublished = publicationDates.pages.home;
 
 export default function Home() {
   return (
@@ -86,14 +88,52 @@ export default function Home() {
                   </dd>
                 </div>
                 <div>
-                  <dt>Prepared</dt>
-                  <dd>{homeContent.manuscript.prepared}</dd>
+                  <dt>Published on Zenodo</dt>
+                  <dd>
+                    <time dateTime={publicationDates.manuscript.zenodoPublished}>
+                      {formatDate(publicationDates.manuscript.zenodoPublished)}
+                    </time>
+                  </dd>
                 </div>
                 <div>
-                  <dt>Length</dt>
-                  <dd>{homeContent.manuscript.pages} pages</dd>
+                  <dt>Zenodo edition</dt>
+                  <dd>{homeContent.manuscript.zenodoPages} pages</dd>
+                </div>
+                <div>
+                  <dt>Website edition</dt>
+                  <dd>
+                    <a
+                      className="manuscript-link"
+                      href={sitePath(homeContent.manuscript.websiteEditionUrl)}
+                    >
+                      Last revised{" "}
+                      <time
+                        dateTime={
+                          publicationDates.manuscript.websiteEditionRevised
+                        }
+                      >
+                        {formatDate(
+                          publicationDates.manuscript.websiteEditionRevised,
+                        )}
+                      </time>{" "}
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                    <small className="paper-fact-note">
+                      {`${homeContent.manuscript.websiteEditionPages}-page site-hosted PDF`}
+                    </small>
+                  </dd>
                 </div>
               </dl>
+
+              <p className="page-publication-meta">
+                <time dateTime={firstPublished}>
+                  First published {formatDate(firstPublished)}
+                </time>{" "}
+                <span aria-hidden="true">·</span>{" "}
+                <time dateTime={pageTimestamp}>
+                  Last revised {formatDate(pageTimestamp)}
+                </time>
+              </p>
             </header>
 
             <ThetaAtlasPlate />
@@ -231,11 +271,9 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="footer-meta">
-          <time dateTime={pageTimestamp}>
-            Last updated {formatDate(pageTimestamp)}.
-          </time>
-          <time dateTime={buildTimestamp}>
-            Site build {formatDate(buildTimestamp)}.
+          <time dateTime={publicationDates.websiteOnlineSince}>
+            Website online since{" "}
+            {formatDate(publicationDates.websiteOnlineSince)}.
           </time>
           <span>© {new Date(buildTimestamp).getUTCFullYear()} The authors</span>
           <a className="to-top" href="#top">

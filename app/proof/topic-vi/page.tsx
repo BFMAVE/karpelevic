@@ -7,6 +7,7 @@ import {
   topicVISetup,
   topicVISourceIds,
 } from "../../data/topic-vi-reader";
+import { publicationDates } from "../../data/publication-dates";
 import { getPageTimestamp } from "../../lib/git-dates";
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 };
 
 const updatedAt = getPageTimestamp("app/data/topic-vi-reader.tsx");
+const firstPublishedAt = publicationDates.pages.topicVI;
 
 export default function TopicVIPage() {
   return (
@@ -39,6 +41,7 @@ export default function TopicVIPage() {
         "Under the standing assumption N≥4, an affine projective chart turns the selected boundary chain into a convex graph. Successive perspectivities define a real projective map, and its behaviour near a fixed point supplies a small signed deformation into the polygon-interior half-plane.",
         "The return-time bijection defines all N deformed vertices. Exact identities and finitely many open inequalities make the resulting polygon invariant, while one extreme point of its image lies in the polygon interior. Topic II rules this out for an N-critical map, so the first-return step is Δ=1.",
       ]}
+      firstPublishedAt={firstPublishedAt}
       provedHere={
         <p>
           This page proves Lemmas 7.6, 7.7, and 7.9; Theorems 7.8,

@@ -7,6 +7,7 @@ import {
   topicVImported,
   topicVSourceIds,
 } from "../../data/topic-v-reader";
+import { publicationDates } from "../../data/publication-dates";
 import { getPageTimestamp } from "../../lib/git-dates";
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 };
 
 const updatedAt = getPageTimestamp("app/data/topic-v-reader.tsx");
+const firstPublishedAt = publicationDates.pages.topicV;
 
 export default function TopicVPage() {
   return (
@@ -32,6 +34,7 @@ export default function TopicVPage() {
         "The cyclic interval of relative-interior contact indices is now studied as a finite rotation. Consecutive record vectors produce a bijective two-height first-return decomposition.",
         "The tower tops are then read as polygon contacts. For N≥4, consecutive boundary vertices omitting at least one side and an exhaustive four-set partition prepare the sequence of perspectivities used in Topic VI.",
       ]}
+      firstPublishedAt={firstPublishedAt}
       provedHere={
         <p>
           This topic proves the first-return decomposition for a finite cyclic rotation,

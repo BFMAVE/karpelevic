@@ -30,9 +30,9 @@ import {
   proofTopics,
 } from "../data/proof";
 import { proofReaderTopicLinks } from "../data/proof-reader";
+import { publicationDates } from "../data/publication-dates";
 import {
   formatDate,
-  getBuildTimestamp,
   getPageTimestamp,
 } from "../lib/git-dates";
 import { sitePath } from "../lib/site-path";
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 };
 
 const pageTimestamp = getPageTimestamp("app/data/proof.ts");
-const buildTimestamp = getBuildTimestamp();
+const firstPublishedAt = publicationDates.pages.topicI;
 const visibleProofTopics = proofTopics.slice(0, 1);
 const visibleTopicItems = getProofItems(
   visibleProofTopics.flatMap((topic) => topic.itemNumbers),
@@ -208,8 +208,11 @@ export default function ProofPage() {
               <span>{visibleResultCount} results</span>
               <span>{visibleProofCount} complete proofs</span>
               <span>{visibleDisplayMathCount} displayed formulas</span>
+              <time dateTime={firstPublishedAt}>
+                First published {formatDate(firstPublishedAt)}.
+              </time>
               <time dateTime={pageTimestamp}>
-                Last updated {formatDate(pageTimestamp)}.
+                Last revised {formatDate(pageTimestamp)}.
               </time>
             </div>
           </div>
@@ -1050,12 +1053,13 @@ export default function ProofPage() {
       <footer className="site-footer">
         <div className="footer-meta">
           <time dateTime={pageTimestamp}>
-            Last updated {formatDate(pageTimestamp)}.
+            Last revised {formatDate(pageTimestamp)}.
           </time>
-          <time dateTime={buildTimestamp}>
-            Site build {formatDate(buildTimestamp)}.
+          <time dateTime={publicationDates.websiteOnlineSince}>
+            Website online since{" "}
+            {formatDate(publicationDates.websiteOnlineSince)}.
           </time>
-          <span>© {new Date(buildTimestamp).getUTCFullYear()} The authors</span>
+          <span>© {new Date(pageTimestamp).getUTCFullYear()} The authors</span>
           <a className="to-top" href="#top">
             To the top ↑
           </a>

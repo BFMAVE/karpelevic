@@ -74,10 +74,11 @@ export const homeContent = {
   personalPrompt:
     "Author prompt — replace before publication: How did you first encounter the Karpelevič region? What feature of the problem made you keep returning to it, and when did invariant polygons become the decisive point of view?",
   manuscript: {
-    status: "Zenodo record",
+    status: "Archival Zenodo record",
     zenodoUrl: "https://zenodo.org/records/21529144",
-    prepared: "24 July 2026",
-    pages: 93,
+    zenodoPages: 93,
+    websiteEditionUrl: "/paper/critical-invariant-polygons.pdf",
+    websiteEditionPages: 100,
     zenodoChecksum:
       "ca3be77169053635302798aa1ba204502db0a3267d2e76e4d8e763cede138f3b",
     localArxivDraftChecksum:

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { historyContent, historyReferences } from "../data/history";
 import { primaryNavigation } from "../data/home";
+import { publicationDates } from "../data/publication-dates";
 import {
   formatDate,
   getBuildTimestamp,
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 
 const pageTimestamp = getPageTimestamp("app/data/history.ts");
 const buildTimestamp = getBuildTimestamp();
+const firstPublished = publicationDates.pages.history;
 const referenceNumbers = new Map(
   historyReferences.map((reference, index) => [reference.id, index + 1]),
 );
@@ -97,9 +99,15 @@ export default function HistoryPage() {
           <aside className="history-disclaimer" aria-label="Scope of this history">
             <p className="section-label">A personal historiographical note</p>
             <p>{historyContent.disclaimer}</p>
-            <time dateTime={pageTimestamp}>
-              Last updated {formatDate(pageTimestamp)}.
-            </time>
+            <p className="page-publication-meta">
+              <time dateTime={firstPublished}>
+                First published {formatDate(firstPublished)}
+              </time>{" "}
+              <span aria-hidden="true">·</span>{" "}
+              <time dateTime={pageTimestamp}>
+                Last revised {formatDate(pageTimestamp)}
+              </time>
+            </p>
           </aside>
         </header>
 
@@ -329,11 +337,9 @@ export default function HistoryPage() {
           </p>
         </div>
         <div className="footer-meta">
-          <time dateTime={pageTimestamp}>
-            Last updated {formatDate(pageTimestamp)}.
-          </time>
-          <time dateTime={buildTimestamp}>
-            Site build {formatDate(buildTimestamp)}.
+          <time dateTime={publicationDates.websiteOnlineSince}>
+            Website online since{" "}
+            {formatDate(publicationDates.websiteOnlineSince)}.
           </time>
           <span>© {new Date(buildTimestamp).getUTCFullYear()} The authors</span>
           <a className="to-top" href="#top">

@@ -5,6 +5,7 @@ import {
   TopicIVChapter,
   topicIVSourceIds,
 } from "../../data/proof-topics/topic-iv";
+import { publicationDates } from "../../data/publication-dates";
 import { getPageTimestamp } from "../../lib/git-dates";
 
 export const metadata: Metadata = {
@@ -14,10 +15,12 @@ export const metadata: Metadata = {
 };
 
 const updatedAt = getPageTimestamp("app/data/proof-topics/topic-iv.tsx");
+const firstPublishedAt = publicationDates.pages.topicIV;
 
 export default function TopicIVPage() {
   return (
     <ProofChapterShell
+      firstPublishedAt={firstPublishedAt}
       routeKey="topic-iv"
       updatedAt={updatedAt}
       overview={[

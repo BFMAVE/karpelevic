@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PrerequisitePlate } from "../components/PrerequisitePlate";
 import { primaryNavigation } from "../data/home";
+import { publicationDates } from "../data/publication-dates";
 import {
   getPrerequisiteReference,
   prerequisiteChapters,
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
 
 const pageTimestamp = getPageTimestamp("app/data/prerequisites.ts");
 const buildTimestamp = getBuildTimestamp();
+const firstPublished = publicationDates.pages.prerequisites;
 const referenceNumbers = new Map(
   prerequisiteReferences.map((reference, index) => [reference.id, index + 1]),
 );
@@ -110,9 +112,15 @@ export default function PrerequisitesPage() {
                 Return to Topic I →
               </a>
             </div>
-            <time dateTime={pageTimestamp}>
-              Last updated {formatDate(pageTimestamp)}.
-            </time>
+            <p className="page-publication-meta">
+              <time dateTime={firstPublished}>
+                First published {formatDate(firstPublished)}
+              </time>{" "}
+              <span aria-hidden="true">·</span>{" "}
+              <time dateTime={pageTimestamp}>
+                Last revised {formatDate(pageTimestamp)}
+              </time>
+            </p>
           </div>
         </header>
 
@@ -315,11 +323,9 @@ export default function PrerequisitesPage() {
 
       <footer className="site-footer">
         <div className="footer-meta">
-          <time dateTime={pageTimestamp}>
-            Last updated {formatDate(pageTimestamp)}.
-          </time>
-          <time dateTime={buildTimestamp}>
-            Site build {formatDate(buildTimestamp)}.
+          <time dateTime={publicationDates.websiteOnlineSince}>
+            Website online since{" "}
+            {formatDate(publicationDates.websiteOnlineSince)}.
           </time>
           <span>© {new Date(buildTimestamp).getUTCFullYear()} The authors</span>
           <a href={sitePath("/proof/")}>The Proof</a>
