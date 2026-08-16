@@ -46,9 +46,9 @@ export const topicVISetup: AdvancedProofSetup = {
       N is the smallest number of
       vertices of a nondegenerate invariant polygon, and for every real
       t&gt;1 the enlarged map tT has no invariant polygon with at most N
-      vertices. Here a <em>strict polygon</em> has nonempty interior and its
-      displayed cyclic list consists exactly of its distinct extreme points,
-      with no redundant listed points. The polygon
+      vertices. Following Definition 1.2, every polygon named below has
+      nonempty interior and is displayed by a cyclic list containing every
+      extreme point exactly once and no other points. The polygon
       <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mi mathvariant="normal">conv</mi><mo stretchy="false">{</mo><msub><mi>x</mi><mn>0</mn></msub><mo>,</mo><mo>…</mo><mo>,</mo><msub><mi>x</mi><mrow><mi>N</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">P=\operatorname{conv}\{x_0,\ldots,x_{N-1}\}</annotation></semantics></math>
       has exactly these extreme points in counterclockwise order for the
       chosen complex orientation and satisfies

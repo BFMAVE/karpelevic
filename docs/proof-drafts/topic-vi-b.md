@@ -74,7 +74,7 @@ Repeat the exact contracts in an expandable panel:
 ### Imported from Topics I-II
 
 - The simultaneous convex-admissibility lemma: finitely many strict determinant inequalities and relative-interior incidences persist for a sufficiently small continuous perturbation.
-- A point satisfies all strict side inequalities of a strict polygon exactly when it is in the polygon's interior.
+- A point satisfies all strict side inequalities of a polygon under Definition 1.2's vertex-list convention exactly when it is in the polygon's interior.
 - An invertible linear map sends extreme points bijectively to extreme points.
 - **Hereditary image-vertex saturation, Theorem 3.2:** for an \(N\)-critical map, every strict invariant polygon with at most \(N\) vertices has exactly \(N\) vertices, every side is touched by the image polygon, and every vertex of the image polygon lies on the boundary of the outer polygon. This exact third clause is the contradiction used in Theorem 7.11.
 
@@ -195,7 +195,7 @@ This stage should use four stacked visual cards, never a wide table.
 #### Stage 5: preserve every nonclosing inequality for \(Y\)
 
 1. At \(\tau=0\), \(Y(0)=C_{m+1}=\xi_c\) lies in the relative interior of the closing side.
-2. Therefore it satisfies the strict interior-side inequality for every other side of the original strict polygon.
+2. Therefore it satisfies the strict interior-side inequality for every other side of the original polygon.
 3. Define \(G_k(\tau)\) for all side labels, not only strict fields.
 4. Apply simultaneous convex admissibility to the finite family \((Y(\tau),k)\) for \(k\neq c\).
 5. Shrink to one common interval \(U\) on which all \(N-1\) nonclosing inequalities remain positive.

@@ -197,7 +197,7 @@ const copy: Record<FigureKind, { title: string; description: string; caption: st
   jensen: { title: "Strict convexity makes the parameters constant", description: "A strictly convex graph, two separated sample points, and their mean below the joining chord.", caption: "Plate X.2. The lifted phase fixes the mean argument; strict Jensen makes a common argument the unique constant-parameter case." },
   "cycle-ledger": { title: "Local cycles or one global cycle", description: "Three deterministic blocks have local return arcs and one highlighted route through every block terminal.", caption: "Plate XI.1. Any subset of local cycles is vertex-disjoint, but the global cycle meets every terminal and cannot coexist with a local cycle." },
   "sparse-cases": { title: "The two graph regimes before padding", description: "One graph routes a cross edge into the interior of a block, while another inserts a subdivision vertex on a cross edge.", caption: "Plate XI.2. When s≤dq the entry positions shorten the global route to s; when s>dq subdivision vertices lengthen it to s." },
-  squeeze: { title: "Attainment closes the upper comparison", description: "Opposing arrows show rho at most rho star and rho star at most rho, meeting at equality.", caption: "Plate XI.3. Topic X supplies one inequality; the independently constructed stochastic realizer supplies the other." },
+  squeeze: { title: "Attainment closes the upper comparison", description: "Opposing arrows show rho at most rho star and rho star at most rho, meeting at equality.", caption: "Plate XI.3. Topic X supplies one inequality; the independently constructed realizing stochastic matrix supplies the other." },
 };
 
 export function StochasticFareyFigure({ kind }: { kind: FigureKind }) {

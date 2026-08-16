@@ -49,7 +49,7 @@ export const homeContent = {
     {
       label: "Part II",
       title: "Return to stochastic spectra",
-      text: "For orders at least four, the resulting monodromy is combined with a sharp scalar comparison, explicit sparse realizations, and Farey refinement; the smaller orders are treated directly. Together these arguments derive the Farey–Ito boundary from invariant polygons.",
+      text: "For orders at least four, the resulting closed-return product is combined with a sharp scalar comparison, explicit sparse realizations, and Farey refinement; the smaller orders are treated directly. Together these arguments derive the Farey–Ito boundary from invariant polygons.",
     },
   ],
   noveltyLedger: [
@@ -61,7 +61,7 @@ export const homeContent = {
     {
       established: "Farey-indexed boundary formulations and matrix realizations",
       thisPaper:
-        "Organizes a different proof route through critical invariant-polygon contacts and return monodromy.",
+        "Organizes a different proof route through critical invariant-polygon contacts and a closed-return product identity.",
     },
     {
       established: "Elementary convexity, compactness, and stochastic-matrix background",

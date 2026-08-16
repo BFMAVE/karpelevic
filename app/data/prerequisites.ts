@@ -175,7 +175,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
     deck:
       "The proof treats a polygon as a compact convex set, not merely as a cyclic list of corners. Extreme points, exposed faces, relative interiors, and strict separation supply the exact language.",
     proofSummary:
-      "Extreme points, strict polygons, exposed faces, relative interiors, supporting functionals, and strict separation of a point from a compact convex set.",
+      "Extreme points, complete cyclic vertex lists, exposed faces, relative interiors, supporting functionals, and strict separation of a point from a compact convex set.",
     vocabulary: [
       {
         term: "Extreme point",
@@ -193,9 +193,9 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
           "The interior taken inside the affine hull of a set. The relative interior of a polygon side is the open segment obtained by deleting its two endpoints.",
       },
       {
-        term: "Strict polygon",
+        term: "Polygon and vertex-list convention",
         definition:
-          "A polygon with nonempty interior whose displayed vertices are exactly its extreme points. Adjacent sides are not collinear, and every side is a maximal boundary segment.",
+          "Throughout the proof, a polygon P has nonempty interior and is displayed by a cyclic list containing every point of Ext(P) exactly once and no other points. Thus adjacent sides are not collinear, and every side is a maximal boundary segment.",
       },
     ],
     facts: [
@@ -214,11 +214,11 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
           "The inequality ℓ≤hP(ℓ) describes a supporting half-plane; equality singles out the touched face.",
       },
       {
-        title: "A strict supporting line isolates one vertex",
+        title: "A supporting line can expose one vertex",
         statement:
-          "A supporting line through a vertex is strict when its exposed face consists of that vertex alone.",
+          "A supporting line through a vertex v exposes v when its contact face is the singleton {v}.",
         explanation:
-          "At a strict polygonal vertex, the directions of strict supporting lines form the interior of its normal cone.",
+          "At a polygon vertex, the covectors whose supporting lines expose that vertex form the interior of its normal cone.",
       },
       {
         title: "Exterior points can be separated strictly",
@@ -251,7 +251,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
         {
           label: "Count correctly",
           text:
-            "The polygon still has four vertices. A five-entry display does not make it a strict pentagon.",
+            "The polygon still has four vertices. A five-entry display does not make it a pentagon with five genuine vertices.",
         },
       ],
       conclusion:
@@ -267,7 +267,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
       {
         label: "Definition 1.2",
         text:
-          "Strict polygons, maximal sides, and strict supporting lines.",
+          "The complete cyclic vertex-list convention, maximal sides, and supporting lines that expose a single vertex.",
         href: "/proof/#part-i-item-2",
       },
       {

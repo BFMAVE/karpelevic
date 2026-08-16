@@ -427,7 +427,7 @@ export const historyContent = {
       number: "III",
       title: "Realizing matrices and graphs",
       text:
-        "A boundary equation becomes concrete when one writes down a stochastic matrix that has the chosen root as an eigenvalue. Parametric realizers, sparsest realizers, and their directed graphs reveal how an extremal eigenvalue is assembled combinatorially.",
+        "A boundary equation becomes concrete when one writes down a stochastic matrix that has the chosen root as an eigenvalue. Parameterized and sparsest realizing stochastic matrices, together with their directed graphs, reveal how an extremal eigenvalue is assembled combinatorially.",
       citations: [
         "johnson-paparella-2017",
         "kirkland-smigoc-2022",

@@ -271,7 +271,7 @@ export const topicVIIIResults: readonly ProofResultData[] = [
       { title: "No outward N-vertex witness", explanation: <>For t&gt;1 the point tλ lies beyond the maximal radius Rᴺ(θ), so it is not in Θᴺ. An invariant polygon with at most N vertices would contradict the polygon criterion.</> },
       { title: "Match the definition", explanation: <>The preceding two conclusions are exactly <span className="math-inline">νpoly(Tλ)=N</span> and <span className="math-inline">νpoly(tTλ)&gt;N</span> for all t&gt;1.</> },
     ],
-    takeaway: <>For N≥4, every non-inherited stochastic radial maximum satisfies the full intrinsic hypothesis needed by Part I monodromy. The smaller orders are handled separately.</>,
+    takeaway: <>For N≥4, every non-inherited stochastic radial maximum satisfies the full intrinsic hypothesis needed by Part I&apos;s closed-return product theorem. The smaller orders are handled separately.</>,
     provenance: "New result",
     sourceIds: ["dmitriev-dynkin-1946", "karpelevic-1951"],
     sourceRelation: <>The exact implication from a non-inherited radial maximum to polygonal criticality is manuscript-specific; the cited works are its closest invariant-polygon and radial-extremality antecedents.</>,
@@ -415,20 +415,20 @@ export const topicXResults: readonly ProofResultData[] = [
     id: "topic-x-compression",
     label: "Theorem II.5.1",
     kind: "Theorem",
-    title: "Part I critical-polygon monodromy",
+    title: "Part I closed-return product theorem",
     purpose: "For N≥4, states the complete list of data imported from the Part I geometric results and verifies that a non-inherited radial maximum satisfies its hypotheses.",
     manuscriptHtml: completeHtml("karp:thm:compression"),
     vocabulary: [
-      { term: "Selected multiplier μ", definition: <>One of λ and its complex conjugate, chosen by the adapted complex orientation in which Part I produces the monodromy data.</> },
+      { term: "Selected multiplier μ", definition: <>One of λ and its complex conjugate, chosen by the adapted complex orientation in which Part I produces the closed-return product data.</> },
       { term: "Positive lifted argument", definition: <>The representative in (0,2π), retained as a real angle rather than reduced modulo 2π.</> },
       { term: "Varying parameter list", definition: <>Complementary parameters αⱼ=1−βⱼ that may differ from return block to return block.</> },
       { term: "Common continuous argument interval", definition: <>One real interval [A,M) containing every selected factor argument uⱼ, so that their arithmetic mean is meaningful.</> },
       { term: "Algebraic padding", definition: <>A zero factor inserted to complete the product algebraically; it is not asserted to be another relative-interior contact.</> },
     ],
-    intuition: <>For N≥4, Topics I–VII are compressed into a product identity, a lifted phase identity, and a common argument interval. No uniqueness of the polygon, contacts, or realizer is required.</>,
+    intuition: <>For N≥4, Topics I–VII are compressed into a product identity, a lifted phase identity, and a common argument interval. No uniqueness of the polygon, contacts, or realizing stochastic matrix is required.</>,
     proofSteps: [
       { title: "Supply criticality", explanation: <>Proposition II.4.7 turns the non-inherited radial maximum into an N-critical elliptic contraction.</> },
-      { title: "Use the Part I geometric theorem", explanation: <>The non-inherited-radial-maximum setup already fixes N≥4, so Part I Theorem 1.4 applies. As proved in Topic VII, it selects one adapted orientation and returns the Farey and monodromy data.</> },
+      { title: "Use the Part I geometric theorem", explanation: <>The non-inherited-radial-maximum setup already fixes N≥4, so Part I Theorem 1.4 applies. As proved in Topic VII, it selects one adapted orientation and returns the Farey cell, closed-return product, and phase data.</> },
       { title: "Name the two orientations", explanation: <>The two adapted complex structures correspond exactly to multiplication by λ and by its conjugate, hence μ is either λ or λ̄.</> },
       { title: "Identify Farey adjacency", explanation: <>Lemma II.2.1 turns consecutiveness into rq−ps=1 in the selected left-to-right orientation.</> },
       { title: "Record every output used later", explanation: <>The theorem retains both product forms, the signed e, complementary parameters, the common argument-interval bounds, and the exact lifted phase. No realization or nesting result enters.</> },
@@ -436,7 +436,7 @@ export const topicXResults: readonly ProofResultData[] = [
     takeaway: <>The deep geometry has now been reduced to precisely the scalar data needed for convex equalization.</>,
     provenance: "New result",
     sourceIds: ["karpelevic-1951", "ito-1997"],
-    sourceRelation: <>The varying-parameter monodromy and common-argument-interval statement come from the manuscript’s new Part I theorem; Karpelevič and Ito are the classical boundary-arc antecedents.</>,
+    sourceRelation: <>The varying-parameter closed-return product and common-argument-interval statement come from the manuscript’s new Part I theorem; Karpelevič and Ito are the classical boundary-arc antecedents.</>,
   },
   {
     id: "topic-x-reflection",
@@ -484,10 +484,10 @@ export const topicXResults: readonly ProofResultData[] = [
       { title: "Exponentiate without changing signs", explanation: <>Substituting F and exponentiating yields the sine-ratio inequality. All sine factors used as denominators are positive on the chosen argument interval.</> },
       { title: "Use the trigonometric reduction", explanation: <>Equation (II.6.10), together with ρᑫ=sin M/sin(M−A), converts the sine-ratio inequality into the scalar radial inequality (II.6.7).</> },
     ],
-    takeaway: <>For every admissible monodromy parameter list the radius is at most the unique scalar equality radius; equality requires β₁=···=βd.</>,
+    takeaway: <>For every admissible closed-return parameter list the radius is at most the unique scalar equality radius; equality requires β₁=···=βd.</>,
     provenance: "New result",
     sourceIds: ["karpelevic-1951", "ito-1997"],
-    sourceRelation: <>The varying-parameter log-sine inequality is new to the manuscript’s monodromy argument. Jensen’s inequality is the classical analytic ingredient.</>,
+    sourceRelation: <>The varying-parameter log-sine inequality is new to the manuscript’s closed-return product argument. Jensen’s inequality is the classical analytic ingredient.</>,
   },
 ] as const;
 
@@ -604,7 +604,7 @@ export const topicXIResults: readonly ProofResultData[] = [
     manuscriptHtml: completeHtml("karp:cor:equal-profile"),
     vocabulary: [
       { term: "Two-inequality squeeze", definition: <>If ρ≤ρ* and an independent argument gives ρ*≤ρ, then both are equal and every strict equality condition used in the first inequality is activated.</> },
-      { term: "Constant parameter list", definition: <>All monodromy parameters agree: β₁=⋯=βd and therefore α₁=⋯=αd.</> },
+      { term: "Constant parameter list", definition: <>All closed-return product parameters agree: β₁=⋯=βd and therefore α₁=⋯=αd.</> },
     ],
     intuition: <>Topic X placed the actual extremum inside the candidate. Attainment places the candidate inside the actual radial maximum. Equality follows, and strict Jensen forces one common contact parameter.</>,
     proofSteps: [
@@ -615,10 +615,10 @@ export const topicXIResults: readonly ProofResultData[] = [
       { title: "Activate strict Jensen equality", explanation: <>Thus ρ=ρ*, so equality holds in Theorem II.6.1 and all βⱼ coincide.</> },
       { title: "Recover the original Ito equation", explanation: <>The constant-parameter product is direct when μ=λ and is conjugated back by Lemma II.5.2 when μ=λ̄.</> },
     ],
-    takeaway: <>For N≥4, every non-inherited radial maximum is exactly the scalar Farey–Ito candidate and has constant monodromy parameters. Orders at most three are handled independently in Topic XIII.</>,
+    takeaway: <>For N≥4, every non-inherited radial maximum is exactly the scalar Farey–Ito candidate and has constant closed-return product parameters. Orders at most three are handled independently in Topic XIII.</>,
     provenance: "New result",
     sourceIds: ["karpelevic-1951", "ito-1997"],
-    sourceRelation: <>The classical boundary is known, but the conclusion that varying critical-polygon monodromy parameters must all coincide is specific to this manuscript’s proof.</>,
+    sourceRelation: <>The classical boundary is known, but the conclusion that varying critical-polygon product parameters must all coincide is specific to this manuscript’s proof.</>,
   },
 ] as const;
 
@@ -636,9 +636,9 @@ export const topicIXExactSources = [
 ] as const;
 
 export const topicXExactSources = [
-  "Part I, Theorem 1.4, ‘Complex monodromy and the Farey equation,’ proved in Topic VII of this reader.",
+  "Part I, Theorem 1.4 (the closed-return product theorem), proved in Topic VII of this reader.",
   "J. L. W. V. Jensen, ‘Sur les fonctions convexes et les inégalités entre les valeurs moyennes,’ Acta Mathematica 30 (1906), 175-193.",
-  "F. I. Karpelevič (1951) and H. Ito (1997), cited as classical boundary antecedents rather than sources of the varying-parameter monodromy inequality.",
+  "F. I. Karpelevič (1951) and H. Ito (1997), cited as classical boundary antecedents rather than sources of the varying-parameter closed-return product inequality.",
 ] as const;
 
 export const topicXIExactSources = [

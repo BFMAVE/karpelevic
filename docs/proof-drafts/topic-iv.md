@@ -52,13 +52,13 @@ The displayed restriction `1≤κ<N` is equation (4.18). It is a scope condition
 ### Imported from Topic I
 
 - Definition 1.1: `N`-criticality.
-- Definition 1.2: strict polygon, oriented sides, half-open side notation, one-sided contact representation, successor `s`, strict set `I`, and contact rotation `σ`.
+- Definition 1.2: the polygon and complete cyclic vertex-list convention, oriented sides, and half-open side notation.
 - Proposition 2.3: real-linear covariance of contact geometry; needed only for Corollary 5.2’s intrinsic formulation.
 - Lemma 2.4: coordinate reversal and the exact conversion of left- and right-half-open conventions.
 - Lemma 2.5: `0∈int(P)`, so every vertex is nonzero and polar angles can be lifted.
 - Lemma 2.6: cyclic order on a convex boundary.
 - Lemma 2.7: determinant criterion for strict convex position; used in Proposition 5.1.
-- Lemma 2.10: angular monotonicity along a positively oriented strict polygon; used in Lemmas 4.13 and 4.14.
+- Lemma 2.10: angular monotonicity along a positively oriented polygonal boundary; used in Lemmas 4.13 and 4.14.
 
 ### Imported from Topic II
 
@@ -325,7 +325,7 @@ Use four small ring diagrams rather than a table.
 #### Step 4 — global label and matrix audit
 
 25. Combine the field cases: `i` changes strict→endpoint, `i+κ` is strict after surgery, all other statuses remain. This gives (5.1) and (5.2).
-26. Rebuild the complete half-plane representation of the primed strict polygon.
+26. Rebuild the complete half-plane representation of the primed polygon and verify its complete cyclic vertex list.
 27. Use the exhaustive incidence list to place every `η_j` in its specified `E_j'^{+}`; half-open disjointness rules out global collisions.
 28. Apply Lemma 4.6 to the primed vertices. In endpoint columns obtain the original side determinant; in barycentric columns obtain its nonnegative convex combination.
 29. Conclude independently from the labelled matrix that all new images lie in `P'` and have the claimed exact side zeros.

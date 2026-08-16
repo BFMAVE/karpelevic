@@ -69,7 +69,7 @@ must appear between Lemma II.2.1 and Definition II.2.2.
 ### Outputs to later topics
 
 - Topic X uses the scalar equation as the target upper-bound inequality and uses the denominator-based labeling in its reflection dictionary.
-- Topic XI uses \(\alpha,\beta\) and the reduced carrier to build a stochastic realizer.
+- Topic XI uses \(\alpha,\beta\) and the reduced polynomial to build a realizing stochastic matrix.
 - Topic XII compares these candidates between successive orders.
 - Topic XIII is the first topic allowed to identify the ordered carrier chain with \(\partial\Theta_n\).
 

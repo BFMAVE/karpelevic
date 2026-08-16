@@ -1,4 +1,4 @@
-# Topic XI authoring blueprint - Explicit stochastic realizers and attainment
+# Topic XI authoring blueprint - Constructing stochastic matrices and proving attainment
 
 Status: local-only authoring blueprint. Do not publish or add to public navigation.
 

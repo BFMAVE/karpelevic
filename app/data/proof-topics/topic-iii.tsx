@@ -295,7 +295,7 @@ const compactnessResults: readonly ProofResultData[] = [
     proofSteps: [
       { title: "Extract a convergent subsequence", explanation: <>Write each polygon as the hull of <i>N</i> points in the closed unit disk, allow repetitions, and take a convergent subsequence of these <i>N</i>-tuples.</> },
       { title: "Preserve the defining conditions", explanation: <>Lemma A.4 preserves the hull, invariance, maximal radius one, and area. A singleton would force <i>λv=v</i>; a segment would require an invariant real direction. Both are impossible for a nonreal contraction.</> },
-      { title: "Use criticality at the limit", explanation: <>Fewer than <i>N</i> extreme points would contradict <i>ν</i><sub>poly</sub>(<i>T</i>)=<i>N</i>. Hence the limit is a strict invariant <i>N</i>-gon and attains least area.</> },
+      { title: "Use criticality at the limit", explanation: <>Fewer than <i>N</i> extreme points would contradict <i>ν</i><sub>poly</sub>(<i>T</i>)=<i>N</i>. Hence the limit is an invariant <i>N</i>-gon whose displayed vertices are exactly its extreme points, and it attains least area.</> },
       { title: "Exclude arcs with three old vertices", explanation: <>The clipping count would give an invariant polygon with at most <i>N−1</i> vertices, contradicting <i>ν</i><sub>poly</sub>(<i>T</i>)=<i>N</i>.</> },
       { title: "Exclude ordinary two-vertex arcs", explanation: <>If the open discarded arc misses a maximal-radius vertex <i>v</i>, the clipped polygon remains normalized. Criticality forces it to have exactly <i>N</i> vertices, while Lemma A.5 gives it strictly smaller area.</> },
       { title: "Count the sole exception", explanation: <>Because <i>Q</i> lies in the disk of radius |<i>λ</i>|&lt;1, <i>v</i> is not a vertex of <i>Q</i>. The open discarded arcs are pairwise disjoint, so <i>v</i> belongs to at most one of them. Only that arc escapes the area comparison.</> },
@@ -319,7 +319,7 @@ export function TopicIIIChapter() {
         importedHeading="Direct dependencies from earlier topics"
         imported={[
           { label: "Definition 1.1", href: sitePath("/proof/#part-i-item-1"), explanation: <>polygonal complexity and radial <i>N</i>-criticality.</> },
-          { label: "Definition 1.2", href: sitePath("/proof/#part-i-item-2"), explanation: <>strict polygons, their complete cyclic vertex list, and oriented sides.</> },
+          { label: "Definition 1.2", href: sitePath("/proof/#part-i-item-2"), explanation: <>the complete cyclic vertex-list convention for polygons and their oriented sides.</> },
           { label: "Lemma 2.6", href: sitePath("/proof/#part-i-item-10"), explanation: <>positive cyclic boundary order agrees with orientation from an interior point.</> },
           { label: "Lemma 2.7", href: sitePath("/proof/topic-ii/#part-i-item-11"), explanation: <>the strict determinant-sign criterion used to prove that the modified list in Lemma 4.7 is exactly the cyclic list of extreme points.</> },
           { label: "Theorem 3.2", href: sitePath("/proof/topic-ii/#part-i-item-16"), explanation: <>for every invariant polygon with at most <i>N</i> vertices, its image intersects every side and every image vertex lies on the outer boundary.</> },

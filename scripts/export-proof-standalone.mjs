@@ -417,7 +417,7 @@ function verifyStandaloneHtml(html) {
           : proofRoute === "/proof/topic-vii"
                 ? [
                     "Topic VII",
-                    "Farey product data and return monodromy",
+                    "Farey data and the closed-return product",
                     "Farey adjacency and exact reflection",
                     "data-proof-route=\"topic-vii\"",
                     "Forthcoming",

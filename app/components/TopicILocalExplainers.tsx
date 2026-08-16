@@ -363,7 +363,7 @@ export function ExposedFaceExplainer() {
           every point where <i>ℓ</i> attains its maximum—not merely one
           arbitrarily chosen point of intersection. It may be a whole side,
           as below, or a single vertex. In the single-vertex case, the
-          corresponding supporting line is strict.
+          corresponding supporting line exposes that vertex.
         </p>
 
         <figure className="topic-i-local-figure">

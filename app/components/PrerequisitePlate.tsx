@@ -22,7 +22,7 @@ const plateCopy: Readonly<
   "convex-background": {
     title: "Extreme points, an exposed side, and a redundant boundary point",
     description:
-      "A strict quadrilateral has four extreme points. A fifth displayed point lies in the relative interior of its top side and is therefore not a vertex. A supporting line exposes the whole side.",
+      "A quadrilateral has four extreme points in its complete cyclic vertex list. A fifth displayed boundary point lies in the relative interior of its top side and is therefore not a vertex. A supporting line exposes the whole side.",
     caption:
       "Plate II. The point m belongs to the relative interior of an exposed face, so it is not extreme. Polygonal complexity counts the four genuine vertices, not the five displayed boundary points.",
   },

@@ -18,7 +18,7 @@ const figureCopy: Readonly<
   language: {
     title: "An invariant polygon and its contracted rotated image",
     description:
-      "A qualitative schematic of a strict outer polygon P containing a smaller rotated polygon labelled T P. The inner polygon is not computed as the image of P under a specified transformation. The origin lies in the interior.",
+      "A qualitative schematic of an outer polygon P, displayed by its complete cyclic list of extreme points, containing a smaller rotated polygon labelled T P. The inner polygon is not computed as the image of P under a specified transformation. The origin lies in the interior.",
     caption:
       "Plate I. The intrinsic starting point: T acts as a rotation-contraction in adapted coordinates, while polygonal complexity counts the vertices of P.",
   },
@@ -106,7 +106,7 @@ const figureCopy: Readonly<
     description:
       "The Farey neighbours one third and two fifths have determinant one, and their mediant is three eighths.",
     caption:
-      "Plate VII. The determinant 3·2 − 1·5 = 1 certifies adjacency. The return monodromy supplies the heterogeneous product carried by this cell.",
+      "Plate VII. The determinant 3·2 − 1·5 = 1 certifies adjacency. The closed-return product supplies the heterogeneous product carried by this cell.",
   },
   spectra: {
     title: "The invariant-polygon criterion",

@@ -4,9 +4,9 @@ import { TopicXIChapter } from "../../data/proof-topics/topics-viii-xi";
 import { getPageTimestamp } from "../../lib/git-dates";
 
 export const metadata: Metadata = {
-  title: "Topic XI — Explicit Stochastic Realizers and Attainment",
+  title: "Topic XI — Constructing Stochastic Matrices and Proving Attainment",
   description:
-    "A complete, illustrated construction of sparse stochastic realizers from cycle covers, followed by attainment and the deferred constant-parameter conclusion.",
+    "A complete, illustrated construction of sparse realizing stochastic matrices from cycle covers, followed by attainment and the deferred constant-parameter conclusion.",
 };
 
 const updatedAt = getPageTimestamp("app/data/proof-topics/topics-viii-xi.tsx");

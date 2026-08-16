@@ -128,7 +128,7 @@ test("keeps the verified local manuscript available", async () => {
 
   const pdf = await readFile(pdfUrl);
   assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
-  assert.equal(pdf.byteLength, 606_033);
+  assert.equal(pdf.byteLength, 606_964);
 });
 
 test("server-renders the sourced History page", async () => {
@@ -196,7 +196,7 @@ test("server-renders the personal Journey page", async () => {
   assert.match(html, /An eigenvalue region for Leslie matrices/);
   assert.match(html, /href="https:\/\/doi\.org\/10\.1137\/0613033"/);
   assert.match(html, /postdoctoral research with Vincent Ginis/);
-  assert.match(html, /From arcs to their realizers/);
+  assert.match(html, /From arcs to realizing matrices/);
   assert.match(html, /The Type III realisation conjecture/);
   assert.match(html, /Type II reduced Ito polynomials/);
   assert.match(html, /New region of interest/);
@@ -408,20 +408,23 @@ test("server-renders the Part I proof reader", async () => {
   );
   assert.match(strictDefinitionHtml, /Adjacent and collinear sides/);
   assert.match(strictDefinitionHtml, /maximal boundary segment/);
-  assert.match(strictDefinitionHtml, /Normal cones and strict supporting lines/);
   assert.match(
     strictDefinitionHtml,
-    /strict supporting line[^<]*mean/,
+    /Normal cones and vertex-exposing supporting lines/,
   );
-  assert.match(strictDefinitionHtml, /NOT STRICT · A WHOLE SIDE/);
-  assert.match(strictDefinitionHtml, /STRICT · ONE VERTEX ONLY/);
+  assert.match(
+    strictDefinitionHtml,
+    /supporting line[\s\S]*?<em>exposes<\/em>[\s\S]*?a vertex/,
+  );
+  assert.match(strictDefinitionHtml, /EXPOSES A WHOLE SIDE/);
+  assert.match(strictDefinitionHtml, /EXPOSES ONE VERTEX/);
   assert.match(
     strictDefinitionHtml,
     /Both lines pictured below pass through the vertex/,
   );
   assert.match(
     strictDefinitionHtml,
-    /left one is[\s\S]*?not strict[\s\S]*?right one is[\s\S]*?strict/,
+    /left one exposes an entire incident side[\s\S]*?right one exposes[\s\S]*?only/,
   );
   assert.match(
     strictDefinitionHtml,
@@ -438,8 +441,8 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(strictDefinitionHtml, /dual plane/);
   assert.match(strictDefinitionHtml, /auxiliary inner product/);
   assert.match(strictDefinitionHtml, /nonzero covector/);
-  assert.match(strictDefinitionHtml, /does <strong>not<\/strong> mean/);
-  assert.match(strictDefinitionHtml, /strictly convex/);
+  assert.match(strictDefinitionHtml, /complete cyclic vertex list/);
+  assert.match(strictDefinitionHtml, /standing convention/);
   assert.match(strictDefinitionHtml, /Figure I\.3/);
   assert.match(strictDefinitionHtml, /Figure I\.4/);
   assert.equal(

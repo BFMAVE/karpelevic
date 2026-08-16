@@ -41,7 +41,7 @@ export const topicIICommentary: Readonly<
     architecture: [
       "Inner and outer disks around K give reciprocal outer and inner disks around K°, proving compactness and nonempty interior.",
       "The adjoint identity transports invariance from K to K°.",
-      "Each vertex inequality is shown irredundant by a strict supporting functional; therefore it contributes one nondegenerate polar side.",
+      "Each vertex inequality is shown irredundant by a functional exposing that vertex; therefore it contributes one nondegenerate polar side.",
       "Equality ⟨y,x⟩=1 cannot occur with x in the interior, since a short step from x in the direction y would violate the polar inequality.",
     ],
   },

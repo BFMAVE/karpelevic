@@ -43,7 +43,7 @@ Lemma 4.1, “Side contact is witnessed by an image vertex,” is imported from 
 ### Imported from Topic I
 
 - **Definition 1.1:** `N`-criticality and the meaning of `ν_poly(T)=N`.
-- **Definition 1.2:** strict polygons, oriented sides, heads and tails, and right-half-open sides.
+- **Definition 1.2:** the polygon and complete cyclic vertex-list convention, oriented sides, heads and tails, and right-half-open sides.
 - **Lemma 2.5:** the origin lies in the interior of every nondegenerate invariant polygon for a nonreal contraction. This is used in the nondegeneracy part of Lemma 4.9.
 - **Lemma 2.6:** an orientation-preserving invertible linear map preserves the cyclic order of vertices on convex boundaries. This is used in Lemma 4.8 for `Q=λP`.
 - **Lemma A.2:** strict separation from a compact convex set. It is used inside the proofs of Lemmas A.4 and A.5.
@@ -57,7 +57,7 @@ Lemma 4.1, “Side contact is witnessed by an image vertex,” is imported from 
 ### Result-by-result dependency check
 
 - Definition 4.2 uses only the strict-polygon and orientation conventions from Topic I.
-- Lemma 4.3 uses Definition 4.2 and the oriented side inequalities for a strict polygon.
+- Lemma 4.3 uses Definition 4.2 and the oriented side inequalities for a polygon under Definition 1.2's vertex-list convention.
 - Lemma 4.4 uses the supporting-functional definition from Topic I.
 - Lemma 4.5 uses Lemmas 4.3 and 4.4.
 - Lemma 4.6 uses the strict-polygon side inequalities and the half-open atlas, Lemma 4.3.
@@ -103,7 +103,7 @@ Do not mention the later chip model yet.
 
 ### Definition 4.2 — Half-open ownership word
 
-**Exact content to display.** For a positively oriented strict polygon, field `i` owns
+**Exact content to display.** For a positively oriented polygon with its complete cyclic vertex list, field `i` owns
 
 `E_i^+=(x_{i-1},x_i]`.
 
@@ -176,7 +176,7 @@ Explain that positive orientation makes `D_i(z)≥0` the half-plane inequality f
 
 ### Lemma 4.6 — Labeled side-matrix certificate
 
-**Before the statement.** Explain a matrix with row `r` testing the supporting half-plane of side `E_r` and column `j` representing the candidate point `η_j`. Avoid calling the polygon “strictly convex”; use “strict polygon” in the manuscript’s custom sense.
+**Before the statement.** Explain a matrix with row `r` testing the supporting half-plane of side `E_r` and column `j` representing the candidate point `η_j`. Say “polygon under Definition 1.2's complete vertex-list convention,” not “strictly convex.”
 
 **Intuitive purpose.** The geometry can be verified by finitely many determinant signs. Nonnegative entry `(r,j)` says `η_j` is on the inward side of the line of `E_r`; an exact zero in row `j` records the assigned contact side.
 
@@ -187,7 +187,7 @@ Explain that positive orientation makes `D_i(z)≥0` the half-plane inequality f
 3. Define `C_{r,k}` for original vertices and `D_{r,j}` for candidate points.
 4. In the endpoint case, substitute directly to get `D_{r,j}=C_{r,j}`.
 5. In the barycentric case, use bilinearity of the determinant to obtain `D_{r,j}=(1-t_j)C_{r,j-1}+t_jC_{r,j}`.
-6. For a positively oriented strict polygon, incident entries are zero and every nonincident vertex lies strictly inside the corresponding side half-plane, so the relevant `C` entries are positive.
+6. For a positively oriented polygon with its complete cyclic vertex list, incident entries are zero and every nonincident vertex lies strictly inside the corresponding side half-plane, so the relevant `C` entries are positive.
 7. Conclude `D_{r,j}≥0` for all rows and columns, with the exact zero and strict off-side signs claimed in the statement.
 8. The inequalities are precisely the half-plane description of `P`, so every `η_j∈P`.
 9. Convexity then gives `conv{η_j}⊆P`.
@@ -223,7 +223,7 @@ Explain that positive orientation makes `D_i(z)≥0` the half-plane inequality f
 
 **Complete proof architecture.**
 
-1. Since `λ≠0`, multiplication by `λ` is an invertible orientation-preserving real-linear map; hence `Q` is a strict polygon with the same number of vertices as `P`.
+1. Since `λ≠0`, multiplication by `λ` is an invertible orientation-preserving real-linear map; hence `Q` is a polygon with the same complete number of extreme vertices as `P`.
 2. Every `Q`-vertex lies on `∂P` by hypothesis. Apply Lemma 2.6 to identify the cyclic order inherited from `∂P` with the order on `∂Q`.
 3. Consecutive `Q`-vertices therefore delimit a unique boundary gap containing no other `Q`-vertex.
 4. The line of their edge supports `Q`; by construction `Q⊆H_j`, so `Q⊆P_j⊆P`.
@@ -348,7 +348,7 @@ Use only the four public categories agreed with the author: Classical result, Pr
 
 ### Findings
 
-1. **Risk: treating “strict polygon” as standard strict convexity.** A polygon is never strictly convex in the usual no-boundary-segments sense. The proof of Lemma 4.6 must say “the oriented side inequalities of a strict polygon,” not “strict convexity” without qualification.
+1. **Risk: confusing the vertex-list convention with strict convexity.** A polygon is never strictly convex in the usual no-boundary-segments sense. The proof of Lemma 4.6 must say “the oriented side inequalities for the complete cyclic vertex list,” not “strict convexity.”
 2. **Risk: circular use of global ownership.** Lemmas 4.7–4.9 may use vertex touching from Theorem 3.2 and local half-open ownership, but not Lemma 4.11 or Corollary 4.12.
 3. **Risk: incomplete line-intersection argument in Lemma 4.8.** The page must state why the nontrivial clip puts points of `P` on both sides of the edge line and why this forces the boundary intersection points to be endpoints of `P∩aff(y_j,y_{j+1})`.
 4. **Risk: claiming an area-minimizer without closure.** The proof must include repeated generators, subsequence extraction, preservation of normalization and invariance, exclusion of singleton and segment limits, and area continuity.

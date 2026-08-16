@@ -351,7 +351,7 @@ export function TopicXChapter() {
       <ProofDependencyContract
         imported={[
           {
-            label: "Topic VII — complex monodromy and the Farey equation",
+            label: "Topic VII — closed-return product and Farey data",
             href: sitePath("/proof/topic-vii/"),
             explanation:
               "supplies, for N≥4, the varying-parameter product, lifted phase identity, and common continuous argument interval obtained from critical polygons.",
@@ -383,10 +383,10 @@ export function TopicXChapter() {
         ]}
         provedHere={
           <p>
-            We transfer Part I monodromy to the stochastic extremum, audit both
-            possible complex orientations, construct the log-sine potential,
-            and prove that every varying parameter list has radius no larger than
-            the constant-parameter case.
+            We transfer Part I&apos;s closed-return product data to the stochastic
+            extremum, audit both possible complex orientations, construct the
+            log-sine potential, and prove that every varying parameter list has
+            radius no larger than the constant-parameter case.
           </p>
         }
       />
@@ -427,7 +427,7 @@ export function TopicXChapter() {
         title="Compress the geometry and repair orientation"
         introduction={
           <p>
-            The imported monodromy theorem states exactly which Part I
+            The imported closed-return product theorem states exactly which Part I
             conclusions enter.
             The reflection lemma shows that an existential orientation choice
             cannot change the modulus comparison.
@@ -469,7 +469,7 @@ export function TopicXChapter() {
         <p>
           Therefore <span className="math-inline">F″(u)=csc²(M−u)&gt;0</span>
           throughout the selected interval: <var>F</var> is strictly convex.
-          The lifted monodromy phase fixes the average of the factor arguments,
+          The lifted closed-return phase identity fixes the average of the factor arguments,
           while the product identity fixes the sum of their potentials. Jensen
           then compares every varying parameter list with the constant list.
         </p>

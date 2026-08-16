@@ -28,7 +28,7 @@ By the end, the reader must be able to explain all four arrows
 \text{new-shell }N\text{-criticality}.
 \]
 
-The prose must not yet mention the Jensen inequality, equality profiles, sparse realizers, or the final boundary theorem. Those belong to later topics.
+The prose must not yet mention the Jensen inequality, equality profiles, sparse realizing stochastic matrices, or the final boundary theorem. Those belong to later topics.
 
 ## Exact manuscript inventory
 

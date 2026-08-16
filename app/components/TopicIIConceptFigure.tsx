@@ -9,7 +9,7 @@ const copy = {
     qualification: "Verified geometric plate",
     title: "One directed edge tests every remaining point",
     description:
-      "A strict convex hexagon is shown with one consecutive edge directed from z zero to z one. The dashed supporting line extends that edge exactly, and every other vertex lies strictly in its shaded left half-plane.",
+      "A convex hexagon with six distinct extreme vertices is shown with one consecutive edge directed from z zero to z one. The dashed supporting line extends that edge exactly, and every other vertex lies strictly in its shaded left half-plane.",
     caption:
       "Figure II.1. For the directed consecutive edge z₀→z₁, every other vertex has det(z₁−z₀,zₖ−z₀)>0. The shaded region is its open left half-plane. Repeating this finite test for every edge exposes the entire polygon.",
   },

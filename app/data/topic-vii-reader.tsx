@@ -184,12 +184,12 @@ const guides: readonly ReaderResultGuide[] = [
         "The integer lift is κ=N, so the contact permutation fixes every side and every contact lies in the relative interior of its side.",
       ),
       vocabulary(
-        "Closed-return monodromy data",
-        "The selected eigenvalue, Farey cell, product parameters, and exact lifted phase obtained by multiplying the recurrence factors around one closed return chain. This closed product is what the page calls monodromy.",
+        "Closed-return product data (monodromy)",
+        "The selected eigenvalue, Farey cell, product parameters, and exact lifted phase obtained by multiplying the recurrence factors around one closed recurrence chain. The standard term for this product around a closed chain is monodromy; this guide otherwise calls it the closed-return product.",
       ),
       vocabulary(
         "Output orientation",
-        "The complex orientation chosen for the final monodromy statement. In this case it is opposite to the contact orientation.",
+        "The complex orientation chosen for the final closed-return product statement. In this case it is opposite to the contact orientation.",
       ),
     ],
     intuition:
@@ -381,7 +381,7 @@ const theorem14: ProofResultData = {
   id: "part-i-item-4",
   label: "Theorem 1.4",
   kind: "Theorem",
-  title: "Complex monodromy and Farey product data",
+  title: "Closed-return product identity and Farey data",
   purpose:
     "For N≥4, this theorem eliminates all case-specific return variables and exports one selected eigenvalue, one ordered Farey cell, one heterogeneous product, and one exact phase identity.",
   manuscriptHtml: theorem14CompleteHtml,
@@ -392,7 +392,7 @@ const theorem14: ProofResultData = {
     ),
     vocabulary(
       "Farey product data",
-      "The ordered neighbouring fractions p/q<y<r/s together with the finite factors in the closed-return monodromy relation.",
+      "The ordered neighbouring fractions p/q<y<r/s together with the finite factors in the closed-return product identity.",
     ),
     vocabulary(
       "Signed remainder e",
@@ -462,7 +462,7 @@ export const topicVIIGroups: readonly AdvancedProofGroup[] = [
     formalSetups: [
       {
         id: "topic-vii-n-ge-4-scope",
-        title: "Standing scope for critical-polygon monodromy: N≥4",
+        title: "Standing scope for the critical-polygon product theorem: N≥4",
         html: String.raw`
           <p>
             Proposition 8.5 invokes Theorem 7.11, which proves that the
@@ -484,8 +484,8 @@ export const topicVIIGroups: readonly AdvancedProofGroup[] = [
     introduction: (
       <p>
         The Farey cell places all factors on one upper-half-plane argument
-        interval. The case constructions then assemble into the complex
-        monodromy theorem.
+        interval. The case constructions then assemble into the
+        closed-return product theorem.
       </p>
     ),
     results: [coreResults[6], theorem14],

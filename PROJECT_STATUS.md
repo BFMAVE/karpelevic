@@ -135,7 +135,7 @@ ingredients are available.
 6. **Topic VI — Projective escape and unit return.**
    PDF pages 41–50. This is expected to be the hardest single topic; Topics
    V–VI together are the principal structural bottleneck.
-7. **Topic VII — The Farey carrier and return monodromy.**
+7. **Topic VII — Farey data and the closed-return product.**
    PDF pages 51–58.
 8. **Topic VIII — Returning to stochastic spectra.**
    PDF pages 3–5, 59–60, 66, and 71–75. This topic includes the complete bridge
@@ -147,7 +147,7 @@ ingredients are available.
 10. **Topic X — The sharp radial upper bound.**
     PDF pages 73–77. Critical monodromy, the Jensen sheet, log-sine
     equalization, and the sharp cellwise inequality.
-11. **Topic XI — Explicit stochastic realizers and attainment.**
+11. **Topic XI — Constructing stochastic matrices and proving attainment.**
     PDF pages 77–79. Sparse carrier matrices and the independent reverse
     inclusion.
 12. **Topic XII — Farey refinement and nesting.**
@@ -746,7 +746,7 @@ full local source history remain later site milestones.
 - **Done locally:** Definition 1.2 no longer sends the reader to the general
   convex-geometry shelf for its core terminology. A collapsed inline lesson
   now defines adjacent collinear sides, maximal boundary segments, contact
-  faces, normal cones, and strict supporting lines, with two deterministic
+  faces, normal cones, and supporting lines that expose one vertex, with two deterministic
   comparison plates.
 - **Verified locally:** the new Definition 1.2 lesson was opened and inspected
   at desktop and phone widths. Its four SVG panels stack cleanly on phones,
@@ -1473,10 +1473,13 @@ full local source history remain later site milestones.
   boundary-contact chain; the Farey carrier is Farey product data or the
   relevant boundary arc; and the Jensen sheet is a common continuous argument
   interval.
-- **Established terms were retained deliberately:** strict polygon,
-  polygonal complexity, \(N\)-criticality, first-return maps and towers,
-  projectivity, perspectivity, Klein sails, Farey neighbours, and monodromy
-  remain where they are defined and mathematically useful. Stable theorem and
+- **Established terms were retained deliberately:** polygonal complexity,
+  \(N\)-criticality, first-return maps and towers, projectivity,
+  perspectivity, Klein sails, and Farey neighbours remain where they are
+  defined and mathematically useful. The former custom “strict polygon” is now
+  the polygon and complete cyclic vertex-list convention of Definition 1.2;
+  the product around a closed recurrence chain is introduced once as monodromy
+  and otherwise called the closed-return product. Stable theorem and
   equation labels, route keys, figure kinds, and URL fragments were preserved,
   including three legacy generated heading anchors restored after the final
   adversarial audit.
@@ -1710,3 +1713,32 @@ full local source history remain later site milestones.
   `a0ecbaa4ebcda7bbc6ddcc07834bcf10e4768d6269cb0d899f1c97f48b72a323`.
   Source implementation commit: `5aff28d`; static-only Pages commit:
   `dc6d0ee`.
+
+## Current milestone — Conventional polygon and closed-return terminology (16 August 2026)
+
+- **The polygon hypothesis is now stated directly:** Definition 1.2 records
+  that the displayed cyclic list contains every extreme point of a
+  nondegenerate convex polygon exactly once. Subsequent statements simply say
+  “polygon.” A supporting line is said to expose a vertex precisely when its
+  contact face is that singleton. The stable label `def:strict-polygon` and all
+  existing cross-reference targets remain unchanged.
+- **Closed-return language is conventional and explicit:** the manuscript and
+  readers now use “closed-return product,” with “monodromy” retained once as a
+  standard parenthetical gloss at first use. Generic “realizer” language has
+  been replaced by “realizing stochastic matrix” or “realizing stochastic
+  matrices”; exact bibliographic titles are unchanged.
+- **Compatibility is preserved:** all 368 canonical labels and all 524
+  generated Part I/II IDs match the preceding source exactly. Legacy words may
+  remain inside invisible compatibility anchors, component keys, and historical
+  records, but not in reader-visible mathematical prose.
+- **Verification and artifacts:** deterministic generation, a clean 100-page
+  Tectonic build, ESLint, all 44 tests, the capped Pages build and verifier, and
+  visible-text/fragment audits for Topics I–IX pass. Canonical TeX SHA-256 is
+  `6066a1bfca14502104345969535216b06975f0f51e76a35c35baf4fc4c7a1fff`;
+  generated Part I and Part II SHA-256 values are
+  `862a3beae6877bdfdfab933802b0dc6214e718d8ee3fb5712e88ecf2921de5b1`
+  and `f55d88322827c964d1b9e54a1a87ead3d277a88d55cfc8e257b619a51d3b1bf0`;
+  the compiled/public PDF SHA-256 is
+  `8f1f6f212acd98bc5f9501ce4c211d5601eb1e0064ffbba40c03239bb2728965`.
+- **Publication status:** the coordinated source, PDF, and standalone artifacts
+  are updated locally. No online publication was performed in this pass.

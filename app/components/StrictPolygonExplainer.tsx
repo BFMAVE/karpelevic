@@ -103,7 +103,7 @@ function EdgeContactDrawing() {
       viewBox="0 0 330 270"
     >
       <text className="strict-polygon-kicker" x="20" y="26">
-        NOT STRICT · A WHOLE SIDE
+        EXPOSES A WHOLE SIDE
       </text>
       <path
         className="strict-polygon-shape"
@@ -137,12 +137,12 @@ function EdgeContactDrawing() {
 function VertexContactDrawing() {
   return (
     <svg
-      aria-label="A strict supporting line through a vertex, together with an interior covector represented as a normal arrow after choosing an inner product"
+      aria-label="A supporting line exposing one vertex, together with an interior covector represented as a normal arrow after choosing an inner product"
       role="img"
       viewBox="0 0 330 270"
     >
       <text className="strict-polygon-kicker" x="20" y="26">
-        STRICT · ONE VERTEX ONLY
+        EXPOSES ONE VERTEX
       </text>
       <path
         className="strict-polygon-normal-cone"
@@ -196,8 +196,8 @@ export function StrictPolygonExplainer() {
     <details className="strict-polygon-explainer">
       <summary>
         <span>Definitions and figures</span>
-        What do “maximal side,” “normal cone,” and “strict supporting line”
-        mean?
+        What do “complete vertex list,” “maximal side,” and “vertex-exposing
+        supporting line” mean?
       </summary>
 
       <div className="strict-polygon-explainer-body">
@@ -222,12 +222,12 @@ export function StrictPolygonExplainer() {
             contrast, the boundary changes direction.
           </p>
           <p>
-            The manuscript calls a polygon <strong>strict</strong> when its
-            displayed vertex list contains every extreme point exactly once
-            and no other points. Thus the list has no repeated vertices or
-            points inserted along a side. This is custom manuscript
-            terminology; it does <strong>not</strong> mean “strictly convex”
-            in the standard convex-geometric sense.
+            Throughout the reader guide, a polygon has nonempty interior and
+            is displayed by its <strong>complete cyclic vertex list</strong>:
+            the list contains every extreme point exactly once and no other
+            points. Thus it has no repeated vertices or points inserted along
+            a side. Definition 1.2 records this standing convention, and the
+            reader guide thereafter simply says “polygon.”
           </p>
 
           <figure className="strict-polygon-figure">
@@ -246,7 +246,7 @@ export function StrictPolygonExplainer() {
 
         <section>
           <p className="section-label">2 · How a line can touch a corner</p>
-          <h6>Normal cones and strict supporting lines</h6>
+          <h6>Normal cones and vertex-exposing supporting lines</h6>
           <p>
             A <strong>supporting line</strong> through a vertex <i>v</i>{" "}
             leaves the entire polygon in one of its two closed half-planes.
@@ -282,15 +282,13 @@ export function StrictPolygonExplainer() {
             exposes an entire incident side. A covector in the interior
             produces a supporting line whose contact face is exactly {"{"}
             <i>v</i>
-            {"}"}. Such a line is called a{" "}
-            <strong>strict supporting line at <i>v</i></strong>.
+            {"}"}. We therefore say that the line <strong>exposes the vertex{" "}
+            <i>v</i></strong>, or that it is a vertex-exposing supporting line.
           </p>
           <p>
             Both lines pictured below pass through the vertex <i>v</i>. The
-            left one is <strong>not strict</strong>, because it also contains
-            every point of an incident side; the right one is{" "}
-            <strong>strict</strong>, because its contact face is the singleton{" "}
-            {"{"}<i>v</i>{"}"}.
+            left one exposes an entire incident side; the right one exposes
+            only <i>v</i>, because its contact face is the singleton {"{"}<i>v</i>{"}"}.
           </p>
 
           <figure className="strict-polygon-figure">
@@ -301,8 +299,8 @@ export function StrictPolygonExplainer() {
             <figcaption>
               <span>Figure I.4.</span> Two supporting lines through the same
               vertex <i>v</i>. A nonzero boundary covector exposes a complete
-              side (left), so that line is not strict. An interior covector{" "}
-              <i>ℓ</i> exposes only <i>v</i> (right), so that line is strict.
+              side (left). An interior covector <i>ℓ</i> exposes only <i>v</i>{" "}
+              (right), so its contact face is the singleton {"{"}<i>v</i>{"}"}.
               The arrow <i>n</i> represents <i>ℓ</i> only after an auxiliary
               inner product has been chosen.
             </figcaption>

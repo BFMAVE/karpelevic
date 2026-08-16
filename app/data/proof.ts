@@ -294,19 +294,19 @@ const rawItems: readonly [
   string,
 ][] = [
   [1, "Definition", "Radial polygonal criticality", "Defines N-criticality by requiring N to be the least invariant-polygon vertex count for T and requiring every tT with t>1 to need more than N vertices."],
-  [2, "Definition", "Strict polygon", "Rules out repeated vertices and flat turns so that every side and cyclic order used later is unambiguous."],
+  [2, "Definition", "Polygon and vertex-list convention", "Fixes the convention that the displayed cyclic list contains every extreme point exactly once and no other points."],
   [3, "Theorem", "Boundary contact, vertex replacement, and first returns", "For N≥4, collects the geometric reduction: a critical invariant polygon admits an order-preserving half-open contact bijection and a finite return description."],
-  [4, "Theorem", "Complex monodromy and Farey product data", "For N≥4, converts the geometric return into a product identity associated with one Farey cell, with every factor argument chosen on one continuous interval."],
+  [4, "Theorem", "Closed-return product identity and Farey data", "For N≥4, converts the geometric return into a product identity associated with one Farey cell, with every factor argument chosen on one continuous interval."],
   [5, "Proposition", "Adapted complex structures", "Identifies an elliptic real-linear map with multiplication by one of its two conjugate complex eigenvalues."],
   [6, "Proposition", "Real-linear invariance of polygonal complexity", "Shows that changing real coordinates does not alter the least number of vertices needed for an invariant polygon."],
   [7, "Lemma", "Real-linear covariance of faces and boundary incidences", "Carries vertices, sides, faces, boundary incidences, and their labels faithfully through an invertible real-linear change of coordinates."],
   [8, "Lemma", "Coordinate reversal, orientation, and endpoint assignment", "Records how orientation, the chosen complex eigenvalue, and half-open endpoint membership change under a reversing coordinate map."],
   [9, "Lemma", "Origin is interior for a nonreal contraction", "Ensures that the invariant polygon surrounds the origin, making angular order and polarity available."],
   [10, "Lemma", "Oriented order on a convex boundary", "Relates the cyclic order of vertices and sides to the orientation seen from an interior point."],
-  [11, "Lemma", "Triple-sign criterion for strict convex position", "Recognizes a strict polygon from consistent signs of oriented triples."],
+  [11, "Lemma", "Triple-sign criterion for strict convex position", "Recognizes a polygon with the required complete cyclic vertex list from consistent signs of oriented triples."],
   [12, "Lemma", "Simultaneous preservation of convexity and side conditions under perturbation", "Shows that finitely many convexity, relative-interior, and strict determinant conditions persist during a sufficiently small deformation."],
-  [13, "Lemma", "Support-face test for strict polygons", "Tests whether a supporting line touches a strict polygon only at the chosen vertex."],
-  [14, "Lemma", "Angular monotonicity", "Shows that the argument of points on the boundary of a strict polygon increases in boundary order."],
+  [13, "Lemma", "Support-face test for polygons", "Tests whether a supporting line exposes the chosen polygon vertex."],
+  [14, "Lemma", "Angular monotonicity", "Shows that the argument of points on a polygon boundary increases in boundary order."],
   [15, "Proposition", "Support-function criterion in a fixed normal fan", "Translates invariance of a polygon into a compatible nonnegative coefficient matrix on its supporting normals."],
   [16, "Theorem", "Contact on every side and at every image vertex", "Proves that for every invariant polygon with at most N vertices, the image polygon intersects every side and all of its vertices lie on the outer boundary."],
   [17, "Remark", "Why the theorem applies after a polygon is modified", "Explains that the theorem applies again whenever a modified polygon remains an invariant N-gon."],
@@ -324,7 +324,7 @@ const rawItems: readonly [
   [29, "Corollary", "One image vertex in every half-open side", "Chooses one global half-open convention that assigns exactly one image vertex to every side."],
   [30, "Lemma", "Order-preserving half-open contact assignment", "Produces a representative in which the image vertices are assigned bijectively to half-open sides by one cyclic shift."],
   [31, "Lemma", "Iteration of endpoint equalities for lifted arguments", "Iterates endpoint equalities on the real angle line after resolving the integer ambiguity in the chosen arguments."],
-  [32, "Proposition", "Exact local vertex replacement", "Replaces one vertex by its contact image while preserving strictness, invariance, and every required label."],
+  [32, "Proposition", "Exact local vertex replacement", "Replaces one vertex by its contact image while preserving the complete cyclic vertex-list condition, invariance, and every required label."],
   [33, "Corollary", "Equivariance under the label-preserving bijection between old and new side sets", "Expresses the relative-interior-contact update after identifying old and new sides by their unchanged labels."],
   [34, "Corollary", "Geometric realization of every permitted update sequence", "Shows that every permitted finite sequence of updates to S comes from actual invariant polygons."],
   [35, "Corollary", "Realization of the successive updates used in Lemma 5.5", "Applies the finite realization result to the right-to-left update sequences in the reduction argument."],
@@ -400,7 +400,7 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "Why must the image polygon TR intersect every side of an invariant polygon for an N-critical map?",
     overview: [
-      "The determinant inequalities for a strict polygon turn cyclic order into finitely many sign conditions. Proposition 3.1 then rewrites polygon invariance as the componentwise support inequality ρBΦ(θ)h≤h.",
+      "The determinant inequalities for a polygon displayed by its complete cyclic vertex list turn cyclic order into finitely many sign conditions. Proposition 3.1 then rewrites polygon invariance as the componentwise support inequality ρBΦ(θ)h≤h.",
       "A left Perron vector forces every support inequality to be attained, so TR intersects every side of R; polarity proves that every vertex of TR lies on the boundary of R. These conclusions hold for every invariant polygon with at most N vertices, not only for one initially chosen polygon.",
     ],
     itemNumbers: [11, 12, 13, 14, 15, 16, 17, 18, 65, 67],
@@ -428,7 +428,7 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "How does a geometric contact become a permitted update of a finite cyclic index set?",
     overview: [
-      "The remaining endpoint lemmas finish the order-preserving half-open contact assignment. A contacted vertex can then be replaced by its image-contact point without breaking strictness or invariance.",
+      "The remaining endpoint lemmas finish the order-preserving half-open contact assignment. A contacted vertex can then be replaced by its image-contact point without losing the complete cyclic vertex-list property or invariance.",
       "The exact vertex replacement updates the subset S of indices whose sides have relative-interior contact. Every permitted finite update sequence is realized geometrically, and a reachable set reduces to one cyclic interval. The source notes distinguish Karpelevič’s antecedent mechanisms from the exact statements proved here.",
     ],
     itemNumbers: [27, 28, 29, 30, 31, 32, 33, 34, 35, 36],
@@ -464,7 +464,7 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "farey-return",
     eyebrow: "Topic VII · 7 items",
-    title: "Farey product data and return monodromy for N≥4",
+    title: "Farey data and the closed-return product for N≥4",
     question:
       "For N≥4, how does the identity return become the scalar equation of a Farey boundary arc?",
     overview: [
@@ -507,7 +507,7 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "Why can no stochastic eigenvalue lie beyond its candidate Farey–Ito arc?",
     overview: [
-      "For non-inherited radial maxima of orders N≥4, the critical-polygon monodromy from Part I supplies an Ito product with varying parameters and places all return factors in one common continuous argument interval; orders at most three have already been treated directly.",
+      "For non-inherited radial maxima of orders N≥4, Part I's closed-return product theorem for critical polygons supplies an Ito product with varying parameters and places all return factors in one common continuous argument interval; orders at most three have already been treated directly.",
       "A strictly convex log-sine potential makes those parameters constant. Its equality case identifies the unique outermost radial candidate and proves the sharp cellwise upper bound.",
     ],
     itemNumbers: [],
@@ -516,7 +516,7 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "realization",
     eyebrow: "Topic XI · reverse inclusion",
-    title: "Explicit stochastic realizers and attainment",
+    title: "Constructing stochastic matrices and proving attainment",
     question:
       "How can every candidate boundary point be realized by an actual stochastic matrix?",
     overview: [

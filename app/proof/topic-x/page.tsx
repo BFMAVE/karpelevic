@@ -17,7 +17,7 @@ export default function TopicXPage() {
       routeKey="topic-x"
       manuscriptPages="73–76"
       overview={[
-        "For a non-inherited radial maximum with N≥4, Part I supplies a monodromy product with varying parameters, a lifted phase identity, and one common continuous argument interval. Reflection formulas make those data independent of which adapted complex orientation was selected.",
+        "For a non-inherited radial maximum with N≥4, Part I supplies a closed-return product with varying parameters, a lifted phase identity, and one common continuous argument interval. Reflection formulas make those data independent of which adapted complex orientation was selected.",
         "A strictly convex log-sine potential proves that every varying parameter list lies radially inside the constant-parameter case. This page proves only that upper comparison; stochastic attainment and the final equality conclusion are deliberately deferred to Topic XI.",
       ]}
       updatedAt={updatedAt}

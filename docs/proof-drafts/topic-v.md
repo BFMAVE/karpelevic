@@ -49,8 +49,8 @@ Also reproduce, as numbered setup rather than as an additional result, equations
 
 Give a one-sentence recap and a link, not a new proof, for each item:
 
-- A strict polygon has its genuine extreme vertices listed once in cyclic order.
-- A strict supporting line at a vertex meets the polygon only at that vertex.
+- Under Definition 1.2, a polygon has nonempty interior and its genuine extreme vertices are listed once in cyclic order, with no other displayed points.
+- A supporting line exposes a vertex when it meets the polygon only at that vertex.
 - \(\operatorname{relint}\) means relative interior in the line containing a side.
 - The support-face test says that a supporting line through a polygon vertex is strict once neither neighbouring vertex lies on it.
 - Multiplication by the nonreal contraction is invertible, so incidence with a pulled-back line may be checked after applying the relevant power of the multiplier.

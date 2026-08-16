@@ -2,7 +2,7 @@
 
 ## Page identity
 
-- Working title: **The Farey carrier and return monodromy**
+- Working title: **Farey data and the closed-return product**
 - Reader marker: **Topic VII of XIV**
 - Proposed local route: **/proof/topic-vii/**
 - Status: local authoring blueprint only. Do not publish from this file.

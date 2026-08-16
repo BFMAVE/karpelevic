@@ -40,12 +40,12 @@ const topicVContactNotation: AdvancedProofSetup = {
       Let λ be the nonreal complex multiplier fixed in Topic IV, with
       |λ|&lt;1, and let
       <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mi mathvariant="normal">conv</mi><mo stretchy="false">{</mo><msub><mi>x</mi><mn>0</mn></msub><mo>,</mo><mo>…</mo><mo>,</mo><msub><mi>x</mi><mrow><mi>N</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">P=\operatorname{conv}\{x_0,\ldots,x_{N-1}\}</annotation></semantics></math>
-      be the strict invariant polygon obtained in Topic IV, so in particular
+      be the invariant polygon obtained in Topic IV, so in particular
       <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mi>P</mi><mo>⊆</mo><mi>P</mi></mrow><annotation encoding="application/x-tex">\lambda P\subseteq P</annotation></semantics></math>.
-      Here “strict” is the
-      custom term from Definition 1.2: the displayed vertices are precisely
-      the extreme points, each listed once; it does not mean that the convex
-      set is strictly convex. The vertices are listed counterclockwise, and
+      As fixed in Definition 1.2, P has nonempty interior and the displayed
+      cyclic list contains every point of Ext(P) exactly once and no other
+      points. We therefore simply say polygon below. The vertices are listed
+      counterclockwise, and
       every vertex, side, and contact index below is interpreted modulo
       <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi></math>.
     </p>

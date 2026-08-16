@@ -49,6 +49,7 @@ function splitFormalProof(html: string): {
 }
 
 const topicIImportAnchors = new Set([
+  "def:strict-polygon",
   "lem:oriented-boundary-order",
   "lem:origin-interior",
   "prop:affine-invariance",
@@ -419,8 +420,8 @@ export function TopicIIChapter() {
                 <ImportedTopicILink anchor="part-i-item-2">
                   Definition 1.2
                 </ImportedTopicILink>
-                : strict polygons, maximal sides, strict support, and cyclic
-                side order.
+                : the complete cyclic vertex-list convention, maximal sides,
+                supporting lines that expose a vertex, and cyclic side order.
               </li>
               <li>
                 <ImportedTopicILink anchor="part-i-item-5">
@@ -511,8 +512,8 @@ export function TopicIIChapter() {
             <li>
               <a href="#part-i-item-11">Lemma 2.7</a> →{" "}
               <a href="#part-i-item-12">Lemma 2.8</a>: determinant
-              conditions make strict polygonal geometry stable under small
-              perturbations.
+              conditions preserve the complete cyclic list of extreme points
+              under small perturbations.
             </li>
             <li>
               <a href="#part-i-item-15">Proposition 3.1</a> +{" "}
@@ -548,8 +549,9 @@ export function TopicIIChapter() {
             The first four lemmas concern finite point configurations in a
             real plane; they do not yet assume criticality or even introduce a
             linear map. They replace geometric order by finitely many
-            inequalities: strict polygonal convex position, persistence under
-            perturbation, strict support, and monotonic polar angle. The
+            inequalities: convex position with a complete cyclic vertex list,
+            persistence under perturbation, vertex-exposing support, and
+            monotonic polar angle. The
             contraction <i>T</i> and the minimal vertex count enter only in
             the later every-side and image-vertex contact theorem. There <i>N := ν</i>
             <sub>poly</sub>(<i>T</i>) is the smallest number of vertices among
@@ -628,7 +630,7 @@ export function TopicIIChapter() {
 
         <div
           className="part-i-manuscript topic-ii-setup-formal"
-          dangerouslySetInnerHTML={{ __html: topicIISetupHtml }}
+          dangerouslySetInnerHTML={{ __html: qualifyTopicIImports(topicIISetupHtml) }}
         />
       </section>
 

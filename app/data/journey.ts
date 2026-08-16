@@ -270,7 +270,7 @@ export const journeyContent = {
     { era: "After 2024", label: "Brando, Swift, and a translation" },
     { era: "Early 2026", label: "Two conjectures on the final pages" },
     { era: "2026", label: "GenAI changes the ambition" },
-    { era: "May–June", label: "From cycles to realizers" },
+    { era: "May–June", label: "From cycles to realizing matrices" },
     { era: "July", label: "Invariant polygons" },
   ],
   openingChapters: [
@@ -386,7 +386,7 @@ export const journeyContent = {
       number: "V",
       era: "June–July 2026",
       label: "Boundary equations become matrices",
-      title: "From arcs to their realizers",
+      title: "From arcs to realizing matrices",
       paragraphs: [
         {
           text:
@@ -395,7 +395,7 @@ export const journeyContent = {
         },
         {
           text:
-            "Vincent and I studied the Type III and Type II reduced Ito families separately. The Type III paper resolves the Kirkland–Šmigoc realization conjecture over the full nonzero parameter range. The Type II paper classifies the corresponding non-degenerate full-degree realizers. These projects forced us to examine cycles, allowed transitions, weights, and the way local pieces combine into a global characteristic polynomial.",
+            "Vincent and I studied the Type III and Type II reduced Ito families separately. The Type III paper resolves the Kirkland–Šmigoc realization conjecture over the full nonzero parameter range. The Type II paper classifies the corresponding non-degenerate full-degree realizing stochastic matrices. These projects forced us to examine cycles, allowed transitions, weights, and the way local pieces combine into a global characteristic polynomial.",
           citations: ["type-three-2026", "type-two-2026"],
         },
       ],

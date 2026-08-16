@@ -121,6 +121,42 @@ test("proof-reader dates distinguish publication, revision, and website launch",
   }
 });
 
+test("reader-visible proof terminology uses the coordinated conventional vocabulary", async () => {
+  const rendered = new Map();
+  for (const pathname of [...proofRoutes, "/prerequisites"]) {
+    const response = await render(pathname);
+    assert.equal(response.status, 200, `render ${pathname}`);
+    const html = await response.text();
+    const text = html
+      .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+      .replace(/<annotation\b[\s\S]*?<\/annotation>/gi, " ")
+      .replace(/<[^>]*>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    rendered.set(pathname, text);
+
+    assert.doesNotMatch(
+      text,
+      /\bstrict polygon(?:s)?\b|strict supporting line(?:s)?|\breturn monodromy\b|\brealizer(?:s)?\b/i,
+      `${pathname} exposes superseded terminology`,
+    );
+  }
+
+  assert.match(
+    rendered.get("/proof") ?? "",
+    /Polygon and vertex-list convention/,
+  );
+  assert.match(
+    rendered.get("/proof/topic-vii") ?? "",
+    /Closed-return product data \(monodromy\)/,
+  );
+  assert.match(
+    rendered.get("/proof/topic-xi") ?? "",
+    /Constructing stochastic matrices and proving attainment/,
+  );
+});
+
 test("legacy Topic VI part routes redirect to the unified chapter", async () => {
   const aliases = [
     ["/proof/topic-vi/a", "#lem:holonomy-calibration"],
@@ -367,7 +403,7 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.doesNotMatch(topicVICard(46, 47), /proof-chapter-provenance/);
   assert.doesNotMatch(topicVICard(48, 49), /proof-chapter-provenance/);
 
-  assert.match(topicVIIText, /Standing scope for critical-polygon monodromy: N\s*≥\s*4/);
+  assert.match(topicVIIText, /Standing scope for the critical-polygon product theorem: N\s*≥\s*4/);
   assert.match(topicVIIText, /More than one relative-interior contact in some orbit:?\s*φ\s*>\s*δ[\s\S]*Assume N\s*≥\s*4/i);
   assert.match(topicVIIText, /Return factors lie on (?:one|the) common continuous argument interval[\s\S]*Assume N\s*≥\s*4/i);
 

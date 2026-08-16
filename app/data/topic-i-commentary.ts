@@ -37,12 +37,12 @@ export const topicICommentary: Readonly<Record<number, TopicICommentary>> = {
   2: {
     number: 2,
     intuition:
-      "A polygon can be displayed with repeated points or with extra points inserted along a side. Those choices must not alter the complexity. The manuscript calls a polygon strict when its displayed list contains each extreme point exactly once and no other points. This removes redundant entries before sides and cyclic order are used.",
+      "A polygon can be displayed with repeated points or with extra points inserted along a side. Those choices must not alter the complexity. Definition 1.2 therefore fixes the convention used throughout: P has nonempty interior, and its displayed cyclic list contains every point of Ext(P) exactly once and no other points. The reader guide then simply says polygon.",
     details: [
       {
-        title: "Extreme points only",
+        title: "Complete cyclic vertex list",
         text:
-          "The displayed cyclic list contains every point of Ext(P) exactly once and contains no other points. A point in the relative interior of a side is a convex combination of its endpoints and therefore is not a vertex. The manuscript’s custom word “strict” does not mean strictly convex in the standard sense.",
+          "The displayed cyclic list contains every point of Ext(P) exactly once and contains no other points. A point in the relative interior of a side is a convex combination of its endpoints and therefore is not a vertex. Definition 1.2 records this as the standing convention on the word polygon.",
       },
       {
         title: "Maximal sides",
@@ -50,13 +50,13 @@ export const topicICommentary: Readonly<Record<number, TopicICommentary>> = {
           "Adjacent sides are consecutive boundary segments sharing an endpoint. If they lie on the same line, their shared endpoint is not an extreme point and their union is one longer segment. A maximal side is this longest straight boundary segment: it cannot be extended at either end while remaining in the boundary.",
       },
       {
-        title: "Strict support",
+        title: "Supporting lines that expose a vertex",
         text:
-          "The contact face of a supporting line is the part of the polygon lying on that line. A supporting line is strict when its contact face is the single vertex rather than a complete edge. Intrinsically, the exposing object is a nonzero covector in the dual plane; after an auxiliary inner product identifies covectors with normal arrows, such a line is strict exactly when its arrow lies in the interior of the vertex’s normal cone.",
+          "The contact face of a supporting line is the part of the polygon lying on that line. The line exposes a vertex v when its contact face is the singleton {v}, rather than a complete side. Intrinsically, the exposing object is a nonzero covector in the dual plane; after an auxiliary inner product identifies covectors with normal arrows, such a line exposes v exactly when its arrow lies in the interior of the vertex’s normal cone.",
       },
     ],
     takeaway:
-      "For a strict polygon in the manuscript’s sense, every displayed vertex is an extreme point and every displayed side is a maximal boundary segment.",
+      "Under the complete cyclic vertex-list convention, every displayed vertex is an extreme point and every displayed side is a maximal boundary segment.",
   },
   5: {
     number: 5,
@@ -120,7 +120,7 @@ export const topicICommentary: Readonly<Record<number, TopicICommentary>> = {
       {
         title: "Faces and contacts",
         text:
-          "If ℓ exposes a face F of P, then ℓ∘A⁻¹ exposes AF in AP. Side contacts, vertex contacts, relative interiors, and strict support are therefore transported exactly.",
+          "If ℓ exposes a face F of P, then ℓ∘A⁻¹ exposes AF in AP. Side contacts, vertex contacts, relative interiors, and the property of exposing a single vertex are therefore transported exactly.",
       },
       {
         title: "Geometric operations",
@@ -213,7 +213,7 @@ export const topicICommentary: Readonly<Record<number, TopicICommentary>> = {
       {
         title: "Restrict to another polygon",
         text:
-          "Applying the same determinant test to a strict polygon Q whose vertices lie on ∂K shows that Q inherits precisely the boundary order of K. No three vertices of Q are collinear: the middle point of three collinear boundary points would not be extreme.",
+          "Applying the same determinant test to a polygon Q whose vertices lie on ∂K shows that Q inherits precisely the boundary order of K. No three vertices of Q are collinear: the middle point of three collinear boundary points would not be extreme.",
       },
     ],
     takeaway:

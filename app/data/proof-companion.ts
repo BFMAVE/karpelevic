@@ -61,9 +61,9 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
           "An N-critical map has an invariant N-gon, but every radial enlargement tT with t > 1 needs more than N vertices. The word radial refers to increasing the contraction factor while keeping the rotation angle fixed.",
       },
       {
-        title: "Why strictness and the interior origin matter",
+        title: "Why the complete vertex list and the interior origin matter",
         body:
-          "Strict polygons have no redundant displayed vertices or flat turns. Showing 0 lies in their interior gives a well-defined angular order around the boundary, which later turns contacts into cyclic arithmetic.",
+          "The complete cyclic vertex-list convention removes redundant displayed points and flat turns. Showing 0 lies in the polygon interior gives a well-defined angular order around the boundary, which later turns contacts into cyclic arithmetic.",
       },
     ],
     glossary: [
@@ -144,7 +144,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
   },
   ownership: {
     prerequisites: [
-      "Every boundary point of a strict polygon lies on one side, except a vertex, which lies on two.",
+      "Every nonvertex boundary point of a polygon lies on exactly one maximal side, while a vertex lies on its two incident sides.",
       "Removing a small cap from a convex polygon decreases its area.",
       "A finite cyclic order has a well-defined notion of interlacing endpoints.",
     ],
@@ -319,7 +319,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         title: "Propagate the starting-point motion through the whole polygon",
         body:
-          "The global admissibility theorem moves all affected tower bases and reconstructs every orbit vertex. It checks the strict-polygon conditions, side assignments, image incidences, and closure simultaneously.",
+          "The global admissibility theorem moves all affected tower bases and reconstructs every orbit vertex. It checks that the displayed list remains exactly the cyclic list of extreme points, together with the side assignments, image incidences, and closure.",
       },
       {
         title: "Criticality forces H = id",
@@ -353,7 +353,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
   },
   "farey-return": {
     prerequisites: [
-      "This return-monodromy module is used for N≥4. Orders at most three are handled by the direct small-order argument.",
+      "This closed-return product module is used for N≥4. Orders at most three are handled by the direct small-order argument.",
       "Reduced fractions p/q and r/s are Farey neighbours when qr − ps = 1 in the chosen order.",
       "Arguments of complex numbers add under multiplication, once a common branch is fixed.",
       "A convex combination on a side supplies coefficients α + β = 1.",
@@ -429,7 +429,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         title: "Apply the critical-polygon theorem at a non-inherited radial maximum",
         body:
-          "For a radial maximum λ∈ΘN∖ΘN−1, multiplication by λ is N-critical. When N≥4, the critical-polygon theorem supplies the Farey product data and monodromy. Orders at most three are handled directly. Part II then supplies the sharp scalar boundary and realization.",
+          "For a radial maximum λ∈ΘN∖ΘN−1, multiplication by λ is N-critical. When N≥4, the critical-polygon theorem supplies the Farey cell, closed-return product, and phase data. Orders at most three are handled directly. Part II then supplies the sharp scalar boundary and realization.",
       },
     ],
     glossary: [

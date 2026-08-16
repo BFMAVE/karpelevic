@@ -53,8 +53,8 @@ Use one expandable "Corridor contract" panel. It must state the exact data rathe
 
 ### Imported from Topic I
 
-- The determinant sign of every cyclically ordered triple of vertices of a strict polygon is nonzero and common.
-- The triple-sign criterion is an open condition for a finite family of continuous point functions: if all the signs persist, the moving points remain distinct, cyclically ordered extreme points of a strict polygon.
+- The determinant sign of every cyclically ordered triple in the complete vertex list of a polygon is nonzero and common.
+- The triple-sign criterion is an open condition for a finite family of continuous point functions: if all the signs persist, the moving points remain distinct, cyclically ordered extreme points forming the complete vertex list of a polygon.
 - Relative interior is preserved by the admissible projective chart from Proposition 7.5.
 
 The page must link "triple-sign criterion" to its exact earlier statement. Do not assume the reader remembers the phrase.
@@ -131,7 +131,7 @@ The phrase "calibration" means that the seed is the particular point \(Z_1=X_0\)
 
 1. Apply Proposition 7.5 and reuse the same symbols after the projective transformation. Explain why the recursion defining \(Z_i\) is projectively natural: projectivities preserve lines and incidences.
 2. Write \(X_i=(t_i,f_i)\) with \(t_0<\cdots<t_{m+1}\), and define edge slopes \(s_i\).
-3. Since the chain is the lower graph of a strict polygon, derive \(s_1<\cdots<s_{m+1}\).
+3. Since the chain is the lower graph of a polygon under Definition 1.2's vertex-list convention, derive \(s_1<\cdots<s_{m+1}\).
 4. For each strict support \(L_i\), explain the supporting-slope interval and obtain \(s_i<\ell_i<s_{i+1}\).
 5. Express \(C_i=(c_i,\chi_i)\) on its side: \(t_{i-1}<c_i<t_i\) and \(\chi_i=f_i+s_i(c_i-t_i)\).
 6. Begin the induction. At \(i=2\), compute \(r_2\) as the positive weighted average in (7.29), hence \(s_1<r_2<s_2\).

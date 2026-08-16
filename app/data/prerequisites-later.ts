@@ -140,7 +140,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
         statement:
           "If the eigenvalues are ρe^{±iθ}, then the two complex structures J± make T equal to multiplication by ρe^{±iθ}.",
         explanation:
-          "The two choices are conjugate and induce opposite orientations. The proof may use one orientation for contact bookkeeping and later select the other for monodromy.",
+          "The two choices are conjugate and induce opposite orientations. The proof may use one orientation for contact bookkeeping and later select the other for the closed-return product.",
       },
       {
         title: "A weighted norm bounds the spectrum",
@@ -223,7 +223,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
       {
         term: "Extreme point",
         definition:
-          "A point of a convex set that is not a nontrivial convex combination of two other points of the set. The extreme points of a strict polygon are exactly its vertices.",
+          "A point of a convex set that is not a nontrivial convex combination of two other points of the set. Under the proof's complete cyclic vertex-list convention, these are exactly the displayed polygon vertices.",
       },
       {
         term: "Supporting line and face",
@@ -299,7 +299,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
       {
         label: "Topics I–II",
         text:
-          "Strictness, supporting faces, normal fans, polarity, and saturation.",
+          "Complete cyclic vertex lists, supporting faces, normal fans, polarity, and side-contact saturation.",
         href: "/proof/#topic-active-sides",
       },
       {
@@ -311,7 +311,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
       {
         label: "Topic VI",
         text:
-          "Strict support inequalities keep the global boundary-chain deformation admissible.",
+          "Supporting half-plane inequalities with positive margin keep the global boundary-chain deformation admissible.",
         href: "/proof/#topic-unit-return",
       },
     ],
@@ -523,7 +523,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
       {
         label: "Topic VII",
         text:
-          "For N≥4, unimodular return data determines Farey product data and a complex monodromy identity; the smaller orders are treated directly.",
+          "For N≥4, unimodular return data determines Farey data and a complex closed-return product identity; the smaller orders are treated directly.",
         href: "/proof/#topic-farey-return",
       },
       {

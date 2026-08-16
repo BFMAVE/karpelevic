@@ -9,7 +9,7 @@ import {
 import { getPageTimestamp } from "../../lib/git-dates";
 
 export const metadata: Metadata = {
-  title: "Topic VII — Farey Product Data and Return Monodromy for N≥4",
+  title: "Topic VII — Farey Data and the Closed-Return Product for N≥4",
   description:
     "For N≥4, a complete guided derivation of Farey adjacency, reflected closed return-recurrence chains, heterogeneous Ito products, exact lifted phase, and one common continuous argument interval.",
 };
@@ -26,7 +26,7 @@ export default function TopicVIIPage() {
       manuscriptPages="51–58; Lemma 8.7 and Theorem 1.4 close on 59"
       overview={[
         "The adjacent return edge is read as a determinant-one Farey cell. Reflection is handled at the level of the complete closed return-recurrence chain, including closure exponent and lifted phase.",
-        "For N≥4, the identity case, the one-contact-per-orbit case, and the case with more than one relative-interior contact in some orbit each produce a finite heterogeneous product. Consecutive vertex angles place every factor on one upper-half-plane argument branch, completing the complex monodromy theorem.",
+        "For N≥4, the identity case, the one-contact-per-orbit case, and the case with more than one relative-interior contact in some orbit each produce a finite heterogeneous product. Consecutive vertex angles place every factor on one upper-half-plane argument branch, completing the closed-return product theorem.",
       ]}
       provedHere={
         <p>
