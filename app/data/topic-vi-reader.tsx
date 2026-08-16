@@ -126,7 +126,7 @@ const guides: readonly ReaderResultGuide[] = [
         "ℒᵢ is the supporting line whose intersection with the polygon is exactly {Xᵢ}. Its scalar slope in the affine chart is written slope(ℒᵢ), so a line and its slope never share a symbol.",
       ),
       vocabulary(
-        "Special final intersection W*",
+        "Final intersection W* when Z₁=X₀",
         "Start the recursion at Z₁=X₀. The last projection meets the final contact line at W*. Lemma 7.6 locates W* strictly between Cₘ and Cₘ₊₁.",
       ),
     ],
@@ -210,7 +210,7 @@ const guides: readonly ReaderResultGuide[] = [
         "The parameter in X₁(τ)=(1-τ)X₁+τX₀. It is allowed to have either sign.",
       ),
       vocabulary(
-        "Scalar projective map u",
+        "Normalized real projectivity u",
         "The composition of all successive perspectivities, followed by the affine coordinate on the final contact line that sends Cₘ₊₁ to 0 and Cₘ to 1.",
       ),
       vocabulary(
@@ -370,7 +370,7 @@ const guides: readonly ReaderResultGuide[] = [
     proofSteps: [
       step(
         "Assume N≥4 and Δ>1",
-        "Topic V supplies the proper consecutive boundary chain, its exposing supporting lines, and the disjoint four-case partition required by Theorem 7.10.",
+        "Topic V supplies a consecutive boundary chain whose displayed sides do not exhaust the sides of P, together with its exposing supporting lines and the disjoint four-case partition required by Theorem 7.10.",
       ),
       step(
         "Construct the deformed invariant polygon",
@@ -390,7 +390,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "For every N≥4 critical polygon whose relative-interior contact set meets some contact-permutation orbit more than once, the first return reaches the next base index: Δ=1.",
+      "For every invariant polygon of an N-critical map with N≥4 whose relative-interior contact set meets some contact-permutation orbit more than once, the first return reaches the next base index: Δ=1.",
   },
   {
     itemNumber: 51,
@@ -542,7 +542,7 @@ export const topicVIGroups: readonly AdvancedProofGroup[] = [
     introduction: (
       <p>
         Ordered slopes in the affine chart locate the result of each
-        successive perspectivity and place the special final intersection
+        successive perspectivity and place the final intersection for Z₁=X₀
         strictly between the last two contacts.
       </p>
     ),
@@ -614,7 +614,7 @@ export const topicVIImported: readonly ProofDependency[] = [
     label: "Topic V: boundary chain and four-case partition",
     href: sitePath("/proof/topic-v/#prop:return-edge-ledger"),
     explanation:
-      "For Δ>1, a proper consecutive boundary chain is selected and 𝓑 is partitioned disjointly as D⊔R⊔{c}⊔A, with the source and assigned side line specified in each case.",
+      "For Δ>1, a consecutive boundary chain is selected whose displayed sides do not exhaust the sides of P, and 𝓑 is partitioned disjointly as D⊔R⊔{c}⊔A, with the source and assigned side line specified in each case.",
   },
   {
     label: "Topic II: persistence of finitely many strict conditions under small perturbations",

@@ -99,7 +99,7 @@ test("keeps the verified local manuscript available", async () => {
 
   const pdf = await readFile(pdfUrl);
   assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
-  assert.equal(pdf.byteLength, 605_923);
+  assert.equal(pdf.byteLength, 606_033);
 });
 
 test("server-renders the sourced History page", async () => {

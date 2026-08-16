@@ -21,12 +21,12 @@ export default function TopicIVPage() {
       routeKey="topic-iv"
       updatedAt={updatedAt}
       overview={[
-        "The boundary-interval bound from Topic III and a finite endpoint count select one consistent half-open orientation. Cyclic order turns the global contact assignment into the permutation Eᵢ↦Eᵢ₊κ, while lifted angles encode its shift κ without hidden multiples of 2π.",
+        "The boundary-interval bound from Topic III and a finite endpoint count select one consistent half-open orientation. Cyclic order turns the global contact assignment into the side-label translation Eᵢ↦Eᵢ₊κ, while lifted angles encode its shift κ without hidden multiples of 2π.",
         "An exact vertex replacement then realizes one permitted update of the subset S, and finite induction realizes every permitted finite update sequence. Among the sets obtained by finitely many such updates, a lexicographically minimal one reduces to one cyclic interval. Source notes identify Karpelevič’s antecedent arguments and state precisely what is proved on this page.",
       ]}
       stats={[
         { value: 5, label: "selection results" },
-        { value: 5, label: "contact-reduction results" },
+        { value: 5, label: "interval-reduction results" },
       ]}
     >
       <TopicIVChapter />

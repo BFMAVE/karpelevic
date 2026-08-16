@@ -88,7 +88,7 @@ function TopicIIIRecall() {
   return (
     <section className="proof-chapter-local-setup proof-chapter-recall" aria-labelledby="topic-iv-topic-iii-recall-heading">
       <p className="section-label">Recall from Topic III</p>
-      <h4 id="topic-iv-topic-iii-recall-heading">The boundary objects used below</h4>
+      <h4 id="topic-iv-topic-iii-recall-heading">The boundary objects and estimates used below</h4>
       <dl>
         <div>
           <dt><i>Q</i> and <i>y</i><sub>j</sub></dt>
@@ -99,10 +99,19 @@ function TopicIIIRecall() {
           <dd>The number of vertices of <i>P</i> on the closed positive boundary interval from <i>y</i><sub>j</sub> to <i>y</i><sub>j+1</sub>.</dd>
         </div>
         <div>
-          <dt>Two kinds of image edge</dt>
-          <dd>If [<i>y</i><sub>j</sub>,<i>y</i><sub>j+1</sub>] lies on one side of <i>P</i>, no part of <i>P</i> is removed. Otherwise its line makes a proper cut and removes a boundary interval. Topic III proves the required bounds in both cases.</dd>
+          <dt>Supporting image-edge line</dt>
+          <dd>If the line through [<i>y</i><sub>j</sub>,<i>y</i><sub>j+1</sub>] also supports <i>P</i>, the positive half-open boundary interval <span>(<i>y</i><sub>j</sub>,<i>y</i><sub>j+1</sub>]</span> lies on one side of <i>P</i> and contains at most one vertex of <i>P</i>.</dd>
+        </div>
+        <div>
+          <dt>Proper image-edge cut</dt>
+          <dd>If that line makes a proper cut, then <i>k</i><sub>j</sub>≤2, and at most one proper cut can attain <i>k</i><sub>j</sub>=2.</dd>
         </div>
       </dl>
+      <p>
+        These are the only counting estimates imported from Topic III. The
+        endpoint indicator <i>c</i><sub>j</sub> and half-open count
+        {" "}<i>r</i><sub>j</sub> used in Lemma 4.11 are defined locally in its proof.
+      </p>
     </section>
   );
 }
@@ -115,7 +124,8 @@ function StandingContactAssumptions() {
       <p>
         After the possible conjugation in Lemma 4.13, rename the selected
         multiplier λ and keep that orientation fixed. Write
-        {" "}<span>λ=ρe<sup>iθ</sup></span>, where
+        {" "}<span>λ=ρe<sup>iθ</sup></span>. Ellipticity makes λ nonreal, so the
+        positive-argument convention gives
         {" "}<span>θ=arg<sub>+</sub>(λ)∈(0,2π)</span>. The arguments below use the
         following five assumptions. For every index <i>i</i> modulo <i>N</i>, write
         {" "}<span><i>E</i><sub>i</sub>=[<i>x</i><sub>i−1</sub>,<i>x</i><sub>i</sub>]</span>
@@ -164,16 +174,16 @@ function ContactIndexDictionary() {
           <dd>The side-based form of the indexed set <i>S</i>.</dd>
         </div>
         <div>
-          <dt><i>h</i>(<i>E</i><sub>i</sub>)=<i>x</i><sub>i</sub></dt>
+          <dt>head(<i>E</i><sub>i</sub>)=<i>x</i><sub>i</sub></dt>
           <dd>The head of the oriented side is its included endpoint.</dd>
         </div>
         <div>
-          <dt><i>s</i>(<i>E</i><sub>i</sub>)=<i>E</i><sub>i+1</sub></dt>
+          <dt>succ(<i>E</i><sub>i</sub>)=<i>E</i><sub>i+1</sub></dt>
           <dd>The successor map advances to the next side.</dd>
         </div>
         <div>
           <dt><i>σ</i>(<i>E</i><sub>i</sub>)=<i>E</i><sub>i+κ</sub></dt>
-          <dd>The cyclic side permutation advances by the fixed shift κ.</dd>
+          <dd>The side-label translation advances by the fixed shift κ.</dd>
         </div>
       </dl>
       <p>All indices are read modulo <i>N</i>.</p>
@@ -211,7 +221,7 @@ function TopicIVProofSpine() {
       <h3 id="topic-iv-proof-spine-heading">From boundary order to one interval</h3>
       <ol>
         <li><strong>Choose one half-open convention.</strong> Endpoint counts and cyclic order place exactly one image vertex in every half-open side.</li>
-        <li><strong>Identify one cyclic shift.</strong> The side assignment is order preserving, so it is the permutation <span><i>E</i><sub>i</sub>↦<i>E</i><sub>i+κ</sub></span>; lifted angles locate κ without an unaccounted multiple of 2π.</li>
+        <li><strong>Identify one cyclic shift.</strong> The side assignment is order preserving, so under the chosen labels it is the translation <span><i>E</i><sub>i</sub>↦<i>E</i><sub>i+κ</sub></span>; lifted angles locate κ without an unaccounted multiple of 2π.</li>
         <li><strong>Realize one index-set update.</strong> Proposition 5.1 replaces one polygon vertex and proves the exact change <span><i>S</i>↦(<i>S</i>∖{"{i}"})∪{"{i+κ}"}</span>.</li>
         <li><strong>Minimize among realizable sets.</strong> Call a set <dfn>reachable</dfn> when it is obtained from the initial <i>S</i> by finitely many updates realized by Proposition 5.1. Among these reachable sets, one consists of a single cyclic interval.</li>
       </ol>
@@ -293,7 +303,7 @@ const selectionResults: readonly ProofResultData[] = [
     label: "Lemma 4.11",
     kind: "Lemma",
     title: "Cyclic interlacing with endpoint membership",
-    purpose: "Upgrade Topic III’s boundary-interval bound into a global assertion: one consistently oriented half-open gap contains exactly one outer vertex everywhere.",
+    purpose: "Upgrade Topic III’s boundary-interval bound into a global assertion: one consistently oriented half-open gap contains exactly one vertex of P everywhere.",
     manuscriptHtml: completeHtml("28", "lem:cyclic-interlacing"),
     prelude: <TopicIIIRecall />,
     vocabulary: [
@@ -304,12 +314,12 @@ const selectionResults: readonly ProofResultData[] = [
     intuition: <>Topic III allows at most one boundary interval containing two vertices. If it occurs, the total forces one interval to contain none. Side touching dictates where endpoint membership can change, exactly matching Lemma 4.10’s finite count.</>,
     figure: <PlateAnchor id="plate-iv-2-interlacing"><OwnershipMutationFigure kind="interlacing" id="topic-iv-cyclic-interlacing" /></PlateAnchor>,
     proofSteps: [
-      { title: "Create the two boundary counts", explanation: <>The right-half-open intervals partition the <i>N</i> outer vertices, giving Σ<i>r</i><sub>j</sub>=<i>N</i>; the endpoint indicator <i>c</i><sub>j</sub> relates <i>r</i><sub>j</sub> to the closed-interval count.</> },
+      { title: "Create the two boundary counts", explanation: <>The right-half-open intervals partition the <i>N</i> vertices of <i>P</i>, giving Σ<i>r</i><sub>j</sub>=<i>N</i>; the endpoint indicator <i>c</i><sub>j</sub> relates <i>r</i><sub>j</sub> to the closed-interval count.</> },
       { title: "Import the boundary-interval bound", explanation: <>If the image edge lies on a side of <i>P</i>, the count is at most 1. A proper image-edge cut has count at most 2, and only one such cut may attain 2.</> },
-      { title: "Find the mandatory rise", explanation: <>On the unique interval containing two vertices, the left endpoint cannot be an outer vertex, while the right endpoint must be one—otherwise a side between consecutive outer vertices would contain no image vertex.</> },
+      { title: "Find the mandatory rise", explanation: <>On the unique interval containing two vertices of <i>P</i>, the left endpoint cannot be a vertex of <i>P</i>, while the right endpoint must be one—otherwise a side between consecutive vertices of <i>P</i> would contain no image vertex.</> },
       { title: "Confine every fall", explanation: <>A 1→0 endpoint transition away from the unique interval containing no vertex would create a second proper cut whose closed interval contains two old vertices, contradicting Topic III.</> },
       { title: "Apply the endpoint count", explanation: <>Lemma 4.10 makes every opposite half-open count equal to one.</> },
-      { title: "Translate gaps into sides", explanation: <>The unique outer vertex in each image gap gives one image vertex in each outer half-open side.</> },
+      { title: "Translate gaps into sides", explanation: <>The unique vertex of <i>P</i> in each image gap gives one image vertex in each half-open side of <i>P</i>.</> },
       { title: "Repair the other orientation", explanation: <>If the first alternative holds, conjugate and reindex. Track the included and excluded endpoints explicitly to obtain right-half-open sides in positive order.</> },
     ],
     takeaway: <>After complex conjugation and positive reindexing when necessary, the entire polygon uses one right-half-open endpoint convention.</>,
@@ -321,7 +331,7 @@ const selectionResults: readonly ProofResultData[] = [
     label: "Corollary 4.12",
     kind: "Corollary",
     title: "One image vertex in every half-open side",
-    purpose: "Turn interlacing into a labelled bijection between the image vertices and the half-open outer sides.",
+    purpose: "Turn interlacing into a labelled bijection between the image vertices and the half-open sides of P.",
     manuscriptHtml: completeHtml("29", "cor:global-half-open-ownership"),
     takeaway: <>Every side index has exactly one assigned image vertex, so the vertex labels and side labels can now be compared globally.</>,
     provenance: "Previously known",
@@ -415,11 +425,11 @@ const mutationResults: readonly ProofResultData[] = [
     manuscriptHtml: completeHtml("33", "cor:intrinsic-mutation-law"),
     prelude: <p>In this corollary, <i>T</i> is the same real-linear map that the present complex coordinates write as multiplication by λ. Only the notation changes; the map does not.</p>,
     vocabulary: [
-      { term: "The maps χ and s", definition: <><i>χ</i> assigns to each polygon vertex the unique half-open side containing its image. The successor <i>s(E</i><sub>i</sub>)=<i>E</i><sub>i+1</sub> is the next side in positive cyclic order.</> },
-      { term: "The cyclic permutation σ", definition: <><i>σ(E</i><sub>i</sub>)=<i>E</i><sub>i+κ</sub> is the permutation of side labels induced by the contact assignment.</> },
+      { term: "The maps χ and succ", definition: <><i>χ</i> assigns to each polygon vertex the unique half-open side containing its image. The successor succ(<i>E</i><sub>i</sub>)=<i>E</i><sub>i+1</sub> is the next side in positive cyclic order.</> },
+      { term: "The side-label translation σ", definition: <><i>σ</i>(<i>E</i><sub>i</sub>)=<i>E</i><sub>i+κ</sub> is the cyclic-order-preserving permutation induced by the contact assignment; under the chosen labels, it is translation by κ modulo <i>N</i>.</> },
       { term: "The label-preserving bijection b", definition: <><i>b</i>(<i>E</i><sub>j</sub>)=<i>E</i><sub>j</sub><sup>′</sup> identifies each old side with the new side carrying the same index. This bijection is needed because the unprimed and primed maps have different side sets as domains.</> },
     ],
-    takeaway: <>With <i>b</i>(<i>E</i><sub>j</sub>)=<i>E</i><sub>j</sub><sup>′</sup>, one has <span><i>b</i>∘<i>s</i>=<i>s</i><sup>′</sup>∘<i>b</i></span>, <span><i>σ</i><sup>′</sup>=<i>b</i>∘<i>σ</i>∘<i>b</i><sup>−1</sup></span>, and the stated set update.</>,
+    takeaway: <>With <i>b</i>(<i>E</i><sub>j</sub>)=<i>E</i><sub>j</sub><sup>′</sup>, one has <span><i>b</i>∘succ=succ<sup>′</sup>∘<i>b</i></span>, <span><i>σ</i><sup>′</sup>=<i>b</i>∘<i>σ</i>∘<i>b</i><sup>−1</sup></span>, and the stated set update.</>,
     sourceIds: karpelevicOnly,
     sourceRelation: karpelevicHistory.intrinsic,
   },
@@ -562,14 +572,14 @@ export function TopicIVChapter() {
       <ProofDependencyContract
         imported={[
           { label: "Definition 1.1", href: sitePath("/proof/#part-i-item-1"), explanation: <>polygonal complexity and <i>N</i>-criticality, including the outward radial condition used by Theorem 3.2.</> },
-          { label: "Definition 1.2", href: sitePath("/proof/#part-i-item-2"), explanation: <>oriented sides, assignment to half-open sides, successors, and the induced cyclic permutation of side labels.</> },
+          { label: "Definition 1.2", href: sitePath("/proof/#part-i-item-2"), explanation: <>oriented sides, assignment to half-open sides, successors, and the induced cyclic-order-preserving translation of side labels.</> },
           { label: "Proposition 2.3", href: sitePath("/proof/#part-i-item-7"), explanation: <>real-linear covariance of contact geometry.</> },
           { label: "Lemma 2.4", href: sitePath("/proof/#part-i-item-8"), explanation: <>the exact effect of complex conjugation on orientation and handedness.</> },
           { label: "Lemma 2.5", href: sitePath("/proof/#part-i-item-9"), explanation: <>the origin lies in the interior of the invariant polygon.</> },
           { label: "Lemma 2.6", href: sitePath("/proof/#part-i-item-10"), explanation: <>positive cyclic order on a convex boundary.</> },
           { label: "Lemma 2.7", href: sitePath("/proof/topic-ii/#part-i-item-11"), explanation: <>positive triple determinants characterize strict convex position.</> },
           { label: "Lemma 2.10", href: sitePath("/proof/topic-ii/#part-i-item-14"), explanation: <>lifted polar angles increase along the positively oriented boundary.</> },
-          { label: "Theorem 3.2", href: sitePath("/proof/topic-ii/#part-i-item-16"), explanation: <>every side has nonempty intersection with the image polygon, and every image vertex lies on the outer boundary.</> },
+          { label: "Theorem 3.2", href: sitePath("/proof/topic-ii/#part-i-item-16"), explanation: <>every side has nonempty intersection with the image polygon, and every image vertex lies on the boundary of <i>P</i>.</> },
           { label: "Lemma 4.1", href: sitePath("/proof/topic-ii/#part-i-item-18"), explanation: <>a side whose intersection with the image polygon is nonempty contains a vertex of that image polygon.</> },
           { label: "Definition 4.2 and Lemmas 4.3–4.9", href: sitePath("/proof/topic-iii/#part-i-item-19"), explanation: <>half-open side assignment, boundary rigidity, labelled side inequalities, exact image-edge clipping, and the least-area boundary-interval bound.</> },
         ]}
@@ -579,7 +589,7 @@ export function TopicIVChapter() {
       <ProofResultGroup
         number="IV-A · Endpoint order"
         title="Turn local boundary-interval counts into one cyclic shift of the side labels"
-        introduction={<p>A finite endpoint count chooses the right-half-open endpoint convention. Cyclic order then turns the contact assignment into the permutation <span><i>E</i><sub>i</sub>↦<i>E</i><sub>i+κ</sub></span>, and lifted angles encode it without an unaccounted multiple of 2π.</p>}
+        introduction={<p>A finite endpoint count chooses the right-half-open endpoint convention. Cyclic order then turns the contact assignment into the side-label translation <span><i>E</i><sub>i</sub>↦<i>E</i><sub>i+κ</sub></span>, and lifted angles encode it without an unaccounted multiple of 2π.</p>}
         results={selectionResults}
       />
 

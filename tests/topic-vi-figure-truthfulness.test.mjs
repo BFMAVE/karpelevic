@@ -109,7 +109,11 @@ test("Plate VI.1 presents coordinate checks as illustration and separates its mo
   const topicVIFigure = figureMarkup(topicVIHtml, "topic-vi-projective-chain");
   const topicVIText = visibleText(topicVIFigure);
 
-  assert.match(topicVIText, /adapted numerical incidence illustration/i);
+  assert.match(
+    topicVIText,
+    /(?:adapts the|adapted) numerical incidence illustration/i,
+  );
+  assert.match(topicVIFigure, />Numerical illustration<\/span>/);
   assert.match(topicVIText, /supports? the internal consistency/i);
   assert.match(topicVIText, /projective statement is proved independently/i);
   assert.doesNotMatch(topicVIText, /incidence[- ]verified/i);
@@ -122,4 +126,23 @@ test("Plate VI.1 presents coordinate checks as illustration and separates its mo
   const topicVFigure = figureMarkup(topicVHtml, "projective-corridor");
   assert.doesNotMatch(topicVFigure, /data-topic-vi-mobile-labels/);
   assert.match(visibleText(topicVFigure), /Plate V\.4/);
+});
+
+test("Topic V and VI figure statuses state the epistemic role directly", async () => {
+  const topicVHtml = await render("/proof/topic-v");
+  for (const kind of ["rotation-records", "return-towers", "global-ledger"]) {
+    assert.match(figureMarkup(topicVHtml, kind), />Exact diagram<\/span>/);
+  }
+
+  const topicVIHtml = await render("/proof/topic-vi");
+  assert.match(
+    figureMarkup(topicVIHtml, "topic-vi-projective-chain"),
+    />Numerical illustration<\/span>/,
+  );
+  assert.match(figureMarkup(topicVIHtml, "holonomy-escape"), />Schematic<\/span>/);
+  assert.match(
+    figureMarkup(topicVIHtml, "topic-vi-return-partition"),
+    />Exact diagram<\/span>/,
+  );
+  assert.match(figureMarkup(topicVIHtml, "unit-return"), />Schematic<\/span>/);
 });

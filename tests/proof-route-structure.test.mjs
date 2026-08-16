@@ -217,6 +217,10 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.match(topicVText, /M∖\{b\*\}/);
   assert.match(topicVText, /The selected boundary arc omits at least one side/);
   assert.match(topicVText, /The two cyclic-orientation cases/);
+  assert.match(topicVText, /Forward and reverse data/);
+  assert.match(topicVText, /M=\{1,…,Δ\}/);
+  assert.match(topicVText, /M=\{Δ−1,…,φ−1\}/);
+  assert.match(topicVText, /s\(R\)=M∖\{b\*\}/);
   assert.match(topicVText, /Boundary-contact projection chain The consecutive vertices/);
   assert.match(topicVText, /Π:Λ₁→K/);
   assert.match(topicVText, /Choose endpoint supporting lines outside a finite exceptional set/);
@@ -227,6 +231,14 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.doesNotMatch(topicVText, /Supporting lines at the return vertices/i);
   assert.doesNotMatch(topicVText, /These are all three eigenvalues/i);
   assert.doesNotMatch(topicVText, /M°/);
+  assert.doesNotMatch(
+    topicV,
+    /data-reference="thm:rotation-section">\s*4\s*<\/a>/,
+  );
+  assert.ok(
+    [...topicV.matchAll(/>Exact diagram<\/span>/g)].length >= 3,
+    "Plates V.1–V.3 identify themselves as exact diagrams",
+  );
 
   assert.match(topicVIText, /A projective deformation and the first-return step Δ\s*=\s*1/i);
   assert.match(topicVIText, /9 results/);
@@ -253,6 +265,17 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.match(topicVIText, /𝓑=D⊔R⊔\{c\}⊔A records exactly which endpoint of the final incidence varies/);
   assert.match(topicVIText, /u\(τ\)<τ/);
   assert.match(topicVIText, /The first-return step satisfies Δ\s*=\s*1/);
+  assert.match(
+    topicVIText,
+    /consecutive boundary chain whose displayed sides do not exhaust the sides of P/i,
+  );
+  assert.match(
+    topicVIText,
+    /invariant polygon of an N-critical map with N≥4/i,
+  );
+  assert.match(topicVIText, /Final intersection W\* when Z₁=X₀/);
+  assert.match(topicVIText, /Normalized real projectivity u/);
+  assert.match(topicVIText, /Interior image vertex excluded by Theorem 3\.2/);
   assert.match(topicVIText, /Contact and first-return structure of an N-critical invariant polygon/);
   assert.match(topicVIText, /First-return cases/);
   assert.match(topicVIText, /A half-open contact assignment is a cyclic-order-preserving bijection χ/);
@@ -314,6 +337,12 @@ test("Topic IV exposes its local setup, typed set-update guide, and five unique 
   assert.match(html, /The proof in four steps/);
   assert.match(html, /From boundary order to one interval/);
   assert.match(html, /Recall from Topic III/);
+  assert.match(html, /The boundary objects and estimates used below/);
+  assert.match(html, /Supporting image-edge line/);
+  assert.match(html, /positive half-open boundary interval[\s\S]{0,300}contains at most one vertex of <i>P<\/i>/);
+  assert.match(html, /Proper image-edge cut[\s\S]{0,200}<i>k<\/i><sub>j<\/sub>≤2/);
+  assert.match(html, /at most one proper cut can attain <i>k<\/i><sub>j<\/sub>=2/);
+  assert.match(html, /endpoint indicator <i>c<\/i><sub>j<\/sub> and half-open count[\s\S]{0,100}<i>r<\/i><sub>j<\/sub> used in Lemma 4\.11 are defined locally/);
   assert.match(html, /Standing assumptions for the half-open contact data/);
   assert.match(html, /following five assumptions/);
   for (let assumption = 0; assumption <= 4; assumption += 1) {
@@ -325,15 +354,24 @@ test("Topic IV exposes its local setup, typed set-update guide, and five unique 
   assert.doesNotMatch(html, /tuple satisfying \(A1\)–\(A4\)/);
   assert.match(html, /standing contact data<\/dfn> means precisely a tuple satisfying \(A0\)–\(A4\)/);
   assert.match(html, /λ=ρe<sup>iθ<\/sup>/);
+  assert.match(html, /Ellipticity makes λ nonreal, so the positive-argument convention gives/);
   assert.match(html, /θ=arg<sub>\+<\/sub>\(λ\)∈\(0,2π\)/);
   assert.match(html, /The same contact data in two notations/);
+  assert.match(html, /<dt>head\(<i>E<\/i><sub>i<\/sub>\)=<i>x<\/i><sub>i<\/sub><\/dt>/);
+  assert.match(html, /<dt>succ\(<i>E<\/i><sub>i<\/sub>\)=<i>E<\/i><sub>i\+1<\/sub><\/dt>/);
+  assert.doesNotMatch(html, /<dt><i>h<\/i>\(<i>E<\/i>/);
+  assert.doesNotMatch(html, /<dt><i>s<\/i>\(<i>E<\/i>/);
+  assert.match(html, /interval-reduction results/);
   assert.match(html, /Call a set <dfn>reachable<\/dfn> when it is obtained[\s\S]{0,200}by finitely many updates realized by Proposition 5\.1/);
   assert.match(html, /Connected components and cyclic relabelling/);
   assert.match(html, /comp\(<i>S<\/i>\).*number of connected components/s);
   assert.match(html, /φ=\|<i>S<\/i>\|/);
   assert.match(html, /Equivariance under the label-preserving bijection between old and new side sets/);
   assert.match(html, /The label-preserving bijection b/);
-  assert.match(html, /The cyclic permutation σ/);
+  assert.match(html, /The side-label translation σ/);
+  assert.match(html, /The maps χ and succ/);
+  assert.doesNotMatch(html, /The maps χ and s<\/dt>/);
+  assert.doesNotMatch(html, /The cyclic permutation σ/);
   assert.match(html, /<i>T<\/i> is the same real-linear map[^<]*multiplication by λ/);
   assert.doesNotMatch(html, /Side-continuation bijection b/);
   assert.match(html, /Stage 1 · Identify the retained-half-plane intersection/);
@@ -392,6 +430,8 @@ test("Topic IV exposes its local setup, typed set-update guide, and five unique 
   assert.match(html, /Exact finite arithmetic example/);
   assert.match(html, /Q=λP/);
   assert.match(html, /S=\{4,5,6,7\}/);
+  assert.match(html, /Indices increase counterclockwise, matching Plate IV\.2/);
+  assert.match(html, /side-label translation σ\(j\)=j\+κ/);
   const visibleTopicIVText = html
     .replace(/<script[\s\S]*?<\/script>/gi, " ")
     .replace(/<style[\s\S]*?<\/style>/gi, " ")

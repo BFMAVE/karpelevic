@@ -38,6 +38,33 @@ const routes = [
     outputPath: "prerequisites/index.html",
   },
 ];
+const compatibilityRedirects = [
+  {
+    outputPath: "proof/topic-vi/a/index.html",
+    target: `${basePath}/proof/topic-vi/#lem:holonomy-calibration`,
+  },
+  {
+    outputPath: "proof/topic-vi/b/index.html",
+    target: `${basePath}/proof/topic-vi/#lem:deformation-admissibility`,
+  },
+];
+
+function redirectPage(target) {
+  const escapedTarget = target.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
+  return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="0; url=${escapedTarget}">
+  <link rel="canonical" href="https://bfmave.github.io${escapedTarget}">
+  <title>Topic VI has moved</title>
+</head>
+<body>
+  <p>Topic VI is now one chapter. <a href="${escapedTarget}">Continue to the corresponding section.</a></p>
+</body>
+</html>`;
+}
 
 function makeStatic(html, requestPath) {
   const withoutScripts = html
@@ -126,6 +153,12 @@ for (const route of routes) {
     await renderRoute(worker, route.requestPath),
     "utf8",
   );
+}
+
+for (const redirect of compatibilityRedirects) {
+  const destination = path.join(outputRoot, redirect.outputPath);
+  await mkdir(path.dirname(destination), { recursive: true });
+  await writeFile(destination, redirectPage(redirect.target), "utf8");
 }
 
 await writeFile(path.join(outputRoot, ".nojekyll"), "", "utf8");

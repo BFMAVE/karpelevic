@@ -65,6 +65,22 @@ for (const [relativePath, expectedText] of pages) {
   }
 }
 
+for (const [relativePath, target] of [
+  [
+    "proof/topic-vi/a/index.html",
+    "/karpelevic/proof/topic-vi/#lem:holonomy-calibration",
+  ],
+  [
+    "proof/topic-vi/b/index.html",
+    "/karpelevic/proof/topic-vi/#lem:deformation-admissibility",
+  ],
+]) {
+  const html = await readFile(path.join(outputRoot, relativePath), "utf8");
+  assert.match(html, /Topic VI is now one chapter/);
+  assert.match(html, new RegExp(target.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.doesNotMatch(html, /<script\b/i);
+}
+
 for (const relativePath of [
   "proof/index.html",
   "proof/topic-ii/index.html",
@@ -99,6 +115,8 @@ for (const relativePath of [
   );
   assert.match(html, /Plate VI\.1/);
   assert.match(html, /Plate VI\.4/);
+  assert.match(html, /Numerical illustration/);
+  assert.match(html, /Interior image vertex excluded by Theorem 3\.2/);
   assert.match(html, /Open all proofs/);
   assert.match(html, /Close all proofs/);
   assert.doesNotMatch(html, /advanced-arrow-global-ledger[^"']*\)/);
@@ -141,7 +159,8 @@ for (const relativePath of [
   assert.match(html, /Multiplication by λ is <i>N<\/i>-critical/);
   assert.doesNotMatch(html, /assumptions \(A1\)–\(A4\)/);
   assert.match(html, /The label-preserving bijection b/);
-  assert.match(html, /The cyclic permutation σ/);
+  assert.match(html, /The side-label translation σ/);
+  assert.doesNotMatch(html, /The cyclic permutation σ/);
   assert.match(
     visibleText,
     /Write\s+comp\(\s*S\s*\)\s+for the number of connected components/i,
@@ -196,6 +215,7 @@ for (const relativePath of [
   assert.match(html, /Definition 7\.4/);
   assert.match(html, /Plate V\.1/);
   assert.match(html, /Plate V\.4/);
+  assert.match(html, /Exact diagram/);
   assert.match(html, /data-incidence-count="8"/);
   assert.match(html, /data-incidence-verified="true"/);
   assert.match(visibleText, /unimodular record-vector chain/i);

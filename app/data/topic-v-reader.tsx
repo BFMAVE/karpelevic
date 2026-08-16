@@ -440,7 +440,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Handle equal-height neighbours",
-        "They return to relative-interior points on adjacent strict sides, which do not lie on the current side line.",
+        "They return to relative-interior points on the adjacent sides of the polygon, and those points do not lie on the current side line.",
       ),
       step(
         "Audit the interface",
@@ -489,6 +489,47 @@ const guides: readonly ReaderResultGuide[] = [
   {
     itemNumber: 42,
     label: "Proposition 7.3",
+    prelude: (
+      <section
+        aria-label="Forward and reverse return-index data"
+        className="proof-chapter-local-setup"
+      >
+        <p className="section-label">Forward and reverse data</p>
+        <h4>One map for the source and target indices</h4>
+        <dl>
+          <div>
+            <dt>Common notation</dt>
+            <dd>
+              𝓑=&#123;1,…,φ&#125;, r adds Δ modulo φ, and s=r<sup>−1</sup>.
+              The interval M contains the selected source indices; b<sub>*</sub>
+              is its distinguished source and c=r(b<sub>*</sub>) its target.
+            </dd>
+          </div>
+          <div>
+            <dt>Forward branch</dt>
+            <dd>
+              M=&#123;1,…,Δ&#125;, b<sub>*</sub>=1,
+              D=&#123;2,…,Δ&#125;, and c=Δ+1.
+            </dd>
+          </div>
+          <div>
+            <dt>Reverse branch</dt>
+            <dd>
+              M=&#123;Δ−1,…,φ−1&#125;, b<sub>*</sub>=φ−1,
+              D=&#123;Δ,…,φ−1&#125;, and c=Δ−1.
+            </dd>
+          </div>
+          <div>
+            <dt>Both branches</dt>
+            <dd>
+              R=r(M∖&#123;b<sub>*</sub>&#125;) and
+              A=𝓑∖(D∪R∪&#123;c&#125;). Thus s(D) and s(A) lie outside M,
+              s(R)=M∖&#123;b<sub>*</sub>&#125;, and s(c)=b<sub>*</sub>.
+            </dd>
+          </div>
+        </dl>
+      </section>
+    ),
     vocabulary: [
       vocabulary(
         "The base set 𝓑",

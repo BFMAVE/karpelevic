@@ -574,7 +574,7 @@ function Interlacing() {
       <text x="327" y="27" fill={ink} fontSize="16">x₀</text>
       <text x="421" y="112" fill={accessibleCopper} fontSize="14">open y₆</text>
       <text x="197" y="110" fill={accessibleCopper} fontSize="14">closed y₀</text>
-      <circle cx="91" cy="52" r="5" fill={ink} /><text x="105" y="57" fill={ink} fontSize="14">outer x-vertices</text>
+      <circle cx="91" cy="52" r="5" fill={ink} /><text x="105" y="57" fill={ink} fontSize="14">vertices xᵢ of P</text>
       <circle cx="91" cy="78" r="5" fill={red} /><text x="105" y="83" fill={ink} fontSize="14">y-vertices of Q = λP</text>
       <text x="340" y="337" fill={ink} fontSize="16" textAnchor="middle">for λ = cos(π/7) exp(iπ/7), each yᵢ is the midpoint of [xᵢ,xᵢ₊₁]</text>
       <text x="340" y="360" fill={ink} fontSize="16" textAnchor="middle">the exact half-open boundary arc (y₆,y₀] contains exactly x₀</text>
@@ -599,7 +599,7 @@ function InterlacingMobile() {
       <text x="238" y="124" fill={accessibleCopper} fontSize="14">open y₆</text>
       <text x="65" y="124" fill={accessibleCopper} fontSize="14">closed y₀</text>
       <text x="180" y="347" fill={ink} fontSize="15" textAnchor="middle">the highlighted gap is (y₆,y₀]</text>
-      <text x="180" y="370" fill={ink} fontSize="15" textAnchor="middle">and its unique outer vertex is x₀</text>
+      <text x="180" y="370" fill={ink} fontSize="15" textAnchor="middle">and its unique vertex of P is x₀</text>
       <text x="180" y="398" fill={ink} fontSize="14" textAnchor="middle">λ = cos(π/7) exp(iπ/7) and Q = λP</text>
       <circle cx="78" cy="425" r="4.5" fill={ink} /><text x="91" y="430" fill={ink} fontSize="13">x-vertices</text>
       <circle cx="216" cy="425" r="4.5" fill={red} /><text x="229" y="430" fill={ink} fontSize="13">y-vertices of Q</text>
@@ -778,11 +778,27 @@ function ResidueNode({ x, y, index, size = 18, fontSize = 15 }: { x: number; y: 
 }
 
 function cyclicPoint(cx: number, cy: number, radius: number, index: number, count = 12): Point {
-  const angle = -Math.PI / 2 + (2 * Math.PI * index) / count;
+  // As in the regular-heptagon plates, decreasing SVG angles make the
+  // displayed labels increase counterclockwise because the SVG y-axis points down.
+  const angle = -Math.PI / 2 - (2 * Math.PI * index) / count;
   return [cx + radius * Math.cos(angle), cy + radius * Math.sin(angle)];
 }
 
+export function verifyResidueBlockDirection() {
+  const [p0, p1, p2] = [0, 1, 2].map((index) => cyclicPoint(0, 0, 1, index));
+  const screenCross =
+    (p1[0] - p0[0]) * (p2[1] - p1[1])
+    - (p1[1] - p0[1]) * (p2[0] - p1[0]);
+  return {
+    screenCross,
+    counterclockwiseOnScreen: screenCross < 0,
+    valid: screenCross < 0,
+  };
+}
+
 function ResidueBlock({ markerId }: { markerId: string }) {
+  const direction = verifyResidueBlockDirection();
+  if (!direction.valid) throw new Error("Plate IV.5 must use the same visible positive cyclic direction as Plate IV.2.");
   const cx = 300;
   const cy = 162;
   const radius = 112;
@@ -793,14 +809,14 @@ function ResidueBlock({ markerId }: { markerId: string }) {
   const endTick = cyclicPoint(cx, cy, 142, 7);
   return (
     <>
-      <path d={`M${intervalStart[0]} ${intervalStart[1]} A${radius} ${radius} 0 0 1 ${intervalEnd[0]} ${intervalEnd[1]}`} fill="none" stroke="#eadcca" strokeWidth="44" strokeLinecap="round" />
-      <path d={`M${intervalStart[0]} ${intervalStart[1]} A${radius} ${radius} 0 0 1 ${intervalEnd[0]} ${intervalEnd[1]}`} fill="none" stroke={accessibleCopper} strokeWidth="2" strokeDasharray="5 5" opacity=".9" />
-      <path d="M286 35 C150 -5 70 82 169 207 C176 216 183 221 187 223" fill="none" stroke={red} strokeWidth="2.8" markerEnd={`url(#${markerId})`} />
-      <text x="66" y="28" fill={ink} fontSize="14" fontWeight="700">permutation σ(j)=j+κ</text>
+      <path d={`M${intervalStart[0]} ${intervalStart[1]} A${radius} ${radius} 0 0 0 ${intervalEnd[0]} ${intervalEnd[1]}`} fill="none" stroke="#eadcca" strokeWidth="44" strokeLinecap="round" />
+      <path d={`M${intervalStart[0]} ${intervalStart[1]} A${radius} ${radius} 0 0 0 ${intervalEnd[0]} ${intervalEnd[1]}`} fill="none" stroke={accessibleCopper} strokeWidth="2" strokeDasharray="5 5" opacity=".9" />
+      <path d="M314 35 C450 -5 530 82 431 207 C424 216 417 221 413 223" fill="none" stroke={red} strokeWidth="2.8" markerEnd={`url(#${markerId})`} />
+      <text x="66" y="28" fill={ink} fontSize="14" fontWeight="700">side-label translation σ(j)=j+κ</text>
       <text x="66" y="48" fill={ink} fontSize="14">example: 0↦8 for κ=8</text>
       {nodes.map(([x, y], index) => <ResidueNode key={index} x={x} y={y} index={index} />)}
-      <line x1={intervalStart[0] + 17} y1={intervalStart[1] + 10} x2={startTick[0]} y2={startTick[1]} stroke={accessibleCopper} strokeWidth="3" />
-      <line x1={intervalEnd[0] - 17} y1={intervalEnd[1] + 10} x2={endTick[0]} y2={endTick[1]} stroke={accessibleCopper} strokeWidth="3" />
+      <line x1={intervalStart[0] - 17} y1={intervalStart[1] + 10} x2={startTick[0]} y2={startTick[1]} stroke={accessibleCopper} strokeWidth="3" />
+      <line x1={intervalEnd[0] + 17} y1={intervalEnd[1] + 10} x2={endTick[0]} y2={endTick[1]} stroke={accessibleCopper} strokeWidth="3" />
       <text x={cx} y="322" fill={accessibleCopper} fontSize="15" fontWeight="700" textAnchor="middle">cyclic interval S = {`{4,5,6,7}`}</text>
 
       <text x="482" y="48" fill={ink} fontSize="15" fontWeight="700">residue mod 4</text>
@@ -812,8 +828,8 @@ function ResidueBlock({ markerId }: { markerId: string }) {
       ))}
       <text x="480" y="282" fill={ink} fontSize="14">φ=|S|=4=δ</text>
       <text x="480" y="305" fill={ink} fontSize="14">N−φ=8=[κ]₁₂</text>
-      <text x="480" y="328" fill={ink} fontSize="13">the arrow is σ, not a set update</text>
-      <text x="340" y="357" fill={ink} fontSize="14" textAnchor="middle">shape and color both encode the four residue classes</text>
+      <text x="480" y="328" fill={ink} fontSize="13">positive order: counterclockwise</text>
+      <text x="340" y="357" fill={ink} fontSize="14" textAnchor="middle">the arrow is σ, not an update · shape and color encode residue classes</text>
     </>
   );
 }
@@ -829,14 +845,14 @@ function ResidueBlockMobile({ markerId }: { markerId: string }) {
   const endTick = cyclicPoint(cx, cy, 108, 7);
   return (
     <>
-      <path d={`M${intervalStart[0]} ${intervalStart[1]} A${radius} ${radius} 0 0 1 ${intervalEnd[0]} ${intervalEnd[1]}`} fill="none" stroke="#eadcca" strokeWidth="36" strokeLinecap="round" />
-      <path d={`M${intervalStart[0]} ${intervalStart[1]} A${radius} ${radius} 0 0 1 ${intervalEnd[0]} ${intervalEnd[1]}`} fill="none" stroke={accessibleCopper} strokeWidth="2" strokeDasharray="5 5" />
-      <path d="M168 48 C76 8 18 79 78 181 C83 190 88 196 91 198" fill="none" stroke={red} strokeWidth="2.7" markerEnd={`url(#${markerId})`} />
-      <text x="13" y="20" fill={ink} fontSize="13" fontWeight="700">σ(j)=j+κ</text>
+      <path d={`M${intervalStart[0]} ${intervalStart[1]} A${radius} ${radius} 0 0 0 ${intervalEnd[0]} ${intervalEnd[1]}`} fill="none" stroke="#eadcca" strokeWidth="36" strokeLinecap="round" />
+      <path d={`M${intervalStart[0]} ${intervalStart[1]} A${radius} ${radius} 0 0 0 ${intervalEnd[0]} ${intervalEnd[1]}`} fill="none" stroke={accessibleCopper} strokeWidth="2" strokeDasharray="5 5" />
+      <path d="M192 48 C284 8 342 79 282 181 C277 190 272 196 269 198" fill="none" stroke={red} strokeWidth="2.7" markerEnd={`url(#${markerId})`} />
+      <text x="13" y="20" fill={ink} fontSize="13" fontWeight="700">side-label translation σ</text>
       <text x="13" y="38" fill={ink} fontSize="13">0↦8, κ=8</text>
       {nodes.map(([x, y], index) => <ResidueNode key={index} x={x} y={y} index={index} size={15} fontSize={12} />)}
-      <line x1={intervalStart[0] + 14} y1={intervalStart[1] + 8} x2={startTick[0]} y2={startTick[1]} stroke={accessibleCopper} strokeWidth="3" />
-      <line x1={intervalEnd[0] - 14} y1={intervalEnd[1] + 8} x2={endTick[0]} y2={endTick[1]} stroke={accessibleCopper} strokeWidth="3" />
+      <line x1={intervalStart[0] - 14} y1={intervalStart[1] + 8} x2={startTick[0]} y2={startTick[1]} stroke={accessibleCopper} strokeWidth="3" />
+      <line x1={intervalEnd[0] + 14} y1={intervalEnd[1] + 8} x2={endTick[0]} y2={endTick[1]} stroke={accessibleCopper} strokeWidth="3" />
       <text x="180" y="267" fill={accessibleCopper} fontSize="14" fontWeight="700" textAnchor="middle">cyclic interval S={`{4,5,6,7}`}</text>
 
       <text x="18" y="304" fill={ink} fontSize="14" fontWeight="700">residue mod 4 — shape + color</text>
@@ -848,7 +864,8 @@ function ResidueBlockMobile({ markerId }: { markerId: string }) {
         return <g key={`mobile-legend-${residue}`}><ResidueNode x={x} y={y} index={residue} size={13} fontSize={11} /><text x={x + 25} y={y + 5} fill={ink} fontSize="13">j ≡ {residue}</text></g>;
       })}
       <text x="180" y="424" fill={ink} fontSize="14" textAnchor="middle">φ=4=δ and N−φ=8=[κ]₁₂</text>
-      <text x="180" y="447" fill={ink} fontSize="14" textAnchor="middle">the arrow shows σ, not a set update</text>
+      <text x="180" y="445" fill={ink} fontSize="14" textAnchor="middle">positive order is counterclockwise</text>
+      <text x="180" y="465" fill={ink} fontSize="13" textAnchor="middle">the arrow shows σ, not an update</text>
     </>
   );
 }
@@ -864,7 +881,7 @@ const descriptions: Record<FigureKind, { title: string; description: string; cap
   interlacing: { title: "Global cyclic interlacing", description: "An exact regular-heptagon configuration with Q equal to lambda P for lambda equal to cosine pi over seven times exponential i pi over seven. Every y vertex is a side midpoint of P. The boundary arc from y six to y zero is open at y six, closed at y zero, and contains exactly x zero.", caption: "Plate IV.2. Exact regular-heptagon configuration. For λ=cos(π/7) exp(iπ/7), Q=λP and yᵢ=(xᵢ+xᵢ₊₁)/2. Thus the highlighted half-open boundary arc (y₆,y₀] contains exactly x₀.", status: "Exact geometric configuration" },
   "lifted-shift": { title: "The cyclic shift on the real angle line", description: "A schematic lifted-angle example with kappa equal to three. The arrow from Theta zero to Theta three means add the multiplier's argument. A hollow circle at Theta two marks the excluded left endpoint, a filled circle at Theta three marks the endpoint case, and a diamond strictly between them marks the distinct relative-interior case.", caption: "Plate IV.3. Schematic lifted-angle example with κ=3. The arrow means “add the multiplier’s argument.” The hollow circle is the excluded left endpoint Θ₂; the filled circle marks the endpoint case at Θ₃; and the diamond marks the distinct relative-interior case in (Θ₂,Θ₃).", status: "Schematic lifted-angle example with κ=3" },
   surgery: { title: "One vertex replacement and its symbolic membership update", description: "A schematic local polygon drawing is paired with the exact symbolic update S prime equals S without i, union i plus kappa. Before replacement, i belongs to S, i plus one does not belong to S, and i plus kappa may or may not already belong to S. Afterwards, i does not belong to S prime, i plus kappa belongs to S prime, and every other membership is unchanged. The cardinality is preserved if i plus kappa was absent and decreases by one if it was already present. No numerical contact system is asserted.", caption: "Plate IV.4. Schematic local geometry · exact symbolic update. Under the permitted replacement hypotheses i∈S and i+1∉S, one has S′=(S∖{i})∪{i+κ}, with every other membership unchanged. If i+κ∉S, then |S′|=|S|; if i+κ∈S, then |S′|=|S|−1. No numerical contact system is asserted by the plate.", status: "Schematic local geometry · exact symbolic update" },
-  "residue-block": { title: "Shift orbits and a reduced cyclic interval", description: "An exact finite example with twelve cyclic side indices and kappa equal to eight. Color and shape jointly encode the four residue classes. The cyclic interval S consists of four, five, six, and seven. An external arrow illustrates the permutation sigma of zero equals eight, not a vertex-replacement update.", caption: "Plate IV.5. Exact finite arithmetic example. For N=12, κ=8, and S={4,5,6,7}, one has φ=|S|=4=δ and N−φ=8=[κ]₁₂. The arrow 0↦8 illustrates the permutation σ(j)=j+κ; it is not itself a permitted update of S.", status: "Exact finite arithmetic example" },
+  "residue-block": { title: "Shift orbits and a reduced cyclic interval", description: "An exact finite example with twelve cyclic side indices increasing counterclockwise, in the same visible direction as Plate IV.2, and kappa equal to eight. Color and shape jointly encode the four residue classes. The cyclic interval S consists of four, five, six, and seven. An external arrow illustrates the side-label translation sigma of zero equals eight, not a vertex-replacement update.", caption: "Plate IV.5. Exact finite arithmetic example. Indices increase counterclockwise, matching Plate IV.2. For N=12, κ=8, and S={4,5,6,7}, one has φ=|S|=4=δ and N−φ=8=[κ]₁₂. The arrow 0↦8 illustrates the side-label translation σ(j)=j+κ; it is not itself a permitted update of S.", status: "Exact finite arithmetic example" },
 };
 
 export function OwnershipMutationFigure({ kind, id }: { kind: FigureKind; id: string }) {

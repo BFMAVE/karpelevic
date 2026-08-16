@@ -19,6 +19,7 @@ type FigureCopy = {
 
 const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
   "rotation-records": {
+    status: "Exact diagram",
     title: "Upper records of the rotation by five modulo thirteen",
     description:
       "A residue strip uses labelled horizontal reference guides at residues zero, five, ten, and twelve, the four record levels. A second panel plots the corresponding integer record vectors zero one, one one, two one, and five two beside the boundary ray on which L of h comma b equals zero.",
@@ -26,6 +27,7 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
       "Plate V.1. For N=13 and κ=5, the upper-record times are 0, 1, 2, and 5, with residues 0, 5, 10, and 12 and deficits 13, 8, 3, and 1. The labelled horizontal lines are residue-scale guides. The lower panel shows the polygonal chain through the lattice vectors associated with the upper-record times beside the boundary ray L(h,b)=0. The Klein sail is defined in Remark 6.3 and is not separately drawn; the displayed chain may contain lattice points in the relative interiors of sail edges.",
   },
   "return-towers": {
+    status: "Exact diagram",
     title: "Two-height first-return decomposition",
     description:
       "Eight base columns contain three towers of height one and five towers of height two, giving thirteen cells. Every cell displays the evaluated residue F of t comma i prominently, with its domain coordinate t comma i underneath. Each tower is labelled by its height, and one arrow illustrates addition of five modulo eight on the base-index set.",
@@ -41,7 +43,7 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
       "Plate V.4. Numerical illustration of Definition 7.4. Let P=conv{X₀,…,X₅}. The displayed coordinates were checked consistently for cyclic convexity, the placement Cᵢ∈relint[Xᵢ₋₁,Xᵢ] for 2≤i≤5, the oriented support signs of ℒᵢ for 2≤i≤4, and all eight projection incidences. Their composition is a projectivity from Λ₁=aff(X₀,X₁) to K=aff(C₄,C₅). These numerical checks concern only the internal consistency of the drawing; the projective statements in Proposition 7.5 are proved independently.",
   },
   "topic-vi-projective-chain": {
-    status: "Adapted numerical incidence illustration",
+    status: "Numerical illustration",
     title: "Successive perspectivities along the selected boundary chain",
     description:
       "Plate VI.1 adapts the numerical incidence illustration from Topic V. A point is projected from the source line Lambda one to the supporting lines script L two, script L three, and script L four, and then to the target line K. The successive projection centres are C two, C three, C four, and X five. The coordinate checks support the internal consistency of this selected local boundary arc; they do not prove the projective statement.",
@@ -49,14 +51,15 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
       "Plate VI.1. Adapted from Plate V.4. In this numerical incidence illustration, projection through C₂ sends Y₁∈Λ₁ to Y₂∈ℒ₂; projection through C₃ sends Y₂ to Y₃∈ℒ₃; projection through C₄ sends Y₃ to Y₄∈ℒ₄; and the final projection through X₅ sends Y₄ to Y₅∈K=aff(C₄,C₅). It shows a selected local boundary arc, not a full polygon or a universal metric configuration. The maximum absolute determinant residual for the eight displayed incidences is approximately 3.3×10⁻¹¹; this supports the internal consistency of the drawing only, while the projective statement is proved independently.",
   },
   "holonomy-escape": {
-    status: "Schematic implication · affine and planar views",
+    status: "Schematic",
     title: "Scalar order and the corresponding planar half-plane",
     description:
-      "Plate VI.2 has two panels. On the entire affine coordinate line, u of tau lies to the left of tau; neither point is assumed to lie between the reference coordinate values zero and one. In the planar panel, the moving closing line through X sub m of tau and X sub m plus one is the zero set of the signed-side functional script S. The final contact line K equals the affine line through C sub m and C sub m plus one; it contains z of u of tau and Y of tau equals z of tau. Both Y and X sub m minus one lie in the open half-plane where script S is positive, identifying it as the polygon-interior side.",
+      "Plate VI.2 has two panels. On the entire affine coordinate line, u of tau lies to the left of tau; neither point is assumed to lie between the reference coordinate values zero and one. In the planar panel, the moving closing line through X sub m of tau and X sub m plus one is the zero set of the oriented determinant script S. The final contact line K equals the affine line through C sub m and C sub m plus one; it contains z of u of tau and Y of tau equals z of tau. Both Y and X sub m minus one lie in the open half-plane where script S is positive, identifying it as the polygon-interior side.",
     caption:
       "Plate VI.2. In the chosen affine coordinate on the final contact line K=aff(Cₘ,Cₘ₊₁), the selected parameter satisfies u(τ)<τ. Neither point is assumed to lie in [0,1]; the marked segment merely joins the reference coordinate values 0 and 1. The planar inset keeps the two roles visible: 𝒮(x,τ)>0 defines an open half-plane bounded by the moving closing line 𝒮(·,τ)=0, while d(t,τ)=𝒮(z(t),τ) is its restriction to K. The unchanged cyclic order puts Xₘ₋₁(τ) in this half-plane, so it is the polygon-interior side. Since γ(τ)>0, the scalar inequality gives d(τ,τ)>0 and hence puts Y(τ)=z(τ) there as well.",
   },
   "global-ledger": {
+    status: "Exact diagram",
     title: "Partition of the return source–target pairs",
     description:
       "The base-index set ℬ, calligraphic B, is partitioned into D, R, the singleton containing c, and A. Each row states both the target-membership condition and the exact condition on its inverse source under s.",
@@ -64,7 +67,7 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
       "Plate V.3. The base-index set ℬ is partitioned as ℬ=D⊔R⊔{c}⊔A. Here M is the selected set of source indices, M∖{b*} is that set without its distinguished endpoint b*, and s is the inverse return map. For j∈D∪A, s(j)∉M; for j∈R, s(j)∈M∖{b*} and indeed s(R)=M∖{b*}; finally s(c)=b*. This classifies the source–target pairs combinatorially; no deformation is assumed.",
   },
   "topic-vi-return-partition": {
-    status: "Adapted from Topic V · exact finite partition",
+    status: "Exact diagram",
     title: "Four cases for the assigned side incidences",
     description:
       "Plate VI.3 displays the disjoint and exhaustive partition of the calligraphic base-index set B into D, R, the singleton c, and A. Each row gives the side index k and the corresponding condition on the return index s of k, equal to r inverse of k.",
@@ -72,8 +75,8 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
       "Plate VI.3. Adapted from Plate V.3. The partition ℬ=D⊔R⊔{c}⊔A is disjoint and exhaustive. For k∈D, the assigned side line moves and the source is fixed; for k∈R, the source moves and the assigned side line is fixed; for k∈A, both remain fixed; and c is the only side index for which the final incidence is not imposed in advance. The displayed conditions involving s record the corresponding inverse sources. This is combinatorial input to the deformation, not a geometric example of the deformation itself.",
   },
   "unit-return": {
-    status: "Logical incidence schematic · no metric realization asserted",
-    title: "The forbidden interior image vertex",
+    status: "Schematic",
+    title: "Interior image vertex excluded by Theorem 3.2",
     description:
       "Plate VI.4 marks schematic locations representing extreme points of lambda P tau without joining them into an image polygon. Eight displayed locations lie on the boundary of P tau, while the highlighted location Y of tau lies strictly inside P tau. No metric realization of multiplication by lambda is asserted.",
     caption:
