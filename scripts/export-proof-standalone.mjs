@@ -22,6 +22,8 @@ const reviewBundleFiles = new Map([
   ["/proof/topic-v", "Critical_Invariant_Polygons_Topic_V.html"],
   ["/proof/topic-vi", "Critical_Invariant_Polygons_Topic_VI.html"],
   ["/proof/topic-vii", "Critical_Invariant_Polygons_Topic_VII.html"],
+  ["/proof/topic-viii", "Critical_Invariant_Polygons_Topic_VIII.html"],
+  ["/proof/topic-ix", "Critical_Invariant_Polygons_Topic_IX.html"],
 ]);
 const proofTopicNumbers = new Map([
   ["/proof/topic-ii", 2],
@@ -35,9 +37,23 @@ const proofTopicNumbers = new Map([
   ["/proof/topic-x", 10],
   ["/proof/topic-xi", 11],
   ["/proof/topic-xii", 12],
+  ["/proof/topic-xii/a", 12],
+  ["/proof/topic-xii/b", 12],
   ["/proof/topic-xiii", 13],
   ["/proof/topic-xiv", 14],
 ]);
+const explicitlyBundledTopicNumbers = new Set(
+  (process.env.PROOF_STANDALONE_BUNDLE_TOPICS ?? "")
+    .split(",")
+    .map((value) => Number(value.trim()))
+    .filter((value) => Number.isInteger(value) && value > 0),
+);
+
+function isExplicitlyBundledTopic(routePath) {
+  if (explicitlyBundledTopicNumbers.size === 0) return true;
+  const topicNumber = proofTopicNumbers.get(routePath);
+  return topicNumber !== undefined && explicitlyBundledTopicNumbers.has(topicNumber);
+}
 
 function normalizeRoutePath(routePath) {
   const normalized = routePath.replace(/\/+$/, "");
@@ -151,7 +167,11 @@ function rewriteInternalLinks(html) {
         return `${attribute}="${fragment || "#top"}"`;
       }
 
-      if (bundleLinkMode && reviewBundleFiles.has(normalizedPathname)) {
+      if (
+        bundleLinkMode &&
+        reviewBundleFiles.has(normalizedPathname) &&
+        isExplicitlyBundledTopic(normalizedPathname)
+      ) {
         return `${attribute}="${reviewBundleFiles.get(normalizedPathname)}${fragment}"`;
       }
       if (siteUrl.startsWith("/")) {
@@ -172,15 +192,19 @@ function markUnavailableTopicLinks(html) {
     routeTopicNumber,
     Number.isFinite(configuredPublicMaximum) ? configuredPublicMaximum : 3,
   );
+  const usesExplicitBundleSet =
+    bundleLinkMode && explicitlyBundledTopicNumbers.size > 0;
 
   return html.replace(
     /<a\b([^>]*\bdata-proof-topic-number="(\d+)"[^>]*)>([\s\S]*?)<\/a>/gi,
     (match, rawAttributes, topicNumberText, children) => {
       const topicNumber = Number(topicNumberText);
-      if (
-        !Number.isFinite(topicNumber) ||
-        topicNumber <= availableTopicMaximum
-      ) {
+      const isAvailable = usesExplicitBundleSet
+        ? topicNumber <= configuredPublicMaximum ||
+          topicNumber === routeTopicNumber ||
+          explicitlyBundledTopicNumbers.has(topicNumber)
+        : topicNumber <= availableTopicMaximum;
+      if (!Number.isFinite(topicNumber) || isAvailable) {
         return match;
       }
 
@@ -227,12 +251,20 @@ function markUnavailableProofAnchors(html) {
     routeTopicNumber,
     Number.isFinite(configuredMaximum) ? configuredMaximum : routeTopicNumber,
   );
+  const usesExplicitBundleSet =
+    bundleLinkMode && explicitlyBundledTopicNumbers.size > 0;
 
   return html.replace(
     /<a\b([^>]*\bhref="([^"]+)"[^>]*)>([\s\S]*?)<\/a>/gi,
     (match, rawAttributes, href, children) => {
       const topicNumber = topicNumberFromUrl(href);
-      if (topicNumber === undefined || topicNumber <= availableMaximum) {
+      const isAvailable = usesExplicitBundleSet
+        ? topicNumber !== undefined &&
+          (topicNumber <= configuredMaximum ||
+            topicNumber === routeTopicNumber ||
+            explicitlyBundledTopicNumbers.has(topicNumber))
+        : topicNumber !== undefined && topicNumber <= availableMaximum;
+      if (topicNumber === undefined || isAvailable) {
         return match;
       }
       let attributes = rawAttributes
@@ -382,7 +414,7 @@ function verifyStandaloneHtml(html) {
                 "data-proof-route=\"topic-vi\"",
                 "Forthcoming",
               ]
-            : proofRoute === "/proof/topic-vii"
+          : proofRoute === "/proof/topic-vii"
                 ? [
                     "Topic VII",
                     "Farey product data and return monodromy",
@@ -390,6 +422,26 @@ function verifyStandaloneHtml(html) {
                     "data-proof-route=\"topic-vii\"",
                     "Forthcoming",
                   ]
+              : proofRoute === "/proof/topic-viii"
+                ? [
+                    "Topic VIII",
+                    "Returning to stochastic spectra",
+                    "The stochastic–polygon equivalence",
+                    "Non-inherited radial maxima are polygonally critical",
+                    'data-proof-route="topic-viii"',
+                    "Forthcoming",
+                  ]
+                : proofRoute === "/proof/topic-ix"
+                  ? [
+                      "Topic IX",
+                      "Constructing the Farey–Ito candidate curves",
+                      "Farey adjacency criterion",
+                      "One scalar equation per ray",
+                      "Endpoint limits, including the order-three exception",
+                      "Boundary extraction",
+                      'data-proof-route="topic-ix"',
+                      "Forthcoming",
+                    ]
         : [
             "How the Proof Works",
             "Definition 1.1",
@@ -531,6 +583,7 @@ function verifyStandaloneHtml(html) {
 
   if (
     bundleLinkMode &&
+    explicitlyBundledTopicNumbers.size === 0 &&
     /href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-(?:v(?:i(?:i)?(?:\/[ab])?)?)(?:\/|#)/i.test(
       html,
     )
@@ -538,6 +591,18 @@ function verifyStandaloneHtml(html) {
     throw new Error(
       "A review-bundle chapter still links to an unpublished public Topic V–VII route.",
     );
+  }
+  if (bundleLinkMode && explicitlyBundledTopicNumbers.size > 0) {
+    for (const [route, topicNumber] of proofTopicNumbers) {
+      if (
+        explicitlyBundledTopicNumbers.has(topicNumber) &&
+        html.includes(`href="${publicSite}${route}/`)
+      ) {
+        throw new Error(
+          `A standalone bundle chapter still links publicly to bundled Topic ${topicNumber}.`,
+        );
+      }
+    }
   }
 }
 
