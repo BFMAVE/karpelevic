@@ -1852,3 +1852,40 @@ full local source history remain later site milestones.
   remains offline and returns HTTP 404, and the live manuscript is byte-identical
   to the verified local PDF. The owner-only Sites production copy is version 6
   and is synchronized to source commit `b12be90`.
+
+## Current milestone — Topic VIII precision review (20 August 2026)
+
+- **The radial-criticality bridge is now explicit:** the reader defines
+  `T_lambda(z)=lambda z` before use, states the exact equivalence between
+  membership in `Theta_n` and polygonal complexity, proves
+  `R_{N-1}(theta)<R_N(theta)`, and separates the two outward-scaling cases
+  `t|lambda|<=1` and `t|lambda|>1`.
+- **Formal and editorial precision repairs are synchronized:** the canonical
+  proof uses the supporting-functional argument actually required, points to
+  Topic III Lemma A.5 for strict area monotonicity, uses `spr(A)`, and retains
+  all 368 labels. Reader copy uses semantic subscripts, cautious provenance,
+  and literal vertex-count conclusions. Topic VIII still contains seven formal
+  cards and six complete proof disclosures.
+- **Figures and responsive output are exact:** Plate VIII.1 labels the map
+  `z -> lambda z`; Plate VIII.2 records both radial-intersection identities,
+  the strict radial inequality, and its not-to-scale status. The shared copper
+  color now passes text contrast while all existing figure IDs and mobile
+  layouts remain stable.
+- **Verification and artifacts:** deterministic generated-content SHA-256 values
+  are `1eb7f74d42be3622156254697a3acebb0138830ddf97d29e58f2825172f807a6`
+  for Part I, `6569e47dba3c95007a3c5d0547bc26ceca50b4fa8a5af69d7fe267f8850105a7`
+  for Part II, and
+  `44858b0d493cb07ecea8f51ebeab38544b0e82cfaebd01de09b389b01a94435a`
+  for the Topic VIII–XI proof data. The clean 101-page manuscript PDF has
+  SHA-256 `d54fdf371a0042cc1d05b95ec365acfa3a008a674bf49932623e56d42a7468a2`.
+  ESLint, all 54 tests, deterministic generation, PDF visual inspection,
+  Pages verification, standalone/bundle integrity, and an independent release
+  audit pass.
+- **Portable editions:** the individual Topic VIII HTML has SHA-256
+  `7257c7e100cf145e9a7a0edc17a9d7ae173ab9ed1bb9fa4136682af43b423f52`
+  and disables Topic IX. The two-member Topic VIII–IX review bundle has SHA-256
+  `75e27fa611ee1925cd66a950c3bcb467fedfaff7e5a2d789d65229aee8e8b998`.
+- **Publication status:** source implementation commit `6f5d10c`; static-only
+  Pages commit `daf75fd`. Live Topic VIII and its manuscript match the audited
+  bytes, while Topic IX remains offline with HTTP 404. The owner-only Sites
+  production copy is version 7 and is synchronized to source commit `6f5d10c`.
