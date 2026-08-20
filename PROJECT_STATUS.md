@@ -1889,3 +1889,45 @@ full local source history remain later site milestones.
   Pages commit `daf75fd`. Live Topic VIII and its manuscript match the audited
   bytes, while Topic IX remains offline with HTTP 404. The owner-only Sites
   production copy is version 7 and is synchronized to source commit `6f5d10c`.
+
+## Current milestone — Topic IX publication and certified evaluation (20 August 2026)
+
+- **The candidate-curve construction is complete and locally verifiable:** the
+  reader derives the angle range before the scalar equation, proves the unique
+  modulus and its endpoint limits, treats the exceptional order-three curve
+  exactly, and preserves the manuscript's numbered equations and stable
+  anchors. Topic VIII now hands off directly to the Farey-interval construction,
+  while stochastic realization and the sharp boundary comparison remain
+  reserved for Topics X and XI.
+- **The numerical algorithm is total:** certified bisection returns immediately
+  when an exact midpoint zero is recognized and otherwise uses either a strict
+  sign or a derivative-based residual enclosure. This closes the exact case
+  `n=3`, `x=1/6`, `rho=1/2` without weakening the radial error guarantee.
+- **Figures and portable output are exact:** the Farey number line, vector
+  identity, and exceptional order-three curve each have dedicated accessible
+  desktop and mobile layouts. The individual Topic IX HTML is self-contained;
+  the two-member Topic VIII–IX archive contains cross-linked self-contained
+  copies without changing the individual downloads.
+- **Verification and artifacts:** canonical TeX SHA-256 is
+  `017e27c7f8a13721ab75a829653a30d79c560f9442dc311ddff30ac50f1ce7b9`;
+  deterministic generated-content SHA-256 values are
+  `428de4ccf37be17e2dfca3b51e080cfd5856ad3fa6e9da0f372a212f1e090dec`
+  for Part I, `81f74c87c2af5293daf77a043bbc54eaf3801e1c783991b8254cfe4255f4d56c`
+  for Part II, and
+  `d116c448a830206a009148d49bba539faecd7c89582e2b46ce7068fba29dcc7d`
+  for Topic VIII–XI proof data. The clean 103-page PDF has SHA-256
+  `75220c1343fc98ee070a09896a6025801ea797e07fb19ca17aca9251406d7e7d`.
+  ESLint, all 58 tests, deterministic generation, PDF visual inspection,
+  Pages verification, standalone/bundle integrity, and independent release
+  audits pass.
+- **Published artifacts:** the live Topic IX HTML has SHA-256
+  `562670d8313102757b43f1796d090eb912f6f8ae478907e4fed2106a43e9bc2f`;
+  the individual Topic IX HTML has SHA-256
+  `0f7d9cb1f3eedf8f295e617acdf7d8ad8f7e937e25bf9e510947416df864237d`;
+  and the Topic VIII–IX review bundle has SHA-256
+  `dda9615748db26d6ebdea136b980d31b702b4716cba6bd12732e34e44404919e`.
+- **Publication status:** source implementation/hotfix commit `639a848`;
+  static-only Pages commit `b04d606`. Live Topics VIII and IX return HTTP 200,
+  Topic X remains offline with HTTP 404, and the live manuscript is
+  byte-identical to the verified local PDF. The owner-only Sites production
+  copy is version 9 and is synchronized to source commit `639a848`.
