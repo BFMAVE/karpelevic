@@ -103,8 +103,9 @@ export function ProofChapterShell({
               {deck ?? (
                 <>
                   A complete, source-aware mathematical reading in which every
-                  nonstandard object is defined before it is used and every
-                  proof remains available in full.
+                  nonstandard object is defined locally or linked to its
+                  earlier definition, and every proof remains available in
+                  full.
                 </>
               )}
             </p>

@@ -180,7 +180,7 @@ const karpelevicOnlyAntecedent = new Set([
 const strengthened = new Set([30]);
 const newResults = new Set<number>([]);
 const unbadgedResults = new Set([
-  4, 15, 16, 27, 28, 31, 42, 44, 45, 46, 48, 57, 58, 59,
+  4, 9, 15, 16, 27, 28, 31, 42, 44, 45, 46, 48, 57, 58, 59,
 ]);
 const previouslyKnown = new Set([
   18, 23, 25, 26, 29, 61, 62, 64,
@@ -485,13 +485,13 @@ export const proofTopics: readonly ProofTopic[] = [
   },
   {
     slug: "spectra",
-    eyebrow: "Topic VIII · 7 items",
+    eyebrow: "Topic VIII · 1 definition and 6 results",
     title: "Returning to stochastic eigenvalue regions",
     question:
       "How does a radial boundary point new at order N satisfy the manuscript’s N-critical vertex-count conditions?",
     overview: [
       "Topic VII proves Theorem 1.4's finite product identity conditionally for an N-critical planar map. This topic returns to row-stochastic matrices and proves the invariant-polytope criterion in both directions.",
-      "Compactness, star-shapedness with respect to the origin, and the unit-circle classification make the radial function precise. For N≥4, a non-inherited radial maximum satisfies νpoly(Tλ)=N and νpoly(tTλ)>N for every t>1, so the Topic VII theorem applies; orders at most three use the direct small-order argument.",
+      "Compactness, star-shapedness with respect to the origin, and the unit-circle classification make the radial function precise. For N≥4, a radial boundary point that first appears at order N has exact polygonal complexity N, while every outward scalar multiple has greater complexity, so the Topic VII theorem applies; orders at most three use the direct small-order argument.",
     ],
     itemNumbers: [3, 4, 60, 61, 62, 63, 64],
     manuscriptPages: "80–83",

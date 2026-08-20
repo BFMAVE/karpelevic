@@ -37,7 +37,21 @@ test("an individual Topic VIII HTML cannot expose an unavailable Topic IX", asyn
     const html = await readFile(output, "utf8");
 
     assert.match(html, /data-proof-route="topic-viii"/);
+    assert.match(
+      html,
+      /Consecutive Farey fractions and the finite product identity for N≥4/,
+    );
     assert.match(html, /data-proof-topic-number="9"[\s\S]{0,500}Forthcoming/);
+    const visibleText = html
+      .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+      .replace(/<annotation\b[\s\S]*?<\/annotation>/gi, " ")
+      .replace(/<[^>]*>/g, " ")
+      .replace(/\s+/g, " ");
+    assert.doesNotMatch(
+      visibleText,
+      /non-inherited radial max|polygonally critical|stochastic interface|νpoly/i,
+    );
     assert.doesNotMatch(
       html,
       /href="Critical_Invariant_Polygons_Topic_IX\.html/,

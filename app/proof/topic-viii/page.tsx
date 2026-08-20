@@ -7,7 +7,7 @@ import { getPageTimestamp } from "../../lib/git-dates";
 export const metadata: Metadata = {
   title: "Topic VIII — Returning to Stochastic Eigenvalue Regions",
   description:
-    "A complete, illustrated account of stochastic eigenvalue regions, invariant polytopes, star-shapedness, and the N-criticality of non-inherited radial maxima.",
+    "A complete, illustrated account of Karpelevič regions, invariant polytopes, star-shapedness, and the N-criticality of radial boundary points new at a given matrix order.",
 };
 
 const updatedAt = getPageTimestamp("app/data/proof-topics/topics-viii-xi.tsx");
@@ -21,7 +21,7 @@ export default function TopicVIIIPage() {
       manuscriptPages="80–83"
       overview={[
         "Topic VII proved Theorem 1.4's finite product identity conditionally for an N-critical planar map. Topic VIII now returns to row-stochastic matrices and verifies that the relevant radial boundary points satisfy that hypothesis.",
-        "Compactness, star-shapedness with respect to the origin, and the unit-circle classification make the radial function precise. For N≥4, a non-inherited radial maximum gives νpoly(Tλ)=N and νpoly(tTλ)>N for every t>1; in the manuscript’s terminology, Tλ is N-critical. Orders one, two, and three are reserved for the direct proof in Topic XIII.",
+        "Compactness, star-shapedness with respect to the origin, and the unit-circle classification make the radial function of each Karpelevič region precise. For N≥4, a radial boundary point that first appears at order N yields an N-critical multiplication map. Orders one, two, and three are reserved for the direct proof in Topic XIII.",
       ]}
       readingConvention={
         <>
@@ -35,8 +35,8 @@ export default function TopicVIIIPage() {
       }
       updatedAt={updatedAt}
       stats={[
-        { value: 1, label: "definition" },
-        { value: 6, label: "results" },
+        { value: 1, label: "numbered definition" },
+        { value: 6, label: "numbered results" },
       ]}
     >
       <TopicVIIIChapter />

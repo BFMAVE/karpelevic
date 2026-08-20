@@ -234,7 +234,7 @@ for (const relativePath of [
   assert.match(visibleText, /compact,\s+hence\s+the\s+maximum\s+is\s+attained/i);
   assert.match(
     visibleText,
-    /star-shapedness identifies the entire smaller ray segment/i,
+    /star-shapedness[\s\S]{0,180}?identifies\s+the\s+whole\s+ray\s+intersection/i,
   );
   assert.match(html, /id="karp:eq:new-shell"/);
   assert.match(html, /id="topic-viii-exact-sources"/);

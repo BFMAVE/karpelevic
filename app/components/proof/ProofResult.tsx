@@ -181,8 +181,12 @@ export function ProofResult({ result }: { result: ProofResultData }) {
       {result.provenance || sources.length > 0 || result.sourceRelation ? (
         <details className="proof-chapter-source-note">
           <summary>
-            <span>Classification and sources</span>
-            Why this result carries its displayed label
+            <span>
+              {result.provenance ? "Classification and sources" : "Sources and provenance"}
+            </span>
+            {result.provenance
+              ? "Why this result carries its displayed label"
+              : "Where the statement and its background come from"}
           </summary>
           <div>
             {result.provenance ? (

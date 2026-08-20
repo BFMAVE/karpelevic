@@ -1,9 +1,15 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const workerUrl = new URL("../dist/server/index.js", import.meta.url);
 workerUrl.searchParams.set("topic-viii-figure-truthfulness", `${process.pid}-${Date.now()}`);
 const workerPromise = import(workerUrl.href).then(({ default: worker }) => worker);
+const figureSourcePromise = readFile(
+  new URL("../app/components/proof/figures/StochasticFareyFigures.tsx", import.meta.url),
+  "utf8",
+);
+const globalCssPromise = readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 
 async function render(pathname) {
   const worker = await workerPromise;
@@ -77,6 +83,19 @@ function angleModuloTau(angle) {
   return ((angle % tau) + tau) % tau;
 }
 
+function relativeLuminance(hex) {
+  const channels = hex.match(/[0-9a-f]{2}/gi).map((channel) => Number.parseInt(channel, 16) / 255);
+  const [red, green, blue] = channels.map((channel) => (
+    channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4
+  ));
+  return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+}
+
+function contrastRatio(first, second) {
+  const luminances = [relativeLuminance(first), relativeLuminance(second)].sort((a, b) => b - a);
+  return (luminances[0] + 0.05) / (luminances[1] + 0.05);
+}
+
 test("Plate VIII.1 is the exact equilateral midpoint construction in both layouts", async () => {
   const html = await render("/proof/topic-viii");
   const figure = figureMarkup(html, "eigenpolygon");
@@ -126,17 +145,20 @@ test("Plate VIII.1 is the exact equilateral midpoint construction in both layout
     assertClose(values.at(-1), image.y, `layout ${layout} arrow-end y`);
   });
 
+  assert.equal([...figure.matchAll(/data-complex-map-label="z-to-lambda-z"/g)].length, 2);
+  assert.match(visibleText(figure), /z ↦ λz/);
+
   assert.ok([...figure.matchAll(/baseline-shift="sub"/g)].length >= 14);
   assert.match(visibleText(figure), /Plate VIII\.1\./);
   assert.match(visibleText(figure), /every image vertex is a side midpoint/i);
 });
 
-test("Plate VIII.2 is an exact one-dimensional radial-endpoint diagram", async () => {
+test("Plate VIII.2 states exact radial-order relations in a not-to-scale diagram", async () => {
   const html = await render("/proof/topic-viii");
   const figure = figureMarkup(html, "new-shell");
   const text = visibleText(figure);
 
-  assert.match(figure, />Exact ray diagram<\/span>/);
+  assert.match(figure, />Exact radial-order diagram — not to scale<\/span>/);
   assert.match(figure, /aria-labelledby="sf-new-shell-title sf-new-shell-desc"/);
   assert.match(figure, /aria-labelledby="sf-new-shell-mobile-title sf-new-shell-mobile-desc"/);
   assert.equal([...figure.matchAll(/data-figure-layout="(?:desktop|mobile)"/g)].length, 2);
@@ -167,7 +189,22 @@ test("Plate VIII.2 is an exact one-dimensional radial-endpoint diagram", async (
   assert.match(text.replace(/\s+/g, ""), /RN−1\(θ\)<RN\(θ\)/);
   assert.match(text, /tλ ∉ Θ N \(t > 1\)/);
   assert.match(text, /Plate VIII\.2\./);
-  assert.match(text, /every tλ with t>1 lies outside the order-N region/i);
+  assert.match(text.replace(/\s+/g, ""), /ΘN−1∩\{reiθ:r≥0\}=\{reiθ:0≤r≤RN−1\(θ\)\}/);
+  assert.match(text.replace(/\s+/g, ""), /ΘN∩\{reiθ:r≥0\}=\{reiθ:0≤r≤RN\(θ\)\}/);
+  assert.match(text, /every tλ with t>1 lies outside Θ N/i);
+});
+
+test("the shared copper figure color meets AA text contrast on the paper backgrounds", async () => {
+  const [source, css] = await Promise.all([figureSourcePromise, globalCssPromise]);
+  const copper = source.match(/const copper = "(#[0-9a-f]{6})";/i)?.[1];
+  const svgPaper = source.match(/const paper = "(#[0-9a-f]{6})";/i)?.[1];
+  const sitePaper = css.match(/--paper:\s*(#[0-9a-f]{6});/i)?.[1];
+
+  assert.ok(copper, "shared figure copper is declared as a hex color");
+  assert.ok(svgPaper, "SVG paper is declared as a hex color");
+  assert.ok(sitePaper, "site paper is declared as a hex color");
+  assert.ok(contrastRatio(copper, svgPaper) >= 4.5, "copper meets AA against SVG paper");
+  assert.ok(contrastRatio(copper, sitePaper) >= 4.5, "copper meets AA against site paper");
 });
 
 test("Topic IX keeps its existing single-layout Plate conventions", async () => {

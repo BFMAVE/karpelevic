@@ -464,7 +464,7 @@ function verifyStandaloneHtml(html) {
                     "Topic VIII",
                     "Returning to stochastic eigenvalue regions",
                     "Stochastic eigenvalues and invariant polytopes",
-                    "A non-inherited radial maximum is N-critical",
+                    "A radial boundary point new at order N is N-critical",
                     'data-proof-route="topic-viii"',
                     "Forthcoming",
                   ]

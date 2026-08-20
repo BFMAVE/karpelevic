@@ -128,7 +128,7 @@ test("keeps the verified local manuscript available", async () => {
 
   const pdf = await readFile(pdfUrl);
   assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
-  assert.equal(pdf.byteLength, 618_788);
+  assert.equal(pdf.byteLength, 619_381);
 });
 
 test("server-renders the sourced History page", async () => {

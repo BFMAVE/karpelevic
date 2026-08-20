@@ -211,6 +211,7 @@ test("Topics VII and VIII form a defined-before-use stochastic handoff", async (
     "topic-viii-unit-circle",
     "topic-viii-origin-interior",
     "topic-viii-criticality-definition",
+    "topic-viii-membership-complexity-equivalence",
     "karp:eq:new-shell",
     "topic-viii-new-shell-critical",
   ];
@@ -232,9 +233,23 @@ test("Topics VII and VIII form a defined-before-use stochastic handoff", async (
     /λ=<i>R<\/i><sub>N<\/sub>\(θ\)e<sup>iθ<\/sup>∈Θ<sub>N<\/sub>∖Θ<sub>N−1<\/sub>/,
   );
   assert.doesNotMatch(visibleText, /Rᴺ|Θᴺ|Θᴺ⁻¹|Θᴺ₋₁/);
+  assert.match(
+    topicVIII,
+    /order-<var>n<\/var>[^<]*<strong>Karpelevič region<\/strong>/,
+  );
+  assert.match(
+    topicVIII,
+    /<i>T<\/i><sub>λ<\/sub>:ℂ→ℂ[^<]*for the real-linear[^<]*<i>T<\/i><sub>λ<\/sub>\(<i>z<\/i>\)=λ<i>z<\/i>/,
+  );
+  assert.match(topicVIII, /1<!-- --> <!-- -->numbered definition/);
+  assert.match(topicVIII, /6<!-- --> <!-- -->numbered results/);
+  assert.match(
+    topicVIII,
+    /href="\/proof\/topic-iii\/#part-i-item-69"/,
+  );
 
   assert.match(visibleText, /Extreme-point set Ext\(P\)/i);
-  assert.match(visibleText, /Spectral radius r\(A\)/i);
+  assert.match(visibleText, /Spectral radius The value spr\(\s*A\s*\)/i);
   assert.match(visibleText, /Supporting functional at zero/i);
   assert.match(visibleText, /Elliptic contraction — manuscript terminology/i);
   assert.match(visibleText, /N-critical — manuscript terminology/i);
@@ -245,6 +260,10 @@ test("Topics VII and VIII form a defined-before-use stochastic handoff", async (
   assert.match(
     topicVIII,
     /ν<sub>poly<\/sub>\(tT<sub>λ<\/sub>\)&gt;<var>N<\/var>/,
+  );
+  assert.match(
+    topicVIII,
+    /λ∈Θ<sub>n<\/sub> ⇔ ν<sub>poly<\/sub>\(<i>T<\/i><sub>λ<\/sub>\)≤<var>n<\/var>/,
   );
 
   const conditionStart = topicVIII.indexOf(
@@ -262,9 +281,15 @@ test("Topics VII and VIII form a defined-before-use stochastic handoff", async (
       condition.indexOf("occurs as an eigenvalue at order"),
     "the two clauses of (II.4.3) are explained in the intended order",
   );
+  assert.match(
+    condition,
+    /<i>R<\/i><sub>N−1<\/sub>\(θ\)&lt;<i>R<\/i><sub>N<\/sub>\(θ\)/,
+  );
+  assert.match(visibleText, /outward multiples still in the unit disk/i);
+  assert.match(visibleText, /outward multiples beyond the unit disk/i);
   assert.doesNotMatch(
     visibleText,
-    /vertex budget|least-vertex witness|absorbing-state padding|outward (?:enlargement|rescaling|witness)/i,
+    /vertex budget|least-vertex witness|absorbing-state padding|outward (?:enlargement|rescaling|witness)|non-inherited radial max|polygonally critical|stochastic interface|νpoly/i,
   );
   assert.match(
     visibleText,
@@ -279,6 +304,15 @@ test("Topics VII and VIII form a defined-before-use stochastic handoff", async (
   const proposition = topicVIII.slice(propositionStart, shelfStart);
   assert.doesNotMatch(proposition, /proof-chapter-provenance/);
   assert.match(proposition, /no separate literature-priority claim is made here/i);
+
+  const originLemmaStart = topicVIII.indexOf('id="topic-viii-origin-interior"');
+  const definitionStart = topicVIII.indexOf(
+    'id="topic-viii-criticality-definition"',
+    originLemmaStart,
+  );
+  const originLemma = topicVIII.slice(originLemmaStart, definitionStart);
+  assert.doesNotMatch(originLemma, /proof-chapter-provenance/);
+  assert.match(originLemma, /no literature-priority classification is asserted/i);
 
   const shelfEnd = topicVIII.indexOf("</section>", shelfStart);
   const shelf = topicVIII.slice(shelfStart, shelfEnd);

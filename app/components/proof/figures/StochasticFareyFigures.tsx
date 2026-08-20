@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 type FigureKind =
   | "eigenpolygon"
   | "new-shell"
@@ -12,7 +14,7 @@ type FigureKind =
 
 const ink = "#14273d";
 const red = "#8b2f35";
-const copper = "#a2683a";
+const copper = "#955c38";
 const teal = "#3f6f78";
 const paper = "#f5efdd";
 const pale = "#d8e2e7";
@@ -103,6 +105,16 @@ function Eigenpolygon({ marker, mobile = false }: { marker: string; mobile?: boo
         stroke={copper}
         strokeWidth="2.4"
       />
+      <text
+        data-complex-map-label="z-to-lambda-z"
+        fill={copper}
+        fontSize={smallSize}
+        textAnchor="middle"
+        x={mobile ? 137 : 303}
+        y={mobile ? 112 : 105}
+      >
+        z ↦ λz
+      </text>
       {vertices.map((vertex, index) => (
         <g data-vertex={`v${index + 1}`} key={`v${index + 1}`}>
           <Dot x={vertex.x} y={vertex.y} />
@@ -438,7 +450,7 @@ function Squeeze({ marker }: { marker: string }) {
   );
 }
 
-const copy: Record<FigureKind, { title: string; description: string; caption: string; status?: string }> = {
+const copy: Record<FigureKind, { title: string; description: string; caption: ReactNode; status?: string }> = {
   eigenpolygon: {
     status: "Exact diagram",
     title: "An invariant equilateral triangle under complex multiplication",
@@ -448,12 +460,15 @@ const copy: Record<FigureKind, { title: string; description: string; caption: st
       "Plate VIII.1. Let P be the displayed equilateral triangle centered at the origin and let λ=½ exp(iπ/3). Then λv₁=(v₁+v₂)/2, λv₂=(v₂+v₃)/2, and λv₃=(v₃+v₁)/2. Thus every image vertex is a side midpoint and λP⊆P.",
   },
   "new-shell": {
-    status: "Exact ray diagram",
+    status: "Exact radial-order diagram — not to scale",
     title: "Radial endpoints at two successive matrix orders",
     description:
-      "One ray starts at the origin. The order N minus one eigenvalue region ends at its included radial endpoint, the order N region continues to the included point lambda, and every point t lambda with t greater than one is excluded from the order N region.",
-    caption:
-      "Plate VIII.2. On the ray at angle θ, the order-(N−1) eigenvalue region ends strictly before λ, while λ is the order-N radial endpoint. Thus λ is absent from the order-(N−1) region, and every tλ with t>1 lies outside the order-N region.",
+      "This not-to-scale diagram records exact order and inclusion relations on one ray. The order N minus one eigenvalue region intersects the ray from the origin through its included radial endpoint, the order N region continues to the included point lambda, their radial maxima satisfy R N minus one of theta less than R N of theta, and every point t lambda with t greater than one is excluded from the order N region.",
+    caption: (
+      <>
+        Plate VIII.2. This not-to-scale order diagram records the exact ray intersections Θ<sub>N−1</sub>∩{"{re"}<sup>iθ</sup>{": r≥0}"}={"{re"}<sup>iθ</sup>{": 0≤r≤R"}<sub>N−1</sub>(θ){"}"} and Θ<sub>N</sub>∩{"{re"}<sup>iθ</sup>{": r≥0}"}={"{re"}<sup>iθ</sup>{": 0≤r≤R"}<sub>N</sub>(θ){"}"}, with R<sub>N−1</sub>(θ)&lt;R<sub>N</sub>(θ) and λ=R<sub>N</sub>(θ)e<sup>iθ</sup>. Hence λ∉Θ<sub>N−1</sub>, while every tλ with t&gt;1 lies outside Θ<sub>N</sub>.
+      </>
+    ),
   },
   "farey-five": { title: "The upper Farey sequence of order five", description: "A number line marks the six reduced fractions from zero to one half and highlights the cell from one third to two fifths.", caption: "Plate IX.1. Exact rational arithmetic selects the cell before any numerical radius is computed." },
   "rooted-chord": { title: "The reciprocal-coordinate Ito identity", description: "Two colored vectors at angles A and minus B join head to tail and sum to the unit real vector.", caption: "Plate IX.2. The definitions of α and β cancel the vertical components and make the horizontal components sum to one on the chosen fractional-power branch." },

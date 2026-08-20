@@ -71,12 +71,19 @@ export function TopicVIIIChapter() {
           {
             label: "Topic I — polygonal complexity and N-criticality",
             href: sitePath("/proof/#def:N-critical"),
-            explanation:
-              "defines νpoly(T) as the minimum invariant-polygon vertex count and calls T N-critical when νpoly(T)=N while νpoly(tT)>N for every t>1.",
+            explanation: (
+              <>
+                defines ν<sub>poly</sub>(<i>T</i>) as the minimum
+                invariant-polygon vertex count and calls <i>T</i>{" "}
+                <var>N</var>-critical when ν<sub>poly</sub>(<i>T</i>)=
+                <var>N</var> while ν<sub>poly</sub>(<i>tT</i>)&gt;
+                <var>N</var> for every <var>t</var>&gt;1.
+              </>
+            ),
           },
           {
-            label: "Topic II — strict area monotonicity",
-            href: sitePath("/proof/topic-ii/"),
+            label: "Topic III, Lemma A.5 — strict area monotonicity",
+            href: sitePath("/proof/topic-iii/#part-i-item-69"),
             explanation:
               "justifies that two full-dimensional compact convex bodies of equal area cannot be properly nested.",
           },
@@ -104,8 +111,14 @@ export function TopicVIIIChapter() {
           },
           {
             label: "Spectral radius",
-            explanation:
-              "for a real-linear map A, r(A) is the maximum modulus of its complex eigenvalues. The manuscript calls an elliptic map an elliptic contraction when r(A) lies in (0,1).",
+            explanation: (
+              <>
+                for a real-linear map <i>A</i>, spr(<i>A</i>) is the maximum
+                modulus of its complex eigenvalues. The manuscript calls an
+                elliptic map an <i>elliptic contraction</i> when spr(<i>A</i>)
+                lies in (0,1).
+              </>
+            ),
           },
         ]}
         provedHere={
@@ -115,7 +128,8 @@ export function TopicVIIIChapter() {
             the unit-circle classification, the interior-origin lemma, and the
             two literal conclusions ν<sub>poly</sub>(T<sub>λ</sub>)=<var>N</var>{" "}
             and ν<sub>poly</sub>(tT<sub>λ</sub>)&gt;<var>N</var> for every
-            <var> t</var>&gt;1 at a non-inherited radial maximum.
+            <var> t</var>&gt;1 at a radial boundary point in
+            Θ<sub>N</sub>∖Θ<sub>N−1</sub>.
           </p>
         }
       />
@@ -129,10 +143,10 @@ export function TopicVIIIChapter() {
           <a href={sitePath("/proof/topic-vii/#part-i-item-4")}>Topic VII</a>{" "}
           proved the finite product theorem for an <var>N</var>-critical
           planar map when <span className="math-inline">N≥4</span>. The present
-          topic supplies the missing stochastic interface: a radial boundary
-          point of Θ<sub>N</sub> that is not in Θ<sub>N−1</sub> gives exactly the
-          two vertex-count inequalities required by that theorem. No result
-          from Topics IX–XIII is used here.
+          topic supplies the missing link to stochastic matrices: a radial
+          boundary point of Θ<sub>N</sub> that is not in Θ<sub>N−1</sub> gives
+          exactly the two vertex-count inequalities required by that theorem.
+          No result from Topics IX–XIII is used here.
         </p>
       </SetupBlock>
 
@@ -146,8 +160,10 @@ export function TopicVIIIChapter() {
           and every row sums to one. For a positive integer <var>n</var>,{" "}
           Θ<sub>n</sub> is the set of all complex eigenvalues of all such
           {" "}<var>n</var>×<var>n</var> matrices. The matrices vary as well as the
-          eigenvalue: Θ<sub>n</sub> is an eigenvalue region assembled from an entire class
-          of matrices.
+          eigenvalue: Θ<sub>n</sub> is the order-<var>n</var>{" "}
+          <strong>Karpelevič region</strong>, assembled from an entire class of
+          matrices. For λ∈ℂ, write <i>T</i><sub>λ</sub>:ℂ→ℂ for the real-linear
+          map <i>T</i><sub>λ</sub>(<i>z</i>)=λ<i>z</i>.
         </p>
         <details className="proof-item-commentary proof-item-explainer">
           <summary>
@@ -233,14 +249,37 @@ export function TopicVIIIChapter() {
       />
 
       <SetupBlock
+        eyebrow="The stochastic–geometric hinge"
+        id="topic-viii-membership-complexity-equivalence"
+        title="Eigenvalue membership is a vertex-count bound"
+      >
+        <p>
+          Let <span className="math-inline">n≥2</span> and let λ be nonreal
+          with <span className="math-inline">0&lt;|λ|&lt;1</span>. Theorem
+          II.4.2 and Lemma II.4.5 give the exact equivalence
+        </p>
+        <p className="display-equation proof-setup-equation">
+          <span className="math-inline">
+            λ∈Θ<sub>n</sub> ⇔ ν<sub>poly</sub>(<i>T</i><sub>λ</sub>)≤<var>n</var>.
+          </span>
+        </p>
+        <p>
+          Indeed, membership supplies a non-singleton invariant polytope with
+          at most <var>n</var> vertices, and Lemma II.4.5 makes it
+          two-dimensional, so it is counted by ν<sub>poly</sub>. Conversely,
+          any polygon counted by ν<sub>poly</sub> satisfies the invariant-polytope
+          criterion. This is the implication used below in both directions.
+        </p>
+      </SetupBlock>
+
+      <SetupBlock
         eyebrow="The extremal condition"
         id="topic-viii-non-inherited-radial-maximum"
         title="A radial boundary point new at order N"
       >
         <p>
           Fix <span className="math-inline">N≥4</span> and
-          {" "}<span className="math-inline">0&lt;θ&lt;π</span>. The manuscript
-          calls λ a <dfn>non-inherited radial maximum</dfn> when
+          {" "}<span className="math-inline">0&lt;θ&lt;π</span>, and suppose
         </p>
         <p id="karp:eq:new-shell" className="display-equation proof-setup-equation">
           <span className="math-inline">
@@ -257,13 +296,23 @@ export function TopicVIIIChapter() {
           <var> N</var>−1.
         </p>
         <p>
-          These are two independent conclusions. The first rules out every
-          invariant polygon with at most <var>N</var>−1 vertices. Radial
-          maximality gives tλ∉Θ<sub>N</sub> for every <var>t</var>&gt;1, so no
-          invariant polygon with at most <var>N</var> vertices exists for
-          tT<sub>λ</sub>. Proposition II.4.7 writes these conclusions as
-          ν<sub>poly</sub>(T<sub>λ</sub>)=<var>N</var> and
-          ν<sub>poly</sub>(tT<sub>λ</sub>)&gt;<var>N</var>.
+          Region nesting gives <i>R</i><sub>N−1</sub>(θ)≤<i>R</i><sub>N</sub>(θ).
+          The endpoint for Θ<sub>N−1</sub> is attained; equality would therefore
+          put λ in Θ<sub>N−1</sub>, contrary to the displayed hypothesis. Hence
+        </p>
+        <p className="display-equation proof-setup-equation">
+          <span className="math-inline">
+            <i>R</i><sub>N−1</sub>(θ)&lt;<i>R</i><sub>N</sub>(θ).
+          </span>
+        </p>
+        <p>
+          The exclusion from Θ<sub>N−1</sub> rules out every invariant polygon
+          with at most <var>N</var>−1 vertices. Radial maximality rules out every
+          invariant polygon with at most <var>N</var> vertices for
+          <var>t</var><i>T</i><sub>λ</sub> when <var>t</var>&gt;1. Proposition
+          II.4.7 writes these vertex-count conclusions as
+          ν<sub>poly</sub>(<i>T</i><sub>λ</sub>)=<var>N</var> and
+          ν<sub>poly</sub>(<var>t</var><i>T</i><sub>λ</sub>)&gt;<var>N</var>.
         </p>
         <StochasticFareyFigure kind="new-shell" />
       </SetupBlock>

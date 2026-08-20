@@ -9,6 +9,9 @@ type PartIILabel = keyof typeof partIIHtmlByLabel;
 const proofHtml = topicsVIIItoXIProofHtmlByLabel as Readonly<Record<string, string>>;
 
 const crossTopicAnchors: Readonly<Record<string, string>> = {
+  "lem:strict-area-monotonicity": sitePath(
+    "/proof/topic-iii/#part-i-item-69",
+  ),
   "karp:eq:new-shell": sitePath("/proof/topic-viii/#karp:eq:new-shell"),
   "karp:prop:new-shell-critical": sitePath(
     "/proof/topic-viii/#karp:prop:new-shell-critical",
@@ -67,9 +70,20 @@ function completeHtml(label: PartIILabel): string {
 
 function rewriteTopicVIIIVisibleTerminology(html: string): string {
   const replacements = [
-    ["New-shell extrema are polygonally critical", "Non-inherited radial maxima are polygonally critical"],
-    ["new-shell radial extremum", "non-inherited radial maximum"],
-    ["new-shell extremum", "non-inherited radial maximum"],
+    [
+      "New-shell extrema are polygonally critical",
+      "A radial boundary point new at order N is N-critical",
+    ],
+    [
+      "Non-inherited radial maxima are polygonally critical",
+      "A radial boundary point new at order N is N-critical",
+    ],
+    [
+      "Polygonal complexity and radial criticality",
+      "Polygonal complexity and N-criticality",
+    ],
+    ["new-shell radial extremum", "radial boundary point new at order N"],
+    ["new-shell extremum", "radial boundary point new at order N"],
     ["Radial filling", "Star-shapedness with respect to the origin"],
     ["radial filling", "star-shapedness with respect to the origin"],
   ] as const;
@@ -98,26 +112,6 @@ export const topicVIIIResults: readonly ProofResultData[] = [
     title: "Compactness, symmetry under complex conjugation, and the disk bound",
     purpose: "Establishes the three global facts needed before the radial function is defined.",
     manuscriptHtml: completeTopicVIIIHtml("karp:prop:compact"),
-    vocabulary: [
-      {
-        term: "Row-stochastic matrix",
-        definition: <>A real matrix whose entries are nonnegative and whose entries in every row sum to one.</>,
-        example: <>The row <span className="math-inline">(1/4, 0, 3/4)</span> sends three numbers to the convex average using weights <span className="math-inline">1/4,0,3/4</span>.</>,
-      },
-      {
-        term: "Eigenvalue region Θₙ",
-        definition: <>The set of all complex eigenvalues occurring among all real row-stochastic matrices of order <var>n</var>.</>,
-      },
-      {
-        term: "Compact",
-        definition: <>A subset of a finite-dimensional Euclidean space is compact if and only if it is closed and bounded. A continuous image of a compact set is compact.</>,
-        example: <>The stochastic matrices form a closed subset of the cube <span className="math-inline">[0,1]ⁿ²</span>.</>,
-      },
-      {
-        term: "Closed unit disk 𝔻̄",
-        definition: <>The set <span className="math-inline">𝔻̄={"{"}z∈ℂ:|z|≤1{"}"}</span>.</>,
-      },
-    ],
     intuition: <>A stochastic row takes an average, so it cannot make the largest coordinate larger. Real characteristic polynomials reflect nonreal roots across the real axis, and a closed eigenpair equation prevents attainable roots from disappearing in a limit.</>,
     proofSteps: [
       { title: "Compact matrix space", explanation: <>The row-sum equations and nonnegativity inequalities define a closed set. Every entry lies between zero and one, so the set of stochastic matrices is bounded and therefore compact.</> },
@@ -126,7 +120,6 @@ export const topicVIIIResults: readonly ProofResultData[] = [
       { title: "Project to the eigenvalue", explanation: <>The projection of that compact eigenpair set to its second coordinate is exactly Θₙ, so Θₙ is compact.</> },
       { title: "Reflect the root", explanation: <>A real matrix has a characteristic polynomial with real coefficients; conjugating the equation preserves zero.</> },
     ],
-    takeaway: <>Every Θₙ is a closed, bounded, conjugation-symmetric subset of the unit disk.</>,
     provenance: "Classical result",
     sourceIds: ["standard-linear-algebra", "rudin-principles", "ito-1997"],
     sourceRelation: <>The disk and symmetry statements occur in the classical theorem on stochastic eigenvalue regions; the compactness proof uses standard finite-dimensional topology.</>,
@@ -172,7 +165,7 @@ export const topicVIIIResults: readonly ProofResultData[] = [
     manuscriptHtml: completeTopicVIIIHtml("karp:cor:radial-filling"),
     vocabulary: [
       { term: "Star-shapedness with respect to the origin", definition: <>If λ belongs to the region, then so does every <span className="math-inline">tλ</span> for <span className="math-inline">0≤t≤1</span>.</> },
-      { term: "Strict area monotonicity", definition: <>If one planar convex body with interior is properly contained in another, its area is strictly smaller. This was proved in Topic II.</> },
+      { term: "Strict area monotonicity", definition: <>If one planar convex body with interior is properly contained in another, its area is strictly smaller. See <a href={sitePath("/proof/topic-iii/#part-i-item-69")}>Topic III, Lemma A.5</a>.</> },
     ],
     intuition: <>Once an invariant polytope contains the origin, shrinking its transformed copy cannot leave it. The unit-modulus case first shows that the multiplier rotates a finite vertex orbit.</>,
     proofSteps: [
@@ -183,7 +176,6 @@ export const topicVIIIResults: readonly ProofResultData[] = [
       { title: "Take the convex hull of the root orbit", explanation: <>Because <span className="math-inline">1+λ+⋯+λᵏ⁻¹=0</span>, zero is the equal-weight average of the orbit points. Their convex hull is fixed by λ and contains every smaller scalar multiple.</> },
       { title: "Handle the one-dimensional case", explanation: <>A unit-modulus image segment has the same length as the original segment, so inclusion is equality. Its supporting real line is invariant, forcing λ=±1; the nontrivial case λ=−1 uses [−1,1].</> },
     ],
-    takeaway: <>Each eigenvalue region Θ<sub>n</sub> is star-shaped with respect to the origin.</>,
     provenance: "Previously known",
     sourceIds: ["dmitriev-dynkin-1946", "swift-1972"],
     sourceRelation: <>The radial/star-shaped structure is part of the established stochastic eigenvalue theory; the page proves it through invariant polygons.</>,
@@ -207,7 +199,6 @@ export const topicVIIIResults: readonly ProofResultData[] = [
       { title: "The one-dimensional case", explanation: <>If the polytope is a segment, equal length makes λP=P; a unit complex multiplier preserving its supporting real line is 1 or −1.</> },
       { title: "Construct the converse", explanation: <>The permutation matrix of a <var>k</var>-cycle realizes every <var>k</var>-th root of unity. If <var>k&lt;n</var>, take its direct sum with <span className="math-inline">Iₙ₋ₖ</span>.</> },
     ],
-    takeaway: <>The only points of Θₙ on the unit circle are roots of unity whose order does not exceed n.</>,
     provenance: "Classical result",
     sourceIds: ["karpelevic-1951", "ito-1997", "standard-linear-algebra"],
     sourceRelation: <>This is the classical unit-circle clause of the Karpelevič-Ito theorem, reproved here before any boundary arcs are used.</>,
@@ -227,32 +218,29 @@ export const topicVIIIResults: readonly ProofResultData[] = [
     proofSteps: [
       { title: "Iteration reaches zero", explanation: <>The points λᵏz stay in P and converge to zero, so closedness places zero in P.</> },
       { title: "A segment of positive length is impossible", explanation: <>Once zero lies in a segment of positive length, its affine hull is a real line through zero. A nonreal rotation cannot preserve that line.</> },
-      { title: "Assume zero is on the boundary", explanation: <>A supporting functional ℓ is nonnegative on P, and because P has interior there is z∈P with ℓ(z)&gt;0.</> },
+      { title: "Choose a supporting functional at zero", explanation: <>If zero were on the boundary, a supporting-line theorem would give a nonzero real-linear functional ℓ with <span className="math-inline">ℓ≥0</span> on <var>P</var> and <span className="math-inline">ℓ(0)=0</span>. Since <var>P</var> has interior, choose <span className="math-inline">z∈P</span> with <span className="math-inline">ℓ(z)&gt;0</span>.</> },
       { title: "Retain the positive radial factor", explanation: <>Invariance gives <span className="math-inline">ρᵏeⁱᵏθz∈P</span>, hence <span className="math-inline">ρᵏℓ(eⁱᵏθz)≥0</span>. Since ρᵏ&gt;0, every <span className="math-inline">ℓ(eⁱᵏθz)</span> is nonnegative.</> },
       { title: "Finite rotation contradiction", explanation: <>The orbit vectors sum to zero. Their nonnegative ℓ-values also sum to zero, forcing ℓ(z)=0, contradiction.</> },
       { title: "Infinite rotation contradiction", explanation: <>Density puts some rotated point in the open half-plane where ℓ&lt;0.</> },
     ],
-    takeaway: <>For multiplication by a nonreal λ with <span className="math-inline">0&lt;|λ|&lt;1</span>, every non-singleton invariant polytope has nonempty interior and contains zero in its interior.</>,
-    provenance: "Classical result",
     sourceIds: ["standard-convexity"],
-    sourceRelation: <>This is imported and reproved from Topic I, Lemma 2.5; supporting-line background is standard convex geometry.</>,
+    sourceRelation: <>This result is imported and reproved from Topic I, Lemma 2.5. Its supporting-line input is standard convex geometry; no literature-priority classification is asserted.</>,
   },
   {
     id: "topic-viii-criticality-definition",
     label: "Definition II.4.6",
     kind: "Definition",
-    title: "The vertex count νpoly and the N-critical condition",
+    title: "Polygonal complexity and the N-critical condition",
     purpose: "Restates the manuscript’s intrinsic terminology, with every symbol and both defining inequalities made literal.",
     manuscriptHtml: completeTopicVIIIHtml("karp:def:polygonal-criticality"),
     vocabulary: [
       { term: "Extreme-point set Ext(P)", definition: <>The set of vertices of <var>P</var>, equivalently the points of <var>P</var> that are not nontrivial convex combinations of other points of <var>P</var>.</> },
-      { term: "Polygonal complexity νpoly(A)", definition: <>The minimum number of vertices of a compact convex polygon <var>P</var> with nonempty interior and <span className="math-inline">AP⊆P</span>; the value is ∞ if no such polygon exists.</> },
-      { term: "Spectral radius r(A)", definition: <>The maximum modulus of the complex eigenvalues of the real-linear map <var>A</var>.</> },
-      { term: "Elliptic contraction — manuscript terminology", definition: <>An elliptic real-linear map whose spectral radius lies in <span className="math-inline">(0,1)</span>. For multiplication by λ, the Euclidean operator norm and spectral radius both equal |λ|.</> },
-      { term: "N-critical — manuscript terminology", definition: <>The two conditions <span className="math-inline">νpoly(T)=N</span> and <span className="math-inline">νpoly(tT)&gt;N</span> for every <span className="math-inline">t&gt;1</span>.</> },
+      { term: "Polygonal complexity", definition: <>The value ν<sub>poly</sub>(<i>A</i>) is the minimum number of vertices of a compact convex polygon <var>P</var> with nonempty interior and <span className="math-inline"><i>AP</i>⊆<i>P</i></span>; the value is ∞ if no such polygon exists.</> },
+      { term: "Spectral radius", definition: <>The value spr(<i>A</i>) is the maximum modulus of the complex eigenvalues of the real-linear map <var>A</var>.</> },
+      { term: "Elliptic contraction — manuscript terminology", definition: <>An elliptic real-linear map whose spectral radius lies in <span className="math-inline">(0,1)</span>. For multiplication by λ, the Euclidean operator norm and spr(<i>T</i><sub>λ</sub>) both equal |λ|.</> },
+      { term: "N-critical — manuscript terminology", definition: <>The two conditions ν<sub>poly</sub>(<i>T</i>)=<var>N</var> and ν<sub>poly</sub>(<var>tT</var>)&gt;<var>N</var> for every <span className="math-inline">t&gt;1</span>.</> },
     ],
     intuition: <>The first equality records the exact minimum vertex count for <var>T</var>. The second says that multiplying <var>T</var> by any scalar <var>t&gt;1</var> makes every invariant polygon with at most <var>N</var> vertices impossible.</>,
-    takeaway: <>Whenever the page says <var>N</var>-critical, it means exactly <span className="math-inline">νpoly(T)=N</span> and <span className="math-inline">νpoly(tT)&gt;N</span> for all <span className="math-inline">t&gt;1</span>.</>,
     sourceIds: [],
     sourceRelation: <>This is the Part II restatement of the definitions introduced in Topic I. Definitions receive no novelty classification.</>,
   },
@@ -260,24 +248,20 @@ export const topicVIIIResults: readonly ProofResultData[] = [
     id: "topic-viii-new-shell-critical",
     label: "Proposition II.4.7",
     kind: "Proposition",
-    title: "A non-inherited radial maximum is N-critical",
+    title: "A radial boundary point new at order N is N-critical",
     purpose: "Converts the two stochastic boundary conditions into the two literal vertex-count inequalities in Definition II.4.6.",
     manuscriptHtml: completeTopicVIIIHtml("karp:prop:new-shell-critical"),
-    vocabulary: [
-      { term: "Radial function Rₙ(θ)", definition: <>The largest radius ρ for which <span className="math-inline">ρe<sup>iθ</sup>∈Θ<sub>n</sub></span>. Compactness gives attainment; star-shapedness identifies the entire smaller ray segment.</> },
-      { term: "Non-inherited radial maximum — manuscript terminology", definition: <>A point <span className="math-inline">λ=<i>R</i><sub>N</sub>(θ)e<sup>iθ</sup>∈Θ<sub>N</sub>∖Θ<sub>N−1</sub></span> with <span className="math-inline">0&lt;|λ|&lt;1</span>.</> },
-      { term: "Elliptic real-linear map", definition: <>A planar real-linear map whose characteristic discriminant is negative. Multiplication by a nonreal complex number has this form.</> },
-    ],
     intuition: <>Not belonging to Θ<sub>N−1</sub> says fewer than <var>N</var> vertices cannot work. Being outermost on the Θ<sub>N</sub> ray says no scalar multiple <span className="math-inline">tT<sub>λ</sub></span>, <span className="math-inline">t&gt;1</span>, can still work with at most <var>N</var> vertices.</>,
     proofSteps: [
       { title: "Write the real matrix", explanation: <>Multiplication by λ has matrix with real and imaginary parts in the basis (1,i).</> },
-      { title: "Check ellipticity and contraction", explanation: <>Its discriminant is <span className="math-inline">−4(Im λ)²&lt;0</span>, while its spectral radius is |λ|∈(0,1).</> },
+      { title: "Check ellipticity and contraction", explanation: <>Its discriminant is <span className="math-inline">−4(Im λ)²&lt;0</span>, while spr(<i>T</i><sub>λ</sub>)=|λ|∈(0,1).</> },
       { title: "At most N vertices", explanation: <>Membership in Θ<sub>N</sub> gives an invariant polytope with at most <var>N</var> vertices. Lemma II.4.5 shows that it has nonempty interior.</> },
       { title: "Not at most N−1 vertices", explanation: <>Otherwise the invariant-polytope criterion would place λ in Θ<sub>N−1</sub>, contradicting the hypothesis.</> },
-      { title: "No scalar multiple tTλ with t>1 has an N-vertex polygon", explanation: <>For <var>t&gt;1</var>, the point tλ lies beyond <span className="math-inline"><i>R</i><sub>N</sub>(θ)</span>, so tλ∉Θ<sub>N</sub>. An invariant polygon with at most <var>N</var> vertices would contradict the invariant-polytope criterion.</> },
-      { title: "Match the definition", explanation: <>The preceding two conclusions are exactly <span className="math-inline">νpoly(Tλ)=N</span> and <span className="math-inline">νpoly(tTλ)&gt;N</span> for all t&gt;1.</> },
+      { title: "Exclude outward multiples still in the unit disk", explanation: <>If <span className="math-inline">t&gt;1</span> and <span className="math-inline">t|λ|≤1</span>, then <span className="math-inline">tλ</span> lies on the same ray at a radius larger than <i>R</i><sub>N</sub>(θ). Hence <span className="math-inline">tλ∉Θ<sub>N</sub></span>.</> },
+      { title: "Exclude outward multiples beyond the unit disk", explanation: <>If <span className="math-inline">t|λ|&gt;1</span>, Proposition II.4.1 gives <span className="math-inline">tλ∉Θ<sub>N</sub></span> because Θ<sub>N</sub> lies in the closed unit disk.</> },
+      { title: "Match the definition", explanation: <>The preceding conclusions are exactly ν<sub>poly</sub>(<i>T</i><sub>λ</sub>)=<var>N</var> and ν<sub>poly</sub>(<var>t</var><i>T</i><sub>λ</sub>)&gt;<var>N</var> for all <span className="math-inline">t&gt;1</span>.</> },
     ],
-    takeaway: <>For N≥4, every non-inherited radial maximum satisfies the full hypothesis of <a href={sitePath("/proof/topic-vii/#part-i-item-4")}>Topic VII&apos;s finite product theorem</a>. The lower orders are handled directly in Topic XIII.</>,
+    takeaway: <>For <span className="math-inline">N≥4</span>, every radial boundary point in Θ<sub>N</sub>∖Θ<sub>N−1</sub> satisfying equation (II.4.3) meets the full hypothesis of <a href={sitePath("/proof/topic-vii/#part-i-item-4")}>Topic VII&apos;s finite product theorem</a>. The lower orders are handled directly in Topic XIII.</>,
     sourceIds: ["dmitriev-dynkin-1946", "karpelevic-1951"],
     sourceRelation: <>This proposition is derived in the manuscript from Theorem II.4.2, Lemma II.4.5, and Definition II.4.6. The cited works are historical antecedents for invariant polytopes and stochastic radial boundary points; no separate literature-priority claim is made here.</>,
   },
