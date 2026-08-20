@@ -5,6 +5,7 @@ type ProofResultGroupProps = {
   title: string;
   introduction: React.ReactNode;
   prelude?: React.ReactNode;
+  postlude?: React.ReactNode;
   results: readonly ProofResultData[];
 };
 
@@ -13,6 +14,7 @@ export function ProofResultGroup({
   title,
   introduction,
   prelude,
+  postlude,
   results,
 }: ProofResultGroupProps) {
   return (
@@ -30,6 +32,7 @@ export function ProofResultGroup({
           <ProofResult key={result.id} result={result} />
         ))}
       </ol>
+      {postlude}
     </section>
   );
 }

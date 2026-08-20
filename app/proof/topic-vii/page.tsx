@@ -4,29 +4,42 @@ import {
   topicVIIBackground,
   topicVIIGroups,
   topicVIIImported,
+  topicVIISetup,
   topicVIISourceIds,
 } from "../../data/topic-vii-reader";
+import { publicationDates } from "../../data/publication-dates";
 import { getPageTimestamp } from "../../lib/git-dates";
 
 export const metadata: Metadata = {
   title: "Topic VII — Farey Data and the Closed-Return Product for N≥4",
   description:
-    "For N≥4, a complete guided derivation of Farey adjacency, reflected closed return-recurrence chains, heterogeneous Ito products, exact lifted phase, and one common continuous argument interval.",
+    "For N≥4, a complete guided derivation of Farey adjacency, reflected closed return-recurrence chains, varying-parameter product relations, exact lifted phase, and one common continuous argument interval.",
 };
 
 const updatedAt = getPageTimestamp("app/data/topic-vii-reader.tsx");
+const firstPublishedAt = publicationDates.pages.topicVII;
 
 export default function TopicVIIPage() {
   return (
     <AdvancedProofChapter
       background={topicVIIBackground}
+      deck={
+        <>
+          A complete, source-aware continuation of Topic VI: the three
+          first-return cases are translated into conventional Farey arithmetic,
+          finite product relations, and exact lifted arguments.
+        </>
+      }
+      firstPublishedAt={firstPublishedAt}
+      formalSetups={[topicVIISetup]}
       groups={topicVIIGroups}
       imported={topicVIIImported}
       leadFigure="farey-reflection"
-      manuscriptPages="51–58; Lemma 8.7 and Theorem 1.4 close on 59"
+      leadFigureAfterSetups
+      manuscriptPages="4 and 58–66"
       overview={[
-        "The adjacent return edge is read as a determinant-one Farey cell. Reflection is handled at the level of the complete closed return-recurrence chain, including closure exponent and lifted phase.",
-        "For N≥4, the identity case, the one-contact-per-orbit case, and the case with more than one relative-interior contact in some orbit each produce a finite heterogeneous product. Consecutive vertex angles place every factor on one upper-half-plane argument branch, completing the closed-return product theorem.",
+        "The first-return structure completed in Topic VI is converted into determinant-one Farey intervals. Reflection is handled at the level of the complete closed return-recurrence chain, including the integer closing exponent and lifted phase.",
+        "Theorem 1.4 and equations (1.5)–(1.9) are stated before the three return cases that prove them. Those cases produce finite varying-parameter product relations, and consecutive vertex angles place every factor on one upper-half-plane argument branch.",
       ]}
       provedHere={
         <p>
@@ -37,7 +50,15 @@ export default function TopicVIIPage() {
           and three are handled directly in Topic XIII.
         </p>
       }
-      question="For N≥4, how does adjacent projective return become one Farey cell, one heterogeneous Ito product, and one exact phase identity?"
+      question="For N≥4, how do the first-return cases from Topic VI become one Farey interval, a varying-parameter product relation, and one exact phase identity?"
+      readingConvention={
+        <>
+          The notation inherited from Topic VI is stated locally. The target
+          theorem appears before the case analysis, while its proof assembly is
+          deferred to the final disclosure. All eight result statements and all
+          eight complete proofs remain present exactly once.
+        </>
+      }
       routeKey="topic-vii"
       sourceIds={topicVIISourceIds}
       stats={[

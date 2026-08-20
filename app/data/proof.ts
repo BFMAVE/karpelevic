@@ -177,10 +177,10 @@ export const proofSources: readonly ProofSource[] = [
 const karpelevicOnlyAntecedent = new Set([
   3, 32, 33, 34, 35, 36, 37, 38, 40, 41, 47, 49, 50, 55, 56,
 ]);
-const strengthened = new Set([30, 57, 58]);
-const newResults = new Set([4, 59]);
+const strengthened = new Set([30]);
+const newResults = new Set<number>([]);
 const unbadgedResults = new Set([
-  15, 16, 27, 28, 31, 42, 44, 45, 46, 48,
+  4, 15, 16, 27, 28, 31, 42, 44, 45, 46, 48, 57, 58, 59,
 ]);
 const previouslyKnown = new Set([
   18, 23, 25, 26, 29, 61, 62, 64,
@@ -269,6 +269,15 @@ function sourceRelationFor(number: number): string | undefined {
   if (number === 44) {
     return "Coxeter supplies the classical projective background. The precise polygonal chart lemma is proved here; no claim of priority is made here because the cited source does not state this exact formulation.";
   }
+  if ([57, 58].includes(number)) {
+    return "The manuscript proves this exact return-case formulation. Karpelevič is cited as a structural antecedent; no priority category is assigned without a statement-level match.";
+  }
+  if (number === 59) {
+    return "The manuscript proves the common-argument-interval statement used later. The cited works provide surrounding boundary-product context; no priority category is assigned without a statement-level match.";
+  }
+  if (number === 4) {
+    return "The manuscript proves this exact orientation-sensitive formulation. The cited works provide classical boundary and product antecedents; no priority category is assigned without a statement-level comparison.";
+  }
   if ([45, 48].includes(number)) {
     return "The exact statement and proof are supplied here. The cited literature provides historical context; no priority claim is made for this formulation.";
   }
@@ -296,7 +305,7 @@ const rawItems: readonly [
   [1, "Definition", "Radial polygonal criticality", "Defines N-criticality by requiring N to be the least invariant-polygon vertex count for T and requiring every tT with t>1 to need more than N vertices."],
   [2, "Definition", "Polygon and vertex-list convention", "Fixes the convention that the displayed cyclic list contains every extreme point exactly once and no other points."],
   [3, "Theorem", "Boundary contact, vertex replacement, and first returns", "For N≥4, collects the geometric reduction: a critical invariant polygon admits an order-preserving half-open contact bijection and a finite return description."],
-  [4, "Theorem", "Closed-return product identity and Farey data", "For N≥4, converts the geometric return into a product identity associated with one Farey cell, with every factor argument chosen on one continuous interval."],
+  [4, "Theorem", "Closed-return product and Farey data", "For N≥4, converts the geometric return into a varying-parameter product relation associated with one Farey interval, with every factor argument chosen on one continuous interval."],
   [5, "Proposition", "Adapted complex structures", "Identifies an elliptic real-linear map with multiplication by one of its two conjugate complex eigenvalues."],
   [6, "Proposition", "Real-linear invariance of polygonal complexity", "Shows that changing real coordinates does not alter the least number of vertices needed for an invariant polygon."],
   [7, "Lemma", "Real-linear covariance of faces and boundary incidences", "Carries vertices, sides, faces, boundary incidences, and their labels faithfully through an invertible real-linear change of coordinates."],
@@ -346,12 +355,12 @@ const rawItems: readonly [
   [51, "Remark", "Boundary cases in the proof that Δ = 1", "Checks the limiting arithmetic values used in the proof that the first-return step is one."],
   [52, "Remark", "Local and global data used in the deformation argument", "Separates the local projective inequality from the global indexing, incidence, and side-inequality facts needed to use it."],
   [53, "Lemma", "Farey adjacency criterion", "Recognizes neighbouring reduced fractions through a determinant of absolute value one."],
-  [54, "Lemma", "Reflection Farey cell", "Reflects a Farey cell across one half-turn while preserving adjacency."],
+  [54, "Lemma", "Reflection preserves Farey adjacency", "Reflects an interval between consecutive Farey fractions while preserving adjacency."],
   [55, "Lemma", "Reflection of a closed backward return-recurrence chain", "Transfers the complete finite return calculation to the reflected orientation, including its closing relation and lifted phase."],
   [56, "Lemma", "Identity contact permutation closes after reflection", "Shows that κ=N gives a closed backward recurrence chain whose reflection yields the required arithmetic data."],
   [57, "Proposition", "More than one relative-interior contact in some orbit", "Derives the varying-factor contact-product relation when some contact-permutation orbit meets the relative-interior contact set more than once."],
   [58, "Proposition", "Exactly one relative-interior contact in each orbit", "Derives the companion product relation when the relative-interior contact set meets every contact-permutation orbit exactly once."],
-  [59, "Lemma", "Return factors lie on one common continuous argument interval", "Places all varying contact factors on one continuous argument interval and extracts the scalar Farey equation."],
+  [59, "Lemma", "Return factors lie on one common continuous argument interval", "Places all varying contact factors on one continuous argument interval and prepares the later scalar comparison."],
   [60, "Proposition", "Compactness, conjugation, and disk bound", "Collects the elementary closure, symmetry, and unit-disk constraints on stochastic spectra."],
   [61, "Theorem", "Invariant-polygon criterion", "Equates stochastic eigenvalue realizability with the existence of a finite invariant polygon."],
   [62, "Corollary", "Star-shapedness with respect to the origin", "Shows that every radial segment from the origin to an attainable eigenvalue remains attainable."],
@@ -468,11 +477,11 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "For N≥4, how does the identity return become the scalar equation of a Farey boundary arc?",
     overview: [
-      "Determinant-one adjacency identifies the relevant Farey cell, and reflection aligns the rotation arithmetic with the chosen contact orientation.",
+      "Determinant-one adjacency identifies the relevant Farey interval, and reflection aligns the rotation arithmetic with the chosen contact orientation.",
       "The proof then separates the case with exactly one relative-interior contact in each orbit from the case with more than one in some orbit. Both produce a product of varying contact factors; a continuous argument interval controls their phases and yields the Farey product data.",
     ],
     itemNumbers: [53, 54, 55, 56, 57, 58, 59],
-    manuscriptPages: "51–58",
+    manuscriptPages: "4 and 58–66",
   },
   {
     slug: "spectra",

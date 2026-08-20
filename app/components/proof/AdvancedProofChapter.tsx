@@ -13,6 +13,7 @@ export type AdvancedProofGroup = {
   introduction: React.ReactNode;
   results: readonly ProofResultData[];
   formalSetups?: readonly AdvancedProofSetup[];
+  postlude?: React.ReactNode;
 };
 
 export type AdvancedProofSetup = {
@@ -42,7 +43,15 @@ type AdvancedProofChapterProps = {
   deck?: React.ReactNode;
 };
 
-function FormalSetup({ setup }: { setup: AdvancedProofSetup }) {
+function FormalSetup({
+  setup,
+  headingLevel,
+}: {
+  setup: AdvancedProofSetup;
+  headingLevel: 3 | 4;
+}) {
+  const Heading = headingLevel === 3 ? "h3" : "h4";
+
   return (
     <section
       className="topic-i-formal proof-chapter-formal proof-chapter-setup"
@@ -51,7 +60,7 @@ function FormalSetup({ setup }: { setup: AdvancedProofSetup }) {
       <p className="section-label">
         {setup.eyebrow ?? "Formal setup used below"}
       </p>
-      <h2>{setup.title}</h2>
+      <Heading>{setup.title}</Heading>
       <div
         className="part-i-manuscript topic-i-formal-text"
         dangerouslySetInnerHTML={{ __html: setup.html }}
@@ -98,7 +107,7 @@ export function AdvancedProofChapter({
         provedHere={provedHere}
       />
       {formalSetups.map((setup) => (
-        <FormalSetup key={setup.id} setup={setup} />
+        <FormalSetup headingLevel={3} key={setup.id} setup={setup} />
       ))}
       {leadFigureAfterSetups && <AdvancedProofFigure kind={leadFigure} />}
       {groups.map((group) => (
@@ -107,8 +116,9 @@ export function AdvancedProofChapter({
           key={group.number}
           number={group.number}
           prelude={group.formalSetups?.map((setup) => (
-            <FormalSetup key={setup.id} setup={setup} />
+            <FormalSetup headingLevel={4} key={setup.id} setup={setup} />
           ))}
+          postlude={group.postlude}
           results={group.results}
           title={group.title}
         />

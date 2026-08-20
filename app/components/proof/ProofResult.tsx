@@ -68,7 +68,7 @@ export function ProofResult({ result }: { result: ProofResultData }) {
               <span className="proof-chapter-provenance">{result.provenance}</span>
             ) : null}
           </div>
-          <h3>{result.title}</h3>
+          <h4>{result.title}</h4>
           <p>{result.purpose}</p>
         </div>
       </header>
@@ -124,7 +124,7 @@ export function ProofResult({ result }: { result: ProofResultData }) {
 
       <section
         className="topic-i-formal proof-chapter-formal"
-        aria-label={`Complete statement and proof of ${result.label}`}
+        aria-label={`${proofHtml ? "Complete statement and proof" : "Complete statement"} of ${result.label}`}
       >
         <p className="section-label">Complete manuscript statement</p>
         <div
@@ -147,20 +147,14 @@ export function ProofResult({ result }: { result: ProofResultData }) {
             {result.proofSteps?.length ? (
               <section className="proof-chapter-guided-proof" aria-label={`Guided explanation of ${result.label}`}>
                 <header>
-                  <p className="section-label">Making every step explicit</p>
-                  <h4>The same proof, unpacked</h4>
-                  <p>
-                    The numbered notes below do not replace the proof. They
-                    explain its choices, identify the imported facts, and make
-                    implicit transitions visible.
-                  </p>
+                  <h5>Guided proof</h5>
                 </header>
                 <ol>
                   {result.proofSteps.map((step, index) => (
                     <li key={`${index}-${step.title}`}>
                       <span>{index + 1}</span>
                       <div>
-                        <h5>{step.title}</h5>
+                        <h6>{step.title}</h6>
                         <div>{step.explanation}</div>
                         {step.check ? (
                           <p className="proof-chapter-check">

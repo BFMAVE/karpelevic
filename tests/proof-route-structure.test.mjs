@@ -48,6 +48,7 @@ const publicTopicPublicationDates = [
   ["/proof/topic-iv", "2026-08-13", "13 August 2026"],
   ["/proof/topic-v", "2026-08-14", "14 August 2026"],
   ["/proof/topic-vi", "2026-08-15", "15 August 2026"],
+  ["/proof/topic-vii", "2026-08-20", "20 August 2026"],
 ];
 
 for (const [pathname, expectedResults, expectedProofs] of chapters) {
@@ -381,6 +382,10 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
     topicVIText,
     /(?:supporting line|strict support)\s+L[ᵢₘ]/i,
   );
+  assert.match(
+    topicVIText,
+    /Topic VII translates these three first-return cases into Farey intervals and closed-return product relations/i,
+  );
   assert.doesNotMatch(topicVIText, /contact-field|target field|strict field/i);
   assert.doesNotMatch(topicVIText, /\bseed\b|\bledger\b|\banchor\b/i);
   assert.doesNotMatch(
@@ -406,6 +411,74 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.match(topicVIIText, /Standing scope for the critical-polygon product theorem: N\s*≥\s*4/);
   assert.match(topicVIIText, /More than one relative-interior contact in some orbit:?\s*φ\s*>\s*δ[\s\S]*Assume N\s*≥\s*4/i);
   assert.match(topicVIIText, /Return factors lie on (?:one|the) common continuous argument interval[\s\S]*Assume N\s*≥\s*4/i);
+  assert.match(topicVIIText, /Notation and return cases imported from Topics I–VI/);
+  assert.match(topicVIIText, /θ\s*=\s*arg\s*\+\s*\(λ\).*x\s*=\s*θ\/\(2π\)/i);
+  assert.match(topicVIIText, /α\s*i\s*>\s*0,\s*β\s*i\s*≥\s*0.*α\s*i\s*\+\s*β\s*i\s*=\s*1/i);
+  assert.match(
+    topicVIIText,
+    /first-return map on 𝓑 is the cyclic shift j↦j\+Δ modulo φ, and Topic VI proves Δ=1/i,
+  );
+  assert.match(
+    topicVIIText,
+    /ξ\s*i\s*=\s*λx\s*i−κ\s*=\s*β\s*i\s*x\s*i−1\s*\+\s*α\s*i\s*x\s*i/i,
+  );
+  assert.match(topicVIIText, /0\s*<\s*β\s*i\s*<\s*1.*relative-interior contact/i);
+  assert.match(topicVIIText, /β\s*i\s*=\s*0 is the retained endpoint x\s*i/i);
+  assert.match(topicVIIText, /lifted vertex arguments Θ\s*i are real representatives/i);
+  assert.match(topicVIIText, /varying-parameter product relation/i);
+  assert.doesNotMatch(
+    topicVIIText,
+    /heterogeneous Ito product|homogeneous product|signed remainder|Farey carrier|Jensen sheet/i,
+  );
+
+  const theoremStatement = topicVII.indexOf('id="part-i-item-4"');
+  const lemmaEightFour = topicVII.indexOf('id="part-i-item-56"');
+  const lemmaEightSeven = topicVII.indexOf('id="part-i-item-59"');
+  const theoremProof = topicVII.indexOf('id="topic-vii-theorem-1-4-proof"');
+  assert.ok(
+    theoremStatement >= 0 &&
+      theoremStatement < lemmaEightFour &&
+      lemmaEightFour < lemmaEightSeven &&
+      lemmaEightSeven < theoremProof,
+    "Theorem 1.4 is stated before the return cases and proved once at the end",
+  );
+  assert.equal(
+    [...topicVII.matchAll(/\sid="thm:complex-monodromy"/g)].length,
+    1,
+    "Theorem 1.4 has one anchor",
+  );
+  for (const equationId of [
+    "eq:hetero-parameters",
+    "eq:hetero-product-homogeneous",
+    "eq:hetero-product",
+    "eq:hetero-normalized-factor",
+    "eq:hetero-phase",
+  ]) {
+    assert.equal(
+      [...topicVII.matchAll(new RegExp(`\\sid="${equationId}"`, "g"))].length,
+      1,
+      `${equationId} is stated once`,
+    );
+  }
+  assert.doesNotMatch(topicVII, /data-reference-type="ref\+Label"/);
+  assert.match(
+    topicVII,
+    /href="#lem:compression-branch"[^>]*>Lemma 8\.7<\/a>/,
+  );
+  const theoremCardEnd = topicVII.indexOf('id="part-i-item-56"', theoremStatement);
+  const theoremCard = topicVII.slice(theoremStatement, theoremCardEnd);
+  assert.doesNotMatch(theoremCard, /proof-chapter-provenance/);
+  assert.match(
+    topicVII,
+    /class="[^"]*proof-chapter-setup[^"]*" id="topic-vii-imported-notation"[\s\S]*?<h3>Notation and return cases imported from Topics I–VI<\/h3>/,
+  );
+  assert.match(
+    topicVII,
+    /class="[^"]*proof-chapter-setup[^"]*" id="topic-vii-n-ge-4-scope"[\s\S]*?<h4>Standing scope/,
+  );
+  assert.match(topicVII, /proof-chapter-result[\s\S]*?<h4>/);
+  assert.match(topicVII, /proof-chapter-guided-proof[\s\S]*?<h5>Guided proof<\/h5>[\s\S]*?<h6>/);
+  assert.doesNotMatch(topicVIIText, /The same proof, unpacked/);
 
   assert.match(topicVIIIText, /orders one, two, and three are reserved for the direct proof in Topic XIII/i);
   assert.match(topicXText, /non-inherited radial maximum[\s\S]*N\s*≥\s*4/i);

@@ -414,7 +414,7 @@ function statementLinks(referenceList) {
 }
 
 html = html.replace(
-  /<a href="#[^"]+" data-reference-type="ref\+label" data-reference="([^"]+)">[\s\S]*?<\/a>/g,
+  /<a href="#[^"]+" data-reference-type="ref\+[Ll]abel" data-reference="([^"]+)">[\s\S]*?<\/a>/g,
   (_match, references) => statementLinks(references),
 );
 

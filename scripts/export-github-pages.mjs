@@ -34,6 +34,10 @@ const routes = [
     outputPath: "proof/topic-vi/index.html",
   },
   {
+    requestPath: "/proof/topic-vii",
+    outputPath: "proof/topic-vii/index.html",
+  },
+  {
     requestPath: "/prerequisites",
     outputPath: "prerequisites/index.html",
   },
@@ -74,7 +78,7 @@ function makeStatic(html, requestPath) {
     // live links to unavailable proof routes. The chapter atlas already
     // renders later topics as text with a Forthcoming label.
     .replace(
-      /\s+href="(?:\/karpelevic)?\/proof\/topic-(?:vii|viii|ix|x|xi|xii(?:\/[ab])?|xiii|xiv)\/?[^\"]*"/gi,
+      /\s+href="(?:\/karpelevic)?\/proof\/topic-(?:viii|ix|x|xi|xii(?:\/[ab])?|xiii|xiv)\/?[^\"]*"/gi,
       "",
     );
   const withProjectAssets = withoutScripts.replaceAll(

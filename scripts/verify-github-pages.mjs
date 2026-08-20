@@ -40,6 +40,10 @@ const pages = [
     "A projective deformation and the first-return step Δ = 1",
   ],
   [
+    "proof/topic-vii/index.html",
+    "Farey data and the closed-return product for N≥4",
+  ],
+  [
     "prerequisites/index.html",
     "The small library this reader assumes",
   ],
@@ -56,6 +60,7 @@ const firstPublicationDates = new Map([
   ["proof/topic-iv/index.html", "13 August 2026"],
   ["proof/topic-v/index.html", "14 August 2026"],
   ["proof/topic-vi/index.html", "15 August 2026"],
+  ["proof/topic-vii/index.html", "20 August 2026"],
 ]);
 
 for (const [relativePath, expectedText] of pages) {
@@ -94,7 +99,8 @@ for (const [relativePath, expectedText] of pages) {
   assert.match(visibleText, /Published on Zenodo/);
   assert.match(visibleText, /24 July 2026/);
   assert.match(visibleText, /Website edition/);
-  assert.match(visibleText, /Last revised\s+16 August 2026/);
+  assert.match(visibleText, /Last revised\s+20 August 2026/);
+  assert.match(visibleText, /101-page site-hosted PDF/);
   assert.doesNotMatch(html, />Prepared</);
 }
 
@@ -121,12 +127,13 @@ for (const relativePath of [
   "proof/topic-iv/index.html",
   "proof/topic-v/index.html",
   "proof/topic-vi/index.html",
+  "proof/topic-vii/index.html",
 ]) {
   const html = await readFile(path.join(outputRoot, relativePath), "utf8");
   assert.match(html, /Forthcoming/);
   assert.doesNotMatch(
     html,
-    /href="\/karpelevic\/proof\/topic-(?:vii|viii|ix|x|xi|xii(?:\/[ab])?|xiii|xiv)\//,
+    /href="\/karpelevic\/proof\/topic-(?:viii|ix|x|xi|xii(?:\/[ab])?|xiii|xiv)\//,
   );
 }
 
@@ -156,6 +163,49 @@ for (const relativePath of [
   assert.doesNotMatch(
     visibleText,
     /projective corridor|hereditary saturation|legal mutation|contact surgery|side-continuation|contact rotation|four-set accounting|first principal theorem|image-polygon vertex|invariant replacement polygon/i,
+  );
+  assert.match(
+    html,
+    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/karpelevic\/proof\/topic-vii\//,
+  );
+}
+
+{
+  const html = await readFile(
+    path.join(outputRoot, "proof/topic-vii/index.html"),
+    "utf8",
+  );
+  const visibleText = visibleTextFromHtml(html);
+  assert.match(html, /data-proof-route="topic-vii"/);
+  assert.match(html, /Notation and return cases imported from Topics I–VI/);
+  assert.match(
+    visibleText,
+    /arg\s*\+\s*\(z\)\s+denotes the unique\s+argument in \(0,2π\)/i,
+  );
+  assert.match(
+    visibleText,
+    /Theorem 1\.4 and equations \(1\.5\)–\(1\.9\) are stated before the three return cases/i,
+  );
+  assert.match(
+    visibleText,
+    /All eight result statements and all eight complete proofs remain present exactly once/i,
+  );
+  assert.match(html, /id="thm:complex-monodromy"/);
+  assert.equal(
+    [...html.matchAll(/\sid="thm:complex-monodromy"/g)].length,
+    1,
+    "Theorem 1.4 must have one anchor on Topic VII.",
+  );
+  assert.equal(
+    [...html.matchAll(/\sid="eq:hetero-parameters"/g)].length,
+    1,
+    "Equation (1.5) must be stated once on Topic VII.",
+  );
+  assert.match(html, /id="topic-vii-theorem-1-4-proof"/);
+  assert.match(html, /href="\/karpelevic\/proof\/topic-vi\//);
+  assert.doesNotMatch(
+    visibleText,
+    /heterogeneous Ito product|homogeneous product|signed remainder|Farey carrier|Jensen sheet/i,
   );
 }
 
@@ -291,7 +341,6 @@ await access(path.join(outputRoot, ".nojekyll"));
 await assert.rejects(access(path.join(outputRoot, ".vite")));
 await assert.rejects(access(path.join(outputRoot, "code")));
 for (const futureTopic of [
-  "topic-vii",
   "topic-viii",
   "topic-ix",
   "topic-x",

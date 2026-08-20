@@ -1,4 +1,7 @@
-import type { AdvancedProofGroup } from "../components/proof/AdvancedProofChapter";
+import type {
+  AdvancedProofGroup,
+  AdvancedProofSetup,
+} from "../components/proof/AdvancedProofChapter";
 import type { ProofDependency } from "../components/proof/ProofDependencyContract";
 import type {
   GuidedProofStep,
@@ -29,6 +32,73 @@ const step = (
   check?: React.ReactNode,
 ): GuidedProofStep => ({ title, explanation, check });
 
+export const topicVIISetup: AdvancedProofSetup = {
+  id: "topic-vii-imported-notation",
+  title: "Notation and return cases imported from Topics I–VI",
+  html: String.raw`
+    <p>
+      Throughout Topic VII, <strong>N≥4</strong>. Let V be the underlying
+      two-dimensional real vector space and let T:V→V be the fixed N-critical
+      elliptic contraction. In the adapted complex coordinate of Topic I,
+      T acts as multiplication by one of two conjugate nonreal eigenvalues.
+      We write λ for the eigenvalue in the contact orientation inherited from
+      Topic VI, set θ=arg<sub>+</sub>(λ), and write x=θ/(2π). The final product
+      may instead use μ=λ̄ after an explicit reflection. For a nonzero complex
+      number z that is not positive real, arg<sub>+</sub>(z) denotes the unique
+      argument in (0,2π).
+    </p>
+    <p>
+      Let P be the invariant N-gon and let κ∈{1,…,N} be the integer lift of
+      its contact permutation. The value κ=N represents the identity
+      permutation. In the nonidentity case, 1≤κ&lt;N and δ=gcd(N,κ) is the
+      number of contact-permutation orbits. After cyclic relabelling, the
+      relative-interior contact indices form 𝓑={1,…,φ}. Topic VI leaves
+      exactly three disjoint and exhaustive cases: κ=N; κ&lt;N with φ=δ; or
+      κ&lt;N with φ&gt;δ. In the last case the first-return map on 𝓑 is the
+      cyclic shift j↦j+Δ modulo φ, and Topic VI proves Δ=1.
+    </p>
+    <p>
+      With E<sub>i</sub>=[x<sub>i−1</sub>,x<sub>i</sub>], the assigned contact
+      point has the coefficient form
+      ξ<sub>i</sub>=λx<sub>i−κ</sub>=β<sub>i</sub>x<sub>i−1</sub>+
+      α<sub>i</sub>x<sub>i</sub>, where α<sub>i</sub>&gt;0,
+      β<sub>i</sub>≥0, and α<sub>i</sub>+β<sub>i</sub>=1.
+      Thus 0&lt;β<sub>i</sub>&lt;1 (equivalently α<sub>i</sub>,β<sub>i</sub>&gt;0)
+      is a relative-interior contact, while β<sub>i</sub>=0 is the retained
+      endpoint x<sub>i</sub>. In the identity
+      case this reads λx<sub>i</sub>=β<sub>i</sub>x<sub>i−1</sub>+
+      α<sub>i</sub>x<sub>i</sub>; after a q-step return it becomes the factor
+      relation (λ<sup>q</sup>−β<sub>j</sub>)x<sub>j−1</sub>=
+      α<sub>j</sub>x<sub>j</sub>. The lifted vertex arguments
+      Θ<sub>i</sub> are real representatives increasing along the chosen
+      polygon boundary; their exact, rather than modular, differences supply
+      the phase equations below.
+    </p>
+    <p>
+      The Farey sequence F<sub>N</sub> is the increasing list of reduced
+      fractions in [0,1] with denominator at most N. A <dfn>Farey interval</dfn>
+      is the open interval between two consecutive terms of F<sub>N</sub>.
+      Topic VII translates each of the three return cases above into one such
+      interval, a varying-parameter product relation, and an exact lifted
+      phase identity.
+    </p>
+  `,
+};
+
+function splitStatementAndProof(html: string): {
+  statementHtml: string;
+  proofHtml: string;
+} {
+  const proofStart = html.indexOf('<div class="proof">');
+  if (proofStart < 0) return { statementHtml: html, proofHtml: "" };
+  return {
+    statementHtml: html.slice(0, proofStart),
+    proofHtml: html.slice(proofStart),
+  };
+}
+
+const theorem14Parts = splitStatementAndProof(theorem14CompleteHtml);
+
 const guides: readonly ReaderResultGuide[] = [
   {
     itemNumber: 53,
@@ -36,19 +106,11 @@ const guides: readonly ReaderResultGuide[] = [
     vocabulary: [
       vocabulary(
         "Farey sequence Fₙ",
-        "The increasing list of all reduced fractions a/b in [0,1] whose denominator satisfies 1≤b≤n.",
-      ),
-      vocabulary(
-        "Reduced fraction",
-        "A fraction whose numerator and denominator have greatest common divisor one.",
+        "The increasing list of fractions a/b in [0,1] with gcd(a,b)=1 and 1≤b≤n.",
       ),
       vocabulary(
         "Farey neighbours",
         "Two consecutive entries of Fₙ: no reduced fraction of denominator at most n lies strictly between them.",
-      ),
-      vocabulary(
-        "Farey determinant",
-        "For a/b<c/d, the positive integer bc-ad.",
       ),
       vocabulary(
         "Mediant",
@@ -89,15 +151,8 @@ const guides: readonly ReaderResultGuide[] = [
   {
     itemNumber: 54,
     label: "Lemma 8.2",
-    vocabulary: [
-      vocabulary(
-        "Reflection of a Farey cell",
-        "Apply x↦1-x to every point, then restore increasing order. The left and right endpoint denominators are exchanged.",
-        "The order-seven cell 1/3<x<2/5 becomes 3/5<1-x<2/3.",
-      ),
-    ],
     intuition:
-      "Reflection changes orientation but not the lattice determinant or the denominator bound. It is the exact tool for choosing the conjugate eigenvalue while keeping an ordered Farey cell.",
+      "Reflection changes orientation but not the lattice determinant or the denominator bound. It is the exact tool for choosing the conjugate eigenvalue while keeping an interval between consecutive Farey fractions.",
     proofSteps: [
       step(
         "Preserve reducedness",
@@ -105,7 +160,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Reflect the inequalities",
-        "Subtract the original cell inequalities from one; this reverses endpoint order.",
+        "Subtract the original interval inequalities from one; this reverses endpoint order.",
       ),
       step(
         "Preserve determinant one",
@@ -117,7 +172,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "Conjugate orientation swaps the Farey endpoint denominators but preserves the cell.",
+      "Conjugate orientation swaps the Farey endpoint denominators but preserves adjacency.",
   },
   {
     itemNumber: 55,
@@ -132,16 +187,12 @@ const guides: readonly ReaderResultGuide[] = [
         "Real-valued vertex angles chosen consistently along the polygon boundary, not residues modulo 2π.",
       ),
       vocabulary(
-        "Reflected multiplier μ",
+        "Selected conjugate eigenvalue μ",
         "The conjugate μ=λ̄. For nonreal λ with positive argument θ, its positive argument is 2π-θ.",
       ),
       vocabulary(
-        "Signed closing exponent e",
-        "After reversing the reflected closure, e=-h. It may be negative in the Laurent identity.",
-      ),
-      vocabulary(
-        "Homogeneous product",
-        "The polynomial identity obtained by multiplying the Laurent product by μ^{dq}, eliminating a negative exponent.",
+        "Integer closing exponent e",
+        "After reversing the reflected closure, e=-h. It may be negative in the Laurent relation.",
       ),
     ],
     intuition:
@@ -157,11 +208,11 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Multiply the closed recurrence chain",
-        "Multiply all forward cell equations, cancel the nonzero endpoint vertices with the signed closure, and obtain the Laurent product.",
+        "Multiply all forward recurrence equations, cancel the nonzero endpoint vertices with the closing relation, and obtain the Laurent relation.",
       ),
       step(
-        "Homogenize",
-        "Multiply by μ^{dq}; the new closing exponent is s=dq-h>0, so the result is a polynomial identity.",
+        "Clear the negative closing exponent",
+        "Multiply by μ^{dq}; the resulting exponent is s=dq-h>0, so the relation is polynomial in the selected value of μ.",
       ),
       step(
         "Reflect the angular lift",
@@ -185,15 +236,11 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       vocabulary(
         "Closed-return product data (monodromy)",
-        "The selected eigenvalue, Farey cell, product parameters, and exact lifted phase obtained by multiplying the recurrence factors around one closed recurrence chain. The standard term for this product around a closed chain is monodromy; this guide otherwise calls it the closed-return product.",
-      ),
-      vocabulary(
-        "Output orientation",
-        "The complex orientation chosen for the final closed-return product statement. In this case it is opposite to the contact orientation.",
+        "The selected eigenvalue, Farey interval, product parameters, and exact lifted phase obtained by multiplying the recurrence factors around one closed chain. The standard term for a product around a closed chain is monodromy; this guide otherwise calls it the closed-return product.",
       ),
     ],
     intuition:
-      "When every contact returns to its own side, the recurrences naturally point backwards around one full polygon turn. Reflection turns them into the required forward recurrence chain and places the output angle in the first Farey cell.",
+      "When every contact returns to its own side, the recurrences naturally point backwards around one full polygon turn. Reflection turns them into the required forward recurrence chain and places the selected angle in the first Farey interval.",
     proofSteps: [
       step(
         "Build the backward recurrence chain",
@@ -208,7 +255,7 @@ const guides: readonly ReaderResultGuide[] = [
         "Since αᵢ+βᵢ=1, the reflected coefficients again satisfy α′=1-β′.",
       ),
       step(
-        "Identify the Farey cell",
+        "Identify the Farey interval",
         "The contact angle lies between (N-1)/N and 1. Reflecting gives 0<y<1/N, with ordered denominators 1<N.",
       ),
     ],
@@ -224,20 +271,12 @@ const guides: readonly ReaderResultGuide[] = [
         "This construction uses Theorem 7.11, which proves that the first-return step is Δ=1. It therefore belongs to the N≥4 part of the argument; the N=3 case is proved directly in Topic XIII.",
       ),
       vocabulary(
-        "More than one relative-interior contact in some orbit",
-        "The relative-interior contact interval has φ>δ indices, where δ is the number of contact-permutation orbits. Thus at least one orbit contributes more than one such index.",
-      ),
-      vocabulary(
-        "Heterogeneous contact factors",
-        "The factors λ^q-βⱼ may have different βⱼ. Each comes from one relative-interior contact or one padded return factor.",
-      ),
-      vocabulary(
-        "Zero-factor padding",
-        "Endpoint-contact indices use (αⱼ,βⱼ)=(1,0) to complete the record interval. They do not create new relative-interior contacts.",
+        "Varying-parameter factors",
+        "The factors λ^q-βⱼ may have different parameters βⱼ. A factor with βⱼ=0 merely completes the closed recurrence chain and is not an additional relative-interior contact.",
       ),
     ],
     intuition:
-      "The identity Δ=1 turns every base-to-successor recurrence into one factor. Multiplying the complete padded recurrence chain cancels the vertices, while the determinant-one record edge identifies the exact Farey endpoints.",
+      "The identity Δ=1 turns every base-to-successor recurrence into one factor. Completing the recurrence chain with factors having β=0 makes the vertices cancel, while the determinant-one record edge identifies the exact Farey endpoints.",
     proofSteps: [
       step(
         "Force one orbit",
@@ -252,15 +291,15 @@ const guides: readonly ReaderResultGuide[] = [
         "If φ<N, extend the unit record edge backwards to E=(e,c), obtaining qκ-pN=1 and N=qd+e with 0≤e<q.",
       ),
       step(
-        "Build the padded recurrences",
-        "Corollary 6.2 gives λ^q xⱼ₋₁=ξⱼ and λ^e x_d=x₀. Substitute the contact coefficients at relative-interior contact indices and (1,0) at the padded endpoint-contact indices.",
+        "Complete the recurrence chain",
+        "Corollary 6.2 gives λ^q xⱼ₋₁=ξⱼ and λ^e x_d=x₀. Use the contact coefficients at relative-interior contact indices and (αⱼ,βⱼ)=(1,0) at endpoint-contact indices.",
       ),
       step(
         "Multiply and cancel",
-        "The nonzero vertices cancel around the strip. The closure gives the Laurent product, and N=qd+e gives its homogeneous form.",
+        "The nonzero vertices cancel around the recurrence chain. The closure gives the Laurent relation, and N=qd+e gives the polynomial relation.",
       ),
       step(
-        "Identify the Farey product data",
+        "Identify the Farey interval and product data",
         "The determinant qκ-pN=1 and denominator sum q+N>N make p/q and κ/N Farey neighbours. The lifted q-step return places x strictly between them.",
       ),
       step(
@@ -269,7 +308,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "For N≥4, the case with more than one relative-interior contact in some orbit yields a determinant-one Farey cell, a complete heterogeneous product, and an exact phase.",
+      "For N≥4, the case with more than one relative-interior contact in some orbit yields a determinant-one Farey interval, a complete varying-parameter product relation, and an exact phase.",
   },
   {
     itemNumber: 58,
@@ -283,14 +322,6 @@ const guides: readonly ReaderResultGuide[] = [
         "Orbit length L and reduced step K",
         "L=N/δ and K=κ/δ. Addition by K modulo L is one complete reduced orbit.",
       ),
-      vocabulary(
-        "Integers S and R",
-        "Local arithmetic symbols S=N-h and R=κ-b. On this result card they are integers, not a contact-index set or a polygon.",
-      ),
-      vocabulary(
-        "Genuine factor versus padded factor",
-        "A genuine factor comes from consecutive polygon vertices. A padded zero factor has β=0 and receives the left-endpoint argument A.",
-      ),
     ],
     intuition:
       "When there is exactly one relative-interior contact in each orbit, the common orbit length supplies a backward recurrence chain. Whether to reflect depends on which endpoint denominator is already smaller; δ≥2 and δ=1 make opposite choices.",
@@ -300,7 +331,7 @@ const guides: readonly ReaderResultGuide[] = [
         "The first L-1 destination indices are endpoint contacts and the L-th return is a relative-interior contact, giving λ^Lxᵢ=ξᵢ for each of the δ relative-interior contact indices.",
       ),
       step(
-        "Close the strip",
+        "Close the recurrence chain",
         "Choose h with Kh≡-1 mod L. The orbit from xδ reaches x₀ through endpoint-contact indices, so λ^h xδ=x₀.",
       ),
       step(
@@ -321,11 +352,11 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Complete each phase",
-        "The reflected case inherits the lifted phase from Lemma 8.3. In the δ=1 case, assign the genuine vertex gap to u₁ and A to every padded factor, then telescope.",
+        "The reflected case inherits the lifted phase from Lemma 8.3. In the δ=1 case, assign the actual vertex gap to u₁ and A to every factor with β=0, then telescope.",
       ),
     ],
     takeaway:
-      "The case with exactly one relative-interior contact in each orbit also has ordered Farey product data, including the reflected negative-exponent case and the singly genuine padded case.",
+      "The case with exactly one relative-interior contact in each orbit also has ordered Farey product data, including the reflected negative-exponent case and the case completed by factors with β=0.",
   },
   {
     itemNumber: 59,
@@ -335,17 +366,9 @@ const guides: readonly ReaderResultGuide[] = [
         "Common continuous argument interval",
         "The interval [A,M) in the open upper half-plane containing the continuously chosen argument of every factor μ^q-βⱼ. Jensen's inequality is not used until a later topic.",
       ),
-      vocabulary(
-        "Left factor angle A",
-        "A=qϑ-2πp, the argument of μ^q relative to the left Farey endpoint p/q.",
-      ),
-      vocabulary(
-        "Limiting angle M",
-        "M=arg₊(μ^q-1). It is approached as β tends to one but never attained because β<1.",
-      ),
     ],
     intuition:
-      "Every factor moves on the same horizontal segment in the upper half-plane. The Farey cell keeps that segment above the real axis, while the vertex recurrences choose the actual lifted arguments rather than only their classes modulo 2π.",
+      "Every factor moves on the same horizontal segment in the upper half-plane. The Farey interval keeps that segment above the real axis, while the vertex recurrences choose the actual lifted arguments rather than only their classes modulo 2π.",
     figure: "jensen-sheet",
     proofSteps: [
       step(
@@ -353,7 +376,7 @@ const guides: readonly ReaderResultGuide[] = [
         "From q+s>N≥4 and q≤s obtain s≥3. Determinant one and the Farey inequalities give 0<A<2π/s<π.",
       ),
       step(
-        "Keep every factor upstairs",
+        "Keep each factor in the open upper half-plane",
         "For 0≤β<1, Im(μ^q-β)=|μ|^q sin A>0, so each factor has one argument in (0,π).",
       ),
       step(
@@ -362,78 +385,143 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Match geometric and analytic branches",
-        "Direct vertex gaps handle the case with more than one relative-interior contact in some orbit. Reflection of the recurrence chain handles both reflected cases, and the δ=1 one-contact-per-orbit construction assigns A to its padded factors.",
+        "Direct vertex gaps handle the case with more than one relative-interior contact in some orbit. Reflection of the recurrence chain handles both reflected cases, and the δ=1 one-contact-per-orbit construction assigns A to its factors with β=0.",
       ),
     ],
     takeaway:
-      "All factors share one controlled branch uⱼ∈[A,M), ready for the later convex equalization argument.",
+      "All factors share one controlled branch uⱼ∈[A,M), ready for the later application of Jensen’s inequality.",
   },
 ] as const;
 
-const coreResults = guides.map((guide) =>
-  makeReaderResult(topicVIIReaderHtmlByItem, guide),
-);
+const unbadgedSourceRelations = new Map<number, string>([
+  [
+    57,
+    "The manuscript proves this exact return-case formulation. Karpelevič is cited as a structural antecedent; no priority category is assigned without a statement-level match.",
+  ],
+  [
+    58,
+    "The manuscript proves this exact return-case formulation. Karpelevič is cited as a structural antecedent; no priority category is assigned without a statement-level match.",
+  ],
+  [
+    59,
+    "The manuscript proves the common-argument-interval statement used later. The cited works provide surrounding boundary-product context; no priority category is assigned without a statement-level match.",
+  ],
+]);
+
+const coreResults = guides.map((guide) => {
+  const result = makeReaderResult(topicVIIReaderHtmlByItem, guide);
+  const sourceRelation = unbadgedSourceRelations.get(guide.itemNumber);
+  return sourceRelation
+    ? { ...result, provenance: undefined, sourceRelation }
+    : result;
+});
 
 const theorem14Item = getProofItems([4])[0];
 if (!theorem14Item) throw new Error("Missing proof metadata for Theorem 1.4");
+
+const theorem14ProofSteps: readonly GuidedProofStep[] = [
+  step(
+    "Keep the contact orientation provisional",
+    "Apply the half-open contact-assignment theorem but postpone selecting μ until the return case is known.",
+  ),
+  step(
+    "Identity case",
+    "Choose μ=λ̄ and use Lemma 8.4; the ordered Farey interval has denominators 1<N.",
+  ),
+  step(
+    "More than one relative-interior contact in some orbit",
+    "In the standing N≥4 range, choose μ=λ and use Proposition 8.5 together with the first-return identity Δ=1; the right endpoint denominator is N.",
+  ),
+  step(
+    "One relative-interior contact per orbit, δ≥2",
+    "Choose μ=λ̄ and Proposition 8.6(a); reflection orders the denominators and gives a negative integer closing exponent.",
+  ),
+  step(
+    "One relative-interior contact per orbit, δ=1",
+    "Keep μ=λ and use Proposition 8.6(b); the original Farey interval already has the smaller denominator first.",
+  ),
+  step(
+    "Unify the argument branch",
+    "In every case the same selected μ satisfies the polynomial relation, Laurent relation, and phase identity. Lemma 8.7 supplies 0<A<M<π and uⱼ∈[A,M).",
+  ),
+];
 
 const theorem14: ProofResultData = {
   id: "part-i-item-4",
   label: "Theorem 1.4",
   kind: "Theorem",
-  title: "Closed-return product identity and Farey data",
+  title: "Closed-return product and Farey data",
   purpose:
-    "For N≥4, this theorem eliminates all case-specific return variables and exports one selected eigenvalue, one ordered Farey cell, one heterogeneous product, and one exact phase identity.",
-  manuscriptHtml: theorem14CompleteHtml,
+    "States the common conclusion of the three return cases before Lemmas 8.4–8.7 prove it: one selected eigenvalue, one Farey interval, a varying-parameter product relation, and one exact phase identity.",
+  manuscriptHtml: theorem14Parts.statementHtml,
   vocabulary: [
     vocabulary(
-      "Output eigenvalue μ",
+      "Selected eigenvalue μ",
       "One of the conjugate eigenvalues λ or λ̄, selected only after the return case is known and then kept fixed through every product and phase identity.",
     ),
     vocabulary(
-      "Farey product data",
-      "The ordered neighbouring fractions p/q<y<r/s together with the finite factors in the closed-return product identity.",
-    ),
-    vocabulary(
-      "Signed remainder e",
-      "The integer e=s-dq with d=floor(N/q). It may be negative; the homogeneous identity remains polynomial in every case.",
+      "Integer closing exponent e",
+      "The integer e=s-dq with d=floor(N/q). It may be negative; equation (1.6) remains a polynomial relation for the selected value of μ.",
     ),
   ],
   intuition:
-    "The theorem is a disciplined case assembly. Each return case chooses its orientation exactly once, then hands the same selected multiplier to the product, phase, and common-argument-interval statements.",
-  proofSteps: [
-    step(
-      "Keep the contact orientation provisional",
-      "Apply the half-open contact-assignment theorem but postpone selecting μ until the return case is known.",
-    ),
-    step(
-      "Identity case",
-      "Choose μ=λ̄ and use Lemma 8.4; the ordered cell has denominators 1<N.",
-    ),
-    step(
-      "More than one relative-interior contact in some orbit",
-      "In the standing N≥4 range, choose μ=λ and use Proposition 8.5 together with the first-return identity Δ=1; the right endpoint denominator is N.",
-    ),
-    step(
-      "One relative-interior contact per orbit, δ≥2",
-      "Choose μ=λ̄ and Proposition 8.6(a); reflection orders the denominators and gives negative e.",
-    ),
-    step(
-      "One relative-interior contact per orbit, δ=1",
-      "Keep μ=λ and use Proposition 8.6(b); the original cell already has the smaller denominator first.",
-    ),
-    step(
-      "Unify the argument branch",
-      "In every case the same selected μ satisfies the homogeneous product, Laurent relation, and phase. Lemma 8.7 supplies 0<A<M<π and uⱼ∈[A,M).",
-    ),
-  ],
+    "This is the target statement. Each following return case chooses its orientation exactly once, and the final disclosure assembles those cases into the proof without repeating the theorem or its equations.",
   takeaway:
-    "The complete critical-polygon geometry is compressed into finite Farey product data without changing orientation after the output has been selected.",
-  provenance: theorem14Item.provenance === "New result" ? "New result" : undefined,
+    "Keep equations (1.5)–(1.9) as the common conclusion while reading the three case constructions below.",
   sourceIds: theorem14Item.sourceIds,
   sourceRelation:
-    "The exact intrinsic product theorem, including orientation selection, signed closing exponent, and common continuous argument interval, is new in the manuscript's audit. The classical Karpelevič-Ito boundary and older product formulations are explicitly not claimed as new.",
+    "The manuscript proves this exact orientation-sensitive formulation. The cited works provide classical boundary and product antecedents; no priority category is assigned without a statement-level comparison.",
 };
+
+const theorem14ProofAssembly = (
+  <section
+    aria-labelledby="topic-vii-theorem-1-4-proof-heading"
+    className="topic-i-formal proof-chapter-formal proof-chapter-deferred-proof"
+    id="topic-vii-theorem-1-4-proof"
+  >
+    <p className="section-label">Final proof assembly</p>
+    <h4 id="topic-vii-theorem-1-4-proof-heading">Proof of Theorem 1.4</h4>
+    <p>
+      The theorem and equations (1.5)–(1.9) were stated once before the case
+      analysis. This final disclosure now assembles Lemma 8.4, Propositions
+      8.5–8.6, and Lemma 8.7.
+    </p>
+    <details className="topic-i-proof-disclosure proof-chapter-proof">
+      <summary>
+        <span>Complete proof</span>
+        Open the manuscript proof and its guided explanation
+      </summary>
+      <div
+        className="part-i-manuscript topic-i-collapsible-proof-text"
+        dangerouslySetInnerHTML={{ __html: theorem14Parts.proofHtml }}
+      />
+      <section
+        aria-label="Guided explanation of Theorem 1.4"
+        className="proof-chapter-guided-proof"
+      >
+        <header>
+          <h5>Guided proof</h5>
+        </header>
+        <ol>
+          {theorem14ProofSteps.map((proofStep, index) => (
+            <li key={`${index}-${proofStep.title}`}>
+              <span>{index + 1}</span>
+              <div>
+                <h6>{proofStep.title}</h6>
+                <div>{proofStep.explanation}</div>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+    </details>
+    <p className="proof-item-takeaway proof-chapter-takeaway">
+      <span>What survives</span>
+      The critical-polygon geometry is compressed into finite Farey product
+      data without changing orientation after the eigenvalue has been selected.
+    </p>
+  </section>
+);
 
 export const topicVIIGroups: readonly AdvancedProofGroup[] = [
   {
@@ -455,8 +543,10 @@ export const topicVIIGroups: readonly AdvancedProofGroup[] = [
       <p>
         The identity case, the case with more than one relative-interior
         contact in some orbit, and the one-contact-per-orbit case each produce
-        a product. The orientation and signed exponent are decided separately
-        and explicitly.
+        a varying-parameter product relation. The selected orientation and
+        integer closing exponent are decided separately and explicitly. The
+        target theorem is stated first so its numbered equations are available
+        throughout the case analysis.
       </p>
     ),
     formalSetups: [
@@ -476,19 +566,20 @@ export const topicVIIGroups: readonly AdvancedProofGroup[] = [
         `,
       },
     ],
-    results: coreResults.slice(3, 6),
+    results: [theorem14, ...coreResults.slice(3, 6)],
   },
   {
     number: "III",
-    title: "One continuous argument interval and one theorem output",
+    title: "One continuous argument interval and the proof assembly",
     introduction: (
       <p>
-        The Farey cell places all factors on one upper-half-plane argument
-        interval. The case constructions then assemble into the
-        closed-return product theorem.
+        The Farey interval places all factors on one upper-half-plane argument
+        branch. The case constructions then assemble into the proof of the
+        closed-return product theorem stated above.
       </p>
     ),
-    results: [coreResults[6], theorem14],
+    results: [coreResults[6]],
+    postlude: theorem14ProofAssembly,
   },
 ] as const;
 
@@ -500,10 +591,10 @@ export const topicVIIImported: readonly ProofDependency[] = [
       "For N≥4, the identity case, the one-contact-per-orbit case, and the case with more than one contact in some orbit are exhaustive; in the last case the first return is the adjacent successor.",
   },
   {
-    label: "Topic V: determinant-one return interval and endpoint padding",
+    label: "Topic V: determinant-one return interval and completed recurrence chains",
     href: sitePath("/proof/topic-v/#cor:endpoint-padded-section"),
     explanation:
-      "The determinant-one record edge supplies q,p,d,e and endpoint padding supplies exact zero factors.",
+      "The determinant-one record edge supplies q,p,d,e; endpoint-contact indices supply the factors with β=0 needed to complete the recurrence chain.",
   },
   {
     label: "Topic V: lattice parallelogram count",
@@ -527,7 +618,7 @@ export const topicVIIImported: readonly ProofDependency[] = [
     label: "Topic IV: lifted endpoint paths",
     href: sitePath("/proof/topic-iv/#lem:lifted-endpoint-paths"),
     explanation:
-      "Consecutive lifted vertex arguments and strict side landings remove every hidden multiple of 2π.",
+      "Consecutive lifted vertex arguments and relative-interior side contacts remove every hidden multiple of 2π.",
   },
 ] as const;
 
@@ -540,7 +631,7 @@ export const topicVIIBackground: readonly ProofDependency[] = [
   {
     label: "Complex conjugation",
     explanation:
-      "Lemma 8.3 explicitly conjugates, reverses, and re-lifts the entire strip rather than relying on an informal symmetry argument.",
+      "Lemma 8.3 explicitly conjugates, reverses, and re-lifts the entire recurrence chain rather than relying on an informal symmetry argument.",
   },
 ] as const;
 
