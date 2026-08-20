@@ -26,22 +26,32 @@ function exportChapter(route, output, extraEnv = {}) {
   });
 }
 
-test("an individual Topic VIII HTML cannot expose an unavailable Topic IX", async () => {
+test("individual Topics VIII and IX use live published links without sibling-file dependencies", async () => {
   const temporaryDirectory = await mkdtemp(
     path.join(os.tmpdir(), "karpelevic-topic-viii-individual-"),
   );
-  const output = path.join(temporaryDirectory, "topic-viii.html");
+  const topicVIIIOutput = path.join(temporaryDirectory, "topic-viii.html");
+  const topicIXOutput = path.join(temporaryDirectory, "topic-ix.html");
 
   try {
-    exportChapter("/proof/topic-viii", output);
-    const html = await readFile(output, "utf8");
+    exportChapter("/proof/topic-viii", topicVIIIOutput);
+    exportChapter("/proof/topic-ix", topicIXOutput);
+    const html = await readFile(topicVIIIOutput, "utf8");
+    const topicIX = await readFile(topicIXOutput, "utf8");
 
     assert.match(html, /data-proof-route="topic-viii"/);
     assert.match(
       html,
       /Consecutive Farey fractions and the finite product identity for N≥4/,
     );
-    assert.match(html, /data-proof-topic-number="9"[\s\S]{0,500}Forthcoming/);
+    assert.match(
+      html,
+      /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-ix\//,
+    );
+    assert.doesNotMatch(
+      html,
+      /data-proof-topic-number="9"(?:(?!<\/li>)[\s\S])*Forthcoming/,
+    );
     const visibleText = html
       .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
       .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
@@ -56,9 +66,31 @@ test("an individual Topic VIII HTML cannot expose an unavailable Topic IX", asyn
       html,
       /href="Critical_Invariant_Polygons_Topic_IX\.html/,
     );
-    assert.doesNotMatch(
+    assert.match(
       html,
       /href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-ix\//,
+    );
+
+    assert.match(topicIX, /data-proof-route="topic-ix"/);
+    assert.match(
+      topicIX,
+      /Candidate curves from the Ito equation on Farey intervals/,
+    );
+    assert.match(
+      topicIX,
+      /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-viii\//,
+    );
+    assert.match(
+      topicIX,
+      /data-proof-topic-number="10"(?:(?!<\/li>)[\s\S])*Forthcoming/,
+    );
+    assert.doesNotMatch(
+      topicIX,
+      /href="Critical_Invariant_Polygons_Topic_VIII\.html/,
+    );
+    assert.doesNotMatch(
+      topicIX,
+      /href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-x\//,
     );
   } finally {
     await rm(temporaryDirectory, { force: true, recursive: true });
@@ -71,15 +103,20 @@ test("the Topic VIII–IX bundle requires and contains both canonical members", 
   );
   const topicVIIIName = "Critical_Invariant_Polygons_Topic_VIII.html";
   const topicIXName = "Critical_Invariant_Polygons_Topic_IX.html";
-  const topicVIIIPath = path.join(temporaryDirectory, topicVIIIName);
-  const topicIXPath = path.join(temporaryDirectory, topicIXName);
+  const individualTopicIXPath = path.join(temporaryDirectory, "individual-topic-ix.html");
+  const memberDirectory = path.join(temporaryDirectory, "bundle-members");
+  const topicVIIIPath = path.join(memberDirectory, topicVIIIName);
+  const topicIXPath = path.join(memberDirectory, topicIXName);
   const bundleEnvironment = {
     PROOF_STANDALONE_BUNDLE_LINKS: "1",
     PROOF_STANDALONE_BUNDLE_TOPICS: "8,9",
-    PROOF_STANDALONE_TOPIC_MAX: "8",
+    PROOF_STANDALONE_TOPIC_MAX: "9",
   };
 
   try {
+    exportChapter("/proof/topic-ix", individualTopicIXPath);
+    const individualTopicIX = await readFile(individualTopicIXPath, "utf8");
+
     assert.throws(
       () =>
         exportChapter("/proof/topic-viii", topicVIIIPath, {
@@ -96,6 +133,12 @@ test("the Topic VIII–IX bundle requires and contains both canonical members", 
     );
     exportChapter("/proof/topic-ix", topicIXPath, bundleEnvironment);
 
+    assert.equal(
+      await readFile(individualTopicIXPath, "utf8"),
+      individualTopicIX,
+      "creating cross-linked bundle members must not overwrite individual Topic IX",
+    );
+
     const members = new Map([
       [topicVIIIName, await readFile(topicVIIIPath, "utf8")],
       [topicIXName, await readFile(topicIXPath, "utf8")],
@@ -110,7 +153,7 @@ test("the Topic VIII–IX bundle requires and contains both canonical members", 
       assert.ok(relativeHtmlTargets.length > 0, `${filename} links to its companion`);
       for (const target of relativeHtmlTargets) {
         assert.ok(members.has(target), `${filename} declares archive member ${target}`);
-        await access(path.join(temporaryDirectory, target));
+        await access(path.join(memberDirectory, target));
       }
     }
   } finally {

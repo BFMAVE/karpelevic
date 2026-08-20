@@ -37,7 +37,7 @@ function exactResult(label: FormalLabel): string {
 
 const commonImports = [
   {
-    label: "Topic IX · Farey intervals and the scalar candidate",
+    label: "Topic IX · Farey intervals and the unique modulus",
     href: sitePath("/proof/topic-ix/"),
     explanation: (
       <>
@@ -62,7 +62,7 @@ const partAResults: readonly ProofResultData[] = [
     label: "Lemma II.8.1",
     kind: "Lemma",
     title: "Mediant chord expansion in both denominator orientations",
-    purpose: "Show that when a new denominator splits one old Farey cell, each new reciprocal chord moves outward relative to the old candidate on the same ray.",
+    purpose: "Show that when a new denominator splits one old Farey interval, each new reciprocal chord moves outward relative to the old candidate on the same ray.",
     manuscriptHtml: exactResult("karp:lem:mediant-expansion"),
     vocabulary: [
       {
@@ -126,7 +126,7 @@ const partAResults: readonly ProofResultData[] = [
       {
         title: "Fix the old chord and its logarithmic radial graph",
         explanation: <><i>R</i> is the reciprocal of the old candidate radius. The rooted identity writes 1 as a strict convex combination of <i>U</i> and <i>V</i>, so 1 lies in the relative interior of their segment. Consequently ℓ(0)=0, while ℓ records the logarithms of the endpoint moduli.</>,
-        check: <>The coefficients α and β lie strictly between 0 and 1 because the ray lies in the open cell.</>,
+        check: <>The coefficients α and β lie strictly between 0 and 1 because the prescribed argument lies in the open Farey interval.</>,
       },
       {
         title: "Treat the left subcell when b&lt;d and b&gt;1",
@@ -156,14 +156,14 @@ const partAResults: readonly ProofResultData[] = [
     takeaway: <>Whenever order <i>n</i> inserts a mediant, both new candidate arcs lie strictly outside the old candidate arc on their open rays.</>,
     provenance: "New result",
     sourceIds: ["standard-farey", "ito-1997"],
-    sourceRelation: <>Farey mediants and Ito’s cellwise candidate curves are established ingredients. The two-orientation signed chord comparison is the manuscript’s new nesting mechanism.</>,
+    sourceRelation: <>Farey mediants and Ito candidate curves on consecutive-fraction intervals are established ingredients. The two-orientation signed chord comparison is the manuscript’s new nesting mechanism.</>,
   },
   {
     id: "topic-xii-multiplicity-padding",
     label: "Lemma II.8.2",
     kind: "Lemma",
     title: "Multiplicity padding",
-    purpose: "Compare two orders when the Farey cell stays fixed but the integer multiplicity increases by one.",
+    purpose: "Compare two orders when the Farey interval stays fixed but the integer multiplicity increases by one.",
     manuscriptHtml: exactResult("karp:lem:multiplicity-padding"),
     vocabulary: [
       {
@@ -375,7 +375,7 @@ export function TopicXIIAContent() {
             explanation: <>supply the signed side test; multiplication by a nonzero complex number scales every real determinant by its positive squared modulus.</>,
           },
         ]}
-        provedHere={<p>Lemma II.8.1 handles a newly split Farey cell in both denominator orientations. Lemma II.8.2 handles an unchanged cell whose multiplicity rises. Together they provide every nontrivial open-ray comparison needed in Part B.</p>}
+        provedHere={<p>Lemma II.8.1 handles a newly split Farey interval in both denominator orientations. Lemma II.8.2 handles an unchanged interval whose multiplicity rises. Together they provide every nontrivial comparison at a prescribed argument needed in Part B.</p>}
       />
 
       <section className="topic-i-textbook proof-chapter-group">
@@ -430,7 +430,7 @@ export function TopicXIIAContent() {
       <ProofResultGroup
         number="Part A · Two local mechanisms"
         title="Every nontrivial refinement moves the candidate outward"
-        introduction={<p>The first result changes the Farey cell. The second keeps the cell but changes the factor count. Their proofs are independent and together cover the only two ways an interior-ray formula can change from order <i>n−1</i> to order <i>n</i>.</p>}
+        introduction={<p>The first result changes the Farey interval. The second keeps the interval but changes the factor count. Their proofs are independent and together cover the only two ways the formula at an interior argument can change from order <i>n−1</i> to order <i>n</i>.</p>}
         results={partAResults}
       />
     </>

@@ -15,10 +15,10 @@ export function TopicXIVContent() {
       <ProofDependencyContract
         imported={[
           {
-            label: "Topic IX · Farey cells and the scalar radius equation",
+            label: "Topic IX · Farey intervals and the equation for the modulus",
             href: sitePath("/proof/topic-ix/"),
             explanation:
-              "supplies the exact cell data, the unique radius on each open ray, and the boundary-extraction algorithm.",
+              "supplies the exact Farey-interval data, the unique modulus at each prescribed argument, and the certified numerical procedure.",
           },
           {
             label: "Topic XI · Sparse stochastic realization",
@@ -73,7 +73,7 @@ export function TopicXIVContent() {
           </div>
         </header>
 
-        <div className="topic-xiv-cell-strip" aria-label="Order-seven Farey cells">
+        <div className="topic-xiv-cell-strip" aria-label="Order-seven Farey intervals">
           {[
             ["0/1", "1/7", "q=1, s=7, d=7, e=0"],
             ["1/7", "1/6", "q=6, s=7, d=1, e=1"],
@@ -124,9 +124,9 @@ export function TopicXIVContent() {
           <li>
             <span>1</span>
             <div>
-              <h4>Locate the Farey cell</h4>
+              <h4>Locate the Farey interval</h4>
               <p>
-                Since 1/3 &lt; 3/8 &lt; 2/5, the ray belongs to the cell with
+                Since 1/3 &lt; 3/8 &lt; 2/5, the argument belongs to the interval with
                 ordered denominator data <i>q</i>=3 and <i>s</i>=5. The
                 determinant check 3·2−1·5=1 confirms that the endpoints are
                 Farey neighbours.

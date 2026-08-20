@@ -50,6 +50,7 @@ const publicTopicPublicationDates = [
   ["/proof/topic-vi", "2026-08-15", "15 August 2026"],
   ["/proof/topic-vii", "2026-08-20", "20 August 2026"],
   ["/proof/topic-viii", "2026-08-20", "20 August 2026"],
+  ["/proof/topic-ix", "2026-08-20", "20 August 2026"],
 ];
 
 for (const [pathname, expectedResults, expectedProofs] of chapters) {
@@ -321,6 +322,90 @@ test("Topics VII and VIII form a defined-before-use stochastic handoff", async (
     7,
     "the Topic VIII source shelf is generated from all seven cited sources",
   );
+});
+
+test("Topics VIII and IX form a self-contained terminology and provenance handoff", async () => {
+  const topicVIII = await (await render("/proof/topic-viii")).text();
+  const topicIX = await (await render("/proof/topic-ix")).text();
+  const visibleText = topicIX
+    .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+    .replace(/<annotation\b[\s\S]*?<\/annotation>/gi, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&amp;", "&")
+    .replace(/\s+/g, " ");
+
+  assert.match(
+    topicVIII,
+    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/proof\/topic-ix\//,
+  );
+  assert.match(
+    topicIX,
+    /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="\/proof\/topic-viii\//,
+  );
+  assert.match(
+    visibleText,
+    /Candidate curves from the Ito equation on Farey intervals/i,
+  );
+  assert.match(
+    visibleText,
+    /row-stochastic[\s\S]{0,220}?Θₙ is the set of all complex eigenvalues/i,
+  );
+  assert.match(visibleText, /exp\(2πit\) runs once along the upper unit semicircle/i);
+  assert.match(
+    visibleText,
+    /the ray at argument 2πx is \{\s*ρ exp\(2πix\)\s*:\s*ρ≥0\s*\}/i,
+  );
+  assert.match(visibleText, /q<s/);
+  assert.match(
+    visibleText,
+    /\(A\+B\)\/\(2π\)=u\/s\+\(1−u\)\/\(dq\)<1\/2/i,
+  );
+  assert.match(visibleText, /0<A,B,A\+B<π/i);
+  assert.doesNotMatch(visibleText, /Farey cell/i);
+  assert.match(visibleText, /A unique modulus at each prescribed argument/i);
+  assert.match(
+    visibleText,
+    /Implicit-function theorem A calculus theorem that gives a continuously differentiable local solution when the defining function is continuously differentiable/i,
+  );
+  assert.match(visibleText, /Certified numerical evaluation of a candidate curve/i);
+  assert.match(visibleText, /U−L≤2ε/i);
+  assert.match(visibleText, /\|λ̂−λ\(x\)\|≤ε/i);
+
+  const orderedIds = [
+    "topic-ix-farey-adjacency",
+    "topic-ix-ito-family",
+    "topic-ix-scalar-ray",
+    "topic-ix-endpoints",
+    "topic-ix-carrier",
+    "topic-ix-algorithm",
+    "topic-ix-exact-sources",
+  ];
+  let previousIndex = -1;
+  for (const id of orderedIds) {
+    const index = topicIX.indexOf(`id="${id}"`);
+    assert.ok(index > previousIndex, `${id} appears in dependency order`);
+    previousIndex = index;
+  }
+
+  const scalarStart = topicIX.indexOf('id="topic-ix-scalar-ray"');
+  const endpointStart = topicIX.indexOf('id="topic-ix-endpoints"');
+  const carrierStart = topicIX.indexOf('id="topic-ix-carrier"');
+  const scalarProposition = topicIX.slice(scalarStart, endpointStart);
+  const endpointProposition = topicIX.slice(endpointStart, carrierStart);
+  for (const proposition of [scalarProposition, endpointProposition]) {
+    assert.doesNotMatch(proposition, /proof-chapter-provenance/);
+    assert.match(proposition, /Kirkland–Laffey–Šmigoc \(2020\)/);
+    assert.match(proposition, /no separate literature-priority classification is asserted/i);
+  }
+  assert.match(scalarProposition, /Theorem 1\.2 and Lemma 4\.4/);
+  assert.match(
+    visibleText,
+    /The Karpelevič region revisited[\s\S]{0,180}?Theorem 1\.2 and Lemma 4\.4/i,
+  );
+  assert.doesNotMatch(visibleText, /Determinant distances|Attack determinant|Cancel transverse/i);
 });
 
 test("the N=3 exception and the N>=4 projective scope remain coherent across topics", async () => {

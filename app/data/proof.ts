@@ -99,6 +99,13 @@ export const proofSources: readonly ProofSource[] = [
     href: "https://doi.org/10.1016/S0024-3795(97)80052-3",
   },
   {
+    id: "kirkland-laffey-smigoc-2020",
+    short: "Kirkland–Laffey–Šmigoc (2020)",
+    citation:
+      "S. Kirkland, T. Laffey, and H. Šmigoc, “The Karpelevič region revisited,” Journal of Mathematical Analysis and Applications 490(2) (2020), 124332.",
+    href: "https://doi.org/10.1016/j.jmaa.2020.124332",
+  },
+  {
     id: "coates-1959",
     short: "Coates (1959)",
     citation:
@@ -494,30 +501,30 @@ export const proofTopics: readonly ProofTopic[] = [
       "Compactness, star-shapedness with respect to the origin, and the unit-circle classification make the radial function precise. For N≥4, a radial boundary point that first appears at order N has exact polygonal complexity N, while every outward scalar multiple has greater complexity, so the Topic VII theorem applies; orders at most three use the direct small-order argument.",
     ],
     itemNumbers: [3, 4, 60, 61, 62, 63, 64],
-    manuscriptPages: "80–83",
+    manuscriptPages: "82–84",
   },
   {
     slug: "candidate-boundary",
-    eyebrow: "Topic IX · candidate construction",
-    title: "Constructing the Farey–Ito candidate curves",
+    eyebrow: "Topic IX · the Ito equation on Farey intervals",
+    title: "Candidate curves from the Ito equation on Farey intervals",
     question:
-      "What is the exact boundary curve that the stochastic spectrum is supposed to attain?",
+      "How does the Ito equation determine a unique modulus at each prescribed argument between consecutive Farey fractions?",
     overview: [
-      "Consecutive Farey fractions determine one cell at a time. On each ray in that cell, a scalar radius equation selects a unique candidate point and connects it to the corresponding reduced Ito polynomial.",
-      "Endpoint limits and the exceptional terminal behaviour at order three are handled explicitly. The formal Karpelevič–Ito theorem is deliberately reserved for Topic XIII; this topic constructs only the candidate that later chapters must bound and realize.",
+      "Consecutive Farey fractions determine one interval at a time. At each argument in that interval, a strictly increasing real equation determines a unique modulus and connects the resulting point to the corresponding reduced Ito polynomial.",
+      "Endpoint limits and the exceptional order-three behaviour are handled explicitly. This topic constructs only the candidate curve; stochastic realization, the sharp outer bound, nesting, and identification with the boundary of the Karpelevič region remain for later topics.",
     ],
     itemNumbers: [],
-    manuscriptPages: "67–71",
+    manuscriptPages: "76–81",
   },
   {
     slug: "sharp-radius",
     eyebrow: "Topic X · upper bound",
     title: "The sharp radial upper bound",
     question:
-      "Why can no stochastic eigenvalue lie beyond its candidate Farey–Ito arc?",
+      "Why can no stochastic eigenvalue lie beyond the candidate curve constructed in Topic IX?",
     overview: [
       "For non-inherited radial maxima of orders N≥4, Part I's finite product theorem for critical polygons supplies an Ito product with varying parameters and proves that the chosen arguments of all factors lie in [A,M); orders at most three have already been treated directly.",
-      "A strictly convex log-sine potential makes those parameters constant. Its equality case identifies the unique outermost radial candidate and proves the sharp cellwise upper bound.",
+      "A strictly convex log-sine potential makes those parameters constant. Its equality case identifies the unique outermost radial candidate and proves the sharp upper bound on each Farey interval.",
     ],
     itemNumbers: [],
     manuscriptPages: "73–77",
@@ -530,7 +537,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "How can every candidate boundary point be realized by an actual stochastic matrix?",
     overview: [
       "A sparse realization graph turns the reduced Ito polynomial into a row-stochastic matrix. A cycle-cover expansion computes its characteristic polynomial without importing the upper-bound argument.",
-      "The resulting construction proves the reverse inclusion independently: every scalar equality point is genuinely attained in the stochastic spectrum.",
+      "The resulting construction proves the reverse inclusion independently: every equality point is genuinely attained in the Karpelevič region.",
     ],
     itemNumbers: [],
     manuscriptPages: "77–79",
@@ -542,7 +549,7 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "Why does increasing the matrix order enlarge the candidate region in the correct way?",
     overview: [
-      "Mediant insertion refines one Farey cell into smaller cells. Log-line comparison, multiplicity padding, and an exhaustive denominator split compare the corresponding radial candidates.",
+      "Mediant insertion refines one Farey interval into smaller intervals. Log-line comparison, multiplicity padding, and an exhaustive denominator split compare the corresponding radial candidates.",
       "The candidate-nesting theorem is the global arithmetic step that lets the final proof pass from non-inherited radial maxima to all stochastic eigenvalues by induction on the order.",
     ],
     itemNumbers: [],

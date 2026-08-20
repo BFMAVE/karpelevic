@@ -16,7 +16,7 @@ const outputPath = path.resolve(
 );
 const proofRoute = process.env.PROOF_ROUTE ?? "/proof";
 const publicSite = "https://bfmave.github.io/karpelevic";
-const publishedTopicMaximum = 8;
+const publishedTopicMaximum = 9;
 const bundleLinkMode = process.env.PROOF_STANDALONE_BUNDLE_LINKS === "1";
 const reviewBundleFiles = new Map([
   ["/proof/topic-v", "Critical_Invariant_Polygons_Topic_V.html"],
@@ -471,11 +471,11 @@ function verifyStandaloneHtml(html) {
                 : proofRoute === "/proof/topic-ix"
                   ? [
                       "Topic IX",
-                      "Constructing the Farey–Ito candidate curves",
+                      "Candidate curves from the Ito equation on Farey intervals",
                       "Farey adjacency criterion",
-                      "One scalar equation per ray",
+                      "A unique modulus at each prescribed argument",
                       "Endpoint limits, including the order-three exception",
-                      "Boundary extraction",
+                      "Certified numerical evaluation",
                       'data-proof-route="topic-ix"',
                       "Forthcoming",
                     ]
@@ -712,18 +712,57 @@ function verifyStandaloneHtml(html) {
         "The individual Topic VIII standalone must not require sibling HTML files.",
       );
     }
-    if (!/data-proof-topic-number="9"[\s\S]{0,500}Forthcoming/i.test(html)) {
-      throw new Error(
-        "The individual Topic VIII standalone must mark Topic IX as forthcoming.",
-      );
-    }
     if (
-      /href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-ix\//i.test(
+      !/class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-ix\//i.test(
         html,
       )
     ) {
       throw new Error(
-        "The individual Topic VIII standalone must not link to unpublished Topic IX.",
+        "The individual Topic VIII standalone must link Next to published Topic IX.",
+      );
+    }
+    if (
+      /data-proof-topic-number="9"(?:(?!<\/li>)[\s\S])*Forthcoming/i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "The individual Topic VIII standalone must not mark published Topic IX as forthcoming.",
+      );
+    }
+  }
+
+  if (proofRoute === "/proof/topic-ix" && !bundleLinkMode) {
+    if (/href="Critical_Invariant_Polygons_Topic_[IVX]+\.html/i.test(html)) {
+      throw new Error(
+        "The individual Topic IX standalone must not require sibling HTML files.",
+      );
+    }
+    if (
+      !/class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-viii\//i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "The individual Topic IX standalone must link Previous to published Topic VIII.",
+      );
+    }
+    if (
+      !/data-proof-topic-number="10"(?:(?!<\/li>)[\s\S])*Forthcoming/i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "The individual Topic IX standalone must mark Topic X as forthcoming.",
+      );
+    }
+    if (
+      /href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-x\//i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "The individual Topic IX standalone must not link to unpublished Topic X.",
       );
     }
   }

@@ -6,7 +6,7 @@ import { getPageTimestamp } from "../../../lib/git-dates";
 export const metadata: Metadata = {
   title: "Topic XII-B — Exhaustive Candidate Nesting",
   description:
-    "A complete annotated proof that Farey–Ito candidate radii are nested as the stochastic-matrix order increases.",
+    "A complete annotated proof that the candidate moduli on Farey intervals are nested as the stochastic-matrix order increases.",
 };
 
 const updatedAt = getPageTimestamp("app/data/proof-topics/topic-xii.tsx");

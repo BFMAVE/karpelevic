@@ -85,7 +85,7 @@ export function BoundaryExplorer() {
           >
             <desc id="boundary-plot-description">
               The stochastic eigenvalue region of order {normalizedOrder},
-              drawn in the complex plane from exact Farey cells, numerical
+              drawn in the complex plane from exact Farey intervals, numerical
               solutions of the scalar radial equation, and, at order three,
               the exact exceptional real segment from minus one half to minus
               one.
@@ -127,7 +127,7 @@ export function BoundaryExplorer() {
             ) : (
               <>
                 Θ<sub>{normalizedOrder}</sub> has {cells.length}{" "}
-                upper-half-plane Farey cell{cells.length === 1 ? "" : "s"}.
+                upper-half-plane Farey interval{cells.length === 1 ? "" : "s"}.
                 The dark nodes are exact roots of unity; curved arcs between
                 them are sampled numerically.
                 {normalizedOrder === 3
@@ -141,7 +141,7 @@ export function BoundaryExplorer() {
         <aside>
           <section>
             <p className="section-label">Exact input</p>
-            <h4>Farey cells and Ito-polynomial data</h4>
+            <h4>Farey intervals and Ito-polynomial data</h4>
             <p>
               Fractions, denominator order, the repeat count <i>d</i>, the
               closing exponent <i>e</i>, and every endpoint angle are computed

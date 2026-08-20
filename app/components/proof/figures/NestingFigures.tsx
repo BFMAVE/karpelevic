@@ -91,9 +91,9 @@ function DefectFigure() {
 
 const copy: Record<NestingFigureKind, { title: string; description: string; caption: string }> = {
   mediant: {
-    title: "One Farey cell splits at its mediant",
+    title: "One Farey interval splits at its mediant",
     description: "An old interval from a over b to c over d is split by the newly admitted mediant with denominator b plus d equals n.",
-    caption: "Plate XII.1. Farey refinement has only one local shape: a newly admitted mediant divides one old cell into two. The drawn curves are a comparison schematic; the proof uses signed determinants and logarithmic radial functions.",
+    caption: "Plate XII.1. Farey refinement has only one local shape: a newly admitted mediant divides one old interval into two. The drawn curves are a comparison schematic; the proof uses signed determinants and logarithmic radial functions.",
   },
   padding: {
     title: "Padding an old product by the identity factor",

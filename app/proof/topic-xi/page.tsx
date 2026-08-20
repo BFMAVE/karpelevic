@@ -18,7 +18,7 @@ export default function TopicXIPage() {
       manuscriptPages="76–79"
       overview={[
         "A sparse realization graph turns the reduced Ito polynomial into the characteristic polynomial of a row-stochastic matrix. The proof derives its cycle-cover signs and checks every possible directed cycle.",
-        "This independently realizes every scalar candidate. Only after that reverse inclusion is established does the chapter combine it with Topic X and activate the strict Jensen equality condition.",
+        "This independently realizes every point on the Topic IX candidate curve. Only after that reverse inclusion is established does the chapter combine it with Topic X and activate the strict Jensen equality condition.",
       ]}
       updatedAt={updatedAt}
       stats={[{ value: 5, label: "results" }]}

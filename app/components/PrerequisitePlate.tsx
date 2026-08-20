@@ -69,11 +69,11 @@ const plateCopy: Readonly<
       "Plate III. The interval I = {0,1,2,3} has return heights 3, 3, 3, and 2. Its four return towers therefore account for all eleven residues exactly once.",
   },
   "projective-farey": {
-    title: "A chain of perspectivities beside a Farey cell",
+    title: "A chain of perspectivities beside a Farey interval",
     description:
       "Successive central projections carry a point through three lines. Beside them, the Farey neighbours one third and two fifths enclose their mediant three eighths.",
     caption:
-      "Plate IV. Projective geometry controls the return map; determinant-one arithmetic identifies the Farey cell. The two structures meet in the return data of Part I.",
+      "Plate IV. Projective geometry controls the return map; determinant-one arithmetic identifies the Farey interval. The two structures meet in the return data of Part I.",
   },
 };
 
@@ -585,7 +585,7 @@ function ProjectiveFareyDrawing() {
 
       <line className="prerequisite-section-rule" x1="402" x2="402" y1="28" y2="330" />
       <text className="prerequisite-svg-kicker" x="575" y="42" textAnchor="middle">
-        FAREY CELL
+        FAREY INTERVAL
       </text>
       <line className="prerequisite-number-line" x1="457" x2="690" y1="211" y2="211" />
       {[

@@ -128,7 +128,7 @@ const smallOrders: ProofResultData = {
     },
     {
       term: "Candidate outer radius Kₙ(θ)",
-      definition: <>Topic XII&apos;s notation for the scalar Farey–Ito radius on an open cell, with value 1 on endpoint rays. It is still only a candidate until the induction below identifies it with <i>R</i><sub>n</sub>.</>,
+      definition: <>Topic XII&apos;s notation for the modulus constructed in Topic IX on an open Farey interval, with value 1 at ordinary Farey endpoints. It remains a candidate until the induction below identifies it with <i>R</i><sub>n</sub>.</>,
     },
     {
       term: "Trace tr(A)",
@@ -155,7 +155,7 @@ const smallOrders: ProofResultData = {
       definition: <>The filled triangle consisting of all nonnegative weighted averages of the three displayed vertices with weights summing to one.</>,
     },
     {
-      term: "Terminal cell",
+      term: "Exceptional interval",
       definition: <>The last upper Farey interval [1/3,1/2]. Its nonreal candidate curve approaches −1/2 rather than the endpoint root −1, so the real segment [−1,−1/2] must be included separately.</>,
     },
     {
@@ -163,7 +163,7 @@ const smallOrders: ProofResultData = {
       definition: <>det(<i>tI−A</i>). Its roots, with multiplicity, are exactly the eigenvalues of <i>A</i>.</>,
     },
   ],
-  intuition: <>Orders one and two are elementary. At order three, trace inequalities trap every nonreal eigenvalue inside an equilateral triangle. Two explicit stochastic families attain the triangle’s boundary and the extra negative-real segment. Matching those pieces to the scalar candidate curve proves exactly the base identity the order-four induction will use.</>,
+  intuition: <>Orders one and two are elementary. At order three, trace inequalities trap every nonreal eigenvalue inside an equilateral triangle. Two explicit stochastic families attain the triangle’s boundary and the extra negative-real segment. Matching those pieces to the Topic IX candidate curve proves exactly the base identity the order-four induction will use.</>,
   figure: <CompletionFigure kind="order-three" />,
   proofSteps: [
     {
@@ -187,11 +187,11 @@ const smallOrders: ProofResultData = {
       explanation: <>Topic XI’s terminal sparse matrix has characteristic factor λ²+λ+α. For 0≤α≤1/4 its lower real root runs from −1 to −1/2. For 1/4&lt;α≤1 the upper root has real part −1/2 and rises to ω; conjugation supplies the lower branch.</>,
     },
     {
-      title: "Identify the first scalar candidate curve",
+      title: "Identify the first candidate curve",
       explanation: <>On [0,1/3], the cell data reduce the scalar equation to the ray equation for the straight chord β+αω. Its argument increases strictly with α, so each open ray meets it once and Topic IX’s unique radius must be that chord radius.</>,
     },
     {
-      title: "Identify the terminal scalar candidate curve",
+      title: "Identify the exceptional candidate curve",
       explanation: <>On [1/3,1/2], the scalar equation is equivalent to λ(λ²−β)=α. Along λ=−1/2+<i>iy</i>, the argument decreases strictly from π to 2π/3 as <i>y</i> rises, so again every open ray is met exactly once. The real interval is an endpoint-ray addition, not part of that open-cell branch.</>,
     },
     {
@@ -221,7 +221,7 @@ const mainTheorem: ProofResultData = {
     },
     {
       term: "Candidate radius Kₙ(θ)",
-      definition: <>The Farey–Ito scalar radius constructed in Topic IX and compared across orders in Topic XII. Before this theorem it is known to be attained, but has not yet been proved to exclude every farther stochastic eigenvalue on inherited rays.</>,
+      definition: <>The modulus constructed in Topic IX and compared across orders in Topic XII. Before this theorem it is known to be attained, but has not yet been proved to exclude every farther stochastic eigenvalue at an inherited argument.</>,
     },
     {
       term: "Natural order embedding",
@@ -233,7 +233,7 @@ const mainTheorem: ProofResultData = {
     },
     {
       term: "Concatenated candidate curves",
-      definition: <>The continuous concatenation of the cellwise curves Γ<sub>f,g</sub><sup>(n)</sup> in increasing Farey order, beginning at 1 and ending at −1 in the upper half-plane.</>,
+      definition: <>The continuous concatenation of the curves Γ<sub>f,g</sub><sup>(n)</sup> on consecutive Farey intervals, in increasing Farey order, beginning at 1 and ending at −1 in the upper half-plane.</>,
     },
     {
       term: "Radial hull of the boundary",
@@ -257,11 +257,11 @@ const mainTheorem: ProofResultData = {
     },
     {
       title: "Place the candidate below the actual maximum",
-      explanation: <>Topic XI constructs an order-<i>n</i> stochastic matrix with eigenvalue <i>K</i><sub>n</sub>(θ)<i>e</i><sup>iθ</sup>. Thus 0&lt;<i>K</i><sub>n</sub>(θ)≤<i>R</i><sub>n</sub>(θ). On an open cell the unit direction is not a root of unity of permitted order, so Topic VIII’s unit-circle result also gives <i>R</i><sub>n</sub>(θ)&lt;1.</>,
+      explanation: <>Topic XI constructs an order-<i>n</i> stochastic matrix with eigenvalue <i>K</i><sub>n</sub>(θ)<i>e</i><sup>iθ</sup>. Thus 0&lt;<i>K</i><sub>n</sub>(θ)≤<i>R</i><sub>n</sub>(θ). At an argument in an open Farey interval, the unit direction is not a root of unity of permitted order, so Topic VIII’s unit-circle result also gives <i>R</i><sub>n</sub>(θ)&lt;1.</>,
     },
     {
       title: "Resolve the non-inherited case",
-      explanation: <>At this induction stage <i>n</i>≥4. If the actual radial maximum is absent from Θ<sub>n−1</sub>, it satisfies the exact non-inherited-radial-maximum hypotheses, so the N≥4 critical-polygon results apply. Topic XI’s constant-parameter corollary says its modulus is the unique scalar equality radius on this ray, namely <i>K</i><sub>n</sub>(θ).</>,
+      explanation: <>At this induction stage <i>n</i>≥4. If the actual radial maximum is absent from Θ<sub>n−1</sub>, it satisfies the exact non-inherited-radial-maximum hypotheses, so the N≥4 critical-polygon results apply. Topic XI’s constant-parameter corollary says its modulus is the unique value determined by the Topic IX equation at this argument, namely <i>K</i><sub>n</sub>(θ).</>,
     },
     {
       title: "Freeze the inherited branch",
@@ -305,14 +305,14 @@ export function TopicXIIIContent() {
             explanation: <>defines Θ<sub>n</sub> and <i>R</i><sub>n</sub>, proves compactness, conjugation symmetry, star-shapedness with respect to the origin, the unit-circle classification, and the critical-polygon input for a non-inherited radial maximum.</>,
           },
           {
-            label: "Topic IX · Farey–Ito candidate curves",
+            label: "Topic IX · candidate curves from the Ito equation",
             href: sitePath("/proof/topic-ix/"),
-            explanation: <>constructs the scalar candidate on each open ray, the candidate curves Γ<sub>f,g</sub><sup>(n)</sup>, and their endpoint continuity.</>,
+            explanation: <>constructs the unique modulus at each prescribed argument, the candidate curves Γ<sub>f,g</sub><sup>(n)</sup>, and their endpoint continuity.</>,
           },
           {
             label: "Topic X · Sharp upper comparison",
             href: sitePath("/proof/topic-x/"),
-            explanation: <>for the induction range <i>n</i>≥4, proves that every varying critical-polygon parameter list lies no farther out than the constant-parameter scalar candidate.</>,
+            explanation: <>for the induction range <i>n</i>≥4, proves that every varying critical-polygon parameter list lies no farther out than the modulus determined in Topic IX.</>,
           },
           {
             label: "Topic XI · Attainment and constant parameters",

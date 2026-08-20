@@ -6,7 +6,7 @@ import { getPageTimestamp } from "../../lib/git-dates";
 export const metadata: Metadata = {
   title: "Topic X — The Sharp Radial Upper Bound",
   description:
-    "A complete, illustrated derivation of the varying-parameter log-sine inequality and the resulting upper comparison with the scalar Farey–Ito candidate.",
+    "A complete, illustrated derivation of the varying-parameter log-sine inequality and the resulting upper comparison with the unique modulus constructed in Topic IX.",
 };
 
 const updatedAt = getPageTimestamp("app/data/proof-topics/topics-viii-xi.tsx");

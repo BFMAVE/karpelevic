@@ -344,16 +344,16 @@ export function TopicIXChapter() {
       <ProofDependencyContract
         imported={[
           {
-            label: "Topic V — the determinant-one lattice cell",
+            label: "Topic V — the lattice-parallelogram lemma",
             href: sitePath("/proof/topic-v/"),
             explanation:
               "supplies the elementary lattice-parallelogram fact used in the converse direction of Farey adjacency.",
           },
           {
-            label: "Topic VIII — compact stochastic eigenvalue regions",
+            label: "Topic VIII — row-stochastic matrices and the Karpelevič region",
             href: sitePath("/proof/topic-viii/"),
             explanation:
-              "explains why one eventually wants one candidate radius on every ray, although no stochastic realization is used in this chapter.",
+              "defines Θₙ and its radial function. This chapter constructs a candidate point at each prescribed argument, but does not yet prove stochastic realization or boundary status.",
           },
         ]}
         background={[
@@ -371,30 +371,45 @@ export function TopicIXChapter() {
         provedHere={
           <p>
             We prove the Farey-neighbour criterion, define the reduced Ito
-            polynomial, solve one scalar equation uniquely on every open cell
-            ray, control both endpoints including the order-three exception,
-            and package the result as an exact extraction algorithm.
+            polynomial, determine one modulus at every argument in an open Farey
+            interval, control both endpoints including the order-three exception,
+            and give a certified bisection procedure for numerical evaluation.
           </p>
         }
       />
 
-      <SetupBlock eyebrow="Arithmetic coordinates" title="Farey cells, with every symbol fixed">
+      <SetupBlock eyebrow="Definitions and arithmetic coordinates" title="From the Karpelevič region to a Farey interval">
         <p>
+          A matrix <span className="math-inline">P=(pᵢⱼ)</span> is
+          <strong> row-stochastic</strong> when
+          <span className="math-inline"> pᵢⱼ≥0</span> and
+          <span className="math-inline"> Σⱼpᵢⱼ=1</span> for every row
+          <var> i</var>. As in Topic VIII,
+          <span className="math-inline"> Θₙ</span> is the set of all complex
+          eigenvalues of <span className="math-inline">n×n</span>
+          row-stochastic matrices.
+        </p>
+        <p>
+          For <span className="math-inline">t∈[0,1/2]</span>, the point
+          <span className="math-inline"> exp(2πit)</span> runs once along the upper
+          unit semicircle. At a prescribed parameter
+          <span className="math-inline"> x</span>, the ray at argument
+          <span className="math-inline"> 2πx</span> is
+          <span className="math-inline"> {"{"}ρ exp(2πix):ρ≥0{"}"}</span>.
           Fix <span className="math-inline">n≥3</span>. The Farey sequence <span className="math-inline">Fₙ</span> contains
           every reduced fraction in [0,1] whose denominator is at most
           <var> n</var>, in increasing order. We use its upper half
           {" "}<span className="math-inline">Fₙ⁺=Fₙ∩[0,1/2]</span>. Two
           consecutive entries <span className="math-inline">f&lt;g</span> form
-          one <strong>Farey cell</strong>. Fractions are always reduced and
+          a <strong>Farey interval</strong> [<var>f</var>,<var>g</var>]. Fractions are always reduced and
           denominators are positive. For the formulas, label the endpoint with
           smaller denominator as <span className="math-inline">p/q</span> and
           the other as <span className="math-inline">r/s</span>, so
-          {" "}<span className="math-inline">q≤s</span>. These labels need not
+          {" "}<span className="math-inline">q&lt;s</span>. These labels need not
           follow the left-to-right order <span className="math-inline">f&lt;g</span>.
         </p>
         <p>
-          Inside this cell choose <span className="math-inline">x</span> and set
-          {" "}<span className="math-inline">θ=2πx</span>,
+          Choose <span className="math-inline">x∈(f,g)</span> and set
           {" "}<span className="math-inline">d=⌊n/q⌋</span>, and
           {" "}<span className="math-inline">e=s−dq</span>. The signed integer
           <var>e</var> is retained; it may be positive, zero, or negative. The
@@ -413,39 +428,59 @@ export function TopicIXChapter() {
           </a>
         </p>
         <p>
-          On the open
-          cell, the manuscript proves that all sine factors occurring below
-          lie in ranges where their displayed signs are correct.
+          These angles have the required signs for an elementary reason. Set
+          <span className="math-inline"> u=|x−p/q|/|r/s−p/q|∈(0,1)</span>.
+          Consecutiveness gives
+          <span className="math-inline"> |rq−ps|=1</span>, hence
+          <span className="math-inline"> |qx−p|=u/s</span> and
+          <span className="math-inline"> |sx−r|=(1−u)/q</span>. Therefore
+          <span className="math-inline"> (A+B)/(2π)=u/s+(1−u)/(dq)&lt;1/2</span>
+          because <span className="math-inline">s≥3</span> and
+          <span className="math-inline">dq≥2</span>.
+        </p>
+        <p id="karp:eq:A+B-range" className="display-equation proof-setup-equation">
+          <span className="math-inline">0&lt;A,B,A+B&lt;π.</span>{" "}
+          <a
+            className="part-i-equation-number"
+            href="#karp:eq:A+B-range"
+            aria-label="Equation II.2.7, permalink"
+          >
+            (II.2.7)
+          </a>
+        </p>
+        <p>
+          Consequently every sine factor used below is positive.
         </p>
         <StochasticFareyFigure kind="farey-five" />
       </SetupBlock>
 
       <ProofResultGroup
         number="IX.A"
-        title="The Farey cell and its Ito polynomial"
+        title="Farey adjacency and the Ito equation"
         introduction={
           <p>
             Determinant-one arithmetic identifies adjacent fractions. The Ito
-            polynomial then names the algebraic family whose correct radial
-            branch must still be selected.
+            polynomial then names the algebraic family. The next result
+            identifies the unique modulus at each prescribed argument.
           </p>
         }
         results={topicIXResults.slice(0, 2)}
       />
 
-      <SetupBlock eyebrow="The scalar selection rule" title="One real equation replaces an ambiguous algebraic branch">
+      <SetupBlock eyebrow="The radial equation" title="A unique modulus at the prescribed argument">
         <p>
-          For the fixed cell and ray, seek <span className="math-inline">ρ∈(0,1)</span>
-          satisfying
-          {" "}<span className="math-inline">ρˢ⁄ᵈ sin A + ρᑫ sin B = sin(A+B)</span>.
-          The left side is strictly increasing in ρ. Proposition II.2.3 proves
-          that it starts below and ends above the right side, so exactly one
-          solution exists. This uniqueness is the branch-selection mechanism.
+          For the fixed Farey interval and prescribed argument, define
+          <span className="math-inline"> Fₓ(ρ)=ρˢ⁄ᵈ sin A+ρᑫ sin B−sin(A+B)</span>
+          on <span className="math-inline">[0,1]</span>. Both exponents and both
+          coefficients of the powers of ρ are positive, so <var>F</var>ₓ is
+          strictly increasing. Proposition II.2.3 proves
+          <span className="math-inline"> Fₓ(0)&lt;0&lt;Fₓ(1)</span>; consequently
+          it has exactly one zero <span className="math-inline">ρ(x)∈(0,1)</span>.
         </p>
         <p>
-          The associated point is <span className="math-inline">λ=ρe²πⁱˣ</span>.
+          The associated point is <span className="math-inline">λ=ρ exp(2πix)</span>.
           The proof constructs complementary coefficients α and β, fixes one
-          fractional-power branch by an explicit exponential, and derives the
+          fractional power by an explicit exponential, and derives the
           reciprocal-coordinate identity. No phrase such as “take the principal root” is
           left implicit.
         </p>
@@ -454,7 +489,7 @@ export function TopicIXChapter() {
 
       <ProofResultGroup
         number="IX.B"
-        title="Unique raywise candidate and its closed cell curve"
+        title="Unique modulus, endpoint limits, and the candidate curve"
         introduction={
           <p>
             The next statements prove existence, uniqueness, algebraic
@@ -467,12 +502,12 @@ export function TopicIXChapter() {
 
       <ProofResultGroup
         number="IX.C"
-        title="An exact extraction algorithm"
+        title="Certified numerical evaluation"
         introduction={
           <p>
-            The algorithm separates exact rational cell selection from the one
-            numerical operation: solving a strictly monotone scalar equation
-            on a certified interval.
+            For an exact prescribed argument, the procedure first certifies its
+            Farey interval. It then uses bisection on the strictly increasing
+            residual, retaining a rigorous error bound for the returned modulus.
           </p>
         }
         results={topicIXResults.slice(5)}
@@ -501,10 +536,10 @@ export function TopicXChapter() {
               "turns the stochastic extremum into the critical planar contraction required by Topic VII.",
           },
           {
-            label: "Topic IX — the unique scalar candidate",
+            label: "Topic IX — the unique modulus from the Ito equation",
             href: sitePath("/proof/topic-ix/"),
             explanation:
-              "provides the unique equality radius and the branch-controlled scalar equation used for comparison.",
+              "provides the unique modulus at each prescribed argument and the real equation used for comparison.",
           },
         ]}
         background={[
@@ -646,10 +681,10 @@ export function TopicXIChapter() {
       <ProofDependencyContract
         imported={[
           {
-            label: "Topic IX — scalar candidate and complementary coefficients",
+            label: "Topic IX — the candidate curve and complementary coefficients",
             href: sitePath("/proof/topic-ix/"),
             explanation:
-              "supplies the reduced Ito polynomial, the candidate root, and parameters α,β with α+β=1.",
+              "supplies the reduced Ito polynomial, its point at each prescribed argument, and parameters α,β with α+β=1.",
           },
           {
             label: "Topic X — the upper comparison",
@@ -675,7 +710,7 @@ export function TopicXIChapter() {
             We derive the cycle-cover coefficient rule, classify every directed
             cycle of the sparse realization graph, compute its characteristic polynomial in
             both signs of <span className="math-inline">s−dq</span>, realize
-            every scalar candidate at order at most <var>n</var>, and only then
+            every point on the Topic IX candidate curve at order at most <var>n</var>, and only then
             close the constant-parameter conclusion deferred from Topic X.
           </p>
         }

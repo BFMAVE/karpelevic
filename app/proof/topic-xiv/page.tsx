@@ -17,7 +17,7 @@ export default function TopicXIVPage() {
       routeKey="topic-xiv"
       updatedAt={updatedAt}
       stats={[
-        { value: 9, label: "Farey cells" },
+        { value: 9, label: "Farey intervals" },
         { value: 1, label: "worked ray" },
         { value: 1, label: "interactive explorer" },
       ]}

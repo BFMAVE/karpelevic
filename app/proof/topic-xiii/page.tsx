@@ -6,7 +6,7 @@ import { getPageTimestamp } from "../../lib/git-dates";
 export const metadata: Metadata = {
   title: "Topic XIII — The Karpelevič–Ito Theorem",
   description:
-    "A complete annotated proof assembling the Farey–Ito candidate, the sharp bound, realization, nesting, and topology into the classical stochastic eigenvalue-region theorem.",
+    "A complete annotated proof assembling the Topic IX candidate curve, the sharp bound, realization, nesting, and topology into the classical stochastic eigenvalue-region theorem.",
 };
 
 const updatedAt = getPageTimestamp("app/data/proof-topics/topic-xiii.tsx");

@@ -313,57 +313,281 @@ function NewShell({ marker, mobile = false }: { marker: string; mobile?: boolean
   );
 }
 
-function FareyFive() {
+function FareyFive({ mobile = false }: { mobile?: boolean }) {
   const entries = [
     { value: 0, label: "0" }, { value: 1 / 5, label: "1/5" }, { value: 1 / 4, label: "1/4" },
     { value: 1 / 3, label: "1/3" }, { value: 2 / 5, label: "2/5" }, { value: 1 / 2, label: "1/2" },
   ];
-  const x = (value: number) => 70 + value * 1080;
+  const axisStart = mobile ? 28 : 70;
+  const axisEnd = mobile ? 292 : 610;
+  const axisY = mobile ? 175 : 185;
+  const x = (value: number) => axisStart + 2 * value * (axisEnd - axisStart);
+  const labelSize = mobile ? 17 : 16;
+  const labelY = mobile
+    ? [212, 212, 245, 212, 245, 212]
+    : entries.map(() => 235);
+
   return (
     <>
-      <line x1="70" y1="185" x2="610" y2="185" stroke={ink} strokeWidth="2.5" />
-      <rect x={x(1 / 3)} y="145" width={x(2 / 5) - x(1 / 3)} height="80" fill={pale} />
-      {entries.map((entry) => (
-        <g key={entry.label}>
-          <line x1={x(entry.value)} y1="168" x2={x(entry.value)} y2="202" stroke={entry.value === 1 / 3 || entry.value === 2 / 5 ? red : ink} strokeWidth="2" />
-          <text x={x(entry.value) - 13} y="235" fill={entry.value === 1 / 3 || entry.value === 2 / 5 ? red : ink}>{entry.label}</text>
+      <rect
+        data-farey-interval="1/3,2/5"
+        fill={pale}
+        height={mobile ? 68 : 80}
+        width={x(2 / 5) - x(1 / 3)}
+        x={x(1 / 3)}
+        y={axisY - (mobile ? 34 : 40)}
+      />
+      <line
+        data-farey-axis="F5-upper-semicircle-arguments"
+        stroke={ink}
+        strokeWidth="2.5"
+        x1={axisStart}
+        x2={axisEnd}
+        y1={axisY}
+        y2={axisY}
+      />
+      {entries.map((entry, index) => (
+        <g data-farey-fraction={entry.label} data-farey-position={x(entry.value)} key={entry.label}>
+          <line
+            stroke={entry.value === 1 / 3 || entry.value === 2 / 5 ? red : ink}
+            strokeWidth="2"
+            x1={x(entry.value)}
+            x2={x(entry.value)}
+            y1={axisY - 17}
+            y2={axisY + 17}
+          />
+          <text
+            fill={entry.value === 1 / 3 || entry.value === 2 / 5 ? red : ink}
+            fontSize={labelSize}
+            textAnchor="middle"
+            x={x(entry.value)}
+            y={labelY[index]}
+          >
+            {entry.label}
+          </text>
         </g>
       ))}
-      <line x1={x(3 / 8)} y1="110" x2={x(3 / 8)} y2="185" stroke={copper} strokeWidth="3" />
-      <text x={x(3 / 8) - 32} y="90" fill={copper}>x = 3/8</text>
-      <text x="138" y="315" fill={ink}>F₅⁺ = {"{0, 1/5, 1/4, 1/3, 2/5, 1/2}"}</text>
+      <line
+        data-prescribed-argument="3/8"
+        stroke={copper}
+        strokeWidth="3"
+        x1={x(3 / 8)}
+        x2={x(3 / 8)}
+        y1={mobile ? 95 : 110}
+        y2={axisY}
+      />
+      <text
+        fill={copper}
+        fontSize={labelSize}
+        textAnchor="middle"
+        x={x(3 / 8)}
+        y={mobile ? 72 : 90}
+      >
+        x = 3/8
+      </text>
+      {mobile ? (
+        <text fill={ink} fontSize={labelSize} textAnchor="middle" x="160" y="315">
+          F₅ ∩ [0, 1/2] =
+          <tspan x="160" dy="25">{"{0, 1/5, 1/4, 1/3, 2/5, 1/2}"}</tspan>
+        </text>
+      ) : (
+        <text fill={ink} fontSize={labelSize} x="112" y="315">
+          F₅ ∩ [0, 1/2] = {"{0, 1/5, 1/4, 1/3, 2/5, 1/2}"}
+        </text>
+      )}
     </>
   );
 }
 
-function RootedChord({ marker }: { marker: string }) {
+function RootedChord({ marker, mobile = false }: { marker: string; mobile?: boolean }) {
+  const origin = mobile ? { x: 30, y: 210 } : { x: 95, y: 225 };
+  const joint = mobile ? { x: 145, y: 115 } : { x: 325, y: 90 };
+  const endpoint = mobile ? { x: 290, y: 210 } : { x: 575, y: 225 };
+  const totalY = mobile ? 280 : 290;
+  const labelSize = mobile ? 17 : 16;
+  const angleRadius = mobile ? 35 : 48;
+  const redVector = { x: joint.x - origin.x, y: joint.y - origin.y };
+  const tealVector = { x: endpoint.x - joint.x, y: endpoint.y - joint.y };
+  const redLength = Math.hypot(redVector.x, redVector.y);
+  const tealLength = Math.hypot(tealVector.x, tealVector.y);
+  const redAnglePoint = {
+    x: origin.x + (angleRadius * redVector.x) / redLength,
+    y: origin.y + (angleRadius * redVector.y) / redLength,
+  };
+  const tealAnglePoint = {
+    x: joint.x + (angleRadius * tealVector.x) / tealLength,
+    y: joint.y + (angleRadius * tealVector.y) / tealLength,
+  };
+
   return (
     <>
-      <line x1="70" y1="250" x2="610" y2="250" stroke={ink} strokeWidth="1.8" />
-      <path d="M90 250 L330 95" fill="none" stroke={red} strokeWidth="4" markerEnd={`url(#${marker})`} />
-      <path d="M330 95 L580 250" fill="none" stroke={teal} strokeWidth="4" markerEnd={`url(#${marker})`} />
-      <path d="M90 250 L580 250" fill="none" stroke={ink} strokeWidth="3" markerEnd={`url(#${marker})`} />
-      <path d="M140 250 A50 50 0 0 0 132 219" fill="none" stroke={red} strokeWidth="2" />
-      <path d="M530 250 A50 50 0 0 1 538 219" fill="none" stroke={teal} strokeWidth="2" />
-      <text x="126" y="217" fill={red}>A</text><text x="535" y="217" fill={teal}>B</text>
-      <text x="145" y="130" fill={red}>βzᑫ</text><text x="425" y="130" fill={teal}>αωzˢ⁄ᵈ</text>
-      <text x="282" y="286" fill={ink}>1 = βzᑫ + αωzˢ⁄ᵈ</text>
-      <text x="132" y="333" fill={ink}>the vertical components cancel; the horizontal components add to one</text>
+      <line
+        data-vector-guide="real-axis"
+        stroke={ink}
+        strokeWidth="1.6"
+        x1={mobile ? 18 : 70}
+        x2={mobile ? 302 : 610}
+        y1={origin.y}
+        y2={origin.y}
+      />
+      <line
+        data-vector="beta-z-q"
+        markerEnd={`url(#${marker})`}
+        stroke={red}
+        strokeWidth={mobile ? 3.4 : 4}
+        x1={origin.x}
+        x2={joint.x}
+        y1={origin.y}
+        y2={joint.y}
+      />
+      <line
+        data-vector="alpha-w"
+        markerEnd={`url(#${marker}-teal)`}
+        stroke={teal}
+        strokeWidth={mobile ? 3.4 : 4}
+        x1={joint.x}
+        x2={endpoint.x}
+        y1={joint.y}
+        y2={endpoint.y}
+      />
+      <line
+        data-vector-guide="minus-B-horizontal"
+        stroke={teal}
+        strokeDasharray="5 5"
+        strokeWidth="1.5"
+        x1={joint.x}
+        x2={joint.x + angleRadius + (mobile ? 12 : 20)}
+        y1={joint.y}
+        y2={joint.y}
+      />
+      <line
+        data-vector-guide="sum-origin"
+        stroke={ink}
+        strokeDasharray="4 5"
+        strokeWidth="1.2"
+        x1={origin.x}
+        x2={origin.x}
+        y1={origin.y + 7}
+        y2={totalY}
+      />
+      <line
+        data-vector-guide="sum-endpoint"
+        stroke={ink}
+        strokeDasharray="4 5"
+        strokeWidth="1.2"
+        x1={endpoint.x}
+        x2={endpoint.x}
+        y1={endpoint.y + 7}
+        y2={totalY}
+      />
+      <line
+        data-vector="sum-one"
+        markerEnd={`url(#${marker}-ink)`}
+        stroke={ink}
+        strokeWidth={mobile ? 2.8 : 3}
+        x1={origin.x}
+        x2={endpoint.x}
+        y1={totalY}
+        y2={totalY}
+      />
+      <path
+        d={`M${origin.x + angleRadius} ${origin.y} A${angleRadius} ${angleRadius} 0 0 0 ${redAnglePoint.x} ${redAnglePoint.y}`}
+        data-vector-angle="A"
+        fill="none"
+        stroke={red}
+        strokeWidth="2"
+      />
+      <path
+        d={`M${joint.x + angleRadius} ${joint.y} A${angleRadius} ${angleRadius} 0 0 1 ${tealAnglePoint.x} ${tealAnglePoint.y}`}
+        data-vector-angle="minus-B"
+        fill="none"
+        stroke={teal}
+        strokeWidth="2"
+      />
+      <text fill={red} fontSize={labelSize} x={mobile ? 63 : 142} y={mobile ? 184 : 196}>A</text>
+      <text fill={teal} fontSize={labelSize} x={mobile ? 180 : 382} y={mobile ? 145 : 135}>−B</text>
+      <text fill={red} fontSize={labelSize} x={mobile ? 55 : 145} y={mobile ? 145 : 128}>βz^q</text>
+      <text fill={teal} fontSize={labelSize} x={mobile ? 222 : 430} y={mobile ? 165 : 132}>αw</text>
+      <text fill={ink} fontSize={labelSize} textAnchor="middle" x={(origin.x + endpoint.x) / 2} y={totalY + (mobile ? 32 : 30)}>
+        1 = βz^q + αw
+      </text>
+      {mobile ? (
+        <text fill={ink} fontSize={labelSize} textAnchor="middle" x="160" y="350">
+          wᵈ = zˢ
+          <tspan x="160" dy="25">the imaginary parts cancel</tspan>
+        </text>
+      ) : (
+        <text fill={ink} fontSize={labelSize} textAnchor="middle" x={(origin.x + endpoint.x) / 2} y="365">
+          wᵈ = zˢ; the imaginary parts cancel
+        </text>
+      )}
     </>
   );
 }
 
-function TerminalThree() {
+function TerminalThree({ mobile = false }: { mobile?: boolean }) {
+  const realAxisY = mobile ? 285 : 290;
+  const scale = mobile ? 180 : 200;
+  const junctionX = mobile ? 205 : 410;
+  const minusOneX = junctionX - scale / 2;
+  const rootY = realAxisY - (Math.sqrt(3) / 2) * scale;
+  const labelSize = mobile ? 17 : 16;
+
   return (
     <>
-      <line x1="70" y1="250" x2="610" y2="250" stroke={ink} strokeWidth="2" />
-      <path d="M245 95 C305 112 360 178 385 250" fill="none" stroke={red} strokeWidth="4" />
-      <line x1="190" y1="250" x2="385" y2="250" stroke={copper} strokeWidth="5" />
-      <Dot x={190} y={250} color={copper} /><Dot x={385} y={250} color={red} />
-      <Dot x={245} y={95} color={ink} />
-      <text x="165" y="282" fill={ink}>−1</text><text x="370" y="282" fill={ink}>−1/2</text>
-      <text x="218" y="68" fill={ink}>e²πⁱ⁄³</text>
-      <text x="110" y="330" fill={ink}>the nonreal graph tends to −1/2; the real candidate curve continues to −1</text>
+      <line
+        data-complex-axis="real"
+        stroke={ink}
+        strokeWidth="2"
+        x1={mobile ? 48 : 235}
+        x2={mobile ? 290 : 600}
+        y1={realAxisY}
+        y2={realAxisY}
+      />
+      <line
+        data-exceptional-branch="nonreal"
+        data-real-part="-0.5"
+        stroke={red}
+        strokeWidth={mobile ? 4 : 4.5}
+        x1={junctionX}
+        x2={junctionX}
+        y1={rootY}
+        y2={realAxisY}
+      />
+      <line
+        data-exceptional-branch="real"
+        data-real-interval="[-1,-1/2]"
+        stroke={copper}
+        strokeWidth={mobile ? 5 : 5.5}
+        x1={minusOneX}
+        x2={junctionX}
+        y1={realAxisY}
+        y2={realAxisY}
+      />
+      <g data-complex-point="minus-one">
+        <Dot color={copper} x={minusOneX} y={realAxisY} />
+      </g>
+      <g data-complex-point="minus-one-half">
+        <Dot color={red} x={junctionX} y={realAxisY} />
+      </g>
+      <g data-complex-point="exp-2pi-i-over-3" data-imaginary-part="sqrt(3)/2" data-real-part="-0.5">
+        <Dot color={ink} x={junctionX} y={rootY} />
+      </g>
+      <text fill={ink} fontSize={labelSize} textAnchor="middle" x={minusOneX} y={realAxisY + 34}>−1</text>
+      <text fill={ink} fontSize={labelSize} textAnchor="middle" x={junctionX} y={realAxisY + 34}>−1/2</text>
+      <text fill={ink} fontSize={labelSize} textAnchor="middle" x={junctionX} y={rootY - 24}>e²πⁱ⁄³</text>
+      <text
+        fill={red}
+        fontSize={labelSize}
+        textAnchor={mobile ? "middle" : "start"}
+        x={mobile ? 255 : junctionX + 18}
+        y={(rootY + realAxisY) / 2}
+      >
+        Re λ = −1/2
+      </text>
+      <text fill={copper} fontSize={labelSize} textAnchor="middle" x={(minusOneX + junctionX) / 2} y="365">
+        [−1, −1/2]
+      </text>
     </>
   );
 }
@@ -450,6 +674,22 @@ function Squeeze({ marker }: { marker: string }) {
   );
 }
 
+function ArrowMarkers({ marker }: { marker: string }) {
+  return (
+    <>
+      <marker id={marker} markerHeight="7" markerWidth="8" orient="auto" refX="7" refY="3.5">
+        <path d="M0,0 L8,3.5 L0,7 Z" fill={red} />
+      </marker>
+      <marker id={`${marker}-teal`} markerHeight="7" markerWidth="8" orient="auto" refX="7" refY="3.5">
+        <path d="M0,0 L8,3.5 L0,7 Z" fill={teal} />
+      </marker>
+      <marker id={`${marker}-ink`} markerHeight="7" markerWidth="8" orient="auto" refX="7" refY="3.5">
+        <path d="M0,0 L8,3.5 L0,7 Z" fill={ink} />
+      </marker>
+    </>
+  );
+}
+
 const copy: Record<FigureKind, { title: string; description: string; caption: ReactNode; status?: string }> = {
   eigenpolygon: {
     status: "Exact diagram",
@@ -470,9 +710,30 @@ const copy: Record<FigureKind, { title: string; description: string; caption: Re
       </>
     ),
   },
-  "farey-five": { title: "The upper Farey sequence of order five", description: "A number line marks the six reduced fractions from zero to one half and highlights the cell from one third to two fifths.", caption: "Plate IX.1. Exact rational arithmetic selects the cell before any numerical radius is computed." },
-  "rooted-chord": { title: "The reciprocal-coordinate Ito identity", description: "Two colored vectors at angles A and minus B join head to tail and sum to the unit real vector.", caption: "Plate IX.2. The definitions of α and β cancel the vertical components and make the horizontal components sum to one on the chosen fractional-power branch." },
-  "terminal-three": { title: "The order-three terminal candidate curve", description: "A nonreal curve approaches minus one half and a real segment continues from minus one half to minus one.", caption: "Plate IX.3. The exceptional nonreal graph tends to −1/2, while the same algebraic family supplies the segment [−1,−1/2]. The curved interpolation is schematic." },
+  "farey-five": {
+    status: "Exact rational diagram",
+    title: "The fractions of F₅ in [0, 1/2]",
+    description:
+      "A number line places the six fractions of the Farey sequence F five from zero through one half at their exact relative positions. The interval from one third to two fifths is highlighted, and x equals three eighths is marked strictly inside it.",
+    caption:
+      "Plate IX.1. The fractions of F₅ in [0,1/2] are shown at their exact number-line positions. The prescribed argument x=3/8 lies strictly between 1/3 and 2/5.",
+  },
+  "rooted-chord": {
+    status: "Exact vector-identity diagram",
+    title: "The identity 1 = βz^q + αw, where w^d = z^s",
+    description:
+      "A red vector beta z to the q at angle A and a teal vector alpha w at angle minus B are joined head to tail. Their imaginary components cancel. Their sum is the positive real vector one, drawn on a parallel line below so that its ink arrowhead remains distinct from the teal arrowhead.",
+    caption:
+      "Plate IX.2. In the identity 1=βz^q+αw with w^d=z^s, the red and teal vectors have equal and opposite imaginary components. Their positive real components add to one; the total vector is translated downward only to keep the arrowheads distinct.",
+  },
+  "terminal-three": {
+    status: "Exact algebraic diagram",
+    title: "The exceptional candidate curve for n = 3",
+    description:
+      "The nonreal branch is the exact vertical segment with real part minus one half, from exp of two pi i over three down to minus one half. The selected real branch is the exact horizontal segment from minus one half to minus one.",
+    caption:
+      "Plate IX.3. For n=3, the nonreal branch is the vertical segment {−1/2+iy: 0≤y≤√3/2}, and the selected real branch is [−1,−1/2].",
+  },
   reflection: { title: "Returning from the selected orientation", description: "A Farey interval reflects about one half while a complex point reflects across the real axis.", caption: "Plate X.1. Reflection reverses order but preserves denominators, modulus, d, e, and the absolute scalar equation." },
   jensen: { title: "Strict convexity makes the parameters constant", description: "A strictly convex graph, two separated sample points, and their mean below the joining chord.", caption: "Plate X.2. The equality for chosen real arguments fixes their mean; strict Jensen makes a common argument the unique constant-parameter case." },
   "cycle-ledger": { title: "Local cycles or one global cycle", description: "Three deterministic blocks have local return arcs and one highlighted route through every block terminal.", caption: "Plate XI.1. Any subset of local cycles is vertex-disjoint, but the global cycle meets every terminal and cannot coexist with a local cycle." },
@@ -484,7 +745,16 @@ export function StochasticFareyFigure({ kind }: { kind: FigureKind }) {
   const description = copy[kind];
   const marker = `sf-arrow-${kind}`;
   const mobileMarker = `${marker}-mobile`;
-  const hasDedicatedMobileLayout = kind === "eigenpolygon" || kind === "new-shell";
+  const hasDedicatedMobileLayout =
+    kind === "eigenpolygon" ||
+    kind === "new-shell" ||
+    kind === "farey-five" ||
+    kind === "rooted-chord" ||
+    kind === "terminal-three";
+  const mobileMinLabelSize =
+    kind === "farey-five" || kind === "rooted-chord" || kind === "terminal-three"
+      ? 17
+      : 18;
   return (
     <figure className="topic-ii-concept-figure">
       <div className="topic-ii-concept-heading">
@@ -501,9 +771,7 @@ export function StochasticFareyFigure({ kind }: { kind: FigureKind }) {
         <title id={`sf-${kind}-title`}>{description.title}</title>
         <desc id={`sf-${kind}-desc`}>{description.description}</desc>
         <defs>
-          <marker id={marker} markerHeight="7" markerWidth="8" orient="auto" refX="7" refY="3.5">
-            <path d="M0,0 L8,3.5 L0,7 Z" fill={red} />
-          </marker>
+          <ArrowMarkers marker={marker} />
         </defs>
         {kind === "eigenpolygon" ? <Eigenpolygon marker={marker} /> : null}
         {kind === "new-shell" ? <NewShell marker={marker} /> : null}
@@ -521,7 +789,7 @@ export function StochasticFareyFigure({ kind }: { kind: FigureKind }) {
           aria-labelledby={`sf-${kind}-mobile-title sf-${kind}-mobile-desc`}
           className="topic-ii-concept-svg topic-ii-concept-svg-mobile"
           data-figure-layout="mobile"
-          data-mobile-min-label-size="18"
+          data-mobile-min-label-size={mobileMinLabelSize}
           role="img"
           viewBox="0 0 320 390"
         >
@@ -530,12 +798,13 @@ export function StochasticFareyFigure({ kind }: { kind: FigureKind }) {
             {description.description} Compact mobile layout.
           </desc>
           <defs>
-            <marker id={mobileMarker} markerHeight="7" markerWidth="8" orient="auto" refX="7" refY="3.5">
-              <path d="M0,0 L8,3.5 L0,7 Z" fill={red} />
-            </marker>
+            <ArrowMarkers marker={mobileMarker} />
           </defs>
           {kind === "eigenpolygon" ? <Eigenpolygon marker={mobileMarker} mobile /> : null}
           {kind === "new-shell" ? <NewShell marker={mobileMarker} mobile /> : null}
+          {kind === "farey-five" ? <FareyFive mobile /> : null}
+          {kind === "rooted-chord" ? <RootedChord marker={mobileMarker} mobile /> : null}
+          {kind === "terminal-three" ? <TerminalThree mobile /> : null}
         </svg>
       ) : null}
       <figcaption>{description.caption}</figcaption>

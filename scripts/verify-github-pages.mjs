@@ -13,7 +13,9 @@ const visibleTextFromHtml = (html) =>
     .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
     .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
     .replace(/<annotation\b[\s\S]*?<\/annotation>/gi, " ")
-    .replace(/<[^>]*>/g, " ");
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 const pages = [
   ["index.html", "Under construction"],
   ["history/index.html", "How a geometric question became an arithmetic boundary"],
@@ -48,6 +50,10 @@ const pages = [
     "Returning to stochastic eigenvalue regions",
   ],
   [
+    "proof/topic-ix/index.html",
+    "Candidate curves from the Ito equation on Farey intervals",
+  ],
+  [
     "prerequisites/index.html",
     "The small library this reader assumes",
   ],
@@ -66,6 +72,7 @@ const firstPublicationDates = new Map([
   ["proof/topic-vi/index.html", "15 August 2026"],
   ["proof/topic-vii/index.html", "20 August 2026"],
   ["proof/topic-viii/index.html", "20 August 2026"],
+  ["proof/topic-ix/index.html", "20 August 2026"],
 ]);
 
 for (const [relativePath, expectedText] of pages) {
@@ -105,7 +112,7 @@ for (const [relativePath, expectedText] of pages) {
   assert.match(visibleText, /24 July 2026/);
   assert.match(visibleText, /Website edition/);
   assert.match(visibleText, /Last revised\s+20 August 2026/);
-  assert.match(visibleText, /101-page site-hosted PDF/);
+  assert.match(visibleText, /103-page site-hosted PDF/);
   assert.doesNotMatch(html, />Prepared</);
 }
 
@@ -134,12 +141,13 @@ for (const relativePath of [
   "proof/topic-vi/index.html",
   "proof/topic-vii/index.html",
   "proof/topic-viii/index.html",
+  "proof/topic-ix/index.html",
 ]) {
   const html = await readFile(path.join(outputRoot, relativePath), "utf8");
   assert.match(html, /Forthcoming/);
   assert.doesNotMatch(
     html,
-    /href="\/karpelevic\/proof\/topic-(?:ix|x|xi|xii(?:\/[ab])?|xiii|xiv)\//,
+    /href="\/karpelevic\/proof\/topic-(?:x|xi|xii(?:\/[ab])?|xiii|xiv)\//,
   );
 }
 
@@ -239,9 +247,39 @@ for (const relativePath of [
   assert.match(html, /id="karp:eq:new-shell"/);
   assert.match(html, /id="topic-viii-exact-sources"/);
   assert.doesNotMatch(visibleText, /Rᴺ|Θᴺ/);
+  assert.match(
+    html,
+    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/karpelevic\/proof\/topic-ix\//,
+  );
+}
+
+{
+  const html = await readFile(
+    path.join(outputRoot, "proof/topic-ix/index.html"),
+    "utf8",
+  );
+  const visibleText = visibleTextFromHtml(html);
+  assert.match(html, /data-proof-route="topic-ix"/);
+  assert.match(
+    visibleText,
+    /Candidate curves from the Ito equation on Farey intervals/i,
+  );
+  assert.match(visibleText, /row-stochastic/i);
+  assert.match(visibleText, /Θₙ is the set of all complex eigenvalues/i);
+  assert.match(visibleText, /exp\(2πit\) runs once along the upper unit semicircle/i);
+  assert.match(visibleText, /the ray at argument 2πx is/i);
+  assert.match(html, /q&lt;s/);
+  assert.match(visibleText, /A unique modulus at each prescribed argument/i);
+  assert.match(visibleText, /Certified numerical evaluation/i);
+  assert.match(visibleText, /Kirkland–Laffey–Šmigoc \(2020\)/i);
+  assert.match(html, /id="topic-ix-exact-sources"/);
+  assert.match(
+    html,
+    /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="\/karpelevic\/proof\/topic-viii\//,
+  );
   assert.doesNotMatch(
     html,
-    /href="\/karpelevic\/proof\/topic-ix\//,
+    /href="\/karpelevic\/proof\/topic-x\//,
   );
 }
 
@@ -377,7 +415,6 @@ await access(path.join(outputRoot, ".nojekyll"));
 await assert.rejects(access(path.join(outputRoot, ".vite")));
 await assert.rejects(access(path.join(outputRoot, "code")));
 for (const futureTopic of [
-  "topic-ix",
   "topic-x",
   "topic-xi",
   "topic-xii",

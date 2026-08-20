@@ -18,7 +18,7 @@ export default function TopicVIIIPage() {
     <ProofChapterShell
       firstPublishedAt={firstPublishedAt}
       routeKey="topic-viii"
-      manuscriptPages="80–83"
+      manuscriptPages="82–84"
       overview={[
         "Topic VII proved Theorem 1.4's finite product identity conditionally for an N-critical planar map. Topic VIII now returns to row-stochastic matrices and verifies that the relevant radial boundary points satisfy that hypothesis.",
         "Compactness, star-shapedness with respect to the origin, and the unit-circle classification make the radial function of each Karpelevič region precise. For N≥4, a radial boundary point that first appears at order N yields an N-critical multiplication map. Orders one, two, and three are reserved for the direct proof in Topic XIII.",

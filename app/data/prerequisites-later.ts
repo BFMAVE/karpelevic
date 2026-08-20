@@ -429,9 +429,9 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
   {
     slug: "projective-farey",
     numeral: "IV",
-    title: "Projective geometry and Farey cells",
+    title: "Projective geometry and Farey intervals",
     deck:
-      "The last prerequisite shelf joins two subjects. Projective geometry explains why successive boundary projections have a rigid return map; Farey arithmetic names the determinant-one cell selected by the return towers.",
+      "The last prerequisite shelf joins two subjects. Projective geometry explains why successive boundary projections have a rigid return map; Farey arithmetic identifies the interval between consecutive fractions selected by the return towers.",
     vocabulary: [
       {
         term: "Central projection",
@@ -481,7 +481,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
         statement:
           "The mediant (p+r)/(q+s) lies strictly between p/q and r/s and has the smallest possible new denominator.",
         explanation:
-          "It is the arithmetic point at which a Farey cell splits when the order reaches q+s.",
+          "It is the arithmetic point at which a Farey interval splits when the order reaches q+s.",
       },
     ],
     example: {

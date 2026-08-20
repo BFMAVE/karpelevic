@@ -207,12 +207,13 @@ test("the shared copper figure color meets AA text contrast on the paper backgro
   assert.ok(contrastRatio(copper, sitePaper) >= 4.5, "copper meets AA against site paper");
 });
 
-test("Topic IX keeps its existing single-layout Plate conventions", async () => {
+test("Topic IX uses its exact responsive Plate conventions", async () => {
   const html = await render("/proof/topic-ix");
   const figure = figureMarkup(html, "farey-five");
 
   assert.equal([...figure.matchAll(/data-figure-layout="desktop"/g)].length, 1);
-  assert.doesNotMatch(figure, /sf-farey-five-mobile/);
-  assert.match(figure, />Deterministic mathematical plate<\/span>/);
+  assert.equal([...figure.matchAll(/data-figure-layout="mobile"/g)].length, 1);
+  assert.match(figure, /sf-farey-five-mobile-title/);
+  assert.match(figure, />Exact rational diagram<\/span>/);
   assert.match(visibleText(figure), /Plate IX\.1\./);
 });
