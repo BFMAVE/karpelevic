@@ -1772,3 +1772,48 @@ full local source history remain later site milestones.
   returns HTTP 200; Topic VIII remains forthcoming and returns HTTP 404. The
   owner-only Sites production copy is version 4 and is synchronized to the
   same source commit.
+
+## Current milestone — Topic VIII publication (20 August 2026)
+
+- **The Topic VII–VIII handoff is explicit:** Topic VII closes its conditional
+  theorem for an `N`-critical planar map, and Topic VIII then proves that a
+  radial boundary point new at order `N` has exactly the required stochastic
+  vertex-count properties. The reader defines the eigenvalue regions before
+  use and introduces the radial function only after compactness and
+  star-shapedness justify the attained maximum.
+- **The formal stochastic interface is complete:** the invariant-polytope
+  criterion treats the singleton case and matrix-order padding explicitly;
+  the eigenvalue regions are compact, nested, and star-shaped with respect to
+  the origin; the unit-circle and interior-origin arguments are literal; and
+  the proof of Lemma II.4.5 retains the positive factor `rho^k`. For `N >= 4`,
+  Proposition II.4.7 concludes both `nu_poly(T_lambda)=N` and
+  `nu_poly(tT_lambda)>N` for every `t>1`. All formal labels and anchors remain
+  stable.
+- **Both plates are now exact:** Plate VIII.1 is the centered equilateral
+  midpoint construction for `lambda=(1/2)e^(i pi/3)`, and Plate VIII.2 is a
+  one-dimensional radial-endpoint diagram showing the strict order between
+  the order-`N-1` and order-`N` endpoints and the excluded outward ray. Each
+  has a dedicated accessible mobile layout with true SVG subscripts and no
+  overflow.
+- **Verification and artifacts:** Tectonic compiles a clean 101-page PDF;
+  canonical TeX SHA-256 is
+  `504602336bd3515e7a36fba08ff7116f12156dab4c0297d92754fe52a248a73d`;
+  generated Part II and Topic VIII–XI proof-data SHA-256 values are
+  `992f7c65745249a513d541107d190fb4086a492b30ac8db698ab4812613faa37`
+  and `f78f3687134d607ad0760c1b6b9519b9f62d01dce6426743e817bb670436e9d6`;
+  and the compiled/public PDF SHA-256 is
+  `c5ef3583e3d54014a69bbbf6d006efe75cbddc5b6c3a89cbb54ae0e423a55fb2`.
+  ESLint, all 52 tests, deterministic generation, Pages verification,
+  standalone/bundle integrity, fragment/privacy checks, and live
+  desktop/390-pixel browser QA pass.
+- **Portable editions:** the individual Topic VIII HTML has SHA-256
+  `6487912ccedd78efd7c6702331e065d9bee9fc2156404a28190343247415ccd6`
+  and marks Topic IX forthcoming. The two-member Topic VIII–IX review bundle
+  has SHA-256
+  `66f21cdabc5f74d25de8bd467e2585c55d199746902b7b311486093bfb94a8a4`
+  and contains exactly the two cross-linked, self-contained HTML files.
+- **Publication status:** source implementation commit `210815b`; static-only
+  Pages commit `abdeb5d`. Topic VIII was first published on 20 August 2026 and
+  returns HTTP 200; Topic IX remains offline and returns HTTP 404. The
+  owner-only Sites production copy is version 5 and is synchronized to source
+  commit `210815b`.
