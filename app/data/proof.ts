@@ -477,7 +477,7 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "For N≥4, how do the three first-return cases yield consecutive Farey fractions and one finite product identity?",
     overview: [
-      "Determinant-one adjacency identifies the relevant Farey interval, and reflection aligns the rotation arithmetic with the chosen contact orientation.",
+      "Determinant-one adjacency identifies the relevant Farey interval, and reflection orders its denominators correctly for the selected complex orientation.",
       "The proof then separates the case with exactly one relative-interior contact in each orbit from the case with more than one in some orbit. Both produce the same finite product identity with possibly different parameters βⱼ; the chosen real arguments of all factors satisfy uⱼ∈[A,M).",
     ],
     itemNumbers: [53, 54, 55, 56, 57, 58, 59],

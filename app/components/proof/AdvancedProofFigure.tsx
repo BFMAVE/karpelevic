@@ -90,7 +90,7 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
       "Plate VII.1. In F₇, 1/3 and 2/5 are consecutive because 3·2−1·5=1 and 3+5=8>7. Their mediant 3/8 lies between them but is not in F₇. Reflection x↦1−x reverses orientation and gives the consecutive endpoints 3/5 and 2/3; their mediant 5/8 is likewise not in F₇. Filled circles mark the F₇ endpoints, open diamonds mark the excluded mediants, and both rows use the same local affine scale.",
   },
   "jensen-sheet": {
-    title: "All varying factors share one continuous upper-half-plane argument interval",
+    title: "Bounds for the chosen factor arguments",
     description:
       "In a representative complex-plane placement, mu to the q is the included right endpoint in quadrant one, and mu to the q minus one is the excluded left endpoint in quadrant two. Their horizontal separation represents one, and the displayed modulus of mu to the q is less than one. As beta increases toward one, mu to the q minus beta moves from right to left. In general mu to the q may lie in quadrant one or quadrant two; its argument lies from A inclusive to M exclusive, where pi over two is less than M and M is less than pi.",
     caption:
