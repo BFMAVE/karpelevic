@@ -140,7 +140,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
         statement:
           "If the eigenvalues are ρe^{±iθ}, then the two complex structures J± make T equal to multiplication by ρe^{±iθ}.",
         explanation:
-          "The two choices are conjugate and induce opposite orientations. The proof may use one orientation for contact bookkeeping and later select the other for the closed-return product.",
+          "The two choices are conjugate and induce opposite orientations. The proof may use one orientation for contact bookkeeping and later select the other for the finite product identity.",
       },
       {
         title: "A weighted norm bounds the spectrum",
@@ -523,7 +523,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
       {
         label: "Topic VII",
         text:
-          "For N≥4, unimodular return data determines Farey data and a complex closed-return product identity; the smaller orders are treated directly.",
+          "For N≥4, unimodular return data determines consecutive Farey fractions, a finite product identity, and an equality for chosen real arguments; the smaller orders are treated directly.",
         href: "/proof/#topic-farey-return",
       },
       {

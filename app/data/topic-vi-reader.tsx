@@ -481,7 +481,7 @@ const theorem13: ProofResultData = {
     ),
   ],
   takeaway:
-    "The intrinsic polygonal part of the argument is complete. Topic VII translates these three first-return cases into Farey intervals and closed-return product relations; stochastic matrices enter in Topic VIII.",
+    "The polygonal part of the argument is complete. Topic VII translates these three first-return cases into consecutive Farey fractions, a finite product identity, and an equality for chosen real arguments; stochastic matrices enter in Topic VIII.",
   sourceIds: theorem13Item.sourceIds,
   sourceRelation:
     "The exact assembly and proof are given here. The displayed sources document earlier boundary-contact and return constructions but do not establish a statement-level priority claim for this theorem.",

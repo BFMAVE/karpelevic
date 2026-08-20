@@ -37,7 +37,7 @@ function exactResult(label: FormalLabel): string {
 
 const commonImports = [
   {
-    label: "Topic IX · Farey cells and the scalar candidate",
+    label: "Topic IX · Farey intervals and the scalar candidate",
     href: sitePath("/proof/topic-ix/"),
     explanation: (
       <>
@@ -50,7 +50,7 @@ const commonImports = [
     href: sitePath("/proof/topic-x/"),
     explanation: (
       <>
-        proves that a product with varying parameters on one common continuous argument interval lies no farther out than its constant-parameter counterpart, with strictness unless all factor parameters agree.
+        proves that a product with varying parameters whose chosen factor arguments lie in [<i>A</i>,<i>M</i>) lies no farther out than its constant-parameter counterpart, with strictness unless all factor parameters agree.
       </>
     ),
   },
@@ -176,20 +176,20 @@ const partAResults: readonly ProofResultData[] = [
       },
       {
         term: "Constant parameter list",
-        definition: <>All factor parameters β<sub>1</sub>,…,β<sub>m</sub> are the same number β, and therefore all α<sub>j</sub>=1−β are also equal. Topic X proved that this symmetric choice uniquely maximizes the radius under the phase constraint.</>,
+        definition: <>All factor parameters β<sub>1</sub>,…,β<sub>m</sub> are the same number β, and therefore all α<sub>j</sub>=1−β are also equal. Topic X proved that this symmetric choice uniquely maximizes the radius under the constraint on the sum of chosen real arguments.</>,
       },
       {
-        term: "Padding factor",
+        term: "Appended factor equal to 1",
         definition: <>The additional parameter pair β<sub>M</sub>=0 and α<sub>M</sub>=1 contributes μ<sup>−q</sup>(μ<sup>q</sup>−0)=1. It changes the factor count but not the numerical value of the product.</>,
         example: <>This is analogous to appending a factor 1 to an ordinary product: the expression is unchanged, but it is now represented with one more factor.</>,
       },
       {
-        term: "Common continuous argument interval",
-        definition: <>The single continuous branch of the argument function on which Topic X’s strict-convexity inequality applies. Placing every factor argument in [<i>A</i>,<i>M</i><sub>*</sub>) prevents hidden additions of 2π.</>,
+        term: "Bounds for chosen factor arguments",
+        definition: <>Topic X’s strict-convexity inequality applies because every chosen factor argument belongs to [<i>A</i>,<i>M</i><sub>*</sub>), preventing hidden additions of 2π.</>,
       },
       {
-        term: "Lifted argument",
-        definition: <>An ordinary complex argument is determined only modulo 2π. A lifted argument chooses one continuous real-valued representative <i>u</i>, so the proof can add arguments as real numbers and record the winding integer explicitly.</>,
+        term: "Chosen real argument",
+        definition: <>An ordinary complex argument is determined only modulo 2π. Here one continuous real-valued representative <i>u</i> is chosen, so the proof can add arguments as real numbers and record the winding integer explicitly.</>,
       },
       {
         term: "Varying-parameter product",
@@ -209,15 +209,15 @@ const partAResults: readonly ProofResultData[] = [
       },
       {
         title: "Recover the old factor argument",
-        explanation: <>The scalar formulas for α and β resolve μ<sup>q</sup>−β into modulus times e<sup>i(A+Bₘ)</sup>. Thus every old factor has the same lifted argument <i>A+B</i><sub>m</sub>; the old phase relation follows by direct substitution rather than being assumed.</>,
+        explanation: <>The scalar formulas for α and β resolve μ<sup>q</sup>−β into modulus times e<sup>i(A+Bₘ)</sup>. Thus every old factor has the same chosen real argument <i>A+B</i><sub>m</sub>; the old equality for their sum follows by direct substitution rather than being assumed.</>,
       },
       {
         title: "Append exactly one identity factor",
         explanation: <>Set β<sub>M</sub>=0, α<sub>M</sub>=1, and <i>u</i><sub>M</sub>=<i>A</i>. Multiplying the old product by μ<sup>−q</sup>(μ<sup>q</sup>−0)=1 changes the exponent from <i>s−mq</i> to <i>s−Mq</i> and produces the order-<i>n</i> product exactly.</>,
       },
       {
-        title: "Audit the lifted phase",
-        explanation: <>Subtracting <i>qϑ</i> from the old phase and adding <i>A=qϑ−2πp</i> changes the integer winding from <i>r−mp</i> to <i>r−Mp</i>. This proves the new phase identity with no untracked multiple of 2π.</>,
+        title: "Check the equality for chosen real arguments",
+        explanation: <>Subtracting <i>qϑ</i> from the old real-argument sum and adding <i>A=qϑ−2πp</i> changes the integer winding from <i>r−mp</i> to <i>r−Mp</i>. This proves the new equality with no untracked multiple of 2π.</>,
       },
       {
         title: "Keep every factor in the permitted interval",

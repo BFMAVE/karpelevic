@@ -49,7 +49,7 @@ export const homeContent = {
     {
       label: "Part II",
       title: "Return to stochastic eigenvalue regions",
-      text: "For orders at least four, the resulting closed-return product is combined with a sharp scalar comparison, explicit sparse realizations, and Farey refinement; the smaller orders are treated directly. Together these arguments derive the Farey–Ito boundary from invariant polygons.",
+      text: "For orders at least four, the resulting finite product identity is combined with a sharp scalar comparison, explicit sparse realizations, and Farey refinement; the smaller orders are treated directly. Together these arguments derive the Farey–Ito boundary from invariant polygons.",
     },
   ],
   noveltyLedger: [
@@ -61,7 +61,7 @@ export const homeContent = {
     {
       established: "Farey-indexed boundary formulations and matrix realizations",
       thisPaper:
-        "Organizes a different proof route through critical invariant-polygon contacts and a closed-return product identity.",
+        "Organizes a different proof route through critical invariant-polygon contacts and a finite product identity.",
     },
     {
       established: "Elementary convexity, compactness, and stochastic-matrix background",
@@ -70,7 +70,7 @@ export const homeContent = {
     },
   ],
   paperSummary:
-    "The paper studies the least polygonal complexity of an elliptic contraction and, for complexities at least four, develops a contact-return normal form at radial criticality. Combined with a direct treatment of the smaller orders, this produces a geometric derivation of the classical Farey–Ito boundary for real row-stochastic matrices.",
+    "The paper studies the least polygonal complexity of an elliptic contraction and, for complexities at least four, derives a finite first-return description and product identity at radial criticality. Combined with a direct treatment of the smaller orders, this produces a geometric derivation of the classical Farey–Ito boundary for real row-stochastic matrices.",
   personalPrompt:
     "Author prompt — replace before publication: How did you first encounter the Karpelevič region? What feature of the problem made you keep returning to it, and when did invariant polygons become the decisive point of view?",
   manuscript: {

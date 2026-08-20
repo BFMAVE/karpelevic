@@ -151,7 +151,11 @@ test("reader-visible proof terminology uses the coordinated conventional vocabul
   );
   assert.match(
     rendered.get("/proof/topic-vii") ?? "",
-    /Closed-return product data \(monodromy\)/,
+    /Consecutive Farey fractions and the finite product identity for N≥4/i,
+  );
+  assert.doesNotMatch(
+    rendered.get("/proof/topic-vii") ?? "",
+    /\bmonodromy\b|closed-return product|return-recurrence|lifted phase|phase identity|common continuous argument interval|contact-return normal form/i,
   );
   assert.match(
     rendered.get("/proof/topic-xi") ?? "",
@@ -261,6 +265,11 @@ test("Topics VII and VIII form a defined-before-use stochastic handoff", async (
   assert.doesNotMatch(
     visibleText,
     /vertex budget|least-vertex witness|absorbing-state padding|outward (?:enlargement|rescaling|witness)/i,
+  );
+  assert.match(
+    visibleText,
+    /Topic VII proved[\s\S]{0,100}finite product/i,
+    "Topic VIII names Topic VII's result with the same literal terminology",
   );
 
   const propositionStart = topicVIII.indexOf(
@@ -489,7 +498,7 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   );
   assert.match(
     topicVIText,
-    /Topic VII translates these three first-return cases into Farey intervals and closed-return product relations/i,
+    /Topic VII translates these three first-return cases into consecutive Farey fractions, a finite product identity, and an equality for chosen real arguments/i,
   );
   assert.doesNotMatch(topicVIText, /contact-field|target field|strict field/i);
   assert.doesNotMatch(topicVIText, /\bseed\b|\bledger\b|\banchor\b/i);
@@ -513,9 +522,12 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.doesNotMatch(topicVICard(46, 47), /proof-chapter-provenance/);
   assert.doesNotMatch(topicVICard(48, 49), /proof-chapter-provenance/);
 
-  assert.match(topicVIIText, /Standing scope for the critical-polygon product theorem: N\s*≥\s*4/);
+  assert.match(topicVIIText, /Standing scope for Theorem 1\.4: N\s*≥\s*4/);
   assert.match(topicVIIText, /More than one relative-interior contact in some orbit:?\s*φ\s*>\s*δ[\s\S]*Assume N\s*≥\s*4/i);
-  assert.match(topicVIIText, /Return factors lie on (?:one|the) common continuous argument interval[\s\S]*Assume N\s*≥\s*4/i);
+  assert.match(
+    topicVIIText,
+    /Bounds for the arguments of(?: the factors)?[\s\S]*Assume N\s*≥\s*4/i,
+  );
   assert.match(topicVIIText, /Notation and return cases imported from Topics I–VI/);
   assert.match(topicVIIText, /θ\s*=\s*arg\s*\+\s*\(λ\).*x\s*=\s*θ\/\(2π\)/i);
   assert.match(topicVIIText, /α\s*i\s*>\s*0,\s*β\s*i\s*≥\s*0.*α\s*i\s*\+\s*β\s*i\s*=\s*1/i);
@@ -530,7 +542,23 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.match(topicVIIText, /0\s*<\s*β\s*i\s*<\s*1.*relative-interior contact/i);
   assert.match(topicVIIText, /β\s*i\s*=\s*0 is the retained endpoint x\s*i/i);
   assert.match(topicVIIText, /lifted vertex arguments Θ\s*i are real representatives/i);
-  assert.match(topicVIIText, /varying-parameter product relation/i);
+  assert.match(topicVIIText, /finite product identity/i);
+  assert.match(
+    topicVIIText,
+    /Corollary 6\.2 supplies q,p,d,e with qκ-pN=1 and N=qd\+e/i,
+  );
+  assert.match(
+    topicVIIText,
+    /the equations λ\^q xⱼ₋₁=ξⱼ and λ\^e x_d=x₀/i,
+  );
+  assert.match(
+    topicVIIText,
+    /endpoint-contact indices that become factors with β=0/i,
+  );
+  assert.doesNotMatch(
+    topicVIIText,
+    /\bmonodromy\b|closed-return product|return-recurrence|lifted phase|phase identity|common continuous argument interval|contact-return normal form/i,
+  );
   assert.doesNotMatch(
     topicVIIText,
     /heterogeneous Ito product|homogeneous product|signed remainder|Farey carrier|Jensen sheet/i,
@@ -551,6 +579,11 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
     [...topicVII.matchAll(/\sid="thm:complex-monodromy"/g)].length,
     1,
     "Theorem 1.4 has one anchor",
+  );
+  assert.match(
+    topicVII,
+    /id="prop:minimal-block-product"[\s\S]*?<ol class="part-i-alpha-enumeration">[\s\S]*?<span class="part-i-alpha-label">\(a\)<\/span>[\s\S]*?<span class="part-i-alpha-label">\(b\)<\/span>/,
+    "Proposition 8.6 visibly preserves its (a) and (b) case labels",
   );
   for (const equationId of [
     "eq:hetero-parameters",

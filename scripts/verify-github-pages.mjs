@@ -41,7 +41,7 @@ const pages = [
   ],
   [
     "proof/topic-vii/index.html",
-    "Farey data and the closed-return product for N≥4",
+    "Consecutive Farey fractions and the finite product identity for N≥4",
   ],
   [
     "proof/topic-viii/index.html",

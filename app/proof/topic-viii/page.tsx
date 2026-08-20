@@ -20,7 +20,7 @@ export default function TopicVIIIPage() {
       routeKey="topic-viii"
       manuscriptPages="80–83"
       overview={[
-        "Topic VII proved the closed-return product theorem conditionally for an N-critical planar map. Topic VIII now returns to row-stochastic matrices and verifies that the relevant radial boundary points satisfy that hypothesis.",
+        "Topic VII proved Theorem 1.4's finite product identity conditionally for an N-critical planar map. Topic VIII now returns to row-stochastic matrices and verifies that the relevant radial boundary points satisfy that hypothesis.",
         "Compactness, star-shapedness with respect to the origin, and the unit-circle classification make the radial function precise. For N≥4, a non-inherited radial maximum gives νpoly(Tλ)=N and νpoly(tTλ)>N for every t>1; in the manuscript’s terminology, Tλ is N-critical. Orders one, two, and three are reserved for the direct proof in Topic XIII.",
       ]}
       readingConvention={

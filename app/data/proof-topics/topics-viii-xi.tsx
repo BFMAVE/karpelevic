@@ -127,7 +127,7 @@ export function TopicVIIIChapter() {
       >
         <p>
           <a href={sitePath("/proof/topic-vii/#part-i-item-4")}>Topic VII</a>{" "}
-          proved the closed-return product theorem for an <var>N</var>-critical
+          proved the finite product theorem for an <var>N</var>-critical
           planar map when <span className="math-inline">N≥4</span>. The present
           topic supplies the missing stochastic interface: a radial boundary
           point of Θ<sub>N</sub> that is not in Θ<sub>N−1</sub> gives exactly the
@@ -440,10 +440,10 @@ export function TopicXChapter() {
       <ProofDependencyContract
         imported={[
           {
-            label: "Topic VII — closed-return product and Farey data",
+            label: "Topic VII — consecutive Farey fractions and a finite product identity",
             href: sitePath("/proof/topic-vii/"),
             explanation:
-              "supplies, for N≥4, the varying-parameter product, lifted phase identity, and common continuous argument interval obtained from critical polygons.",
+              "supplies, for N≥4, the finite product with parameters βⱼ, the equality for chosen real arguments, and the bounds uⱼ∈[A,M) obtained from critical polygons.",
           },
           {
             label: "Topic VIII — criticality of a non-inherited radial maximum",
@@ -472,8 +472,8 @@ export function TopicXChapter() {
         ]}
         provedHere={
           <p>
-            We transfer Part I&apos;s closed-return product data to the stochastic
-            extremum, audit both possible complex orientations, construct the
+            We apply Part I&apos;s finite product identity to the stochastic
+            extremum, check both possible complex orientations, construct the
             log-sine potential, and prove that every varying parameter list has
             radius no larger than the constant-parameter case.
           </p>
@@ -496,8 +496,8 @@ export function TopicXChapter() {
           argument in <span className="math-inline">(0,2π)</span>. We write
           {" "}<span className="math-inline">ϑ=arg₊(μ)</span> and
           {" "}<span className="math-inline">y=ϑ/(2π)</span>. Keeping this
-          lifted real angle, instead of reducing every equation modulo
-          {" "}<span className="math-inline">2π</span>, is what makes the phase
+          chosen real angle, instead of reducing every equation modulo
+          {" "}<span className="math-inline">2π</span>, is what makes the
           average in Theorem II.6.1 exact.
         </p>
         <p>
@@ -516,7 +516,7 @@ export function TopicXChapter() {
         title="Compress the geometry and repair orientation"
         introduction={
           <p>
-            The imported closed-return product theorem states exactly which Part I
+            The imported finite product theorem states exactly which Part I
             conclusions enter.
             The reflection lemma shows that an existential orientation choice
             cannot change the modulus comparison.
@@ -546,8 +546,8 @@ export function TopicXChapter() {
           {" "}<span className="math-inline">B=(2πr−sϑ)/d</span>. These are
           positive and satisfy <span className="math-inline">A+B&lt;π</span>.
           Choose
-          {" "}<span className="math-inline">M=Arg(μᑫ−1)</span> on the common
-          continuous argument interval supplied by Theorem II.5.1, where
+          {" "}<span className="math-inline">M=Arg(μᑫ−1)</span> using the
+          chosen real arguments supplied by Theorem II.5.1, where
           {" "}<span className="math-inline">A&lt;M&lt;π</span>. For a factor
           parameter β, let <span className="math-inline">u=Arg(μᑫ−β)</span> on
           that same continuous branch and define
@@ -558,8 +558,8 @@ export function TopicXChapter() {
         <p>
           Therefore <span className="math-inline">F″(u)=csc²(M−u)&gt;0</span>
           throughout the selected interval: <var>F</var> is strictly convex.
-          The lifted closed-return phase identity fixes the average of the factor arguments,
-          while the product identity fixes the sum of their potentials. Jensen
+          The equality eϑ+Σuⱼ=2π(r−dp) fixes the average of the factor
+          arguments, while the product identity fixes the sum of their potentials. Jensen
           then compares every varying parameter list with the constant list.
         </p>
         <p id="karp:eq:rhoq-sine" className="display-equation proof-setup-equation">
@@ -578,7 +578,7 @@ export function TopicXChapter() {
         introduction={
           <p>
             Every sign, branch, and equality condition is part of the formal
-            theorem. The guide additionally expands the phase arithmetic and
+            theorem. The guide additionally expands the chosen-argument arithmetic and
             the monotonicity step that converts the trigonometric inequality
             into a radial one.
           </p>

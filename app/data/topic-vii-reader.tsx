@@ -72,15 +72,15 @@ export const topicVIISetup: AdvancedProofSetup = {
       α<sub>j</sub>x<sub>j</sub>. The lifted vertex arguments
       Θ<sub>i</sub> are real representatives increasing along the chosen
       polygon boundary; their exact, rather than modular, differences supply
-      the phase equations below.
+      the equalities for chosen real arguments below.
     </p>
     <p>
       The Farey sequence F<sub>N</sub> is the increasing list of reduced
       fractions in [0,1] with denominator at most N. A <dfn>Farey interval</dfn>
       is the open interval between two consecutive terms of F<sub>N</sub>.
       Topic VII translates each of the three return cases above into one such
-      interval, a varying-parameter product relation, and an exact lifted
-      phase identity.
+      interval, a finite product identity with parameters β<sub>j</sub>, and an
+      equality for chosen real arguments of its factors.
     </p>
   `,
 };
@@ -179,52 +179,52 @@ const guides: readonly ReaderResultGuide[] = [
     label: "Lemma 8.3",
     vocabulary: [
       vocabulary(
-        "Closed backward return-recurrence chain",
-        "The recurrences (λ^q-bᵢ)zᵢ=aᵢzᵢ₋₁ together with the closing relation λ^h z_d=z₀.",
+        "Finite backward recurrence",
+        "The equations (λ^q-bᵢ)zᵢ=aᵢzᵢ₋₁ for 1≤i≤d, together with the final equation λ^h z_d=z₀.",
       ),
       vocabulary(
-        "Lifted arguments Θᵢ",
-        "Real-valued vertex angles chosen consistently along the polygon boundary, not residues modulo 2π.",
+        "Chosen real vertex arguments Θᵢ",
+        "Real-valued vertex angles chosen consistently along the polygon boundary, rather than only as residues modulo 2π.",
       ),
       vocabulary(
         "Selected conjugate eigenvalue μ",
         "The conjugate μ=λ̄. For nonreal λ with positive argument θ, its positive argument is 2π-θ.",
       ),
       vocabulary(
-        "Integer closing exponent e",
-        "After reversing the reflected closure, e=-h. It may be negative in the Laurent relation.",
+        "Integer exponent e",
+        "After conjugating and reversing the final equation, e=-h. It may be negative in the Laurent identity.",
       ),
     ],
     intuition:
-      "Changing orientation requires more than conjugating one equation. The vertex order must also be reversed, the closure exponent changes sign, and the lifted phase must be recomputed. The lemma performs all three operations at once.",
+      "Changing orientation requires more than conjugating one equation. The vertex order must also be reversed, the final exponent changes sign, and the equality of chosen real arguments must be recomputed. The lemma performs all three operations at once.",
     proofSteps: [
       step(
-        "Conjugate and reverse the cells",
-        "Set wⱼ=z̄_{d-j} and reverse the coefficients. Conjugating the cell with index d-j+1 gives the forward recurrence (8.7).",
+        "Conjugate and reverse the recurrence",
+        "Set wⱼ=z̄_{d-j} and reverse the coefficients. Conjugating the equation with index d-j+1 gives the forward recurrence (8.7).",
       ),
       step(
-        "Reverse the closure",
+        "Reverse the final equation",
         "Conjugating λ^h z_d=z₀ gives μ^h w₀=w_d. Since μ≠0, rewrite it as μ^{-h}w_d=w₀, so e=-h.",
       ),
       step(
-        "Multiply the closed recurrence chain",
-        "Multiply all forward recurrence equations, cancel the nonzero endpoint vertices with the closing relation, and obtain the Laurent relation.",
+        "Multiply the finite recurrence",
+        "Multiply all forward recurrence equations, cancel the nonzero endpoint vertices with the final equation, and obtain the Laurent identity.",
       ),
       step(
-        "Clear the negative closing exponent",
+        "Clear the negative exponent",
         "Multiply by μ^{dq}; the resulting exponent is s=dq-h>0, so the relation is polynomial in the selected value of μ.",
       ),
       step(
         "Reflect the angular lift",
-        "Set Φⱼ=-Θ_{d-j}+C. Its consecutive gaps are the original positive gaps in reverse order and therefore belong to (0,π).",
+        "Set Φⱼ=-Θ_{d-j} (equivalently, add the same multiple of 2π to every Φⱼ). Its consecutive gaps are the original positive gaps in reverse order and therefore belong to (0,π).",
       ),
       step(
-        "Telescope the phase",
-        "Use the original lifted closure and e(2π-θ) to derive exactly e arg₊(μ)+Σuⱼ=2π(m-h).",
+        "Telescope the chosen real arguments",
+        "Use the original equality of chosen vertex arguments and e(2π-θ) to derive exactly e arg₊(μ)+Σuⱼ=2π(m-h).",
       ),
     ],
     takeaway:
-      "Reflection preserves the complete closed recurrence chain, including its product and exact lifted phase, while selecting the conjugate eigenvalue.",
+      "After conjugation and reversal, the same finite recurrence gives the product identity and the exact equality for chosen real arguments for the conjugate eigenvalue.",
   },
   {
     itemNumber: 56,
@@ -234,20 +234,16 @@ const guides: readonly ReaderResultGuide[] = [
         "Identity contact permutation",
         "The integer lift is κ=N, so the contact permutation fixes every side and every contact lies in the relative interior of its side.",
       ),
-      vocabulary(
-        "Closed-return product data (monodromy)",
-        "The selected eigenvalue, Farey interval, product parameters, and exact lifted phase obtained by multiplying the recurrence factors around one closed chain. The standard term for a product around a closed chain is monodromy; this guide otherwise calls it the closed-return product.",
-      ),
     ],
     intuition:
-      "When every contact returns to its own side, the recurrences naturally point backwards around one full polygon turn. Reflection turns them into the required forward recurrence chain and places the selected angle in the first Farey interval.",
+      "When every contact returns to its own side, the finite recurrences naturally point backwards around one full polygon turn. Reflection reverses them and places the selected angle in the first Farey interval.",
     proofSteps: [
       step(
-        "Build the backward recurrence chain",
+        "Write the backward recurrence",
         "Rearrange λxᵢ=βᵢxᵢ₋₁+αᵢxᵢ as (λ-αᵢ)zᵢ=βᵢzᵢ₋₁ and lift one complete boundary turn.",
       ),
       step(
-        "Reflect the recurrence chain",
+        "Conjugate and reverse the recurrence",
         "Use Lemma 8.3 with q=1,d=N,h=0,m=1 and reversed coefficients.",
       ),
       step(
@@ -260,7 +256,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "The identity return produces the Farey product data after one exact orientation reflection.",
+      "In the identity case, conjugation and reversal give the first Farey interval and the finite product identity.",
   },
   {
     itemNumber: 57,
@@ -271,12 +267,12 @@ const guides: readonly ReaderResultGuide[] = [
         "This construction uses Theorem 7.11, which proves that the first-return step is Δ=1. It therefore belongs to the N≥4 part of the argument; the N=3 case is proved directly in Topic XIII.",
       ),
       vocabulary(
-        "Varying-parameter factors",
-        "The factors λ^q-βⱼ may have different parameters βⱼ. A factor with βⱼ=0 merely completes the closed recurrence chain and is not an additional relative-interior contact.",
+        "Parameters βⱼ",
+        "The factors λ^q-βⱼ may have different parameters. A factor with βⱼ=0 completes the finite recurrence but is not an additional relative-interior contact.",
       ),
     ],
     intuition:
-      "The identity Δ=1 turns every base-to-successor recurrence into one factor. Completing the recurrence chain with factors having β=0 makes the vertices cancel, while the determinant-one record edge identifies the exact Farey endpoints.",
+      "The identity Δ=1 turns every base-to-successor recurrence into one factor. Inserting the endpoint cases β=0 makes the finite product telescope, while the determinant-one identity qκ-pN=1 identifies the two Farey endpoints.",
     proofSteps: [
       step(
         "Force one orbit",
@@ -288,27 +284,27 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Extend a proper block",
-        "If φ<N, extend the unit record edge backwards to E=(e,c), obtaining qκ-pN=1 and N=qd+e with 0≤e<q.",
+        "If φ<N, use Topic V's consecutive determinant-one vectors to obtain qκ-pN=1 and N=qd+e with 0≤e<q.",
       ),
       step(
-        "Complete the recurrence chain",
+        "Use the Topic V recurrence equations",
         "Corollary 6.2 gives λ^q xⱼ₋₁=ξⱼ and λ^e x_d=x₀. Use the contact coefficients at relative-interior contact indices and (αⱼ,βⱼ)=(1,0) at endpoint-contact indices.",
       ),
       step(
         "Multiply and cancel",
-        "The nonzero vertices cancel around the recurrence chain. The closure gives the Laurent relation, and N=qd+e gives the polynomial relation.",
+        "Multiplying the finite recurrence cancels the nonzero vertices. The final equation gives the Laurent identity, and N=qd+e gives the polynomial identity.",
       ),
       step(
-        "Identify the Farey interval and product data",
-        "The determinant qκ-pN=1 and denominator sum q+N>N make p/q and κ/N Farey neighbours. The lifted q-step return places x strictly between them.",
+        "Identify the consecutive Farey fractions",
+        "The determinant qκ-pN=1 and denominator sum q+N>N make p/q and κ/N Farey neighbours. The q-step inequalities for chosen real vertex arguments place x strictly between them.",
       ),
       step(
-        "Fix the phase without modular ambiguity",
-        "Choose each factor argument as the lifted gap between consecutive vertices. The closure index identity telescopes to equation (1.9).",
+        "Choose real arguments without modular ambiguity",
+        "Choose each factor argument as the real gap between consecutive lifted vertex arguments. The final index equality telescopes to equation (1.9).",
       ),
     ],
     takeaway:
-      "For N≥4, the case with more than one relative-interior contact in some orbit yields a determinant-one Farey interval, a complete varying-parameter product relation, and an exact phase.",
+      "For N≥4, this case gives consecutive Farey fractions, the finite product identity, and the equality for the chosen real arguments.",
   },
   {
     itemNumber: 58,
@@ -324,14 +320,14 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     intuition:
-      "When there is exactly one relative-interior contact in each orbit, the common orbit length supplies a backward recurrence chain. Whether to reflect depends on which endpoint denominator is already smaller; δ≥2 and δ=1 make opposite choices.",
+      "When there is exactly one relative-interior contact in each orbit, the common orbit length supplies a finite backward recurrence. Whether to conjugate and reverse it depends on which endpoint denominator is already smaller; δ≥2 and δ=1 make opposite choices.",
     proofSteps: [
       step(
         "Build the common orbit recurrence",
         "The first L-1 destination indices are endpoint contacts and the L-th return is a relative-interior contact, giving λ^Lxᵢ=ξᵢ for each of the δ relative-interior contact indices.",
       ),
       step(
-        "Close the recurrence chain",
+        "Derive the final recurrence equation",
         "Choose h with Kh≡-1 mod L. The orbit from xδ reaches x₀ through endpoint-contact indices, so λ^h xδ=x₀.",
       ),
       step(
@@ -340,35 +336,35 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Locate the angle",
-        "Strict L-returns and the endpoint closure give exact lifted inequalities; subtracting their phase errors yields R/S<x<K/L.",
+        "Strict L-returns and the final endpoint equation give exact inequalities between chosen real arguments; subtracting them yields R/S<x<K/L.",
       ),
       step(
         "Case δ≥2",
-        "Here S>L. Reflect the cell so q=L<s=S, use μ=λ̄, d=δ, and e=-h, and apply Lemma 8.3.",
+        "Here S>L. Reflect the Farey interval so q=L<s=S, use μ=λ̄, d=δ, and e=-h, and apply Lemma 8.3.",
       ),
       step(
         "Case δ=1",
         "Here S<N=L, so keep μ=λ and q=S<s=N. Rewrite the one genuine relation and pad the remaining factors with β=0.",
       ),
       step(
-        "Complete each phase",
-        "The reflected case inherits the lifted phase from Lemma 8.3. In the δ=1 case, assign the actual vertex gap to u₁ and A to every factor with β=0, then telescope.",
+        "Choose the real arguments in both cases",
+        "The conjugated case inherits the equality for chosen real arguments from Lemma 8.3. In the δ=1 case, assign the actual vertex gap to u₁ and A to every factor with β=0, then telescope.",
       ),
     ],
     takeaway:
-      "The case with exactly one relative-interior contact in each orbit also has ordered Farey product data, including the reflected negative-exponent case and the case completed by factors with β=0.",
+      "This case also gives consecutive Farey fractions and the same finite product identity, both when conjugation makes e negative and when β=0 factors complete the recurrence.",
   },
   {
     itemNumber: 59,
     label: "Lemma 8.7",
     vocabulary: [
       vocabulary(
-        "Common continuous argument interval",
-        "The interval [A,M) in the open upper half-plane containing the continuously chosen argument of every factor μ^q-βⱼ. Jensen's inequality is not used until a later topic.",
+        "Arguments of μ^q-βⱼ",
+        "For 0≤βⱼ<1, each factor lies in the open upper half-plane and therefore has a unique argument uⱼ in (0,π). The lemma proves uⱼ∈[A,M). Jensen's inequality is not used until a later topic.",
       ),
     ],
     intuition:
-      "Every factor moves on the same horizontal segment in the upper half-plane. The Farey interval keeps that segment above the real axis, while the vertex recurrences choose the actual lifted arguments rather than only their classes modulo 2π.",
+      "Every factor moves on the same horizontal segment in the upper half-plane. The Farey interval keeps that segment above the real axis, while the vertex recurrences choose actual real arguments rather than only their classes modulo 2π.",
     figure: "jensen-sheet",
     proofSteps: [
       step(
@@ -384,12 +380,12 @@ const guides: readonly ReaderResultGuide[] = [
         "As β increases, the factor moves strictly left with fixed positive imaginary part. Its argument increases continuously from A toward M.",
       ),
       step(
-        "Match geometric and analytic branches",
-        "Direct vertex gaps handle the case with more than one relative-interior contact in some orbit. Reflection of the recurrence chain handles both reflected cases, and the δ=1 one-contact-per-orbit construction assigns A to its factors with β=0.",
+        "Match the geometric and analytic choices",
+        "Direct vertex gaps handle the case with more than one relative-interior contact in some orbit. Conjugation and reversal handle the other orientation, and the δ=1 one-contact-per-orbit construction assigns A to its factors with β=0.",
       ),
     ],
     takeaway:
-      "All factors share one controlled branch uⱼ∈[A,M), ready for the later application of Jensen’s inequality.",
+      "Every chosen factor argument satisfies uⱼ∈[A,M), ready for the later application of Jensen’s inequality.",
   },
 ] as const;
 
@@ -404,7 +400,7 @@ const unbadgedSourceRelations = new Map<number, string>([
   ],
   [
     59,
-    "The manuscript proves the common-argument-interval statement used later. The cited works provide surrounding boundary-product context; no priority category is assigned without a statement-level match.",
+    "The manuscript proves the bounds for the chosen factor arguments used later. The cited works provide surrounding boundary-product context; no priority category is assigned without a statement-level match.",
   ],
 ]);
 
@@ -434,15 +430,15 @@ const theorem14ProofSteps: readonly GuidedProofStep[] = [
   ),
   step(
     "One relative-interior contact per orbit, δ≥2",
-    "Choose μ=λ̄ and Proposition 8.6(a); reflection orders the denominators and gives a negative integer closing exponent.",
+    "Choose μ=λ̄ and Proposition 8.6(a); reflection orders the denominators and gives a negative exponent e.",
   ),
   step(
     "One relative-interior contact per orbit, δ=1",
     "Keep μ=λ and use Proposition 8.6(b); the original Farey interval already has the smaller denominator first.",
   ),
   step(
-    "Unify the argument branch",
-    "In every case the same selected μ satisfies the polynomial relation, Laurent relation, and phase identity. Lemma 8.7 supplies 0<A<M<π and uⱼ∈[A,M).",
+    "Use one choice of real arguments",
+    "In every case the same selected μ satisfies the polynomial identity, Laurent identity, and equality e arg₊(μ)+Σuⱼ=2π(r-dp). Lemma 8.7 supplies 0<A<M<π and uⱼ∈[A,M).",
   ),
 ];
 
@@ -450,17 +446,17 @@ const theorem14: ProofResultData = {
   id: "part-i-item-4",
   label: "Theorem 1.4",
   kind: "Theorem",
-  title: "Closed-return product and Farey data",
+  title: "Consecutive Farey fractions and a finite product identity",
   purpose:
-    "States the common conclusion of the three return cases before Lemmas 8.4–8.7 prove it: one selected eigenvalue, one Farey interval, a varying-parameter product relation, and one exact phase identity.",
+    "States the common conclusion of the three return cases before Lemmas 8.4–8.7 prove it: one selected eigenvalue, two consecutive Farey fractions, a finite product identity, and an equality for chosen real arguments.",
   manuscriptHtml: theorem14Parts.statementHtml,
   vocabulary: [
     vocabulary(
       "Selected eigenvalue μ",
-      "One of the conjugate eigenvalues λ or λ̄, selected only after the return case is known and then kept fixed through every product and phase identity.",
+      "One of the conjugate eigenvalues λ or λ̄, selected only after the return case is known and then kept fixed through the product and the equality for chosen real arguments.",
     ),
     vocabulary(
-      "Integer closing exponent e",
+      "Integer exponent e",
       "The integer e=s-dq with d=floor(N/q). It may be negative; equation (1.6) remains a polynomial relation for the selected value of μ.",
     ),
   ],
@@ -517,8 +513,9 @@ const theorem14ProofAssembly = (
     </details>
     <p className="proof-item-takeaway proof-chapter-takeaway">
       <span>What survives</span>
-      The critical-polygon geometry is compressed into finite Farey product
-      data without changing orientation after the eigenvalue has been selected.
+      The polygon geometry yields consecutive Farey fractions, a finite
+      product identity, and an exact equality for chosen real arguments,
+      without changing orientation after the eigenvalue has been selected.
     </p>
   </section>
 );
@@ -526,25 +523,26 @@ const theorem14ProofAssembly = (
 export const topicVIIGroups: readonly AdvancedProofGroup[] = [
   {
     number: "I",
-    title: "Farey adjacency and exact reflection",
+    title: "Consecutive Farey fractions and reflection",
     introduction: (
       <p>
         Lattice determinant one identifies neighbouring fractions. Reflection
-        then transports a complete closed return-recurrence chain, including its lifted phase,
-        to the opposite complex orientation.
+        then conjugates and reverses the finite recurrence, including its
+        equality for chosen real arguments.
       </p>
     ),
     results: coreResults.slice(0, 3),
   },
   {
     number: "II",
-    title: "Build the Farey product data in every return case",
+    title: "Derive the finite product identity in every return case",
     introduction: (
       <p>
         The identity case, the case with more than one relative-interior
         contact in some orbit, and the one-contact-per-orbit case each produce
-        a varying-parameter product relation. The selected orientation and
-        integer closing exponent are decided separately and explicitly. The
+        the same finite product identity, with possibly different parameters
+        β<sub>j</sub>. The selected orientation and integer exponent are
+        decided separately and explicitly. The
         target theorem is stated first so its numbered equations are available
         throughout the case analysis.
       </p>
@@ -552,13 +550,13 @@ export const topicVIIGroups: readonly AdvancedProofGroup[] = [
     formalSetups: [
       {
         id: "topic-vii-n-ge-4-scope",
-        title: "Standing scope for the critical-polygon product theorem: N≥4",
+        title: "Standing scope for Theorem 1.4: N≥4",
         html: String.raw`
           <p>
             Proposition 8.5 invokes Theorem 7.11, which proves that the
             first-return step is Δ=1, and Theorem 1.4 assembles the resulting
-            contact-return normal form. Both are used
-            here only for <strong>N≥4</strong>. The finite Farey lemmas above do
+            finite recurrence and product identities. Both are used here only
+            for <strong>N≥4</strong>. The finite Farey lemmas above do
             not require that restriction. The stochastic regions of orders
             one, two, and three are established by a separate direct proof in
             Topic XIII, which is forthcoming on the public site.
@@ -570,12 +568,12 @@ export const topicVIIGroups: readonly AdvancedProofGroup[] = [
   },
   {
     number: "III",
-    title: "One continuous argument interval and the proof assembly",
+    title: "Bounds for the factor arguments and the proof assembly",
     introduction: (
       <p>
         The Farey interval places all factors on one upper-half-plane argument
-        branch. The case constructions then assemble into the proof of the
-        closed-return product theorem stated above.
+        interval. The case constructions then assemble into the proof of
+        Theorem 1.4 stated above.
       </p>
     ),
     results: [coreResults[6]],
@@ -591,10 +589,10 @@ export const topicVIIImported: readonly ProofDependency[] = [
       "For N≥4, the identity case, the one-contact-per-orbit case, and the case with more than one contact in some orbit are exhaustive; in the last case the first return is the adjacent successor.",
   },
   {
-    label: "Topic V: determinant-one return interval and completed recurrence chains",
+    label: "Topic V: determinant-one first-return arithmetic",
     href: sitePath("/proof/topic-v/#cor:endpoint-padded-section"),
     explanation:
-      "The determinant-one record edge supplies q,p,d,e; endpoint-contact indices supply the factors with β=0 needed to complete the recurrence chain.",
+      "Corollary 6.2 supplies q,p,d,e with qκ-pN=1 and N=qd+e, the equations λ^q xⱼ₋₁=ξⱼ and λ^e x_d=x₀, and the endpoint-contact indices that become factors with β=0.",
   },
   {
     label: "Topic V: lattice parallelogram count",
@@ -631,7 +629,7 @@ export const topicVIIBackground: readonly ProofDependency[] = [
   {
     label: "Complex conjugation",
     explanation:
-      "Lemma 8.3 explicitly conjugates, reverses, and re-lifts the entire recurrence chain rather than relying on an informal symmetry argument.",
+      "Lemma 8.3 explicitly conjugates, reverses, and chooses real arguments for every equation in the finite recurrence rather than relying on an informal symmetry argument.",
   },
 ] as const;
 

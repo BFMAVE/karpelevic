@@ -273,7 +273,7 @@ function sourceRelationFor(number: number): string | undefined {
     return "The manuscript proves this exact return-case formulation. Karpelevič is cited as a structural antecedent; no priority category is assigned without a statement-level match.";
   }
   if (number === 59) {
-    return "The manuscript proves the common-argument-interval statement used later. The cited works provide surrounding boundary-product context; no priority category is assigned without a statement-level match.";
+    return "The manuscript proves the bounds for the chosen factor arguments used later. The cited works provide surrounding boundary-product context; no priority category is assigned without a statement-level match.";
   }
   if (number === 4) {
     return "The manuscript proves this exact orientation-sensitive formulation. The cited works provide classical boundary and product antecedents; no priority category is assigned without a statement-level comparison.";
@@ -305,7 +305,7 @@ const rawItems: readonly [
   [1, "Definition", "Radial polygonal criticality", "Defines N-criticality by requiring N to be the least invariant-polygon vertex count for T and requiring every tT with t>1 to need more than N vertices."],
   [2, "Definition", "Polygon and vertex-list convention", "Fixes the convention that the displayed cyclic list contains every extreme point exactly once and no other points."],
   [3, "Theorem", "Boundary contact, vertex replacement, and first returns", "For N≥4, collects the geometric reduction: a critical invariant polygon admits an order-preserving half-open contact bijection and a finite return description."],
-  [4, "Theorem", "Closed-return product and Farey data", "For N≥4, converts the geometric return into a varying-parameter product relation associated with one Farey interval, with every factor argument chosen on one continuous interval."],
+  [4, "Theorem", "Consecutive Farey fractions and a finite product identity", "For N≥4, converts the geometric return into a finite product identity associated with two consecutive Farey fractions, with explicit real arguments for every factor."],
   [5, "Proposition", "Adapted complex structures", "Identifies an elliptic real-linear map with multiplication by one of its two conjugate complex eigenvalues."],
   [6, "Proposition", "Real-linear invariance of polygonal complexity", "Shows that changing real coordinates does not alter the least number of vertices needed for an invariant polygon."],
   [7, "Lemma", "Real-linear covariance of faces and boundary incidences", "Carries vertices, sides, faces, boundary incidences, and their labels faithfully through an invertible real-linear change of coordinates."],
@@ -356,11 +356,11 @@ const rawItems: readonly [
   [52, "Remark", "Local and global data used in the deformation argument", "Separates the local projective inequality from the global indexing, incidence, and side-inequality facts needed to use it."],
   [53, "Lemma", "Farey adjacency criterion", "Recognizes neighbouring reduced fractions through a determinant of absolute value one."],
   [54, "Lemma", "Reflection preserves Farey adjacency", "Reflects an interval between consecutive Farey fractions while preserving adjacency."],
-  [55, "Lemma", "Reflection of a closed backward return-recurrence chain", "Transfers the complete finite return calculation to the reflected orientation, including its closing relation and lifted phase."],
-  [56, "Lemma", "Identity contact permutation closes after reflection", "Shows that κ=N gives a closed backward recurrence chain whose reflection yields the required arithmetic data."],
-  [57, "Proposition", "More than one relative-interior contact in some orbit", "Derives the varying-factor contact-product relation when some contact-permutation orbit meets the relative-interior contact set more than once."],
-  [58, "Proposition", "Exactly one relative-interior contact in each orbit", "Derives the companion product relation when the relative-interior contact set meets every contact-permutation orbit exactly once."],
-  [59, "Lemma", "Return factors lie on one common continuous argument interval", "Places all varying contact factors on one continuous argument interval and prepares the later scalar comparison."],
+  [55, "Lemma", "Conjugation and reversal of a finite recurrence", "Transfers the complete finite return calculation to the opposite orientation, including its final equation and its equality for chosen real arguments."],
+  [56, "Lemma", "Identity contact permutation closes after reflection", "Shows that κ=N gives a finite backward recurrence whose conjugation and reversal yield the required arithmetic data."],
+  [57, "Proposition", "More than one relative-interior contact in some orbit", "Derives the finite product identity when some contact-permutation orbit meets the relative-interior contact set more than once."],
+  [58, "Proposition", "Exactly one relative-interior contact in each orbit", "Derives the finite product identity when the relative-interior contact set meets every contact-permutation orbit exactly once."],
+  [59, "Lemma", "Bounds for the arguments of the factors μ^q−βⱼ", "Proves that every chosen factor argument satisfies uⱼ∈[A,M), preparing the later scalar comparison."],
   [60, "Proposition", "Compactness, conjugation, and disk bound", "Collects the elementary closure, symmetry, and unit-disk constraints on stochastic spectra."],
   [61, "Theorem", "Invariant-polygon criterion", "Equates stochastic eigenvalue realizability with the existence of a finite invariant polygon."],
   [62, "Corollary", "Star-shapedness with respect to the origin", "Shows that every radial segment from the origin to an attainable eigenvalue remains attainable."],
@@ -473,12 +473,12 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "farey-return",
     eyebrow: "Topic VII · 7 items",
-    title: "Farey data and the closed-return product for N≥4",
+    title: "Consecutive Farey fractions and the finite product identity for N≥4",
     question:
-      "For N≥4, how does the identity return become the scalar equation of a Farey boundary arc?",
+      "For N≥4, how do the three first-return cases yield consecutive Farey fractions and one finite product identity?",
     overview: [
       "Determinant-one adjacency identifies the relevant Farey interval, and reflection aligns the rotation arithmetic with the chosen contact orientation.",
-      "The proof then separates the case with exactly one relative-interior contact in each orbit from the case with more than one in some orbit. Both produce a product of varying contact factors; a continuous argument interval controls their phases and yields the Farey product data.",
+      "The proof then separates the case with exactly one relative-interior contact in each orbit from the case with more than one in some orbit. Both produce the same finite product identity with possibly different parameters βⱼ; the chosen real arguments of all factors satisfy uⱼ∈[A,M).",
     ],
     itemNumbers: [53, 54, 55, 56, 57, 58, 59],
     manuscriptPages: "4 and 58–66",
@@ -490,7 +490,7 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "How does a radial boundary point new at order N satisfy the manuscript’s N-critical vertex-count conditions?",
     overview: [
-      "Topic VII proves the closed-return product theorem conditionally for an N-critical planar map. This topic returns to row-stochastic matrices and proves the invariant-polytope criterion in both directions.",
+      "Topic VII proves Theorem 1.4's finite product identity conditionally for an N-critical planar map. This topic returns to row-stochastic matrices and proves the invariant-polytope criterion in both directions.",
       "Compactness, star-shapedness with respect to the origin, and the unit-circle classification make the radial function precise. For N≥4, a non-inherited radial maximum satisfies νpoly(Tλ)=N and νpoly(tTλ)>N for every t>1, so the Topic VII theorem applies; orders at most three use the direct small-order argument.",
     ],
     itemNumbers: [3, 4, 60, 61, 62, 63, 64],
@@ -516,7 +516,7 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "Why can no stochastic eigenvalue lie beyond its candidate Farey–Ito arc?",
     overview: [
-      "For non-inherited radial maxima of orders N≥4, Part I's closed-return product theorem for critical polygons supplies an Ito product with varying parameters and places all return factors in one common continuous argument interval; orders at most three have already been treated directly.",
+      "For non-inherited radial maxima of orders N≥4, Part I's finite product theorem for critical polygons supplies an Ito product with varying parameters and proves that the chosen arguments of all factors lie in [A,M); orders at most three have already been treated directly.",
       "A strictly convex log-sine potential makes those parameters constant. Its equality case identifies the unique outermost radial candidate and proves the sharp cellwise upper bound.",
     ],
     itemNumbers: [],

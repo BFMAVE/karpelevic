@@ -102,11 +102,11 @@ const figureCopy: Readonly<
       "Plate VI. The dashed projection rays define a fractional-linear return map H. Criticality forces H to be the identity.",
   },
   "farey-return": {
-    title: "A Farey cell and the return product",
+    title: "Consecutive Farey fractions and the finite product",
     description:
       "The Farey neighbours one third and two fifths have determinant one, and their mediant is three eighths.",
     caption:
-      "Plate VII. The determinant 3·2 − 1·5 = 1 certifies adjacency. The closed-return product supplies the heterogeneous product carried by this cell.",
+      "Plate VII. The determinant 3·2 − 1·5 = 1 certifies adjacency. The finite recurrence supplies the product with its possibly different parameters βⱼ.",
   },
   spectra: {
     title: "The invariant-polygon criterion",

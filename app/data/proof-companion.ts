@@ -353,21 +353,21 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
   },
   "farey-return": {
     prerequisites: [
-      "This closed-return product module is used for N≥4. Orders at most three are handled by the direct small-order argument.",
+      "This finite-product theorem is used for N≥4. Orders at most three are handled by the direct small-order argument.",
       "Reduced fractions p/q and r/s are Farey neighbours when qr − ps = 1 in the chosen order.",
       "Arguments of complex numbers add under multiplication, once a common branch is fixed.",
       "A convex combination on a side supplies coefficients α + β = 1.",
     ],
     steps: [
       {
-        title: "Return data selects a Farey cell",
+        title: "Return data selects consecutive Farey fractions",
         body:
           "The two tower heights and their lattice determinant identify consecutive reduced fractions p/q < r/s. Reflection is used when necessary to align the arithmetic orientation with the final complex coordinate.",
       },
       {
         title: "Each return contributes a contact factor",
         body:
-          "A contact equation has the form μ^q − βj after normalization, where βj is the endpoint weight and αj = 1 − βj. Multiplying around the closed return-recurrence chain gives the product of the possibly varying Ito factors.",
+          "A contact equation has the form μ^q − βj after normalization, where βj is the endpoint weight and αj = 1 − βj. Multiplying the finite recurrence gives the product of the possibly varying factors.",
       },
       {
         title: "The two contact-distribution cases give compatible products",
@@ -375,33 +375,33 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
           "The case with more than one relative-interior contact in some orbit and the case with exactly one in each orbit have different closing exponents, but the homogeneous identity treats both without pretending that the signed exponent is always nonnegative.",
       },
       {
-        title: "One continuous argument interval controls the phase",
+        title: "Choose every factor argument as a real number",
         body:
-          "The common-argument lemma places every normalized factor argument uj in one interval [A, M). The exact lifted phase identity then records the integer multiple of 2π without losing it.",
+          "Lemma 8.7 proves that every chosen factor argument uj lies in [A,M). The equality e arg₊(μ)+Σuj=2π(r−dp) records the integer multiple of 2π rather than reducing it away.",
       },
     ],
     glossary: [
       {
-        term: "Farey product data",
+        term: "Consecutive Farey fractions",
         definition:
-          "The neighbouring fractions p/q < r/s, the associated exponents, and the factor coefficients selected by the return recurrence.",
+          "The neighbouring fractions p/q < r/s selected by the determinant-one return arithmetic.",
       },
       {
-        term: "Heterogeneous product",
+        term: "Product with varying parameters",
         definition:
           "A product in which different returns may carry different contact weights βj.",
       },
       {
-        term: "Common argument interval",
+        term: "Bounds for chosen factor arguments",
         definition:
-          "A common branch interval for the factor arguments, chosen so convexity can later be applied without branch jumps.",
+          "Every chosen real argument uj belongs to [A,M), so convexity can later be applied without a branch jump.",
       },
     ],
     checkpoint: {
       question:
-        "Why is the phase identity more than taking the argument of the product modulo 2π?",
+        "Why are chosen real arguments needed instead of arguments modulo 2π?",
       answer:
-        "Because the later sharp inequality needs the actual lifted sum of arguments. The common interval identifies the correct integer multiple of 2π and prevents a branch jump from going unnoticed.",
+        "Because the later sharp inequality needs the actual real sum of arguments. The bounds uj∈[A,M) identify the correct integer multiple of 2π and prevent a branch jump from going unnoticed.",
     },
   },
   spectra: {
@@ -429,7 +429,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         title: "Apply the critical-polygon theorem at a non-inherited radial maximum",
         body:
-          "For a radial maximum λ∈ΘN∖ΘN−1, multiplication by λ is N-critical. When N≥4, the critical-polygon theorem supplies the Farey cell, closed-return product, and phase data. Orders at most three are handled directly. Part II then supplies the sharp scalar boundary and realization.",
+          "For a radial maximum λ∈ΘN∖ΘN−1, multiplication by λ is N-critical. When N≥4, the critical-polygon theorem supplies consecutive Farey fractions, the finite product identity, and its equality for chosen real arguments. Orders at most three are handled directly. Part II then supplies the sharp scalar boundary and realization.",
       },
     ],
     glossary: [
@@ -453,7 +453,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       question:
         "Does Part I by itself prove every radial boundary formula of the Karpelevič–Ito theorem?",
       answer:
-        "No. For N≥4, Part I supplies the critical-polygon contact and first-return structure together with Farey product data; the small orders are treated directly. Part II adds the sharp log-sine inequality, explicit stochastic realization, and nesting needed for the full boundary theorem.",
+        "No. For N≥4, Part I supplies the critical-polygon contact and first-return structure together with consecutive Farey fractions and the finite product identity; the small orders are treated directly. Part II adds the sharp log-sine inequality, explicit stochastic realization, and nesting needed for the full boundary theorem.",
     },
   },
 };

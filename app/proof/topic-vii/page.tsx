@@ -11,9 +11,10 @@ import { publicationDates } from "../../data/publication-dates";
 import { getPageTimestamp } from "../../lib/git-dates";
 
 export const metadata: Metadata = {
-  title: "Topic VII — Farey Data and the Closed-Return Product for N≥4",
+  title:
+    "Topic VII — Consecutive Farey Fractions and the Finite Product Identity for N≥4",
   description:
-    "For N≥4, a complete guided derivation of Farey adjacency, reflected closed return-recurrence chains, varying-parameter product relations, exact lifted phase, and one common continuous argument interval.",
+    "For N≥4, a complete guided derivation of consecutive Farey fractions, finite recurrence and product identities, and bounds for chosen real arguments of the factors.",
 };
 
 const updatedAt = getPageTimestamp("app/data/topic-vii-reader.tsx");
@@ -27,7 +28,8 @@ export default function TopicVIIPage() {
         <>
           A complete, source-aware continuation of Topic VI: the three
           first-return cases are translated into conventional Farey arithmetic,
-          finite product relations, and exact lifted arguments.
+          finite product identities, and exact equalities for chosen real
+          arguments.
         </>
       }
       firstPublishedAt={firstPublishedAt}
@@ -38,20 +40,20 @@ export default function TopicVIIPage() {
       leadFigureAfterSetups
       manuscriptPages="4 and 58–66"
       overview={[
-        "The first-return structure completed in Topic VI is converted into determinant-one Farey intervals. Reflection is handled at the level of the complete closed return-recurrence chain, including the integer closing exponent and lifted phase.",
-        "Theorem 1.4 and equations (1.5)–(1.9) are stated before the three return cases that prove them. Those cases produce finite varying-parameter product relations, and consecutive vertex angles place every factor on one upper-half-plane argument branch.",
+        "The first-return structure completed in Topic VI is converted into intervals between consecutive Farey fractions. When the opposite complex orientation is needed, every equation in the finite recurrence is conjugated and reversed, and its chosen real arguments are recomputed.",
+        "Theorem 1.4 and equations (1.5)–(1.9) are stated before the three return cases that prove them. Those cases produce the same finite product identity with possibly different parameters βⱼ, and consecutive vertex angles place each chosen factor argument in [A,M).",
         "This completes the conditional geometric theorem for N-critical maps. Topic VIII returns to stochastic eigenvalue regions and proves that a radial boundary point new at order N satisfies that N-critical hypothesis.",
       ]}
       provedHere={
         <p>
-          This page proves the Farey criterion, exact reflection of a closed
-          return-recurrence chain, every return-case product, the common
-          continuous argument interval, and the complete
-          assembly of Theorem 1.4 for its stated range N≥4. Orders one, two,
-          and three are handled directly in Topic XIII.
+          This page proves the Farey criterion, conjugation and reversal of the
+          finite recurrence, the product identity in every return case, the
+          bounds u<sub>j</sub>∈[A,M), and the complete assembly of Theorem 1.4
+          for its stated range N≥4. Orders one, two, and three are handled
+          directly in Topic XIII.
         </p>
       }
-      question="For N≥4, how do the first-return cases from Topic VI become one Farey interval, a varying-parameter product relation, and one exact phase identity?"
+      question="For N≥4, how do the first-return cases from Topic VI yield consecutive Farey fractions, a finite product identity, and an equality for chosen real arguments?"
       readingConvention={
         <>
           The notation inherited from Topic VI is stated locally. The target

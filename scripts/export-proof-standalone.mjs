@@ -454,8 +454,8 @@ function verifyStandaloneHtml(html) {
           : proofRoute === "/proof/topic-vii"
                 ? [
                     "Topic VII",
-                    "Farey data and the closed-return product",
-                    "Farey adjacency and exact reflection",
+                    "Consecutive Farey fractions and the finite product identity",
+                    "Consecutive Farey fractions and reflection",
                     "data-proof-route=\"topic-vii\"",
                     "Forthcoming",
                   ]
@@ -648,6 +648,44 @@ function verifyStandaloneHtml(html) {
     ) {
       throw new Error(
         "Standalone Topic VII must link Next to the published Topic VIII page.",
+      );
+    }
+
+    const visibleText = visibleTextFromHtml(html).replace(/\s+/g, " ").trim();
+    if (
+      !/Consecutive Farey fractions and the finite product identity for N≥4/i.test(
+        visibleText,
+      )
+    ) {
+      throw new Error(
+        "Standalone Topic VII must expose the current literal chapter title.",
+      );
+    }
+    if (
+      !/First published 20 August 2026\s*\./i.test(visibleText) ||
+      !/Last revised 20 August 2026\s*\./i.test(visibleText)
+    ) {
+      throw new Error(
+        "Standalone Topic VII must expose its current first-publication and revision dates.",
+      );
+    }
+    if (
+      !/This reader was developed with generative-AI assistance\./i.test(
+        visibleText,
+      ) ||
+      /made through vibecoding/i.test(visibleText)
+    ) {
+      throw new Error(
+        "Standalone Topic VII must expose the current authorship disclosure.",
+      );
+    }
+    if (
+      /\bmonodromy\b|closed-return product|return-recurrence|lifted phase|phase identity|common continuous argument interval|contact-return normal form/i.test(
+        visibleText,
+      )
+    ) {
+      throw new Error(
+        "Standalone Topic VII still contains superseded reader-facing terminology.",
       );
     }
   }

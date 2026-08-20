@@ -436,6 +436,48 @@ html = html.replace(
       .join(" and "),
 );
 
+function restoreParenthesizedAlphaEnumeration(statementId) {
+  const statementMarker = `<div id="${statementId}"`;
+  const statementStart = html.indexOf(statementMarker);
+  if (statementStart < 0) {
+    throw new Error(`Missing statement for alphabetic enumeration: ${statementId}`);
+  }
+
+  const statementEnd = html.indexOf("\n</div>", statementStart);
+  const listStart = html.indexOf("<ol>", statementStart);
+  if (statementEnd < 0 || listStart < 0 || listStart > statementEnd) {
+    throw new Error(`Missing statement list for alphabetic enumeration: ${statementId}`);
+  }
+
+  const listEnd = html.indexOf("</ol>", listStart);
+  if (listEnd < 0 || listEnd > statementEnd) {
+    throw new Error(`Could not close statement list for alphabetic enumeration: ${statementId}`);
+  }
+
+  const labels = ["(a)", "(b)"];
+  let listItemIndex = 0;
+  const listHtml = html
+    .slice(listStart, listEnd + "</ol>".length)
+    .replace("<ol>", '<ol class="part-i-alpha-enumeration">')
+    .replace(/<li>/g, (match) => {
+      const label = labels[listItemIndex];
+      listItemIndex += 1;
+      return label
+        ? `<li><span class="part-i-alpha-label">${label}</span>`
+        : match;
+    });
+
+  if (listItemIndex !== labels.length) {
+    throw new Error(
+      `Expected ${labels.length} cases in ${statementId}, found ${listItemIndex}`,
+    );
+  }
+
+  html = `${html.slice(0, listStart)}${listHtml}${html.slice(listEnd + "</ol>".length)}`;
+}
+
+restoreParenthesizedAlphaEnumeration("prop:minimal-block-product");
+
 function start(marker) {
   const index = html.indexOf(marker);
   if (index < 0) throw new Error(`Missing generated marker: ${marker}`);

@@ -6461,6 +6461,20 @@ math mover > mo[accent="true"] {
   margin-top: 0.7em;
 }
 
+.part-i-manuscript .part-i-alpha-enumeration {
+  list-style: none;
+}
+
+.part-i-manuscript .part-i-alpha-enumeration > li {
+  position: relative;
+}
+
+.part-i-manuscript .part-i-alpha-label {
+  position: absolute;
+  left: -1.7rem;
+  font-weight: 650;
+}
+
 .part-i-manuscript math[display="inline"] {
   font-size: 1.02em;
 }

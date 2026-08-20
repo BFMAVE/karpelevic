@@ -85,22 +85,23 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
   "farey-reflection": {
     title: "A Farey interval and its reflected orientation",
     description:
-      "The order-seven interval from one third to two fifths contains three eighths. Reflection reverses the interval and maps it to the interval from three fifths to two thirds containing five eighths. The labels use a local interval scale and are staggered so that all six fractions remain distinct.",
+      "The order-seven Farey endpoints one third and two fifths are shown as filled circles. Their mediant three eighths lies between them but is not in F seven, so it is shown as an open diamond. Reflection reverses the interval: three fifths and two thirds are the filled endpoints, while the mediant five eighths is an open diamond and is not in F seven. Both rows use the same local affine scale.",
     caption:
-      "Plate VII.1. The original endpoints satisfy 3·2-1·5=1 and 3+5=8>7. Reflection preserves Farey adjacency, reverses orientation, and swaps the endpoint denominators. Each row uses the same local interval scale.",
+      "Plate VII.1. In F₇, 1/3 and 2/5 are consecutive because 3·2−1·5=1 and 3+5=8>7. Their mediant 3/8 lies between them but is not in F₇. Reflection x↦1−x reverses orientation and gives the consecutive endpoints 3/5 and 2/3; their mediant 5/8 is likewise not in F₇. Filled circles mark the F₇ endpoints, open diamonds mark the excluded mediants, and both rows use the same local affine scale.",
   },
   "jensen-sheet": {
     title: "All varying factors share one continuous upper-half-plane argument interval",
     description:
-      "In the complex plane, mu to the q is the included right endpoint and mu to the q minus one is the excluded left endpoint. As beta increases toward one, mu to the q minus beta moves from right to left. Its argument lies from A inclusive to M exclusive, with M less than pi.",
+      "In a representative complex-plane placement, mu to the q is the included right endpoint in quadrant one, and mu to the q minus one is the excluded left endpoint in quadrant two. Their horizontal separation represents one, and the displayed modulus of mu to the q is less than one. As beta increases toward one, mu to the q minus beta moves from right to left. In general mu to the q may lie in quadrant one or quadrant two; its argument lies from A inclusive to M exclusive, where pi over two is less than M and M is less than pi.",
     caption:
-      "Plate VII.2. As 0≤β<1 increases, μ^q−β moves left with fixed positive imaginary part. The filled endpoint μ^q corresponds to β=0; the open endpoint μ^q−1 is approached as β↑1 but is never attained. Hence A≤arg(μ^q−β)<M<π.",
+      "Plate VII.2. This representative placement shows μ^q in quadrant I; in the argument, μ^q may lie in quadrant I or II. The horizontal separation from μ^q−1 to μ^q is one, and the displayed vector satisfies |μ^q|<1, so the excluded endpoint μ^q−1 lies in quadrant II. As 0≤β<1 increases, μ^q−β moves left with fixed positive imaginary part. The filled endpoint μ^q corresponds to β=0; the open endpoint μ^q−1 is approached as β↑1 but is never attained. Hence A≤arg(μ^q−β)<M and π/2<M<π.",
   },
 };
 
 const recordResidueGuides = [0, 5, 10, 12] as const;
 const mobileSmallTextStyle = { fontSize: 14 } as const;
 const mobileLabelTextStyle = { fontSize: 15 } as const;
+const topicVIIMobileTextStyle = { fontSize: 18 } as const;
 
 function RotationRecords() {
   const residues = Array.from({ length: 13 }, (_, time) => (5 * time) % 13);
@@ -1065,19 +1066,19 @@ function UnitReturn({ mobile = false }: { mobile?: boolean }) {
 type FareyReflectionPoint = {
   label: string;
   position: number;
-  emphasized?: boolean;
+  membership: "in-F7" | "not-in-F7";
 };
 
 const originalFareyPoints: readonly FareyReflectionPoint[] = [
-  { label: "1/3", position: 0 },
-  { label: "3/8", position: 5 / 8, emphasized: true },
-  { label: "2/5", position: 1 },
+  { label: "1/3", position: 0, membership: "in-F7" },
+  { label: "3/8", position: 5 / 8, membership: "not-in-F7" },
+  { label: "2/5", position: 1, membership: "in-F7" },
 ];
 
 const reflectedFareyPoints: readonly FareyReflectionPoint[] = [
-  { label: "3/5", position: 0 },
-  { label: "5/8", position: 3 / 8, emphasized: true },
-  { label: "2/3", position: 1 },
+  { label: "3/5", position: 0, membership: "in-F7" },
+  { label: "5/8", position: 3 / 8, membership: "not-in-F7" },
+  { label: "2/3", position: 1, membership: "in-F7" },
 ];
 
 function FareyReflectionRow({
@@ -1098,13 +1099,14 @@ function FareyReflectionRow({
   mobile?: boolean;
 }) {
   const x = (position: number) => left + position * (right - left);
-  const endpointLabelOffset = mobile ? 38 : 36;
-  const middleLabelOffset = mobile ? 47 : 45;
+  const endpointLabelOffset = mobile ? 42 : 36;
+  const middleLabelOffset = mobile ? 54 : 45;
 
   return (
     <g
       data-label-layout="staggered"
       data-local-interval-scale="true"
+      data-affine-horizontal-scale="same"
       data-reflection-row={label}
     >
       {!mobile ? (
@@ -1131,8 +1133,13 @@ function FareyReflectionRow({
         const labelY = y + (placeAbove ? -labelOffset : labelOffset + 7);
         const leaderEndY = labelY + (placeAbove ? 9 : -14);
         const pointX = x(point.position);
+        const excludedMediant = point.membership === "not-in-F7";
         return (
-          <g key={point.label} data-farey-label={point.label}>
+          <g
+            key={point.label}
+            data-farey-label={point.label}
+            data-farey-membership={point.membership}
+          >
             <line
               className="topic-ii-figure-support"
               data-label-leader="true"
@@ -1141,20 +1148,34 @@ function FareyReflectionRow({
               y1={y + (placeAbove ? -7 : 7)}
               y2={leaderEndY}
             />
-            <circle
-              className={point.emphasized ? "topic-ii-figure-point topic-ii-figure-point-accent" : "topic-ii-figure-point"}
-              cx={pointX}
-              cy={y}
-              r={point.emphasized ? 7 : 5}
-            />
+            {excludedMediant ? (
+              <rect
+                className="topic-ii-figure-point"
+                data-farey-marker="excluded-mediant"
+                height="10"
+                style={{ stroke: "var(--oxblood)", strokeWidth: 2.2 }}
+                transform={`rotate(45 ${pointX} ${y})`}
+                width="10"
+                x={pointX - 5}
+                y={y - 5}
+              />
+            ) : (
+              <circle
+                className="topic-ii-figure-point topic-ii-figure-point-accent"
+                cx={pointX}
+                cy={y}
+                data-farey-marker="included-endpoint"
+                r="6"
+              />
+            )}
             <text
               className="topic-ii-figure-label"
-              style={mobile ? mobileLabelTextStyle : undefined}
+              style={mobile ? topicVIIMobileTextStyle : undefined}
               x={pointX}
               y={labelY}
               textAnchor="middle"
             >
-              {point.label}
+              {point.label}{excludedMediant ? " ∉ F₇" : ""}
             </text>
           </g>
         );
@@ -1170,30 +1191,30 @@ function FareyReflection({ markerId, mobile = false }: { markerId: string; mobil
         <FareyReflectionRow
           label="original interval"
           points={originalFareyPoints}
-          y={96}
+          y={98}
           labelSide="above"
-          left={55}
-          right={305}
+          left={45}
+          right={275}
           mobile
         />
         <path
           className="topic-ii-figure-transfer"
-          d="M180 165 L180 238"
+          d="M160 170 L160 232"
           markerEnd={`url(#${markerId})`}
         />
-        <text className="topic-ii-figure-equation" style={mobileLabelTextStyle} x="195" y="207">
+        <text className="topic-ii-figure-equation" style={topicVIIMobileTextStyle} x="175" y="207">
           x ↦ 1−x
         </text>
         <FareyReflectionRow
           label="reflected interval"
           points={reflectedFareyPoints}
-          y={306}
+          y={300}
           labelSide="below"
-          left={55}
-          right={305}
+          left={45}
+          right={275}
           mobile
         />
-        <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="180" y="402" textAnchor="middle">
+        <text className="topic-ii-figure-small" style={topicVIIMobileTextStyle} x="160" y="405" textAnchor="middle">
           reflection reverses the order
         </text>
       </>
@@ -1231,24 +1252,25 @@ function FareyReflection({ markerId, mobile = false }: { markerId: string; mobil
 function PowerOfMu({ mobile = false }: { mobile?: boolean }) {
   return (
     <>
-      μ<tspan baselineShift="super" fontSize={mobile ? 11 : 12}>q</tspan>
+      μ<tspan baselineShift="super" fontSize={mobile ? 18 : 12}>q</tspan>
     </>
   );
 }
 
 function JensenSheet({ markerId, mobile = false }: { markerId: string; mobile?: boolean }) {
-  const origin = mobile ? { x: 42, y: 320 } : { x: 106, y: 310 };
-  const excluded = mobile ? { x: 174, y: 118 } : { x: 350, y: 120 };
-  const included = mobile ? { x: 310, y: 118 } : { x: 535, y: 120 };
-  const moving = mobile ? { x: 238, y: 118 } : { x: 440, y: 120 };
+  const origin = mobile ? { x: 150, y: 305 } : { x: 340, y: 310 };
+  const excluded = mobile ? { x: 70, y: 145 } : { x: 210, y: 125 };
+  const included = mobile ? { x: 275, y: 145 } : { x: 510, y: 125 };
+  const moving = mobile ? { x: 185, y: 145 } : { x: 375, y: 125 };
+  const textStyle = mobile ? topicVIIMobileTextStyle : undefined;
 
   return (
     <>
       <line
         className="topic-ii-figure-ray"
         data-coordinate-axis="real"
-        x1={mobile ? 24 : 55}
-        x2={mobile ? 340 : 705}
+        x1={mobile ? 20 : 55}
+        x2={mobile ? 305 : 705}
         y1={origin.y}
         y2={origin.y}
       />
@@ -1257,13 +1279,20 @@ function JensenSheet({ markerId, mobile = false }: { markerId: string; mobile?: 
         data-coordinate-axis="imaginary"
         x1={origin.x}
         x2={origin.x}
-        y1={mobile ? 38 : 42}
-        y2={mobile ? 342 : 340}
+        y1={mobile ? 42 : 42}
+        y2={mobile ? 337 : 340}
+      />
+      <circle
+        className="topic-ii-figure-point topic-ii-figure-point-accent"
+        cx={origin.x}
+        cy={origin.y}
+        data-complex-origin="true"
+        r="3"
       />
       <text
         className="topic-ii-figure-small"
-        style={mobile ? mobileSmallTextStyle : undefined}
-        x={mobile ? 338 : 700}
+        style={textStyle}
+        x={mobile ? 303 : 700}
         y={origin.y + (mobile ? 20 : 18)}
         textAnchor="end"
       >
@@ -1271,15 +1300,15 @@ function JensenSheet({ markerId, mobile = false }: { markerId: string; mobile?: 
       </text>
       <text
         className="topic-ii-figure-small"
-        style={mobile ? mobileSmallTextStyle : undefined}
+        style={textStyle}
         x={origin.x + (mobile ? 10 : 9)}
-        y={mobile ? 53 : 54}
+        y={mobile ? 62 : 54}
       >
         Im z
       </text>
       <text
         className="topic-ii-figure-small"
-        style={mobile ? mobileSmallTextStyle : undefined}
+        style={textStyle}
         x={origin.x - 9}
         y={origin.y + 18}
         textAnchor="end"
@@ -1292,6 +1321,8 @@ function JensenSheet({ markerId, mobile = false }: { markerId: string; mobile?: 
       />
       <line
         className="topic-ii-figure-target"
+        data-horizontal-separation="one"
+        data-unit-length={included.x - excluded.x}
         x1={included.x}
         x2={excluded.x}
         y1={included.y}
@@ -1301,15 +1332,15 @@ function JensenSheet({ markerId, mobile = false }: { markerId: string; mobile?: 
       <line className="topic-ii-figure-support" x1={origin.x} x2={excluded.x} y1={origin.y} y2={excluded.y} />
       <path
         className="topic-ii-figure-transfer"
-        d={mobile ? "M292 90 L198 90" : "M510 91 L376 91"}
+        d={mobile ? "M255 106 L95 106" : "M485 91 L235 91"}
         data-parameter-direction="beta-up-to-one"
         markerEnd={`url(#${markerId})`}
       />
       <text
         className="topic-ii-figure-small"
-        style={mobile ? mobileSmallTextStyle : undefined}
-        x={mobile ? 245 : 443}
-        y={mobile ? 72 : 72}
+        style={textStyle}
+        x={mobile ? 175 : 360}
+        y={mobile ? 88 : 72}
         textAnchor="middle"
       >
         β ↑ 1
@@ -1320,6 +1351,7 @@ function JensenSheet({ markerId, mobile = false }: { markerId: string; mobile?: 
         cy={included.y}
         data-endpoint="mu-q"
         data-inclusion="included"
+        data-representative-quadrant="I"
         r={mobile ? 7 : 7}
       />
       <circle
@@ -1328,20 +1360,22 @@ function JensenSheet({ markerId, mobile = false }: { markerId: string; mobile?: 
         cy={excluded.y}
         data-endpoint="mu-q-minus-one"
         data-inclusion="excluded"
+        data-representative-quadrant="II"
         r={mobile ? 7 : 7}
       />
       <circle className="topic-ii-figure-point topic-ii-figure-point-accent" cx={moving.x} cy={moving.y} r={mobile ? 6 : 6} />
       <text
         className="topic-ii-figure-label"
-        style={mobile ? mobileLabelTextStyle : undefined}
+        style={textStyle}
         x={included.x + (mobile ? 8 : 12)}
         y={included.y - 12}
+        textAnchor={mobile ? "end" : undefined}
       >
         <PowerOfMu mobile={mobile} />
       </text>
       <text
         className="topic-ii-figure-label"
-        style={mobile ? mobileLabelTextStyle : undefined}
+        style={textStyle}
         x={excluded.x - (mobile ? 8 : 12)}
         y={excluded.y - 12}
         textAnchor="end"
@@ -1350,7 +1384,7 @@ function JensenSheet({ markerId, mobile = false }: { markerId: string; mobile?: 
       </text>
       <text
         className="topic-ii-figure-label topic-ii-figure-accent"
-        style={mobile ? mobileLabelTextStyle : undefined}
+        style={textStyle}
         x={moving.x}
         y={moving.y + 30}
         textAnchor="middle"
@@ -1359,29 +1393,61 @@ function JensenSheet({ markerId, mobile = false }: { markerId: string; mobile?: 
       </text>
       <text
         className="topic-ii-figure-small"
-        style={mobile ? mobileSmallTextStyle : undefined}
-        x={mobile ? 270 : 300}
-        y={mobile ? 263 : 258}
+        style={textStyle}
+        x={mobile ? 238 : 432}
+        y={mobile ? 254 : 252}
       >
         A
       </text>
       <text
         className="topic-ii-figure-small"
-        style={mobile ? mobileSmallTextStyle : undefined}
-        x={mobile ? 135 : 225}
-        y={mobile ? 220 : 218}
+        style={textStyle}
+        x={mobile ? 100 : 252}
+        y={mobile ? 230 : 218}
       >
         M
       </text>
       <text
-        className="topic-ii-figure-equation"
-        style={mobile ? mobileLabelTextStyle : undefined}
-        x={mobile ? 180 : 390}
-        y={mobile ? 392 : 365}
+        className="topic-ii-figure-small"
+        data-quadrant-note="mu-q-may-be-QI-or-QII"
+        style={textStyle}
+        x={mobile ? 215 : 540}
+        y={mobile ? 31 : 43}
         textAnchor="middle"
       >
-        A ≤ arg(<PowerOfMu mobile={mobile} /> − β) &lt; M &lt; π
+        <PowerOfMu mobile={mobile} /> may be in QI or QII
       </text>
+      {mobile ? (
+        <>
+          <text
+            className="topic-ii-figure-equation"
+            style={topicVIIMobileTextStyle}
+            x="160"
+            y="378"
+            textAnchor="middle"
+          >
+            A ≤ arg(<PowerOfMu mobile /> − β) &lt; M
+          </text>
+          <text
+            className="topic-ii-figure-equation"
+            style={topicVIIMobileTextStyle}
+            x="160"
+            y="412"
+            textAnchor="middle"
+          >
+            π/2 &lt; M &lt; π
+          </text>
+        </>
+      ) : (
+        <text
+          className="topic-ii-figure-equation"
+          x="390"
+          y="365"
+          textAnchor="middle"
+        >
+          A ≤ arg(<PowerOfMu /> − β) &lt; M,   π/2 &lt; M &lt; π
+        </text>
+      )}
     </>
   );
 }
@@ -1397,8 +1463,8 @@ export function AdvancedProofFigure({ kind }: { kind: AdvancedProofFigureKind })
     "topic-vi-projective-chain": "0 0 360 390",
     "holonomy-escape": "0 0 360 610",
     "unit-return": "0 0 360 400",
-    "farey-reflection": "0 0 360 430",
-    "jensen-sheet": "0 0 360 420",
+    "farey-reflection": "0 0 320 430",
+    "jensen-sheet": "0 0 320 430",
   };
   const mobileViewBox = mobileViewBoxes[kind];
   const hasMobileLayout = Boolean(mobileViewBox);
