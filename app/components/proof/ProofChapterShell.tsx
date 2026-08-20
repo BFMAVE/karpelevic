@@ -266,8 +266,8 @@ export function ProofChapterShell({
             <h2>Accessibility does not lower the standard of proof.</h2>
           </div>
           <p>
-            This reader was made through vibecoding with generative-AI
-            assistance. Mathematical and editorial responsibility remains
+            This reader was developed with generative-AI assistance.
+            Mathematical and editorial responsibility remains
             with the authors. If a definition, proof step, source, diagram, or
             historical classification is unclear or incorrect, please{" "}
             <a href={sitePath("/#contact-heading")}>send a correction</a>.

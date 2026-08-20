@@ -5,7 +5,7 @@ export const homeContent = {
     "Boundary Contacts, First Returns, and the Karpelevič–Ito Theorem",
   authors: ["Brecht Verbeken", "Vincent Ginis"],
   descriptor:
-    "A geometric route from invariant polygons to the classical boundary of stochastic spectra.",
+    "A geometric route from invariant polygons to the classical boundary of stochastic eigenvalue regions.",
   projectAim:
     "The aim of this project is to make the paper, together with its archival Zenodo record, more approachable and digestible—both for me and for the wider community.",
   readingRoutes: [
@@ -48,7 +48,7 @@ export const homeContent = {
     },
     {
       label: "Part II",
-      title: "Return to stochastic spectra",
+      title: "Return to stochastic eigenvalue regions",
       text: "For orders at least four, the resulting closed-return product is combined with a sharp scalar comparison, explicit sparse realizations, and Farey refinement; the smaller orders are treated directly. Together these arguments derive the Farey–Ito boundary from invariant polygons.",
     },
   ],

@@ -40,6 +40,7 @@ export default function TopicVIIPage() {
       overview={[
         "The first-return structure completed in Topic VI is converted into determinant-one Farey intervals. Reflection is handled at the level of the complete closed return-recurrence chain, including the integer closing exponent and lifted phase.",
         "Theorem 1.4 and equations (1.5)–(1.9) are stated before the three return cases that prove them. Those cases produce finite varying-parameter product relations, and consecutive vertex angles place every factor on one upper-half-plane argument branch.",
+        "This completes the conditional geometric theorem for N-critical maps. Topic VIII returns to stochastic eigenvalue regions and proves that a radial boundary point new at order N satisfies that N-critical hypothesis.",
       ]}
       provedHere={
         <p>

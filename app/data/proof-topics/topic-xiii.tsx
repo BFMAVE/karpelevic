@@ -300,7 +300,7 @@ export function TopicXIIIContent() {
       <ProofDependencyContract
         imported={[
           {
-            label: "Topic VIII · Stochastic spectra and criticality",
+            label: "Topic VIII · Stochastic eigenvalue regions and criticality",
             href: sitePath("/proof/topic-viii/"),
             explanation: <>defines Θ<sub>n</sub> and <i>R</i><sub>n</sub>, proves compactness, conjugation symmetry, star-shapedness with respect to the origin, the unit-circle classification, and the critical-polygon input for a non-inherited radial maximum.</>,
           },

@@ -44,6 +44,10 @@ const pages = [
     "Farey data and the closed-return product for N≥4",
   ],
   [
+    "proof/topic-viii/index.html",
+    "Returning to stochastic eigenvalue regions",
+  ],
+  [
     "prerequisites/index.html",
     "The small library this reader assumes",
   ],
@@ -61,6 +65,7 @@ const firstPublicationDates = new Map([
   ["proof/topic-v/index.html", "14 August 2026"],
   ["proof/topic-vi/index.html", "15 August 2026"],
   ["proof/topic-vii/index.html", "20 August 2026"],
+  ["proof/topic-viii/index.html", "20 August 2026"],
 ]);
 
 for (const [relativePath, expectedText] of pages) {
@@ -128,12 +133,13 @@ for (const relativePath of [
   "proof/topic-v/index.html",
   "proof/topic-vi/index.html",
   "proof/topic-vii/index.html",
+  "proof/topic-viii/index.html",
 ]) {
   const html = await readFile(path.join(outputRoot, relativePath), "utf8");
   assert.match(html, /Forthcoming/);
   assert.doesNotMatch(
     html,
-    /href="\/karpelevic\/proof\/topic-(?:viii|ix|x|xi|xii(?:\/[ab])?|xiii|xiv)\//,
+    /href="\/karpelevic\/proof\/topic-(?:ix|x|xi|xii(?:\/[ab])?|xiii|xiv)\//,
   );
 }
 
@@ -203,9 +209,39 @@ for (const relativePath of [
   );
   assert.match(html, /id="topic-vii-theorem-1-4-proof"/);
   assert.match(html, /href="\/karpelevic\/proof\/topic-vi\//);
+  assert.match(
+    html,
+    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/karpelevic\/proof\/topic-viii\//,
+  );
   assert.doesNotMatch(
     visibleText,
     /heterogeneous Ito product|homogeneous product|signed remainder|Farey carrier|Jensen sheet/i,
+  );
+}
+
+{
+  const html = await readFile(
+    path.join(outputRoot, "proof/topic-viii/index.html"),
+    "utf8",
+  );
+  const visibleText = visibleTextFromHtml(html);
+  assert.match(html, /data-proof-route="topic-viii"/);
+  assert.match(html, /Returning to stochastic eigenvalue regions/i);
+  assert.match(html, /id="topic-viii-topic-vii-handoff"/);
+  assert.match(html, /href="\/karpelevic\/proof\/topic-vii\/#part-i-item-4"/);
+  assert.match(html, /id="topic-viii-radial-function"/);
+  assert.match(visibleText, /Let\s+n≥2\s+and\s+θ∈ℝ/i);
+  assert.match(visibleText, /compact,\s+hence\s+the\s+maximum\s+is\s+attained/i);
+  assert.match(
+    visibleText,
+    /star-shapedness identifies the entire smaller ray segment/i,
+  );
+  assert.match(html, /id="karp:eq:new-shell"/);
+  assert.match(html, /id="topic-viii-exact-sources"/);
+  assert.doesNotMatch(visibleText, /Rᴺ|Θᴺ/);
+  assert.doesNotMatch(
+    html,
+    /href="\/karpelevic\/proof\/topic-ix\//,
   );
 }
 
@@ -341,7 +377,6 @@ await access(path.join(outputRoot, ".nojekyll"));
 await assert.rejects(access(path.join(outputRoot, ".vite")));
 await assert.rejects(access(path.join(outputRoot, "code")));
 for (const futureTopic of [
-  "topic-viii",
   "topic-ix",
   "topic-x",
   "topic-xi",

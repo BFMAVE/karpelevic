@@ -49,6 +49,7 @@ const publicTopicPublicationDates = [
   ["/proof/topic-v", "2026-08-14", "14 August 2026"],
   ["/proof/topic-vi", "2026-08-15", "15 August 2026"],
   ["/proof/topic-vii", "2026-08-20", "20 August 2026"],
+  ["/proof/topic-viii", "2026-08-20", "20 August 2026"],
 ];
 
 for (const [pathname, expectedResults, expectedProofs] of chapters) {
@@ -173,6 +174,110 @@ test("legacy Topic VI part routes redirect to the unified chapter", async () => 
     );
     assert.equal(new URL(response.headers.get("location")).hash, fragment);
   }
+});
+
+test("Topics VII and VIII form a defined-before-use stochastic handoff", async () => {
+  const topicVII = await (await render("/proof/topic-vii")).text();
+  const topicVIII = await (await render("/proof/topic-viii")).text();
+  const visibleText = topicVIII
+    .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+    .replace(/<annotation\b[\s\S]*?<\/annotation>/gi, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&amp;", "&")
+    .replace(/\s+/g, " ");
+
+  assert.match(topicVIII, /Returning to stochastic eigenvalue regions/i);
+  assert.match(
+    topicVII,
+    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/proof\/topic-viii\//,
+  );
+  assert.match(
+    topicVIII,
+    /href="\/proof\/topic-vii\/#part-i-item-4"/,
+  );
+
+  const orderedIds = [
+    "topic-viii-compact",
+    "topic-viii-polygon-criterion",
+    "topic-viii-radial-filling",
+    "topic-viii-radial-function",
+    "topic-viii-unit-circle",
+    "topic-viii-origin-interior",
+    "topic-viii-criticality-definition",
+    "karp:eq:new-shell",
+    "topic-viii-new-shell-critical",
+  ];
+  let previousIndex = -1;
+  for (const id of orderedIds) {
+    const index = topicVIII.indexOf(`id="${id}"`);
+    assert.ok(index > previousIndex, `${id} appears in dependency order`);
+    previousIndex = index;
+  }
+
+  assert.match(visibleText, /Let n≥2 and θ∈ℝ/i);
+  assert.match(
+    visibleText,
+    /compact, hence the maximum is attained[\s\S]*star-shapedness[\s\S]*whole ray intersection/i,
+  );
+  assert.match(topicVIII, /<i>R<\/i><sub>n<\/sub>\(θ\)=max/);
+  assert.match(
+    topicVIII,
+    /λ=<i>R<\/i><sub>N<\/sub>\(θ\)e<sup>iθ<\/sup>∈Θ<sub>N<\/sub>∖Θ<sub>N−1<\/sub>/,
+  );
+  assert.doesNotMatch(visibleText, /Rᴺ|Θᴺ|Θᴺ⁻¹|Θᴺ₋₁/);
+
+  assert.match(visibleText, /Extreme-point set Ext\(P\)/i);
+  assert.match(visibleText, /Spectral radius r\(A\)/i);
+  assert.match(visibleText, /Supporting functional at zero/i);
+  assert.match(visibleText, /Elliptic contraction — manuscript terminology/i);
+  assert.match(visibleText, /N-critical — manuscript terminology/i);
+  assert.match(
+    topicVIII,
+    /ν<sub>poly<\/sub>\(T<sub>λ<\/sub>\)=<var>N<\/var>/,
+  );
+  assert.match(
+    topicVIII,
+    /ν<sub>poly<\/sub>\(tT<sub>λ<\/sub>\)&gt;<var>N<\/var>/,
+  );
+
+  const conditionStart = topicVIII.indexOf(
+    'id="topic-viii-non-inherited-radial-maximum"',
+  );
+  const conditionEnd = topicVIII.indexOf(
+    'id="topic-viii-new-shell-critical"',
+    conditionStart,
+  );
+  const condition = topicVIII.slice(conditionStart, conditionEnd);
+  assert.match(condition, /excludes the origin/);
+  assert.match(condition, /occurs as an eigenvalue at order/);
+  assert.ok(
+    condition.indexOf("excludes the origin") <
+      condition.indexOf("occurs as an eigenvalue at order"),
+    "the two clauses of (II.4.3) are explained in the intended order",
+  );
+  assert.doesNotMatch(
+    visibleText,
+    /vertex budget|least-vertex witness|absorbing-state padding|outward (?:enlargement|rescaling|witness)/i,
+  );
+
+  const propositionStart = topicVIII.indexOf(
+    'id="topic-viii-new-shell-critical"',
+  );
+  const shelfStart = topicVIII.indexOf('id="topic-viii-exact-sources"');
+  const proposition = topicVIII.slice(propositionStart, shelfStart);
+  assert.doesNotMatch(proposition, /proof-chapter-provenance/);
+  assert.match(proposition, /no separate literature-priority claim is made here/i);
+
+  const shelfEnd = topicVIII.indexOf("</section>", shelfStart);
+  const shelf = topicVIII.slice(shelfStart, shelfEnd);
+  assert.equal(
+    [...shelf.matchAll(/<li>/g)].length,
+    7,
+    "the Topic VIII source shelf is generated from all seven cited sources",
+  );
 });
 
 test("the N=3 exception and the N>=4 projective scope remain coherent across topics", async () => {

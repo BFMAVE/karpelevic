@@ -1,10 +1,11 @@
 import { ProofDependencyContract } from "../../components/proof/ProofDependencyContract";
 import { ProofResultGroup } from "../../components/proof/ProofResultGroup";
+import { ProofSourceShelf } from "../../components/proof/ProofSourceShelf";
 import { StochasticFareyFigure } from "../../components/proof/figures/StochasticFareyFigures";
 import { sitePath } from "../../lib/site-path";
 import {
-  topicVIIIExactSources,
   topicVIIIResults,
+  topicVIIISourceIds,
   topicIXExactSources,
   topicIXResults,
   topicXExactSources,
@@ -40,15 +41,17 @@ function ExactSourceShelf({
 
 function SetupBlock({
   eyebrow,
+  id,
   title,
   children,
 }: {
   eyebrow: string;
+  id?: string;
   title: string;
   children: React.ReactNode;
 }) {
   return (
-    <section className="topic-i-textbook proof-chapter-group">
+    <section className="topic-i-textbook proof-chapter-group" id={id}>
       <header>
         <div>
           <p className="section-label">{eyebrow}</p>
@@ -66,10 +69,10 @@ export function TopicVIIIChapter() {
       <ProofDependencyContract
         imported={[
           {
-            label: "Topic I — polygonal complexity and radial criticality",
-            href: sitePath("/proof/"),
+            label: "Topic I — polygonal complexity and N-criticality",
+            href: sitePath("/proof/#def:N-critical"),
             explanation:
-              "supplies the intrinsic definition that Definition II.4.6 restates in stochastic language.",
+              "defines νpoly(T) as the minimum invariant-polygon vertex count and calls T N-critical when νpoly(T)=N while νpoly(tT)>N for every t>1.",
           },
           {
             label: "Topic II — strict area monotonicity",
@@ -94,46 +97,70 @@ export function TopicVIIIChapter() {
             explanation:
               "the powers of a unit complex number either form a finite root-of-unity orbit or are dense on the unit circle.",
           },
+          {
+            label: "Supporting line at a boundary point",
+            explanation:
+              "if zero lies on the boundary of a two-dimensional compact convex polygon, a nonzero real linear functional ℓ has ℓ≥0 on the polygon and kernel equal to a supporting line through zero.",
+          },
+          {
+            label: "Spectral radius",
+            explanation:
+              "for a real-linear map A, r(A) is the maximum modulus of its complex eigenvalues. The manuscript calls an elliptic map an elliptic contraction when r(A) lies in (0,1).",
+          },
         ]}
         provedHere={
           <p>
             We prove compactness and star-shapedness of Θ<sub>n</sub>, the exact
-            equivalence between stochastic eigenpairs and invariant polygons,
+            equivalence between stochastic eigenpairs and invariant polytopes,
             the unit-circle classification, the interior-origin lemma, and the
-            implication from a non-inherited radial maximum to an
-            <var>N</var>-critical planar contraction.
+            two literal conclusions ν<sub>poly</sub>(T<sub>λ</sub>)=<var>N</var>{" "}
+            and ν<sub>poly</sub>(tT<sub>λ</sub>)&gt;<var>N</var> for every
+            <var> t</var>&gt;1 at a non-inherited radial maximum.
           </p>
         }
       />
 
-      <SetupBlock eyebrow="The object being studied" title="From stochastic matrices to a radial region">
+      <SetupBlock
+        eyebrow="Handoff from Topic VII"
+        id="topic-viii-topic-vii-handoff"
+        title="From the conditional polygon theorem back to matrices"
+      >
+        <p>
+          <a href={sitePath("/proof/topic-vii/#part-i-item-4")}>Topic VII</a>{" "}
+          proved the closed-return product theorem for an <var>N</var>-critical
+          planar map when <span className="math-inline">N≥4</span>. The present
+          topic supplies the missing stochastic interface: a radial boundary
+          point of Θ<sub>N</sub> that is not in Θ<sub>N−1</sub> gives exactly the
+          two vertex-count inequalities required by that theorem. No result
+          from Topics IX–XIII is used here.
+        </p>
+      </SetupBlock>
+
+      <SetupBlock
+        eyebrow="The object being studied"
+        id="topic-viii-eigenvalue-region"
+        title="Row-stochastic matrices and their eigenvalue regions"
+      >
         <p>
           A real <strong>row-stochastic matrix</strong> has nonnegative entries
-          and every row sums to one. For a positive integer <var>n</var>,
+          and every row sums to one. For a positive integer <var>n</var>,{" "}
           Θ<sub>n</sub> is the set of all complex eigenvalues of all such
-          <var>n</var>×<var>n</var> matrices. The matrices vary as well as the
-          eigenvalue: Θ<sub>n</sub> is one region assembled from an entire class
+          {" "}<var>n</var>×<var>n</var> matrices. The matrices vary as well as the
+          eigenvalue: Θ<sub>n</sub> is an eigenvalue region assembled from an entire class
           of matrices.
-        </p>
-        <p>
-          Along the ray of angle θ we write
-          {" "}<span className="math-inline">Rₙ(θ)=max{"{"}ρ∈[0,1] : ρeⁱθ∈Θₙ{"}"}</span>.
-          Proposition II.4.1 and Corollary II.4.3 will prove that this maximum
-          exists and that every smaller radius on the same ray is also present.
-          Thus <span className="math-inline">Rₙ(θ)eⁱθ</span> really is the
-          outermost attainable point on that ray.
         </p>
         <details className="proof-item-commentary proof-item-explainer">
           <summary>
             <span>Why the subscript is matrix order</span>
-            Open the state-count interpretation
+            Open the matrix-order interpretation
           </summary>
           <div className="proof-item-explainer-body">
             <p>
               The order <var>n</var> counts stochastic states. Theorem II.4.2
               proves that allowing <var>n</var> states is equivalent to allowing
-              an invariant polygon with at most <var>n</var> vertices. This is
-              why a change of matrix order becomes a change of vertex budget.
+              a non-singleton invariant polytope with at most <var>n</var>{" "}
+              vertices. Thus increasing the matrix order increases the permitted
+              number of vertices.
             </p>
           </div>
         </details>
@@ -141,61 +168,123 @@ export function TopicVIIIChapter() {
 
       <ProofResultGroup
         number="VIII.A"
-        title="The stochastic–polygon equivalence"
+        title="Stochastic eigenvalues and invariant polytopes"
         introduction={
           <p>
-            The first five statements establish the global shape of Θ<sub>n</sub>
-            and prove that stochastic eigenpairs and finite invariant polygons
-            encode exactly the same existence question.
+            The first three statements establish the basic shape of Θ<sub>n</sub>{" "}
+            and prove that stochastic eigenpairs and finite invariant polytopes
+            encode the same existence question.
           </p>
         }
-        results={topicVIIIResults.slice(0, 5)}
+        results={topicVIIIResults.slice(0, 3)}
       />
 
-      <SetupBlock eyebrow="The extremal condition" title="A radial maximum not inherited from order N−1">
+      <SetupBlock
+        eyebrow="The radial function"
+        id="topic-viii-radial-function"
+        title="The maximum is now justified"
+      >
         <p>
-          Fix an order <span className="math-inline">N≥4</span> and an angle
-          {" "}<span className="math-inline">0&lt;θ&lt;π</span>. A point is a
-          <strong> non-inherited radial maximum</strong> when it satisfies
+          Let <span className="math-inline">n≥2</span> and θ∈ℝ. The identity
+          matrix shows that 1∈Θ<sub>n</sub>, so Corollary II.4.3 gives
+          0∈Θ<sub>n</sub>. We may therefore define
+        </p>
+        <p className="display-equation proof-setup-equation">
+          <span className="math-inline">
+            <i>R</i><sub>n</sub>(θ)=max{"{"}ρ∈[0,1] : ρe<sup>iθ</sup>∈Θ<sub>n</sub>{"}"}.
+          </span>
+        </p>
+        <p>
+          Proposition II.4.1 makes the set of admissible radii compact, hence
+          the maximum is attained. Star-shapedness from Corollary II.4.3 has a
+          different role: it identifies the whole ray intersection as
+        </p>
+        <p className="display-equation proof-setup-equation">
+          <span className="math-inline">
+            Θ<sub>n</sub>∩{"{"}ρe<sup>iθ</sup>:ρ≥0{"}"}={"{"}ρe<sup>iθ</sup>:0≤ρ≤<i>R</i><sub>n</sub>(θ){"}"}.
+          </span>
+        </p>
+      </SetupBlock>
+
+      <ProofResultGroup
+        number="VIII.B"
+        title="The unit circle and the interior origin"
+        introduction={
+          <p>
+            The next two results classify the only unit-modulus points and show
+            that a genuinely rotating strict contraction forces the origin into
+            the interior of every non-singleton invariant polytope.
+          </p>
+        }
+        results={topicVIIIResults.slice(3, 5)}
+      />
+
+      <ProofResultGroup
+        number="VIII.C"
+        title="The manuscript’s vertex-count terminology"
+        introduction={
+          <p>
+            Definition II.4.6 restates the Topic I terminology here, before the
+            stochastic boundary hypothesis uses it. Its two inequalities are
+            always displayed alongside the term <var>N</var>-critical.
+          </p>
+        }
+        results={topicVIIIResults.slice(5, 6)}
+      />
+
+      <SetupBlock
+        eyebrow="The extremal condition"
+        id="topic-viii-non-inherited-radial-maximum"
+        title="A radial boundary point new at order N"
+      >
+        <p>
+          Fix <span className="math-inline">N≥4</span> and
+          {" "}<span className="math-inline">0&lt;θ&lt;π</span>. The manuscript
+          calls λ a <dfn>non-inherited radial maximum</dfn> when
         </p>
         <p id="karp:eq:new-shell" className="display-equation proof-setup-equation">
           <span className="math-inline">
-            λ=Rᴺ(θ)eⁱθ ∈ Θᴺ∖Θᴺ⁻¹, 0&lt;|λ|&lt;1.
+            λ=<i>R</i><sub>N</sub>(θ)e<sup>iθ</sup>∈Θ<sub>N</sub>∖Θ<sub>N−1</sub>, 0&lt;|λ|&lt;1.
           </span>{" "}
           <a className="part-i-equation-number" href="#karp:eq:new-shell" aria-label="Equation II.4.3, permalink">
             (II.4.3)
           </a>
         </p>
         <p>
-          The first clause
-          excludes the origin and the already classified unit circle. The second
-          says the point genuinely appears at order <var>N</var>; it was not
-          inherited from a smaller stochastic matrix.
+          The condition 0&lt;|λ|&lt;1 excludes the origin and the already classified
+          unit circle. The membership λ∈Θ<sub>N</sub>∖Θ<sub>N−1</sub> says that λ
+          occurs as an eigenvalue at order <var>N</var> but not at order
+          <var> N</var>−1.
         </p>
         <p>
-          There are two independent extremal statements. Non-inheritance from
-          order <var>N</var>−1 rules out every polygon with at most
-          <var>N</var>−1 vertices. Being outermost on the order-<var>N</var> ray
-          rules out every outward enlargement that still has an invariant
-          polygon with at most <var>N</var> vertices. Proposition II.4.7 matches
-          these clauses, one by one, with radial polygonal criticality.
+          These are two independent conclusions. The first rules out every
+          invariant polygon with at most <var>N</var>−1 vertices. Radial
+          maximality gives tλ∉Θ<sub>N</sub> for every <var>t</var>&gt;1, so no
+          invariant polygon with at most <var>N</var> vertices exists for
+          tT<sub>λ</sub>. Proposition II.4.7 writes these conclusions as
+          ν<sub>poly</sub>(T<sub>λ</sub>)=<var>N</var> and
+          ν<sub>poly</sub>(tT<sub>λ</sub>)&gt;<var>N</var>.
         </p>
         <StochasticFareyFigure kind="new-shell" />
       </SetupBlock>
 
       <ProofResultGroup
-        number="VIII.B"
-        title="From a non-inherited radial maximum to critical geometry"
+        number="VIII.D"
+        title="The stochastic boundary point satisfies the Topic VII hypothesis"
         introduction={
           <p>
-            The definition is repeated here deliberately: the final proposition
-            should be readable without translating notation back to Topic I.
+            The final proposition now only has to match the two stochastic
+            conclusions above with the two clauses of the definition.
           </p>
         }
-        results={topicVIIIResults.slice(5)}
+        results={topicVIIIResults.slice(6)}
       />
 
-      <ExactSourceShelf headingId="topic-viii-exact-sources" sources={topicVIIIExactSources} />
+      <ProofSourceShelf
+        heading="Sources and provenance"
+        headingId="topic-viii-exact-sources"
+        sourceIds={topicVIIISourceIds}
+      />
     </>
   );
 }
@@ -212,7 +301,7 @@ export function TopicIXChapter() {
               "supplies the elementary lattice-parallelogram fact used in the converse direction of Farey adjacency.",
           },
           {
-            label: "Topic VIII — compact radial stochastic regions",
+            label: "Topic VIII — compact stochastic eigenvalue regions",
             href: sitePath("/proof/topic-viii/"),
             explanation:
               "explains why one eventually wants one candidate radius on every ray, although no stochastic realization is used in this chapter.",

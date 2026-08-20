@@ -1041,8 +1041,8 @@ export default function ProofPage() {
             <h2>The classification is part of the scholarship.</h2>
           </div>
           <p>
-            This page was made through vibecoding with generative-AI
-            assistance. Mathematical and editorial responsibility remains
+            This page was developed with generative-AI assistance.
+            Mathematical and editorial responsibility remains
             with the authors. If a result has an earlier source, a stronger
             antecedent, or a qualification missing here, please{" "}
             <a href={sitePath("/#contact-heading")}>send a correction</a>.

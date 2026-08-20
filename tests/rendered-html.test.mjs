@@ -128,7 +128,7 @@ test("keeps the verified local manuscript available", async () => {
 
   const pdf = await readFile(pdfUrl);
   assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
-  assert.equal(pdf.byteLength, 610_633);
+  assert.equal(pdf.byteLength, 616_787);
 });
 
 test("server-renders the sourced History page", async () => {
@@ -867,7 +867,7 @@ test("server-renders the Part I proof reader", async () => {
   assert.doesNotMatch(topicIPanelHtml, /Hereditary saturation/);
   assert.doesNotMatch(topicIPanelHtml, /Projective unit return/);
   assert.doesNotMatch(topicIPanelHtml, /Return factors lie on the Jensen sheet/);
-  assert.match(html, /Returning to stochastic spectra/);
+  assert.match(html, /Returning to stochastic eigenvalue regions/);
   assert.match(html, /href="(?:\/karpelevic)?\/proof\/topic-ii\/"/);
   assert.doesNotMatch(
     html,

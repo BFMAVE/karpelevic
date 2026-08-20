@@ -486,15 +486,15 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "spectra",
     eyebrow: "Topic VIII · 7 items",
-    title: "Returning to stochastic spectra",
+    title: "Returning to stochastic eigenvalue regions",
     question:
-      "How does a stochastic radial extremum become a critical planar contraction?",
+      "How does a radial boundary point new at order N satisfy the manuscript’s N-critical vertex-count conditions?",
     overview: [
-      "This topic reattaches the geometry to row-stochastic matrices. The invariant-polygon criterion passes in both directions between a stochastic eigenvalue and a polygon with at most the prescribed number of vertices.",
-      "Compactness, star-shapedness with respect to the origin, and the unit-circle classification isolate non-inherited radial maxima. For N≥4, the proof then shows directly that multiplication by such a maximum is an N-critical planar contraction, so Part I applies; orders at most three use the direct small-order argument. This is the complete interface needed by the five proof chapters that follow.",
+      "Topic VII proves the closed-return product theorem conditionally for an N-critical planar map. This topic returns to row-stochastic matrices and proves the invariant-polytope criterion in both directions.",
+      "Compactness, star-shapedness with respect to the origin, and the unit-circle classification make the radial function precise. For N≥4, a non-inherited radial maximum satisfies νpoly(Tλ)=N and νpoly(tTλ)>N for every t>1, so the Topic VII theorem applies; orders at most three use the direct small-order argument.",
     ],
     itemNumbers: [3, 4, 60, 61, 62, 63, 64],
-    manuscriptPages: "3–5, 59–60, 66, and 71–75",
+    manuscriptPages: "80–83",
   },
   {
     slug: "candidate-boundary",

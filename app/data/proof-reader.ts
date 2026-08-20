@@ -88,7 +88,7 @@ export const proofReaderRoutes: readonly ProofReaderRoute[] = [
     topicNumber: 8,
     href: "/proof/topic-viii/",
     title: topicTitle(8),
-    shortTitle: "Stochastic spectra",
+    shortTitle: "Eigenvalue regions",
   },
   {
     key: "topic-ix",

@@ -331,8 +331,8 @@ export default function HistoryPage() {
           <p>
             This page is a guided reading of the literature, not a final
             bibliography. Mathematical, historical, technical, and
-            typographical corrections are welcome. This site is being made
-            through vibecoding with generative-AI assistance; the authors
+            typographical corrections are welcome. This site is being developed
+            with generative-AI assistance; the authors
             remain responsible for every claim.
           </p>
         </div>

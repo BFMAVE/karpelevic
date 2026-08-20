@@ -295,8 +295,8 @@ export default function JourneyPage() {
           <p>
             Mathematics is a cultural and community endeavour. Comments,
             corrections, and missing parts of the story are welcome, especially
-            if you spot an error. This site is being made through vibecoding
-            with generative-AI assistance; the authors remain responsible for
+            if you spot an error. This site is being developed with
+            generative-AI assistance; the authors remain responsible for
             every claim.
           </p>
         </div>

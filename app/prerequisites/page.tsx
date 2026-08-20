@@ -312,8 +312,8 @@ export default function PrerequisitesPage() {
             <h2>A library should become clearer when readers use it.</h2>
           </div>
           <p>
-            This page was made through vibecoding with generative-AI
-            assistance. Mathematical and editorial responsibility remains
+            This page was developed with generative-AI assistance.
+            Mathematical and editorial responsibility remains
             with the authors. If a definition is misleading, an illustration
             needs qualification, or a useful prerequisite is missing, please{" "}
             <a href={sitePath("/#contact-heading")}>send a correction</a>.

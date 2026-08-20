@@ -16,7 +16,7 @@ const outputPath = path.resolve(
 );
 const proofRoute = process.env.PROOF_ROUTE ?? "/proof";
 const publicSite = "https://bfmave.github.io/karpelevic";
-const publishedTopicMaximum = 7;
+const publishedTopicMaximum = 8;
 const bundleLinkMode = process.env.PROOF_STANDALONE_BUNDLE_LINKS === "1";
 const reviewBundleFiles = new Map([
   ["/proof/topic-v", "Critical_Invariant_Polygons_Topic_V.html"],
@@ -59,6 +59,43 @@ function normalizeRoutePath(routePath) {
   const normalized = routePath.replace(/\/+$/, "");
   return normalized || "/";
 }
+
+function validateBundleConfiguration() {
+  if (!bundleLinkMode && explicitlyBundledTopicNumbers.size > 0) {
+    throw new Error(
+      "PROOF_STANDALONE_BUNDLE_TOPICS requires PROOF_STANDALONE_BUNDLE_LINKS=1.",
+    );
+  }
+  if (!bundleLinkMode || explicitlyBundledTopicNumbers.size === 0) return;
+
+  const hasTopicVIII = explicitlyBundledTopicNumbers.has(8);
+  const hasTopicIX = explicitlyBundledTopicNumbers.has(9);
+  if (hasTopicVIII !== hasTopicIX) {
+    throw new Error(
+      "The offline Topic VIII–IX review bundle must declare both topics 8 and 9.",
+    );
+  }
+
+  const normalizedRoute = normalizeRoutePath(proofRoute);
+  const routeTopicNumber = proofTopicNumbers.get(normalizedRoute);
+  if (
+    routeTopicNumber !== undefined &&
+    !explicitlyBundledTopicNumbers.has(routeTopicNumber)
+  ) {
+    throw new Error(
+      `The exported route ${normalizedRoute} is not declared in PROOF_STANDALONE_BUNDLE_TOPICS.`,
+    );
+  }
+
+  const expectedFilename = reviewBundleFiles.get(normalizedRoute);
+  if (expectedFilename && path.basename(outputPath) !== expectedFilename) {
+    throw new Error(
+      `Bundle export for ${normalizedRoute} must be named ${expectedFilename}.`,
+    );
+  }
+}
+
+validateBundleConfiguration();
 
 const mimeTypes = new Map([
   [".avif", "image/avif"],
@@ -425,9 +462,9 @@ function verifyStandaloneHtml(html) {
               : proofRoute === "/proof/topic-viii"
                 ? [
                     "Topic VIII",
-                    "Returning to stochastic spectra",
-                    "The stochastic–polygon equivalence",
-                    "Non-inherited radial maxima are polygonally critical",
+                    "Returning to stochastic eigenvalue regions",
+                    "Stochastic eigenvalues and invariant polytopes",
+                    "A non-inherited radial maximum is N-critical",
                     'data-proof-route="topic-viii"',
                     "Forthcoming",
                   ]
@@ -590,6 +627,7 @@ function verifyStandaloneHtml(html) {
       "/proof/topic-iv/",
       "/proof/topic-v/",
       "/proof/topic-vi/",
+      "/proof/topic-viii/",
     ];
     for (const route of requiredPublishedRoutes) {
       if (!html.includes(`href="${publicSite}${route}`)) {
@@ -603,18 +641,51 @@ function verifyStandaloneHtml(html) {
         "The individual Topic VII standalone must not require sibling HTML files.",
       );
     }
-    if (!/data-proof-topic-number="8"[\s\S]{0,500}Forthcoming/i.test(html)) {
-      throw new Error(
-        "Standalone Topic VII must mark Topic VIII as forthcoming.",
-      );
-    }
     if (
-      /href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-viii\//i.test(
+      !/class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-viii\//i.test(
         html,
       )
     ) {
       throw new Error(
-        "Standalone Topic VII must not link to unpublished Topic VIII.",
+        "Standalone Topic VII must link Next to the published Topic VIII page.",
+      );
+    }
+  }
+
+  if (proofRoute === "/proof/topic-viii" && !bundleLinkMode) {
+    const requiredPublishedRoutes = [
+      "/proof/",
+      "/proof/topic-ii/",
+      "/proof/topic-iii/",
+      "/proof/topic-iv/",
+      "/proof/topic-v/",
+      "/proof/topic-vi/",
+      "/proof/topic-vii/",
+    ];
+    for (const route of requiredPublishedRoutes) {
+      if (!html.includes(`href="${publicSite}${route}"`)) {
+        throw new Error(
+          `Standalone Topic VIII must link to the published route ${route}`,
+        );
+      }
+    }
+    if (/href="Critical_Invariant_Polygons_Topic_[IVX]+\.html/i.test(html)) {
+      throw new Error(
+        "The individual Topic VIII standalone must not require sibling HTML files.",
+      );
+    }
+    if (!/data-proof-topic-number="9"[\s\S]{0,500}Forthcoming/i.test(html)) {
+      throw new Error(
+        "The individual Topic VIII standalone must mark Topic IX as forthcoming.",
+      );
+    }
+    if (
+      /href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-ix\//i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "The individual Topic VIII standalone must not link to unpublished Topic IX.",
       );
     }
   }
@@ -631,6 +702,22 @@ function verifyStandaloneHtml(html) {
     );
   }
   if (bundleLinkMode && explicitlyBundledTopicNumbers.size > 0) {
+    const allowedFilenames = new Set(
+      [...reviewBundleFiles]
+        .filter(([route]) => isExplicitlyBundledTopic(route))
+        .map(([, filename]) => filename),
+    );
+    const relativeHtmlTargets = [
+      ...html.matchAll(/href="([^":/#?]+\.html)(?:#[^"]*)?"/gi),
+    ].map((match) => match[1]);
+    for (const target of relativeHtmlTargets) {
+      if (!allowedFilenames.has(target)) {
+        throw new Error(
+          `A standalone bundle chapter links to undeclared archive member ${target}.`,
+        );
+      }
+    }
+
     for (const [route, topicNumber] of proofTopicNumbers) {
       if (
         explicitlyBundledTopicNumbers.has(topicNumber) &&
@@ -638,6 +725,23 @@ function verifyStandaloneHtml(html) {
       ) {
         throw new Error(
           `A standalone bundle chapter still links publicly to bundled Topic ${topicNumber}.`,
+        );
+      }
+    }
+
+    if (
+      explicitlyBundledTopicNumbers.has(8) &&
+      explicitlyBundledTopicNumbers.has(9)
+    ) {
+      const companionFilename =
+        normalizeRoutePath(proofRoute) === "/proof/topic-viii"
+          ? reviewBundleFiles.get("/proof/topic-ix")
+          : normalizeRoutePath(proofRoute) === "/proof/topic-ix"
+            ? reviewBundleFiles.get("/proof/topic-viii")
+            : undefined;
+      if (companionFilename && !html.includes(`href="${companionFilename}`)) {
+        throw new Error(
+          `The Topic VIII–IX bundle chapter is missing its companion link to ${companionFilename}.`,
         );
       }
     }

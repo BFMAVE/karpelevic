@@ -21,31 +21,282 @@ function Dot({ x, y, color = ink, open = false, r = 6 }: { x: number; y: number;
   return <circle cx={x} cy={y} r={r} fill={open ? paper : color} stroke={color} strokeWidth="2" />;
 }
 
-function Eigenpolygon({ marker }: { marker: string }) {
+type Point = { x: number; y: number };
+
+function pointsAttribute(points: readonly Point[]): string {
+  return points.map(({ x, y }) => `${x},${y}`).join(" ");
+}
+
+function equilateralPoint(center: Point, radius: number, angle: number): Point {
+  return {
+    x: center.x + radius * Math.cos(angle),
+    y: center.y - radius * Math.sin(angle),
+  };
+}
+
+function midpoint(first: Point, second: Point): Point {
+  return {
+    x: (first.x + second.x) / 2,
+    y: (first.y + second.y) / 2,
+  };
+}
+
+function Eigenpolygon({ marker, mobile = false }: { marker: string; mobile?: boolean }) {
+  const center = mobile ? { x: 160, y: 175 } : { x: 340, y: 185 };
+  const radius = mobile ? 115 : 145;
+  const angles = [Math.PI / 2, (7 * Math.PI) / 6, (11 * Math.PI) / 6] as const;
+  const vertices = angles.map((angle) => equilateralPoint(center, radius, angle));
+  const imageVertices = vertices.map((vertex, index) =>
+    midpoint(vertex, vertices[(index + 1) % vertices.length]),
+  );
+  const labelSize = mobile ? 18 : 16;
+  const smallSize = mobile ? 18 : 15;
+  const vertexLabels = mobile
+    ? [
+        { x: vertices[0].x, y: vertices[0].y - 10, anchor: "middle" as const },
+        { x: vertices[1].x - 9, y: vertices[1].y + 28, anchor: "end" as const },
+        { x: vertices[2].x + 9, y: vertices[2].y + 28, anchor: "start" as const },
+      ]
+    : [
+        { x: vertices[0].x, y: vertices[0].y - 11, anchor: "middle" as const },
+        { x: vertices[1].x - 12, y: vertices[1].y + 28, anchor: "end" as const },
+        { x: vertices[2].x + 12, y: vertices[2].y + 28, anchor: "start" as const },
+      ];
+  const imageLabels = mobile
+    ? [
+        { x: imageVertices[0].x - 9, y: imageVertices[0].y - 13, anchor: "end" as const },
+        { x: imageVertices[1].x, y: imageVertices[1].y + 29, anchor: "middle" as const },
+        { x: imageVertices[2].x + 9, y: imageVertices[2].y - 13, anchor: "start" as const },
+      ]
+    : [
+        { x: imageVertices[0].x - 10, y: imageVertices[0].y - 13, anchor: "end" as const },
+        { x: imageVertices[1].x, y: imageVertices[1].y + 28, anchor: "middle" as const },
+        { x: imageVertices[2].x + 10, y: imageVertices[2].y - 13, anchor: "start" as const },
+      ];
+  const arrowStart = vertices[0];
+  const arrowEnd = imageVertices[0];
+  const arrowControl = mobile ? { x: 121, y: 83 } : { x: 294, y: 72 };
+
   return (
     <>
-      <polygon points="115,275 320,60 555,275" fill={pale} stroke={ink} strokeWidth="2.6" />
-      <polygon points="215,235 330,118 455,232" fill="none" stroke={red} strokeWidth="3.4" />
-      <path d="M320 60 Q430 64 463 145" fill="none" stroke={copper} strokeWidth="2.4" markerEnd={`url(#${marker})`} />
-      <Dot x={115} y={275} /><Dot x={320} y={60} /><Dot x={555} y={275} />
-      <Dot x={215} y={235} color={red} /><Dot x={330} y={118} color={red} /><Dot x={455} y={232} color={red} />
-      <text x="300" y="40" fill={ink}>v₂</text><text x="76" y="304" fill={ink}>v₁</text><text x="560" y="303" fill={ink}>v₃</text>
-      <text x="360" y="150" fill={red}>λP ⊆ P</text>
-      <text x="102" y="344" fill={ink}>each λvᵢ is a convex average of the original coordinates</text>
+      <polygon
+        data-polygon="P"
+        fill={pale}
+        points={pointsAttribute(vertices)}
+        stroke={ink}
+        strokeWidth="2.6"
+      />
+      <polygon
+        data-complex-scale="0.5"
+        data-polygon="lambda-P"
+        data-rotation="pi/3"
+        fill="none"
+        points={pointsAttribute(imageVertices)}
+        stroke={red}
+        strokeWidth="3.4"
+      />
+      <path
+        d={`M${arrowStart.x} ${arrowStart.y} Q${arrowControl.x} ${arrowControl.y} ${arrowEnd.x} ${arrowEnd.y}`}
+        data-complex-image-arrow="v1-to-lambda-v1"
+        fill="none"
+        markerEnd={`url(#${marker})`}
+        stroke={copper}
+        strokeWidth="2.4"
+      />
+      {vertices.map((vertex, index) => (
+        <g data-vertex={`v${index + 1}`} key={`v${index + 1}`}>
+          <Dot x={vertex.x} y={vertex.y} />
+          <text
+            fill={ink}
+            fontSize={labelSize}
+            textAnchor={vertexLabels[index].anchor}
+            x={vertexLabels[index].x}
+            y={vertexLabels[index].y}
+          >
+            v<tspan baselineShift="sub" fontSize={labelSize}>{index + 1}</tspan>
+          </text>
+        </g>
+      ))}
+      {imageVertices.map((vertex, index) => (
+        <g
+          data-image-vertex={`lambda-v${index + 1}`}
+          data-midpoint-of={`v${index + 1},v${((index + 1) % vertices.length) + 1}`}
+          key={`lambda-v${index + 1}`}
+        >
+          <Dot x={vertex.x} y={vertex.y} color={red} />
+          <text
+            fill={red}
+            fontSize={labelSize}
+            textAnchor={imageLabels[index].anchor}
+            x={imageLabels[index].x}
+            y={imageLabels[index].y}
+          >
+            λv<tspan baselineShift="sub" fontSize={labelSize}>{index + 1}</tspan>
+          </text>
+        </g>
+      ))}
+      <g data-origin="complex-multiplication">
+        <Dot x={center.x} y={center.y} open r={4.5} />
+        <text fill={ink} fontSize={labelSize} x={center.x + 13} y={center.y - 8}>O</text>
+      </g>
+      <text
+        fill={ink}
+        fontSize={smallSize}
+        textAnchor="middle"
+        x={mobile ? 160 : 340}
+        y={mobile ? 320 : 340}
+      >
+        each λv<tspan baselineShift="sub" fontSize={smallSize}>i</tspan> is a side midpoint
+      </text>
+      <text
+        fill={red}
+        fontSize={smallSize}
+        textAnchor="middle"
+        x={mobile ? 160 : 340}
+        y={370}
+      >
+        λ = ½ exp(iπ/3), so λP ⊆ P
+      </text>
     </>
   );
 }
 
-function NewShell() {
+function IndexedSymbol({
+  symbol,
+  index,
+  indexSize,
+}: {
+  symbol: "R" | "Θ";
+  index: "N" | "N−1";
+  indexSize: number;
+}) {
   return (
     <>
-      <path d="M82 274 C120 80 285 42 478 94 C580 122 628 208 585 291" fill={pale} stroke={ink} strokeWidth="2.8" />
-      <path d="M144 271 C170 140 286 103 430 136 C496 151 535 208 511 275" fill={paper} stroke={copper} strokeWidth="2.6" strokeDasharray="8 6" />
-      <line x1="100" y1="300" x2="585" y2="95" stroke={red} strokeWidth="2.5" />
-      <Dot x={521} y={122} color={red} r={7} />
-      <text x="530" y="112" fill={red}>λ = Rᴺ(θ)eⁱθ</text>
-      <text x="305" y="198" fill={copper}>Θᴺ₋₁</text><text x="470" y="250" fill={ink}>Θᴺ</text>
-      <text x="98" y="338" fill={ink}>not in order N−1 · outermost in order N · therefore N-critical</text>
+      {symbol}<tspan baselineShift="sub" fontSize={indexSize}>{index}</tspan>
+    </>
+  );
+}
+
+function ExpITheta({ indexSize }: { indexSize: number }) {
+  return <>e<tspan baselineShift="super" fontSize={indexSize}>iθ</tspan></>;
+}
+
+function NewShell({ marker, mobile = false }: { marker: string; mobile?: boolean }) {
+  const originX = mobile ? 30 : 72;
+  const previousX = mobile ? 130 : 288;
+  const currentX = mobile ? 235 : 500;
+  const rayEndX = mobile ? 302 : 622;
+  const y = mobile ? 180 : 205;
+  const labelSize = mobile ? 18 : 16;
+  const indexSize = mobile ? 18 : 13;
+
+  return (
+    <>
+      <text
+        data-strict-radial-inequality="true"
+        fill={ink}
+        fontSize={labelSize}
+        textAnchor="middle"
+        x={mobile ? 160 : 347}
+        y={mobile ? 48 : 68}
+      >
+        <IndexedSymbol symbol="R" index="N−1" indexSize={indexSize} />(θ) &lt;{" "}
+        <IndexedSymbol symbol="R" index="N" indexSize={indexSize} />(θ)
+      </text>
+      <line
+        data-ray-axis="theta"
+        x1={originX}
+        x2={rayEndX}
+        y1={y}
+        y2={y}
+        stroke={ink}
+        strokeWidth="2"
+      />
+      <line
+        data-ray-intersection="Theta-N"
+        x1={originX}
+        x2={currentX}
+        y1={y}
+        y2={y}
+        stroke={ink}
+        strokeWidth="9"
+      />
+      <line
+        data-ray-intersection="Theta-N-1"
+        x1={originX}
+        x2={previousX}
+        y1={y}
+        y2={y}
+        stroke={copper}
+        strokeWidth="5"
+      />
+      <line
+        data-outward-exclusion="t-lambda"
+        markerEnd={`url(#${marker})`}
+        stroke={red}
+        strokeDasharray="8 6"
+        strokeWidth="3"
+        x1={currentX + 10}
+        x2={rayEndX}
+        y1={y}
+        y2={y}
+      />
+      <g data-origin-in-both-regions="true">
+        <Dot x={originX} y={y} />
+        <text fill={ink} fontSize={labelSize} textAnchor="middle" x={originX} y={y + 34}>0</text>
+      </g>
+      <g data-inclusion="included" data-ray-endpoint="order-N-1">
+        <Dot x={previousX} y={y} color={copper} r={7} />
+        <text
+          fill={copper}
+          fontSize={labelSize}
+          textAnchor="middle"
+          x={mobile ? previousX : previousX - 12}
+          y={y + 48}
+        >
+          <IndexedSymbol symbol="R" index="N−1" indexSize={indexSize} />(θ)<ExpITheta indexSize={indexSize} />
+        </text>
+      </g>
+      <g data-inclusion="included" data-ray-endpoint="order-N">
+        <Dot x={currentX} y={y} color={red} r={8} />
+        <text
+          fill={red}
+          fontSize={labelSize}
+          textAnchor="middle"
+          x={mobile ? currentX - 7 : currentX}
+          y={mobile ? y - 42 : y - 38}
+        >
+          λ = <IndexedSymbol symbol="R" index="N" indexSize={indexSize} />(θ)<ExpITheta indexSize={indexSize} />
+        </text>
+      </g>
+      <text
+        fill={red}
+        fontSize={labelSize}
+        textAnchor="middle"
+        x={mobile ? 240 : 556}
+        y={mobile ? 282 : 282}
+      >
+        tλ ∉ <IndexedSymbol symbol="Θ" index="N" indexSize={indexSize} />
+        <tspan x={mobile ? 240 : 556} dy={mobile ? 26 : 24}>(t &gt; 1)</tspan>
+      </text>
+      <text
+        fill={copper}
+        fontSize={labelSize}
+        textAnchor="middle"
+        x={mobile ? 92 : 180}
+        y={mobile ? 335 : 350}
+      >
+        <IndexedSymbol symbol="Θ" index="N−1" indexSize={indexSize} /> on this ray
+      </text>
+      <text
+        fill={ink}
+        fontSize={labelSize}
+        textAnchor="middle"
+        x={mobile ? 230 : 430}
+        y={mobile ? 365 : 350}
+      >
+        <IndexedSymbol symbol="Θ" index="N" indexSize={indexSize} /> on this ray
+      </text>
     </>
   );
 }
@@ -187,9 +438,23 @@ function Squeeze({ marker }: { marker: string }) {
   );
 }
 
-const copy: Record<FigureKind, { title: string; description: string; caption: string }> = {
-  eigenpolygon: { title: "An eigenvector draws an invariant polygon", description: "A large triangular convex hull contains a smaller red transformed triangle.", caption: "Plate VIII.1. Each stochastic row expresses λvᵢ as a convex average, so the transformed coordinate hull lies inside the original hull." },
-  "new-shell": { title: "Two conditions at a non-inherited radial maximum", description: "Two nested radial regions and one ray ending at a point on the larger region but outside the smaller region.", caption: "Plate VIII.2. Non-inheritance from order N−1 rules out polygons with at most N−1 vertices; radial maximality rules out every outward N-vertex invariant polygon. The curves are a logical schematic, not a computed spectrum." },
+const copy: Record<FigureKind, { title: string; description: string; caption: string; status?: string }> = {
+  eigenpolygon: {
+    status: "Exact diagram",
+    title: "An invariant equilateral triangle under complex multiplication",
+    description:
+      "An equilateral triangle P is centered at the marked origin O. Multiplication by lambda equal to one half times exp of i pi over three sends each vertex exactly to the midpoint of the following side, so the red image triangle lambda P is contained in P.",
+    caption:
+      "Plate VIII.1. Let P be the displayed equilateral triangle centered at the origin and let λ=½ exp(iπ/3). Then λv₁=(v₁+v₂)/2, λv₂=(v₂+v₃)/2, and λv₃=(v₃+v₁)/2. Thus every image vertex is a side midpoint and λP⊆P.",
+  },
+  "new-shell": {
+    status: "Exact ray diagram",
+    title: "Radial endpoints at two successive matrix orders",
+    description:
+      "One ray starts at the origin. The order N minus one eigenvalue region ends at its included radial endpoint, the order N region continues to the included point lambda, and every point t lambda with t greater than one is excluded from the order N region.",
+    caption:
+      "Plate VIII.2. On the ray at angle θ, the order-(N−1) eigenvalue region ends strictly before λ, while λ is the order-N radial endpoint. Thus λ is absent from the order-(N−1) region, and every tλ with t>1 lies outside the order-N region.",
+  },
   "farey-five": { title: "The upper Farey sequence of order five", description: "A number line marks the six reduced fractions from zero to one half and highlights the cell from one third to two fifths.", caption: "Plate IX.1. Exact rational arithmetic selects the cell before any numerical radius is computed." },
   "rooted-chord": { title: "The reciprocal-coordinate Ito identity", description: "Two colored vectors at angles A and minus B join head to tail and sum to the unit real vector.", caption: "Plate IX.2. The definitions of α and β cancel the vertical components and make the horizontal components sum to one on the chosen fractional-power branch." },
   "terminal-three": { title: "The order-three terminal candidate curve", description: "A nonreal curve approaches minus one half and a real segment continues from minus one half to minus one.", caption: "Plate IX.3. The exceptional nonreal graph tends to −1/2, while the same algebraic family supplies the segment [−1,−1/2]. The curved interpolation is schematic." },
@@ -203,13 +468,21 @@ const copy: Record<FigureKind, { title: string; description: string; caption: st
 export function StochasticFareyFigure({ kind }: { kind: FigureKind }) {
   const description = copy[kind];
   const marker = `sf-arrow-${kind}`;
+  const mobileMarker = `${marker}-mobile`;
+  const hasDedicatedMobileLayout = kind === "eigenpolygon" || kind === "new-shell";
   return (
     <figure className="topic-ii-concept-figure">
       <div className="topic-ii-concept-heading">
-        <span>Deterministic mathematical plate</span>
+        <span>{description.status ?? "Deterministic mathematical plate"}</span>
         <span>{description.title}</span>
       </div>
-      <svg role="img" aria-labelledby={`sf-${kind}-title sf-${kind}-desc`} viewBox="0 0 680 400">
+      <svg
+        aria-labelledby={`sf-${kind}-title sf-${kind}-desc`}
+        className={hasDedicatedMobileLayout ? "topic-ii-concept-svg topic-ii-concept-svg-desktop" : undefined}
+        data-figure-layout="desktop"
+        role="img"
+        viewBox="0 0 680 400"
+      >
         <title id={`sf-${kind}-title`}>{description.title}</title>
         <desc id={`sf-${kind}-desc`}>{description.description}</desc>
         <defs>
@@ -218,7 +491,7 @@ export function StochasticFareyFigure({ kind }: { kind: FigureKind }) {
           </marker>
         </defs>
         {kind === "eigenpolygon" ? <Eigenpolygon marker={marker} /> : null}
-        {kind === "new-shell" ? <NewShell /> : null}
+        {kind === "new-shell" ? <NewShell marker={marker} /> : null}
         {kind === "farey-five" ? <FareyFive /> : null}
         {kind === "rooted-chord" ? <RootedChord marker={marker} /> : null}
         {kind === "terminal-three" ? <TerminalThree /> : null}
@@ -228,6 +501,28 @@ export function StochasticFareyFigure({ kind }: { kind: FigureKind }) {
         {kind === "sparse-cases" ? <SparseCases marker={marker} /> : null}
         {kind === "squeeze" ? <Squeeze marker={marker} /> : null}
       </svg>
+      {hasDedicatedMobileLayout ? (
+        <svg
+          aria-labelledby={`sf-${kind}-mobile-title sf-${kind}-mobile-desc`}
+          className="topic-ii-concept-svg topic-ii-concept-svg-mobile"
+          data-figure-layout="mobile"
+          data-mobile-min-label-size="18"
+          role="img"
+          viewBox="0 0 320 390"
+        >
+          <title id={`sf-${kind}-mobile-title`}>{description.title}</title>
+          <desc id={`sf-${kind}-mobile-desc`}>
+            {description.description} Compact mobile layout.
+          </desc>
+          <defs>
+            <marker id={mobileMarker} markerHeight="7" markerWidth="8" orient="auto" refX="7" refY="3.5">
+              <path d="M0,0 L8,3.5 L0,7 Z" fill={red} />
+            </marker>
+          </defs>
+          {kind === "eigenpolygon" ? <Eigenpolygon marker={mobileMarker} mobile /> : null}
+          {kind === "new-shell" ? <NewShell marker={mobileMarker} mobile /> : null}
+        </svg>
+      ) : null}
       <figcaption>{description.caption}</figcaption>
     </figure>
   );

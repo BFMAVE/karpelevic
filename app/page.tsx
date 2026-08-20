@@ -244,8 +244,8 @@ export default function Home() {
             <p className="section-label">Generative AI</p>
             <h2>How this site is being made</h2>
             <p>
-              This website is being developed through vibecoding with
-              generative-AI assistance. AI tools assist with design, coding,
+              This website is being developed with generative-AI assistance.
+              AI tools assist with design, coding,
               and editorial organization; the authors remain responsible for
               the mathematics, historical claims, wording, and final
               presentation.
