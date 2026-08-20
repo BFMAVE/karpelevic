@@ -1817,3 +1817,38 @@ full local source history remain later site milestones.
   returns HTTP 200; Topic IX remains offline and returns HTTP 404. The
   owner-only Sites production copy is version 5 and is synchronized to source
   commit `210815b`.
+
+## Current milestone — Topic VII audit repair (20 August 2026)
+
+- **The formal argument is now explicit at every disputed step:** Lemma 8.1
+  states the primitive-segment argument precisely; Lemma 8.3 fixes the chosen
+  real arguments under conjugation and reversal; Proposition 8.5 rejoins its
+  two branches explicitly; and Lemma 8.7 defines `M` unconditionally and proves
+  `0 < A < M < pi` with `M > pi/2`. Proposition 8.6 again renders its two cases
+  as `(a)` and `(b)`. All 368 canonical labels and 267 generated Part I IDs are
+  unchanged.
+- **Both Topic VII plates now state only true geometry:** Plate VII.1 marks the
+  order-seven Farey endpoints as included and the denominator-eight mediants as
+  excluded. Plate VII.2 places the limiting point in the second quadrant,
+  displays the unit horizontal displacement and half-open endpoint convention,
+  and has dedicated desktop and mobile layouts with legible labels.
+- **Terminology is continuous from Topic VI through Topic VIII:** reader-visible
+  prose now uses consecutive Farey fractions, finite recurrences, finite product
+  identities, and chosen real arguments. Compatibility anchors retain their
+  stable internal names, while the public title and downstream references use
+  the literal mathematical descriptions.
+- **Verification and artifacts:** deterministic generated-content SHA-256 values
+  are `f3ff23c4882082b04e4c89201910f230ce2f08806120e9c559cba82ecd036fb1`
+  for Part I, `18d4effb6a9951bde6b5c4af2dacfe793571a1845973e5da1fab0041e6ccfbc1`
+  for Part II, and
+  `2810c7653f9e739c0c21b80b3e78581563a064dc1b44cabbf8fda62a15809c70`
+  for the Topic VIII–XI proof data. The 101-page manuscript PDF has SHA-256
+  `e9e4044b348484d043ab6f8e4c9bbe764319ed2f79b4c375c1d5b0894af8c5af`.
+  ESLint, all 53 tests, the capped Pages verifier, standalone integrity, and
+  desktop/320-pixel figure QA pass. The standalone Topic VII HTML has SHA-256
+  `6fc29c97949f4d955250689772d442bfda51d43948cf67bddd8352f5d2a5a6ab`.
+- **Publication status:** source implementation commit `b12be90`; static-only
+  Pages commit `a718278`. Live Topics VII and VIII return HTTP 200, Topic IX
+  remains offline and returns HTTP 404, and the live manuscript is byte-identical
+  to the verified local PDF. The owner-only Sites production copy is version 6
+  and is synchronized to source commit `b12be90`.
