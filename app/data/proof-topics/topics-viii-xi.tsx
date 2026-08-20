@@ -403,15 +403,37 @@ export function TopicIXChapter() {
           consecutive entries <span className="math-inline">f&lt;g</span> form
           a <strong>Farey interval</strong> [<var>f</var>,<var>g</var>]. Fractions are always reduced and
           denominators are positive. For the formulas, label the endpoint with
-          smaller denominator as <span className="math-inline">p/q</span> and
-          the other as <span className="math-inline">r/s</span>, so
-          {" "}<span className="math-inline">q&lt;s</span>. These labels need not
-          follow the left-to-right order <span className="math-inline">f&lt;g</span>.
+          smaller denominator first:
+        </p>
+        <p id="karp:eq:endpoint-labels" className="display-equation proof-setup-equation">
+          <span className="math-inline">p/q, r/s, q&lt;s.</span>{" "}
+          <a
+            className="part-i-equation-number"
+            href="#karp:eq:endpoint-labels"
+            aria-label="Equation II.2.2, permalink"
+          >
+            (II.2.2)
+          </a>
+        </p>
+        <p>
+          These labels need not follow the left-to-right order
+          {" "}<span className="math-inline">f&lt;g</span>.
         </p>
         <p>
           Choose <span className="math-inline">x∈(f,g)</span> and set
-          {" "}<span className="math-inline">d=⌊n/q⌋</span>, and
-          {" "}<span className="math-inline">e=s−dq</span>. The signed integer
+        </p>
+        <p id="karp:eq:mult-d" className="display-equation proof-setup-equation">
+          <span className="math-inline">d=⌊n/q⌋, e=s−dq.</span>{" "}
+          <a
+            className="part-i-equation-number"
+            href="#karp:eq:mult-d"
+            aria-label="Equation II.2.3, permalink"
+          >
+            (II.2.3)
+          </a>
+        </p>
+        <p>
+          The signed integer
           <var>e</var> is retained; it may be positive, zero, or negative. The
           positive angular distances used by the scalar equation are
         </p>

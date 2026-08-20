@@ -431,7 +431,7 @@ export const topicIXResults: readonly ProofResultData[] = [
     proofSteps: [
       { title: "Certify the Farey interval", explanation: <>Given n≥3 and exact x∈(0,1/2), find the consecutive fractions f&lt;x&lt;g in Fₙ, label the smaller denominator p/q and the other r/s, and compute d, A, and B exactly or with directed interval bounds.</> },
       { title: "Define the increasing residual", explanation: <>Set Fₓ(ρ)=ρˢ⁄ᵈ sin A+ρᑫ sin B−sin(A+B). Proposition II.2.3 gives Fₓ(0)&lt;0&lt;Fₓ(1) and strict increase on [0,1].</> },
-      { title: "Bisect the certified bracket", explanation: <>Start from [L,U]=[0,1]. Evaluate the residual with sufficient directed precision to choose the half containing the sign change, and continue until U−L≤2ε.</> },
+      { title: "Use a certified sign or enclosure", explanation: <>Start from [L,U]=[0,1]. At the midpoint, return immediately if Fₓ=0 is certified; otherwise use a certified strict sign to retain one half. If a directed evaluation still contains zero, certify a lower bound c&gt;0 for Fₓ′ on [m−ε,m+ε] and return m once the residual enclosure lies in [−cε,cε]. This also terminates when the exact root is a bisection midpoint.</> },
       { title: "Return the approximation", explanation: <>With ρ̂=(L+U)/2, return λ̂=ρ̂ exp(2πix) together with the Farey labels and numerical values α̂,β̂ from equation (II.2.9). Then |λ̂−λ(x)|=|ρ̂−ρ(x)|≤ε; no separate coefficient-error bound is claimed.</> },
       { title: "Handle endpoints separately", explanation: <>Use the proved unit-circle endpoint values, and for n=3 include the exact real segment [−1,−1/2]. The contract makes no convergence claim for Newton iteration or for an uncertified floating-point choice of x.</> },
     ],

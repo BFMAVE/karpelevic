@@ -1,7 +1,7 @@
 // Generated mechanically from the canonical Part I TeX source.
 // Regenerate with: npm run content:part-i
 export const partIContentMetadata = {
-  "sourceHash": "9d13e1acc614248ffd9c284c2884b7cd62c56f50effb6bf51bc266f1abeb2ef6",
+  "sourceHash": "017e27c7f8a13721ab75a829653a30d79c560f9442dc311ddff30ac50f1ce7b9",
   "statementCount": 70,
   "proofCount": 62,
   "displayMathCount": 525

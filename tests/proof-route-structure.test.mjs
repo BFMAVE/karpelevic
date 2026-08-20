@@ -370,9 +370,32 @@ test("Topics VIII and IX form a self-contained terminology and provenance handof
     visibleText,
     /Implicit-function theorem A calculus theorem that gives a continuously differentiable local solution when the defining function is continuously differentiable/i,
   );
+  for (const equationId of [
+    "karp:eq:endpoint-labels",
+    "karp:eq:mult-d",
+    "karp:eq:A-B-absolute",
+    "karp:eq:A+B-range",
+  ]) {
+    assert.equal(
+      topicIX.split(`id="${equationId}"`).length - 1,
+      1,
+      `${equationId} appears exactly once in the visible setup`,
+    );
+  }
   assert.match(visibleText, /Certified numerical evaluation of a candidate curve/i);
   assert.match(visibleText, /U−L≤2ε/i);
   assert.match(visibleText, /\|λ̂−λ\(x\)\|≤ε/i);
+  assert.match(visibleText, /If an exact zero is certified, return m immediately/i);
+  assert.match(
+    visibleText,
+    /directed enclosure for F x \( m \) is contained in \[ − c ε , c ε \]/i,
+  );
+  const exactMidpointResidual =
+    2 * 0.5 * Math.sin(Math.PI / 3) - Math.sin((2 * Math.PI) / 3);
+  assert.ok(
+    Math.abs(exactMidpointResidual) < 1e-15,
+    "n=3 and x=1/6 produce the exact first bisection midpoint root",
+  );
 
   const orderedIds = [
     "topic-ix-farey-adjacency",
