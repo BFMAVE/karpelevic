@@ -1744,3 +1744,31 @@ full local source history remain later site milestones.
   Pages commit `ca56019`. Topics I–VI and the synchronized manuscript PDF are
   live, Topic VII remains HTTP 404, and the owner-only hosted production copy
   has also been updated.
+
+## Current milestone — Topic VII publication (20 August 2026)
+
+- **The Topic VI–VII transition is explicit:** Topic VI now hands its three
+  first-return cases to Topic VII, where an always-visible setup defines the
+  inherited contact data, the normalized argument, the first-return shift, and
+  the three disjoint cases before any Farey statement is used.
+- **The formal route is self-contained and correctly ordered:** Theorem 1.4 is
+  stated once before Lemma 8.4 and proved once after Lemma 8.7. Proposition 8.6
+  now states the required `1 <= kappa < N` scope and verifies all Farey ranges,
+  reducedness claims, and the existence and uniqueness of its auxiliary
+  integer. The page contains eight result cards and eight complete proofs.
+- **Figures and terminology were repaired:** Plate VII.1 uses separate
+  desktop/mobile interval scales with nonoverlapping labels. Plate VII.2 shows
+  the included and excluded endpoints and the correct direction as the
+  parameter tends to one. Reader-visible prose consistently uses Farey
+  intervals, polynomial relations, and closed-return products while preserving
+  all stable anchors.
+- **Verification and artifacts:** ESLint, all 46 tests, deterministic Part I
+  and Part II generation, a clean Tectonic build, the Pages verifier, fragment
+  and privacy audits, proof controls, and desktop/390-pixel browser QA pass.
+  The canonical/public manuscript is now 101 pages with SHA-256
+  `e087092f5c235b50671055ae35b1b927b796fd95c609d787cdde3cc3fd9a2e1e`.
+- **Publication status:** source implementation commit `b641334`; static-only
+  Pages commit `ba910d7`. Topic VII was first published on 20 August 2026 and
+  returns HTTP 200; Topic VIII remains forthcoming and returns HTTP 404. The
+  owner-only Sites production copy is version 4 and is synchronized to the
+  same source commit.
