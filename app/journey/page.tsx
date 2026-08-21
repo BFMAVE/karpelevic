@@ -247,7 +247,8 @@ export default function JourneyPage() {
               className="journey-paper-link"
               href="https://zenodo.org/records/21529144"
             >
-              Read the current paper on Zenodo <span aria-hidden="true">↗</span>
+              Read the archival 24 July 2026 version on Zenodo{" "}
+              <span aria-hidden="true">↗</span>
             </a>
           </div>
         </section>

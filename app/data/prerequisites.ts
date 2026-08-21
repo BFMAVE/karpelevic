@@ -70,7 +70,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
     deck:
       "A standard linear-algebra course explains conjugate eigenvalues, but it may not formulate a real planar map intrinsically as complex multiplication. That formulation—and its two possible orientations—is the first specialised tool used here.",
     proofSummary:
-      "How an elliptic real-linear map becomes complex multiplication, why there are exactly two adapted choices, and how handedness selects between conjugate eigenvalues.",
+      "How an elliptic real-linear map becomes complex multiplication, why such a map has exactly two adapted choices, and how an ambient orientation selects between conjugate eigenvalues.",
     vocabulary: [
       {
         term: "Complex structure on a real plane",
@@ -102,25 +102,25 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
           "Cayley–Hamilton gives (T−αI)²=−β²I. Thus the complex coordinate is constructed from the intrinsic map; it is not an extra Euclidean choice.",
       },
       {
-        title: "There are exactly two adapted choices",
+        title: "An elliptic map has exactly two adapted choices",
         statement:
-          "The two adapted complex structures are J and −J.",
+          "For an elliptic real-linear map T, the only adapted complex structures are J and −J.",
         explanation:
           "They give the two conjugate descriptions Tz=μz and Tz=μ̄z. The underlying real map is unchanged.",
       },
       {
         title: "Conjugacy transports the structure",
         statement:
-          "For an invertible real-linear S, the structure adapted to STS⁻¹ is SJS⁻¹.",
+          "For every invertible real-linear S, the structure adapted to STS⁻¹ is SJS⁻¹, and the multiplier remains μ in that transported structure.",
         explanation:
           "Indeed, (SJS⁻¹)²=−I and it commutes with STS⁻¹. Adapted complex coordinates therefore behave naturally under coordinate changes.",
       },
       {
-        title: "Orientation decides whether μ is conjugated",
+        title: "Orientation normalisation decides whether μ is conjugated",
         statement:
-          "An orientation-preserving coordinate change keeps the chosen multiplier; an orientation-reversing change exchanges μ and μ̄.",
+          "Transporting J as SJS⁻¹ preserves μ for every invertible S. If the target instead chooses the adapted structure compatible with a fixed ambient orientation and det S<0, it uses −SJS⁻¹ and the multiplier is μ̄.",
         explanation:
-          "This is the precise bridge between an intrinsic real map, an oriented polygon, and the complex phases used in the argument.",
+          "Thus orientation reversal does not by itself conjugate the multiplier. Conjugation records the additional choice to re-normalise the target complex structure to the ambient orientation.",
       },
     ],
     example: {
@@ -318,11 +318,11 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
           "Every ray meets the boundary exactly once. Along the positive boundary, its direction therefore turns monotonically around the origin.",
       },
       {
-        title: "Handedness changes all orders together",
+        title: "A reflection reverses both geometric cyclic orders",
         statement:
           "An invertible S preserves these cyclic orders when det S>0 and reverses both when det S<0.",
         explanation:
-          "There is no independent sign choice: the orientation of the plane, the boundary, and the adapted complex coordinate are linked.",
+          "The transported structure SJS⁻¹ still represents the same multiplier. If one additionally requires compatibility with a fixed ambient orientation, a negative determinant selects −SJS⁻¹ instead.",
       },
       {
         title: "Containment is covariant",
@@ -360,13 +360,13 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
             "The directions of the image vertices occur in the opposite cyclic order around the origin.",
         },
         {
-          label: "Conjugate the multiplier",
+          label: "Re-normalise the target structure",
           text:
-            "In adapted complex coordinates, the multiplier μ representing T is replaced by μ̄.",
+            "Transporting J to SJS⁻¹ preserves μ. If target coordinates must again match the fixed ambient orientation, use −SJS⁻¹; only then is μ replaced by μ̄.",
         },
       ],
       conclusion:
-        "All reversals are manifestations of the same change of handedness; the invariant-polygon geometry itself is unchanged.",
+        "The geometric cyclic orders reverse while the invariant-polygon geometry is transported unchanged. Multiplier conjugation reflects a separate orientation-normalisation convention.",
     },
     partIUse: [
       {
@@ -394,7 +394,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
 
 export const prerequisitesContent = {
   title: "Prerequisites for Topic I",
-  subtitle: "The small library this reader assumes",
+  subtitle: "The background used in Topic I",
   topicTitle: "Topic I · The language of critical polygons",
   deck:
     "Three illustrated notes on background that is not normally part of a first linear-algebra course: adapted complex structures, precise polygonal convexity, and oriented boundary covariance.",

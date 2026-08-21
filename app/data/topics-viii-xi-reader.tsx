@@ -366,9 +366,9 @@ export const topicIXResults: readonly ProofResultData[] = [
     label: "Proposition II.2.3",
     kind: "Proposition",
     title: "A unique modulus at each prescribed argument",
-    purpose: "Determines exactly one modulus at each argument in the open Farey interval without presupposing a polynomial root branch.",
+    purpose: "Proves exact existence and uniqueness of the modulus at each argument in the open Farey interval, without presupposing a polynomial root branch or using numerical approximation.",
     manuscriptHtml: completeTopicIXHtml("karp:prop:scalar-ray"),
-    intuition: <>Two complex vectors at opposite signed angles A and B can have their vertical components cancel. The scalar equation is precisely what makes the recovered coefficients α and β add to one.</>,
+    intuition: <><strong>Exact result.</strong> Two complex vectors at opposite signed angles A and B can have their vertical components cancel. The scalar equation is precisely what makes the recovered coefficients α and β add to one; the later numerical algorithm only certifies an enclosure of this already proved unique modulus.</>,
     proofSteps: [
       { title: "Verify the angle range", explanation: <>Writing x as an affine combination of the consecutive endpoints gives explicit formulas for |qx−p| and |sx−r|. They imply A&gt;0, B&gt;0, and A+B&lt;π.</> },
       { title: "A monotone scalar function", explanation: <>Both exponents are positive and both sine coefficients are positive, so the left side is continuous and strictly increasing in ρ.</> },
@@ -378,7 +378,7 @@ export const topicIXResults: readonly ProofResultData[] = [
       { title: "Compare real and imaginary parts", explanation: <>The signed differences qx−p and sx−r have opposite signs. The sine-weighted vectors therefore have equal and opposite imaginary parts and real parts summing to one.</> },
       { title: "Recover the Ito equation", explanation: <>Raise equation (II.2.10) to the <var>d</var>-th power, use ωᵈ=1, clear inverse powers, and conjugate. This proves that the constructed λ satisfies the Ito equation.</> },
     ],
-    takeaway: <>At every argument between two consecutive Farey fractions there is one explicitly determined modulus, and the resulting point satisfies equation (II.2.10) and the Ito equation.</>,
+    takeaway: <>At every argument between two consecutive Farey fractions there is exactly one modulus, proved to exist and be unique by this proposition. The resulting point satisfies equation (II.2.10) and the Ito equation; numerical interval enclosures are needed only to approximate it with a certified error bound.</>,
     sourceIds: ["ito-1997", "kirkland-laffey-smigoc-2020"],
     sourceRelation: <>Ito supplies the polynomial family. Kirkland–Laffey–Šmigoc (2020), Theorem 1.2 and Lemma 4.4, characterize the boundary point at each prescribed argument through a unique positive radial solution. The proof here derives equation (II.2.8), the coefficients in (II.2.9), and the explicitly defined vector equation (II.2.10).</>,
   },
@@ -429,12 +429,14 @@ export const topicIXResults: readonly ProofResultData[] = [
     label: "Algorithm II.2.6",
     kind: "Algorithm",
     title: "Certified numerical evaluation",
-    purpose: "Returns either an ε-certified polar point approximation or, only when n=3 and x=1/2, the exact interval [−1,−1/2].",
+    purpose: "Certifies an enclosure of the exact modulus from Proposition II.2.3 and returns an ε-certified polar point approximation or, only when n=3 and x=1/2, the exact interval [−1,−1/2].",
     manuscriptHtml: completeTopicIXHtml("karp:alg:boundary"),
     prelude: (
       <>
         <p>
-          <strong>Numerical assumptions and output guarantee.</strong> The input representation must
+          <strong>Numerical assumptions and output guarantee.</strong> Proposition II.2.3 has already
+          proved exact existence and uniqueness. The interval computation below does not establish or
+          select a root; it certifies an enclosure of that exact modulus. The input representation must
           support exact comparison with Farey endpoints and outward-rounded
           interval enclosures of every transcendental evaluation. For an
           interior argument, maintain a sign-certified bracket [L,U]. When
@@ -456,10 +458,10 @@ export const topicIXResults: readonly ProofResultData[] = [
     ),
     vocabulary: [
       { term: "Input representation and certified evaluation", definition: <>The representation of <var>x</var> must permit exact comparison with the finitely many Farey endpoints and outward-rounded interval enclosures of the required sine values and rational powers. Rational and real-algebraic inputs are sufficient examples.</> },
-      { term: "Bisection bracket", definition: <>An interval [L,U] known to contain the unique zero of Fₓ. Each bisection step preserves that guarantee and halves U−L.</> },
+      { term: "Bisection bracket", definition: <>An interval [L,U] certified to contain the unique zero of Fₓ whose existence and uniqueness were proved in Proposition II.2.3. Each bisection step preserves that enclosure and halves U−L.</> },
       { term: "Polar and Cartesian output", definition: <>The polar output <span className="math-inline">(ρ̂,x)</span> denotes <span className="math-inline">ρ̂ exp(2πix)</span> and has radial error at most ε. For a Cartesian target τ, allocate τ/2 to the radial error and τ/2 to a certified unit-direction approximation.</> },
     ],
-    intuition: <>Farey comparisons remain exact and every transcendental evaluation is enclosed outward. Only a one-dimensional root-finding problem is numerical, and strict monotonicity makes bisection certifiable.</>,
+    intuition: <>Farey comparisons remain exact and every transcendental evaluation is enclosed outward. The underlying radius is already defined exactly by Proposition II.2.3; only its certified enclosure is numerical, and strict monotonicity makes bisection reliable.</>,
     proofSteps: [
       { title: "Certify the Farey interval", explanation: <>Given <span className="math-inline">n≥3</span> and an input <span className="math-inline">x∈(0,1/2)</span> in the stated representation, compare it exactly with Farey endpoints to find <span className="math-inline">f&lt;x&lt;g</span>. Label the smaller denominator p/q and the other r/s, then compute <var>d</var> exactly and enclose A and B outward.</> },
       { title: "Enclose the increasing residual", explanation: <>Set <span className="math-inline">Fₓ(ρ)=ρˢ⁄ᵈ sin A+ρᑫ sin B−sin(A+B)</span>. Proposition II.2.3 gives <span className="math-inline">Fₓ(0)&lt;0&lt;Fₓ(1)</span> and strict increase. On a positive interval, the rational power may be enclosed through <span className="math-inline">ρˢ⁄ᵈ=exp((s/d)log ρ)</span>.</> },
@@ -470,7 +472,7 @@ export const topicIXResults: readonly ProofResultData[] = [
     ],
     takeaway: <>Topic IX has constructed the candidate. Topics X–XIII will prove the radial upper bound, construct realizing stochastic matrices, establish nesting across orders, and identify these arcs with ∂Θₙ.</>,
     sourceIds: ["ito-1997"],
-    sourceRelation: <>This certified bisection procedure is an algorithmic consequence of the preceding exact statements.</>,
+    sourceRelation: <>This certified bisection procedure is an algorithmic consequence of the preceding exact existence-and-uniqueness statement; it supplies an enclosure, not an additional existence proof.</>,
   },
 ] as const;
 

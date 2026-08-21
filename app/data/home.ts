@@ -2,7 +2,7 @@ export const homeContent = {
   title:
     "Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic Spectra",
   subtitle:
-    "Boundary Contacts, First Returns, and the Karpelevič–Ito Theorem",
+    "Boundary Contacts, First Returns, and the Karpelevič Theorem in Ito’s Formulation",
   authors: ["Brecht Verbeken", "Vincent Ginis"],
   descriptor:
     "A geometric route from invariant polygons to the classical boundary of stochastic eigenvalue regions.",
@@ -13,7 +13,7 @@ export const homeContent = {
       label: "The paper",
       title: "Go directly to the manuscript",
       text:
-        "Open the current archival version on Zenodo and begin with the paper itself.",
+        "Open the archival 24 July 2026 version on Zenodo and begin with that citable record.",
       href: "https://zenodo.org/records/21529144",
       external: true,
     },
@@ -49,7 +49,7 @@ export const homeContent = {
     {
       label: "Part II",
       title: "Return to stochastic eigenvalue regions",
-      text: "For orders at least four, the resulting finite product equation is combined with a sharp scalar comparison, explicit sparse realizations, and Farey refinement; the smaller orders are treated directly. Together these arguments derive the Farey–Ito boundary from invariant polygons.",
+      text: "For orders at least four, the resulting finite product equation is combined with a sharp scalar comparison, explicit sparse realizations, and Farey refinement; the smaller orders are treated directly. Together these arguments derive the boundary of the Karpelevič region in Ito’s formulation from invariant polygons.",
     },
   ],
   noveltyLedger: [
@@ -70,11 +70,11 @@ export const homeContent = {
     },
   ],
   paperSummary:
-    "The paper studies the least polygonal complexity of an elliptic contraction and, for complexities at least four, derives a finite first-return description and product equation at radial criticality. Combined with a direct treatment of the smaller orders, this produces a geometric derivation of the classical Farey–Ito boundary for real row-stochastic matrices.",
+    "The paper studies the least polygonal complexity of an elliptic contraction and, for complexities at least four, derives a finite first-return description and product equation at radial criticality. Combined with a direct treatment of the smaller orders, this produces a geometric derivation of the classical boundary of the Karpelevič region in Ito’s formulation for real row-stochastic matrices.",
   personalPrompt:
     "Author prompt — replace before publication: How did you first encounter the Karpelevič region? What feature of the problem made you keep returning to it, and when did invariant polygons become the decisive point of view?",
   manuscript: {
-    status: "Archival Zenodo record",
+    status: "Archival Zenodo record (24 July 2026)",
     zenodoUrl: "https://zenodo.org/records/21529144",
     zenodoPages: 93,
     websiteEditionUrl: "/paper/critical-invariant-polygons.pdf",
@@ -82,7 +82,7 @@ export const homeContent = {
     zenodoChecksum:
       "ca3be77169053635302798aa1ba204502db0a3267d2e76e4d8e763cede138f3b",
     localArxivDraftChecksum:
-      "a98f464fe379d9220defb889675f6087e027f563ddfa592ab35e9eee5f12ea0e",
+      "986286b980b66deef50113763f299b04136c2ed86e8ad37f6ed7790a85ab9fe4",
   },
 } as const;
 

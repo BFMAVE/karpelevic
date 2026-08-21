@@ -88,19 +88,46 @@ test("Plate VI.2 identifies the positive half-plane by an explicit cyclic-order 
   assert.doesNotMatch(visibleText(figure), /calibration interval|calibration points/i);
 });
 
-test("Plate VI.3 names its side and return indices literally while Plate V.3 is unchanged", async () => {
+test("Plate VI.3 names its side and return indices and records every deformation status while Plate V.3 is unchanged", async () => {
   const topicVIHtml = await render("/proof/topic-vi");
   const topicVIFigure = figureMarkup(topicVIHtml, "topic-vi-return-partition");
   assert.match(topicVIFigure, /side index k/);
-  assert.match(topicVIFigure, /condition on return index s\(k\)=r⁻¹\(k\)/);
+  assert.match(topicVIFigure, /(?:condition on )?return index s\(k\)=r⁻¹\(k\)/);
   assert.match(topicVIFigure, /side index k∈D/);
-  assert.doesNotMatch(topicVIFigure, /target membership|inverse-source condition/);
+  assert.equal(
+    [...topicVIFigure.matchAll(/data-deformation-status-column="true"/g)].length,
+    2,
+    "desktop and mobile layouts each label the deformation-status column",
+  );
+  for (const status of [
+    "source fixed; side line moves",
+    "source moves; side line fixed",
+    "final incidence not imposed",
+    "source fixed; side line fixed",
+  ]) {
+    assert.equal(
+      [...topicVIFigure.matchAll(new RegExp(`data-deformation-status="${status}"`, "g"))].length,
+      2,
+      `${status} appears once in each layout`,
+    );
+  }
+  assert.equal(
+    [...topicVIFigure.matchAll(/data-column-divider="return-to-deformation-status"/g)].length,
+    8,
+    "each case has an explicit status-column divider in both layouts",
+  );
+  assert.match(
+    visibleText(topicVIFigure),
+    /three columns give the side index k, the corresponding condition on the return index[\s\S]*deformation status/i,
+  );
+  assert.doesNotMatch(topicVIFigure, />target membership<|>inverse-source condition</);
 
   const topicVHtml = await render("/proof/topic-v");
   const topicVFigure = figureMarkup(topicVHtml, "global-ledger");
   assert.match(topicVFigure, /target membership/);
   assert.match(topicVFigure, /inverse-source condition/);
   assert.match(topicVFigure, /target j∈D/);
+  assert.doesNotMatch(topicVFigure, /data-deformation-status|deformation status/);
   assert.doesNotMatch(topicVFigure, /side index k|return index s\(k\)/);
 });
 

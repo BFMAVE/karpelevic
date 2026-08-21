@@ -29,7 +29,10 @@ import {
   proofContent,
   proofTopics,
 } from "../data/proof";
-import { proofReaderTopicLinks } from "../data/proof-reader";
+import {
+  availableProofTopicMaximum,
+  proofReaderTopicLinks,
+} from "../data/proof-reader";
 import { publicationDates } from "../data/publication-dates";
 import {
   formatDate,
@@ -116,6 +119,10 @@ function toRomanNumeral(n: number): string | null {
 const totalTopicNumeral = "XIV";
 const proofEditionTopicLabel = `Topic I of ${totalTopicNumeral}`;
 const proofTopicCounterLabel = `Topic I of ${totalTopicNumeral}`;
+const proofPublicationScope =
+  availableProofTopicMaximum < proofTopics.length
+    ? `Topics I–${toRomanNumeral(availableProofTopicMaximum)} are online; Topics ${toRomanNumeral(availableProofTopicMaximum + 1)}–${totalTopicNumeral} are forthcoming.`
+    : `Topics I–${totalTopicNumeral} are online.`;
 
 function resultNumber(label: string): string {
   return label.replace(/^(?:Proposition|Lemma|Theorem|Remark)\s+/, "");
@@ -208,6 +215,7 @@ export default function ProofPage() {
               <span>{visibleResultCount} results</span>
               <span>{visibleProofCount} complete proofs</span>
               <span>{visibleDisplayMathCount} displayed formulas</span>
+              <span>{proofPublicationScope}</span>
               <time dateTime={firstPublishedAt}>
                 First published {formatDate(firstPublishedAt)}.
               </time>
@@ -334,7 +342,7 @@ export default function ProofPage() {
                         data-reading-mode-button="compact"
                         type="button"
                       >
-                        Compact
+                        Formal
                       </button>
                     </div>
                   </header>

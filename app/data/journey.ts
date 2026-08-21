@@ -435,7 +435,7 @@ export const journeyContent = {
       },
       {
         text:
-          "The decisive change was to look at the problem through invariant polygons. Instead of beginning with the classical boundary equations, Vincent and I asked what an extremal eigenvalue forces an invariant polygon to do. Contact, return structure, and cyclic order then offered a route from geometry to the Farey–Ito boundary.",
+          "The decisive change was to look at the problem through invariant polygons. Instead of beginning with the classical boundary equations, Vincent and I asked what an extremal eigenvalue forces an invariant polygon to do. Contact, return structure, and cyclic order then offered a route from geometry to the boundary of the Karpelevič region in Ito’s formulation.",
         citations: ["critical-polygons-2026"],
       },
       {

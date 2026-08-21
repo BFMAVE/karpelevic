@@ -18,7 +18,7 @@ import { sitePath } from "../lib/site-path";
 export const metadata: Metadata = {
   title: "Prerequisites for Topic I",
   description:
-    "An illustrated mathematical library for Topic I: intrinsic real-linear maps, elliptic contractions, invariant polygons, orientation, and strict separation.",
+    "Illustrated prerequisites for Topic I: intrinsic real-linear maps, elliptic contractions, invariant polygons, orientation, and strict separation.",
 };
 
 const pageTimestamp = getPageTimestamp("app/data/prerequisites.ts");
@@ -58,7 +58,7 @@ export default function PrerequisitesPage() {
   return (
     <>
       <a className="skip-link" href="#main-content">
-        Skip to the prerequisite library
+        Skip to the prerequisite sections
       </a>
 
       <header className="site-header" id="top">
@@ -100,13 +100,13 @@ export default function PrerequisitesPage() {
             <p>{prerequisitesContent.deck}</p>
             <p>
               Read a chapter from beginning to end if its language is new, or
-              use the contents below as a dictionary while working through
+              consult the definitions below as needed while working through
               Topic I. Routine linear algebra is assumed, and nothing here is
               claimed as new.
             </p>
             <div className="prerequisites-hero-actions">
               <a className="button button-primary" href="#library-contents">
-                Open the library
+                Open the prerequisites
               </a>
               <a className="text-link" href={sitePath("/proof/")}>
                 Return to Topic I →
@@ -131,7 +131,7 @@ export default function PrerequisitesPage() {
         >
           <header>
             <p className="section-label">Contents</p>
-            <h2>Three shelves for Topic I, in the order they are needed</h2>
+            <h2>Three prerequisite sections, in the order they are needed</h2>
           </header>
           <ol>
             {prerequisiteChapters.map((chapter) => (
@@ -248,7 +248,7 @@ export default function PrerequisitesPage() {
                 <header>
                   <p className="section-label">Return to the argument</p>
                   <h3 id={`${chapter.slug}-return`}>
-                    Where Topic I uses this shelf
+                    Where Topic I uses this section
                   </h3>
                 </header>
                 <div>
@@ -265,7 +265,7 @@ export default function PrerequisitesPage() {
               <ChapterSources ids={chapter.referenceIds} />
 
               <a className="prerequisite-back-to-contents" href="#library-contents">
-                Back to the three shelves ↑
+                Back to the three sections ↑
               </a>
             </article>
           ))}
@@ -276,13 +276,13 @@ export default function PrerequisitesPage() {
           aria-labelledby="prerequisite-references-heading"
         >
           <header>
-            <p className="section-label">Reference shelf</p>
+            <p className="section-label">References</p>
             <h2 id="prerequisite-references-heading">
               Standard sources for the background
             </h2>
             <p>
               These sources are included for readers who want a fuller
-              treatment than this proof-specific library can provide.
+              treatment than this proof-specific overview can provide.
             </p>
           </header>
           <ol>
@@ -309,7 +309,7 @@ export default function PrerequisitesPage() {
         <section className="prerequisite-responsibility">
           <div>
             <p className="footer-disclosure-label">Corrections are welcome</p>
-            <h2>A library should become clearer when readers use it.</h2>
+            <h2>These prerequisites should become clearer when readers use them.</h2>
           </div>
           <p>
             This page was developed with generative-AI assistance.

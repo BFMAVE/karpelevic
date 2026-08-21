@@ -266,7 +266,7 @@ export const historyContent = {
       },
       {
         text:
-          "A Farey fraction of order n is simply a reduced fraction p/q between 0 and 1 whose denominator q is at most n. Read p/q as the fraction of one complete turn: it marks the root of unity exp(2πip/q). Farey fractions therefore provide an ordered address book for the accessible points around the unit circle.",
+          "A Farey fraction of order n is simply a reduced fraction p/q between 0 and 1 whose denominator q is at most n. Read p/q as the fraction of one complete turn: it marks the root of unity exp(2πip/q). Listing these fractions in increasing order gives the Farey sequence of order n, and hence the cyclic order of the accessible points around the unit circle.",
         citations: ["ito-1997", "johnson-paparella-2017"],
       },
       {
@@ -288,7 +288,7 @@ export const historyContent = {
       { numerator: "1", denominator: "2", angle: "180°", emphasis: false },
     ],
     example:
-      "At order five, 1/3 and 2/5 are neighbours. Their mediant is 3/8: it lies between them, but denominator eight exceeds the current budget. It first becomes available at order eight—the same fraction that appears in the manuscript’s worked ray.",
+      "At order five, 1/3 and 2/5 are neighbours. Their mediant is 3/8: it lies between them, but its denominator, 8, is greater than 5. It first becomes available at order eight—the same fraction that appears in the manuscript’s worked ray.",
   },
   timeline: [
     {
@@ -374,7 +374,8 @@ export const historyContent = {
     {
       year: "2022",
       label: "Sparse realizations",
-      title: "Kirkland and Šmigoc classify the extremal matrix patterns",
+      title:
+        "Kirkland and Šmigoc classify Type 0/I realizations and the sparsest Type II/III cases",
       text:
         "The realizing-matrix problem was pushed from existence toward structure. Kirkland and Šmigoc characterize every stochastic matrix with a Type 0 or Type I reduced Ito characteristic polynomial, and all sparsest realizing matrices for Types II and III. The boundary can now be studied through the weighted directed graphs of its leanest matrix models.",
       citations: ["kirkland-smigoc-2022"],
@@ -400,7 +401,7 @@ export const historyContent = {
       label: "This manuscript",
       title: "Returning to the invariant polygon",
       text:
-        "Our manuscript starts from a radially critical elliptic contraction and studies the contact geometry of an invariant polygon. Permitted vertex replacements and a finite first-return decomposition are followed, for N≥4, by a projective argument ruling out skipped returns; the resulting structure has a product of possibly varying Ito factors as its scalar consequence. The aim is a new geometric route to the already classical Farey–Ito boundary, not a claim that the boundary theorem itself is new.",
+        "Our manuscript starts from a radially critical elliptic contraction and studies the contact geometry of an invariant polygon. Permitted vertex replacements and a finite first-return decomposition are followed, for N≥4, by a projective argument ruling out skipped returns; the resulting structure has a product of possibly varying Ito factors as its scalar consequence. The aim is a new geometric route to the already classical boundary of the Karpelevič region in Ito’s formulation, not a claim that the boundary theorem itself is new.",
       citations: ["verbeken-ginis-2026"],
     },
   ],
@@ -463,7 +464,7 @@ export const historyContent = {
     {
       title: "The claim made here",
       text:
-        "The present manuscript seeks a derivation of the known Farey–Ito boundary from the contact-return structure of critical invariant polygons. Its contribution must therefore be judged as proof architecture, structural geometry, and interpretation—not as discovery of the classical region.",
+        "The present manuscript seeks a derivation of the known boundary of the Karpelevič region in Ito’s formulation from the contact-return structure of critical invariant polygons. Its contribution must therefore be judged as proof architecture, structural geometry, and interpretation—not as discovery of the classical region.",
       citations: ["verbeken-ginis-2026"],
     },
   ],

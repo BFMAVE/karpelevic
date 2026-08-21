@@ -12,7 +12,7 @@ import { sitePath } from "../lib/site-path";
 export const metadata: Metadata = {
   title: "History",
   description:
-    "A sourced history of the Karpelevič problem, from invariant polygons to the Farey–Ito boundary and realizing stochastic matrices.",
+    "A sourced history of the Karpelevič problem, from invariant polygons to the theorem in Ito’s formulation and realizing stochastic matrices.",
 };
 
 const pageTimestamp = getPageTimestamp("app/data/history.ts");
@@ -134,7 +134,7 @@ export default function HistoryPage() {
         <section className="history-farey" aria-labelledby="farey-heading">
           <header className="history-section-heading">
             <p className="section-number">II</p>
-            <p className="section-label">A small arithmetic dictionary</p>
+            <p className="section-label">Farey definitions</p>
             <h2 id="farey-heading">{historyContent.farey.title}</h2>
           </header>
 
@@ -148,9 +148,10 @@ export default function HistoryPage() {
 
             <div className="farey-unit-circle-statement">
               <p className="proposition-label">The unit-circle points</p>
-              <p aria-label="Theta n intersect the unit circle equals the roots of unity of order at most n.">
+              <p aria-label="Theta n intersect the unit circle equals the set of e to the power two pi i p over q, where one is less than or equal to q, q is less than or equal to n, zero is less than or equal to p, p is less than q, and p and q are coprime.">
                 Θ<sub>n</sub> ∩ &#123;|z| = 1&#125; = &#123;e
-                <sup>2πip/q</sup> : gcd(p,q) = 1, q ≤ n&#125;.
+                <sup>2πip/q</sup> : 1 ≤ q ≤ n, 0 ≤ p &lt; q,
+                gcd(p,q) = 1&#125;.
               </p>
             </div>
 

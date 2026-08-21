@@ -28,7 +28,7 @@ export default function TopicVPage() {
       imported={topicVImported}
       leadFigure="rotation-records"
       leadFigureAfterSetups
-      manuscriptPages="31–40; Proposition 7.5 closes on 41; Lemma A.6 on 65"
+      manuscriptPages="31–40; Proposition 7.5 closes on 41; Lemma A.6 on 74"
       overview={[
         "Theorem 6.1 is arithmetic and holds for N≥2. The projective argument beginning in Section 7 assumes N≥4; the exceptional N=3 family is proved explicitly on this page.",
         "The cyclic interval of relative-interior contact indices is now studied as a finite rotation. Consecutive record vectors produce a bijective two-height first-return decomposition.",

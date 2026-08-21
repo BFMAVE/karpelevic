@@ -1,7 +1,7 @@
 // Generated mechanically from the canonical Part II TeX source.
 // Regenerate with: node scripts/generate-topics-viii-xi-proofs.mjs
 export const partIIContentMetadata = {
-  "sourceHash": "db6210cd8966ddba35181d2f56a9475fc50f2cdf15dab9bc503e9be02019af4c",
+  "sourceHash": "f18ce4a9b63ffd5488ea499a7a2216c69af9fbb26289064852e04a3dfa3c9f6b",
   "statementCount": 28,
   "equationCount": 74
 } as const;

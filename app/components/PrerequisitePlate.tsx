@@ -29,9 +29,9 @@ const plateCopy: Readonly<
   "oriented-boundary": {
     title: "Boundary order transported through an orientation reversal",
     description:
-      "A positively oriented triangle around the origin is reflected to a triangle with the opposite displayed boundary order. Vertices, rays, and the invariant geometry are transported together.",
+      "The ordered vertices v one, v two, v three run counterclockwise in Cartesian coordinates. Their reflected images S v one, S v two, S v three run clockwise; both arrows follow the same indexed traversal.",
     caption:
-      "Plate III. Reflection preserves incidence and containment but reverses handedness. Boundary order, ray order, and the chosen complex multiplier are reversed or conjugated together.",
+      "Plate III. Reflection preserves incidence and containment but reverses orientation: det(v₂−v₁,v₃−v₁)>0, whereas det(Sv₂−Sv₁,Sv₃−Sv₁)<0. Transporting the adapted complex structure preserves its multiplier; conjugation occurs only if the target structure is re-normalised to the fixed ambient orientation.",
   },
   "invariant-polygons": {
     title: "A square and its rotated contracted image",
@@ -186,26 +186,26 @@ function ConvexBackgroundDrawing() {
       <ArrowMarker id="prerequisite-arrow-convex" />
       <polygon
         className="prerequisite-polygon"
-        points="115,286 151,101 544,101 638,258 410,322"
+        points="115,286 151,101 544,101 638,258"
       />
       <line className="prerequisite-support" x1="73" x2="604" y1="101" y2="101" />
       <circle className="prerequisite-contact" cx="151" cy="101" r="7" />
       <circle className="prerequisite-contact" cx="544" cy="101" r="7" />
-      <circle className="prerequisite-point" cx="348" cy="101" r="6" />
+      <circle className="prerequisite-point" cx="347.5" cy="101" r="6" />
       <text className="prerequisite-svg-label prerequisite-svg-accent" x="139" y="82">
         v₁
       </text>
       <text className="prerequisite-svg-label prerequisite-svg-accent" x="553" y="82">
         v₂
       </text>
-      <text className="prerequisite-svg-label" x="348" y="79" textAnchor="middle">
+      <text className="prerequisite-svg-label" x="347.5" y="79" textAnchor="middle">
         m
       </text>
-      <text className="prerequisite-svg-small" x="348" y="133" textAnchor="middle">
+      <text className="prerequisite-svg-small" x="347.5" y="133" textAnchor="middle">
         m = ½v₁ + ½v₂
       </text>
       <text className="prerequisite-svg-small" x="642" y="98">
-        ℓ = hP(ℓ)
+        ℓ(x) = h_P(ℓ)
       </text>
       <path
         className="prerequisite-normal"
@@ -215,7 +215,7 @@ function ConvexBackgroundDrawing() {
       <text className="prerequisite-svg-small" x="604" y="163">
         outward normal
       </text>
-      <text className="prerequisite-svg-equation" x="348" y="364" textAnchor="middle">
+      <text className="prerequisite-svg-equation" x="347.5" y="364" textAnchor="middle">
         m ∈ relint([v₁,v₂])  ⇒  m ∉ Ext(P)
       </text>
     </>
@@ -236,8 +236,8 @@ function OrientedBoundaryDrawing() {
       <circle className="prerequisite-origin" cx="214" cy="213" r="5" />
       {[
         [80, 278, "v₁"],
-        [205, 70, "v₂"],
-        [352, 287, "v₃"],
+        [352, 287, "v₂"],
+        [205, 70, "v₃"],
       ].map(([x, y, label]) => (
         <g key={String(label)}>
           <line className="prerequisite-guide" x1="214" x2={Number(x)} y1="213" y2={Number(y)} />
@@ -248,7 +248,7 @@ function OrientedBoundaryDrawing() {
       ))}
       <path
         className="prerequisite-angle"
-        d="M119 292 Q50 169 162 84"
+        d="M162 84 Q50 169 119 292"
         markerEnd="url(#prerequisite-arrow-boundary)"
       />
 
@@ -271,8 +271,8 @@ function OrientedBoundaryDrawing() {
       <circle className="prerequisite-origin" cx="564" cy="213" r="5" />
       {[
         [698, 278, "Sv₁"],
-        [573, 70, "Sv₂"],
-        [426, 287, "Sv₃"],
+        [426, 287, "Sv₂"],
+        [573, 70, "Sv₃"],
       ].map(([x, y, label]) => (
         <g key={String(label)}>
           <line className="prerequisite-guide" x1="564" x2={Number(x)} y1="213" y2={Number(y)} />
@@ -288,11 +288,17 @@ function OrientedBoundaryDrawing() {
       ))}
       <path
         className="prerequisite-angle"
-        d="M659 292 Q728 169 616 84"
+        d="M616 84 Q728 169 659 292"
         markerEnd="url(#prerequisite-arrow-boundary)"
       />
-      <text className="prerequisite-svg-equation" x="380" y="360" textAnchor="middle">
-        cyclic order reverses · incidence is preserved
+      <text className="prerequisite-svg-small" x="205" y="338" textAnchor="middle">
+        det(v₂−v₁, v₃−v₁) &gt; 0
+      </text>
+      <text className="prerequisite-svg-small" x="573" y="338" textAnchor="middle">
+        det(Sv₂−Sv₁, Sv₃−Sv₁) &lt; 0
+      </text>
+      <text className="prerequisite-svg-equation" x="380" y="368" textAnchor="middle">
+        the indexed traversal is transported · ambient orientation reverses
       </text>
     </>
   );
@@ -658,7 +664,7 @@ export function PrerequisitePlate({ slug }: PrerequisitePlateProps) {
   return (
     <figure className="prerequisite-plate">
       <div className="prerequisite-plate-heading">
-        <span>Illustrated dictionary</span>
+        <span>Illustrated definition</span>
         <span>{copy.title}</span>
       </div>
       <svg

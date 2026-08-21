@@ -469,7 +469,7 @@ export const proofTopics: readonly ProofTopic[] = [
     ],
     itemNumbers: [37, 38, 39, 40, 41, 42, 43, 44, 70],
     manuscriptPages: "31–40",
-    appendixPages: "Lemma A.6 on page 65",
+    appendixPages: "Lemma A.6 on page 74",
   },
   {
     slug: "unit-return",
@@ -482,7 +482,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "The return-time bijection then defines all N deformed vertices, and finitely many incidence and side inequalities remain valid simultaneously. The resulting invariant polygon has an extreme point of its image in the polygon interior, contradicting the boundary conclusion proved in Topic II and forcing Δ=1.",
     ],
     itemNumbers: [45, 46, 47, 48, 49, 50, 51, 52],
-    manuscriptPages: "41–50",
+    manuscriptPages: "41–58",
   },
   {
     slug: "farey-return",
@@ -578,7 +578,7 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "order-seven",
     eyebrow: "Topic XIV · worked example and interactive computation",
-    title: "The complete order-seven example and boundary explorer",
+    title: "The complete order-seven example and an interactive boundary plot",
     question:
       "What does the theorem produce at one concrete order, and how can a reader draw further orders for themselves?",
     overview: [

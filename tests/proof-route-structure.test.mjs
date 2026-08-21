@@ -446,6 +446,14 @@ test("Topics VIII and IX form a self-contained terminology and provenance handof
     );
   }
   assert.match(visibleText, /Certified numerical evaluation/i);
+  assert.match(
+    visibleText,
+    /Proposition II\.2\.3 has already proved exact existence and uniqueness[\s\S]{0,180}?certifies an enclosure of that exact modulus/i,
+  );
+  assert.match(
+    visibleText,
+    /The underlying radius is already defined exactly by Proposition II\.2\.3; only its certified enclosure is numerical/i,
+  );
   assert.match(visibleText, /U−L≤2ε/i);
   assert.match(visibleText, /radial error (?:is )?at most ε/i);
   assert.match(visibleText, /If an exact zero is certified, return m immediately/i);
@@ -632,6 +640,11 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   );
   assert.match(topicVText, /Throughout this section assume N\s*≥\s*4/i);
   assert.match(topicVText, /Critical invariant triangles with Δ=2/i);
+  assert.match(
+    topicVText,
+    /Manuscript pages 31–40; Proposition 7\.5 closes on 41; Lemma A\.6 on 74/i,
+  );
+  assert.doesNotMatch(topicVText, /Lemma A\.6 on (?:page )?65/i);
   assert.match(topicVText, /Exceptional order N=3 · unnumbered proposition/i);
   assert.match(
     topicVText,
@@ -741,6 +754,7 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   );
 
   assert.match(topicVIText, /A projective deformation and the first-return step Δ\s*=\s*1/i);
+  assert.match(topicVIText, /Manuscript pages 41–58/i);
   assert.match(topicVIText, /9 results/);
   assert.match(topicVIText, /7 complete proofs/);
   assert.match(topicVIText, /Notation and exact facts imported from Topics II–V/);

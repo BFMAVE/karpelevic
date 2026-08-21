@@ -70,9 +70,9 @@ const copy: Record<AdvancedProofFigureKind, FigureCopy> = {
     status: "Exact diagram",
     title: "Four cases for the assigned side incidences",
     description:
-      "Plate VI.3 displays the disjoint and exhaustive partition of the calligraphic base-index set B into D, R, the singleton c, and A. Each row gives the side index k and the corresponding condition on the return index s of k, equal to r inverse of k.",
+      "Plate VI.3 displays the disjoint and exhaustive partition of the calligraphic base-index set B into D, R, the singleton c, and A. Its three columns give the side index k, the corresponding condition on the return index s of k, equal to r inverse of k, and the deformation status. In D the source is fixed and the side line moves; in R the source moves and the side line is fixed; for c the final incidence is not imposed; and in A both the source and side line are fixed.",
     caption:
-      "Plate VI.3. Adapted from Plate V.3. The partition ℬ=D⊔R⊔{c}⊔A is disjoint and exhaustive. For k∈D, the assigned side line moves and the source is fixed; for k∈R, the source moves and the assigned side line is fixed; for k∈A, both remain fixed; and c is the only side index for which the final incidence is not imposed in advance. The displayed conditions involving s record the corresponding inverse sources. This is combinatorial input to the deformation, not a geometric example of the deformation itself.",
+      "Plate VI.3. Adapted from Plate V.3. The partition ℬ=D⊔R⊔{c}⊔A is disjoint and exhaustive. The third column records the deformation status explicitly: for k∈D, the source is fixed and the assigned side line moves; for k∈R, the source moves and the assigned side line is fixed; for k=c, the final incidence is not imposed in advance; and for k∈A, both the source and assigned side line are fixed. The middle column records the corresponding inverse-source conditions through s=r⁻¹. This is combinatorial input to the deformation, not a geometric example of the deformation itself.",
   },
   "unit-return": {
     status: "Schematic",
@@ -884,28 +884,80 @@ function GlobalLedger({
   const isTopicVI = indexSymbol === "k";
   const targetLabel = isTopicVI ? "side index" : "target";
   const rows = [
-    ["D", `${targetLabel} ${indexSymbol}∈D`, `s(${indexSymbol})∉M`],
-    ["R", `${targetLabel} ${indexSymbol}∈R`, `s(${indexSymbol})∈M∖{b*}; s(R)=M∖{b*}`],
-    ["{c}", `${targetLabel} ${indexSymbol}=c`, "s(c)=b*"],
-    ["A", `${targetLabel} ${indexSymbol}∈A`, `s(${indexSymbol})∉M`],
+    ["D", `${targetLabel} ${indexSymbol}∈D`, `s(${indexSymbol})∉M`, "source fixed; side line moves"],
+    ["R", `${targetLabel} ${indexSymbol}∈R`, `s(${indexSymbol})∈M∖{b*}; s(R)=M∖{b*}`, "source moves; side line fixed"],
+    ["{c}", `${targetLabel} ${indexSymbol}=c`, "s(c)=b*", "final incidence not imposed"],
+    ["A", `${targetLabel} ${indexSymbol}∈A`, `s(${indexSymbol})∉M`, "source fixed; side line fixed"],
   ] as const;
   return (
     <>
-      <text className="topic-ii-figure-small" x="157" y="29">
-        {isTopicVI ? "side index k" : "target membership"}
-      </text>
-      <text className="topic-ii-figure-small" x="458" y="29">
-        {isTopicVI ? "condition on return index s(k)=r⁻¹(k)" : "inverse-source condition"}
-      </text>
-      {rows.map(([label, source, target], index) => {
+      {isTopicVI ? (
+        <>
+          <text className="topic-ii-figure-small" textAnchor="middle" x="165" y="29">
+            side index k
+          </text>
+          <text className="topic-ii-figure-small" textAnchor="middle" x="387" y="29">
+            return index s(k)=r⁻¹(k)
+          </text>
+          <text
+            className="topic-ii-figure-small"
+            data-deformation-status-column="true"
+            textAnchor="middle"
+            x="620"
+            y="29"
+          >
+            deformation status
+          </text>
+        </>
+      ) : (
+        <>
+          <text className="topic-ii-figure-small" x="157" y="29">
+            target membership
+          </text>
+          <text className="topic-ii-figure-small" x="458" y="29">
+            inverse-source condition
+          </text>
+        </>
+      )}
+      {rows.map(([label, source, target, deformationStatus], index) => {
         const y = 83 + index * 70;
         return (
-          <g key={label}>
-            <rect className={label === "{c}" ? "topic-ii-figure-polar" : "topic-ii-figure-polygon"} x="52" y={y - 30} width="650" height="52" />
-            <text className="topic-ii-figure-label" x="79" y={y + 3}>{label}</text>
-            <text className="topic-ii-figure-small" x="157" y={y + 1}>{source}</text>
-            <path className="topic-ii-figure-transfer" d={"M345 " + (y - 5) + " L430 " + (y - 5)} markerEnd={`url(#${markerId})`} />
-            <text className="topic-ii-figure-small" x="458" y={y + 1}>{target}</text>
+          <g data-return-partition-class={label} key={label}>
+            <rect
+              className={label === "{c}" ? "topic-ii-figure-polar" : "topic-ii-figure-polygon"}
+              height="52"
+              width={isTopicVI ? "704" : "650"}
+              x={isTopicVI ? "28" : "52"}
+              y={y - 30}
+            />
+            <text className="topic-ii-figure-label" x={isTopicVI ? "50" : "79"} y={y + 3}>{label}</text>
+            <text className="topic-ii-figure-small" x={isTopicVI ? "86" : "157"} y={y + 1}>{source}</text>
+            <path
+              className="topic-ii-figure-transfer"
+              d={isTopicVI ? `M225 ${y - 5} L258 ${y - 5}` : `M345 ${y - 5} L430 ${y - 5}`}
+              markerEnd={`url(#${markerId})`}
+            />
+            <text className="topic-ii-figure-small" x={isTopicVI ? "278" : "458"} y={y + 1}>{target}</text>
+            {isTopicVI ? (
+              <>
+                <line
+                  className="topic-ii-figure-support"
+                  data-column-divider="return-to-deformation-status"
+                  x1="508"
+                  x2="508"
+                  y1={y - 22}
+                  y2={y + 14}
+                />
+                <text
+                  className="topic-ii-figure-small"
+                  data-deformation-status={deformationStatus}
+                  x="522"
+                  y={y + 1}
+                >
+                  {deformationStatus}
+                </text>
+              </>
+            ) : null}
           </g>
         );
       })}
@@ -918,10 +970,10 @@ function GlobalLedgerMobile({ indexSymbol }: { indexSymbol: "j" | "k" }) {
   const isTopicVI = indexSymbol === "k";
   const targetLabel = isTopicVI ? "side index" : "target";
   const rows = [
-    ["D", `${targetLabel} ${indexSymbol}∈D`, `s(${indexSymbol})∉M`],
-    ["R", `${targetLabel} ${indexSymbol}∈R`, `s(${indexSymbol})∈M∖{b*}; s(R)=M∖{b*}`],
-    ["{c}", `${targetLabel} ${indexSymbol}=c`, "s(c)=b*"],
-    ["A", `${targetLabel} ${indexSymbol}∈A`, `s(${indexSymbol})∉M`],
+    ["D", `${targetLabel} ${indexSymbol}∈D`, `s(${indexSymbol})∉M`, "source fixed; side line moves"],
+    ["R", `${targetLabel} ${indexSymbol}∈R`, `s(${indexSymbol})∈M∖{b*}; s(R)=M∖{b*}`, "source moves; side line fixed"],
+    ["{c}", `${targetLabel} ${indexSymbol}=c`, "s(c)=b*", "final incidence not imposed"],
+    ["A", `${targetLabel} ${indexSymbol}∈A`, `s(${indexSymbol})∉M`, "source fixed; side line fixed"],
   ] as const;
 
   return (
@@ -930,17 +982,18 @@ function GlobalLedgerMobile({ indexSymbol }: { indexSymbol: "j" | "k" }) {
         <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="180" y="22" textAnchor="middle">
           <tspan x="180">side index k</tspan>
           <tspan x="180" dy="21">condition on return index s(k)=r⁻¹(k)</tspan>
+          <tspan data-deformation-status-column="true" x="180" dy="21">deformation status</tspan>
         </text>
       ) : (
         <text className="topic-ii-figure-equation" x="180" y="30" textAnchor="middle">partition of target indices</text>
       )}
-      {rows.map(([label, source, target], index) => {
-        const y = (isTopicVI ? 64 : 54) + index * 118;
+      {rows.map(([label, source, target, deformationStatus], index) => {
+        const y = (isTopicVI ? 82 : 54) + index * (isTopicVI ? 140 : 118);
         return (
-          <g key={label}>
+          <g data-return-partition-class={label} key={label}>
             <rect
               className={label === "{c}" ? "topic-ii-figure-polar" : "topic-ii-figure-polygon"}
-              height="96"
+              height={isTopicVI ? "122" : "96"}
               width="312"
               x="24"
               y={y}
@@ -949,10 +1002,31 @@ function GlobalLedgerMobile({ indexSymbol }: { indexSymbol: "j" | "k" }) {
             <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="94" y={y + 29}>{source}</text>
             <line className="topic-ii-figure-support" x1="94" x2="315" y1={y + 45} y2={y + 45} />
             <text className="topic-ii-figure-small" style={mobileSmallTextStyle} x="94" y={y + 72}>{target}</text>
+            {isTopicVI ? (
+              <>
+                <line
+                  className="topic-ii-figure-support"
+                  data-column-divider="return-to-deformation-status"
+                  x1="94"
+                  x2="315"
+                  y1={y + 84}
+                  y2={y + 84}
+                />
+                <text
+                  className="topic-ii-figure-small"
+                  data-deformation-status={deformationStatus}
+                  style={mobileSmallTextStyle}
+                  x="94"
+                  y={y + 108}
+                >
+                  {deformationStatus}
+                </text>
+              </>
+            ) : null}
           </g>
         );
       })}
-      <text className="topic-ii-figure-equation" x="180" y={isTopicVI ? 556 : 544} textAnchor="middle">ℬ = D ⊔ R ⊔ {"{c}"} ⊔ A</text>
+      <text className="topic-ii-figure-equation" x="180" y={isTopicVI ? 670 : 544} textAnchor="middle">ℬ = D ⊔ R ⊔ {"{c}"} ⊔ A</text>
     </>
   );
 }
@@ -1459,7 +1533,7 @@ export function AdvancedProofFigure({ kind }: { kind: AdvancedProofFigureKind })
     "rotation-records": "0 0 360 570",
     "return-towers": "0 0 360 480",
     "global-ledger": "0 0 360 570",
-    "topic-vi-return-partition": "0 0 360 570",
+    "topic-vi-return-partition": "0 0 360 690",
     "projective-corridor": "0 0 360 390",
     "topic-vi-projective-chain": "0 0 360 390",
     "holonomy-escape": "0 0 360 610",

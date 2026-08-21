@@ -50,7 +50,7 @@ export function ThetaAtlasPlate() {
         </title>
         <desc id="theta-atlas-description">
           One comparison plot showing the nested boundaries of Theta four
-          through Theta seven, the exact triangular region and real tail for
+          through Theta seven, the exact triangle and real interval for
           Theta three, the interval Theta two, and the point Theta one.
         </desc>
         <defs>
@@ -157,7 +157,7 @@ export function ThetaAtlasPlate() {
         {[
           ["1", "point"],
           ["2", "interval"],
-          ["3", "exact polygon and tail"],
+          ["3", "exact triangle and real interval"],
           ["4", "boundary"],
           ["5", "boundary"],
           ["6", "boundary"],

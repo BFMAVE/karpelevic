@@ -36,7 +36,7 @@ export default function TopicVIPage() {
       imported={topicVIImported}
       leadFigure="topic-vi-projective-chain"
       leadFigureAfterSetups
-      manuscriptPages="41–51"
+      manuscriptPages="41–58"
       overview={[
         "Under the standing assumption N≥4, an affine projective chart turns the selected boundary chain into a convex graph. Successive perspectivities define a real projective map, and its behaviour near a fixed point supplies a small signed deformation into the polygon-interior half-plane.",
         "The return-time bijection defines all N deformed vertices. Exact identities and finitely many open inequalities make the resulting polygon invariant, while one extreme point of its image lies in the polygon interior. Topic II rules this out for an N-critical map, so the first-return step is Δ=1.",

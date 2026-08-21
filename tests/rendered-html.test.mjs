@@ -129,7 +129,7 @@ test("keeps the verified local manuscript available", async () => {
 
   const pdf = await readFile(pdfUrl);
   assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
-  assert.equal(pdf.byteLength, 637_609);
+  assert.equal(pdf.byteLength, 637_538);
 
   const checksum = createHash("sha256").update(pdf).digest("hex");
   const homeSource = await readFile(
@@ -1101,18 +1101,18 @@ test("server-renders the Part I proof reader", async () => {
   }
 });
 
-test("server-renders the illustrated prerequisite library", async () => {
+test("server-renders the illustrated prerequisites", async () => {
   const response = await render("/prerequisites");
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /The small library this reader assumes/);
+  assert.match(html, /The background used in Topic I/);
   assert.match(html, /Prerequisites for Topic I/);
   assert.match(html, /Topic I · The language of critical polygons/);
   assert.match(
     html,
-    /Three shelves for Topic I, in the order they are needed/,
+    /Three prerequisite sections, in the order they are needed/,
   );
   assert.match(html, /id="elliptic-maps"/);
   assert.match(html, /id="convex-background"/);
@@ -1131,7 +1131,7 @@ test("server-renders the illustrated prerequisite library", async () => {
   assert.match(html, /J=\(T−αI\)\/β/);
   assert.match(html, /m ∈ relint/);
   assert.match(html, /Routine linear algebra is assumed/);
-  assert.match(html, /Where Topic I uses this shelf/);
+  assert.match(html, /Where Topic I uses this section/);
   assert.match(html, /Standard sources for the background/);
   assert.match(html, /Matrix Analysis/);
   assert.match(html, /Convex Bodies: The Brunn–Minkowski Theory/);

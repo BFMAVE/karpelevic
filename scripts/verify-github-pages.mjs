@@ -59,7 +59,7 @@ const pages = [
   ],
   [
     "prerequisites/index.html",
-    "The small library this reader assumes",
+    "The background used in Topic I",
   ],
 ];
 
