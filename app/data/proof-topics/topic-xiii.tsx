@@ -209,7 +209,7 @@ const mainTheorem: ProofResultData = {
   id: "topic-xiii-main-theorem",
   label: "Theorem II.3.1",
   kind: "Theorem",
-  title: "Karpelevič–Ito, standalone form",
+  title: "Karpelevič theorem in Ito’s formulation",
   purpose: "Identify every boundary arc, the complete region star-shaped with respect to 0, and all unit-circle points for every matrix order.",
   manuscriptHtml: relinkCrossTopicReferences(
     partIIHtmlByLabel["karp:thm:main"] + partIIMainTheoremProofHtml,
@@ -288,7 +288,7 @@ const mainTheorem: ProofResultData = {
       explanation: <>Topic VIII already classified unit-modulus points as roots of unity of order at most <i>n</i>. Proposition II.9.2 handled the only discontinuous terminal graph, so the continuous-radius lemma is never applied where its hypothesis fails.</>,
     },
   ],
-  takeaway: <>The candidate curve is now the actual boundary on every ray, its radial hull is exactly Θ<sub>n</sub>, and the Karpelevič–Ito theorem is complete.</>,
+  takeaway: <>The candidate curve is now the actual boundary on every ray, its radial hull is exactly Θ<sub>n</sub>, and the Karpelevič theorem in Ito’s formulation is complete.</>,
   provenance: "Classical result",
   sourceIds: ["karpelevic-1951", "ito-1997"],
   sourceRelation: <>The eigenvalue-region theorem is classical: Karpelevič proved the original form and Ito supplied the modern polynomial-arc formulation. This manuscript gives the displayed self-contained route through critical invariant polygons; the classification applies to the theorem’s statement, not to its proof.</>,

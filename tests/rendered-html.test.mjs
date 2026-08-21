@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
@@ -87,7 +88,7 @@ test("server-renders the scholarly Home page", async () => {
   assert.match(homeText, /Zenodo edition 93 pages/);
   assert.match(
     homeText,
-    /Website edition Last revised 20 August 2026 ↗ 103-page site-hosted PDF/,
+    /Website edition Last revised 21 August 2026 ↗ 104-page site-hosted PDF/,
   );
   assert.match(
     html,
@@ -128,7 +129,14 @@ test("keeps the verified local manuscript available", async () => {
 
   const pdf = await readFile(pdfUrl);
   assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
-  assert.equal(pdf.byteLength, 627_704);
+  assert.equal(pdf.byteLength, 631_241);
+
+  const checksum = createHash("sha256").update(pdf).digest("hex");
+  const homeSource = await readFile(
+    new URL("../app/data/home.ts", import.meta.url),
+    "utf8",
+  );
+  assert.match(homeSource, new RegExp(`localArxivDraftChecksum:\\s*"${checksum}"`));
 });
 
 test("server-renders the sourced History page", async () => {
@@ -281,7 +289,7 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(html, /How the Proof Works/);
   assert.match(
     html,
-    /Critical invariant polygons and the route to Karpelevič–Ito/,
+    /Critical invariant polygons and the Karpelevič theorem in Ito(?:&#x27;|&apos;|’)s formulation/,
   );
   assert.match(html, /Topic I of (?:<!-- -->)?XIV/);
   assert.doesNotMatch(html, /Topic I of fourteen|Topic 1 of 14/);
@@ -290,7 +298,7 @@ test("server-renders the Part I proof reader", async () => {
   const atlasEnd = html.indexOf('class="proof-reader', atlasStart);
   assert.ok(atlasStart >= 0 && atlasEnd > atlasStart);
   const atlasHtml = html.slice(atlasStart, atlasEnd);
-  assert.match(atlasHtml, /The complete route/);
+  assert.match(atlasHtml, /Proof topics/);
   assert.match(atlasHtml, /Critical maps and invariant polygons/);
   assert.match(atlasHtml, /The complete order-seven example/);
   assert.match(
@@ -1043,7 +1051,7 @@ test("server-renders the Part I proof reader", async () => {
     proposition31End,
   );
   assert.doesNotMatch(proposition31Html, /proof-chapter-provenance/);
-  assert.match(proposition31Html, /Classification and sources/);
+  assert.match(proposition31Html, /Status and references/);
   assert.match(proposition31Html, /broader polyhedral-invariance antecedent/);
   assert.match(proposition31Html, /no claim is made that this precise proposition appears/i);
 
@@ -1056,11 +1064,11 @@ test("server-renders the Part I proof reader", async () => {
   const theorem32Html = topicIIPanelHtml.slice(theorem32Start, theorem32End);
   assert.doesNotMatch(theorem32Html, /proof-chapter-provenance/);
   assert.doesNotMatch(theorem32Html, /<dt>Nonempty intersection<\/dt>/);
-  assert.match(theorem32Html, /Classification and sources/);
+  assert.match(theorem32Html, /Status and references/);
   assert.match(theorem32Html, /earlier antecedent for side-intersection arguments/);
   assert.match(theorem32Html, /no priority category is assigned/i);
   assert.match(topicIIPanelHtml, /Guided explanation/);
-  assert.match(topicIIPanelHtml, /Classification and sources/);
+  assert.match(topicIIPanelHtml, /Status and references/);
   assert.doesNotMatch(topicIIPanelHtml, /admissible subpolygon/i);
   assert.doesNotMatch(topicIIPanelHtml, /<table\b/);
   assert.doesNotMatch(

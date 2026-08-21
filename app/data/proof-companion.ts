@@ -451,7 +451,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
     ],
     checkpoint: {
       question:
-        "Does Part I by itself prove every radial boundary formula of the Karpelevič–Ito theorem?",
+        "Does Part I by itself prove every radial boundary formula in Ito’s formulation of the Karpelevič theorem?",
       answer:
         "No. For N≥4, Part I supplies the critical-polygon contact and first-return structure together with consecutive Farey fractions and the finite product identity; the small orders are treated directly. Part II adds the sharp log-sine inequality, explicit stochastic realization, and nesting needed for the full boundary theorem.",
     },

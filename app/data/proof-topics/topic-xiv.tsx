@@ -27,7 +27,7 @@ export function TopicXIVContent() {
               "turns a reduced Ito polynomial into an explicit row-stochastic matrix that has the selected boundary point as an eigenvalue.",
           },
           {
-            label: "Topic XIII · Karpelevič–Ito theorem",
+            label: "Topic XIII · Karpelevič theorem in Ito’s formulation",
             href: sitePath("/proof/topic-xiii/"),
             explanation:
               "justifies interpreting the assembled boundary arc chain as the complete boundary rather than merely a candidate curve.",

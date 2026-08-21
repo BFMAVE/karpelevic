@@ -512,7 +512,7 @@ const theorem14ProofAssembly = (
       </section>
     </details>
     <p className="proof-item-takeaway proof-chapter-takeaway">
-      <span>What survives</span>
+      <span>Conclusion</span>
       The polygon geometry yields consecutive Farey fractions, a finite
       product identity, and an exact equality for chosen real arguments,
       without changing orientation after the eigenvalue has been selected.

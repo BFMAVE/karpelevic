@@ -111,8 +111,8 @@ for (const [relativePath, expectedText] of pages) {
   assert.match(visibleText, /Published on Zenodo/);
   assert.match(visibleText, /24 July 2026/);
   assert.match(visibleText, /Website edition/);
-  assert.match(visibleText, /Last revised\s+20 August 2026/);
-  assert.match(visibleText, /103-page site-hosted PDF/);
+  assert.match(visibleText, /Last revised\s+21 August 2026/);
+  assert.match(visibleText, /104-page site-hosted PDF/);
   assert.doesNotMatch(html, />Prepared</);
 }
 

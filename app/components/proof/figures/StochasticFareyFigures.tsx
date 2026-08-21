@@ -400,12 +400,24 @@ function FareyFive({ mobile = false }: { mobile?: boolean }) {
 }
 
 function RootedChord({ marker, mobile = false }: { marker: string; mobile?: boolean }) {
-  const origin = mobile ? { x: 30, y: 210 } : { x: 95, y: 225 };
-  const joint = mobile ? { x: 145, y: 115 } : { x: 325, y: 90 };
-  const endpoint = mobile ? { x: 290, y: 210 } : { x: 575, y: 225 };
-  const totalY = mobile ? 280 : 290;
+  const angleA = Math.PI / 6;
+  const angleB = (3 * Math.PI) / 4;
+  const angleSum = angleA + angleB;
+  const betaZqLength = Math.sin(angleB) / Math.sin(angleSum);
+  const alphaWLength = Math.sin(angleA) / Math.sin(angleSum);
+  const unitLength = mobile ? 70 : 130;
+  const origin = mobile ? { x: 65, y: 110 } : { x: 170, y: 110 };
+  const joint = {
+    x: origin.x + unitLength * betaZqLength * Math.cos(-angleA),
+    y: origin.y - unitLength * betaZqLength * Math.sin(-angleA),
+  };
+  const endpoint = {
+    x: joint.x + unitLength * alphaWLength * Math.cos(angleB),
+    y: joint.y - unitLength * alphaWLength * Math.sin(angleB),
+  };
+  const totalY = mobile ? 296 : 315;
   const labelSize = mobile ? 17 : 16;
-  const angleRadius = mobile ? 35 : 48;
+  const angleRadius = mobile ? 31 : 44;
   const redVector = { x: joint.x - origin.x, y: joint.y - origin.y };
   const tealVector = { x: endpoint.x - joint.x, y: endpoint.y - joint.y };
   const redLength = Math.hypot(redVector.x, redVector.y);
@@ -421,6 +433,16 @@ function RootedChord({ marker, mobile = false }: { marker: string; mobile?: bool
 
   return (
     <>
+      <text
+        data-vector-example="n=3,x=11/24"
+        fill={ink}
+        fontSize={labelSize}
+        textAnchor="middle"
+        x={mobile ? 160 : 340}
+        y={mobile ? 45 : 34}
+      >
+        n = 3, x = 11/24; A = π/6, B = 3π/4
+      </text>
       <line
         data-vector-guide="real-axis"
         stroke={ink}
@@ -431,6 +453,9 @@ function RootedChord({ marker, mobile = false }: { marker: string; mobile?: bool
         y2={origin.y}
       />
       <line
+        data-example-x="11/24"
+        data-mathematical-angle="-pi/6"
+        data-real-component-sign="positive"
         data-vector="beta-z-q"
         markerEnd={`url(#${marker})`}
         stroke={red}
@@ -441,6 +466,9 @@ function RootedChord({ marker, mobile = false }: { marker: string; mobile?: bool
         y2={joint.y}
       />
       <line
+        data-example-x="11/24"
+        data-mathematical-angle="3pi/4"
+        data-real-component-sign="negative"
         data-vector="alpha-w"
         markerEnd={`url(#${marker}-teal)`}
         stroke={teal}
@@ -451,7 +479,7 @@ function RootedChord({ marker, mobile = false }: { marker: string; mobile?: bool
         y2={endpoint.y}
       />
       <line
-        data-vector-guide="minus-B-horizontal"
+        data-vector-guide="B-horizontal"
         stroke={teal}
         strokeDasharray="5 5"
         strokeWidth="1.5"
@@ -491,23 +519,53 @@ function RootedChord({ marker, mobile = false }: { marker: string; mobile?: bool
         y2={totalY}
       />
       <path
-        d={`M${origin.x + angleRadius} ${origin.y} A${angleRadius} ${angleRadius} 0 0 0 ${redAnglePoint.x} ${redAnglePoint.y}`}
-        data-vector-angle="A"
+        d={`M${origin.x + angleRadius} ${origin.y} A${angleRadius} ${angleRadius} 0 0 1 ${redAnglePoint.x} ${redAnglePoint.y}`}
+        data-vector-angle="minus-A"
         fill="none"
         stroke={red}
         strokeWidth="2"
       />
       <path
-        d={`M${joint.x + angleRadius} ${joint.y} A${angleRadius} ${angleRadius} 0 0 1 ${tealAnglePoint.x} ${tealAnglePoint.y}`}
-        data-vector-angle="minus-B"
+        d={`M${joint.x + angleRadius} ${joint.y} A${angleRadius} ${angleRadius} 0 0 0 ${tealAnglePoint.x} ${tealAnglePoint.y}`}
+        data-vector-angle="B"
         fill="none"
         stroke={teal}
         strokeWidth="2"
       />
-      <text fill={red} fontSize={labelSize} x={mobile ? 63 : 142} y={mobile ? 184 : 196}>A</text>
-      <text fill={teal} fontSize={labelSize} x={mobile ? 180 : 382} y={mobile ? 145 : 135}>−B</text>
-      <text fill={red} fontSize={labelSize} x={mobile ? 55 : 145} y={mobile ? 145 : 128}>βz^q</text>
-      <text fill={teal} fontSize={labelSize} x={mobile ? 222 : 430} y={mobile ? 165 : 132}>αw</text>
+      <text
+        fill={red}
+        fontSize={labelSize}
+        x={origin.x + angleRadius * 0.84}
+        y={origin.y + angleRadius * 0.28}
+      >
+        −A
+      </text>
+      <text
+        fill={teal}
+        fontSize={labelSize}
+        x={joint.x + angleRadius * 0.38}
+        y={joint.y - angleRadius * 0.94}
+      >
+        B
+      </text>
+      <text
+        fill={red}
+        fontSize={labelSize}
+        textAnchor="middle"
+        x={(origin.x + joint.x) / 2 - (mobile ? 10 : 16)}
+        y={(origin.y + joint.y) / 2 - (mobile ? 17 : 24)}
+      >
+        βz^q
+      </text>
+      <text
+        fill={teal}
+        fontSize={labelSize}
+        textAnchor="middle"
+        x={(joint.x + endpoint.x) / 2 + (mobile ? 15 : 18)}
+        y={(joint.y + endpoint.y) / 2 + (mobile ? 15 : 20)}
+      >
+        αw
+      </text>
       <text fill={ink} fontSize={labelSize} textAnchor="middle" x={(origin.x + endpoint.x) / 2} y={totalY + (mobile ? 32 : 30)}>
         1 = βz^q + αw
       </text>
@@ -527,9 +585,10 @@ function RootedChord({ marker, mobile = false }: { marker: string; mobile?: bool
 
 function TerminalThree({ mobile = false }: { mobile?: boolean }) {
   const realAxisY = mobile ? 285 : 290;
-  const scale = mobile ? 180 : 200;
-  const junctionX = mobile ? 205 : 410;
+  const scale = mobile ? 160 : 180;
+  const junctionX = mobile ? 190 : 390;
   const minusOneX = junctionX - scale / 2;
+  const imaginaryAxisX = junctionX + scale / 2;
   const rootY = realAxisY - (Math.sqrt(3) / 2) * scale;
   const labelSize = mobile ? 17 : 16;
 
@@ -543,6 +602,34 @@ function TerminalThree({ mobile = false }: { mobile?: boolean }) {
         x2={mobile ? 290 : 600}
         y1={realAxisY}
         y2={realAxisY}
+      />
+      <line
+        data-complex-axis="imaginary"
+        stroke={ink}
+        strokeWidth="1.6"
+        x1={imaginaryAxisX}
+        x2={imaginaryAxisX}
+        y1={rootY - (mobile ? 28 : 32)}
+        y2={realAxisY}
+      />
+      <line
+        data-imaginary-level="sqrt(3)/2"
+        stroke={ink}
+        strokeDasharray="4 5"
+        strokeWidth="1.2"
+        x1={junctionX}
+        x2={imaginaryAxisX}
+        y1={rootY}
+        y2={rootY}
+      />
+      <line
+        data-axis-tick="sqrt(3)/2"
+        stroke={ink}
+        strokeWidth="2"
+        x1={imaginaryAxisX - 6}
+        x2={imaginaryAxisX + 6}
+        y1={rootY}
+        y2={rootY}
       />
       <line
         data-exceptional-branch="nonreal"
@@ -575,12 +662,39 @@ function TerminalThree({ mobile = false }: { mobile?: boolean }) {
       </g>
       <text fill={ink} fontSize={labelSize} textAnchor="middle" x={minusOneX} y={realAxisY + 34}>−1</text>
       <text fill={ink} fontSize={labelSize} textAnchor="middle" x={junctionX} y={realAxisY + 34}>−1/2</text>
-      <text fill={ink} fontSize={labelSize} textAnchor="middle" x={junctionX} y={rootY - 24}>e²πⁱ⁄³</text>
+      <text
+        data-exact-coordinate="-1/2+(sqrt(3)/2)i"
+        fill={ink}
+        fontSize={labelSize}
+        textAnchor="middle"
+        x={junctionX}
+        y={rootY - (mobile ? 20 : 24)}
+      >
+        −1/2 + (√3/2)i
+      </text>
+      <text
+        fill={ink}
+        fontSize={labelSize}
+        textAnchor="middle"
+        x={imaginaryAxisX}
+        y={rootY - (mobile ? 35 : 39)}
+      >
+        Im
+      </text>
+      <text
+        fill={ink}
+        fontSize={labelSize}
+        textAnchor={mobile ? "end" : "start"}
+        x={mobile ? 307 : imaginaryAxisX + 9}
+        y={rootY + 6}
+      >
+        √3/2
+      </text>
       <text
         fill={red}
         fontSize={labelSize}
-        textAnchor={mobile ? "middle" : "start"}
-        x={mobile ? 255 : junctionX + 18}
+        textAnchor={mobile ? "end" : "start"}
+        x={mobile ? junctionX - 12 : junctionX + 18}
         y={(rootY + realAxisY) / 2}
       >
         Re λ = −1/2
@@ -719,12 +833,12 @@ const copy: Record<FigureKind, { title: string; description: string; caption: Re
       "Plate IX.1. The fractions of F₅ in [0,1/2] are shown at their exact number-line positions. The prescribed argument x=3/8 lies strictly between 1/3 and 2/5.",
   },
   "rooted-chord": {
-    status: "Exact vector-identity diagram",
-    title: "The identity 1 = βz^q + αw, where w^d = z^s",
+    status: "Exact obtuse vector-identity diagram",
+    title: "An obtuse n = 3 instance of 1 = βz^q + αw",
     description:
-      "A red vector beta z to the q at angle A and a teal vector alpha w at angle minus B are joined head to tail. Their imaginary components cancel. Their sum is the positive real vector one, drawn on a parallel line below so that its ink arrowhead remains distinct from the teal arrowhead.",
+      "For n equals three and x equals eleven twenty-fourths, A equals pi over six and B equals three pi over four. A red vector beta z to the q at angle minus A and a teal vector alpha w at the obtuse angle B are joined head to tail. The teal vector has negative real component. Their imaginary components cancel and their real components sum to the positive real vector one, drawn on a parallel line below so that its ink arrowhead remains distinct from the teal arrowhead.",
     caption:
-      "Plate IX.2. In the identity 1=βz^q+αw with w^d=z^s, the red and teal vectors have equal and opposite imaginary components. Their positive real components add to one; the total vector is translated downward only to keep the arrowheads distinct.",
+      "Plate IX.2. On the n=3 Farey interval [1/3,1/2], take x=11/24, so A=π/6 and B=3π/4. In 1=βz^q+αw with w^d=z^s, βz^q has argument −A=−π/6 and αw has argument B=3π/4. Their imaginary components cancel; αw has negative real component, while the two real components sum to one. The total vector is translated downward only to keep the arrowheads distinct.",
   },
   "terminal-three": {
     status: "Exact algebraic diagram",

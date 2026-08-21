@@ -40,7 +40,7 @@ import { sitePath } from "../lib/site-path";
 export const metadata: Metadata = {
   title: "How the Proof Works",
   description:
-    "Topic I of a fourteen-topic annotated proof that works from critical invariant polygons to the Karpelevič–Ito theorem.",
+    "Topic I of a fourteen-topic annotated proof that works from critical invariant polygons to the Karpelevič theorem in Ito's formulation.",
 };
 
 const pageTimestamp = getPageTimestamp("app/data/proof.ts");
@@ -219,7 +219,7 @@ export default function ProofPage() {
         </header>
 
         <nav className="proof-chapter-atlas" aria-label="Fourteen proof topics">
-          <p className="section-label">The complete route</p>
+          <p className="section-label">Proof topics</p>
           <ol>
             {proofReaderTopicLinks.map((link) => (
               <li key={link.topicNumber}>

@@ -193,6 +193,7 @@ const externalStatements = new Map([
   ["thm:critical-polygon-normal-form", { kind: "Theorem", number: "1.3", href: "/proof/#part-i-item-3" }],
   ["thm:complex-monodromy", { kind: "Theorem", number: "1.4", href: "/proof/topic-vii/#topic-vii-monodromy" }],
   ["lem:origin-interior", { kind: "Lemma", number: "2.5", href: "/proof/#part-i-item-9" }],
+  ["lem:lattice-parallelogram-count", { kind: "Lemma", number: "A.6", href: "#lem:lattice-parallelogram-count" }],
 ]);
 
 function statementLinks(referenceList) {
@@ -210,7 +211,7 @@ function statementLinks(referenceList) {
 }
 
 html = html.replace(
-  /<a href="#[^"]+" data-reference-type="ref\+label" data-reference="([^"]+)">[\s\S]*?<\/a>/g,
+  /<a href="#[^"]+" data-reference-type="ref\+label" data-reference="([^"]+)">[\s\S]*?<\/a>/gi,
   (_match, references) => statementLinks(references),
 );
 

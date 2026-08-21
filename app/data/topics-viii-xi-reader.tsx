@@ -109,6 +109,9 @@ function completeTopicVIIIHtml(label: PartIILabel): string {
 
 function rewriteTopicIXVisibleTerminology(html: string): string {
   const replacements = [
+    ["Farey adjacency criterion", "Criterion for consecutive Farey fractions"],
+    ["Farey-neighbour criterion", "criterion for consecutive Farey fractions"],
+    ["Farey-neighbor criterion", "criterion for consecutive Farey fractions"],
     ["Farey cells", "Farey intervals"],
     ["Farey cell", "Farey interval"],
     ["open cell", "open interval"],
@@ -119,6 +122,14 @@ function rewriteTopicIXVisibleTerminology(html: string): string {
     ["q≤s", "q<s"],
     ["scalar candidate", "candidate point"],
     ["Scalar candidate", "Candidate point"],
+    ["specified rooted identity", "displayed identity (II.2.10)"],
+    ["rooted identity", "identity (II.2.10)"],
+    ["directed error bounds", "outward-rounded interval enclosures"],
+    ["directed enclosure", "outward-rounded interval enclosure"],
+    [
+      "lem:lattice-parallelogram-count",
+      "the lattice-parallelogram lemma from Topic V",
+    ],
   ] as const;
 
   return html
@@ -234,7 +245,7 @@ export const topicVIIIResults: readonly ProofResultData[] = [
     ],
     provenance: "Classical result",
     sourceIds: ["karpelevic-1951", "ito-1997", "standard-linear-algebra"],
-    sourceRelation: <>This is the classical unit-circle clause of the Karpelevič-Ito theorem, reproved here before any boundary arcs are used.</>,
+    sourceRelation: <>This is the classical unit-circle clause of the Karpelevič theorem in Ito’s formulation, reproved here before any boundary arcs are used.</>,
   },
   {
     id: "topic-viii-origin-interior",
@@ -309,7 +320,7 @@ export const topicIXResults: readonly ProofResultData[] = [
     id: "topic-ix-farey-adjacency",
     label: "Lemma II.2.1",
     kind: "Lemma",
-    title: "Farey adjacency criterion",
+    title: "Criterion for consecutive Farey fractions",
     purpose: "Recognizes consecutive fractions using only a determinant and a denominator bound.",
     manuscriptHtml: completeTopicIXHtml("karp:lem:farey-adjacency-expanded"),
     vocabulary: [
@@ -327,10 +338,10 @@ export const topicIXResults: readonly ProofResultData[] = [
       { title: "Read an intermediate slope", explanation: <>That point and its complementary representative have slopes strictly between the endpoints; one has first coordinate at most (b+d)/2≤n.</> },
       { title: "Exclude a small denominator sum", explanation: <>If b+d≤n, the reduced mediant lies in Fₙ between the endpoints. Both necessary conditions follow.</> },
     ],
-    takeaway: <>Consecutive Farey fractions are exactly determinant-one neighbours whose denominator sum exceeds n.</>,
+    takeaway: <>Two reduced fractions in Fₙ are consecutive exactly when their determinant is one and their denominator sum exceeds <var>n</var>.</>,
     provenance: "Classical result",
     sourceIds: ["standard-farey"],
-    sourceRelation: <>This is the classical Farey-neighbour criterion, with the converse proved using the lattice count already established in Topic V.</>,
+    sourceRelation: <>This is the classical criterion for consecutive Farey fractions, with the converse proved using the lattice count already established in Topic V.</>,
   },
   {
     id: "topic-ix-ito-family",
@@ -340,14 +351,12 @@ export const topicIXResults: readonly ProofResultData[] = [
     purpose: "Associates one polynomial family with each interval between consecutive Farey fractions.",
     manuscriptHtml: completeTopicIXHtml("karp:def:ito-family"),
     vocabulary: [
-      { term: "Endpoint labels", definition: <>The endpoint with smaller denominator is p/q and the other is r/s, so q&lt;s. This need not agree with left-to-right order.</> },
-      { term: "Signed exponent e=s−dq", definition: <>An integer that may be negative. The reduced Ito polynomial is written in two cases so that both sides remain polynomials.</> },
-      { term: "Polynomial family versus root branch", definition: <>A polynomial can have several roots. Naming the family does not yet choose a continuous root as α varies.</> },
+      { term: "Reduced Ito polynomial", definition: <>After cancelling only for λ≠0, the equation is written in two cases according to the sign of the integer <span className="math-inline">e=s−dq</span>, so both sides remain polynomials.</> },
     ],
-    intuition: <>The uncancelled identity works for either sign of e. Cancelling only for λ≠0 exposes the actual reduced polynomial without silently leaving a negative exponent.</>,
-    takeaway: <>The Ito family is algebraic data; the next result constructs the particular point on each ray.</>,
+    intuition: <>The uncancelled equation works for either sign of <var>e</var>. Cancelling only for λ≠0 exposes the reduced polynomial without silently leaving a negative exponent. The polynomial equation may have several roots; it does not by itself select the continuous root used below.</>,
+    takeaway: <>The Ito equation defines a polynomial family; Proposition II.2.3 selects the particular point at each argument.</>,
     sourceIds: ["ito-1997"],
-    sourceRelation: <>This is Ito’s Farey-indexed polynomial formulation. Definitions receive no novelty classification.</>,
+    sourceRelation: <>Ito introduced this polynomial equation for two consecutive Farey fractions.</>,
   },
   {
     id: "topic-ix-scalar-ray",
@@ -356,88 +365,109 @@ export const topicIXResults: readonly ProofResultData[] = [
     title: "A unique modulus at each prescribed argument",
     purpose: "Determines exactly one modulus at each argument in the open Farey interval without presupposing a polynomial root branch.",
     manuscriptHtml: completeTopicIXHtml("karp:prop:scalar-ray"),
-    vocabulary: [
-      { term: "Specified fractional-power branch", definition: <>A continuous choice of argument used to interpret a fractional power. Here the defining exponential anchors it explicitly at the endpoint r/s.</> },
-      { term: "Residual Fₓ", definition: <>The left side of equation (II.2.8) minus its right side, viewed as a real function of ρ on [0,1].</> },
-    ],
     intuition: <>Two complex vectors at opposite signed angles A and B can have their vertical components cancel. The scalar equation is precisely what makes the recovered coefficients α and β add to one.</>,
     proofSteps: [
       { title: "Verify the angle range", explanation: <>Writing x as an affine combination of the consecutive endpoints gives explicit formulas for |qx−p| and |sx−r|. They imply A&gt;0, B&gt;0, and A+B&lt;π.</> },
       { title: "A monotone scalar function", explanation: <>Both exponents are positive and both sine coefficients are positive, so the left side is continuous and strictly increasing in ρ.</> },
-      { title: "Bracket the unique root", explanation: <>At ρ=0 the left side is zero. At ρ=1 it exceeds sin(A+B) by the positive three-sine identity printed in the proof.</> },
-      { title: "Recover complementary coefficients", explanation: <>Equation (II.2.8) makes the two positive quantities in (II.2.9) sum to one.</> },
-      { title: "Specify the fractional power", explanation: <>Set z to the inverse conjugate of λ and define ωzˢ⁄ᵈ by an explicit exponential anchored at r/s. No implicit principal-root convention is used.</> },
-      { title: "Compare real and imaginary parts", explanation: <>The endpoint errors qx−p and sx−r have opposite signs. The sine-weighted vectors therefore have equal and opposite imaginary parts and real parts summing to one.</> },
-      { title: "Recover the Ito equation", explanation: <>Raise the rooted identity to the d-th power, use ωᵈ=1, clear inverse powers, and conjugate. This proves that the constructed λ satisfies the Ito equation.</> },
+      { title: "Bracket the unique root", explanation: <>At ρ=0 the left side is zero. At ρ=1 the identity <span className="math-inline">sin A+sin B−sin(A+B)=4 sin(A/2) sin(B/2) sin((A+B)/2)</span> shows that it exceeds <span className="math-inline">sin(A+B)</span>.</> },
+      { title: "Recover positive coefficients summing to one", explanation: <>Equation (II.2.8) makes the two positive quantities in (II.2.9) sum to one.</> },
+      { title: "Define the required fractional power", explanation: <>Set z to the inverse conjugate of λ and define ωzˢ⁄ᵈ by an explicit exponential anchored at r/s. No implicit principal-root convention is used.</> },
+      { title: "Compare real and imaginary parts", explanation: <>The signed differences qx−p and sx−r have opposite signs. The sine-weighted vectors therefore have equal and opposite imaginary parts and real parts summing to one.</> },
+      { title: "Recover the Ito equation", explanation: <>Raise identity (II.2.10) to the <var>d</var>-th power, use ωᵈ=1, clear inverse powers, and conjugate. This proves that the constructed λ satisfies the Ito equation.</> },
     ],
-    takeaway: <>At every argument between two consecutive Farey fractions there is one explicitly determined modulus, and the resulting point satisfies the stated rooted identity.</>,
+    takeaway: <>At every argument between two consecutive Farey fractions there is one explicitly determined modulus, and the resulting point satisfies identity (II.2.10) and the Ito equation.</>,
     sourceIds: ["ito-1997", "kirkland-laffey-smigoc-2020"],
-    sourceRelation: <>Ito supplies the polynomial family. Kirkland–Laffey–Šmigoc (2020), Theorem 1.2 and Lemma 4.4, already characterize the boundary point at each prescribed argument through a unique positive radial solution. This proposition derives the particular real equation (II.2.8), the coefficients in (II.2.9), and the specified fractional-power identity (II.2.10); no separate literature-priority classification is asserted.</>,
+    sourceRelation: <>Ito supplies the polynomial family. Kirkland–Laffey–Šmigoc (2020), Theorem 1.2 and Lemma 4.4, characterize the boundary point at each prescribed argument through a unique positive radial solution. The proof here derives equation (II.2.8), the coefficients in (II.2.9), and the explicitly defined identity (II.2.10).</>,
   },
   {
     id: "topic-ix-endpoints",
     label: "Proposition II.2.4",
     kind: "Proposition",
-    title: "Endpoint limits, including the order-three exception",
-    purpose: "Closes the candidate curves and identifies the one place where the nonreal graph does not reach its unit-circle endpoint.",
+    title: "Endpoint limits, including the case n=3",
+    purpose: "Determines the endpoint limits and hence the closure of each parametrized arc, including the one case where the nonreal graph does not reach its unit-circle endpoint.",
     manuscriptHtml: completeTopicIXHtml("karp:prop:scalar-continuity"),
     vocabulary: [
       { term: "Subsequential limit", definition: <>A limit obtained after selecting a convergent subsequence. If every convergent subsequence has the same limit, the original bounded sequence converges to it.</> },
       { term: "Implicit-function theorem", definition: <>A calculus theorem that gives a continuously differentiable local solution when the defining function is continuously differentiable and its derivative in the solved-for variable does not vanish. A direct sequential continuity proof is also provided here.</> },
     ],
-    intuition: <>At an ordinary endpoint one sine term vanishes and the other forces ρ=1. Only when the surviving sine also vanishes must one retain first-order terms; that happens exactly on the exceptional order-three interval.</>,
+    intuition: <>At an ordinary endpoint one sine term vanishes and the other forces ρ=1. Only when the surviving sine also vanishes must one retain first-order terms; that happens exactly when <span className="math-inline">n=3</span> and <span className="math-inline">[f,g]=[1/3,1/2]</span>.</>,
     figure: <StochasticFareyFigure kind="terminal-three" />,
     proofSteps: [
       { title: "Continuity inside the interval", explanation: <>For xₖ→x, every subsequential modulus limit solves the limiting real equation. Uniqueness from Proposition II.2.3 forces that limit to be ρ(x).</> },
+      { title: "Smoothness inside the interval", explanation: <>The defining function is C<sup>∞</sup> in <span className="math-inline">(x,ρ)</span> and its partial derivative with respect to ρ is positive. The implicit-function theorem therefore gives C<sup>∞</sup> functions ρ, α, β, and γ on every open Farey interval.</> },
       { title: "Approach p/q", explanation: <>Here A→0 and determinant one gives B→2π/(dq). If this angle is not π, the limiting equation is ρ*ᑫ sin B=sin B and forces ρ*=1.</> },
       { title: "Approach r/s", explanation: <>Here B→0 and A→2π/s∈(0,π), so the surviving term forces ρ*=1.</> },
       { title: "Identify the only degenerate case", explanation: <>The exceptional equality 2π/(dq)=π is dq=2. Under the Farey and order assumptions this is exactly n=3, q=2, d=1, and the interval [1/3,1/2].</> },
       { title: "Keep first-order sine terms", explanation: <>Write x=1/2−ε, divide the real equation by 2πε, and pass to the limit. Every limit ρ* satisfies 2ρ*³+3ρ*²=1.</> },
       { title: "Choose the admissible root", explanation: <>Factoring gives (2ρ*−1)(ρ*+1)²=0; the only root in [0,1] is ρ*=1/2. The recovered α tends to 1/4.</> },
     ],
-    takeaway: <>All ordinary candidate curves meet their endpoint roots of unity; the nonreal order-three curve approaches −1/2 instead.</>,
+    takeaway: <>In every case other than <span className="math-inline">n=3</span> with <span className="math-inline">[f,g]=[1/3,1/2]</span>, the parametrized arc meets both endpoint roots of unity; in that remaining case its nonreal part approaches −1/2.</>,
     sourceIds: ["ito-1997", "kirkland-laffey-smigoc-2020"],
-    sourceRelation: <>The Ito polynomial family and the exceptional order-three boundary are classical, and Kirkland–Laffey–Šmigoc (2020) use the unique radial solution to describe these boundary arcs. This proposition records the endpoint limits needed by the present construction; no separate literature-priority classification is asserted.</>,
+    sourceRelation: <>The Ito polynomial family and the <span className="math-inline">n=3</span> boundary are classical, and Kirkland–Laffey–Šmigoc (2020) use the unique radial solution to describe these arcs. This proposition records the endpoint limits needed here.</>,
   },
   {
     id: "topic-ix-carrier",
     label: "Definition II.2.5",
     kind: "Definition",
     title: "Candidate curve on a Farey interval",
-    purpose: "Packages the points determined at each argument into one closed curve without assuming an α-parametrized algebraic branch.",
+    purpose: "Defines a compact candidate arc from the radial parametrization and its endpoint limits without assuming an α-parametrized algebraic branch.",
     manuscriptHtml: completeTopicIXHtml("karp:def:carrier"),
     vocabulary: [
       { term: "Closure", definition: <>The curve together with every limit point approached by sequences on it.</> },
-      { term: "Exceptional real segment", definition: <>For n=3 the candidate curve includes [−1,−1/2], which belongs to the same algebraic family after setting α=−λ(λ+1).</> },
+      { term: "Additional radial fibre at x=1/2", definition: <>For <span className="math-inline">n=3</span>, the set includes [−1,−1/2] on the endpoint ray. This interval belongs to the same algebraic family after setting α=−λ(λ+1); it is not the image of a continuum of different arguments.</> },
     ],
-    intuition: <>The candidate curve is defined geometrically as a radial graph. The exceptional real segment is added only after its polynomial identity is checked.</>,
-    takeaway: <>The candidate curve is now closed from one Farey endpoint to the next, with the order-three correction included.</>,
+    intuition: <>The candidate set is defined geometrically from a radial graph and its closure. The segment [−1,−1/2] is added in the case <span className="math-inline">n=3</span> only after its polynomial identity is checked.</>,
+    takeaway: <>The set now contains both endpoint limits and, when <span className="math-inline">n=3</span>, the additional radial fibre [−1,−1/2].</>,
     sourceIds: ["ito-1997"],
-    sourceRelation: <>The polynomial family is Ito’s; this definition packages the constructed radial graph together with its proved endpoint limits. Definitions receive no novelty classification.</>,
+    sourceRelation: <>The polynomial family is Ito’s; this definition takes the closure of the radial graph whose endpoint behavior was just proved.</>,
   },
   {
     id: "topic-ix-algorithm",
     label: "Algorithm II.2.6",
     kind: "Algorithm",
     title: "Certified numerical evaluation",
-    purpose: "Computes the point at an exact prescribed argument with an explicit bisection error bound.",
+    purpose: "Returns either an ε-certified polar point approximation or, only when n=3 and x=1/2, the exact compact fibre [−1,−1/2].",
     manuscriptHtml: completeTopicIXHtml("karp:alg:boundary"),
+    prelude: (
+      <>
+        <p>
+          <strong>Certification contract.</strong> The input representation must
+          support exact comparison with Farey endpoints and outward-rounded
+          interval enclosures of every transcendental evaluation. For an
+          interior argument, maintain a sign-certified bracket [L,U]. When
+          <span className="math-inline"> U−L≤2ε</span>, return its midpoint; if
+          an exact zero is certified, return <var>m</var> immediately. An
+          outward-rounded interval enclosure containing zero may instead use
+          the stated derivative lower bound to certify the same ε-error.
+        </p>
+        <p>
+          The return type is a tagged union. At every ordinary input, the point
+          variant contains the ε-certified polar pair
+          <span className="math-inline"> (ρ̂,x)</span>. Only at
+          <span className="math-inline"> n=3, x=1/2</span> does the exceptional
+          variant return the exact compact fibre [−1,−1/2]. If Cartesian output
+          has total target τ, run the radial solve with tolerance τ/2 and bound
+          the unit-direction error by τ/2.
+        </p>
+      </>
+    ),
     vocabulary: [
-      { term: "Exact argument", definition: <>The input x is rational or is otherwise represented exactly, so its containing Farey interval can be certified before any numerical evaluation begins.</> },
+      { term: "Input representation and certified evaluation", definition: <>The representation of <var>x</var> must permit exact comparison with the finitely many Farey endpoints and outward-rounded interval enclosures of the required sine values and rational powers. Rational and real-algebraic inputs are sufficient examples.</> },
       { term: "Bisection bracket", definition: <>An interval [L,U] known to contain the unique zero of Fₓ. Each bisection step preserves that guarantee and halves U−L.</> },
-      { term: "Error bound", definition: <>When U−L≤2ε, the midpoint ρ̂ satisfies |ρ̂−ρ(x)|≤ε; for λ̂=ρ̂ exp(2πix), multiplication by exp(2πix) gives |λ̂−λ(x)|≤ε.</> },
+      { term: "Polar and Cartesian output", definition: <>The polar output <span className="math-inline">(ρ̂,x)</span> denotes <span className="math-inline">ρ̂ exp(2πix)</span> and has radial error at most ε. For a Cartesian target τ, allocate τ/2 to the radial error and τ/2 to a certified unit-direction approximation.</> },
     ],
-    intuition: <>Farey data and the prescribed argument stay exact. Only the one-dimensional root solve is numerical, and strict monotonicity makes bisection a certified procedure.</>,
+    intuition: <>Farey comparisons remain exact and every transcendental evaluation is enclosed outward. Only a one-dimensional root-finding problem is numerical, and strict monotonicity makes bisection certifiable.</>,
     proofSteps: [
-      { title: "Certify the Farey interval", explanation: <>Given n≥3 and exact x∈(0,1/2), find the consecutive fractions f&lt;x&lt;g in Fₙ, label the smaller denominator p/q and the other r/s, and compute d, A, and B exactly or with directed interval bounds.</> },
-      { title: "Define the increasing residual", explanation: <>Set Fₓ(ρ)=ρˢ⁄ᵈ sin A+ρᑫ sin B−sin(A+B). Proposition II.2.3 gives Fₓ(0)&lt;0&lt;Fₓ(1) and strict increase on [0,1].</> },
-      { title: "Use a certified sign or enclosure", explanation: <>Start from [L,U]=[0,1]. At the midpoint, return immediately if Fₓ=0 is certified; otherwise use a certified strict sign to retain one half. If a directed evaluation still contains zero, certify a lower bound c&gt;0 for Fₓ′ on [m−ε,m+ε] and return m once the residual enclosure lies in [−cε,cε]. This also terminates when the exact root is a bisection midpoint.</> },
-      { title: "Return the approximation", explanation: <>With ρ̂=(L+U)/2, return λ̂=ρ̂ exp(2πix) together with the Farey labels and numerical values α̂,β̂ from equation (II.2.9). Then |λ̂−λ(x)|=|ρ̂−ρ(x)|≤ε; no separate coefficient-error bound is claimed.</> },
-      { title: "Handle endpoints separately", explanation: <>Use the proved unit-circle endpoint values, and for n=3 include the exact real segment [−1,−1/2]. The contract makes no convergence claim for Newton iteration or for an uncertified floating-point choice of x.</> },
+      { title: "Certify the Farey interval", explanation: <>Given <span className="math-inline">n≥3</span> and an input <span className="math-inline">x∈(0,1/2)</span> in the stated representation, compare it exactly with Farey endpoints to find <span className="math-inline">f&lt;x&lt;g</span>. Label the smaller denominator p/q and the other r/s, then compute <var>d</var> exactly and enclose A and B outward.</> },
+      { title: "Enclose the increasing residual", explanation: <>Set <span className="math-inline">Fₓ(ρ)=ρˢ⁄ᵈ sin A+ρᑫ sin B−sin(A+B)</span>. Proposition II.2.3 gives <span className="math-inline">Fₓ(0)&lt;0&lt;Fₓ(1)</span> and strict increase. On a positive interval, the rational power may be enclosed through <span className="math-inline">ρˢ⁄ᵈ=exp((s/d)log ρ)</span>.</> },
+      { title: "Stop first by bracket width", explanation: <>Maintain a sign-certified bracket [L,U]. As soon as <span className="math-inline">U−L≤2ε</span>, its midpoint <span className="math-inline">m=(L+U)/2</span> satisfies <span className="math-inline">|m−ρ(x)|≤ε</span>.</> },
+      { title: "Handle an unresolved midpoint sign", explanation: <>If <span className="math-inline">Fₓ(m)=0</span> is certified, return <var>m</var> immediately; otherwise a certified strict sign selects one half. If the outward-rounded evaluation still contains zero, the existing derivative-enclosure test certifies <span className="math-inline">|m−ρ(x)|≤ε</span> without pretending to know that sign. This includes the case where the exact root is a bisection midpoint.</> },
+      { title: "Return a polar approximation", explanation: <>Return <span className="math-inline">(ρ̂,x)</span>, denoting <span className="math-inline">ρ̂ exp(2πix)</span>, with the Farey labels and numerical α̂,β̂ from equation (II.2.9). The radial error is at most ε; no coefficient-error bound is claimed. For total Cartesian target τ, allocate τ/2 to the modulus and τ/2 to the unit-direction approximation.</> },
+      { title: "Return the tagged result", explanation: <>At an ordinary input, return the point-approximation variant carrying the ε-certified polar data. Only when <span className="math-inline">n=3</span> and <span className="math-inline">x=1/2</span>, return the exceptional-fibre variant carrying the exact interval [−1,−1/2]. No convergence claim is made for Newton iteration or an uncertified floating-point input.</> },
     ],
-    takeaway: <>Topic IX has constructed the candidate; Topics X-XIII must still bound, realize, nest, and identify it as the actual boundary.</>,
+    takeaway: <>Topic IX has constructed the candidate. Topics X–XIII will prove the radial upper bound, construct realizing stochastic matrices, establish nesting across orders, and identify these arcs with ∂Θₙ.</>,
     sourceIds: ["ito-1997"],
-    sourceRelation: <>This is an algorithmic synthesis of the preceding exact statements. Algorithms receive no novelty classification.</>,
+    sourceRelation: <>This certified bisection procedure is an algorithmic consequence of the preceding exact statements.</>,
   },
 ] as const;
 

@@ -95,7 +95,8 @@ export function ProofChapterShell({
             <p className="kicker">The fourteen-topic proof reader</p>
             <h1>How the Proof Works</h1>
             <p className="proof-subtitle">
-              Critical invariant polygons and the route to Karpelevič–Ito
+              Critical invariant polygons and the Karpelevič theorem in Ito&apos;s
+              formulation
             </p>
           </div>
           <div className="proof-hero-copy">
@@ -131,7 +132,7 @@ export function ProofChapterShell({
         </header>
 
         <nav className="proof-chapter-atlas" aria-label="Fourteen proof topics">
-          <p className="section-label">The complete route</p>
+          <p className="section-label">Proof topics</p>
           <ol>
             {proofReaderTopicLinks.map((link) => {
               const isCurrent = link.topicNumber === route.topicNumber;

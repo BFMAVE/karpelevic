@@ -24,11 +24,11 @@ function ExactSourceShelf({
   return (
     <section className="proof-topic-sources" aria-labelledby={headingId}>
       <p className="section-label">Sources cited in this topic</p>
-      <h3 id={headingId}>Sources and provenance</h3>
+      <h3 id={headingId}>References</h3>
       <p>
-        These entries support inherited statements and historical classifications.
-        A classification describes the result, not the originality of the proof
-        printed on this page.
+        These entries support inherited statements and the status labels shown
+        on this page. Each status describes a mathematical result, not the
+        originality of the proof printed here.
       </p>
       <ol>
         {sources.map((source) => (
@@ -330,7 +330,7 @@ export function TopicVIIIChapter() {
       />
 
       <ProofSourceShelf
-        heading="Sources and provenance"
+        heading="References"
         headingId="topic-viii-exact-sources"
         sourceIds={topicVIIISourceIds}
       />
@@ -347,7 +347,7 @@ export function TopicIXChapter() {
             label: "Topic V — the lattice-parallelogram lemma",
             href: sitePath("/proof/topic-v/"),
             explanation:
-              "supplies the elementary lattice-parallelogram fact used in the converse direction of Farey adjacency.",
+              "supplies the elementary lattice-parallelogram fact used in the converse direction of the criterion for consecutive Farey fractions.",
           },
           {
             label: "Topic VIII — row-stochastic matrices and the Karpelevič region",
@@ -370,15 +370,18 @@ export function TopicIXChapter() {
         ]}
         provedHere={
           <p>
-            We prove the Farey-neighbour criterion, define the reduced Ito
+            We prove the criterion for consecutive Farey fractions, define the reduced Ito
             polynomial, determine one modulus at every argument in an open Farey
-            interval, control both endpoints including the order-three exception,
+            interval, control both endpoints including the case <var>n</var>=3,
             and give a certified bisection procedure for numerical evaluation.
           </p>
         }
       />
 
-      <SetupBlock eyebrow="Definitions and arithmetic coordinates" title="From the Karpelevič region to a Farey interval">
+      <SetupBlock
+        eyebrow="Definitions and parameter range"
+        title="From the Karpelevič region to consecutive Farey fractions"
+      >
         <p>
           A matrix <span className="math-inline">P=(pᵢⱼ)</span> is
           <strong> row-stochastic</strong> when
@@ -386,8 +389,13 @@ export function TopicIXChapter() {
           <span className="math-inline"> Σⱼpᵢⱼ=1</span> for every row
           <var> i</var>. As in Topic VIII,
           <span className="math-inline"> Θₙ</span> is the set of all complex
-          eigenvalues of <span className="math-inline">n×n</span>
+          eigenvalues of <span className="math-inline">n×n</span>{" "}
           row-stochastic matrices.
+        </p>
+        <p>
+          This is Topic IX of the online proof reader, whereas the theorem and
+          equation numbers retain their labels from §II.2 of the manuscript.
+          The two numbering systems are independent.
         </p>
         <p>
           For <span className="math-inline">t∈[0,1/2]</span>, the point
@@ -398,12 +406,41 @@ export function TopicIXChapter() {
           <span className="math-inline"> {"{"}ρ exp(2πix):ρ≥0{"}"}</span>.
           Fix <span className="math-inline">n≥3</span>. The Farey sequence <span className="math-inline">Fₙ</span> contains
           every reduced fraction in [0,1] whose denominator is at most
-          <var> n</var>, in increasing order. We use its upper half
-          {" "}<span className="math-inline">Fₙ⁺=Fₙ∩[0,1/2]</span>. Two
-          consecutive entries <span className="math-inline">f&lt;g</span> form
-          a <strong>Farey interval</strong> [<var>f</var>,<var>g</var>]. Fractions are always reduced and
-          denominators are positive. For the formulas, label the endpoint with
-          smaller denominator first:
+          <var> n</var>, in increasing order. We restrict to{" "}
+          <span className="math-inline">Fₙ⁺=Fₙ∩[0,1/2]</span>; the superscript
+          + refers to the upper semicircle under{" "}
+          <span className="math-inline"> t↦exp(2πit)</span>. Two consecutive
+          fractions <span className="math-inline">f&lt;g</span> in Fₙ form a
+          <strong> Farey interval</strong> [<var>f</var>,<var>g</var>]. When both
+          fractions lie in [0,1/2], they are equivalently consecutive in Fₙ⁺.
+          Fractions are always reduced and denominators are positive.
+        </p>
+      </SetupBlock>
+
+      <ProofResultGroup
+        number="IX.A"
+        title="Criterion for consecutive Farey fractions"
+        introduction={
+          <p>
+            The determinant and denominator criterion is proved before either
+            consequence is used in the angular coordinates.
+          </p>
+        }
+        results={topicIXResults.slice(0, 1)}
+      />
+
+      <SetupBlock
+        eyebrow="Arithmetic coordinates"
+        title="Coordinates and angle bounds on a fixed Farey interval"
+      >
+        <p>
+          Fix consecutive fractions <span className="math-inline">f&lt;g</span>{" "}
+          in Fₙ⁺. Lemma II.2.1 shows that their determinant has absolute value
+          one. In particular their denominators are unequal, so label the
+          endpoint with smaller denominator{" "}
+          <span className="math-inline">p/q</span> and the other{" "}
+          <span className="math-inline">r/s</span>, with
+          <span className="math-inline"> q&lt;s</span>:
         </p>
         <p id="karp:eq:endpoint-labels" className="display-equation proof-setup-equation">
           <span className="math-inline">p/q, r/s, q&lt;s.</span>{" "}
@@ -434,7 +471,7 @@ export function TopicIXChapter() {
         </p>
         <p>
           The signed integer
-          <var>e</var> is retained; it may be positive, zero, or negative. The
+          {" "}<var>e</var> is retained; it may be positive, zero, or negative. The
           positive angular distances used by the scalar equation are
         </p>
         <p id="karp:eq:A-B-absolute" className="display-equation proof-setup-equation">
@@ -456,9 +493,19 @@ export function TopicIXChapter() {
           <span className="math-inline"> |rq−ps|=1</span>, hence
           <span className="math-inline"> |qx−p|=u/s</span> and
           <span className="math-inline"> |sx−r|=(1−u)/q</span>. Therefore
-          <span className="math-inline"> (A+B)/(2π)=u/s+(1−u)/(dq)&lt;1/2</span>
+          <span className="math-inline"> (A+B)/(2π)=u/s+(1−u)/(dq)&lt;1/2</span>{" "}
           because <span className="math-inline">s≥3</span> and
-          <span className="math-inline">dq≥2</span>.
+          <span className="math-inline">dq≥2</span>. Indeed, Lemma II.2.1 gives
+          <span className="math-inline"> q+s&gt;n≥3</span>; together with
+          <span className="math-inline"> q&lt;s</span>, this excludes
+          <span className="math-inline"> s≤2</span>. Also
+          <span className="math-inline"> d=⌊n/q⌋≥1</span>; if
+          <span className="math-inline"> q≥2</span> then
+          <span className="math-inline"> dq≥2</span>, while if
+          <span className="math-inline"> q=1</span> then
+          <span className="math-inline"> dq=n≥3</span>. Since
+          <span className="math-inline"> u∈(0,1)</span>, the displayed convex
+          combination is strictly below one half.
         </p>
         <p id="karp:eq:A+B-range" className="display-equation proof-setup-equation">
           <span className="math-inline">0&lt;A,B,A+B&lt;π.</span>{" "}
@@ -477,22 +524,22 @@ export function TopicIXChapter() {
       </SetupBlock>
 
       <ProofResultGroup
-        number="IX.A"
-        title="Farey adjacency and the Ito equation"
+        number="IX.B"
+        title="The Ito polynomial family"
         introduction={
           <p>
-            Determinant-one arithmetic identifies adjacent fractions. The Ito
-            polynomial then names the algebraic family. The next result
-            identifies the unique modulus at each prescribed argument.
+            With the Farey data and angle bounds now established, the Ito
+            equation defines the relevant family of polynomials. The equation
+            alone does not select the continuous root used below.
           </p>
         }
-        results={topicIXResults.slice(0, 2)}
+        results={topicIXResults.slice(1, 2)}
       />
 
       <SetupBlock eyebrow="The radial equation" title="A unique modulus at the prescribed argument">
         <p>
           For the fixed Farey interval and prescribed argument, define
-          <span className="math-inline"> Fₓ(ρ)=ρˢ⁄ᵈ sin A+ρᑫ sin B−sin(A+B)</span>
+          <span className="math-inline"> Fₓ(ρ)=ρˢ⁄ᵈ sin A+ρᑫ sin B−sin(A+B)</span>{" "}
           on <span className="math-inline">[0,1]</span>. Both exponents and both
           coefficients of the powers of ρ are positive, so <var>F</var>ₓ is
           strictly increasing. Proposition II.2.3 proves
@@ -501,29 +548,30 @@ export function TopicIXChapter() {
         </p>
         <p>
           The associated point is <span className="math-inline">λ=ρ exp(2πix)</span>.
-          The proof constructs complementary coefficients α and β, fixes one
-          fractional power by an explicit exponential, and derives the
-          reciprocal-coordinate identity. No phrase such as “take the principal root” is
-          left implicit.
+          The proof constructs positive coefficients α and β with α+β=1,
+          defines the required fractional power by an explicit exponential,
+          and derives the displayed vector identity. No phrase such as “take
+          the principal root” is left implicit.
         </p>
         <StochasticFareyFigure kind="rooted-chord" />
       </SetupBlock>
 
       <ProofResultGroup
-        number="IX.B"
+        number="IX.C"
         title="Unique modulus, endpoint limits, and the candidate curve"
         introduction={
           <p>
             The next statements prove existence, uniqueness, algebraic
-            membership, endpoint continuity, and the exact exceptional real
-            segment before the candidate curve receives its formal definition.
+            satisfaction of the Ito equation, endpoint continuity, and the
+            exact segment [−1,−1/2] in the case <var>n</var>=3 before the set
+            Γ<sub>f,g</sub><sup>(n)</sup> receives its formal definition.
           </p>
         }
         results={topicIXResults.slice(2, 5)}
       />
 
       <ProofResultGroup
-        number="IX.C"
+        number="IX.D"
         title="Certified numerical evaluation"
         introduction={
           <p>
