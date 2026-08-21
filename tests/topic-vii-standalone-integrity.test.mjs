@@ -46,7 +46,7 @@ test("the individual Topic VII standalone preserves the current publication cont
     assert.match(html, /data-proof-route="topic-vii"/);
     assert.match(
       visibleText,
-      /Consecutive Farey fractions and the finite product identity for N≥4/i,
+      /Consecutive Farey fractions and the finite product equation for N≥4/i,
     );
     assert.match(visibleText, /First published 20 August 2026\s*\./);
     assert.match(visibleText, /Last revised 21 August 2026\s*\./);

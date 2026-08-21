@@ -457,7 +457,7 @@ const theorem13: ProofResultData = {
     ),
   ],
   intuition:
-    "Every required component is now available. The proof separates the identity case, the one-representative-per-orbit case, and the larger-interval case, and invokes only the precise conclusion assigned to each earlier topic.",
+    "Every required component is now available. The proof separates the identity-contact-permutation case, the one-representative-per-orbit case, and the larger-interval case, and invokes only the precise conclusion assigned to each earlier topic.",
   proofSteps: [
     step(
       "Choose the fixed coordinate and contact data",
@@ -481,7 +481,7 @@ const theorem13: ProofResultData = {
     ),
   ],
   takeaway:
-    "The polygonal part of the argument is complete. Topic VII translates these three first-return cases into consecutive Farey fractions, a finite product identity, and an equality for chosen real arguments; stochastic matrices enter in Topic VIII.",
+    "The polygonal part of the argument is complete. Topic VII translates these three first-return cases into consecutive Farey fractions, a finite product equation, and an equality for chosen real arguments; stochastic matrices enter in Topic VIII.",
   sourceIds: theorem13Item.sourceIds,
   sourceRelation:
     "The exact assembly and proof are given here. The displayed sources document earlier boundary-contact and return constructions but do not establish a statement-level priority claim for this theorem.",

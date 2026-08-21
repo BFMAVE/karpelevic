@@ -42,7 +42,7 @@ test("individual Topics VIII and IX use live published links without sibling-fil
     assert.match(html, /data-proof-route="topic-viii"/);
     assert.match(
       html,
-      /Consecutive Farey fractions and the finite product identity for N≥4/,
+      /Consecutive Farey fractions and the finite product equation for N≥4/,
     );
     assert.match(
       html,

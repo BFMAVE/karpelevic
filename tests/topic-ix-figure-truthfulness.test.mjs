@@ -167,7 +167,7 @@ test("Plate IX.2 uses the exact obtuse n=3 example with matching, non-overlappin
   const text = visibleText(figure);
 
   assertAccessibleLayouts(figure, "rooted-chord");
-  assert.match(figure, />Exact obtuse vector-identity diagram<\/span>/);
+  assert.match(figure, />Exact obtuse vector-equation diagram<\/span>/);
   assert.match(text, /An obtuse n = 3 instance of 1 = βz\^q \+ αw/);
   assert.match(text, /x=11\/24, so A=π\/6 and B=3π\/4/);
   assert.match(text, /βz\^q has argument −A=−π\/6 and αw has argument B=3π\/4/);
@@ -232,6 +232,8 @@ test("Plate IX.3 is the exact vertical-plus-horizontal exceptional curve", async
   assert.match(text, /Plate IX\.3\./);
   assert.match(text, /vertical segment \{−1\/2\+iy: 0≤y≤√3\/2\}/);
   assert.match(text, /−1\/2 \+ \(√3\/2\)i/);
+  assert.match(figure, /data-complex-point="exp-plus-2pi-i-over-3"/);
+  assert.doesNotMatch(figure, /data-complex-point="exp-2pi-i-over-3"/);
   assert.doesNotMatch(figure, /e²πⁱ⁄³/);
   assert.doesNotMatch(text, /curved interpolation|nonreal graph tends/i);
 

@@ -65,8 +65,8 @@ export const topicVIISetup: AdvancedProofSetup = {
       β<sub>i</sub>≥0, and α<sub>i</sub>+β<sub>i</sub>=1.
       Thus 0&lt;β<sub>i</sub>&lt;1 (equivalently α<sub>i</sub>,β<sub>i</sub>&gt;0)
       is a relative-interior contact, while β<sub>i</sub>=0 is the retained
-      endpoint x<sub>i</sub>. In the identity
-      case this reads λx<sub>i</sub>=β<sub>i</sub>x<sub>i−1</sub>+
+      endpoint x<sub>i</sub>. When the contact permutation is the identity,
+      this reads λx<sub>i</sub>=β<sub>i</sub>x<sub>i−1</sub>+
       α<sub>i</sub>x<sub>i</sub>; after a q-step return it becomes the factor
       relation (λ<sup>q</sup>−β<sub>j</sub>)x<sub>j−1</sub>=
       α<sub>j</sub>x<sub>j</sub>. The lifted vertex arguments
@@ -79,7 +79,7 @@ export const topicVIISetup: AdvancedProofSetup = {
       fractions in [0,1] with denominator at most N. A <dfn>Farey interval</dfn>
       is the open interval between two consecutive terms of F<sub>N</sub>.
       Topic VII translates each of the three return cases above into one such
-      interval, a finite product identity with parameters β<sub>j</sub>, and an
+      interval, a finite product equation with parameters β<sub>j</sub>, and an
       equality for chosen real arguments of its factors.
     </p>
   `,
@@ -122,7 +122,7 @@ const guides: readonly ReaderResultGuide[] = [
     proofSteps: [
       step(
         "Determinant one excludes a small denominator",
-        "For an intermediate h/k, define positive integers m=ck-dh and ℓ=bh-ak. The determinant-one identity gives (k,h)=m(b,a)+ℓ(d,c), hence k≥b+d.",
+        "For an intermediate h/k, define positive integers m=ck-dh and ℓ=bh-ak. The determinant-one relation gives (k,h)=m(b,a)+ℓ(d,c), hence k≥b+d.",
       ),
       step(
         "Use the order bound",
@@ -192,7 +192,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       vocabulary(
         "Integer exponent e",
-        "After conjugating and reversing the final equation, e=-h. It may be negative in the Laurent identity.",
+        "After conjugating and reversing the final equation, e=-h. It may be negative in the Laurent equation.",
       ),
     ],
     intuition:
@@ -208,7 +208,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Multiply the finite recurrence",
-        "Multiply all forward recurrence equations, cancel the nonzero endpoint vertices with the final equation, and obtain the Laurent identity.",
+        "Multiply all forward recurrence equations, cancel the nonzero endpoint vertices with the final equation, and obtain the Laurent equation.",
       ),
       step(
         "Clear the negative exponent",
@@ -224,7 +224,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "After conjugation and reversal, the same finite recurrence gives the product identity and the exact equality for chosen real arguments for the conjugate eigenvalue.",
+      "After conjugation and reversal, the same finite recurrence gives the product equation and the exact equality for chosen real arguments for the conjugate eigenvalue.",
   },
   {
     itemNumber: 56,
@@ -256,7 +256,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "In the identity case, conjugation and reversal give the first Farey interval and the finite product identity.",
+      "In the identity-permutation case, conjugation and reversal give the first Farey interval and the finite product equation.",
   },
   {
     itemNumber: 57,
@@ -272,11 +272,11 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     intuition:
-      "The identity Δ=1 turns every base-to-successor recurrence into one factor. Inserting the endpoint cases β=0 makes the finite product telescope, while the determinant-one identity qκ-pN=1 identifies the two Farey endpoints.",
+      "The conclusion Δ=1 turns every base-to-successor recurrence into one factor. Inserting the endpoint cases β=0 makes the finite product telescope, while the determinant relation qκ-pN=1 identifies the two Farey endpoints.",
     proofSteps: [
       step(
         "Force one orbit",
-        "Because N≥4, Theorem 7.11 applies and gives Δ=1. The record identity gcd(Δ,φ)=δ therefore gives δ=1.",
+        "Because N≥4, Theorem 7.11 applies and gives Δ=1. The equality gcd(Δ,φ)=δ therefore gives δ=1.",
       ),
       step(
         "Treat the full interval",
@@ -292,7 +292,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
       step(
         "Multiply and cancel",
-        "Multiplying the finite recurrence cancels the nonzero vertices. The final equation gives the Laurent identity, and N=qd+e gives the polynomial identity.",
+        "Multiplying the finite recurrence cancels the nonzero vertices. The final equation gives the Laurent equation, and N=qd+e gives the polynomial equation.",
       ),
       step(
         "Identify the consecutive Farey fractions",
@@ -304,7 +304,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "For N≥4, this case gives consecutive Farey fractions, the finite product identity, and the equality for the chosen real arguments.",
+      "For N≥4, this case gives consecutive Farey fractions, the finite product equation, and the equality for the chosen real arguments.",
   },
   {
     itemNumber: 58,
@@ -352,7 +352,7 @@ const guides: readonly ReaderResultGuide[] = [
       ),
     ],
     takeaway:
-      "This case also gives consecutive Farey fractions and the same finite product identity, both when conjugation makes e negative and when β=0 factors complete the recurrence.",
+      "This case also gives consecutive Farey fractions and the same finite product equation, both when conjugation makes e negative and when β=0 factors complete the recurrence.",
   },
   {
     itemNumber: 59,
@@ -369,7 +369,7 @@ const guides: readonly ReaderResultGuide[] = [
     proofSteps: [
       step(
         "Bound the left angle",
-        "From q+s>N≥4 and q≤s obtain s≥3. Determinant one and the Farey inequalities give 0<A<2π/s<π.",
+        "From q+s>N≥4 and q<s obtain s≥3. Determinant one and the Farey inequalities give 0<A<2π/s<π.",
       ),
       step(
         "Keep each factor in the open upper half-plane",
@@ -426,7 +426,7 @@ const theorem14ProofSteps: readonly GuidedProofStep[] = [
   ),
   step(
     "More than one relative-interior contact in some orbit",
-    "In the standing N≥4 range, choose μ=λ and use Proposition 8.5 together with the first-return identity Δ=1; the right endpoint denominator is N.",
+    "In the standing N≥4 range, choose μ=λ and use Proposition 8.5 together with the first-return conclusion Δ=1; the right endpoint denominator is N.",
   ),
   step(
     "One relative-interior contact per orbit, δ≥2",
@@ -438,17 +438,17 @@ const theorem14ProofSteps: readonly GuidedProofStep[] = [
   ),
   step(
     "Use one choice of real arguments",
-    "In every case the same selected μ satisfies the polynomial identity, Laurent identity, and equality e arg₊(μ)+Σuⱼ=2π(r-dp). Lemma 8.7 supplies 0<A<M<π and uⱼ∈[A,M).",
+    "In every case the same selected μ satisfies the polynomial equation, its Laurent form, and the equality e arg₊(μ)+Σuⱼ=2π(r-dp). Lemma 8.7 supplies 0<A<M<π and uⱼ∈[A,M).",
   ),
 ];
 
 const theorem14: ProofResultData = {
   id: "part-i-item-4",
-  label: "Theorem 1.4",
+  label: "Manuscript Theorem 1.4",
   kind: "Theorem",
-  title: "Consecutive Farey fractions and a finite product identity",
+  title: "Consecutive Farey fractions and a finite product equation",
   purpose:
-    "States the common conclusion of the three return cases before Lemmas 8.4–8.7 prove it: one selected eigenvalue, two consecutive Farey fractions, a finite product identity, and an equality for chosen real arguments.",
+    "States the common conclusion of the three return cases before Lemmas 8.4–8.7 prove it: one selected eigenvalue, two consecutive Farey fractions, a finite product equation, and an equality for chosen real arguments.",
   manuscriptHtml: theorem14Parts.statementHtml,
   vocabulary: [
     vocabulary(
@@ -514,7 +514,7 @@ const theorem14ProofAssembly = (
     <p className="proof-item-takeaway proof-chapter-takeaway">
       <span>Conclusion</span>
       The polygon geometry yields consecutive Farey fractions, a finite
-      product identity, and an exact equality for chosen real arguments,
+      product equation, and an exact equality for chosen real arguments,
       without changing orientation after the eigenvalue has been selected.
     </p>
   </section>
@@ -535,12 +535,12 @@ export const topicVIIGroups: readonly AdvancedProofGroup[] = [
   },
   {
     number: "II",
-    title: "Derive the finite product identity in every return case",
+    title: "Derive the finite product equation in every return case",
     introduction: (
       <p>
-        The identity case, the case with more than one relative-interior
+        The identity-permutation case, the case with more than one relative-interior
         contact in some orbit, and the one-contact-per-orbit case each produce
-        the same finite product identity, with possibly different parameters
+        the same finite product equation, with possibly different parameters
         β<sub>j</sub>. The selected orientation and integer exponent are
         decided separately and explicitly. The
         target theorem is stated first so its numbered equations are available
@@ -555,7 +555,7 @@ export const topicVIIGroups: readonly AdvancedProofGroup[] = [
           <p>
             Proposition 8.5 invokes Theorem 7.11, which proves that the
             first-return step is Δ=1, and Theorem 1.4 assembles the resulting
-            finite recurrence and product identities. Both are used here only
+            finite recurrence relations and product equations. Both are used here only
             for <strong>N≥4</strong>. The finite Farey lemmas above do
             not require that restriction. The stochastic regions of orders
             one, two, and three are established by a separate direct proof in
@@ -586,7 +586,7 @@ export const topicVIIImported: readonly ProofDependency[] = [
     label: "Topic VI: completed first-return cases",
     href: sitePath("/proof/topic-vi/#thm:critical-polygon-normal-form"),
     explanation:
-      "For N≥4, the identity case, the one-contact-per-orbit case, and the case with more than one contact in some orbit are exhaustive; in the last case the first return is the adjacent successor.",
+      "For N≥4, the identity-contact-permutation case, the one-contact-per-orbit case, and the case with more than one contact in some orbit are exhaustive; in the last case the first return is the adjacent successor.",
   },
   {
     label: "Topic V: determinant-one first-return arithmetic",

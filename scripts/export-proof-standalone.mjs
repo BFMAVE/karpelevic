@@ -463,7 +463,7 @@ function verifyStandaloneHtml(html) {
           : proofRoute === "/proof/topic-vii"
                 ? [
                     "Topic VII",
-                    "Consecutive Farey fractions and the finite product identity",
+                    "Consecutive Farey fractions and the finite product equation",
                     "Consecutive Farey fractions and reflection",
                     "data-proof-route=\"topic-vii\"",
                     "Forthcoming",
@@ -694,7 +694,7 @@ function verifyStandaloneHtml(html) {
 
     const visibleText = visibleTextFromHtml(html).replace(/\s+/g, " ").trim();
     if (
-      !/Consecutive Farey fractions and the finite product identity for N≥4/i.test(
+      !/Consecutive Farey fractions and the finite product equation for N≥4/i.test(
         visibleText,
       )
     ) {

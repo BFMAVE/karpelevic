@@ -152,7 +152,15 @@ test("reader-visible proof terminology uses the coordinated conventional vocabul
   );
   assert.match(
     rendered.get("/proof/topic-vii") ?? "",
-    /Consecutive Farey fractions and the finite product identity for N≥4/i,
+    /Consecutive Farey fractions and the finite product equation for N≥4/i,
+  );
+  assert.match(
+    rendered.get("/proof/topic-vii") ?? "",
+    /Manuscript pages 4–5 and 58–67/i,
+  );
+  assert.match(
+    rendered.get("/proof/topic-viii") ?? "",
+    /Manuscript pages 83–86/i,
   );
   assert.doesNotMatch(
     rendered.get("/proof/topic-vii") ?? "",
@@ -250,8 +258,28 @@ test("Topics VII and VIII form a defined-before-use stochastic handoff", async (
   );
 
   assert.match(visibleText, /Extreme-point set Ext\(P\)/i);
+  assert.match(
+    visibleText,
+    /points that do not lie in the open segment joining two distinct points of P/i,
+  );
+  assert.match(
+    visibleText,
+    /When P is a polytope, these extreme points are precisely its vertices/i,
+  );
+  const correctedUnitIntervalPower =
+    '<msup><mrow><mo stretchy="false" form="prefix">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">]</mo></mrow><msup><mi>n</mi><mn>2</mn></msup></msup>';
+  const malformedUnitIntervalPower =
+    '<mrow><mo stretchy="false" form="prefix">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><msup><mo stretchy="false" form="postfix">]</mo><msup><mi>n</mi><mn>2</mn></msup></msup></mrow>';
+  assert.ok(
+    topicVIII.includes(correctedUnitIntervalPower),
+    "[0,1]^{n²} applies the exponent to the complete fenced interval",
+  );
+  assert.ok(
+    !topicVIII.includes(malformedUnitIntervalPower),
+    "[0,1]^{n²} does not attach the exponent to the closing fence",
+  );
   assert.match(visibleText, /Spectral radius The value spr\(\s*A\s*\)/i);
-  assert.match(visibleText, /Supporting functional at zero/i);
+  assert.match(visibleText, /Supporting linear functional for P at 0/i);
   assert.match(visibleText, /Elliptic contraction — manuscript terminology/i);
   assert.match(visibleText, /N-critical — manuscript terminology/i);
   assert.match(
@@ -294,7 +322,7 @@ test("Topics VII and VIII form a defined-before-use stochastic handoff", async (
   );
   assert.match(
     visibleText,
-    /Topic VII proved[\s\S]{0,100}finite product/i,
+    /Topic VII proved[\s\S]{0,100}finite product equation/i,
     "Topic VIII names Topic VII's result with the same literal terminology",
   );
 
@@ -374,6 +402,22 @@ test("Topics VIII and IX form a self-contained terminology and provenance handof
   assert.match(visibleText, /q<s/);
   assert.match(
     visibleText,
+    /Topic VII obtains a necessary equation[\s\S]{0,320}?coefficients β₁,…,β\s*d may differ/i,
+  );
+  assert.match(
+    visibleText,
+    /common-coefficient subfamily[\s\S]{0,260}?Ito’s polynomial equation/i,
+  );
+  assert.match(
+    visibleText,
+    /Topic X proves the sharp modulus comparison and its equality case[\s\S]{0,120}?Topic XI constructs the realizing stochastic matrices/i,
+  );
+  assert.match(
+    visibleText,
+    /For Part II self-containment[\s\S]{0,180}?standard Farey-neighbor criterion/i,
+  );
+  assert.match(
+    visibleText,
     /\(A\+B\)\/\(2π\)=u\/s\+\(1−u\)\/\(dq\)<1\/2/i,
   );
   assert.match(visibleText, /0<A,B,A\+B<π/i);
@@ -415,8 +459,9 @@ test("Topics VIII and IX form a self-contained terminology and provenance handof
   );
   assert.match(
     visibleText,
-    /tagged union[\s\S]{0,240}?only at[\s\S]{0,100}?exact compact fibre \[−1,−1\/2\]/i,
+    /two possible outputs[\s\S]{0,180}?Except when[\s\S]{0,180}?exact interval \[−1,−1\/2\]/i,
   );
+  assert.doesNotMatch(visibleText, /tagged union|exact compact fibre|total (?:Cartesian )?target/i);
   assert.doesNotMatch(visibleText, /Set-valued output is uniform/i);
 
   for (const phrase of [
@@ -448,6 +493,7 @@ test("Topics VIII and IX form a self-contained terminology and provenance handof
   );
 
   const orderedIds = [
+    "topic-ix-common-coefficient-specialization",
     "topic-ix-farey-adjacency",
     "topic-ix-ito-family",
     "topic-ix-scalar-ray",
@@ -695,7 +741,7 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   );
   assert.match(
     topicVIText,
-    /Topic VII translates these three first-return cases into consecutive Farey fractions, a finite product identity, and an equality for chosen real arguments/i,
+    /Topic VII translates these three first-return cases into consecutive Farey fractions, a finite product equation, and an equality for chosen real arguments/i,
   );
   assert.doesNotMatch(topicVIText, /contact-field|target field|strict field/i);
   assert.doesNotMatch(topicVIText, /\bseed\b|\bledger\b|\banchor\b/i);
@@ -739,7 +785,8 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.match(topicVIIText, /0\s*<\s*β\s*i\s*<\s*1.*relative-interior contact/i);
   assert.match(topicVIIText, /β\s*i\s*=\s*0 is the retained endpoint x\s*i/i);
   assert.match(topicVIIText, /lifted vertex arguments Θ\s*i are real representatives/i);
-  assert.match(topicVIIText, /finite product identity/i);
+  assert.match(topicVIIText, /finite product equation/i);
+  assert.doesNotMatch(topicVIIText, /\bproduct identity\b|Laurent identity|polynomial identity/i);
   assert.match(
     topicVIIText,
     /Corollary 6\.2 supplies q,p,d,e with qκ-pN=1 and N=qd\+e/i,

@@ -98,7 +98,7 @@ const copy: Record<NestingFigureKind, { title: string; description: string; capt
   padding: {
     title: "Padding an old product by the identity factor",
     description: "A representative row of equal beta factors, with an ellipsis for the omitted middle factors, is followed by one new factor beta equals zero.",
-    caption: "Plate XII.2. The symbols β₁, …, βₘ represent an arbitrary number m of equal old factors. Multiplying by μ⁻ᑫ(μᑫ−0)=1 promotes the old Ito identity to the next multiplicity. The added zero parameter makes the new parameter list nonconstant, so making the parameters constant produces a larger candidate radius.",
+    caption: "Plate XII.2. The symbols β₁, …, βₘ represent an arbitrary number m of equal old factors. Multiplying by μ⁻ᑫ(μᑫ−0)=1 promotes the old Ito equation to the next multiplicity. The added zero parameter makes the new parameter list nonconstant, so making the parameters constant produces a larger candidate radius.",
   },
   defect: {
     title: "A sign comparison locates the new radius",

@@ -25,6 +25,9 @@ const crossTopicAnchors: Readonly<Record<string, string>> = {
   "karp:eq:A-B-absolute": sitePath(
     "/proof/topic-ix/#karp:eq:A-B-absolute",
   ),
+  "karp:eq:endpoint-labels": sitePath(
+    "/proof/topic-ix/#karp:eq:endpoint-labels",
+  ),
   "karp:eq:scalar-radius": sitePath(
     "/proof/topic-ix/#karp:eq:scalar-radius",
   ),
@@ -122,8 +125,8 @@ function rewriteTopicIXVisibleTerminology(html: string): string {
     ["q≤s", "q<s"],
     ["scalar candidate", "candidate point"],
     ["Scalar candidate", "Candidate point"],
-    ["specified rooted identity", "displayed identity (II.2.10)"],
-    ["rooted identity", "identity (II.2.10)"],
+    ["specified rooted identity", "displayed vector equation (II.2.10)"],
+    ["rooted identity", "equation (II.2.10)"],
     ["directed error bounds", "outward-rounded interval enclosures"],
     ["directed enclosure", "outward-rounded interval enclosure"],
     [
@@ -255,14 +258,14 @@ export const topicVIIIResults: readonly ProofResultData[] = [
     purpose: "Ensures that every invariant polytope relevant to an open upper-half-plane ray is two-dimensional and contains zero in its interior.",
     manuscriptHtml: completeTopicVIIIHtml("karp:lem:origin-interior"),
     vocabulary: [
-      { term: "Supporting functional at zero", definition: <>A nonzero real-linear map ℓ such that <span className="math-inline">P⊆{"{"}x:ℓ(x)≥0{"}"}</span> and <span className="math-inline">ℓ(0)=0</span>. Its kernel is a supporting line of P at zero.</> },
+      { term: "Supporting linear functional for P at 0", definition: <>A nonzero real-linear map ℓ such that <span className="math-inline">P⊆{"{"}x:ℓ(x)≥0{"}"}</span> and <span className="math-inline">ℓ(0)=0</span>. Its kernel is a supporting line of P at zero.</> },
       { term: "Finite order or dense powers", definition: <>The powers of a unit complex number either form a finite root-of-unity orbit or are dense on the unit circle.</> },
     ],
     intuition: <>Every orbit converges to zero. If zero lay on the boundary, one supporting half-plane would have to contain every rotated direction of a nonzero point, which is impossible for a genuinely nonreal rotation.</>,
     proofSteps: [
       { title: "Iteration reaches zero", explanation: <>The points λᵏz stay in P and converge to zero, so closedness places zero in P.</> },
       { title: "A segment of positive length is impossible", explanation: <>Once zero lies in a segment of positive length, its affine hull is a real line through zero. A nonreal rotation cannot preserve that line.</> },
-      { title: "Choose a supporting functional at zero", explanation: <>If zero were on the boundary, a supporting-line theorem would give a nonzero real-linear functional ℓ with <span className="math-inline">ℓ≥0</span> on <var>P</var> and <span className="math-inline">ℓ(0)=0</span>. Since <var>P</var> has interior, choose <span className="math-inline">z∈P</span> with <span className="math-inline">ℓ(z)&gt;0</span>.</> },
+      { title: "Choose a supporting linear functional for P at 0", explanation: <>If zero were on the boundary, a supporting-line theorem would give a nonzero real-linear functional ℓ with <span className="math-inline">ℓ≥0</span> on <var>P</var> and <span className="math-inline">ℓ(0)=0</span>. Since <var>P</var> has interior, choose <span className="math-inline">z∈P</span> with <span className="math-inline">ℓ(z)&gt;0</span>.</> },
       { title: "Retain the positive radial factor", explanation: <>Invariance gives <span className="math-inline">ρᵏeⁱᵏθz∈P</span>, hence <span className="math-inline">ρᵏℓ(eⁱᵏθz)≥0</span>. Since ρᵏ&gt;0, every <span className="math-inline">ℓ(eⁱᵏθz)</span> is nonnegative.</> },
       { title: "Finite rotation contradiction", explanation: <>The orbit vectors sum to zero. Their nonnegative ℓ-values also sum to zero, forcing ℓ(z)=0, contradiction.</> },
       { title: "Infinite rotation contradiction", explanation: <>Density puts some rotated point in the open half-plane where ℓ&lt;0.</> },
@@ -278,7 +281,7 @@ export const topicVIIIResults: readonly ProofResultData[] = [
     purpose: "Restates the manuscript’s intrinsic terminology, with every symbol and both defining inequalities made literal.",
     manuscriptHtml: completeTopicVIIIHtml("karp:def:polygonal-criticality"),
     vocabulary: [
-      { term: "Extreme-point set Ext(P)", definition: <>The set of vertices of <var>P</var>, equivalently the points of <var>P</var> that are not nontrivial convex combinations of other points of <var>P</var>.</> },
+      { term: "Extreme-point set Ext(P)", definition: <>For a compact convex set <var>P</var>, Ext(<var>P</var>) consists of the points that do not lie in the open segment joining two distinct points of <var>P</var>. When <var>P</var> is a polytope, these extreme points are precisely its vertices.</> },
       { term: "Polygonal complexity", definition: <>The value ν<sub>poly</sub>(<i>A</i>) is the minimum number of vertices of a compact convex polygon <var>P</var> with nonempty interior and <span className="math-inline"><i>AP</i>⊆<i>P</i></span>; the value is ∞ if no such polygon exists.</> },
       { term: "Spectral radius", definition: <>The value spr(<i>A</i>) is the maximum modulus of the complex eigenvalues of the real-linear map <var>A</var>.</> },
       { term: "Elliptic contraction — manuscript terminology", definition: <>An elliptic real-linear map whose spectral radius lies in <span className="math-inline">(0,1)</span>. For multiplication by λ, the Euclidean operator norm and spr(<i>T</i><sub>λ</sub>) both equal |λ|.</> },
@@ -332,7 +335,7 @@ export const topicIXResults: readonly ProofResultData[] = [
     intuition: <>Determinant one means the primitive endpoint vectors form a basis of the integer lattice. The condition b+d&gt;n says even the mediant has denominator too large for Fₙ.</>,
     proofSteps: [
       { title: "Encode an intermediate fraction", explanation: <>For a/b&lt;h/k&lt;c/d, the positive integers m=ck−dh and ℓ=bh−ak are the two determinants obtained from the endpoint and intermediate primitive vectors.</> },
-      { title: "Use determinant one", explanation: <>The identity bc−ad=1 gives the exact lattice decomposition <span className="math-inline">(k,h)=m(b,a)+ℓ(d,c)</span>, hence k≥b+d.</> },
+      { title: "Use determinant one", explanation: <>The equality bc−ad=1 gives the exact lattice decomposition <span className="math-inline">(k,h)=m(b,a)+ℓ(d,c)</span>, hence k≥b+d.</> },
       { title: "Exclude denominator at most n", explanation: <>If b+d&gt;n, every intermediate reduced fraction has denominator larger than n.</> },
       { title: "Exclude determinant larger than one", explanation: <>Topic V’s lattice-parallelogram lemma supplies a nonzero integer point strictly inside the fundamental parallelogram spanned by the endpoint vectors.</> },
       { title: "Read an intermediate slope", explanation: <>That point and its complementary representative have slopes strictly between the endpoints; one has first coordinate at most (b+d)/2≤n.</> },
@@ -373,11 +376,11 @@ export const topicIXResults: readonly ProofResultData[] = [
       { title: "Recover positive coefficients summing to one", explanation: <>Equation (II.2.8) makes the two positive quantities in (II.2.9) sum to one.</> },
       { title: "Define the required fractional power", explanation: <>Set z to the inverse conjugate of λ and define ωzˢ⁄ᵈ by an explicit exponential anchored at r/s. No implicit principal-root convention is used.</> },
       { title: "Compare real and imaginary parts", explanation: <>The signed differences qx−p and sx−r have opposite signs. The sine-weighted vectors therefore have equal and opposite imaginary parts and real parts summing to one.</> },
-      { title: "Recover the Ito equation", explanation: <>Raise identity (II.2.10) to the <var>d</var>-th power, use ωᵈ=1, clear inverse powers, and conjugate. This proves that the constructed λ satisfies the Ito equation.</> },
+      { title: "Recover the Ito equation", explanation: <>Raise equation (II.2.10) to the <var>d</var>-th power, use ωᵈ=1, clear inverse powers, and conjugate. This proves that the constructed λ satisfies the Ito equation.</> },
     ],
-    takeaway: <>At every argument between two consecutive Farey fractions there is one explicitly determined modulus, and the resulting point satisfies identity (II.2.10) and the Ito equation.</>,
+    takeaway: <>At every argument between two consecutive Farey fractions there is one explicitly determined modulus, and the resulting point satisfies equation (II.2.10) and the Ito equation.</>,
     sourceIds: ["ito-1997", "kirkland-laffey-smigoc-2020"],
-    sourceRelation: <>Ito supplies the polynomial family. Kirkland–Laffey–Šmigoc (2020), Theorem 1.2 and Lemma 4.4, characterize the boundary point at each prescribed argument through a unique positive radial solution. The proof here derives equation (II.2.8), the coefficients in (II.2.9), and the explicitly defined identity (II.2.10).</>,
+    sourceRelation: <>Ito supplies the polynomial family. Kirkland–Laffey–Šmigoc (2020), Theorem 1.2 and Lemma 4.4, characterize the boundary point at each prescribed argument through a unique positive radial solution. The proof here derives equation (II.2.8), the coefficients in (II.2.9), and the explicitly defined vector equation (II.2.10).</>,
   },
   {
     id: "topic-ix-endpoints",
@@ -390,11 +393,11 @@ export const topicIXResults: readonly ProofResultData[] = [
       { term: "Subsequential limit", definition: <>A limit obtained after selecting a convergent subsequence. If every convergent subsequence has the same limit, the original bounded sequence converges to it.</> },
       { term: "Implicit-function theorem", definition: <>A calculus theorem that gives a continuously differentiable local solution when the defining function is continuously differentiable and its derivative in the solved-for variable does not vanish. A direct sequential continuity proof is also provided here.</> },
     ],
-    intuition: <>At an ordinary endpoint one sine term vanishes and the other forces ρ=1. Only when the surviving sine also vanishes must one retain first-order terms; that happens exactly when <span className="math-inline">n=3</span> and <span className="math-inline">[f,g]=[1/3,1/2]</span>.</>,
+    intuition: <>At every endpoint except <span className="math-inline">n=3, x=1/2</span>, one sine term vanishes and the other forces ρ=1. At that one endpoint the surviving sine also vanishes, so the proof retains first-order terms.</>,
     figure: <StochasticFareyFigure kind="terminal-three" />,
     proofSteps: [
       { title: "Continuity inside the interval", explanation: <>For xₖ→x, every subsequential modulus limit solves the limiting real equation. Uniqueness from Proposition II.2.3 forces that limit to be ρ(x).</> },
-      { title: "Smoothness inside the interval", explanation: <>The defining function is C<sup>∞</sup> in <span className="math-inline">(x,ρ)</span> and its partial derivative with respect to ρ is positive. The implicit-function theorem therefore gives C<sup>∞</sup> functions ρ, α, β, and γ on every open Farey interval.</> },
+      { title: "Smoothness inside the interval", explanation: <>The defining function is C<sup>∞</sup> in <span className="math-inline">(x,ρ)</span> and its partial derivative with respect to ρ is positive. The implicit-function theorem therefore makes ρ(<var>x</var>), α(<var>x</var>), β(<var>x</var>), and the map <span className="math-inline">x↦ρ(x) exp(2πix)</span> C<sup>∞</sup> on every open Farey interval.</> },
       { title: "Approach p/q", explanation: <>Here A→0 and determinant one gives B→2π/(dq). If this angle is not π, the limiting equation is ρ*ᑫ sin B=sin B and forces ρ*=1.</> },
       { title: "Approach r/s", explanation: <>Here B→0 and A→2π/s∈(0,π), so the surviving term forces ρ*=1.</> },
       { title: "Identify the only degenerate case", explanation: <>The exceptional equality 2π/(dq)=π is dq=2. Under the Farey and order assumptions this is exactly n=3, q=2, d=1, and the interval [1/3,1/2].</> },
@@ -410,14 +413,14 @@ export const topicIXResults: readonly ProofResultData[] = [
     label: "Definition II.2.5",
     kind: "Definition",
     title: "Candidate curve on a Farey interval",
-    purpose: "Defines a compact candidate arc from the radial parametrization and its endpoint limits without assuming an α-parametrized algebraic branch.",
+    purpose: "Defines the compact candidate set from the radial parametrization and its endpoint limits, then verifies that it is an arc without assuming an α-parametrized algebraic branch.",
     manuscriptHtml: completeTopicIXHtml("karp:def:carrier"),
     vocabulary: [
       { term: "Closure", definition: <>The curve together with every limit point approached by sequences on it.</> },
-      { term: "Additional radial fibre at x=1/2", definition: <>For <span className="math-inline">n=3</span>, the set includes [−1,−1/2] on the endpoint ray. This interval belongs to the same algebraic family after setting α=−λ(λ+1); it is not the image of a continuum of different arguments.</> },
+      { term: "Additional segment when x=1/2", definition: <>For <span className="math-inline">n=3</span>, the set includes the interval [−1,−1/2] on the endpoint ray. This interval belongs to the same algebraic family after setting α=−λ(λ+1); it is not the image of a continuum of different arguments.</> },
     ],
-    intuition: <>The candidate set is defined geometrically from a radial graph and its closure. The segment [−1,−1/2] is added in the case <span className="math-inline">n=3</span> only after its polynomial identity is checked.</>,
-    takeaway: <>The set now contains both endpoint limits and, when <span className="math-inline">n=3</span>, the additional radial fibre [−1,−1/2].</>,
+    intuition: <>The candidate set is defined geometrically from a radial graph and its closure. The segment [−1,−1/2] is added in the case <span className="math-inline">n=3</span> only after its polynomial equation is checked.</>,
+    takeaway: <>The set contains both endpoint limits and, when <span className="math-inline">n=3</span>, the additional segment [−1,−1/2]. Distinct interior parameters have distinct arguments, so the completed set is an arc.</>,
     sourceIds: ["ito-1997"],
     sourceRelation: <>The polynomial family is Ito’s; this definition takes the closure of the radial graph whose endpoint behavior was just proved.</>,
   },
@@ -426,12 +429,12 @@ export const topicIXResults: readonly ProofResultData[] = [
     label: "Algorithm II.2.6",
     kind: "Algorithm",
     title: "Certified numerical evaluation",
-    purpose: "Returns either an ε-certified polar point approximation or, only when n=3 and x=1/2, the exact compact fibre [−1,−1/2].",
+    purpose: "Returns either an ε-certified polar point approximation or, only when n=3 and x=1/2, the exact interval [−1,−1/2].",
     manuscriptHtml: completeTopicIXHtml("karp:alg:boundary"),
     prelude: (
       <>
         <p>
-          <strong>Certification contract.</strong> The input representation must
+          <strong>Numerical assumptions and output guarantee.</strong> The input representation must
           support exact comparison with Farey endpoints and outward-rounded
           interval enclosures of every transcendental evaluation. For an
           interior argument, maintain a sign-certified bracket [L,U]. When
@@ -441,12 +444,12 @@ export const topicIXResults: readonly ProofResultData[] = [
           the stated derivative lower bound to certify the same ε-error.
         </p>
         <p>
-          The return type is a tagged union. At every ordinary input, the point
-          variant contains the ε-certified polar pair
-          <span className="math-inline"> (ρ̂,x)</span>. Only at
-          <span className="math-inline"> n=3, x=1/2</span> does the exceptional
-          variant return the exact compact fibre [−1,−1/2]. If Cartesian output
-          has total target τ, run the radial solve with tolerance τ/2 and bound
+          The algorithm has two possible outputs. Except when
+          <span className="math-inline"> n=3, x=1/2</span>, it returns the
+          ε-certified polar pair <span className="math-inline">(ρ̂,x)</span>.
+          At that one endpoint it returns the exact interval [−1,−1/2]. If
+          Cartesian output has requested error tolerance τ, run the radial
+          solve with tolerance τ/2 and bound
           the unit-direction error by τ/2.
         </p>
       </>
@@ -462,8 +465,8 @@ export const topicIXResults: readonly ProofResultData[] = [
       { title: "Enclose the increasing residual", explanation: <>Set <span className="math-inline">Fₓ(ρ)=ρˢ⁄ᵈ sin A+ρᑫ sin B−sin(A+B)</span>. Proposition II.2.3 gives <span className="math-inline">Fₓ(0)&lt;0&lt;Fₓ(1)</span> and strict increase. On a positive interval, the rational power may be enclosed through <span className="math-inline">ρˢ⁄ᵈ=exp((s/d)log ρ)</span>.</> },
       { title: "Stop first by bracket width", explanation: <>Maintain a sign-certified bracket [L,U]. As soon as <span className="math-inline">U−L≤2ε</span>, its midpoint <span className="math-inline">m=(L+U)/2</span> satisfies <span className="math-inline">|m−ρ(x)|≤ε</span>.</> },
       { title: "Handle an unresolved midpoint sign", explanation: <>If <span className="math-inline">Fₓ(m)=0</span> is certified, return <var>m</var> immediately; otherwise a certified strict sign selects one half. If the outward-rounded evaluation still contains zero, the existing derivative-enclosure test certifies <span className="math-inline">|m−ρ(x)|≤ε</span> without pretending to know that sign. This includes the case where the exact root is a bisection midpoint.</> },
-      { title: "Return a polar approximation", explanation: <>Return <span className="math-inline">(ρ̂,x)</span>, denoting <span className="math-inline">ρ̂ exp(2πix)</span>, with the Farey labels and numerical α̂,β̂ from equation (II.2.9). The radial error is at most ε; no coefficient-error bound is claimed. For total Cartesian target τ, allocate τ/2 to the modulus and τ/2 to the unit-direction approximation.</> },
-      { title: "Return the tagged result", explanation: <>At an ordinary input, return the point-approximation variant carrying the ε-certified polar data. Only when <span className="math-inline">n=3</span> and <span className="math-inline">x=1/2</span>, return the exceptional-fibre variant carrying the exact interval [−1,−1/2]. No convergence claim is made for Newton iteration or an uncertified floating-point input.</> },
+      { title: "Return a polar approximation", explanation: <>Return <span className="math-inline">(ρ̂,x)</span>, denoting <span className="math-inline">ρ̂ exp(2πix)</span>, with the Farey labels and numerical α̂,β̂ from equation (II.2.9). The radial error is at most ε; no coefficient-error bound is claimed. For requested Cartesian error tolerance τ, allocate τ/2 to the modulus and τ/2 to the unit-direction approximation.</> },
+      { title: "Return the appropriate output", explanation: <>For every input except <span className="math-inline">n=3</span>, <span className="math-inline">x=1/2</span>, return the ε-certified polar point approximation. At that one endpoint, return the exact interval [−1,−1/2]. No convergence claim is made for Newton iteration or an uncertified floating-point input.</> },
     ],
     takeaway: <>Topic IX has constructed the candidate. Topics X–XIII will prove the radial upper bound, construct realizing stochastic matrices, establish nesting across orders, and identify these arcs with ∂Θₙ.</>,
     sourceIds: ["ito-1997"],
@@ -480,16 +483,16 @@ export const topicXResults: readonly ProofResultData[] = [
     purpose: "For N≥4, states the complete list of data imported from the Part I geometric results and verifies that a non-inherited radial maximum satisfies its hypotheses.",
     manuscriptHtml: completeHtml("karp:thm:compression"),
     vocabulary: [
-      { term: "Selected multiplier μ", definition: <>One of λ and its complex conjugate, chosen in the complex orientation in which Part I proves the finite product identity.</> },
+      { term: "Selected multiplier μ", definition: <>One of λ and its complex conjugate, chosen in the complex orientation in which Part I proves the finite product equation.</> },
       { term: "Chosen positive argument", definition: <>The representative in (0,2π), retained as a real angle rather than reduced modulo 2π.</> },
       { term: "Parameters αⱼ and βⱼ", definition: <>Complementary parameters αⱼ=1−βⱼ that may differ from one recurrence equation to another.</> },
       { term: "Bounds for the chosen factor arguments", definition: <>Every chosen argument uⱼ of μᑫ−βⱼ lies in the real interval [A,M), so their arithmetic mean is meaningful.</> },
       { term: "Factors with βⱼ=0", definition: <>These factors complete the finite recurrence algebraically; they are not asserted to be additional relative-interior contacts.</> },
     ],
-    intuition: <>For N≥4, Topics I–VII provide a finite product identity, an exact equality for chosen real arguments, and the bounds uⱼ∈[A,M). No uniqueness of the polygon, contacts, or realizing stochastic matrix is required.</>,
+    intuition: <>For N≥4, Topics I–VII provide a finite product equation, an exact equality for chosen real arguments, and the bounds uⱼ∈[A,M). No uniqueness of the polygon, contacts, or realizing stochastic matrix is required.</>,
     proofSteps: [
       { title: "Supply criticality", explanation: <>Proposition II.4.7 turns the non-inherited radial maximum into an N-critical elliptic contraction.</> },
-      { title: "Use the Part I geometric theorem", explanation: <>The non-inherited-radial-maximum setup already fixes N≥4, so Part I Theorem 1.4 applies. As proved in Topic VII, it selects one adapted orientation and gives consecutive Farey fractions, the finite product identity, and the equality for chosen real arguments.</> },
+      { title: "Use the Part I geometric theorem", explanation: <>The non-inherited-radial-maximum setup already fixes N≥4, so Part I Theorem 1.4 applies. As proved in Topic VII, it selects one adapted orientation and gives consecutive Farey fractions, the finite product equation, and the equality for chosen real arguments.</> },
       { title: "Name the two orientations", explanation: <>The two adapted complex structures correspond exactly to multiplication by λ and by its conjugate, hence μ is either λ or λ̄.</> },
       { title: "Identify Farey adjacency", explanation: <>Lemma II.2.1 turns consecutiveness into rq−ps=1 in the selected left-to-right orientation.</> },
       { title: "Record every output used later", explanation: <>The theorem retains both product forms, the signed e, complementary parameters, the bounds uⱼ∈[A,M), and the exact equality eϑ+Σuⱼ=2π(r−dp). No realization or nesting result enters.</> },
@@ -516,7 +519,7 @@ export const topicXResults: readonly ProofResultData[] = [
       { title: "Preserve denominator data", explanation: <>The transformation changes numerators but leaves q and s unchanged; therefore d and e are unchanged.</> },
       { title: "Compute both signs", explanation: <>Substitution gives qx−(q−p)=p−qy&lt;0 and sx−(s−r)=r−sy&gt;0.</> },
       { title: "Recover the same A and B", explanation: <>Absolute values turn those expressions into exactly the selected orientation’s positive angles.</> },
-      { title: "Conjugate the constant parameter list", explanation: <>The real parameters and integer exponents are unchanged, so conjugation returns the Ito identity for the original cell.</> },
+      { title: "Conjugate the constant parameter list", explanation: <>The real parameters and integer exponents are unchanged, so conjugation returns the Ito equation for the original interval.</> },
     ],
     takeaway: <>The reflection formulas transfer every scalar inequality proved for the selected μ exactly to the original λ.</>,
     provenance: "Classical result",
@@ -545,7 +548,7 @@ export const topicXResults: readonly ProofResultData[] = [
       { title: "Exponentiate without changing signs", explanation: <>Substituting F and exponentiating yields the sine-ratio inequality. All sine factors used as denominators are positive on the chosen argument interval.</> },
       { title: "Use the trigonometric reduction", explanation: <>Equation (II.6.10), together with ρᑫ=sin M/sin(M−A), converts the sine-ratio inequality into the scalar radial inequality (II.6.7).</> },
     ],
-    takeaway: <>For every parameter list satisfying Topic VII&apos;s finite product identity, the radius is at most the unique modulus determined in Topic IX; equality requires β₁=···=βd.</>,
+    takeaway: <>For every parameter list satisfying Topic VII&apos;s finite product equation, the radius is at most the unique modulus determined in Topic IX; equality requires β₁=···=βd.</>,
     provenance: "New result",
     sourceIds: ["karpelevic-1951", "ito-1997"],
     sourceRelation: <>The varying-parameter log-sine inequality is new to the manuscript’s finite-product argument. Jensen’s inequality is the classical analytic ingredient.</>,
@@ -626,7 +629,7 @@ export const topicXIResults: readonly ProofResultData[] = [
       { title: "Read the first characteristic polynomial", explanation: <>Local subsets give (tᑫ−β)ᵈ. The global length-s cycle contributes −αᵈtᵈᑫ⁻ˢ, yielding equation (II.7.3).</> },
       { title: "Case s&gt;dq: lengthen one cross edge", explanation: <>Insert K=s−dq deterministic vertices. Local subsets leave them unused and gain tᴷ; the global cycle uses them and has length s.</> },
       { title: "Read the second characteristic polynomial", explanation: <>The contributions are tˢ⁻ᵈᑫ(tᑫ−β)ᵈ and −αᵈ, giving equation (II.7.4).</> },
-      { title: "Verify stochasticity and endpoints", explanation: <>All weights are nonnegative and every outgoing total is one. At α=0 or β=0, retain zero-weight formal edges or extend the polynomial identity from the open parameter interval.</> },
+      { title: "Verify stochasticity and endpoints", explanation: <>All weights are nonnegative and every outgoing total is one. At α=0 or β=0, retain zero-weight formal edges or extend the polynomial equation from the open parameter interval by continuity.</> },
       { title: "Pad to order n", explanation: <>Absorbing states preserve every root of the reduced Ito polynomial. Nonzero roots of the homogeneous equation remain after the cancelled zero powers are removed.</> },
     ],
     takeaway: <>Every reduced Ito polynomial has an explicit sparse row-stochastic realization of order at most n.</>,
@@ -647,7 +650,7 @@ export const topicXIResults: readonly ProofResultData[] = [
     intuition: <>Topic IX already computed complementary coefficients and proved that the candidate satisfies the Ito equation. The realization theorem now turns that algebraic fact into matrix membership.</>,
     proofSteps: [
       { title: "Take the coefficients from Topic IX", explanation: <>Equation (II.2.9) supplies α,β∈[0,1] with α+β=1.</> },
-      { title: "Use the Ito identity", explanation: <>Proposition II.2.3 proves that the candidate is a nonzero root of the Ito polynomial.</> },
+      { title: "Use the Ito equation", explanation: <>Proposition II.2.3 proves that the candidate is a nonzero root of the Ito polynomial.</> },
       { title: "Apply the sparse theorem", explanation: <>Theorem II.7.3 realizes that root in a row-stochastic matrix of order at most n and pads if needed.</> },
       { title: "Read the definition of Θₙ", explanation: <>Being such an eigenvalue is exactly membership in Θₙ.</> },
     ],

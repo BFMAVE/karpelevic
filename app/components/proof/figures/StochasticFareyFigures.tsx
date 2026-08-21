@@ -657,7 +657,7 @@ function TerminalThree({ mobile = false }: { mobile?: boolean }) {
       <g data-complex-point="minus-one-half">
         <Dot color={red} x={junctionX} y={realAxisY} />
       </g>
-      <g data-complex-point="exp-2pi-i-over-3" data-imaginary-part="sqrt(3)/2" data-real-part="-0.5">
+      <g data-complex-point="exp-plus-2pi-i-over-3" data-imaginary-part="sqrt(3)/2" data-real-part="-0.5">
         <Dot color={ink} x={junctionX} y={rootY} />
       </g>
       <text fill={ink} fontSize={labelSize} textAnchor="middle" x={minusOneX} y={realAxisY + 34}>−1</text>
@@ -833,7 +833,7 @@ const copy: Record<FigureKind, { title: string; description: string; caption: Re
       "Plate IX.1. The fractions of F₅ in [0,1/2] are shown at their exact number-line positions. The prescribed argument x=3/8 lies strictly between 1/3 and 2/5.",
   },
   "rooted-chord": {
-    status: "Exact obtuse vector-identity diagram",
+    status: "Exact obtuse vector-equation diagram",
     title: "An obtuse n = 3 instance of 1 = βz^q + αw",
     description:
       "For n equals three and x equals eleven twenty-fourths, A equals pi over six and B equals three pi over four. A red vector beta z to the q at angle minus A and a teal vector alpha w at the obtuse angle B are joined head to tail. The teal vector has negative real component. Their imaginary components cancel and their real components sum to the positive real vector one, drawn on a parallel line below so that its ink arrowhead remains distinct from the teal arrowhead.",

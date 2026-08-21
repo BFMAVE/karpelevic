@@ -49,7 +49,7 @@ export const homeContent = {
     {
       label: "Part II",
       title: "Return to stochastic eigenvalue regions",
-      text: "For orders at least four, the resulting finite product identity is combined with a sharp scalar comparison, explicit sparse realizations, and Farey refinement; the smaller orders are treated directly. Together these arguments derive the Farey–Ito boundary from invariant polygons.",
+      text: "For orders at least four, the resulting finite product equation is combined with a sharp scalar comparison, explicit sparse realizations, and Farey refinement; the smaller orders are treated directly. Together these arguments derive the Farey–Ito boundary from invariant polygons.",
     },
   ],
   noveltyLedger: [
@@ -61,7 +61,7 @@ export const homeContent = {
     {
       established: "Farey-indexed boundary formulations and matrix realizations",
       thisPaper:
-        "Organizes a different proof route through critical invariant-polygon contacts and a finite product identity.",
+        "Organizes a different proof route through critical invariant-polygon contacts and a finite product equation.",
     },
     {
       established: "Elementary convexity, compactness, and stochastic-matrix background",
@@ -70,7 +70,7 @@ export const homeContent = {
     },
   ],
   paperSummary:
-    "The paper studies the least polygonal complexity of an elliptic contraction and, for complexities at least four, derives a finite first-return description and product identity at radial criticality. Combined with a direct treatment of the smaller orders, this produces a geometric derivation of the classical Farey–Ito boundary for real row-stochastic matrices.",
+    "The paper studies the least polygonal complexity of an elliptic contraction and, for complexities at least four, derives a finite first-return description and product equation at radial criticality. Combined with a direct treatment of the smaller orders, this produces a geometric derivation of the classical Farey–Ito boundary for real row-stochastic matrices.",
   personalPrompt:
     "Author prompt — replace before publication: How did you first encounter the Karpelevič region? What feature of the problem made you keep returning to it, and when did invariant polygons become the decisive point of view?",
   manuscript: {
@@ -82,7 +82,7 @@ export const homeContent = {
     zenodoChecksum:
       "ca3be77169053635302798aa1ba204502db0a3267d2e76e4d8e763cede138f3b",
     localArxivDraftChecksum:
-      "b24734c44dc21603cb0d41f8e2fd9f9fe1481064a882735ebfe25dd3d9e57b8b",
+      "0511a0903d98846a2e07a0b77c04f5c5cbaeff6110fcc4ed58da11181b7522e9",
   },
 } as const;
 

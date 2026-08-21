@@ -76,7 +76,7 @@ const partAResults: readonly ProofResultData[] = [
       },
       {
         term: "Reciprocal chord",
-        definition: <>After taking the explicitly chosen root of the Ito identity and replacing the old radius ρ by its reciprocal <i>R</i>, the equation has the form 1=β<i>U</i>+α<i>V</i>. The two complex endpoints <i>U,V</i> determine the reciprocal-coordinate chord used in this comparison.</>,
+        definition: <>After taking the explicitly chosen root of the Ito equation and replacing the old radius ρ by its reciprocal <i>R</i>, the equation has the form 1=β<i>U</i>+α<i>V</i>. The two complex endpoints <i>U,V</i> determine the reciprocal-coordinate chord used in this comparison.</>,
       },
       {
         term: "Relative interior of a segment",
@@ -125,7 +125,7 @@ const partAResults: readonly ProofResultData[] = [
     proofSteps: [
       {
         title: "Fix the old chord and its logarithmic radial graph",
-        explanation: <><i>R</i> is the reciprocal of the old candidate radius. The rooted identity writes 1 as a strict convex combination of <i>U</i> and <i>V</i>, so 1 lies in the relative interior of their segment. Consequently ℓ(0)=0, while ℓ records the logarithms of the endpoint moduli.</>,
+        explanation: <><i>R</i> is the reciprocal of the old candidate radius. The vector equation writes 1 as a strict convex combination of <i>U</i> and <i>V</i>, so 1 lies in the relative interior of their segment. Consequently ℓ(0)=0, while ℓ records the logarithms of the endpoint moduli.</>,
         check: <>The coefficients α and β lie strictly between 0 and 1 because the prescribed argument lies in the open Farey interval.</>,
       },
       {

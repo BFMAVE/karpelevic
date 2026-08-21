@@ -150,6 +150,21 @@ html = html.replaceAll(
   '<mo accent="true" stretchy="true">∼</mo>',
 );
 
+// Pandoc 3.8.3 can attach the exponent in [0,1]^{n^2} to the closing
+// fence instead of to the complete fenced interval. Repair that one known
+// accessibility defect structurally while preserving the TeX annotation.
+const malformedUnitIntervalPower =
+  '<mrow><mo stretchy="false" form="prefix">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><msup><mo stretchy="false" form="postfix">]</mo><msup><mi>n</mi><mn>2</mn></msup></msup></mrow>';
+const correctedUnitIntervalPower =
+  '<msup><mrow><mo stretchy="false" form="prefix">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">]</mo></mrow><msup><mi>n</mi><mn>2</mn></msup></msup>';
+const malformedUnitIntervalPowerCount = html.split(malformedUnitIntervalPower).length - 1;
+if (malformedUnitIntervalPowerCount !== 1) {
+  throw new Error(
+    `Expected one malformed [0,1]^{n^2} MathML expression, found ${malformedUnitIntervalPowerCount}`,
+  );
+}
+html = html.replace(malformedUnitIntervalPower, correctedUnitIntervalPower);
+
 const statementKinds = new Set([
   "theorem",
   "proposition",

@@ -135,9 +135,9 @@ export function TopicVIIIChapter() {
       />
 
       <SetupBlock
-        eyebrow="Handoff from Topic VII"
+        eyebrow="Application of Topic VII"
         id="topic-viii-topic-vii-handoff"
-        title="From the conditional polygon theorem back to matrices"
+        title="The conditional polygon theorem applies to radial boundary points"
       >
         <p>
           <a href={sitePath("/proof/topic-vii/#part-i-item-4")}>Topic VII</a>{" "}
@@ -198,7 +198,7 @@ export function TopicVIIIChapter() {
       <SetupBlock
         eyebrow="The radial function"
         id="topic-viii-radial-function"
-        title="The maximum is now justified"
+        title="Definition of the radial function"
       >
         <p>
           Let <span className="math-inline">n≥2</span> and θ∈ℝ. The identity
@@ -249,7 +249,7 @@ export function TopicVIIIChapter() {
       />
 
       <SetupBlock
-        eyebrow="The stochastic–geometric hinge"
+        eyebrow="Invariant-polytope equivalence"
         id="topic-viii-membership-complexity-equivalence"
         title="Eigenvalue membership is a vertex-count bound"
       >
@@ -344,6 +344,12 @@ export function TopicIXChapter() {
       <ProofDependencyContract
         imported={[
           {
+            label: "Topics VII–VIII — the product equation and its criticality hypothesis",
+            href: sitePath("/proof/topic-vii/"),
+            explanation:
+              "Topic VII derives a finite product equation with possibly different coefficients in its factors, and Topic VIII verifies the criticality hypothesis for the relevant radial boundary points. Topic IX studies the common-coefficient subfamily that leads to Ito’s equation.",
+          },
+          {
             label: "Topic V — the lattice-parallelogram lemma",
             href: sitePath("/proof/topic-v/"),
             explanation:
@@ -377,6 +383,43 @@ export function TopicIXChapter() {
           </p>
         }
       />
+
+      <SetupBlock
+        eyebrow="Connection with Topics VII–VIII"
+        id="topic-ix-common-coefficient-specialization"
+        title="From the finite product equation to Ito’s polynomial family"
+      >
+        <p>
+          Topic VII obtains a necessary equation with factors
+          <span className="math-inline"> μᵠ−βⱼ</span>, where the coefficients
+          <span className="math-inline"> β₁,…,β<sub>d</sub></span> may differ and
+          <span className="math-inline"> αⱼ=1−βⱼ</span>. Topic VIII supplies the
+          criticality hypothesis that makes that theorem applicable to the
+          stochastic radial boundary problem.
+        </p>
+        <p>
+          We now study the common-coefficient subfamily
+          <span className="math-inline"> β₁=···=β<sub>d</sub>=β</span> and
+          <span className="math-inline"> α₁=···=α<sub>d</sub>=α</span>. Its product
+          equation is Ito’s polynomial equation. This specialization defines a
+          candidate point at each prescribed argument; it does not yet assert
+          that every factor in Topic VII must have the same coefficient. Topic
+          X proves the sharp modulus comparison and its equality case, while
+          Topic XI constructs the realizing stochastic matrices.
+        </p>
+        <p>
+          Topic VII writes its selected Farey interval in the chosen complex
+          orientation. Here <span className="math-inline">f&lt;g</span> always
+          records left-to-right order, whereas
+          <span className="math-inline">p/q, r/s</span> will be ordered by
+          denominator. The two roles are kept separate below.
+        </p>
+        <p>
+          For Part II self-containment, Lemma II.2.1 repeats and proves the
+          standard Farey-neighbor criterion before it is used; no new notion of
+          Farey adjacency is being introduced.
+        </p>
+      </SetupBlock>
 
       <SetupBlock
         eyebrow="Definitions and parameter range"
@@ -550,7 +593,7 @@ export function TopicIXChapter() {
           The associated point is <span className="math-inline">λ=ρ exp(2πix)</span>.
           The proof constructs positive coefficients α and β with α+β=1,
           defines the required fractional power by an explicit exponential,
-          and derives the displayed vector identity. No phrase such as “take
+          and derives the displayed vector equation. No phrase such as “take
           the principal root” is left implicit.
         </p>
         <StochasticFareyFigure kind="rooted-chord" />
@@ -594,7 +637,7 @@ export function TopicXChapter() {
       <ProofDependencyContract
         imported={[
           {
-            label: "Topic VII — consecutive Farey fractions and a finite product identity",
+            label: "Topic VII — consecutive Farey fractions and a finite product equation",
             href: sitePath("/proof/topic-vii/"),
             explanation:
               "supplies, for N≥4, the finite product with parameters βⱼ, the equality for chosen real arguments, and the bounds uⱼ∈[A,M) obtained from critical polygons.",
@@ -626,7 +669,7 @@ export function TopicXChapter() {
         ]}
         provedHere={
           <p>
-            We apply Part I&apos;s finite product identity to the stochastic
+            We apply Part I&apos;s finite product equation to the stochastic
             extremum, check both possible complex orientations, construct the
             log-sine potential, and prove that every varying parameter list has
             radius no larger than the constant-parameter case.
@@ -688,7 +731,7 @@ export function TopicXChapter() {
         </p>
         <p id="karp:eq:oriented-cell" className="display-equation proof-setup-equation">
           <span className="math-inline">
-            p/q&lt;x&lt;r/s, rq−ps=1, q≤s.
+            p/q&lt;x&lt;r/s, rq−ps=1, q&lt;s.
           </span>{" "}
           <a className="part-i-equation-number" href="#karp:eq:oriented-cell" aria-label="Equation II.6.1, permalink">
             (II.6.1)
@@ -713,7 +756,7 @@ export function TopicXChapter() {
           Therefore <span className="math-inline">F″(u)=csc²(M−u)&gt;0</span>
           throughout the selected interval: <var>F</var> is strictly convex.
           The equality eϑ+Σuⱼ=2π(r−dp) fixes the average of the factor
-          arguments, while the product identity fixes the sum of their potentials. Jensen
+          arguments, while the product equation fixes the sum of their potentials. Jensen
           then compares every varying parameter list with the constant list.
         </p>
         <p id="karp:eq:rhoq-sine" className="display-equation proof-setup-equation">

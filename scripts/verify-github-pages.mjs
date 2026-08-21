@@ -43,7 +43,7 @@ const pages = [
   ],
   [
     "proof/topic-vii/index.html",
-    "Consecutive Farey fractions and the finite product identity for N≥4",
+    "Consecutive Farey fractions and the finite product equation for N≥4",
   ],
   [
     "proof/topic-viii/index.html",

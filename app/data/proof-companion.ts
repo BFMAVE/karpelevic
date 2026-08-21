@@ -372,7 +372,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         title: "The two contact-distribution cases give compatible products",
         body:
-          "The case with more than one relative-interior contact in some orbit and the case with exactly one in each orbit have different closing exponents, but the homogeneous identity treats both without pretending that the signed exponent is always nonnegative.",
+          "The case with more than one relative-interior contact in some orbit and the case with exactly one in each orbit have different closing exponents, but the common product equation treats both without pretending that the signed exponent is always nonnegative.",
       },
       {
         title: "Choose every factor argument as a real number",
@@ -429,7 +429,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       {
         title: "Apply the critical-polygon theorem at a non-inherited radial maximum",
         body:
-          "For a radial maximum λ∈ΘN∖ΘN−1, multiplication by λ is N-critical. When N≥4, the critical-polygon theorem supplies consecutive Farey fractions, the finite product identity, and its equality for chosen real arguments. Orders at most three are handled directly. Part II then supplies the sharp scalar boundary and realization.",
+          "For a radial maximum λ∈ΘN∖ΘN−1, multiplication by λ is N-critical. When N≥4, the critical-polygon theorem supplies consecutive Farey fractions, the finite product equation, and its equality for chosen real arguments. Orders at most three are handled directly. Part II then supplies the sharp scalar boundary and realization.",
       },
     ],
     glossary: [
@@ -453,7 +453,7 @@ export const proofCompanions: Readonly<Record<string, ProofCompanion>> = {
       question:
         "Does Part I by itself prove every radial boundary formula in Ito’s formulation of the Karpelevič theorem?",
       answer:
-        "No. For N≥4, Part I supplies the critical-polygon contact and first-return structure together with consecutive Farey fractions and the finite product identity; the small orders are treated directly. Part II adds the sharp log-sine inequality, explicit stochastic realization, and nesting needed for the full boundary theorem.",
+        "No. For N≥4, Part I supplies the critical-polygon contact and first-return structure together with consecutive Farey fractions and the finite product equation; the small orders are treated directly. Part II adds the sharp log-sine inequality, explicit stochastic realization, and nesting needed for the full boundary theorem.",
     },
   },
 };

@@ -128,6 +128,11 @@ test("Plate VII.2 shows the half-open factor path and its argument range", async
   const compactText = visibleText(figure).replace(/\s+/g, "");
 
   assert.match(figure, /viewBox="0 0 320 430"/);
+  assert.match(figure, />Representative schematic — not to scale<\/span>/);
+  assert.match(
+    visibleText(figure),
+    /Plate VII\.2\. Representative schematic, not to scale\./,
+  );
   assert.equal([...figure.matchAll(/data-coordinate-axis="real"/g)].length, 2);
   assert.equal([...figure.matchAll(/data-coordinate-axis="imaginary"/g)].length, 2);
   assert.equal(

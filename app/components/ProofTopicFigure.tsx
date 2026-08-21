@@ -375,7 +375,7 @@ function FigureDrawing({ slug }: { slug: string }) {
             μˢ ∏(μᑫ − βⱼ) = μᵈᑫ ∏αⱼ
           </text>
           <text className="proof-figure-note" x="380" y="316" textAnchor="middle">
-            Farey adjacency supports the finite product identity
+            Farey adjacency supports the finite product equation
           </text>
         </>
       );

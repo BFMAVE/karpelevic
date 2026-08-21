@@ -312,7 +312,7 @@ const rawItems: readonly [
   [1, "Definition", "Radial polygonal criticality", "Defines N-criticality by requiring N to be the least invariant-polygon vertex count for T and requiring every tT with t>1 to need more than N vertices."],
   [2, "Definition", "Polygon and vertex-list convention", "Fixes the convention that the displayed cyclic list contains every extreme point exactly once and no other points."],
   [3, "Theorem", "Boundary contact, vertex replacement, and first returns", "For N≥4, collects the geometric reduction: a critical invariant polygon admits an order-preserving half-open contact bijection and a finite return description."],
-  [4, "Theorem", "Consecutive Farey fractions and a finite product identity", "For N≥4, converts the geometric return into a finite product identity associated with two consecutive Farey fractions, with explicit real arguments for every factor."],
+  [4, "Theorem", "Consecutive Farey fractions and a finite product equation", "For N≥4, converts the geometric return into a finite product equation associated with two consecutive Farey fractions, with explicit real arguments for every factor."],
   [5, "Proposition", "Adapted complex structures", "Identifies an elliptic real-linear map with multiplication by one of its two conjugate complex eigenvalues."],
   [6, "Proposition", "Real-linear invariance of polygonal complexity", "Shows that changing real coordinates does not alter the least number of vertices needed for an invariant polygon."],
   [7, "Lemma", "Real-linear covariance of faces and boundary incidences", "Carries vertices, sides, faces, boundary incidences, and their labels faithfully through an invertible real-linear change of coordinates."],
@@ -365,8 +365,8 @@ const rawItems: readonly [
   [54, "Lemma", "Reflection preserves Farey adjacency", "Reflects an interval between consecutive Farey fractions while preserving adjacency."],
   [55, "Lemma", "Conjugation and reversal of a finite recurrence", "Transfers the complete finite return calculation to the opposite orientation, including its final equation and its equality for chosen real arguments."],
   [56, "Lemma", "Identity contact permutation closes after reflection", "Shows that κ=N gives a finite backward recurrence whose conjugation and reversal yield the required arithmetic data."],
-  [57, "Proposition", "More than one relative-interior contact in some orbit", "Derives the finite product identity when some contact-permutation orbit meets the relative-interior contact set more than once."],
-  [58, "Proposition", "Exactly one relative-interior contact in each orbit", "Derives the finite product identity when the relative-interior contact set meets every contact-permutation orbit exactly once."],
+  [57, "Proposition", "More than one relative-interior contact in some orbit", "Derives the finite product equation when some contact-permutation orbit meets the relative-interior contact set more than once."],
+  [58, "Proposition", "Exactly one relative-interior contact in each orbit", "Derives the finite product equation when the relative-interior contact set meets every contact-permutation orbit exactly once."],
   [59, "Lemma", "Bounds for the arguments of the factors μ^q−βⱼ", "Proves that every chosen factor argument satisfies uⱼ∈[A,M), preparing the later scalar comparison."],
   [60, "Proposition", "Compactness, conjugation, and disk bound", "Collects the elementary closure, symmetry, and unit-disk constraints on stochastic spectra."],
   [61, "Theorem", "Invariant-polygon criterion", "Equates stochastic eigenvalue realizability with the existence of a finite invariant polygon."],
@@ -480,15 +480,15 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "farey-return",
     eyebrow: "Topic VII · 7 items",
-    title: "Consecutive Farey fractions and the finite product identity for N≥4",
+    title: "Consecutive Farey fractions and the finite product equation for N≥4",
     question:
-      "For N≥4, how do the three first-return cases yield consecutive Farey fractions and one finite product identity?",
+      "For N≥4, how do the three first-return cases yield consecutive Farey fractions and one finite product equation?",
     overview: [
       "Determinant-one adjacency identifies the relevant Farey interval, and reflection orders its denominators correctly for the selected complex orientation.",
-      "The proof then separates the case with exactly one relative-interior contact in each orbit from the case with more than one in some orbit. Both produce the same finite product identity with possibly different parameters βⱼ; the chosen real arguments of all factors satisfy uⱼ∈[A,M).",
+      "The proof then separates the case with exactly one relative-interior contact in each orbit from the case with more than one in some orbit. Both produce the same finite product equation with possibly different parameters βⱼ; the chosen real arguments of all factors satisfy uⱼ∈[A,M).",
     ],
     itemNumbers: [53, 54, 55, 56, 57, 58, 59],
-    manuscriptPages: "4 and 58–66",
+    manuscriptPages: "4–5 and 58–67",
   },
   {
     slug: "spectra",
@@ -497,11 +497,11 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "How does a radial boundary point new at order N satisfy the manuscript’s N-critical vertex-count conditions?",
     overview: [
-      "Topic VII proves Theorem 1.4's finite product identity conditionally for an N-critical planar map. This topic returns to row-stochastic matrices and proves the invariant-polytope criterion in both directions.",
+      "Topic VII proves Theorem 1.4's finite product equation conditionally for an N-critical planar map. This topic returns to row-stochastic matrices and proves the invariant-polytope criterion in both directions.",
       "Compactness, star-shapedness with respect to the origin, and the unit-circle classification make the radial function precise. For N≥4, a radial boundary point that first appears at order N has exact polygonal complexity N, while every outward scalar multiple has greater complexity, so the Topic VII theorem applies; orders at most three use the direct small-order argument.",
     ],
     itemNumbers: [3, 4, 60, 61, 62, 63, 64],
-    manuscriptPages: "82–84",
+    manuscriptPages: "83–86",
   },
   {
     slug: "candidate-boundary",
@@ -589,7 +589,7 @@ export const proofContent = {
   subtitle:
     "Critical invariant polygons and the Karpelevič theorem in Ito’s formulation",
   deck:
-    "A fourteen-topic route from intrinsic polygon geometry to the Karpelevič theorem in Ito’s formulation. Each chapter preserves the manuscript’s formal statements and complete proofs, then adds definitions, dependency maps, guided explanations, and verified mathematical plates. Topic XIV is a worked example rather than a proof dependency.",
+    "A fourteen-topic route from intrinsic polygon geometry to the Karpelevič theorem in Ito’s formulation. Each published chapter preserves the manuscript’s formal statements and complete proofs, then adds definitions, dependency maps, guided explanations, and verified mathematical plates. Topic XIV is a worked example rather than a proof dependency.",
   auditNote:
     "The four labels—Classical result, Previously known, Strengthened, and New result—classify mathematical statements, not proofs. A Karpelevič-only antecedent may be cited without assigning a category or priority claim. The classifications remain open to correction.",
   criticalPath:
