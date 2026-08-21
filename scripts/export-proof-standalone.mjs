@@ -220,15 +220,12 @@ function rewriteInternalLinks(html) {
 }
 
 function markUnavailableTopicLinks(html) {
-  const routeTopicNumber = proofTopicNumbers.get(normalizeRoutePath(proofRoute));
-  if (routeTopicNumber === undefined) return html;
-  const configuredPublicMaximum = Number(
+  const configuredMaximumValue = Number(
     process.env.PROOF_STANDALONE_TOPIC_MAX ?? String(publishedTopicMaximum),
   );
-  const availableTopicMaximum = Math.max(
-    routeTopicNumber,
-    Number.isFinite(configuredPublicMaximum) ? configuredPublicMaximum : 3,
-  );
+  const configuredPublicMaximum = Number.isFinite(configuredMaximumValue)
+    ? configuredMaximumValue
+    : publishedTopicMaximum;
   const usesExplicitBundleSet =
     bundleLinkMode && explicitlyBundledTopicNumbers.size > 0;
 
@@ -238,9 +235,14 @@ function markUnavailableTopicLinks(html) {
       const topicNumber = Number(topicNumberText);
       const isAvailable = usesExplicitBundleSet
         ? topicNumber <= configuredPublicMaximum ||
-          topicNumber === routeTopicNumber ||
+          normalizedRoutePathFromUrl(
+            rawAttributes.match(/\bhref="([^"]+)"/i)?.[1] ?? "",
+          ) === normalizeRoutePath(proofRoute) ||
           explicitlyBundledTopicNumbers.has(topicNumber)
-        : topicNumber <= availableTopicMaximum;
+        : topicNumber <= configuredPublicMaximum ||
+          normalizedRoutePathFromUrl(
+            rawAttributes.match(/\bhref="([^"]+)"/i)?.[1] ?? "",
+          ) === normalizeRoutePath(proofRoute);
       if (!Number.isFinite(topicNumber) || isAvailable) {
         return match;
       }
@@ -278,16 +280,21 @@ function topicNumberFromUrl(url) {
   return proofTopicNumbers.get(pathname);
 }
 
+function normalizedRoutePathFromUrl(url) {
+  let pathname = url;
+  if (pathname.startsWith("/karpelevic/")) {
+    pathname = pathname.slice("/karpelevic".length);
+  }
+  return normalizeRoutePath(pathname.split(/[?#]/, 1)[0]);
+}
+
 function markUnavailableProofAnchors(html) {
-  const routeTopicNumber = proofTopicNumbers.get(normalizeRoutePath(proofRoute));
-  if (routeTopicNumber === undefined) return html;
-  const configuredMaximum = Number(
+  const configuredMaximumValue = Number(
     process.env.PROOF_STANDALONE_TOPIC_MAX ?? String(publishedTopicMaximum),
   );
-  const availableMaximum = Math.max(
-    routeTopicNumber,
-    Number.isFinite(configuredMaximum) ? configuredMaximum : routeTopicNumber,
-  );
+  const configuredMaximum = Number.isFinite(configuredMaximumValue)
+    ? configuredMaximumValue
+    : publishedTopicMaximum;
   const usesExplicitBundleSet =
     bundleLinkMode && explicitlyBundledTopicNumbers.size > 0;
 
@@ -298,9 +305,11 @@ function markUnavailableProofAnchors(html) {
       const isAvailable = usesExplicitBundleSet
         ? topicNumber !== undefined &&
           (topicNumber <= configuredMaximum ||
-            topicNumber === routeTopicNumber ||
+            normalizedRoutePathFromUrl(href) === normalizeRoutePath(proofRoute) ||
             explicitlyBundledTopicNumbers.has(topicNumber))
-        : topicNumber !== undefined && topicNumber <= availableMaximum;
+        : topicNumber !== undefined &&
+          (topicNumber <= configuredMaximum ||
+            normalizedRoutePathFromUrl(href) === normalizeRoutePath(proofRoute));
       if (topicNumber === undefined || isAvailable) {
         return match;
       }
@@ -479,6 +488,38 @@ function verifyStandaloneHtml(html) {
                       'data-proof-route="topic-ix"',
                       "Forthcoming",
                     ]
+                  : proofRoute === "/proof/topic-x"
+                    ? [
+                        "Topic X",
+                        "The Sharp Radial Upper Bound",
+                        "The sharp inequality for varying parameters",
+                        'data-proof-route="topic-x"',
+                        "Forthcoming",
+                      ]
+                    : proofRoute === "/proof/topic-xi"
+                      ? [
+                          "Topic XI",
+                          "Constructing Stochastic Matrices and Proving Attainment",
+                          "Sparse stochastic realization and attainment",
+                          'data-proof-route="topic-xi"',
+                          "Forthcoming",
+                        ]
+                      : proofRoute === "/proof/topic-xii/a"
+                        ? [
+                            "Topic XII-A",
+                            "Local Farey Refinement",
+                            "Every nontrivial refinement moves the candidate outward",
+                            'data-proof-route="topic-xii-a"',
+                            "Forthcoming",
+                          ]
+                        : proofRoute === "/proof/topic-xii/b"
+                          ? [
+                              "Topic XII-B",
+                              "Exhaustive Candidate Nesting",
+                              "From two local signs to one global nesting theorem",
+                              'data-proof-route="topic-xii-b"',
+                              "Forthcoming",
+                            ]
         : [
             "How the Proof Works",
             "Definition 1.1",
