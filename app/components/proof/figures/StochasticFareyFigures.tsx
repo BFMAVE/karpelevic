@@ -706,34 +706,136 @@ function TerminalThree({ mobile = false }: { mobile?: boolean }) {
   );
 }
 
-function Reflection({ marker }: { marker: string }) {
+function Reflection({ marker, mobile = false }: { marker: string; mobile?: boolean }) {
+  const labelSize = mobile ? 16 : 15;
+  const smallSize = mobile ? 16 : 14;
+  const topY = mobile ? 78 : 82;
+  const bottomY = mobile ? 220 : 232;
+  const leftX = mobile ? 42 : 72;
+  const rightX = mobile ? 278 : 322;
+  const sourceLeft = { x: mobile ? 78 : 118, y: topY };
+  const sourceRight = { x: mobile ? 242 : 278, y: topY };
+  const targetLeft = { x: mobile ? 78 : 118, y: bottomY };
+  const targetRight = { x: mobile ? 242 : 278, y: bottomY };
+  const axisY = mobile ? 395 : 232;
+  const origin = mobile ? { x: 120, y: axisY } : { x: 492, y: axisY };
+  const lambda = mobile ? { x: 218, y: 335 } : { x: 590, y: 162 };
+  const mu = mobile ? { x: 218, y: 455 } : { x: 590, y: 302 };
+  const axisStart = mobile ? 42 : 390;
+  const axisEnd = mobile ? 292 : 650;
+
   return (
     <>
-      <line x1="80" y1="95" x2="600" y2="95" stroke={ink} strokeWidth="2" />
-      <line x1="340" y1="65" x2="340" y2="125" stroke={copper} strokeWidth="2" strokeDasharray="5 5" />
-      <path d="M185 75 Q340 20 495 75" fill="none" stroke={red} strokeWidth="2.8" markerEnd={`url(#${marker})`} />
-      <text x="168" y="145" fill={ink}>p/q</text><text x="475" y="145" fill={ink}>r/s</text>
-      <text x="276" y="40" fill={red}>t ↦ 1−t</text>
-      <line x1="80" y1="285" x2="600" y2="285" stroke={ink} strokeWidth="1.6" />
-      <Dot x={405} y={205} color={red} /><Dot x={405} y={365} color={teal} />
-      <line x1="405" y1="205" x2="405" y2="365" stroke={copper} strokeWidth="2.4" strokeDasharray="7 6" />
-      <text x="420" y="205" fill={red}>λ</text><text x="420" y="365" fill={teal}>λ̄ = μ</text>
-      <text x="118" y="345" fill={ink}>denominators and modulus stay fixed; orientation reverses</text>
+      <text fill={ink} fontSize={labelSize} textAnchor="middle" x={(leftX + rightX) / 2} y={mobile ? 30 : 30}>
+        p/q &lt; y &lt; r/s
+      </text>
+      <line data-farey-row="source" x1={leftX} y1={topY} x2={rightX} y2={topY} stroke={ink} strokeWidth="2" />
+      <g data-denominator="q" data-farey-endpoint="p/q" data-row="source">
+        <Dot x={sourceLeft.x} y={sourceLeft.y} color={red} />
+        <text fill={ink} fontSize={labelSize} textAnchor="middle" x={sourceLeft.x} y={topY - 16}>p/q</text>
+      </g>
+      <g data-denominator="s" data-farey-endpoint="r/s" data-row="source">
+        <Dot x={sourceRight.x} y={sourceRight.y} color={red} />
+        <text fill={ink} fontSize={labelSize} textAnchor="middle" x={sourceRight.x} y={topY - 16}>r/s</text>
+      </g>
+      <text fill={copper} fontSize={smallSize} textAnchor="middle" x={(leftX + rightX) / 2} y={topY + 25}>t ↦ 1−t</text>
+      <path
+        d={`M${sourceLeft.x} ${sourceLeft.y + 8} L${targetRight.x} ${targetRight.y - 8}`}
+        data-reflection-map="p/q-to-(q-p)/q"
+        data-source-denominator="q"
+        data-target-denominator="q"
+        fill="none"
+        markerEnd={`url(#${marker})`}
+        stroke={red}
+        strokeWidth="2.5"
+      />
+      <path
+        d={`M${sourceRight.x} ${sourceRight.y + 8} L${targetLeft.x} ${targetLeft.y - 8}`}
+        data-reflection-map="r/s-to-(s-r)/s"
+        data-source-denominator="s"
+        data-target-denominator="s"
+        fill="none"
+        markerEnd={`url(#${marker})`}
+        stroke={red}
+        strokeWidth="2.5"
+      />
+      <line data-farey-row="reflected" x1={leftX} y1={bottomY} x2={rightX} y2={bottomY} stroke={ink} strokeWidth="2" />
+      <g data-denominator="s" data-farey-endpoint="(s-r)/s" data-row="reflected">
+        <Dot x={targetLeft.x} y={targetLeft.y} color={teal} />
+        <text fill={ink} fontSize={labelSize} textAnchor="middle" x={targetLeft.x} y={bottomY + 27}>(s−r)/s</text>
+      </g>
+      <g data-denominator="q" data-farey-endpoint="(q-p)/q" data-row="reflected">
+        <Dot x={targetRight.x} y={targetRight.y} color={teal} />
+        <text fill={ink} fontSize={labelSize} textAnchor="middle" x={targetRight.x} y={bottomY + 27}>(q−p)/q</text>
+      </g>
+      <text fill={ink} fontSize={smallSize} textAnchor="middle" x={(leftX + rightX) / 2} y={bottomY + (mobile ? 55 : 54)}>
+        (s−r)/s &lt; x &lt; (q−p)/q
+      </text>
+
+      <line data-complex-axis="real" x1={axisStart} y1={axisY} x2={axisEnd} y2={axisY} stroke={ink} strokeWidth="2" />
+      <line x1={origin.x} y1={axisY - (mobile ? 78 : 112)} x2={origin.x} y2={axisY + (mobile ? 78 : 112)} stroke={copper} strokeDasharray="5 5" strokeWidth="1.6" />
+      <text fill={ink} fontSize={smallSize} x={axisEnd - 20} y={axisY - 9}>Re</text>
+      <text fill={ink} fontSize={smallSize} x={origin.x + 8} y={axisY - (mobile ? 66 : 98)}>Im</text>
+      <circle cx={origin.x} cy={origin.y} data-complex-origin="true" fill={paper} r="5" stroke={ink} strokeWidth="2" />
+      <line data-conjugate-ray="lambda" x1={origin.x} y1={origin.y} x2={lambda.x} y2={lambda.y} stroke={red} strokeWidth="2.5" markerEnd={`url(#${marker})`} />
+      <line data-conjugate-ray="mu" x1={origin.x} y1={origin.y} x2={mu.x} y2={mu.y} stroke={teal} strokeWidth="2.5" markerEnd={`url(#${marker}-teal)`} />
+      <circle cx={lambda.x} cy={lambda.y} data-complex-point="lambda" data-modulus="rho" fill={red} r="6" />
+      <circle cx={mu.x} cy={mu.y} data-complex-point="mu" data-modulus="rho" fill={teal} r="6" />
+      <text fill={red} fontSize={labelSize} x={lambda.x + 10} y={lambda.y - 8}>λ</text>
+      <text fill={teal} fontSize={labelSize} x={mu.x + 10} y={mu.y + 18}>μ=λ̄</text>
+      <text fill={ink} fontSize={smallSize} textAnchor="middle" x={(axisStart + axisEnd) / 2} y={mobile ? 492 : 370}>|μ|=|λ|</text>
     </>
   );
 }
 
-function Jensen() {
-  const curve = "M90 310 C210 300 265 210 330 120 C400 28 500 40 590 65";
+function Jensen({ mobile = false }: { mobile?: boolean }) {
+  const start = mobile ? { x: 35, y: 300 } : { x: 130, y: 300 };
+  const control = mobile ? { x: 160, y: 315 } : { x: 340, y: 310 };
+  const end = mobile ? { x: 285, y: 85 } : { x: 550, y: 85 };
+  const meanX = (start.x + 2 * control.x + end.x) / 4;
+  const graphMeanY = (start.y + 2 * control.y + end.y) / 4;
+  const secantMeanY = (start.y + end.y) / 2;
+  const labelSize = mobile ? 16 : 15;
+  const curve = `M${start.x} ${start.y} Q${control.x} ${control.y} ${end.x} ${end.y}`;
   return (
     <>
-      <path d={curve} fill="none" stroke={ink} strokeWidth="3" />
-      <line x1="160" y1="277" x2="495" y2="47" stroke={copper} strokeWidth="2.2" strokeDasharray="7 6" />
-      <Dot x={160} y={277} color={red} /><Dot x={495} y={47} color={red} /><Dot x={328} y={122} color={teal} />
-      <line x1="328" y1="122" x2="328" y2="320" stroke={teal} strokeWidth="2" strokeDasharray="5 5" />
-      <text x="139" y="305" fill={red}>u₁</text><text x="486" y="80" fill={red}>u₃</text><text x="300" y="350" fill={teal}>mean = A+B</text>
-      <text x="125" y="55" fill={ink}>F″(u) = csc²(M−u) &gt; 0</text>
-      <text x="128" y="380" fill={ink}>equal arguments are the unique equality case</text>
+      <text fill={ink} fontSize={labelSize} textAnchor="middle" x={mobile ? 160 : 340} y={mobile ? 28 : 32}>
+        F″(u)=csc²(M−u)&gt;0
+      </text>
+      <path d={curve} data-jensen-curve="quadratic" fill="none" stroke={ink} strokeWidth="3" />
+      <line
+        data-jensen-secant="two-input"
+        x1={start.x}
+        y1={start.y}
+        x2={end.x}
+        y2={end.y}
+        stroke={copper}
+        strokeWidth="2.2"
+        strokeDasharray="7 6"
+      />
+      <circle cx={start.x} cy={start.y} data-jensen-input="u1" fill={red} r="6" />
+      <circle cx={end.x} cy={end.y} data-jensen-input="u2" fill={red} r="6" />
+      <circle cx={meanX} cy={secantMeanY} data-jensen-mean="secant" fill={copper} r="5" />
+      <circle cx={meanX} cy={graphMeanY} data-jensen-mean="graph" fill={teal} r="6" />
+      <line
+        data-jensen-gap="strict"
+        x1={meanX}
+        y1={secantMeanY}
+        x2={meanX}
+        y2={graphMeanY}
+        stroke={teal}
+        strokeWidth="2"
+        strokeDasharray="5 5"
+      />
+      <text fill={red} fontSize={labelSize} x={start.x - (mobile ? 4 : 10)} y={start.y + 26}>u₁</text>
+      <text fill={red} fontSize={labelSize} x={end.x - 4} y={end.y - 14}>u₂</text>
+      <text fill={teal} fontSize={labelSize} textAnchor="middle" x={meanX} y={graphMeanY + 28}>(u₁+u₂)/2</text>
+      <text fill={ink} fontSize={labelSize} textAnchor="middle" x={mobile ? 160 : 340} y={mobile ? 360 : 355}>
+        F((u₁+u₂)/2)&lt;(F(u₁)+F(u₂))/2
+      </text>
+      <text fill={ink} fontSize={labelSize} textAnchor="middle" x={mobile ? 160 : 340} y={mobile ? 390 : 383}>
+        equality in d inputs iff u₁=⋯=u<tspan baselineShift="sub" fontSize={labelSize}>d</tspan>
+      </text>
     </>
   );
 }
@@ -848,8 +950,22 @@ const copy: Record<FigureKind, { title: string; description: string; caption: Re
     caption:
       "Plate IX.3. For n=3, the nonreal branch is the vertical segment {−1/2+iy: 0≤y≤√3/2}, and the selected real branch is [−1,−1/2].",
   },
-  reflection: { title: "Returning from the selected orientation", description: "A Farey interval reflects about one half while a complex point reflects across the real axis.", caption: "Plate X.1. Reflection reverses order but preserves denominators, modulus, d, e, and the absolute scalar equation." },
-  jensen: { title: "Strict convexity makes the parameters constant", description: "A strictly convex graph, two separated sample points, and their mean below the joining chord.", caption: "Plate X.2. The equality for chosen real arguments fixes their mean; strict Jensen makes a common argument the unique constant-parameter case." },
+  reflection: {
+    status: "Exact order diagram — distances not to scale",
+    title: "Reflection reverses the selected Farey interval",
+    description:
+      "Two rational rows show that t maps to one minus t by crossing arrows: p over q maps to q minus p over q, and r over s maps to s minus r over s. A second panel shows mu equal to the complex conjugate of lambda across the real axis at the same modulus.",
+    caption:
+      "Plate X.1. From p/q<y<r/s, the map t↦1−t gives (s−r)/s<x<(q−p)/q: p/q maps to (q−p)/q and r/s maps to (s−r)/s. Endpoint order reverses while denominators are preserved. In the conjugate case μ=λ̄ is the reflection of λ across the real axis and |μ|=|λ|. Rational-row spacings are schematic.",
+  },
+  jensen: {
+    status: "Strict-convexity schematic — not to scale",
+    title: "Equality in Jensen’s inequality forces equal factor arguments",
+    description:
+      "A quadratic strictly convex graph lies below the secant at the mean of two inputs. The displayed strict inequality is the two-input instance of the d-input Jensen inequality used in the proof.",
+    caption:
+      "Plate X.2. The drawing shows the two-input case F((u₁+u₂)/2)<(F(u₁)+F(u₂))/2. In the proof, F((Σuⱼ)/d)≤ΣF(uⱼ)/d, with equality exactly when u₁=⋯=u_d. Since β↦u(β) is strictly increasing, equality is equivalent to β₁=⋯=β_d.",
+  },
   "cycle-ledger": { title: "Local cycles or one global cycle", description: "Three deterministic blocks have local return arcs and one highlighted route through every block terminal.", caption: "Plate XI.1. Any subset of local cycles is vertex-disjoint, but the global cycle meets every terminal and cannot coexist with a local cycle." },
   "sparse-cases": { title: "The two graph regimes before padding", description: "One graph routes a cross edge into the interior of a block, while another inserts a subdivision vertex on a cross edge.", caption: "Plate XI.2. When s≤dq the entry positions shorten the global route to s; when s>dq subdivision vertices lengthen it to s." },
   squeeze: { title: "Attainment closes the upper comparison", description: "Opposing arrows show rho at most rho star and rho star at most rho, meeting at equality.", caption: "Plate XI.3. Topic X supplies one inequality; the independently constructed realizing stochastic matrix supplies the other." },
@@ -864,11 +980,21 @@ export function StochasticFareyFigure({ kind }: { kind: FigureKind }) {
     kind === "new-shell" ||
     kind === "farey-five" ||
     kind === "rooted-chord" ||
-    kind === "terminal-three";
+    kind === "terminal-three" ||
+    kind === "reflection" ||
+    kind === "jensen";
   const mobileMinLabelSize =
-    kind === "farey-five" || kind === "rooted-chord" || kind === "terminal-three"
+    kind === "reflection" || kind === "jensen"
+      ? 16
+      : kind === "farey-five" || kind === "rooted-chord" || kind === "terminal-three"
       ? 17
       : 18;
+  const mobileViewBox =
+    kind === "reflection"
+      ? "0 0 320 500"
+      : kind === "jensen"
+        ? "0 0 320 410"
+        : "0 0 320 390";
   return (
     <figure className="topic-ii-concept-figure">
       <div className="topic-ii-concept-heading">
@@ -905,7 +1031,7 @@ export function StochasticFareyFigure({ kind }: { kind: FigureKind }) {
           data-figure-layout="mobile"
           data-mobile-min-label-size={mobileMinLabelSize}
           role="img"
-          viewBox="0 0 320 390"
+          viewBox={mobileViewBox}
         >
           <title id={`sf-${kind}-mobile-title`}>{description.title}</title>
           <desc id={`sf-${kind}-mobile-desc`}>
@@ -919,6 +1045,8 @@ export function StochasticFareyFigure({ kind }: { kind: FigureKind }) {
           {kind === "farey-five" ? <FareyFive mobile /> : null}
           {kind === "rooted-chord" ? <RootedChord marker={mobileMarker} mobile /> : null}
           {kind === "terminal-three" ? <TerminalThree mobile /> : null}
+          {kind === "reflection" ? <Reflection marker={mobileMarker} mobile /> : null}
+          {kind === "jensen" ? <Jensen mobile /> : null}
         </svg>
       ) : null}
       <figcaption>{description.caption}</figcaption>

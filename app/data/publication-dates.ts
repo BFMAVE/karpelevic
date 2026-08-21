@@ -18,5 +18,6 @@ export const publicationDates = {
     topicVII: "2026-08-20",
     topicVIII: "2026-08-20",
     topicIX: "2026-08-20",
+    topicX: "2026-08-21",
   },
 } as const;

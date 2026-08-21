@@ -50,7 +50,10 @@ const commonImports = [
     href: sitePath("/proof/topic-x/"),
     explanation: (
       <>
-        proves that a product with varying parameters whose chosen factor arguments lie in [<i>A</i>,<i>M</i>) lies no farther out than its constant-parameter counterpart, with strictness unless all factor parameters agree.
+        proves that a list satisfying the finite product equation, the phase
+        equation, and the bounds <i>u</i><sub>j</sub>∈[<i>A</i>,<i>M</i>) has
+        radius at most the constant-parameter radius, with equality only when
+        all factor parameters agree.
       </>
     ),
   },

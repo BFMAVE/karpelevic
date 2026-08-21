@@ -54,6 +54,10 @@ const pages = [
     "Candidate curves from the Ito equation on Farey intervals",
   ],
   [
+    "proof/topic-x/index.html",
+    "The sharp radial upper bound",
+  ],
+  [
     "prerequisites/index.html",
     "The small library this reader assumes",
   ],
@@ -73,6 +77,7 @@ const firstPublicationDates = new Map([
   ["proof/topic-vii/index.html", "20 August 2026"],
   ["proof/topic-viii/index.html", "20 August 2026"],
   ["proof/topic-ix/index.html", "20 August 2026"],
+  ["proof/topic-x/index.html", "21 August 2026"],
 ]);
 
 for (const [relativePath, expectedText] of pages) {
@@ -112,7 +117,7 @@ for (const [relativePath, expectedText] of pages) {
   assert.match(visibleText, /24 July 2026/);
   assert.match(visibleText, /Website edition/);
   assert.match(visibleText, /Last revised\s+21 August 2026/);
-  assert.match(visibleText, /104-page site-hosted PDF/);
+  assert.match(visibleText, /105-page site-hosted PDF/);
   assert.doesNotMatch(html, />Prepared</);
 }
 
@@ -142,12 +147,13 @@ for (const relativePath of [
   "proof/topic-vii/index.html",
   "proof/topic-viii/index.html",
   "proof/topic-ix/index.html",
+  "proof/topic-x/index.html",
 ]) {
   const html = await readFile(path.join(outputRoot, relativePath), "utf8");
   assert.match(html, /Forthcoming/);
   assert.doesNotMatch(
     html,
-    /href="\/karpelevic\/proof\/topic-(?:x|xi|xii(?:\/[ab])?|xiii|xiv)\//,
+    /href="\/karpelevic\/proof\/topic-(?:xi|xii(?:\/[ab])?|xiii|xiv)\//,
   );
 }
 
@@ -277,9 +283,39 @@ for (const relativePath of [
     html,
     /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="\/karpelevic\/proof\/topic-viii\//,
   );
-  assert.doesNotMatch(
+  assert.match(
     html,
-    /href="\/karpelevic\/proof\/topic-x\//,
+    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/karpelevic\/proof\/topic-x\//,
+  );
+}
+
+{
+  const html = await readFile(
+    path.join(outputRoot, "proof/topic-x/index.html"),
+    "utf8",
+  );
+  const visibleText = visibleTextFromHtml(html);
+  assert.match(html, /data-proof-route="topic-x"/);
+  assert.match(visibleText, /The sharp radial upper bound/i);
+  assert.match(visibleText, /radial boundary point that first appears at order N/i);
+  assert.match(html, /q&lt;s/);
+  assert.match(visibleText, /du\/dβ=ρᑫ sin A\/\|μᑫ−β\|²&gt;0/i);
+  assert.match(visibleText, /ρ≤ρ\*/);
+  assert.match(visibleText, /Reflection reverses the selected Farey interval/i);
+  assert.match(visibleText, /Equality in Jensen’s inequality forces equal factor arguments/i);
+  assert.match(html, /id="topic-x-exact-sources"/);
+  assert.match(
+    html,
+    /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="\/karpelevic\/proof\/topic-ix\//,
+  );
+  assert.doesNotMatch(html, /href="\/karpelevic\/proof\/topic-xi\//);
+  assert.match(
+    html,
+    /data-proof-topic-number="11"(?:(?!<\/li>)[\s\S])*Forthcoming/i,
+  );
+  assert.doesNotMatch(
+    visibleText,
+    /log-sine potential|convex equalization|strict Jensen|non-inherited radial maximum|continuous arguments on a zero-free path/i,
   );
 }
 
@@ -415,7 +451,6 @@ await access(path.join(outputRoot, ".nojekyll"));
 await assert.rejects(access(path.join(outputRoot, ".vite")));
 await assert.rejects(access(path.join(outputRoot, "code")));
 for (const futureTopic of [
-  "topic-x",
   "topic-xi",
   "topic-xii",
   "topic-xiii",

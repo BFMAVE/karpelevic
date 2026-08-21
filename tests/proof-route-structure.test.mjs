@@ -51,6 +51,7 @@ const publicTopicPublicationDates = [
   ["/proof/topic-vii", "2026-08-20", "20 August 2026"],
   ["/proof/topic-viii", "2026-08-20", "20 August 2026"],
   ["/proof/topic-ix", "2026-08-20", "20 August 2026"],
+  ["/proof/topic-x", "2026-08-21", "21 August 2026"],
 ];
 
 for (const [pathname, expectedResults, expectedProofs] of chapters) {
@@ -532,6 +533,58 @@ test("Topics VIII and IX form a self-contained terminology and provenance handof
   assert.doesNotMatch(visibleText, /Determinant distances|Attack determinant|Cancel transverse/i);
 });
 
+test("Topics IX and X form a self-contained scalar-to-Jensen handoff", async () => {
+  const topicIX = await (await render("/proof/topic-ix")).text();
+  const topicX = await (await render("/proof/topic-x")).text();
+  const visibleText = topicX
+    .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+    .replace(/<annotation\b[\s\S]*?<\/annotation>/gi, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&amp;", "&")
+    .replace(/\s+/g, " ");
+
+  assert.match(
+    topicIX,
+    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/proof\/topic-x\//,
+  );
+  assert.match(
+    topicX,
+    /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="\/proof\/topic-ix\//,
+  );
+  assert.match(visibleText, /radial boundary point that first appears at order N/i);
+  assert.match(visibleText, /Θ N ∖Θ N−1|ΘN∖ΘN−1/i);
+  assert.match(visibleText, /consecutive fractions of F N|consecutive reduced fractions in F N/i);
+  assert.match(visibleText, /ϑ=arg₊\(μ\)∈\(0,2π\) so that y=ϑ\/\(2π\)/i);
+  assert.match(visibleText, /p\/q<y<r\/s[\s\S]{0,80}?rq−ps=1[\s\S]{0,80}?q<s/i);
+  assert.match(visibleText, /μ=ρe iϑ|μ=ρe\s*iϑ/i);
+  assert.match(visibleText, /du\/dβ=ρᑫ sin A\/\|μᑫ−β\|²>0/i);
+  assert.match(visibleText, /A<A\+B<M<π/i);
+  assert.match(visibleText, /sines of A, B, A\+B, M, M−A, and M−A−B are positive/i);
+  assert.match(visibleText, /ρ≤ρ\*/);
+  assert.match(visibleText, /equality[\s\S]{0,100}?β₁=⋯=β/i);
+  assert.match(visibleText, /10\.1007\/BF02418571/);
+  assert.match(visibleText, /finite product equation[\s\S]{0,180}?phase equation[\s\S]{0,180}?bounds uⱼ∈\[A,M\)/i);
+  assert.doesNotMatch(
+    visibleText,
+    /log-sine potential|convex equalization|strict Jensen|non-inherited radial maximum|continuous arguments on a zero-free path|factor potential|absolute scalar angles/i,
+  );
+
+  for (const id of [
+    "topic-x-compression",
+    "topic-x-reflection",
+    "topic-x-heterogeneous",
+  ]) {
+    const start = topicX.indexOf(`id="${id}"`);
+    assert.ok(start >= 0, `${id} exists`);
+    const end = topicX.indexOf('class="topic-i-textbook-item', start + 1);
+    const card = topicX.slice(start, end < 0 ? undefined : end);
+    assert.doesNotMatch(card, /proof-chapter-provenance/);
+  }
+});
+
 test("the N=3 exception and the N>=4 projective scope remain coherent across topics", async () => {
   const topicV = await (await render("/proof/topic-v")).text();
   const topicVI = await (await render("/proof/topic-vi")).text();
@@ -863,7 +916,7 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.doesNotMatch(topicVIIText, /The same proof, unpacked/);
 
   assert.match(topicVIIIText, /orders one, two, and three are reserved for the direct proof in Topic XIII/i);
-  assert.match(topicXText, /non-inherited radial maximum[\s\S]*N\s*≥\s*4/i);
+  assert.match(topicXText, /radial boundary point that first appears at order N[\s\S]*N\s*≥\s*4/i);
   assert.match(topicXIText, /Orders at most three are handled independently in Topic XIII/i);
   assert.match(topicXIIIText, /At this induction stage n\s*≥\s*4/i);
 });

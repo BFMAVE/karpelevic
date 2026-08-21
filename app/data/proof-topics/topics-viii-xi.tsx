@@ -640,13 +640,13 @@ export function TopicXChapter() {
             label: "Topic VII — consecutive Farey fractions and a finite product equation",
             href: sitePath("/proof/topic-vii/"),
             explanation:
-              "supplies, for N≥4, the finite product with parameters βⱼ, the equality for chosen real arguments, and the bounds uⱼ∈[A,M) obtained from critical polygons.",
+              "supplies, for N≥4, the finite product equation with parameters βⱼ, the phase equation for chosen real arguments, and the bounds uⱼ∈[A,M).",
           },
           {
-            label: "Topic VIII — criticality of a non-inherited radial maximum",
+            label: "Topic VIII — criticality of a radial boundary point new at order N",
             href: sitePath("/proof/topic-viii/"),
             explanation:
-              "turns the stochastic extremum into the critical planar contraction required by Topic VII.",
+              "shows that such a boundary point determines the N-critical planar contraction required by Topic VII.",
           },
           {
             label: "Topic IX — the unique modulus from the Ito equation",
@@ -657,35 +657,46 @@ export function TopicXChapter() {
         ]}
         background={[
           {
-            label: "Strict Jensen inequality",
+            label: "Jensen’s inequality",
             explanation:
               "for a strictly convex function, the value at an average is at most the average of the values, with equality only when all inputs coincide.",
           },
           {
-            label: "Continuous arguments on a zero-free path",
+            label: "Arguments in the open upper half-plane",
             explanation:
-              "a continuous complex path avoiding zero has a continuous real-valued argument after one initial value is fixed.",
+              "every nonzero complex number in the open upper half-plane has a unique argument in (0,π).",
           },
         ]}
         provedHere={
           <p>
             We apply Part I&apos;s finite product equation to the stochastic
-            extremum, check both possible complex orientations, construct the
-            log-sine potential, and prove that every varying parameter list has
-            radius no larger than the constant-parameter case.
+            boundary point, relate the two possible orientations by complex
+            conjugation, and apply Jensen&apos;s inequality to a strictly convex
+            log-sine function. The result is the radial upper bound ρ≤ρ*.
           </p>
         }
       />
 
-      <SetupBlock eyebrow="Scope boundary" title="This chapter proves an upper comparison—nothing is realized here">
+      <SetupBlock eyebrow="Scope" title="Hypotheses and the one-sided conclusion">
         <p>
-          Let <span className="math-inline">λ=ρeⁱθ</span> be a non-inherited radial
-          maximum. By Topic VIII&apos;s definition this chapter is in the range
-          <span className="math-inline"> N≥4</span>. Topic VII may choose either
-          λ or its conjugate as the multiplier μ best adapted to the oriented
-          contact system. Theorem
-          II.5.1 records every output of that choice; Lemma II.5.2 later returns
-          the conclusion to the original upper-half-plane orientation.
+          For <span className="math-inline">N≥4</span>, let Θ<sub>N</sub> be the
+          union of the spectra of all real row-stochastic N×N matrices and let
+          {" "}<span className="math-inline">R<sub>N</sub>(θ)=max&#123;r≥0:
+          re<sup>iθ</sup>∈Θ<sub>N</sub>&#125;</span>. Fix
+          {" "}<span className="math-inline">λ=R<sub>N</sub>(θ)e<sup>iθ</sup>
+          ∈Θ<sub>N</sub>∖Θ<sub>N−1</sub></span>, with
+          {" "}<span className="math-inline">0&lt;|λ|&lt;1</span>. Thus λ is a
+          radial boundary point that first appears at order N.
+        </p>
+        <p>
+          Let F<sub>N</sub> denote the Farey sequence of order N. Topic VII
+          selects <span className="math-inline">μ∈&#123;λ,λ̄&#125;</span> and the
+          argument <span className="math-inline">ϑ=arg₊(μ)∈(0,2π)</span>{" "}
+          so that <span className="math-inline">y=ϑ/(2π)</span> lies between
+          consecutive fractions of F<sub>N</sub> whose ordered denominators
+          satisfy <span className="math-inline">q&lt;s</span>. Theorem II.5.1
+          lists the resulting product equation, phase equation, and argument
+          bounds. Lemma II.5.2 transfers the comparison back to λ if μ=λ̄.
         </p>
         <p>
           For a nonzero complex number <var>z</var> that is not positive real,
@@ -700,7 +711,7 @@ export function TopicXChapter() {
         <p>
           The result of this page is the one-sided inequality
           {" "}<span className="math-inline">ρ≤ρ*</span>, where ρ* is Topic
-          IX&apos;s unique constant-parameter radius. We do <strong>not</strong> yet
+          IX&apos;s unique radius defined by the scalar equation. We do <strong>not</strong> yet
           know from this argument that ρ* is an eigenvalue of a stochastic
           matrix. That independent construction belongs to Topic XI, and only
           then may the equality conclusion be closed.
@@ -710,28 +721,32 @@ export function TopicXChapter() {
 
       <ProofResultGroup
         number="X.A"
-        title="Compress the geometry and repair orientation"
+        title="The finite product data and complex conjugation"
         introduction={
           <p>
             The imported finite product theorem states exactly which Part I
-            conclusions enter.
-            The reflection lemma shows that an existential orientation choice
-            cannot change the modulus comparison.
+            conclusions enter. The reflection lemma shows explicitly how
+            complex conjugation reverses the Farey interval while preserving
+            its denominators and the modulus comparison.
           </p>
         }
         results={topicXResults.slice(0, 2)}
       />
 
-      <SetupBlock eyebrow="The convexity argument" title="Why one convex function controls every factor">
+      <SetupBlock eyebrow="Convexity" title="The log-sine function and the factor arguments">
         <p>
-          In the abstract analytic theorem, write the multiplier being analysed
-          as <span className="math-inline">λ=ρe<sup>2πix</sup></span>. In the application
-          to Theorem II.5.1 this multiplier is the selected <var>μ</var>, so
-          <span className="math-inline">x=y=ϑ/(2π)</span>.
+          Retain the selected multiplier
+          {" "}<span className="math-inline">μ=ρe<sup>iϑ</sup></span> and put
+          {" "}<span className="math-inline">y=ϑ/(2π)</span>. If
+          {" "}<span className="math-inline">p/q&lt;y&lt;r/s</span> is its open
+          Farey interval, then <span className="math-inline">rq−ps=1</span> and
+          {" "}<span className="math-inline">q&lt;s</span>. Put
+          {" "}<span className="math-inline">d=⌊N/q⌋</span> and
+          {" "}<span className="math-inline">e=s−dq</span>.
         </p>
         <p id="karp:eq:oriented-cell" className="display-equation proof-setup-equation">
           <span className="math-inline">
-            p/q&lt;x&lt;r/s, rq−ps=1, q&lt;s.
+            p/q&lt;y&lt;r/s, rq−ps=1, q&lt;s.
           </span>{" "}
           <a className="part-i-equation-number" href="#karp:eq:oriented-cell" aria-label="Equation II.6.1, permalink">
             (II.6.1)
@@ -743,21 +758,33 @@ export function TopicXChapter() {
           {" "}<span className="math-inline">B=(2πr−sϑ)/d</span>. These are
           positive and satisfy <span className="math-inline">A+B&lt;π</span>.
           Choose
-          {" "}<span className="math-inline">M=Arg(μᑫ−1)</span> using the
-          chosen real arguments supplied by Theorem II.5.1, where
+          {" "}<span className="math-inline">M=Arg(μᑫ−1)</span> as the unique
+          argument in the open upper half-plane, where
           {" "}<span className="math-inline">A&lt;M&lt;π</span>. For a factor
-          parameter β, let <span className="math-inline">u=Arg(μᑫ−β)</span> on
-          that same continuous branch and define
-          {" "}<span className="math-inline">F(u)=log(|μᑫ−β|/(1−β))</span>.
-          Elementary triangle trigonometry rewrites this as
+          parameter <span className="math-inline">0≤β&lt;1</span>, let
+          {" "}<span className="math-inline">u(β)=Arg(μᑫ−β)∈[A,M)</span> be
+          its unique argument in <span className="math-inline">(0,π)</span>.
+          Define directly
           {" "}<span className="math-inline">F(u)=log sin M−log sin(M−u)</span>.
+          Triangle trigonometry then gives
+          {" "}<span className="math-inline">F(u(β))=log(|μᑫ−β|/(1−β))</span>.
         </p>
         <p>
           Therefore <span className="math-inline">F″(u)=csc²(M−u)&gt;0</span>
-          throughout the selected interval: <var>F</var> is strictly convex.
-          The equality eϑ+Σuⱼ=2π(r−dp) fixes the average of the factor
-          arguments, while the product equation fixes the sum of their potentials. Jensen
-          then compares every varying parameter list with the constant list.
+          on <span className="math-inline">[A,M)</span>, so <var>F</var> is
+          strictly convex. Moreover,
+          {" "}<span className="math-inline">du/dβ=ρᑫ sin A/|μᑫ−β|²&gt;0</span>.
+          The phase equation <span className="math-inline">eϑ+Σuⱼ=2π(r−dp)</span>
+          fixes the mean of the arguments at A+B, while the modulus of the
+          product equation fixes ΣF(uⱼ). Jensen&apos;s inequality compares this
+          list with the list in which all arguments are equal.
+        </p>
+        <p>
+          Since <span className="math-inline">A&lt;A+B&lt;M&lt;π</span>, the quantities
+          {" "}<span className="math-inline">sin A, sin B, sin(A+B), sin M,
+          sin(M−A), and sin(M−A−B)</span> are positive. These signs justify the
+          logarithms, divisions, and multiplications used below and preserve
+          the direction of the inequality.
         </p>
         <p id="karp:eq:rhoq-sine" className="display-equation proof-setup-equation">
           At β=0, the same triangle gives
@@ -771,7 +798,7 @@ export function TopicXChapter() {
 
       <ProofResultGroup
         number="X.B"
-        title="The sharp inequality for varying parameters"
+        title="Jensen’s inequality and the radial upper bound"
         introduction={
           <p>
             Every sign, branch, and equality condition is part of the formal

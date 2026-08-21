@@ -80,7 +80,7 @@ test("individual Topics VIII and IX use live published links without sibling-fil
       topicIX,
       /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-viii\//,
     );
-    assert.match(
+    assert.doesNotMatch(
       topicIX,
       /data-proof-topic-number="10"(?:(?!<\/li>)[\s\S])*Forthcoming/,
     );
@@ -88,9 +88,9 @@ test("individual Topics VIII and IX use live published links without sibling-fil
       topicIX,
       /href="Critical_Invariant_Polygons_Topic_VIII\.html/,
     );
-    assert.doesNotMatch(
+    assert.match(
       topicIX,
-      /href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-x\//,
+      /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-x\//,
     );
   } finally {
     await rm(temporaryDirectory, { force: true, recursive: true });

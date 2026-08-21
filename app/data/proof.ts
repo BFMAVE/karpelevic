@@ -126,6 +126,13 @@ export const proofSources: readonly ProofSource[] = [
     href: "https://doi.org/10.1016/j.laa.2021.11.016",
   },
   {
+    id: "jensen-1906",
+    short: "Jensen (1906)",
+    citation:
+      "J. L. W. V. Jensen, “Sur les fonctions convexes et les inégalités entre les valeurs moyennes,” Acta Mathematica 30 (1906), 175–193.",
+    href: "https://doi.org/10.1007/BF02418571",
+  },
+  {
     id: "standard-linear-algebra",
     short: "Horn–Johnson, Matrix Analysis",
     citation:
@@ -523,11 +530,11 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "Why can no stochastic eigenvalue lie beyond the candidate curve constructed in Topic IX?",
     overview: [
-      "For non-inherited radial maxima of orders N≥4, Part I's finite product theorem for critical polygons supplies an Ito product with varying parameters and proves that the chosen arguments of all factors lie in [A,M); orders at most three have already been treated directly.",
-      "A strictly convex log-sine potential makes those parameters constant. Its equality case identifies the unique outermost radial candidate and proves the sharp upper bound on each Farey interval.",
+      "For a radial boundary point that first appears at order N≥4, Part I supplies a finite product equation, an exact phase equation, and the factor-argument bounds uⱼ∈[A,M); orders at most three are treated directly later.",
+      "Jensen’s inequality for a strictly convex log-sine function gives the radial upper bound ρ≤ρ* on each Farey interval, with equality only when all factor parameters agree.",
     ],
     itemNumbers: [],
-    manuscriptPages: "73–77",
+    manuscriptPages: "86–90",
   },
   {
     slug: "realization",

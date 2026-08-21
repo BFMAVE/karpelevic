@@ -16,7 +16,7 @@ const outputPath = path.resolve(
 );
 const proofRoute = process.env.PROOF_ROUTE ?? "/proof";
 const publicSite = "https://bfmave.github.io/karpelevic";
-const publishedTopicMaximum = 9;
+const publishedTopicMaximum = 10;
 const bundleLinkMode = process.env.PROOF_STANDALONE_BUNDLE_LINKS === "1";
 const reviewBundleFiles = new Map([
   ["/proof/topic-v", "Critical_Invariant_Polygons_Topic_V.html"],
@@ -492,7 +492,7 @@ function verifyStandaloneHtml(html) {
                     ? [
                         "Topic X",
                         "The Sharp Radial Upper Bound",
-                        "The sharp inequality for varying parameters",
+                        "Jensen’s inequality and the radial upper bound",
                         'data-proof-route="topic-x"',
                         "Forthcoming",
                       ]
@@ -789,21 +789,75 @@ function verifyStandaloneHtml(html) {
       );
     }
     if (
-      !/data-proof-topic-number="10"(?:(?!<\/li>)[\s\S])*Forthcoming/i.test(
+      /data-proof-topic-number="10"(?:(?!<\/li>)[\s\S])*Forthcoming/i.test(
         html,
       )
     ) {
       throw new Error(
-        "The individual Topic IX standalone must mark Topic X as forthcoming.",
+        "The individual Topic IX standalone must not mark published Topic X as forthcoming.",
       );
     }
     if (
-      /href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-x\//i.test(
+      !/class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-x\//i.test(
         html,
       )
     ) {
       throw new Error(
-        "The individual Topic IX standalone must not link to unpublished Topic X.",
+        "The individual Topic IX standalone must link Next to published Topic X.",
+      );
+    }
+  }
+
+  if (proofRoute === "/proof/topic-x" && !bundleLinkMode) {
+    if (/href="Critical_Invariant_Polygons_Topic_[IVX]+\.html/i.test(html)) {
+      throw new Error(
+        "The individual Topic X standalone must not require sibling HTML files.",
+      );
+    }
+    if (
+      !/class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-ix\//i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "The individual Topic X standalone must link Previous to published Topic IX.",
+      );
+    }
+    if (
+      !/data-proof-topic-number="11"(?:(?!<\/li>)[\s\S])*Forthcoming/i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "The individual Topic X standalone must mark Topic XI as forthcoming.",
+      );
+    }
+    if (
+      /href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xi\//i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "The individual Topic X standalone must not link to unpublished Topic XI.",
+      );
+    }
+
+    const visibleText = visibleTextFromHtml(html).replace(/\s+/g, " ").trim();
+    if (
+      !/First published 21 August 2026\s*\./i.test(visibleText) ||
+      !/Last revised 21 August 2026\s*\./i.test(visibleText)
+    ) {
+      throw new Error(
+        "Standalone Topic X must expose its first-publication and revision dates.",
+      );
+    }
+    if (
+      /log-sine potential|convex equalization|strict Jensen|non-inherited radial maximum|continuous arguments on a zero-free path/i.test(
+        visibleText,
+      )
+    ) {
+      throw new Error(
+        "Standalone Topic X still contains superseded reader-facing terminology.",
       );
     }
   }
