@@ -56,7 +56,7 @@ export const homeContent = {
     {
       established: "The eigenvalue-region problem and its classical solution",
       thisPaper:
-        "Uses the Karpelevič–Ito theorem as the classical destination, not as a new claim.",
+        "Uses the Karpelevič theorem in Ito’s formulation as the classical destination, not as a new claim.",
     },
     {
       established: "Farey-indexed boundary formulations and matrix realizations",
@@ -78,11 +78,11 @@ export const homeContent = {
     zenodoUrl: "https://zenodo.org/records/21529144",
     zenodoPages: 93,
     websiteEditionUrl: "/paper/critical-invariant-polygons.pdf",
-    websiteEditionPages: 103,
+    websiteEditionPages: 104,
     zenodoChecksum:
       "ca3be77169053635302798aa1ba204502db0a3267d2e76e4d8e763cede138f3b",
     localArxivDraftChecksum:
-      "75220c1343fc98ee070a09896a6025801ea797e07fb19ca17aca9251406d7e7d",
+      "b24734c44dc21603cb0d41f8e2fd9f9fe1481064a882735ebfe25dd3d9e57b8b",
   },
 } as const;
 

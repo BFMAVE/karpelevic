@@ -173,7 +173,7 @@ export function ProofResult({ result }: { result: ProofResultData }) {
 
       {result.takeaway ? (
         <p className="proof-item-takeaway proof-chapter-takeaway">
-          <span>{result.takeawayLabel ?? "What survives"}</span>
+          <span>{result.takeawayLabel ?? "Conclusion"}</span>
           {result.takeaway}
         </p>
       ) : null}
@@ -182,11 +182,11 @@ export function ProofResult({ result }: { result: ProofResultData }) {
         <details className="proof-chapter-source-note">
           <summary>
             <span>
-              {result.provenance ? "Classification and sources" : "Sources and provenance"}
+              {result.provenance ? "Status and references" : "References"}
             </span>
             {result.provenance
-              ? "Why this result carries its displayed label"
-              : "Where the statement and its background come from"}
+              ? "Source classification and supporting references"
+              : "Sources for the statement and its background"}
           </summary>
           <div>
             {result.provenance ? (

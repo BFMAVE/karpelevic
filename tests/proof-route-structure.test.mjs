@@ -336,6 +336,19 @@ test("Topics VIII and IX form a self-contained terminology and provenance handof
     .replaceAll("&lt;", "<")
     .replaceAll("&amp;", "&")
     .replace(/\s+/g, " ");
+  const renderedTextContent = topicIX
+    .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+    .replace(/<annotation\b[\s\S]*?<\/annotation>/gi, " ")
+    .replace(/<\/(?:p|h[1-6]|li|section|div|summary|dt|dd|figure|figcaption)>/gi, " ")
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<[^>]*>/g, "")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&amp;", "&")
+    .replaceAll("&#x27;", "'")
+    .replaceAll("&apos;", "'")
+    .replace(/\s+/g, " ");
 
   assert.match(
     topicVIII,
@@ -364,6 +377,11 @@ test("Topics VIII and IX form a self-contained terminology and provenance handof
     /\(A\+B\)\/\(2π\)=u\/s\+\(1−u\)\/\(dq\)<1\/2/i,
   );
   assert.match(visibleText, /0<A,B,A\+B<π/i);
+  assert.match(
+    visibleText,
+    /Topic IX of the online proof reader[\s\S]{0,220}?numbering systems are independent/i,
+  );
+  assert.match(visibleText, /superscript \+ refers to the upper semicircle/i);
   assert.doesNotMatch(visibleText, /Farey cell/i);
   assert.match(visibleText, /A unique modulus at each prescribed argument/i);
   assert.match(
@@ -382,14 +400,46 @@ test("Topics VIII and IX form a self-contained terminology and provenance handof
       `${equationId} appears exactly once in the visible setup`,
     );
   }
-  assert.match(visibleText, /Certified numerical evaluation of a candidate curve/i);
+  assert.match(visibleText, /Certified numerical evaluation/i);
   assert.match(visibleText, /U−L≤2ε/i);
-  assert.match(visibleText, /\|λ̂−λ\(x\)\|≤ε/i);
+  assert.match(visibleText, /radial error (?:is )?at most ε/i);
   assert.match(visibleText, /If an exact zero is certified, return m immediately/i);
   assert.match(
     visibleText,
-    /directed enclosure for F x \( m \) is contained in \[ − c ε , c ε \]/i,
+    /outward-rounded interval enclosure containing zero[\s\S]{0,140}?derivative lower bound/i,
   );
+  assert.match(visibleText, /polar output \(ρ̂,x\)/i);
+  assert.match(
+    visibleText,
+    /Cartesian (?:output|target)[\s\S]{0,180}?τ\/2[\s\S]{0,100}?τ\/2/i,
+  );
+  assert.match(
+    visibleText,
+    /tagged union[\s\S]{0,240}?only at[\s\S]{0,100}?exact compact fibre \[−1,−1\/2\]/i,
+  );
+  assert.doesNotMatch(visibleText, /Set-valued output is uniform/i);
+
+  for (const phrase of [
+    "n×n row-stochastic matrices",
+    "sin(A+B) on [0,1]",
+    "<1/2 because s≥3",
+    "s≥3 and dq≥2",
+    "The signed integer e is retained",
+  ]) {
+    assert.ok(
+      renderedTextContent.includes(phrase),
+      `rendered text preserves inline spacing in “${phrase}”`,
+    );
+  }
+  assert.doesNotMatch(
+    renderedTextContent,
+    /n×nrow-stochastic|sin\(A\+B\)on \[0,1\]|<1\/2because|anddq|integere\b/,
+  );
+  assert.match(
+    renderedTextContent,
+    /Topic V(?:’s| — the) lattice-parallelogram lemma|the lattice-parallelogram lemma from Topic V/i,
+  );
+  assert.doesNotMatch(renderedTextContent, /lem:lattice-parallelogram-count/);
   const exactMidpointResidual =
     2 * 0.5 * Math.sin(Math.PI / 3) - Math.sin((2 * Math.PI) / 3);
   assert.ok(
@@ -412,6 +462,11 @@ test("Topics VIII and IX form a self-contained terminology and provenance handof
     assert.ok(index > previousIndex, `${id} appears in dependency order`);
     previousIndex = index;
   }
+  assert.ok(
+    topicIX.indexOf('id="topic-ix-farey-adjacency"') <
+      topicIX.indexOf('id="karp:eq:endpoint-labels"'),
+    "Lemma II.2.1 is rendered before the endpoint and angle coordinates that use it",
+  );
 
   const scalarStart = topicIX.indexOf('id="topic-ix-scalar-ray"');
   const endpointStart = topicIX.indexOf('id="topic-ix-endpoints"');
@@ -421,7 +476,7 @@ test("Topics VIII and IX form a self-contained terminology and provenance handof
   for (const proposition of [scalarProposition, endpointProposition]) {
     assert.doesNotMatch(proposition, /proof-chapter-provenance/);
     assert.match(proposition, /Kirkland–Laffey–Šmigoc \(2020\)/);
-    assert.match(proposition, /no separate literature-priority classification is asserted/i);
+    assert.doesNotMatch(proposition, /literature-priority classification/i);
   }
   assert.match(scalarProposition, /Theorem 1\.2 and Lemma 4\.4/);
   assert.match(

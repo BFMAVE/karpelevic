@@ -514,7 +514,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "Endpoint limits and the exceptional order-three behaviour are handled explicitly. This topic constructs only the candidate curve; stochastic realization, the sharp outer bound, nesting, and identification with the boundary of the Karpelevič region remain for later topics.",
     ],
     itemNumbers: [],
-    manuscriptPages: "76–81",
+    manuscriptPages: "76–82",
   },
   {
     slug: "sharp-radius",
@@ -558,7 +558,7 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "karpelevic-ito",
     eyebrow: "Topic XIII · final theorem",
-    title: "The Karpelevič–Ito theorem",
+    title: "The Karpelevič theorem in Ito’s formulation",
     question:
       "How do the upper bound, attainment, and nesting assemble into the complete stochastic eigenvalue region?",
     overview: [
@@ -586,9 +586,10 @@ export const proofTopics: readonly ProofTopic[] = [
 
 export const proofContent = {
   title: "How the Proof Works",
-  subtitle: "Critical invariant polygons and the route to Karpelevič–Ito",
+  subtitle:
+    "Critical invariant polygons and the Karpelevič theorem in Ito’s formulation",
   deck:
-    "A fourteen-topic route from intrinsic polygon geometry to the Karpelevič–Ito theorem. Each chapter preserves the manuscript’s formal statements and complete proofs, then adds definitions, dependency maps, guided explanations, and verified mathematical plates. Topic XIV is a worked example rather than a proof dependency.",
+    "A fourteen-topic route from intrinsic polygon geometry to the Karpelevič theorem in Ito’s formulation. Each chapter preserves the manuscript’s formal statements and complete proofs, then adds definitions, dependency maps, guided explanations, and verified mathematical plates. Topic XIV is a worked example rather than a proof dependency.",
   auditNote:
     "The four labels—Classical result, Previously known, Strengthened, and New result—classify mathematical statements, not proofs. A Karpelevič-only antecedent may be cited without assigning a category or priority claim. The classifications remain open to correction.",
   criticalPath:

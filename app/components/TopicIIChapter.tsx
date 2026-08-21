@@ -352,7 +352,7 @@ function TopicIIResult({ itemNumber }: { itemNumber: number }) {
       (item.provenance || sources.length > 0 || item.sourceRelation) ? (
         <details className="proof-chapter-source-note">
           <summary>
-            <span>Classification and sources</span>
+            <span>Status and references</span>
             How this statement relates to the cited sources
           </summary>
           <div>

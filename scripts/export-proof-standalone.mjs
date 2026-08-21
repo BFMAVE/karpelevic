@@ -481,9 +481,9 @@ function verifyStandaloneHtml(html) {
                   ? [
                       "Topic IX",
                       "Candidate curves from the Ito equation on Farey intervals",
-                      "Farey adjacency criterion",
+                      "Criterion for consecutive Farey fractions",
                       "A unique modulus at each prescribed argument",
-                      "Endpoint limits, including the order-three exception",
+                      "Endpoint limits, including the case n=3",
                       "Certified numerical evaluation",
                       'data-proof-route="topic-ix"',
                       "Forthcoming",
@@ -704,7 +704,7 @@ function verifyStandaloneHtml(html) {
     }
     if (
       !/First published 20 August 2026\s*\./i.test(visibleText) ||
-      !/Last revised 20 August 2026\s*\./i.test(visibleText)
+      !/Last revised 21 August 2026\s*\./i.test(visibleText)
     ) {
       throw new Error(
         "Standalone Topic VII must expose its current first-publication and revision dates.",

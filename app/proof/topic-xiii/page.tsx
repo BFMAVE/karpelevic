@@ -4,7 +4,7 @@ import { TopicXIIIContent } from "../../data/proof-topics/topic-xiii";
 import { getPageTimestamp } from "../../lib/git-dates";
 
 export const metadata: Metadata = {
-  title: "Topic XIII — The Karpelevič–Ito Theorem",
+  title: "Topic XIII — The Karpelevič Theorem in Ito’s Formulation",
   description:
     "A complete annotated proof assembling the Topic IX candidate curve, the sharp bound, realization, nesting, and topology into the classical stochastic eigenvalue-region theorem.",
 };

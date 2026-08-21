@@ -162,14 +162,17 @@ test("Plate IX.1 places F5 fractions and x = 3/8 exactly in both layouts", async
   }
 });
 
-test("Plate IX.2 uses exact vector addition and matching, non-overlapping arrowheads", async () => {
+test("Plate IX.2 uses the exact obtuse n=3 example with matching, non-overlapping arrowheads", async () => {
   const figure = figureMarkup(await topicIXHtmlPromise, "rooted-chord");
   const text = visibleText(figure);
 
   assertAccessibleLayouts(figure, "rooted-chord");
-  assert.match(figure, />Exact vector-identity diagram<\/span>/);
-  assert.match(text, /The identity 1 = βz\^q \+ αw, where w\^d = z\^s/);
-  assert.match(text, /−B/);
+  assert.match(figure, />Exact obtuse vector-identity diagram<\/span>/);
+  assert.match(text, /An obtuse n = 3 instance of 1 = βz\^q \+ αw/);
+  assert.match(text, /x=11\/24, so A=π\/6 and B=3π\/4/);
+  assert.match(text, /βz\^q has argument −A=−π\/6 and αw has argument B=3π\/4/);
+  assert.match(text, /αw has negative real component/);
+  assert.match(text, /−A/);
   assert.match(text, /Plate IX\.2\./);
   assert.doesNotMatch(text, /reciprocal-coordinate|rooted chord/i);
 
@@ -193,16 +196,29 @@ test("Plate IX.2 uses exact vector addition and matching, non-overlapping arrowh
     const tealDy = numberAttribute(tealVector, "y2") - numberAttribute(tealVector, "y1");
     const totalDx = numberAttribute(totalVector, "x2") - numberAttribute(totalVector, "x1");
     const totalDy = numberAttribute(totalVector, "y2") - numberAttribute(totalVector, "y1");
+    const redAngle = Math.atan2(-redDy, redDx);
+    const tealAngle = Math.atan2(-tealDy, tealDx);
 
     assertClose(numberAttribute(redVector, "x2"), numberAttribute(tealVector, "x1"), `${layout} vectors join x`);
     assertClose(numberAttribute(redVector, "y2"), numberAttribute(tealVector, "y1"), `${layout} vectors join y`);
     assertClose(redDx + tealDx, totalDx, `${layout} horizontal components add`);
     assertClose(redDy + tealDy, totalDy, `${layout} imaginary components cancel`);
     assertClose(totalDy, 0, `${layout} total vector is real`);
+    assertClose(redAngle, -Math.PI / 6, `${layout} minus A is -pi/6`);
+    assertClose(tealAngle, (3 * Math.PI) / 4, `${layout} B is 3pi/4`);
+    assert.ok(redDx > 0, `${layout} beta z^q has positive real component`);
+    assert.ok(tealDx < 0, `${layout} alpha w has negative real component`);
+    assert.equal(attribute(redVector, "data-example-x"), "11/24");
+    assert.equal(attribute(tealVector, "data-example-x"), "11/24");
+    assert.equal(attribute(redVector, "data-real-component-sign"), "positive");
+    assert.equal(attribute(tealVector, "data-real-component-sign"), "negative");
     assert.notEqual(numberAttribute(totalVector, "y1"), numberAttribute(tealVector, "y2"));
 
-    assert.equal(tagsWithAttribute(svg, "path", "data-vector-angle", "minus-B").length, 1);
-    assert.equal(tagsWithAttribute(svg, "line", "data-vector-guide", "minus-B-horizontal").length, 1);
+    assert.equal(attribute(redVector, "data-mathematical-angle"), "-pi/6");
+    assert.equal(attribute(tealVector, "data-mathematical-angle"), "3pi/4");
+    assert.equal(tagsWithAttribute(svg, "path", "data-vector-angle", "minus-A").length, 1);
+    assert.equal(tagsWithAttribute(svg, "path", "data-vector-angle", "B").length, 1);
+    assert.equal(tagsWithAttribute(svg, "line", "data-vector-guide", "B-horizontal").length, 1);
   }
 });
 
@@ -215,15 +231,23 @@ test("Plate IX.3 is the exact vertical-plus-horizontal exceptional curve", async
   assert.match(text, /The exceptional candidate curve for n = 3/);
   assert.match(text, /Plate IX\.3\./);
   assert.match(text, /vertical segment \{−1\/2\+iy: 0≤y≤√3\/2\}/);
+  assert.match(text, /−1\/2 \+ \(√3\/2\)i/);
+  assert.doesNotMatch(figure, /e²πⁱ⁄³/);
   assert.doesNotMatch(text, /curved interpolation|nonreal graph tends/i);
 
   for (const layout of ["desktop", "mobile"]) {
     const svg = svgMarkup(figure, layout);
     const nonreal = tagsWithAttribute(svg, "line", "data-exceptional-branch", "nonreal")[0];
     const real = tagsWithAttribute(svg, "line", "data-exceptional-branch", "real")[0];
+    const imaginaryAxis = tagsWithAttribute(svg, "line", "data-complex-axis", "imaginary")[0];
+    const imaginaryTick = tagsWithAttribute(svg, "line", "data-axis-tick", "sqrt(3)/2")[0];
+    const exactCoordinate = tagsWithAttribute(svg, "text", "data-exact-coordinate", "-1/2+(sqrt(3)/2)i")[0];
 
     assert.equal(attribute(nonreal, "data-real-part"), "-0.5");
     assert.equal(attribute(real, "data-real-interval"), "[-1,-1/2]");
+    assert.ok(imaginaryAxis, `${layout} imaginary axis exists`);
+    assert.ok(imaginaryTick, `${layout} sqrt(3)/2 imaginary tick exists`);
+    assert.ok(exactCoordinate, `${layout} exact Cartesian endpoint label exists`);
     assertClose(numberAttribute(nonreal, "x1"), numberAttribute(nonreal, "x2"), `${layout} nonreal branch is vertical`);
     assertClose(numberAttribute(real, "y1"), numberAttribute(real, "y2"), `${layout} real branch is horizontal`);
     assertClose(numberAttribute(nonreal, "x2"), numberAttribute(real, "x2"), `${layout} branches meet x`);
