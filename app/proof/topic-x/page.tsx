@@ -5,9 +5,9 @@ import { publicationDates } from "../../data/publication-dates";
 import { getPageTimestamp } from "../../lib/git-dates";
 
 export const metadata: Metadata = {
-  title: "Topic X — The Sharp Radial Upper Bound",
+  title: "Topic X — The Radial Upper Bound and Its Equality Case",
   description:
-    "A complete, illustrated Jensen comparison for a strictly convex log-sine function, yielding the radial upper bound against Topic IX’s unique radius.",
+    "An illustrated Jensen comparison proving the radial upper bound for a new order-N boundary point and characterizing equality under the finite-product hypotheses.",
 };
 
 const updatedAt = getPageTimestamp("app/data/proof-topics/topics-viii-xi.tsx");
@@ -18,10 +18,10 @@ export default function TopicXPage() {
     <ProofChapterShell
       firstPublishedAt={firstPublishedAt}
       routeKey="topic-x"
-      manuscriptPages="86–90"
+      manuscriptPages="86–91"
       overview={[
-        "For a radial boundary point that first appears at order N≥4, Part I supplies a finite product equation, the phase equation eϑ+Σuⱼ=2π(r−dp), and the bounds uⱼ∈[A,M). Complex conjugation transfers these data between the two possible orientations without changing the modulus or Farey denominators.",
-        "Jensen’s inequality for the strictly convex function F(u)=log sin M−log sin(M−u) gives ρ≤ρ*, where ρ* is the unique radius defined by Topic IX’s scalar equation. This page proves only that upper bound; Topic XI independently constructs a stochastic matrix attaining ρ* and then obtains equality.",
+        "For an upper-half-plane radial boundary point that first appears at order N≥4, Topics VII and VIII supply a finite product equation, a phase equation for chosen arguments of its factors, and bounds placing those arguments in one interval. Lower-half-plane points follow by complex conjugation.",
+        "Topic X turns those identities into a Jensen comparison with the candidate radius constructed in Topic IX and characterizes equality under the finite-product hypotheses. Topic XI, now published, independently realizes the common-parameter case; Topic XII handles inherited lower-order boundary points through nesting.",
       ]}
       updatedAt={updatedAt}
       stats={[{ value: 3, label: "results" }]}

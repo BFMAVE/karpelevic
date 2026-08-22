@@ -38,7 +38,7 @@ test("the Topic X standalone is self-contained and links to published Topic XI",
     assert.match(html, /<script data-standalone-proof-chapter-script>/);
     assert.doesNotMatch(html, /<link\b(?=[^>]*\brel="(?:stylesheet|modulepreload|preload)")/i);
     assert.doesNotMatch(html, /\b(?:href|src)="\/(?!\/)/i);
-    assert.match(visibleText, /Topic X · Manuscript pages 86–90/);
+    assert.match(visibleText, /Topic X · Manuscript pages 86–91/);
     assert.match(visibleText, /First published 21 August 2026/);
     assert.match(visibleText, /Last revised 22 August 2026/);
     assert.match(

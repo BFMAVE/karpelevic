@@ -491,7 +491,7 @@ function verifyStandaloneHtml(html) {
                   : proofRoute === "/proof/topic-x"
                     ? [
                         "Topic X",
-                        "The Sharp Radial Upper Bound",
+                        "The Radial Upper Bound and Its Equality Case",
                         "Jensen’s inequality and the radial upper bound",
                         'data-proof-route="topic-x"',
                         "Forthcoming",

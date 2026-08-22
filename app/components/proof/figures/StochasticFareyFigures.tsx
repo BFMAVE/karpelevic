@@ -801,7 +801,7 @@ function Jensen({ mobile = false }: { mobile?: boolean }) {
       <text fill={ink} fontSize={labelSize} textAnchor="middle" x={mobile ? 160 : 340} y={mobile ? 28 : 32}>
         F″(u)=csc²(M−u)&gt;0
       </text>
-      <path d={curve} data-jensen-curve="quadratic" fill="none" stroke={ink} strokeWidth="3" />
+      <path d={curve} data-jensen-curve="strictly-convex-schematic" fill="none" stroke={ink} strokeWidth="3" />
       <line
         data-jensen-secant="two-input"
         x1={start.x}
@@ -829,6 +829,9 @@ function Jensen({ mobile = false }: { mobile?: boolean }) {
       <text fill={red} fontSize={labelSize} x={start.x - (mobile ? 4 : 10)} y={start.y + 26}>u₁</text>
       <text fill={red} fontSize={labelSize} x={end.x - 4} y={end.y - 14}>u₂</text>
       <text fill={teal} fontSize={labelSize} textAnchor="middle" x={meanX} y={graphMeanY + 28}>(u₁+u₂)/2</text>
+      <text fill={copper} fontSize={labelSize} textAnchor="middle" x={mobile ? 160 : 340} y={mobile ? 333 : 330}>
+        u₁≠u₂
+      </text>
       <text fill={ink} fontSize={labelSize} textAnchor="middle" x={mobile ? 160 : 340} y={mobile ? 360 : 355}>
         F((u₁+u₂)/2)&lt;(F(u₁)+F(u₂))/2
       </text>
@@ -1011,20 +1014,20 @@ const copy: Record<FigureKind, { title: string; description: string; caption: Re
       "Plate IX.3. For n=3, the nonreal branch is the vertical segment {−1/2+iy: 0≤y≤√3/2}, and the selected real branch is [−1,−1/2].",
   },
   reflection: {
-    status: "Exact order diagram — distances not to scale",
+    status: "Exact Farey order; schematic conjugation panel",
     title: "Reflection reverses the selected Farey interval",
     description:
-      "Two rational rows show that t maps to one minus t by crossing arrows: p over q maps to q minus p over q, and r over s maps to s minus r over s. A second panel shows mu equal to the complex conjugate of lambda across the real axis at the same modulus.",
+      "Two rational rows record the exact endpoint order under t mapping to one minus t: p over q maps to q minus p over q, and r over s maps to s minus r over s. A separate schematic panel shows a representative pair with mu equal to the complex conjugate of lambda across the real axis and at the same modulus. Its representative horizontal placement does not restrict the real part of lambda.",
     caption:
-      "Plate X.1. From p/q<y<r/s, the map t↦1−t gives (s−r)/s<x<(q−p)/q: p/q maps to (q−p)/q and r/s maps to (s−r)/s. Endpoint order reverses while denominators are preserved. In the conjugate case μ=λ̄ is the reflection of λ across the real axis and |μ|=|λ|. Rational-row spacings are schematic.",
+      "Plate X.1. From p/q<y<r/s, the map t↦1−t gives (s−r)/s<x<(q−p)/q: p/q maps to (q−p)/q and r/s maps to (s−r)/s. Farey endpoint order is exact, denominators are preserved, and rational-row spacings are schematic. The separate conjugation panel is also schematic: μ=λ̄ is the reflection of λ across the real axis and |μ|=|λ|, while the representative placement does not restrict Re λ.",
   },
   jensen: {
     status: "Strict-convexity schematic — not to scale",
     title: "Equality in Jensen’s inequality forces equal factor arguments",
     description:
-      "A quadratic strictly convex graph lies below the secant at the mean of two inputs. The displayed strict inequality is the two-input instance of the d-input Jensen inequality used in the proof.",
+      "A generic strictly convex schematic curve lies below the secant at the mean of two distinct inputs. It illustrates the strict-convexity property of F rather than the formula or shape of F itself. The displayed strict inequality is the two-input instance of the d-input Jensen inequality used in the proof.",
     caption:
-      "Plate X.2. The drawing shows the two-input case F((u₁+u₂)/2)<(F(u₁)+F(u₂))/2. In the proof, F((Σuⱼ)/d)≤ΣF(uⱼ)/d, with equality exactly when u₁=⋯=u_d. Since β↦u(β) is strictly increasing, equality is equivalent to β₁=⋯=β_d.",
+      "Plate X.2. This generic strictly convex curve is schematic; it is not a plot or quadratic model of F. For u₁≠u₂ it shows the two-input case F((u₁+u₂)/2)<(F(u₁)+F(u₂))/2. In the proof, F((Σuⱼ)/d)≤ΣF(uⱼ)/d, with equality exactly when u₁=⋯=u_d. Since β↦u(β) is strictly increasing, equality is equivalent to β₁=⋯=β_d.",
   },
   "cycle-ledger": { title: "Within-block cycles and the cycle through all blocks", description: "Three directed blocks have copper return edges of weight beta and red inter-block edges of weight alpha. The graph contains all these edges simultaneously.", caption: "Plate XI.1. The graph contains all displayed edges simultaneously. A pairwise vertex-disjoint cycle collection may contain any subset of the within-block cycles, or the single cycle through all blocks; that cycle meets every within-block cycle, so the two alternatives cannot be selected together." },
   "sparse-cases": {

@@ -41,7 +41,7 @@ test("the Topic XI standalone is self-contained and stops before Topic XII", asy
     assert.match(html, /<script data-standalone-proof-chapter-script>/);
     assert.doesNotMatch(html, /<link\b(?=[^>]*\brel="(?:stylesheet|modulepreload|preload)")/i);
     assert.doesNotMatch(html, /\b(?:href|src)="\/(?!\/)/i);
-    assert.match(text, /Topic XI · Manuscript pages 90–93/);
+    assert.match(text, /Topic XI · Manuscript pages 91–93/);
     assert.match(text, /First published 22 August 2026/);
     assert.match(text, /Last revised 22 August 2026/);
     assert.match(text, /Directed-cycle expansion of the characteristic polynomial/i);

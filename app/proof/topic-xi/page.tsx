@@ -18,7 +18,7 @@ export default function TopicXIPage() {
     <ProofChapterShell
       firstPublishedAt={firstPublishedAt}
       routeKey="topic-xi"
-      manuscriptPages="90–93"
+      manuscriptPages="91–93"
       overview={[
         "A sparse realization graph turns the reduced Ito polynomial into the characteristic polynomial of a row-stochastic matrix. The proof derives the determinant expansion over pairwise vertex-disjoint directed cycles and classifies every directed cycle in the graph.",
         "This independently realizes every point on the Topic IX candidate curve. Only after that reverse inclusion is established does the chapter combine it with Topic X and activate the strict Jensen equality condition.",

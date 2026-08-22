@@ -526,15 +526,15 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "sharp-radius",
     eyebrow: "Topic X · upper bound",
-    title: "The sharp radial upper bound",
+    title: "The radial upper bound and its equality case",
     question:
-      "Why can no stochastic eigenvalue lie beyond the candidate curve constructed in Topic IX?",
+      "For an upper-half-plane radial boundary point that first appears at order N, why is its modulus no greater than the Topic IX radius on the corresponding Farey interval?",
     overview: [
-      "For a radial boundary point that first appears at order N≥4, Part I supplies a finite product equation, an exact phase equation, and the factor-argument bounds uⱼ∈[A,M); orders at most three are treated directly later.",
-      "Jensen’s inequality for a strictly convex log-sine function gives the radial upper bound ρ≤ρ* on each Farey interval, with equality only when all factor parameters agree.",
+      "For N≥4, Topic X starts with an upper-half-plane radial boundary point that belongs to the order-N region but not the order-(N−1) region. Topics VII and VIII supply a finite product equation, an exact phase equation, and bounds on the arguments of its factors; lower-half-plane points follow by complex conjugation.",
+      "Jensen’s inequality for an explicitly defined strictly convex function gives the radial upper bound and characterizes equality within the finite-product hypotheses. Topic XI supplies stochastic attainment, while Topic XII handles inherited boundary points through nesting.",
     ],
     itemNumbers: [],
-    manuscriptPages: "86–90",
+    manuscriptPages: "86–91",
   },
   {
     slug: "realization",
@@ -547,7 +547,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "The resulting construction proves the reverse inclusion independently: every equality point is genuinely attained in the Karpelevič region.",
     ],
     itemNumbers: [],
-    manuscriptPages: "90–93",
+    manuscriptPages: "91–93",
   },
   {
     slug: "nesting",

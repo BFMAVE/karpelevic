@@ -570,7 +570,10 @@ test("Topics IX and X form a self-contained scalar-to-Jensen handoff", async () 
   assert.match(visibleText, /radial boundary point that first appears at order N/i);
   assert.match(visibleText, /Θ N ∖Θ N−1|ΘN∖ΘN−1/i);
   assert.match(visibleText, /consecutive fractions of F N|consecutive reduced fractions in F N/i);
-  assert.match(visibleText, /ϑ=arg₊\(μ\)∈\(0,2π\) so that y=ϑ\/\(2π\)/i);
+  assert.match(
+    visibleText,
+    /ϑ∈\(0,2π\)[\s\S]{0,80}?unique[\s\S]{0,100}?μ=ρe\s*iϑ[\s\S]{0,80}?y=ϑ\/\(2π\)/i,
+  );
   assert.match(visibleText, /p\/q<y<r\/s[\s\S]{0,80}?rq−ps=1[\s\S]{0,80}?q<s/i);
   assert.match(visibleText, /μ=ρe iϑ|μ=ρe\s*iϑ/i);
   assert.match(visibleText, /du\/dβ=ρᑫ sin A\/\|μᑫ−β\|²>0/i);

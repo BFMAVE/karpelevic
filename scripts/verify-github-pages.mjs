@@ -55,7 +55,7 @@ const pages = [
   ],
   [
     "proof/topic-x/index.html",
-    "The sharp radial upper bound",
+    "The radial upper bound and its equality case",
   ],
   [
     "proof/topic-xi/index.html",
@@ -302,7 +302,7 @@ for (const relativePath of [
   );
   const visibleText = visibleTextFromHtml(html);
   assert.match(html, /data-proof-route="topic-x"/);
-  assert.match(visibleText, /The sharp radial upper bound/i);
+  assert.match(visibleText, /The radial upper bound and its equality case/i);
   assert.match(visibleText, /radial boundary point that first appears at order N/i);
   assert.match(html, /q&lt;s/);
   assert.match(visibleText, /du\/dβ=ρᑫ sin A\/\|μᑫ−β\|²&gt;0/i);

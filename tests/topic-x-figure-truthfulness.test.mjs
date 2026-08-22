@@ -88,7 +88,9 @@ test("Plate X.1 shows the order-reversing Farey reflection and complex conjugati
   assert.match(text, /p\/q maps to \(q−p\)\/q/);
   assert.match(text, /r\/s maps to \(s−r\)\/s/);
   assert.match(text, /\|μ\|=\|λ\|/);
-  assert.match(text, /Rational-row spacings are schematic/);
+  assert.match(text, /Farey endpoint order is exact/);
+  assert.match(text, /rational-row spacings are schematic/);
+  assert.match(text, /representative placement does not restrict Re λ/);
 
   for (const layout of ["desktop", "mobile"]) {
     const svg = svgMarkup(figure, layout);
@@ -123,14 +125,17 @@ test("Plate X.2 depicts a strictly convex graph below its secant at the mean", a
   const figure = figureMarkup(await render("/proof/topic-x"), "jensen");
   assertAccessibleLayouts(figure, "jensen", "0 0 320 410");
   const text = visibleText(figure);
+  assert.match(text, /u₁≠u₂/);
   assert.match(text, /F\(\(u₁\+u₂\)\/2\)<\(F\(u₁\)\+F\(u₂\)\)\/2/);
   assert.match(text, /F\(\(Σuⱼ\)\/d\)≤ΣF\(uⱼ\)\/d/);
   assert.match(text, /equality exactly when u₁=⋯=u_d/);
+  assert.match(text, /generic strictly convex curve is schematic/);
+  assert.match(text, /not a plot or quadratic model of F/);
   assert.doesNotMatch(text, /Strict convexity makes the parameters constant|u₃/);
 
   for (const layout of ["desktop", "mobile"]) {
     const svg = svgMarkup(figure, layout);
-    const curve = tagsWithAttribute(svg, "path", "data-jensen-curve", "quadratic")[0];
+    const curve = tagsWithAttribute(svg, "path", "data-jensen-curve", "strictly-convex-schematic")[0];
     const values = [...attribute(curve, "d").matchAll(/-?\d+(?:\.\d+)?/g)].map((match) => Number(match[0]));
     assert.equal(values.length, 6);
     const [x0, y0, cx, cy, x2, y2] = values;
@@ -148,7 +153,7 @@ test("Plate X.2 depicts a strictly convex graph below its secant at the mean", a
     const expectedGraphY = (y0 + 2 * cy + y2) / 4;
     const expectedSecantY = (y0 + y2) / 2;
     assertClose(numberAttribute(graphMean, "cx"), numberAttribute(secantMean, "cx"), `${layout}: means have same abscissa`);
-    assertClose(numberAttribute(graphMean, "cy"), expectedGraphY, `${layout}: graph mean lies on quadratic`);
+    assertClose(numberAttribute(graphMean, "cy"), expectedGraphY, `${layout}: graph mean lies on schematic curve`);
     assertClose(numberAttribute(secantMean, "cy"), expectedSecantY, `${layout}: secant midpoint is exact`);
     assert.ok(numberAttribute(graphMean, "cy") > numberAttribute(secantMean, "cy"), `${layout}: graph lies below secant in y-down coordinates`);
   }

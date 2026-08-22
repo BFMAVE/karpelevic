@@ -643,7 +643,7 @@ export function TopicXChapter() {
             label: "Topic VII — consecutive Farey fractions and a finite product equation",
             href: sitePath("/proof/topic-vii/"),
             explanation:
-              "supplies, for N≥4, the finite product equation with parameters βⱼ, the phase equation for chosen real arguments, and the bounds uⱼ∈[A,M).",
+              "supplies, for N≥4, the finite product equation with possibly different real parameters, the exact phase equation for chosen arguments of its factors, and bounds placing those arguments in one interval.",
           },
           {
             label: "Topic VIII — criticality of a radial boundary point new at order N",
@@ -674,50 +674,73 @@ export function TopicXChapter() {
           <p>
             We apply Part I&apos;s finite product equation to the stochastic
             boundary point, relate the two possible orientations by complex
-            conjugation, and apply Jensen&apos;s inequality to a strictly convex
-            log-sine function. The result is the radial upper bound ρ≤ρ*.
+            conjugation, and apply Jensen&apos;s inequality to an elementary
+            strictly convex function obtained from the triangle sine ratios.
+            The result compares the point&apos;s modulus with Topic IX&apos;s candidate
+            radius.
           </p>
         }
       />
 
-      <SetupBlock eyebrow="Scope" title="Hypotheses and the one-sided conclusion">
+      <SetupBlock eyebrow="Scope" title="Hypotheses and the comparison proved here">
         <p>
-          For <span className="math-inline">N≥4</span>, let Θ<sub>N</sub> be the
-          union of the spectra of all real row-stochastic N×N matrices and let
+          Fix <span className="math-inline">N≥4</span> and
+          {" "}<span className="math-inline">0&lt;θ&lt;π</span>. Let Θ<sub>N</sub> be
+          the union of the spectra of all real row-stochastic N×N matrices and let
           {" "}<span className="math-inline">R<sub>N</sub>(θ)=max&#123;r≥0:
           re<sup>iθ</sup>∈Θ<sub>N</sub>&#125;</span>. Fix
           {" "}<span className="math-inline">λ=R<sub>N</sub>(θ)e<sup>iθ</sup>
           ∈Θ<sub>N</sub>∖Θ<sub>N−1</sub></span>, with
           {" "}<span className="math-inline">0&lt;|λ|&lt;1</span>. Thus λ is a
-          radial boundary point that first appears at order N.
+          radial boundary point in the open upper half-plane that first appears
+          at order N. The lower-half-plane case follows by complex conjugation.
         </p>
         <p>
-          Let F<sub>N</sub> denote the Farey sequence of order N. Topic VII
-          selects <span className="math-inline">μ∈&#123;λ,λ̄&#125;</span> and the
-          argument <span className="math-inline">ϑ=arg₊(μ)∈(0,2π)</span>{" "}
-          so that <span className="math-inline">y=ϑ/(2π)</span> lies between
-          consecutive fractions of F<sub>N</sub> whose ordered denominators
-          satisfy <span className="math-inline">q&lt;s</span>. Theorem II.5.1
-          lists the resulting product equation, phase equation, and argument
-          bounds. Lemma II.5.2 transfers the comparison back to λ if μ=λ̄.
+          Put <span className="math-inline">x=θ/(2π)</span>. Let F<sub>N</sub>
+          denote the Farey sequence of order N. Topic VII chooses
+          {" "}<span className="math-inline">μ∈&#123;λ,λ̄&#125;</span>. Set
+          {" "}<span className="math-inline">ρ:=|μ|=|λ|</span>, and let
+          {" "}<span className="math-inline">ϑ∈(0,2π)</span> be the unique
+          number satisfying
+          {" "}<span className="math-inline">μ=ρe<sup>iϑ</sup></span>. Put
+          {" "}<span className="math-inline">y=ϑ/(2π)</span>. Topic VII
+          provides consecutive fractions
+          {" "}<span className="math-inline">p/q&lt;y&lt;r/s</span> in F<sub>N</sub>
+          with <span className="math-inline">q&lt;s</span>. Define
+          {" "}<span className="math-inline">d=⌊N/q⌋</span>,
+          {" "}<span className="math-inline">e=s−dq</span>,
+          {" "}<span className="math-inline">A=qϑ−2πp</span>, and
+          {" "}<span className="math-inline">B=(2πr−sϑ)/d</span>.
         </p>
         <p>
-          For a nonzero complex number <var>z</var> that is not positive real,
-          {" "}<span className="math-inline">arg₊(z)</span> means the unique
-          argument in <span className="math-inline">(0,2π)</span>. We write
-          {" "}<span className="math-inline">ϑ=arg₊(μ)</span> and
-          {" "}<span className="math-inline">y=ϑ/(2π)</span>. Keeping this
-          chosen real angle, instead of reducing every equation modulo
-          {" "}<span className="math-inline">2π</span>, is what makes the
-          average in Theorem II.6.1 exact.
+          Theorem II.5.1 lists the resulting product equation, phase equation,
+          and bounds on the arguments of
+          {" "}<span className="math-inline">μᑫ−βⱼ</span>. Lemma II.5.2
+          transfers the comparison back to λ when
+          {" "}<span className="math-inline">μ=λ̄</span>. Retaining ϑ as this
+          real number, rather than reducing the phase equation modulo
+          {" "}<span className="math-inline">2π</span>, makes the average in
+          Theorem II.6.1 exact.
         </p>
         <p>
-          The result of this page is the one-sided inequality
-          {" "}<span className="math-inline">ρ≤ρ*</span>, where ρ* is Topic
-          IX&apos;s unique radius defined by the scalar equation. We do <strong>not</strong> yet
-          know from this argument that ρ* is an eigenvalue of a stochastic
-          matrix. That independent construction belongs to Topic XI, and only
-          then may the equality conclusion be closed.
+          Define ρ* using Topic IX&apos;s radius on the original upper-half-plane
+          Farey interval. If <span className="math-inline">μ=λ</span>, set
+          {" "}<span className="math-inline">ρ*=ρ<sub>p/q,r/s</sub><sup>(N)</sup>(x)</span>.
+          If <span className="math-inline">μ=λ̄</span>, reflection gives
+          {" "}<span className="math-inline">(s−r)/s&lt;x&lt;(q−p)/q</span>, and set
+          {" "}<span className="math-inline">ρ*=ρ<sub>(s−r)/s,(q−p)/q</sub><sup>(N)</sup>(x)</span>.
+          In each case the two subscripts are the endpoints in left-to-right
+          order in F<sub>N</sub><sup>+</sup>, and Topic IX proves that this is the
+          unique solution in <span className="math-inline">(0,1)</span> of its
+          scalar equation.
+        </p>
+        <p>
+          This page proves <span className="math-inline">ρ≤ρ*</span> and
+          characterizes equality under the finite-product and phase
+          hypotheses. The argument itself does not construct a stochastic
+          matrix at ρ*. Topic XI, now published, supplies that independent
+          construction and proves attainment in Θ<sub>N</sub>; Topic XII uses
+          nesting to handle boundary points inherited from lower orders.
         </p>
         <StochasticFareyFigure kind="reflection" />
       </SetupBlock>
@@ -736,16 +759,13 @@ export function TopicXChapter() {
         results={topicXResults.slice(0, 2)}
       />
 
-      <SetupBlock eyebrow="Convexity" title="The log-sine function and the factor arguments">
+      <SetupBlock eyebrow="Convexity" title="The strictly convex function and the factor arguments">
         <p>
-          Retain the selected multiplier
-          {" "}<span className="math-inline">μ=ρe<sup>iϑ</sup></span> and put
-          {" "}<span className="math-inline">y=ϑ/(2π)</span>. If
-          {" "}<span className="math-inline">p/q&lt;y&lt;r/s</span> is its open
-          Farey interval, then <span className="math-inline">rq−ps=1</span> and
-          {" "}<span className="math-inline">q&lt;s</span>. Put
-          {" "}<span className="math-inline">d=⌊N/q⌋</span> and
-          {" "}<span className="math-inline">e=s−dq</span>.
+          For whichever choice <span className="math-inline">μ=λ</span> or
+          {" "}<span className="math-inline">μ=λ̄</span> Topic VII supplies,
+          retain the quantities ρ, ϑ, y, p/q, r/s, d, e, A, and B defined in
+          the Scope. Farey adjacency gives
+          {" "}<span className="math-inline">rq−ps=1</span>.
         </p>
         <p id="karp:eq:oriented-cell" className="display-equation proof-setup-equation">
           <span className="math-inline">
@@ -755,32 +775,77 @@ export function TopicXChapter() {
             (II.6.1)
           </a>
         </p>
-        <p>
-          In the selected orientation set
-          {" "}<span className="math-inline">A=qϑ−2πp</span> and
-          {" "}<span className="math-inline">B=(2πr−sϑ)/d</span>. These are
-          positive and satisfy <span className="math-inline">A+B&lt;π</span>.
-          Choose
-          {" "}<span className="math-inline">M=Arg(μᑫ−1)</span> as the unique
-          argument in the open upper half-plane, where
-          {" "}<span className="math-inline">A&lt;M&lt;π</span>. For a factor
-          parameter <span className="math-inline">0≤β&lt;1</span>, let
-          {" "}<span className="math-inline">u(β)=Arg(μᑫ−β)∈[A,M)</span> be
-          its unique argument in <span className="math-inline">(0,π)</span>.
-          Define directly
-          {" "}<span className="math-inline">F(u)=log sin M−log sin(M−u)</span>.
-          Triangle trigonometry then gives
-          {" "}<span className="math-inline">F(u(β))=log(|μᑫ−β|/(1−β))</span>.
+        <p id="karp:eq:A-B-oriented" className="display-equation proof-setup-equation">
+          <span className="math-inline">
+            A=qϑ−2πp, B=(2πr−sϑ)/d.
+          </span>{" "}
+          <a className="part-i-equation-number" href="#karp:eq:A-B-oriented" aria-label="Equation II.6.2, permalink">
+            (II.6.2)
+          </a>
+        </p>
+        <p id="karp:eq:A-B-oriented-range" className="display-equation proof-setup-equation">
+          <span className="math-inline">A&gt;0, B&gt;0, A+B&lt;π.</span>{" "}
+          <a className="part-i-equation-number" href="#karp:eq:A-B-oriented-range" aria-label="Equation II.6.3, permalink">
+            (II.6.3)
+          </a>
         </p>
         <p>
-          Therefore <span className="math-inline">F″(u)=csc²(M−u)&gt;0</span>
-          on <span className="math-inline">[A,M)</span>, so <var>F</var> is
-          strictly convex. Moreover,
+          Set
+          {" "}<span className="math-inline">z=μᑫ=ρᑫe<sup>iA</sup></span>. Let
+          {" "}<span className="math-inline">M∈(0,π)</span> be the unique angle
+          such that
+          {" "}<span className="math-inline">μᑫ−1=|μᑫ−1|e<sup>iM</sup></span>;
+          then <span className="math-inline">A&lt;M&lt;π</span>. For
+          {" "}<span className="math-inline">0≤β&lt;1</span>, let
+          {" "}<span className="math-inline">u(β)∈(0,π)</span> be the unique
+          angle satisfying
+          {" "}<span className="math-inline">μᑫ−β=|μᑫ−β|e<sup>iu(β)</sup></span>.
+          The imported argument bounds give
+          {" "}<span className="math-inline">u(β)∈[A,M)</span>.
+        </p>
+        <p>
+          Consider the triangle with vertices β, 1, and <var>z</var>. Its
+          angles at β, 1, and <var>z</var> are respectively
+          {" "}<span className="math-inline">u(β)</span>,
+          {" "}<span className="math-inline">π−M</span>, and
+          {" "}<span className="math-inline">M−u(β)</span>. The sine rule gives
+        </p>
+        <p className="display-equation proof-setup-equation">
+          <span className="math-inline">
+            |z−β|/sin M=(1−β)/sin(M−u(β)).
+          </span>
+        </p>
+        <p>
+          Define <span className="math-inline">F:[A,M)→ℝ</span> by
+          {" "}<span className="math-inline">F(u)=log(sin M)−log(sin(M−u))</span>.
+          The displayed sine-rule identity is exactly the following equation.
+        </p>
+        <p id="karp:eq:factor-potential" className="display-equation proof-setup-equation">
+          <span className="math-inline">F(u(β))=log(|μᑫ−β|/(1−β)).</span>{" "}
+          <a className="part-i-equation-number" href="#karp:eq:factor-potential" aria-label="Equation II.6.4, permalink">
+            (II.6.4)
+          </a>
+        </p>
+        <p>
+          The second derivative is
+        </p>
+        <p id="karp:eq:F-convex" className="display-equation proof-setup-equation">
+          <span className="math-inline">F″(u)=csc²(M−u)&gt;0.</span>{" "}
+          <a className="part-i-equation-number" href="#karp:eq:F-convex" aria-label="Equation II.6.5, permalink">
+            (II.6.5)
+          </a>
+        </p>
+        <p>
+          Therefore <var>F</var> is strictly convex on
+          {" "}<span className="math-inline">[A,M)</span>. Moreover,
           {" "}<span className="math-inline">du/dβ=ρᑫ sin A/|μᑫ−β|²&gt;0</span>.
-          The phase equation <span className="math-inline">eϑ+Σuⱼ=2π(r−dp)</span>
-          fixes the mean of the arguments at A+B, while the modulus of the
-          product equation fixes ΣF(uⱼ). Jensen&apos;s inequality compares this
-          list with the list in which all arguments are equal.
+          The phase equation
+          {" "}<span className="math-inline">eϑ+Σⱼ₌₁ᵈuⱼ=2π(r−dp)</span> fixes
+          the mean of the arguments at A+B. Taking absolute values and
+          logarithms in the assumed product equation fixes
+          {" "}<span className="math-inline">Σⱼ₌₁ᵈF(uⱼ)</span>. Jensen&apos;s
+          inequality compares this list with the list in which all arguments
+          equal their common mean.
         </p>
         <p>
           Since <span className="math-inline">A&lt;A+B&lt;M&lt;π</span>, the quantities
@@ -790,7 +855,9 @@ export function TopicXChapter() {
           the direction of the inequality.
         </p>
         <p id="karp:eq:rhoq-sine" className="display-equation proof-setup-equation">
-          At β=0, the same triangle gives
+          At <span className="math-inline">β=0</span>, one has
+          {" "}<span className="math-inline">u(0)=A</span>, so the sine-rule
+          identity gives
           {" "}<span className="math-inline">ρᑫ=sin M/sin(M−A)</span>.{" "}
           <a className="part-i-equation-number" href="#karp:eq:rhoq-sine" aria-label="Equation II.6.6, permalink">
             (II.6.6)
@@ -804,10 +871,10 @@ export function TopicXChapter() {
         title="Jensen’s inequality and the radial upper bound"
         introduction={
           <p>
-            Every sign, branch, and equality condition is part of the formal
-            theorem. The guide additionally expands the chosen-argument arithmetic and
-            the monotonicity step that converts the trigonometric inequality
-            into a radial one.
+            The formal theorem states the finite-product and phase hypotheses
+            and the resulting radial inequality. The guide expands the branch
+            choices, triangle calculation, sign checks, chosen-angle
+            arithmetic, and the final monotonicity step.
           </p>
         }
         results={topicXResults.slice(2)}
