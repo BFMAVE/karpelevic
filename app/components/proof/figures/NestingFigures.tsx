@@ -90,8 +90,8 @@ function DefectFigure() {
       <circle cx="420" cy="300" r="7" fill={red} stroke={red} />
       <line x1="310" y1="341" x2="310" y2="375" stroke={teal} strokeWidth="2" strokeDasharray="5 4" />
       <line x1="420" y1="300" x2="420" y2="375" stroke={red} strokeWidth="2" strokeDasharray="5 4" />
-      <text x="245" y="403" fill={teal}>ρ₋=Kₙ₋₁</text>
-      <text x="395" y="403" fill={red}>Kₙ</text>
+      <text x="230" y="403" fill={teal}>ρ₋=Kₙ₋₁(θ)</text>
+      <text x="390" y="403" fill={red}>ρ₊=Kₙ(θ)</text>
       <text x="132" y="88" fill={ink}>strictly increasing residual</text>
       <text x="438" y="282" fill={red}>unique zero</text>
       <text x="150" y="330" fill={teal}>Fₙ,θ(ρ₋)&lt;0</text>
@@ -99,21 +99,22 @@ function DefectFigure() {
   );
 }
 
-const copy: Record<NestingFigureKind, { title: string; description: string; caption: string }> = {
+const copy: Record<NestingFigureKind, { title: string; description: string; caption: string; status?: string }> = {
   mediant: {
     title: "One Farey interval is divided at its mediant",
     description: "Two ordered interval rows show the old interval from a over b to c over d and the two new subintervals divided at the mediant whose denominator is b plus d equals n. Positions are schematic and not to scale.",
     caption: "Plate XII.1. Schematic interval diagram (not to scale): when a/b<c/d are consecutive in F_{n−1} and b+d=n, their mediant (a+c)/(b+d) divides the old interval into two order-n intervals.",
   },
   padding: {
+    status: "Exact algebraic identity; schematic tuple layout",
     title: "Append the zero parameter",
-    description: "A row of equal old beta parameters is extended by beta sub M equals zero; the corresponding algebraic factor is one.",
-    caption: "Plate XII.2. The old tuple (β,…,β) is extended by the parameter β_M=0. Its corresponding factor μ^{-q}(μ^q−β_M) equals 1, so the product is unchanged, but the extended tuple is not constant and Topic X gives a strict radius comparison.",
+    description: "A schematic row of equal old beta parameters, with beta strictly between zero and one, is extended by beta sub M equals zero. The appended zero is therefore distinct from every old entry, and its corresponding algebraic factor is exactly one.",
+    caption: "Plate XII.2. Exact algebraic identity; schematic tuple layout. The old tuple (β,…,β), with 0<β<1, is extended by the distinct parameter β_M=0. Its corresponding factor μ^{-q}(μ^q−β_M) equals 1, so the product is unchanged, but the extended tuple is not constant and Topic X gives a strict radius comparison.",
   },
   defect: {
     title: "A sign comparison locates the new radius",
-    description: "In either strict interior comparison case, the increasing scalar residual is negative at the old radius and vanishes at the new radius, so the old radius is smaller.",
-    caption: "Plate XII.3. Schematic for the strict interior cases: after a mediant insertion or factor-count increase, the new increasing residual is negative at K_{n−1}(θ) and vanishes at K_n(θ).",
+    description: "In either strict interior comparison case, the increasing scalar residual is negative at rho minus equal to K sub n minus one of theta and vanishes at rho plus equal to K sub n of theta, so the old radius is smaller. The curve shape and scale are schematic and are not asserted.",
+    caption: "Plate XII.3. Schematic for the strict interior cases: after a mediant insertion or factor-count increase, the new increasing residual is negative at ρ₋=K_{n−1}(θ) and vanishes at ρ₊=K_n(θ). Only monotonicity, the sign at ρ₋, and the zero at ρ₊ are asserted; the curve shape and scale are not.",
   },
 };
 
@@ -122,7 +123,7 @@ export function NestingFigure({ kind }: { kind: NestingFigureKind }) {
   return (
     <figure className="topic-ii-concept-figure">
       <div className="topic-ii-concept-heading">
-        <span>Mathematical plate</span>
+        <span>{description.status ?? "Mathematical plate"}</span>
         <span>{description.title}</span>
       </div>
       <svg role="img" aria-labelledby={`nest-${kind}-title nest-${kind}-desc`} viewBox="0 0 680 450">

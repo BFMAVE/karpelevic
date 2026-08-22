@@ -1277,6 +1277,18 @@ test("Topic XII publishes as one continuous monotonicity argument", async () => 
     [...topicXII.matchAll(/\sid="topic-xii-contract-heading"/g)].length,
     1,
   );
+  assert.match(
+    topicXII,
+    /Topic XI proved stochastic attainment[\s\S]{0,500}?does not use Topic XI(?:&apos;|&#x27;|')s realization theorem/,
+  );
+  assert.match(
+    topicXII,
+    /This completes candidate-radius monotonicity[\s\S]{0,500}?remain for Topic XIII/,
+  );
+  assert.match(
+    topicXII,
+    /newly inserted fraction is its mediant/,
+  );
   assert.doesNotMatch(topicXII, /proof-chapter-parts|\/proof\/topic-xii\/[ab]\//i);
 
   const card = (id, nextId) => {

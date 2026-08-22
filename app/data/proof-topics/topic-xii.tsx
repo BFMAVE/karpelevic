@@ -119,7 +119,7 @@ const comparisonResults: readonly ProofResultData[] = [
         explanation: <>The strict comparison concerns angles whose normalized values lie in the two open subintervals. At either inherited Farey endpoint both candidate radii are defined to be 1, so equality there is part of the definition rather than a limiting claim.</>,
       },
     ],
-    takeaway: <>On either open subinterval created by the mediant, the comparison gives <i>K</i><sub>n−1</sub>(θ)&lt;<i>K</i><sub>n</sub>(θ).</>,
+    takeaway: <>Lemma II.8.1 supplies the reciprocal-line comparison <i>I</i><sub>R</sub>&gt;1 on either open subinterval created by the mediant. Theorem II.8.4 converts that comparison, through identity (II.8.23) and strict monotonicity of the new scalar residual, into <i>K</i><sub>n−1</sub>(θ)&lt;<i>K</i><sub>n</sub>(θ).</>,
     sourceIds: ["standard-farey", "ito-1997"],
     sourceRelation: <>Farey mediants and Ito candidate curves on consecutive-fraction intervals are established ingredients; the signed line comparison used here is proved in full in Lemma II.8.1.</>,
   },
@@ -381,13 +381,30 @@ function TopicXIISetup() {
 export function TopicXIIContent() {
   return (
     <>
+      <section
+        className="topic-i-textbook proof-chapter-group"
+        aria-labelledby="topic-xii-transition-heading"
+      >
+        <header>
+          <div>
+            <p className="section-label">Transition from Topic XI</p>
+            <h3 id="topic-xii-transition-heading">A separate candidate-only comparison</h3>
+          </div>
+          <div>
+            <p>
+              Topic XI proved stochastic attainment of Topic IX&apos;s candidate curves and, by combining that construction with Topic X, identified the non-inherited radial maxima in the <i>N</i>≥4 open-Farey-interval setting. Topic XII proves a separate comparison involving only the candidate radii: it uses Topic IX&apos;s scalar construction and Topic X&apos;s inequality, but it does not use Topic XI&apos;s realization theorem.
+            </p>
+          </div>
+        </header>
+      </section>
+
       <ProofDependencyContract
         headingId="topic-xii-contract-heading"
         imported={commonImports}
         background={[
           {
             label: "Classical Farey refinement",
-            explanation: <>a reduced fraction appearing for the first time has denominator exactly <i>n</i>, and an interval between unimodular neighbours is divided at their mediant.</>,
+            explanation: <>If an old interval is divided when passing from order <i>n</i>−1 to order <i>n</i>, the newly inserted fraction is its mediant.</>,
           },
           {
             label: "Strict convexity of −log cos",
@@ -464,6 +481,23 @@ export function TopicXIIContent() {
         introduction={<p>Lemmas II.8.1 and II.8.2 treat the two strict ways the formula at an interior argument can change. Lemma II.8.3 proves that these, the unchanged case, and the endpoint cases exhaust the refinement. Theorem II.8.4 then evaluates the new scalar residual at the old candidate and compares its unique zero.</p>}
         results={topicXIIResults}
       />
+
+      <section
+        className="topic-i-textbook proof-chapter-group"
+        aria-labelledby="topic-xii-output-heading"
+      >
+        <header>
+          <div>
+            <p className="section-label">Logical output</p>
+            <h3 id="topic-xii-output-heading">What Topic XII proves—and what remains</h3>
+          </div>
+          <div>
+            <p>
+              This completes candidate-radius monotonicity. It does not yet identify <i>K</i><sub>n</sub> with the stochastic radial maximum <i>R</i><sub>n</sub>. The base cases, the inherited/non-inherited induction, and the final topological argument remain for Topic XIII.
+            </p>
+          </div>
+        </header>
+      </section>
     </>
   );
 }

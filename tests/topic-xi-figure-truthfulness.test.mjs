@@ -63,6 +63,8 @@ test("Plate XI.1 distinguishes within-block and inter-block edges", () => {
   assert.match(figureSource, /cannot be selected together/);
   assert.match(figureSource, /url\(#\$\{marker\}-copper\)/);
   assert.match(figureSource, /Schematic d=q=3, s=9 instance/);
+  assert.match(figureSource, /generic case 0<α,β<1/);
+  assert.match(figureSource, /zero-weight endpoint cases are treated by continuity in the prose/);
   assert.match(figureSource, /B\{index \+ 1\}/);
   assert.match(figureSource, /data-terminal-vertex=/);
   assert.match(figureSource, /strokeDasharray="(?:9|10) 6"/);
@@ -70,6 +72,7 @@ test("Plate XI.1 distinguishes within-block and inter-block edges", () => {
 });
 
 test("Plate XI.2 labels both exact graph regimes and the subdivided weights", () => {
+  assert.match(figureSource, /Schematic construction — not to scale/);
   assert.match(figureSource, /data-regime="s-lt-dq"/);
   assert.match(figureSource, /data-regime="s-gt-dq"/);
   assert.match(figureSource, /data-entry-length="ell-1"/);
@@ -87,6 +90,7 @@ test("Plate XI.2 labels both exact graph regimes and the subdivided weights", ()
   assert.match(figureSource, /data-drawn-case="K-ge-2"/);
   assert.match(figureSource, /data-boundary-case="K-1"/);
   assert.match(figureSource, /for K=1, w₁=w<sub>K<\/sub>/);
+  assert.match(figureSource, /generic\s+case\s+0&lt;α,β&lt;1/);
   assert.doesNotMatch(figureSource, /s ≤ dq: an inter-block edge enters part-way/);
 });
 

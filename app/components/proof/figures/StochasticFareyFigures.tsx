@@ -1044,12 +1044,13 @@ const copy: Record<FigureKind, { title: string; description: string; caption: Re
   "cycle-ledger": {
     status: "Schematic d=q=3, s=9 instance",
     title: "Within-block cycles and the cycle through all blocks",
-    description: "Three directed blocks B one through B three illustrate the unshortened construction when d and q both equal three and s equals nine. Solid copper return edges of weight beta close the local q-cycles. Dashed red inter-block edges of weight alpha form the global s-cycle. The graph contains all these edges simultaneously.",
-    caption: "Plate XI.1. This d=q=3, s=9 schematic labels the blocks B₁,B₂,B₃; the proof allows arbitrary positive d and q and adjusts the global cycle to the required length s. Solid return edges of weight β close the local q-cycles, while dashed inter-block edges of weight α form the global s-cycle. A pairwise vertex-disjoint cycle collection may contain any subset of the local cycles, or the single global cycle. The global cycle meets every local cycle, so the two alternatives cannot be selected together.",
+    description: "Three directed blocks B one through B three illustrate the unshortened construction when d and q both equal three and s equals nine. Solid copper return edges of weight beta close the local q-cycles. Dashed red inter-block edges of weight alpha form the global s-cycle. The graph contains all these edges simultaneously. The drawn weighted edges represent the generic case with alpha and beta strictly between zero and one; zero-weight endpoint cases are treated by continuity in the prose.",
+    caption: "Plate XI.1. This d=q=3, s=9 schematic labels the blocks B₁,B₂,B₃; the proof allows arbitrary positive d and q and adjusts the global cycle to the required length s. Solid return edges of weight β close the local q-cycles, while dashed inter-block edges of weight α form the global s-cycle. The drawn weighted edges represent the generic case 0<α,β<1; the zero-weight endpoint cases are treated by continuity in the prose. A pairwise vertex-disjoint cycle collection may contain any subset of the local cycles, or the single global cycle. The global cycle meets every local cycle, so the two alternatives cannot be selected together.",
   },
   "sparse-cases": {
+    status: "Schematic construction — not to scale",
     title: "The two graph regimes before padding",
-    description: "When s is less than d q, an inter-block edge enters B one part-way through, and ell one labels the suffix traversed inside that block. At s equal to d q, every block is entered at its first vertex. When s exceeds d q, one inter-block edge is subdivided through K new vertices; the generic drawing shows K at least two, while K equal to one has a single vertex w one equal to w K.",
+    description: "When s is less than d q, an inter-block edge enters B one part-way through, and ell one labels the suffix traversed inside that block. At s equal to d q, every block is entered at its first vertex. When s exceeds d q, one inter-block edge is subdivided through K new vertices; the generic drawing shows K at least two, while K equal to one has a single vertex w one equal to w K. The drawn weighted edges represent the generic case with alpha and beta strictly between zero and one; zero-weight endpoint cases are treated by continuity in the prose.",
     caption: (
       <>
         Plate XI.2. If s&lt;dq, the chosen entry positions leave ℓⱼ vertices to be
@@ -1060,7 +1061,9 @@ const copy: Record<FigureKind, { title: string; description: string; caption: Re
         inter-block edge increases that cycle&apos;s length from dq to s; the first
         replacement edge has weight α and the remaining replacement edges have
         weight 1. The drawing shows the generic case K≥2; for K=1, w₁=w<sub>K</sub>{" "}
-        and the ellipsis is omitted.
+        and the ellipsis is omitted. The drawn weighted edges represent the generic
+        case 0&lt;α,β&lt;1; the zero-weight endpoint cases are treated by
+        continuity in the prose.
       </>
     ),
   },

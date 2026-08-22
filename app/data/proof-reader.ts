@@ -171,10 +171,10 @@ export function getProofReaderNeighbours(key: string): {
     previous: precedingRoutes.find((route) =>
       isProofTopicAvailable(route.topicNumber),
     ),
-    next:
-      followingRoutes.find((route) =>
-        isProofTopicAvailable(route.topicNumber),
-      ) ?? followingRoutes[0],
+    // Keep the logical proof sequence visible even when its next chapter has
+    // not yet been published. ProofChapterShell renders that immediate route
+    // as a disabled “Forthcoming” step instead of silently skipping it.
+    next: followingRoutes[0],
   };
 }
 

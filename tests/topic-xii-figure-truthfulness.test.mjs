@@ -48,13 +48,19 @@ test("Topic XII plates encode the exact interval, factor, and residual claims", 
   assert.match(padding, /<tspan>\)=1<\/tspan>/);
   assert.doesNotMatch(padding, /μ[⁻⁰¹²³⁴⁵⁶⁷⁸⁹ᑫ]/);
   assert.doesNotMatch(padding, /new factor/i);
+  assert.match(source, /Exact algebraic identity; schematic tuple layout/);
+  assert.match(source, /with 0<β<1/);
+  assert.match(source, /appended zero is therefore distinct/);
 
   assert.match(residual, /data-residual-axis="t"/);
   assert.match(residual, /data-residual-axis="value"/);
   assert.match(residual, /data-residual-curve="strict-case"/);
   assert.match(residual, /Fₙ,θ\(t\)/);
   assert.match(residual, /Fₙ,θ\(ρ₋\)&lt;0/);
+  assert.match(residual, /ρ₋=Kₙ₋₁\(θ\)/);
+  assert.match(residual, /ρ₊=Kₙ\(θ\)/);
   assert.match(residual, /unique zero/);
+  assert.match(source, /curve shape and scale are not/);
 
   const topicXII = await render("/proof/topic-xii").then((response) => response.text());
   const markupOnly = (html) => html.replace(/<script\b[\s\S]*?<\/script>/gi, " ");

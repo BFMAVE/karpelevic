@@ -455,9 +455,10 @@ for (const relativePath of [
   );
   assert.match(
     html,
-    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/karpelevic\/proof\/topic-xiv\//i,
+    /class="[^"]*proof-topic-control-next[^"]*proof-topic-control-unavailable[^"]*"[^>]*data-proof-topic-number="13"[^>]*>[\s\S]{0,260}?Forthcoming/i,
   );
   assert.doesNotMatch(html, /href="\/karpelevic\/proof\/topic-xiii\//);
+  assert.match(html, /href="\/karpelevic\/proof\/topic-xiv\//);
   assert.match(html, /href="\/karpelevic\/proof\/topic-ix\//);
   assert.match(
     html,
