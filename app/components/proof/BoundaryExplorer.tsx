@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import {
-  fareyCells,
+  fareyIntervals,
   svgCoordinates,
   svgPath,
   thetaBoundaryForOrder,
@@ -14,6 +14,7 @@ const padding = 78;
 const maximumInteractiveOrder = 40;
 const fullMarkerOrderLimit = 12;
 const sparseMarkerDenominatorLimit = 12;
+const samplesPerInterval = 55;
 
 function fractionText(numerator: number, denominator: number): string {
   return numerator + "/" + denominator;
@@ -52,8 +53,14 @@ export function BoundaryExplorer() {
     parsedDraft === null
       ? "Enter an integer from 1 to 40. The plot remains at n=" + order + "."
       : null;
-  const region = useMemo(() => thetaBoundaryForOrder(order, 54), [order]);
-  const cells = useMemo(() => (order >= 3 ? fareyCells(order) : []), [order]);
+  const region = useMemo(
+    () => thetaBoundaryForOrder(order, samplesPerInterval),
+    [order],
+  );
+  const intervals = useMemo(
+    () => (order >= 3 ? fareyIntervals(order) : []),
+    [order],
+  );
   const nodes = useMemo(
     () => markerNodes(order, region.upperFareyNodes),
     [order, region.upperFareyNodes],
@@ -108,10 +115,12 @@ export function BoundaryExplorer() {
       </header>
       <p id="boundary-order-help" className="boundary-laboratory-help">
         Enter an integer from 1 to 40. Orders 1 and 2 use their exact
-        elementary descriptions. From order 3 onward, each curved arc is
-        sampled from the proved scalar equation using ninety bisection steps
-        per sample. At order 3, the segment [−1,−1/2] on the real axis is
-        inserted exactly.
+        elementary descriptions. From order 3 onward, each nonreal Farey
+        branch is represented by {samplesPerInterval} points, including its
+        endpoints before shared endpoints are removed. Each interior modulus
+        requests at most ninety bisection updates and stops when binary64 can
+        no longer refine the bracket. At order 3, the segment [−1,−1/2] on
+        the real axis is inserted exactly.
       </p>
       {errorMessage ? (
         <p
@@ -133,10 +142,10 @@ export function BoundaryExplorer() {
             viewBox={"0 0 " + size + " " + size}
           >
             <desc id="boundary-plot-description">
-              The stochastic eigenvalue region of order {order}, drawn in the
-              complex plane. The dashed circle is the unit circle. Farey
-              fractions determine boundary endpoints exactly, while the
-              curved arcs and displayed coordinates are numerical.
+              The boundary of the stochastic eigenvalue region of order {order},
+              drawn in the complex plane. The dashed circle is the unit circle.
+              Farey fractions determine boundary endpoints exactly, while the
+              nonreal branches and displayed coordinates are numerical.
               {order === 3
                 ? " The exceptional real segment from minus one to minus one half is included exactly."
                 : ""}
@@ -169,7 +178,15 @@ export function BoundaryExplorer() {
                     ) + (point.y < 0 ? ":lower" : ":upper")
                   }
                   r="4.5"
-                />
+                >
+                  <title>
+                    {point.y < 0 ? "Conjugate of " : ""}Farey endpoint root{" "}
+                    {fractionText(
+                      point.fraction?.numerator ?? 0,
+                      point.fraction?.denominator ?? 1,
+                    )}
+                  </title>
+                </circle>
               );
             })}
             <text className="boundary-lab-label" x={size - padding + 15} y={size / 2 + 28}>Re λ</text>
@@ -183,11 +200,11 @@ export function BoundaryExplorer() {
               <>Θ<sub>2</sub> is the exact real interval [−1,1].</>
             ) : (
               <>
-                Θ<sub>{order}</sub> has {cells.length} Farey interval
-                {cells.length === 1 ? "" : "s"} in 0≤x≤1/2, reflected across
+                Θ<sub>{order}</sub> has {intervals.length} Farey interval
+                {intervals.length === 1 ? "" : "s"} in 0≤x≤1/2, reflected across
                 the real axis.
                 {order === 3
-                  ? " The segment [−1,−1/2] is exact."
+                  ? " The segment [−1,−1/2] is exact; the closed SVG walk traverses this attached segment once in each direction."
                   : ""}
               </>
             )}{" "}
@@ -195,7 +212,7 @@ export function BoundaryExplorer() {
             roots exactly, but their SVG coordinates and all sampled arc
             coordinates are floating-point approximations.{" "}
             {order <= fullMarkerOrderLimit
-              ? "All endpoint roots are marked in both half-planes."
+              ? "The roots of unity associated with the Farey endpoints are marked on the closed upper semicircle and, except for ±1, at their conjugates below the real axis."
               : "To reduce overlap above order 12, markers are limited to endpoints with denominator at most 12; the table retains every Farey pair."}
           </figcaption>
         </figure>
@@ -205,8 +222,8 @@ export function BoundaryExplorer() {
             <p className="section-label">Exact combinatorial data</p>
             <h4>Farey pairs and reduced Ito-polynomial data</h4>
             <p>
-              Fractions, Farey-neighbour tests, denominator order, and the
-              integers <i>d</i> and <i>e</i> are computed exactly. The
+              Fractions, Farey-neighbour tests, relabelling so that <i>q</i>
+              &lt;<i>s</i>, and the integers <i>d</i> and <i>e</i> are computed exactly. The
               corresponding root-of-unity coordinates are evaluated in
               floating-point arithmetic only when the SVG is drawn.
             </p>
@@ -217,10 +234,11 @@ export function BoundaryExplorer() {
             <p>
               {region.kind === "region" ? (
                 <>
-                  Interior moduli are found by fixed-iteration bisection. The
-                  SVG joins finitely many sampled points, so it is a numerical
-                  plot of the proved boundary formula, not an exact symbolic
-                  curve.
+                  Moduli for parameters in the open Farey intervals are found
+                  by binary64 bisection. Each nonreal branch uses {samplesPerInterval}
+                  points, and the SVG joins them by line segments. No bound on
+                  the geometric error of this polyline approximation is
+                  asserted.
                   {order === 3
                     ? " The exceptional real segment is added from exact endpoints rather than sampled from that equation."
                     : ""}
@@ -230,29 +248,29 @@ export function BoundaryExplorer() {
               )}
             </p>
           </section>
-          {cells.length > 0 ? (
+          {intervals.length > 0 ? (
             <details>
               <summary>Open all Farey pairs for n={order}</summary>
               <div className="boundary-cell-ledger">
                 <table>
-                  <caption>Consecutive Farey pairs and denominator-ordered data for n={order}</caption>
+                  <caption>Consecutive Farey pairs and relabelled data with q&lt;s for n={order}</caption>
                   <thead>
                     <tr>
                       <th scope="col">Farey pair</th>
-                      <th scope="col">(q,s)</th>
+                      <th scope="col">(p/q,r/s), q&lt;s</th>
                       <th scope="col">d</th>
                       <th scope="col">e</th>
                     </tr>
                   </thead>
                   <tbody data-boundary-cell-rows>
-                    {cells.map((cell) => (
-                      <tr key={fractionText(cell.left.numerator, cell.left.denominator) + "-" + fractionText(cell.right.numerator, cell.right.denominator)}>
+                    {intervals.map((interval) => (
+                      <tr key={fractionText(interval.left.numerator, interval.left.denominator) + "-" + fractionText(interval.right.numerator, interval.right.denominator)}>
                         <th scope="row">
-                          {fractionText(cell.left.numerator, cell.left.denominator)} → {fractionText(cell.right.numerator, cell.right.denominator)}
+                          {fractionText(interval.left.numerator, interval.left.denominator)} → {fractionText(interval.right.numerator, interval.right.denominator)}
                         </th>
-                        <td>({cell.q},{cell.s})</td>
-                        <td>{cell.d}</td>
-                        <td>{cell.e}</td>
+                        <td>({fractionText(interval.p, interval.q)},{fractionText(interval.r, interval.s)})</td>
+                        <td>{interval.d}</td>
+                        <td>{interval.e}</td>
                       </tr>
                     ))}
                   </tbody>

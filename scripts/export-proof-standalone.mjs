@@ -1,6 +1,10 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import {
+  composeTopicXIVRuntime,
+  readCanonicalBoundarySource,
+} from "./lib/topic-xiv-runtime.mjs";
 
 const projectRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -362,10 +366,7 @@ function removeRuntimeMarkup(html) {
 }
 
 async function readBoundaryGeneratorSource() {
-  return readFile(
-    path.join(projectRoot, "public/code/karpelevic-boundary.js"),
-    "utf8",
-  );
+  return readCanonicalBoundarySource(projectRoot);
 }
 
 async function readBoundaryGeneratorTestSource() {
@@ -415,15 +416,7 @@ async function addStandaloneProofScript(html) {
   let proofScript = "";
   let marker = "";
   if (isTopicXIV) {
-    const boundaryGenerator = (await readBoundaryGeneratorSource()).replace(
-      /^export\s+/gm,
-      "",
-    );
-    const boundaryExplorer = await readFile(
-      path.join(projectRoot, "scripts/standalone-topic-xiv.js"),
-      "utf8",
-    );
-    proofScript = `;(() => {\n${boundaryGenerator}\n${boundaryExplorer}\n})();`;
+    proofScript = await composeTopicXIVRuntime(projectRoot);
     marker = "data-standalone-topic-xiv-script";
   } else {
     const scriptName = isCombinedReader ? "proof.js" : "proof-chapter.js";
@@ -599,7 +592,7 @@ function verifyStandaloneHtml(html) {
                                 "Topic XIV",
                                 "The complete order-seven example and an interactive boundary plot",
                                 "Nine Farey intervals cover 0≤x≤1/2",
-                                "The worked direction x=3/8",
+                                "The computation at x=3/8",
                                 "Interactive numerical boundary plot",
                                 'data-proof-route="topic-xiv"',
                               ]
@@ -1152,7 +1145,7 @@ function verifyStandaloneHtml(html) {
 
     const visibleText = visibleTextFromHtml(html).replace(/\s+/g, " ").trim();
     if (
-      !/Topic XIV · Manuscript pages 107–108/i.test(visibleText) ||
+      !/Topic XIV · Manuscript pages 107–109/i.test(visibleText) ||
       !/First published 22 August 2026\s*\./i.test(visibleText)
     ) {
       throw new Error(

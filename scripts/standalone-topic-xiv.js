@@ -8,6 +8,7 @@ if (boundaryExplorerRoot) {
   const plotCenter = plotSize / 2;
   const fullMarkerOrderLimit = 12;
   const sparseMarkerDenominatorLimit = 12;
+  const samplesPerInterval = 55;
   const orderInput = boundaryExplorerRoot.querySelector("[data-boundary-order-input]");
   const orderHelp = boundaryExplorerRoot.querySelector("#boundary-order-help");
   const plot = boundaryExplorerRoot.querySelector('svg[role="img"]');
@@ -108,7 +109,7 @@ if (boundaryExplorerRoot) {
     cellSummary.textContent = "Open all Farey pairs for n=" + order;
     if (cellTableCaption) {
       cellTableCaption.textContent =
-        "Consecutive Farey pairs and denominator-ordered data for n=" + order;
+        "Consecutive Farey pairs and relabelled data with q<s for n=" + order;
     }
     cellRows.replaceChildren();
     for (const cell of cells) {
@@ -120,7 +121,16 @@ if (boundaryExplorerRoot) {
       pair.scope = "row";
       pair.textContent =
         fractionLabel(cell.left) + " → " + fractionLabel(cell.right);
-      denominators.textContent = "(" + cell.q + "," + cell.s + ")";
+      denominators.textContent =
+        "(" +
+        cell.p +
+        "/" +
+        cell.q +
+        "," +
+        cell.r +
+        "/" +
+        cell.s +
+        ")";
       d.textContent = String(cell.d);
       e.textContent = String(cell.e);
       row.append(pair, denominators, d, e);
@@ -142,32 +152,37 @@ if (boundaryExplorerRoot) {
     for (const fraction of selected) {
       const angle = (2 * Math.PI * fraction.numerator) / fraction.denominator;
       const upperCoordinate = toSvgCoordinate(Math.cos(angle), Math.sin(angle));
-      insertPlotElement(
-        createSvgElement("circle", {
-          "aria-hidden": "true",
-          class: "boundary-lab-root",
-          cx: upperCoordinate.x,
-          cy: upperCoordinate.y,
-          "data-farey-root": "",
-          r: 4.5,
-        }),
-      );
+      const upperMarker = createSvgElement("circle", {
+        "aria-hidden": "true",
+        class: "boundary-lab-root",
+        cx: upperCoordinate.x,
+        cy: upperCoordinate.y,
+        "data-farey-root": "",
+        r: 4.5,
+      });
+      const upperTitle = createSvgElement("title", {});
+      upperTitle.textContent = "Farey endpoint root " + fractionLabel(fraction);
+      upperMarker.append(upperTitle);
+      insertPlotElement(upperMarker);
       markerCount += 1;
       if (Math.abs(Math.sin(angle)) > 1e-12) {
         const lowerCoordinate = toSvgCoordinate(
           Math.cos(angle),
           -Math.sin(angle),
         );
-        insertPlotElement(
-          createSvgElement("circle", {
-            "aria-hidden": "true",
-            class: "boundary-lab-root",
-            cx: lowerCoordinate.x,
-            cy: lowerCoordinate.y,
-            "data-farey-root": "",
-            r: 4.5,
-          }),
-        );
+        const lowerMarker = createSvgElement("circle", {
+          "aria-hidden": "true",
+          class: "boundary-lab-root",
+          cx: lowerCoordinate.x,
+          cy: lowerCoordinate.y,
+          "data-farey-root": "",
+          r: 4.5,
+        });
+        const lowerTitle = createSvgElement("title", {});
+        lowerTitle.textContent =
+          "Conjugate of Farey endpoint root " + fractionLabel(fraction);
+        lowerMarker.append(lowerTitle);
+        insertPlotElement(lowerMarker);
         markerCount += 1;
       }
     }
@@ -208,7 +223,7 @@ if (boundaryExplorerRoot) {
         }),
       );
     } else {
-      boundary = fullBoundary(order, 54);
+      boundary = fullBoundary(order, samplesPerInterval);
       insertPlotElement(
         createSvgElement("path", {
           class: "boundary-lab-region",
@@ -227,7 +242,7 @@ if (boundaryExplorerRoot) {
           ? "The stochastic eigenvalue region of order one, the exact single point one in the complex plane. The dashed circle is the unit circle."
           : kind === "interval"
             ? "The stochastic eigenvalue region of order two, the exact real interval from minus one to one. The dashed circle is the unit circle."
-            : "The stochastic eigenvalue region of order " +
+            : "The boundary of the stochastic eigenvalue region of order " +
               order +
               ", drawn from exact Farey-pair data and numerical solutions of the scalar radial equation. The dashed circle is the unit circle." +
               (order === 3
@@ -237,7 +252,7 @@ if (boundaryExplorerRoot) {
     if (plotCaption) {
       const markerCopy =
         order <= fullMarkerOrderLimit
-          ? "All endpoint roots are marked in both half-planes."
+          ? "The roots of unity associated with the Farey endpoints are marked on the closed upper semicircle and, except for ±1, at their conjugates below the real axis."
           : "To reduce overlap above order 12, markers are limited to endpoints with denominator at most 12; the table retains every Farey pair.";
       plotCaption.innerHTML =
         kind === "point"
@@ -253,14 +268,18 @@ if (boundaryExplorerRoot) {
               " Farey interval" +
               (cells.length === 1 ? "" : "s") +
               " in 0≤x≤1/2, reflected across the real axis." +
-              (order === 3 ? " The segment [−1,−1/2] is exact." : "") +
+              (order === 3
+                ? " The segment [−1,−1/2] is exact; the closed SVG walk traverses this attached segment once in each direction."
+                : "") +
               " The dashed circle is |λ|=1. Farey fractions specify endpoint roots exactly, but their SVG coordinates and all sampled arc coordinates are floating-point approximations. " +
               markerCopy;
     }
     if (numericalCopy) {
       numericalCopy.textContent =
         kind === "region"
-          ? "Interior moduli are found by fixed-iteration bisection. The SVG joins finitely many sampled points, so it is a numerical plot of the proved boundary formula, not an exact symbolic curve." +
+          ? "Moduli for parameters in the open Farey intervals are found by binary64 bisection. Each nonreal branch uses " +
+            samplesPerInterval +
+            " points, and the SVG joins them by line segments. No bound on the geometric error of this polyline approximation is asserted." +
             (order === 3
               ? " The exceptional real segment is added from exact endpoints rather than sampled from that equation."
               : "")

@@ -1137,8 +1137,14 @@ test("Topic XIV provides the complete example and executable boundary explorer",
   assert.equal(response.status, 200);
 
   const html = await response.text();
+  const visibleText = html
+    .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
   assert.match(html, /complete order-seven/i);
-  assert.match(html, /worked direction[^<]*x=3\/8/i);
+  assert.match(html, /computation at[^<]*x=3\/8/i);
   assert.match(html, /Download source module/i);
   assert.match(html, /Download regression tests/i);
   assert.match(html, /Interactive numerical boundary plot/i);
@@ -1151,6 +1157,19 @@ test("Topic XIV provides the complete example and executable boundary explorer",
     10,
     "the header and all nine Farey-pair rows are present",
   );
+  assert.match(
+    visibleText,
+    /2\/7 → 1\/3 \(\s*1\s*\/\s*3\s*,\s*2\s*\/\s*7\s*\)/,
+  );
+  assert.match(
+    visibleText,
+    /3\/7 → 1\/2 \(\s*1\s*\/\s*2\s*,\s*3\s*\/\s*7\s*\)/,
+  );
+  assert.match(visibleText, /3·2−1·5=1 and 3\+5=8&gt;7/);
+  assert.match(visibleText, /0&lt;α&lt;1, 0&lt;β&lt;1, and α\+β=1/);
+  assert.match(visibleText, /55 points/);
+  assert.match(visibleText, /73\s*-point polyline/);
+  assert.match(visibleText, /No bound on (?:the|its) geometric (?:error|approximation error)/i);
   assert.match(html, /data-order-seven-boundary-figure/);
   assert.match(html, /data-order-seven-boundary-path/);
   assert.match(html, /data-worked-ray/);

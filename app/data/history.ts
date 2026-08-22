@@ -288,7 +288,7 @@ export const historyContent = {
       { numerator: "1", denominator: "2", angle: "180°", emphasis: false },
     ],
     example:
-      "At order five, 1/3 and 2/5 are neighbours. Their mediant is 3/8: it lies between them, but its denominator, 8, is greater than 5. It first becomes available at order eight—the same fraction that appears in the manuscript’s worked ray.",
+      "At order five, 1/3 and 2/5 are neighbours. Their mediant is 3/8: it lies between them, but its denominator, 8, is greater than 5. It first becomes available at order eight—the same fraction used in the manuscript’s worked computation.",
   },
   timeline: [
     {

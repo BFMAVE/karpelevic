@@ -156,10 +156,10 @@ test("Topics XIII and XIV export as a published, cross-linked standalone pair", 
 
     const topicXIVText = visibleText(topicXIV);
     assert.match(topicXIV, /data-proof-route="topic-xiv"/);
-    assert.match(topicXIVText, /Topic XIV · Manuscript pages 107–108/);
+    assert.match(topicXIVText, /Topic XIV · Manuscript pages 107–109/);
     assert.match(topicXIVText, /First published 22 August 2026/);
     assert.match(topicXIVText, /Nine Farey intervals cover 0≤x≤1\/2/);
-    assert.match(topicXIVText, /The worked direction x=3\/8/);
+    assert.match(topicXIVText, /The computation at x=3\/8/);
     assert.match(topicXIVText, /Interactive numerical boundary plot/);
     assert.match(
       topicXIV,

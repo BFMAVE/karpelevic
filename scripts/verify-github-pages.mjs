@@ -145,7 +145,7 @@ for (const [relativePath, expectedText] of pages) {
   assert.match(visibleText, /24 July 2026/);
   assert.match(visibleText, /Website edition/);
   assert.match(visibleText, /Last revised\s+22 August 2026/);
-  assert.match(visibleText, /109-page site-hosted PDF/);
+  assert.match(visibleText, /110-page site-hosted PDF/);
   assert.doesNotMatch(html, />Prepared</);
 }
 
@@ -540,12 +540,25 @@ for (const relativePath of [
   );
   const visibleText = visibleTextFromHtml(html);
   assert.match(html, /data-proof-route="topic-xiv"/);
-  assert.match(visibleText, /Manuscript pages\s+107–108/);
+  assert.match(visibleText, /Manuscript pages\s+107–109/);
   assert.match(visibleText, /First published\s+22 August 2026/);
   assert.match(visibleText, /Nine Farey intervals cover 0≤x≤1\/2/);
+  assert.match(
+    visibleText,
+    /2\/7 → 1\/3 \(\s*1\s*\/\s*3\s*,\s*2\s*\/\s*7\s*\)/,
+  );
+  assert.match(
+    visibleText,
+    /3\/7 → 1\/2 \(\s*1\s*\/\s*2\s*,\s*3\s*\/\s*7\s*\)/,
+  );
+  assert.match(visibleText, /3·2−1·5=1 and 3\+5=8&gt;7/);
+  assert.match(visibleText, /0&lt;α&lt;1, 0&lt;β&lt;1, and α\+β=1/);
+  assert.match(visibleText, /55 points/);
+  assert.match(visibleText, /73\s*-point polyline/);
+  assert.match(visibleText, /no bound on its geometric approximation error/i);
   assert.match(visibleText, /Laurent equation/i);
   assert.match(visibleText, /intermediate value theorem gives existence/i);
-  assert.match(visibleText, /The scalar equation gives α\+β=1/i);
+  assert.match(visibleText, /The scalar equation gives[^.]*α\+β=1/i);
   assert.doesNotMatch(visibleText, /Only the radius changes|homogeneous form/i);
   assert.doesNotMatch(html, /data-proof-chapter-controls="true"/);
   assert.doesNotMatch(html, /\/karpelevic\/proof-chapter\.js/);
@@ -594,6 +607,12 @@ for (const relativePath of [
   assert.match(html, /href="\/karpelevic\/code\/karpelevic-boundary\.test\.mjs"/);
   assert.match(html, /data-boundary-order-input/);
   assert.match(html, /Enter an integer from 1 to 40/i);
+
+  const runtime = await readFile(path.join(outputRoot, "topic-xiv.js"), "utf8");
+  assert.match(runtime, /function itoArcRadius\(/);
+  assert.match(runtime, /function radialBoundaryRadius\(/);
+  assert.match(runtime, /const samplesPerInterval = 55/);
+  assert.doesNotMatch(runtime, /^\s*export\b/m);
 }
 
 {

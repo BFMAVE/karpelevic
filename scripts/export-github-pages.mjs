@@ -1,6 +1,7 @@
-import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { composeTopicXIVRuntime } from "./lib/topic-xiv-runtime.mjs";
 
 const projectRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -183,19 +184,9 @@ for (const entry of await readdir(assetDirectory, { withFileTypes: true })) {
   }
 }
 
-const boundaryGenerator = (
-  await readFile(
-    path.join(projectRoot, "public/code/karpelevic-boundary.js"),
-    "utf8",
-  )
-).replace(/^export\s+/gm, "");
-const boundaryController = await readFile(
-  path.join(projectRoot, "scripts/standalone-topic-xiv.js"),
-  "utf8",
-);
 await writeFile(
   path.join(outputRoot, "topic-xiv.js"),
-  `;(() => {\n${boundaryGenerator}\n${boundaryController}\n})();\n`,
+  await composeTopicXIVRuntime(projectRoot),
   "utf8",
 );
 

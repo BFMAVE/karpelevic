@@ -511,7 +511,7 @@ export const prerequisiteChapters: readonly PrerequisiteChapter[] = [
         },
       ],
       conclusion:
-        "This is also the paper’s worked ray x = 3/8: the arithmetic label is not decorative but records the first refinement of the neighbouring cell.",
+        "This is also the paper’s computation at the normalized angular parameter x = 3/8: the arithmetic label records the first refinement of the neighbouring Farey interval.",
     },
     partIUse: [
       {

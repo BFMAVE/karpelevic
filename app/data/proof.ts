@@ -582,12 +582,12 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "What does the theorem produce at one concrete order, and how can a reader draw further orders for themselves?",
     overview: [
-      "For order seven, the general theorem yields a complete table of consecutive Farey pairs, reduced Ito polynomials, and parametrized boundary arcs. The direction x = 3/8 shows the scalar calculation numerically from beginning to end.",
+      "For order seven, the general theorem yields a complete table of consecutive Farey pairs, reduced Ito polynomials, and parametrized boundary arcs. The computation at the normalized angular parameter x = 3/8 follows the scalar calculation numerically from beginning to end.",
       "The chapter documents the numerical boundary-plot implementation and publishes its source and regression tests. Its final section lets the reader select n and obtain the corresponding plot, with exact Farey data kept visibly distinct from floating-point root-finding and plotting.",
       "This interactive computation illustrates the theorem but is not part of its logical proof. Topic XIII remains the endpoint of the necessary argument; Topic XIV lets readers inspect the complete construction at order seven and then explore other orders themselves.",
     ],
     itemNumbers: [],
-    manuscriptPages: "107–108",
+    manuscriptPages: "107–109",
   },
 ] as const;
 

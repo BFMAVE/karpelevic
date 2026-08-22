@@ -74,6 +74,12 @@ test("Topic XIV's restored order-seven figure is accessible and geometrically tr
   const rootTags = [...figure.matchAll(/<circle\b[^>]*data-farey-root[^>]*>/g)].map(
     (match) => match[0],
   );
+  assert.equal(
+    [...figure.matchAll(/<circle\b(?=[^>]*data-farey-root)[^>]*>\s*<title>/g)]
+      .length,
+    18,
+    "each endpoint marker has a native SVG tooltip",
+  );
   assert.equal(rootTags.length, 18);
   const roots = rootTags.map((tag) => ({
     x: Number(attribute(tag, "cx")),
@@ -96,4 +102,7 @@ test("Topic XIV's restored order-seven figure is accessible and geometrically tr
   assert.match(caption, /marked endpoint is the complex point λ=/i);
   assert.match(caption, /ρ is the unique solution/i);
   assert.match(caption, /floating-point approximations/i);
+  assert.match(caption, /By Topic XIII/i);
+  assert.match(caption, /73\s*-point polyline/i);
+  assert.match(caption, /no bound on its geometric approximation error/i);
 });

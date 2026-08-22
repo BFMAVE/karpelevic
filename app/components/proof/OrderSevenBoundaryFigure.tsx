@@ -8,6 +8,7 @@ import {
 const size = 760;
 const padding = 78;
 const workedRadius = 0.940100221928822853;
+const samplesPerInterval = 73;
 
 function reflectedFareyNodes(nodes: PlotPoint[]): PlotPoint[] {
   const reflected = nodes
@@ -17,7 +18,7 @@ function reflectedFareyNodes(nodes: PlotPoint[]): PlotPoint[] {
 }
 
 export function OrderSevenBoundaryFigure() {
-  const region = thetaBoundaryForOrder(7, 72);
+  const region = thetaBoundaryForOrder(7, samplesPerInterval);
   const boundaryPath = svgPath(region.boundary, size, padding);
   const nodes = reflectedFareyNodes(region.upperFareyNodes);
   const workedPoint: PlotPoint = {
@@ -41,12 +42,13 @@ export function OrderSevenBoundaryFigure() {
         role="img"
         viewBox={"0 0 " + size + " " + size}
       >
-        <title id="order-seven-boundary-title">Boundary of the order-seven Karpelevič region</title>
+        <title id="order-seven-boundary-title">Numerical plot of the order-seven boundary</title>
         <desc id="order-seven-boundary-description">
-          A numerical plot of the boundary of Theta seven, symmetric about
-          the real axis. A pale dashed circle identifies the unit circle. A
-          dashed segment runs from the origin along argument three pi over
-          four to the marked boundary point lambda.
+          A numerical polyline approximation to the boundary of Theta seven,
+          symmetric about the real axis. Topic thirteen proves that the
+          parametrized curves are the boundary. A pale dashed circle identifies
+          the unit circle. A dashed segment runs from the origin along argument
+          three pi over four to the marked boundary point lambda.
         </desc>
         <line
           className="boundary-lab-axis"
@@ -90,7 +92,12 @@ export function OrderSevenBoundaryFigure() {
                 (point.y < 0 ? ":lower" : ":upper")
               }
               r="4.5"
-            />
+            >
+              <title>
+                {point.y < 0 ? "Conjugate of " : ""}Farey endpoint root{" "}
+                {String(point.fraction?.numerator)}/{String(point.fraction?.denominator)}
+              </title>
+            </circle>
           );
         })}
         <line
@@ -118,8 +125,11 @@ export function OrderSevenBoundaryFigure() {
         </text>
       </svg>
       <figcaption>
-        <span>Plate XIV.1.</span> Boundary of Θ<sub>7</sub>. The pale dashed
-        circle is |λ|=1. The dashed segment lies on the ray{" "}
+        <span>Plate XIV.1.</span> By Topic XIII, the parametrized curves shown
+        here form the boundary of Θ<sub>7</sub>. Each nonreal Farey branch is
+        represented by a {samplesPerInterval}-point polyline; no bound on its
+        geometric approximation error is asserted. The pale dashed circle is
+        |λ|=1. The dashed segment lies on the ray{" "}
         {"{t e^(3πi/4) : t ≥ 0}"}. Its marked endpoint is the complex point{" "}
         λ=ρe<sup>3πi/4</sup>, where ρ is the unique solution of{" "}
         <a href="#karp:eq:n7-ray-equation">equation (II.10.2)</a>. Farey

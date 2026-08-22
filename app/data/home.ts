@@ -78,11 +78,11 @@ export const homeContent = {
     zenodoUrl: "https://zenodo.org/records/21529144",
     zenodoPages: 93,
     websiteEditionUrl: "/paper/critical-invariant-polygons.pdf",
-    websiteEditionPages: 109,
+    websiteEditionPages: 110,
     zenodoChecksum:
       "ca3be77169053635302798aa1ba204502db0a3267d2e76e4d8e763cede138f3b",
     localArxivDraftChecksum:
-      "6a6d38de39c0e036d2322d15dcbad290268dfacb9004b7b8b4240f892fc0fbe0",
+      "a7b3cf7be74794b15f1b5b3c73bd0b41464c7964fd358d5394a255d720d7430b",
   },
 } as const;
 
