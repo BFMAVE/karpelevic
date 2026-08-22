@@ -20,7 +20,7 @@ const visibleText = (html) =>
     .replaceAll("&amp;", "&")
     .replace(/\s+/g, " ");
 
-test("the Topic XI standalone is self-contained and stops before Topic XII", async () => {
+test("the Topic XI standalone is self-contained and links to published Topic XII", async () => {
   const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), "karpelevic-topic-xi-"));
   const output = path.join(temporaryDirectory, "Critical_Invariant_Polygons_Topic_XI.html");
   try {
@@ -30,7 +30,7 @@ test("the Topic XI standalone is self-contained and stops before Topic XII", asy
         ...process.env,
         PROOF_ROUTE: "/proof/topic-xi",
         PROOF_HTML_OUTPUT: output,
-        PROOF_STANDALONE_TOPIC_MAX: "11",
+        PROOF_STANDALONE_TOPIC_MAX: "12",
       },
       stdio: ["ignore", "pipe", "pipe"],
     });
@@ -51,8 +51,11 @@ test("the Topic XI standalone is self-contained and stops before Topic XII", asy
       html,
       /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-x\//,
     );
-    assert.match(html, /data-proof-topic-number="12"(?:(?!<\/li>)[\s\S])*Forthcoming/);
-    assert.doesNotMatch(html, /href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xii\//);
+    assert.doesNotMatch(html, /data-proof-topic-number="12"(?:(?!<\/li>)[\s\S])*Forthcoming/);
+    assert.match(
+      html,
+      /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xii\/a\//,
+    );
     assert.doesNotMatch(
       text,
       /cycle cover term|global cross cycle|cross edge|tail-row adjacency|constant parameter list|Rᴺ|Θᴺ/i,

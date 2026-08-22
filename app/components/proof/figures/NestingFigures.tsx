@@ -10,21 +10,25 @@ const pale = "#d8e2e7";
 function MediantFigure() {
   return (
     <>
-      <line x1="80" y1="285" x2="600" y2="285" stroke={ink} strokeWidth="2.4" />
-      <line x1="145" y1="265" x2="145" y2="305" stroke={ink} strokeWidth="2.4" />
-      <line x1="525" y1="265" x2="525" y2="305" stroke={ink} strokeWidth="2.4" />
-      <line x1="365" y1="255" x2="365" y2="315" stroke={red} strokeWidth="3.6" />
-      <text x="115" y="338" fill={ink}>a/b</text>
-      <text x="495" y="338" fill={ink}>c/d</text>
-      <text x="310" y="352" fill={red}>(a+c)/(b+d)</text>
-      <path d="M145 225 Q335 48 525 225" fill="none" stroke={copper} strokeWidth="3" strokeDasharray="8 7" />
-      <path d="M145 225 Q248 92 365 225 Q445 105 525 225" fill="none" stroke={red} strokeWidth="4" />
-      <line x1="365" y1="225" x2="365" y2="185" stroke={teal} strokeWidth="2.6" />
-      <text x="82" y="52" fill={ink}>old cell at order n−1</text>
-      <text x="82" y="82" fill={copper}>one reciprocal chord comparison</text>
-      <text x="402" y="92" fill={red}>two order-n subcells</text>
-      <text x="405" y="122" fill={teal}>new denominator b+d=n</text>
-      <text x="126" y="390" fill={ink}>The curves encode the comparison pattern, not Euclidean boundary arcs.</text>
+      <text x="78" y="58" fill={ink}>order n−1: one Farey interval</text>
+      <line data-farey-row="n-1" x1="120" y1="140" x2="560" y2="140" stroke={copper} strokeWidth="4" />
+      <line x1="120" y1="120" x2="120" y2="160" stroke={ink} strokeWidth="2.4" />
+      <line x1="560" y1="120" x2="560" y2="160" stroke={ink} strokeWidth="2.4" />
+      <text x="98" y="195" fill={ink}>a/b</text>
+      <text x="538" y="195" fill={ink}>c/d</text>
+
+      <line x1="340" y1="166" x2="340" y2="254" stroke={teal} strokeWidth="2" strokeDasharray="6 6" />
+      <text x="385" y="220" fill={teal}>insert denominator b+d=n</text>
+
+      <text x="78" y="275" fill={ink}>order n: two Farey subintervals</text>
+      <line data-farey-row="n" x1="120" y1="345" x2="340" y2="345" stroke={red} strokeWidth="4" />
+      <line data-farey-row="n" x1="340" y1="345" x2="560" y2="345" stroke={red} strokeWidth="4" />
+      <line x1="120" y1="325" x2="120" y2="365" stroke={ink} strokeWidth="2.4" />
+      <line x1="340" y1="317" x2="340" y2="373" stroke={red} strokeWidth="3.6" />
+      <line x1="560" y1="325" x2="560" y2="365" stroke={ink} strokeWidth="2.4" />
+      <text x="98" y="410" fill={ink}>a/b</text>
+      <text x="273" y="410" fill={red}>(a+c)/(b+d)</text>
+      <text x="538" y="410" fill={ink}>c/d</text>
     </>
   );
 }
@@ -34,7 +38,7 @@ function PaddingFigure() {
   const oldLabels = ["β₁", "⋯", "βₘ"];
   return (
     <>
-      <text x="78" y="65" fill={ink}>old multiplicity m=M−1</text>
+      <text x="78" y="65" fill={ink}>old factor count m=M−1</text>
       {positions.slice(0, 3).map((x, index) => (
         <g key={x}>
           <circle cx={x} cy="145" r="33" fill={pale} stroke={ink} strokeWidth="2.4" />
@@ -45,7 +49,12 @@ function PaddingFigure() {
       <path d="M125 228 L430 228" fill="none" stroke={copper} strokeWidth="3" />
       <path d="M430 228 L505 228" fill="none" stroke={red} strokeWidth="4" />
       <polygon points="505,228 489,218 489,238" fill={red} />
-      <text x="80" y="270" fill={ink}>multiply by μ⁻ᑫ(μᑫ−0)=1</text>
+      <text x="80" y="270" fill={ink}>identity factor:</text>
+      <text x="245" y="270" fill={ink}>
+        <tspan>μ</tspan><tspan baselineShift="super" fontSize="12">−q</tspan>
+        <tspan>(μ</tspan><tspan baselineShift="super" fontSize="12">q</tspan>
+        <tspan>−β</tspan><tspan baselineShift="sub" fontSize="12">M</tspan><tspan>)=1</tspan>
+      </text>
       {positions.map((x, index) => (
         <g key={`new-${x}`}>
           <circle
@@ -56,13 +65,14 @@ function PaddingFigure() {
             stroke={index === positions.length - 1 ? red : ink}
             strokeWidth="2.4"
           />
-          <text x={x - 13} y="347" fill={index === positions.length - 1 ? paper : ink}>
-            {index === positions.length - 1 ? "0" : oldLabels[index]}
+          <text x={x - (index === positions.length - 1 ? 23 : 13)} y="347" fill={index === positions.length - 1 ? paper : ink} fontSize={index === positions.length - 1 ? "15" : undefined}>
+            {index === positions.length - 1 ? (
+              <><tspan>β</tspan><tspan baselineShift="sub" fontSize="11">M</tspan><tspan>=0</tspan></>
+            ) : oldLabels[index]}
           </text>
         </g>
       ))}
-      <text x="475" y="346" fill={red}>new factor</text>
-      <text x="80" y="415" fill={ink}>The product is unchanged, but its order-n parameter list is no longer constant.</text>
+      <text x="475" y="346" fill={red}>new parameter</text>
     </>
   );
 }
@@ -70,40 +80,40 @@ function PaddingFigure() {
 function DefectFigure() {
   return (
     <>
-      <line x1="85" y1="335" x2="610" y2="335" stroke={ink} strokeWidth="2.2" />
-      <line x1="110" y1="385" x2="110" y2="55" stroke={ink} strokeWidth="2.2" />
-      <line x1="85" y1="250" x2="610" y2="250" stroke={copper} strokeWidth="1.8" strokeDasharray="7 7" />
-      <path d="M110 365 C245 350 320 310 390 250 C465 185 520 110 590 65" fill="none" stroke={red} strokeWidth="4" />
-      <circle cx="300" cy="321" r="7" fill={teal} stroke={teal} />
-      <circle cx="390" cy="250" r="7" fill={red} stroke={red} />
-      <line x1="300" y1="321" x2="300" y2="335" stroke={teal} strokeWidth="2" />
-      <line x1="390" y1="250" x2="390" y2="335" stroke={red} strokeWidth="2" />
-      <text x="255" y="365" fill={teal}>ρ₋=Kₙ₋₁</text>
-      <text x="360" y="365" fill={red}>Kₙ</text>
-      <text x="125" y="239" fill={copper}>residual = 0</text>
-      <text x="127" y="82" fill={ink}>Fₙ,θ(t) is strictly increasing</text>
-      <text x="412" y="218" fill={red}>unique zero</text>
-      <text x="164" y="312" fill={teal}>old candidate gives residual ≤ 0</text>
-      <text x="128" y="420" fill={ink}>Therefore the old radius cannot lie to the right of the new zero.</text>
+      <line data-residual-axis="t" x1="85" y1="300" x2="610" y2="300" stroke={ink} strokeWidth="2.2" />
+      <line data-residual-axis="value" x1="110" y1="385" x2="110" y2="55" stroke={ink} strokeWidth="2.2" />
+      <text x="620" y="306" fill={ink}>t</text>
+      <text x="38" y="48" fill={ink}>Fₙ,θ(t)</text>
+      <text x="90" y="320" fill={ink}>0</text>
+      <path data-residual-curve="strict-case" d="M110 365 C245 354 330 338 420 300 C490 245 545 145 590 70" fill="none" stroke={red} strokeWidth="4" />
+      <circle cx="310" cy="341" r="7" fill={teal} stroke={teal} />
+      <circle cx="420" cy="300" r="7" fill={red} stroke={red} />
+      <line x1="310" y1="341" x2="310" y2="375" stroke={teal} strokeWidth="2" strokeDasharray="5 4" />
+      <line x1="420" y1="300" x2="420" y2="375" stroke={red} strokeWidth="2" strokeDasharray="5 4" />
+      <text x="245" y="403" fill={teal}>ρ₋=Kₙ₋₁</text>
+      <text x="395" y="403" fill={red}>Kₙ</text>
+      <text x="132" y="88" fill={ink}>strictly increasing residual</text>
+      <text x="438" y="282" fill={red}>unique zero</text>
+      <text x="150" y="330" fill={teal}>Fₙ,θ(ρ₋)&lt;0</text>
     </>
   );
 }
 
 const copy: Record<NestingFigureKind, { title: string; description: string; caption: string }> = {
   mediant: {
-    title: "One Farey interval splits at its mediant",
-    description: "An old interval from a over b to c over d is split by the newly admitted mediant with denominator b plus d equals n.",
-    caption: "Plate XII.1. Farey refinement has only one local shape: a newly admitted mediant divides one old interval into two. The drawn curves are a comparison schematic; the proof uses signed determinants and logarithmic radial functions.",
+    title: "One Farey interval is divided at its mediant",
+    description: "Two ordered interval rows show the old interval from a over b to c over d and the two new subintervals divided at the mediant whose denominator is b plus d equals n. Positions are schematic and not to scale.",
+    caption: "Plate XII.1. Schematic interval diagram (not to scale) of the exact Farey refinement: the newly admitted mediant (a+c)/(b+d), with b+d=n, divides one order-(n−1) interval into two order-n subintervals.",
   },
   padding: {
-    title: "Padding an old product by the identity factor",
-    description: "A representative row of equal beta factors, with an ellipsis for the omitted middle factors, is followed by one new factor beta equals zero.",
-    caption: "Plate XII.2. The symbols β₁, …, βₘ represent an arbitrary number m of equal old factors. Multiplying by μ⁻ᑫ(μᑫ−0)=1 promotes the old Ito equation to the next multiplicity. The added zero parameter makes the new parameter list nonconstant, so making the parameters constant produces a larger candidate radius.",
+    title: "Extend the parameter tuple by βM=0",
+    description: "A row of equal old beta parameters is extended by beta sub M equals zero; the corresponding algebraic factor is one.",
+    caption: "Plate XII.2. The old tuple (β,…,β) is extended by the parameter β_M=0. Its corresponding factor μ^{-q}(μ^q−β_M) equals 1, so the product is unchanged, but the extended tuple is not constant and Topic X gives a strict radius comparison.",
   },
   defect: {
     title: "A sign comparison locates the new radius",
-    description: "A strictly increasing scalar residual is nonpositive at the old radius and vanishes at the new radius, so the old radius is no larger.",
-    caption: "Plate XII.3. Every refinement case is reduced to the same one-dimensional argument: evaluate the new increasing residual at the old candidate, prove the value is at most zero, and compare with its unique zero.",
+    description: "In a strict comparison case, the increasing scalar residual is negative at the old radius and vanishes at the new radius, so the old radius is smaller.",
+    caption: "Plate XII.3. Schematic for the strict cases: after a mediant insertion or factor-count increase, the new increasing residual is negative at K_{n−1}(θ) and vanishes at K_n(θ). In the unchanged case, the old radius is already the zero.",
   },
 };
 
@@ -112,7 +122,7 @@ export function NestingFigure({ kind }: { kind: NestingFigureKind }) {
   return (
     <figure className="topic-ii-concept-figure">
       <div className="topic-ii-concept-heading">
-        <span>Deterministic mathematical plate</span>
+        <span>Mathematical plate</span>
         <span>{description.title}</span>
       </div>
       <svg role="img" aria-labelledby={`nest-${kind}-title nest-${kind}-desc`} viewBox="0 0 680 450">

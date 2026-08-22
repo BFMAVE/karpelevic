@@ -244,7 +244,7 @@ const mainTheorem: ProofResultData = {
       definition: <>Prove the statement directly at the base orders, then assume it for <i>n−1</i> and use that assumption to prove it for <i>n</i>.</>,
     },
   ],
-  intuition: <>Fix one direction. Attainment puts the candidate no farther out than the actual maximum. If the actual maximum is new, the critical-polygon inequality identifies it with the candidate. If it is inherited, the order embedding and induction identify it with the old candidate, while candidate nesting and attainment squeeze the new candidate to that same number. Once this equality is known on every ray, continuity turns the radial graph into the topological boundary.</>,
+  intuition: <>Fix one direction. Attainment puts the candidate no farther out than the actual maximum. If the actual maximum is new, the critical-polygon inequality identifies it with the candidate. If it is inherited, the order embedding and induction identify it with the old candidate, while the pointwise monotonicity from Topic XII and attainment squeeze the new candidate to that same number. Once this equality is known on every ray, continuity turns the radial graph into the topological boundary.</>,
   figure: <CompletionFigure kind="induction" />,
   proofSteps: [
     {
@@ -320,7 +320,7 @@ export function TopicXIIIContent() {
             explanation: <>independently constructs a stochastic matrix attaining every candidate, then identifies a non-inherited radial maximum with the scalar constant-parameter candidate.</>,
           },
           {
-            label: "Topic XII · Candidate nesting",
+            label: "Topic XII · Monotonicity of the candidate radius",
             href: sitePath("/proof/topic-xii/b/"),
             explanation: <>defines the packaged candidate radius <i>K</i><sub>n</sub> and proves <i>K</i><sub>n−1</sub>(θ)≤<i>K</i><sub>n</sub>(θ), the comparison that closes the inherited branch.</>,
           },

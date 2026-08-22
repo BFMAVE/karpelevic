@@ -53,6 +53,8 @@ const publicTopicPublicationDates = [
   ["/proof/topic-ix", "2026-08-20", "20 August 2026"],
   ["/proof/topic-x", "2026-08-21", "21 August 2026"],
   ["/proof/topic-xi", "2026-08-22", "22 August 2026"],
+  ["/proof/topic-xii/a", "2026-08-22", "22 August 2026"],
+  ["/proof/topic-xii/b", "2026-08-22", "22 August 2026"],
 ];
 
 for (const [pathname, expectedResults, expectedProofs] of chapters) {
@@ -1178,5 +1180,105 @@ test("every internal proof-reader fragment resolves on its target page", async (
         `${pathname} links to missing ${targetPath}#${fragment}`,
       );
     }
+  }
+});
+
+test("Topic XII publishes as one continuous two-part monotonicity argument", async () => {
+  const redirect = await render("/proof/topic-xii");
+  assert.equal(redirect.status, 308);
+  assert.equal(
+    new URL(redirect.headers.get("location") ?? "", "http://localhost").pathname,
+    "/proof/topic-xii/a/",
+  );
+
+  const [topicXI, partA, partB] = await Promise.all([
+    render("/proof/topic-xi").then((response) => response.text()),
+    render("/proof/topic-xii/a").then((response) => response.text()),
+    render("/proof/topic-xii/b").then((response) => response.text()),
+  ]);
+  const visibleText = (html) =>
+    html
+      .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+      .replace(/<annotation\b[\s\S]*?<\/annotation>/gi, " ")
+      .replace(/<[^>]*>/g, " ")
+      .replaceAll("&gt;", ">")
+      .replaceAll("&lt;", "<")
+      .replaceAll("&amp;", "&")
+      .replace(/\s+/g, " ");
+
+  assert.match(
+    topicXI,
+    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/proof\/topic-xii\/a\//,
+  );
+  assert.match(
+    partA,
+    /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="\/proof\/topic-xi\//,
+  );
+  assert.match(
+    partA,
+    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/proof\/topic-xii\/b\//,
+  );
+  assert.match(
+    partB,
+    /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="\/proof\/topic-xii\/a\//,
+  );
+  assert.match(
+    partB,
+    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/proof\/topic-xiii\//,
+  );
+
+  assert.match(partA, /href="\/proof\/topic-ix\//);
+  assert.match(partA, /href="\/proof\/topic-x\/#karp:thm:hetero-sharp"/);
+  for (const anchor of [
+    "karp:eq:padding-explicit-scalar-sign",
+    "karp:lem:mediant-expansion",
+    "karp:eq:Kn-pi-definition",
+  ]) {
+    assert.match(partB, new RegExp(`href="/proof/topic-xii/a/#${anchor}"`));
+  }
+
+  const setup = partA.indexOf("data-topic-xii-setup");
+  const firstResult = partA.indexOf('id="topic-xii-mediant-expansion"');
+  assert.ok(setup >= 0 && firstResult > setup, "K_n is defined before its first use");
+  assert.match(partA, /id="karp:eq:Kn-pi-definition"/);
+  assert.equal(
+    [...partA.matchAll(/\sid="topic-xii-a-contract-heading"/g)].length,
+    1,
+  );
+  assert.equal(
+    [...partB.matchAll(/\sid="topic-xii-b-contract-heading"/g)].length,
+    1,
+  );
+
+  const card = (html, id, nextId) => {
+    const start = html.indexOf(`id="${id}"`);
+    const end = nextId ? html.indexOf(`id="${nextId}"`, start + 1) : html.length;
+    assert.notEqual(start, -1, `${id} exists`);
+    return html.slice(start, end < 0 ? html.length : end);
+  };
+  assert.doesNotMatch(
+    card(partA, "topic-xii-mediant-expansion", "topic-xii-multiplicity-padding"),
+    /proof-chapter-provenance/,
+  );
+  assert.doesNotMatch(
+    card(partA, "topic-xii-multiplicity-padding"),
+    /proof-chapter-provenance/,
+  );
+  assert.doesNotMatch(
+    card(partB, "topic-xii-refinement-split", "topic-xii-candidate-nesting"),
+    /proof-chapter-provenance/,
+  );
+  assert.doesNotMatch(
+    card(partB, "topic-xii-candidate-nesting"),
+    /proof-chapter-provenance/,
+  );
+
+  for (const [label, html] of [["A", partA], ["B", partB]]) {
+    assert.doesNotMatch(
+      visibleText(html),
+      /Farey cell|subcell|reciprocal chord|multiplicity padding|candidate outer radius|candidate nesting|moves outward|radial excess/i,
+      `Part ${label} exposes superseded terminology`,
+    );
   }
 });

@@ -62,6 +62,14 @@ const pages = [
     "Explicit stochastic realization of the candidate curve",
   ],
   [
+    "proof/topic-xii/a/index.html",
+    "The two cases where",
+  ],
+  [
+    "proof/topic-xii/b/index.html",
+    "Proof that",
+  ],
+  [
     "prerequisites/index.html",
     "The background used in Topic I",
   ],
@@ -83,6 +91,8 @@ const firstPublicationDates = new Map([
   ["proof/topic-ix/index.html", "20 August 2026"],
   ["proof/topic-x/index.html", "21 August 2026"],
   ["proof/topic-xi/index.html", "22 August 2026"],
+  ["proof/topic-xii/a/index.html", "22 August 2026"],
+  ["proof/topic-xii/b/index.html", "22 August 2026"],
 ]);
 
 for (const [relativePath, expectedText] of pages) {
@@ -122,7 +132,7 @@ for (const [relativePath, expectedText] of pages) {
   assert.match(visibleText, /24 July 2026/);
   assert.match(visibleText, /Website edition/);
   assert.match(visibleText, /Last revised\s+22 August 2026/);
-  assert.match(visibleText, /106-page site-hosted PDF/);
+  assert.match(visibleText, /108-page site-hosted PDF/);
   assert.doesNotMatch(html, />Prepared</);
 }
 
@@ -142,6 +152,16 @@ for (const [relativePath, target] of [
   assert.doesNotMatch(html, /<script\b/i);
 }
 
+{
+  const html = await readFile(
+    path.join(outputRoot, "proof/topic-xii/index.html"),
+    "utf8",
+  );
+  assert.match(html, /Topic XII is published in two consecutive parts/);
+  assert.match(html, /\/karpelevic\/proof\/topic-xii\/a\//);
+  assert.doesNotMatch(html, /<script\b/i);
+}
+
 for (const relativePath of [
   "proof/index.html",
   "proof/topic-ii/index.html",
@@ -154,12 +174,14 @@ for (const relativePath of [
   "proof/topic-ix/index.html",
   "proof/topic-x/index.html",
   "proof/topic-xi/index.html",
+  "proof/topic-xii/a/index.html",
+  "proof/topic-xii/b/index.html",
 ]) {
   const html = await readFile(path.join(outputRoot, relativePath), "utf8");
   assert.match(html, /Forthcoming/);
   assert.doesNotMatch(
     html,
-    /href="\/karpelevic\/proof\/topic-(?:xii(?:\/[ab])?|xiii|xiv)\//,
+    /href="\/karpelevic\/proof\/topic-(?:xiii|xiv)\//,
   );
 }
 
@@ -351,16 +373,95 @@ for (const relativePath of [
     html,
     /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="\/karpelevic\/proof\/topic-x\//,
   );
-  assert.doesNotMatch(html, /href="\/karpelevic\/proof\/topic-xii\//);
   assert.match(
     html,
-    /data-proof-topic-number="12"(?:(?!<\/li>)[\s\S])*Forthcoming/i,
+    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/karpelevic\/proof\/topic-xii\/a\//,
+  );
+  assert.doesNotMatch(
+    html,
+    /<li>(?:(?!<\/li>)[\s\S])*data-proof-topic-number="12"(?:(?!<\/li>)[\s\S])*Forthcoming/i,
   );
   assert.doesNotMatch(
     visibleText,
     /cycle cover term|global cross cycle|cross edge|tail-row adjacency|constant parameter list|Rᴺ|Θᴺ/i,
   );
   assert.doesNotMatch(html, /<\/(?:var|sub|sup)>[A-Za-z]/);
+}
+
+{
+  const html = await readFile(
+    path.join(outputRoot, "proof/topic-xii/a/index.html"),
+    "utf8",
+  );
+  const visibleText = visibleTextFromHtml(html);
+  assert.match(html, /data-proof-route="topic-xii-a"/);
+  assert.match(visibleText, /Manuscript pages\s+94–100/);
+  assert.match(html, /id="karp:lem:mediant-expansion"/);
+  assert.match(html, /id="karp:lem:multiplicity-padding"/);
+  assert.match(html, /id="topic-xii-a-contract-heading"/);
+  assert.equal(
+    [...html.matchAll(/\sid="topic-xii-a-contract-heading"/g)].length,
+    1,
+    "Topic XII-A dependency heading must have one anchor.",
+  );
+  assert.match(
+    html,
+    /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="\/karpelevic\/proof\/topic-xi\//,
+  );
+  assert.match(
+    html,
+    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/karpelevic\/proof\/topic-xii\/b\//,
+  );
+  assert.match(html, /href="\/karpelevic\/proof\/topic-ix\//);
+  assert.match(
+    html,
+    /href="\/karpelevic\/proof\/topic-x\/#karp:thm:hetero-sharp"/,
+  );
+  assert.match(html, /Plate XII\.1/);
+  assert.match(html, /Plate XII\.2/);
+  assert.doesNotMatch(html, /Plate XII\.3/);
+  assert.doesNotMatch(
+    visibleText,
+    /reciprocal-chord|multiplicity padding|mediant expansion|cell split|carrier interval|candidate nesting|provenance badge/i,
+  );
+}
+
+{
+  const html = await readFile(
+    path.join(outputRoot, "proof/topic-xii/b/index.html"),
+    "utf8",
+  );
+  const visibleText = visibleTextFromHtml(html);
+  assert.match(html, /data-proof-route="topic-xii-b"/);
+  assert.match(visibleText, /Manuscript pages\s+100–101/);
+  assert.match(html, /id="karp:lem:nesting-case-split"/);
+  assert.match(html, /id="karp:thm:candidate-nesting"/);
+  assert.match(html, /id="topic-xii-b-contract-heading"/);
+  assert.equal(
+    [...html.matchAll(/\sid="topic-xii-b-contract-heading"/g)].length,
+    1,
+    "Topic XII-B dependency heading must have one anchor.",
+  );
+  assert.match(
+    html,
+    /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="\/karpelevic\/proof\/topic-xii\/a\//,
+  );
+  assert.match(html, /href="\/karpelevic\/proof\/topic-xii\/a\//);
+  assert.match(html, /Plate XII\.3/);
+  assert.doesNotMatch(html, /Plate XII\.1|Plate XII\.2/);
+  assert.doesNotMatch(
+    html,
+    /<li>(?:(?!<\/li>)[\s\S])*data-proof-topic-number="12"(?:(?!<\/li>)[\s\S])*Forthcoming/i,
+  );
+  assert.match(
+    html,
+    /<li>(?:(?!<\/li>)[\s\S])*data-proof-topic-number="13"(?:(?!<\/li>)[\s\S])*Forthcoming/i,
+  );
+  assert.doesNotMatch(html, /href="\/karpelevic\/proof\/topic-xiii\//);
+  assert.doesNotMatch(
+    visibleText,
+    /cell split|multiplicity padding|carrier interval|candidate nesting|provenance badge/i,
+  );
 }
 
 {
@@ -495,12 +596,14 @@ await access(path.join(outputRoot, ".nojekyll"));
 await assert.rejects(access(path.join(outputRoot, ".vite")));
 await assert.rejects(access(path.join(outputRoot, "code")));
 for (const futureTopic of [
-  "topic-xii",
   "topic-xiii",
   "topic-xiv",
 ]) {
   await assert.rejects(access(path.join(outputRoot, `proof/${futureTopic}`)));
 }
+await access(path.join(outputRoot, "proof/topic-xii/a/index.html"));
+await access(path.join(outputRoot, "proof/topic-xii/b/index.html"));
+await access(path.join(outputRoot, "proof/topic-xii/index.html"));
 const publicAssetEntries = await readdir(path.join(outputRoot, "assets"));
 assert.equal(
   publicAssetEntries.some((entry) => entry.endsWith(".js")),

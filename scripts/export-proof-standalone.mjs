@@ -16,7 +16,7 @@ const outputPath = path.resolve(
 );
 const proofRoute = process.env.PROOF_ROUTE ?? "/proof";
 const publicSite = "https://bfmave.github.io/karpelevic";
-const publishedTopicMaximum = 11;
+const publishedTopicMaximum = 12;
 const bundleLinkMode = process.env.PROOF_STANDALONE_BUNDLE_LINKS === "1";
 const reviewBundleFiles = new Map([
   ["/proof/topic-v", "Critical_Invariant_Polygons_Topic_V.html"],
@@ -508,16 +508,16 @@ function verifyStandaloneHtml(html) {
                       : proofRoute === "/proof/topic-xii/a"
                         ? [
                             "Topic XII-A",
-                            "Local Farey Refinement",
-                            "Every nontrivial refinement moves the candidate outward",
+                            "Two Farey-Refinement Comparisons",
+                            "The two cases where",
                             'data-proof-route="topic-xii-a"',
                             "Forthcoming",
                           ]
                         : proofRoute === "/proof/topic-xii/b"
                           ? [
                               "Topic XII-B",
-                              "Exhaustive Candidate Nesting",
-                              "From two local signs to one global nesting theorem",
+                              "Monotonicity of the Candidate Radius",
+                              "Proof that",
                               'data-proof-route="topic-xii-b"',
                               "Forthcoming",
                             ]
@@ -874,18 +874,18 @@ function verifyStandaloneHtml(html) {
         "The individual Topic XI standalone must link Previous to published Topic X.",
       );
     }
+    if (/data-proof-topic-number="12"(?:(?!<\/li>)[\s\S])*Forthcoming/i.test(html)) {
+      throw new Error(
+        "The individual Topic XI standalone must not mark published Topic XII as forthcoming.",
+      );
+    }
     if (
-      !/data-proof-topic-number="12"(?:(?!<\/li>)[\s\S])*Forthcoming/i.test(
+      !/class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xii\/a\//i.test(
         html,
       )
     ) {
       throw new Error(
-        "The individual Topic XI standalone must mark Topic XII as forthcoming.",
-      );
-    }
-    if (/href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xii\//i.test(html)) {
-      throw new Error(
-        "The individual Topic XI standalone must not link to unpublished Topic XII.",
+        "The individual Topic XI standalone must link Next to published Topic XII-A.",
       );
     }
 
@@ -906,6 +906,83 @@ function verifyStandaloneHtml(html) {
       throw new Error(
         "Standalone Topic XI still contains superseded reader-facing terminology.",
       );
+    }
+  }
+
+  if (proofRoute === "/proof/topic-xii/a" && !bundleLinkMode) {
+    if (/href="Critical_Invariant_Polygons_Topic_[IVX]+\.html/i.test(html)) {
+      throw new Error(
+        "The individual Topic XII-A standalone must not require sibling HTML files.",
+      );
+    }
+    if (
+      !/class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xi\//i.test(
+        html,
+      ) ||
+      !/class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xii\/b\//i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "The individual Topic XII-A standalone must link from Topic XI to Topic XII-B.",
+      );
+    }
+    if (/data-proof-topic-number="12"(?:(?!<\/li>)[\s\S])*Forthcoming/i.test(html)) {
+      throw new Error("The individual Topic XII-A standalone marks Topic XII as forthcoming.");
+    }
+    if (!/href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-x\/#karp:thm:hetero-sharp"/i.test(html)) {
+      throw new Error("The individual Topic XII-A standalone is missing its exact Topic X dependency.");
+    }
+
+    const visibleText = visibleTextFromHtml(html).replace(/\s+/g, " ").trim();
+    if (
+      !/Topic XII · Part A · Manuscript pages 94–100/i.test(visibleText) ||
+      !/First published 22 August 2026\s*\./i.test(visibleText) ||
+      !/Last revised 22 August 2026\s*\./i.test(visibleText)
+    ) {
+      throw new Error("Standalone Topic XII-A has incorrect range or publication metadata.");
+    }
+    if (/Farey cell|subcell|reciprocal chord|multiplicity padding|candidate outer radius|candidate nesting|moves outward|radial excess/i.test(visibleText)) {
+      throw new Error("Standalone Topic XII-A still contains superseded terminology.");
+    }
+  }
+
+  if (proofRoute === "/proof/topic-xii/b" && !bundleLinkMode) {
+    if (/href="Critical_Invariant_Polygons_Topic_[IVX]+\.html/i.test(html)) {
+      throw new Error(
+        "The individual Topic XII-B standalone must not require sibling HTML files.",
+      );
+    }
+    if (
+      !/class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xii\/a\//i.test(
+        html,
+      ) ||
+      !/data-proof-topic-number="13"[^>]*aria-disabled="true"/i.test(html)
+    ) {
+      throw new Error(
+        "The individual Topic XII-B standalone must link Previous to XII-A and keep Topic XIII unavailable.",
+      );
+    }
+    for (const anchor of [
+      "karp:eq:padding-explicit-scalar-sign",
+      "karp:lem:mediant-expansion",
+      "karp:eq:Kn-pi-definition",
+    ]) {
+      if (!html.includes(`href="https://bfmave.github.io/karpelevic/proof/topic-xii/a/#${anchor}"`)) {
+        throw new Error(`The individual Topic XII-B standalone is missing its Part-A link to ${anchor}.`);
+      }
+    }
+
+    const visibleText = visibleTextFromHtml(html).replace(/\s+/g, " ").trim();
+    if (
+      !/Topic XII · Part B · Manuscript pages 100–101/i.test(visibleText) ||
+      !/First published 22 August 2026\s*\./i.test(visibleText) ||
+      !/Last revised 22 August 2026\s*\./i.test(visibleText)
+    ) {
+      throw new Error("Standalone Topic XII-B has incorrect range or publication metadata.");
+    }
+    if (/Farey cell|subcell|reciprocal chord|multiplicity padding|candidate outer radius|candidate nesting|moves outward|radial excess/i.test(visibleText)) {
+      throw new Error("Standalone Topic XII-B still contains superseded terminology.");
     }
   }
 

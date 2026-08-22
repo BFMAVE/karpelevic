@@ -8,6 +8,7 @@ type ProofDependencyContractProps = {
   imported: readonly ProofDependency[];
   importedHeading?: string;
   background?: readonly ProofDependency[];
+  headingId?: string;
   provedHere: React.ReactNode;
 };
 
@@ -29,13 +30,14 @@ export function ProofDependencyContract({
   imported,
   importedHeading = "Imported from earlier topics",
   background = [],
+  headingId = "chapter-contract-heading",
   provedHere,
 }: ProofDependencyContractProps) {
   return (
-    <section className="topic-ii-reader-contract proof-chapter-contract" aria-labelledby="chapter-contract-heading">
+    <section className="topic-ii-reader-contract proof-chapter-contract" aria-labelledby={headingId}>
       <header>
         <p className="section-label">Prerequisites and sources</p>
-        <h3 id="chapter-contract-heading">What this chapter uses</h3>
+        <h3 id={headingId}>What this chapter uses</h3>
         <p>
           Every ingredient below has already been proved, is stated here with
           a precise source, or is established in full before the chapter uses

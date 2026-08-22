@@ -21,7 +21,7 @@ export default function TopicXPage() {
       manuscriptPages="86–91"
       overview={[
         "For an upper-half-plane radial boundary point that first appears at order N≥4, Topics VII and VIII supply a finite product equation, a phase equation for chosen arguments of its factors, and bounds placing those arguments in one interval. Lower-half-plane points follow by complex conjugation.",
-        "Topic X turns those identities into a Jensen comparison with the candidate radius constructed in Topic IX and characterizes equality under the finite-product hypotheses. Topic XI, now published, independently realizes the common-parameter case; Topic XII handles inherited lower-order boundary points through nesting.",
+        "Topic X turns those identities into a Jensen comparison with the candidate radius constructed in Topic IX and characterizes equality under the finite-product hypotheses. Topic XI independently realizes the common-parameter case; Topic XII proves the pointwise monotonicity Kₙ₋₁(θ)≤Kₙ(θ) needed for inherited lower-order boundary points.",
       ]}
       updatedAt={updatedAt}
       stats={[{ value: 3, label: "results" }]}

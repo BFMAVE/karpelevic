@@ -552,15 +552,15 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "nesting",
     eyebrow: "Topic XII · order comparison",
-    title: "Farey refinement and nesting",
+    title: "Farey refinement and monotonicity of the candidate radius",
     question:
-      "Why does increasing the matrix order enlarge the candidate region in the correct way?",
+      "Why is Kₙ(θ) nondecreasing with respect to the order n for every angle θ?",
     overview: [
-      "Mediant insertion refines one Farey interval into smaller intervals. Log-line comparison, multiplicity padding, and an exhaustive denominator split compare the corresponding radial candidates.",
-      "The candidate-nesting theorem is the global arithmetic step that lets the final proof pass from non-inherited radial maxima to all stochastic eigenvalues by induction on the order.",
+      "Mediant insertion refines one Farey interval into two subintervals. A log-line comparison, the case where the factor count increases, and an exhaustive Farey classification compare the corresponding candidate radii.",
+      "The pointwise inequality Kₙ₋₁(θ)≤Kₙ(θ) is the global arithmetic step that lets the final proof pass from radial maxima first appearing at one order to all stochastic eigenvalues by induction.",
     ],
     itemNumbers: [],
-    manuscriptPages: "93–100",
+    manuscriptPages: "94–101",
   },
   {
     slug: "karpelevic-ito",
@@ -573,7 +573,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "Continuity of the radial graph, conjugation, star-shapedness with respect to the origin, and the unit-circle classification then identify the concatenated candidate curves with the full topological boundary. This is where the classical theorem is finally stated and proved.",
     ],
     itemNumbers: [],
-    manuscriptPages: "100–104",
+    manuscriptPages: "101–105",
   },
   {
     slug: "order-seven",
@@ -587,7 +587,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "This interactive computation illustrates the theorem but is not part of its logical proof. Topic XIII remains the endpoint of the necessary argument; Topic XIV lets readers inspect the complete construction at order seven and then explore other orders themselves.",
     ],
     itemNumbers: [],
-    manuscriptPages: "104–106",
+    manuscriptPages: "105–108",
   },
 ] as const;
 

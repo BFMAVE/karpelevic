@@ -54,6 +54,14 @@ const routes = [
     outputPath: "proof/topic-xi/index.html",
   },
   {
+    requestPath: "/proof/topic-xii/a",
+    outputPath: "proof/topic-xii/a/index.html",
+  },
+  {
+    requestPath: "/proof/topic-xii/b",
+    outputPath: "proof/topic-xii/b/index.html",
+  },
+  {
     requestPath: "/prerequisites",
     outputPath: "prerequisites/index.html",
   },
@@ -62,14 +70,24 @@ const compatibilityRedirects = [
   {
     outputPath: "proof/topic-vi/a/index.html",
     target: `${basePath}/proof/topic-vi/#lem:holonomy-calibration`,
+    title: "Topic VI has moved",
+    message: "Topic VI is now one chapter.",
   },
   {
     outputPath: "proof/topic-vi/b/index.html",
     target: `${basePath}/proof/topic-vi/#lem:deformation-admissibility`,
+    title: "Topic VI has moved",
+    message: "Topic VI is now one chapter.",
+  },
+  {
+    outputPath: "proof/topic-xii/index.html",
+    target: `${basePath}/proof/topic-xii/a/`,
+    title: "Topic XII begins with Part A",
+    message: "Topic XII is published in two consecutive parts.",
   },
 ];
 
-function redirectPage(target) {
+function redirectPage(target, title, message) {
   const escapedTarget = target.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
   return `<!doctype html>
 <html lang="en">
@@ -78,10 +96,10 @@ function redirectPage(target) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="refresh" content="0; url=${escapedTarget}">
   <link rel="canonical" href="https://bfmave.github.io${escapedTarget}">
-  <title>Topic VI has moved</title>
+  <title>${title}</title>
 </head>
 <body>
-  <p>Topic VI is now one chapter. <a href="${escapedTarget}">Continue to the corresponding section.</a></p>
+  <p>${message} <a href="${escapedTarget}">Continue.</a></p>
 </body>
 </html>`;
 }
@@ -94,7 +112,7 @@ function makeStatic(html, requestPath) {
     // live links to unavailable proof routes. The chapter atlas already
     // renders later topics as text with a Forthcoming label.
     .replace(
-      /\s+href="(?:\/karpelevic)?\/proof\/topic-(?:xii(?:\/[ab])?|xiii|xiv)\/?[^\"]*"/gi,
+      /\s+href="(?:\/karpelevic)?\/proof\/topic-(?:xiii|xiv)\/?[^\"]*"/gi,
       "",
     );
   const withProjectAssets = withoutScripts.replaceAll(
@@ -178,7 +196,11 @@ for (const route of routes) {
 for (const redirect of compatibilityRedirects) {
   const destination = path.join(outputRoot, redirect.outputPath);
   await mkdir(path.dirname(destination), { recursive: true });
-  await writeFile(destination, redirectPage(redirect.target), "utf8");
+  await writeFile(
+    destination,
+    redirectPage(redirect.target, redirect.title, redirect.message),
+    "utf8",
+  );
 }
 
 await writeFile(path.join(outputRoot, ".nojekyll"), "", "utf8");
