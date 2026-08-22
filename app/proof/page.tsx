@@ -30,7 +30,6 @@ import {
   proofTopics,
 } from "../data/proof";
 import {
-  availableProofTopicMaximum,
   proofReaderTopicLinks,
 } from "../data/proof-reader";
 import { publicationDates } from "../data/publication-dates";
@@ -119,10 +118,56 @@ function toRomanNumeral(n: number): string | null {
 const totalTopicNumeral = "XIV";
 const proofEditionTopicLabel = `Topic I of ${totalTopicNumeral}`;
 const proofTopicCounterLabel = `Topic I of ${totalTopicNumeral}`;
+
+function topicRangeList(topicNumbers: readonly number[]): string {
+  const ranges: string[] = [];
+  let start = topicNumbers[0];
+  let end = start;
+
+  for (const topicNumber of topicNumbers.slice(1)) {
+    if (topicNumber === (end ?? 0) + 1) {
+      end = topicNumber;
+      continue;
+    }
+    ranges.push(
+      start === end
+        ? String(toRomanNumeral(start ?? 0))
+        : String(toRomanNumeral(start ?? 0)) + "–" + toRomanNumeral(end ?? 0),
+    );
+    start = topicNumber;
+    end = topicNumber;
+  }
+
+  if (start !== undefined) {
+    ranges.push(
+      start === end
+        ? String(toRomanNumeral(start))
+        : String(toRomanNumeral(start)) + "–" + toRomanNumeral(end ?? start),
+    );
+  }
+
+  if (ranges.length <= 1) return ranges[0] ?? "";
+  return ranges.slice(0, -1).join(", ") + " and " + ranges.at(-1);
+}
+
+const onlineTopicNumbers = proofReaderTopicLinks
+  .filter((topic) => topic.available)
+  .map((topic) => topic.topicNumber);
+const forthcomingTopicNumbers = proofReaderTopicLinks
+  .filter((topic) => !topic.available)
+  .map((topic) => topic.topicNumber);
 const proofPublicationScope =
-  availableProofTopicMaximum < proofTopics.length
-    ? `Topics I–${toRomanNumeral(availableProofTopicMaximum)} are online; Topics ${toRomanNumeral(availableProofTopicMaximum + 1)}–${totalTopicNumeral} are forthcoming.`
-    : `Topics I–${totalTopicNumeral} are online.`;
+  forthcomingTopicNumbers.length === 0
+    ? "Topics " + topicRangeList(onlineTopicNumbers) + " are online."
+    : "Topics " +
+      topicRangeList(onlineTopicNumbers) +
+      " are online; " +
+      (forthcomingTopicNumbers.length === 1 ? "Topic" : "Topics") +
+      " " +
+      topicRangeList(forthcomingTopicNumbers) +
+      " " +
+      (forthcomingTopicNumbers.length === 1 ? "is" : "are") +
+      " forthcoming.";
 
 function resultNumber(label: string): string {
   return label.replace(/^(?:Proposition|Lemma|Theorem|Remark)\s+/, "");

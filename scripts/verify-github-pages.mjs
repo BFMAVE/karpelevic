@@ -66,10 +66,6 @@ const pages = [
     "From local Farey comparisons to global monotonicity",
   ],
   [
-    "proof/topic-xiii/index.html",
-    "The Karpelevič theorem in Ito’s formulation",
-  ],
-  [
     "proof/topic-xiv/index.html",
     "The complete order-seven example and an interactive boundary plot",
   ],
@@ -96,7 +92,6 @@ const firstPublicationDates = new Map([
   ["proof/topic-x/index.html", "21 August 2026"],
   ["proof/topic-xi/index.html", "22 August 2026"],
   ["proof/topic-xii/index.html", "22 August 2026"],
-  ["proof/topic-xiii/index.html", "22 August 2026"],
   ["proof/topic-xiv/index.html", "22 August 2026"],
 ]);
 
@@ -149,6 +144,18 @@ for (const [relativePath, expectedText] of pages) {
   assert.doesNotMatch(html, />Prepared</);
 }
 
+{
+  const html = await readFile(
+    path.join(outputRoot, "proof/index.html"),
+    "utf8",
+  );
+  const visibleText = visibleTextFromHtml(html);
+  assert.match(
+    visibleText,
+    /Topics I–XII and XIV are online; Topic XIII is forthcoming\./,
+  );
+}
+
 for (const [relativePath, target, message] of [
   [
     "proof/topic-vi/a/index.html",
@@ -190,13 +197,21 @@ for (const relativePath of [
   "proof/topic-x/index.html",
   "proof/topic-xi/index.html",
   "proof/topic-xii/index.html",
-  "proof/topic-xiii/index.html",
   "proof/topic-xiv/index.html",
 ]) {
   const html = await readFile(path.join(outputRoot, relativePath), "utf8");
-  assert.doesNotMatch(html, /Forthcoming/);
-  assert.match(html, /href="\/karpelevic\/proof\/topic-xiii\//);
+  const topicXIIIEntry = html.match(
+    /<li>(?:(?!<\/li>)[\s\S])*data-proof-topic-number="13"(?:(?!<\/li>)[\s\S])*<\/li>/i,
+  )?.[0];
+  assert.ok(topicXIIIEntry, "The proof atlas must retain Topic XIII.");
+  assert.match(topicXIIIEntry, /Forthcoming/i);
+  assert.doesNotMatch(topicXIIIEntry, /<a\b|href=/i);
+  assert.doesNotMatch(html, /href="\/karpelevic\/proof\/topic-xiii\//);
   assert.match(html, /href="\/karpelevic\/proof\/topic-xiv\//);
+  assert.doesNotMatch(
+    html,
+    /<li>(?:(?!<\/li>)[\s\S])*data-proof-topic-number="14"(?:(?!<\/li>)[\s\S])*Forthcoming/i,
+  );
 }
 
 {
@@ -440,9 +455,9 @@ for (const relativePath of [
   );
   assert.match(
     html,
-    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/karpelevic\/proof\/topic-xiii\//i,
+    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/karpelevic\/proof\/topic-xiv\//i,
   );
-  assert.match(html, /href="\/karpelevic\/proof\/topic-xiii\//);
+  assert.doesNotMatch(html, /href="\/karpelevic\/proof\/topic-xiii\//);
   assert.match(html, /href="\/karpelevic\/proof\/topic-ix\//);
   assert.match(
     html,
@@ -459,52 +474,15 @@ for (const relativePath of [
     html,
     /<li>(?:(?!<\/li>)[\s\S])*data-proof-topic-number="12"(?:(?!<\/li>)[\s\S])*Forthcoming/i,
   );
-  assert.doesNotMatch(html, /data-proof-topic-number="13"[^>]*aria-disabled="true"/i);
+  assert.match(
+    html,
+    /<li>(?:(?!<\/li>)[\s\S])*data-proof-topic-number="13"(?:(?!<\/li>)[\s\S])*Forthcoming/i,
+  );
   assert.doesNotMatch(html, /proof-chapter-parts|\/proof\/topic-xii\/[ab]\//i);
   assert.doesNotMatch(
     visibleText,
     /Part A|Part B|Topic XII-A|Topic XII-B|reciprocal-chord|multiplicity padding|mediant expansion|cell split|carrier interval|candidate nesting|provenance badge/i,
   );
-}
-
-{
-  const html = await readFile(
-    path.join(outputRoot, "proof/topic-xiii/index.html"),
-    "utf8",
-  );
-  const visibleText = visibleTextFromHtml(html);
-  assert.match(html, /data-proof-route="topic-xiii"/);
-  assert.match(visibleText, /Manuscript pages\s+101–105/);
-  assert.match(visibleText, /Karpelevič theorem in Ito’s formulation/i);
-  assert.match(visibleText, /First published\s+22 August 2026/);
-  assert.match(
-    html,
-    /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="\/karpelevic\/proof\/topic-xii\//,
-  );
-  assert.match(
-    html,
-    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/karpelevic\/proof\/topic-xiv\//,
-  );
-  const classLists = [...html.matchAll(/class="([^"]+)"/g)].map((match) =>
-    match[1].split(/\s+/),
-  );
-  assert.equal(
-    classLists.filter((tokens) => tokens.includes("topic-i-textbook-item")).length,
-    3,
-    "Topic XIII must contain all three formal results.",
-  );
-  assert.equal(
-    classLists.filter((tokens) => tokens.includes("topic-i-proof-disclosure")).length,
-    3,
-    "Topic XIII must contain all three complete proofs.",
-  );
-  for (const number of [1, 2, 3]) {
-    assert.equal(
-      [...html.matchAll(new RegExp("Plate XIII\\." + number + "\\.", "g"))].length,
-      1,
-      "Topic XIII must contain Plate XIII." + number + " exactly once.",
-    );
-  }
 }
 
 {
@@ -524,6 +502,15 @@ for (const relativePath of [
   assert.doesNotMatch(html, /data-proof-chapter-controls="true"/);
   assert.doesNotMatch(html, /\/karpelevic\/proof-chapter\.js/);
   assert.match(html, /\/karpelevic\/topic-xiv\.js/);
+  assert.match(
+    html,
+    /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="\/karpelevic\/proof\/topic-xii\//,
+  );
+  assert.doesNotMatch(html, /href="\/karpelevic\/proof\/topic-xiii\//);
+  assert.match(
+    visibleText,
+    /Manuscript Topic XIII · Karpelevič theorem in Ito’s formulation/i,
+  );
   assert.match(
     visibleText,
     /Worked example, source, tests, and numerical plot complete/i,
@@ -694,7 +681,9 @@ await access(path.join(outputRoot, "code/karpelevic-boundary.test.mjs"));
 await access(path.join(outputRoot, ".nojekyll"));
 
 await assert.rejects(access(path.join(outputRoot, ".vite")));
-await access(path.join(outputRoot, "proof/topic-xiii/index.html"));
+await assert.rejects(
+  access(path.join(outputRoot, "proof/topic-xiii/index.html")),
+);
 await access(path.join(outputRoot, "proof/topic-xiv/index.html"));
 await access(path.join(outputRoot, "proof/topic-xii/a/index.html"));
 await access(path.join(outputRoot, "proof/topic-xii/b/index.html"));

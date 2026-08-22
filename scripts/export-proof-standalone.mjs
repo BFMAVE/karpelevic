@@ -787,7 +787,7 @@ function verifyStandaloneHtml(html) {
     }
     if (
       !/First published 20 August 2026\s*\./i.test(visibleText) ||
-      !/Last revised 21 August 2026\s*\./i.test(visibleText)
+      !/Last revised 22 August 2026\s*\./i.test(visibleText)
     ) {
       throw new Error(
         "Standalone Topic VII must expose its current first-publication and revision dates.",

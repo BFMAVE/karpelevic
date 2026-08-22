@@ -15,6 +15,13 @@ const configuredTopicMaximum = Number.parseInt(
   process.env.NEXT_PUBLIC_PROOF_TOPIC_MAX ?? "",
   10,
 );
+const configuredTopicExclusions = new Set(
+  (process.env.NEXT_PUBLIC_PROOF_TOPIC_EXCLUSIONS ?? "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter((value) => /^\d+$/.test(value))
+    .map(Number),
+);
 
 export const availableProofTopicMaximum = Number.isFinite(
   configuredTopicMaximum,
@@ -23,7 +30,10 @@ export const availableProofTopicMaximum = Number.isFinite(
   : proofTopics.length;
 
 export function isProofTopicAvailable(topicNumber: number): boolean {
-  return topicNumber <= availableProofTopicMaximum;
+  return (
+    topicNumber <= availableProofTopicMaximum &&
+    !configuredTopicExclusions.has(topicNumber)
+  );
 }
 
 export const proofReaderRoutes: readonly ProofReaderRoute[] = [
@@ -155,9 +165,16 @@ export function getProofReaderNeighbours(key: string): {
 } {
   const index = proofReaderRoutes.findIndex((route) => route.key === key);
   if (index < 0) return {};
+  const precedingRoutes = proofReaderRoutes.slice(0, index).reverse();
+  const followingRoutes = proofReaderRoutes.slice(index + 1);
   return {
-    previous: proofReaderRoutes[index - 1],
-    next: proofReaderRoutes[index + 1],
+    previous: precedingRoutes.find((route) =>
+      isProofTopicAvailable(route.topicNumber),
+    ),
+    next:
+      followingRoutes.find((route) =>
+        isProofTopicAvailable(route.topicNumber),
+      ) ?? followingRoutes[0],
   };
 }
 

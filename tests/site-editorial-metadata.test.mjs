@@ -79,9 +79,9 @@ test("reader-facing terminology is conventional while the manuscript title is pr
 
   assert.match(proofPage, />\s*Formal\s*<\/button>/);
   assert.doesNotMatch(proofPage, />\s*Compact\s*<\/button>/);
-  assert.match(proofPage, /availableProofTopicMaximum/);
-  assert.match(proofPage, /are online; Topics/);
-  assert.match(proofPage, /are forthcoming/);
+  assert.match(proofPage, /onlineTopicNumbers/);
+  assert.match(proofPage, /forthcomingTopicNumbers/);
+  assert.match(proofPage, /proofReaderTopicLinks/);
   assert.match(
     proofData,
     /The complete order-seven example and an interactive boundary plot/,

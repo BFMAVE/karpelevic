@@ -3,6 +3,7 @@ import { OrderSevenBoundaryFigure } from "../../components/proof/OrderSevenBound
 import { ProofDependencyContract } from "../../components/proof/ProofDependencyContract";
 import { sitePath } from "../../lib/site-path";
 import { partIIOrderSevenHtml } from "../part-ii-content.generated";
+import { isProofTopicAvailable } from "../proof-reader";
 
 const manuscriptHtml = partIIOrderSevenHtml
   .replaceAll("<h1", "<h3")
@@ -44,8 +45,12 @@ export function TopicXIVContent() {
               "turns a reduced Ito polynomial into an explicit row-stochastic matrix that has the selected boundary point as an eigenvalue.",
           },
           {
-            label: "Topic XIII · Karpelevič theorem in Ito’s formulation",
-            href: sitePath("/proof/topic-xiii/"),
+            label: isProofTopicAvailable(13)
+              ? "Topic XIII · Karpelevič theorem in Ito’s formulation"
+              : "Manuscript Topic XIII · Karpelevič theorem in Ito’s formulation",
+            href: isProofTopicAvailable(13)
+              ? sitePath("/proof/topic-xiii/")
+              : undefined,
             explanation:
               "identifies the union of the parametrized Karpelevič arcs with the complete boundary of the stochastic eigenvalue region.",
           },
