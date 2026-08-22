@@ -16,7 +16,7 @@ export default function TopicXIIAPage() {
     <ProofChapterShell
       routeKey="topic-xii-a"
       updatedAt={updatedAt}
-      manuscriptPages="79–83"
+      manuscriptPages="93–98"
       stats={[
         { value: 2, label: "lemmas" },
         { value: 2, label: "refinement mechanisms" },

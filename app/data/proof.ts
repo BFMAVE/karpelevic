@@ -560,7 +560,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "The candidate-nesting theorem is the global arithmetic step that lets the final proof pass from non-inherited radial maxima to all stochastic eigenvalues by induction on the order.",
     ],
     itemNumbers: [],
-    manuscriptPages: "79–85",
+    manuscriptPages: "93–100",
   },
   {
     slug: "karpelevic-ito",
@@ -573,7 +573,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "Continuity of the radial graph, conjugation, star-shapedness with respect to the origin, and the unit-circle classification then identify the concatenated candidate curves with the full topological boundary. This is where the classical theorem is finally stated and proved.",
     ],
     itemNumbers: [],
-    manuscriptPages: "71 and 85–89",
+    manuscriptPages: "100–104",
   },
   {
     slug: "order-seven",
@@ -587,7 +587,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "This interactive computation illustrates the theorem but is not part of its logical proof. Topic XIII remains the endpoint of the necessary argument; Topic XIV lets readers inspect the complete construction at order seven and then explore other orders themselves.",
     ],
     itemNumbers: [],
-    manuscriptPages: "89–90",
+    manuscriptPages: "104–106",
   },
 ] as const;
 

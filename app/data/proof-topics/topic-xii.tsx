@@ -12,7 +12,7 @@ type FormalLabel = keyof typeof partIIProofHtmlByLabel;
 
 const crossTopicAnchors: Readonly<Record<string, string>> = {
   "karp:eq:rooted-chord": sitePath("/proof/topic-ix/#karp:eq:rooted-chord"),
-  "karp:eq:A-B-oriented-range": sitePath("/proof/topic-x/#topic-x-heterogeneous"),
+  "karp:eq:A-B-oriented-range": sitePath("/proof/topic-x/#karp:eq:A-B-oriented-range"),
   "karp:thm:hetero-sharp": sitePath("/proof/topic-x/#karp:thm:hetero-sharp"),
   "karp:lem:farey-adjacency-expanded": sitePath("/proof/topic-ix/#karp:lem:farey-adjacency-expanded"),
   "karp:eq:A-B-absolute": sitePath("/proof/topic-ix/#topic-ix-scalar-ray"),
@@ -46,7 +46,7 @@ const commonImports = [
     ),
   },
   {
-    label: "Topic X · Sharp inequality for varying parameters",
+    label: "Topic X · Radial inequality under the finite-product and phase hypotheses",
     href: sitePath("/proof/topic-x/"),
     explanation: (
       <>

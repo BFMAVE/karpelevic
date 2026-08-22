@@ -95,8 +95,8 @@ main = main.replace(
   'data-proof-route="topic-xii"',
 );
 main = main.replace(
-  "Topic <!-- -->XII<!-- --> · Part A<!-- --> · Manuscript pages <!-- -->79–83",
-  "Topic <!-- -->XII<!-- --> · Parts A–B<!-- --> · Manuscript pages <!-- -->79–85",
+  "Topic <!-- -->XII<!-- --> · Part A<!-- --> · Manuscript pages <!-- -->93–98",
+  "Topic <!-- -->XII<!-- --> · Parts A–B<!-- --> · Manuscript pages <!-- -->93–100",
 );
 main = main.replace(
   "Farey refinement and nesting — mediants and multiplicity",
