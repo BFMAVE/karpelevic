@@ -45,7 +45,7 @@ test("the Topic XI standalone is self-contained and links to published Topic XII
     assert.match(text, /First published 22 August 2026/);
     assert.match(text, /Last revised 22 August 2026/);
     assert.match(text, /Directed-cycle expansion of the characteristic polynomial/i);
-    assert.match(text, /Stochastic realization of the candidate point/i);
+    assert.match(text, /Stochastic realization of the compact candidate (?:arc|curve)/i);
     assert.match(html, /data-topic-xi-equation-plate="attainment"/);
     assert.match(
       html,

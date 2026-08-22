@@ -893,8 +893,13 @@ export function TopicXIChapter() {
           {
             label: "Topic IX — the candidate curve and complementary coefficients",
             href: sitePath("/proof/topic-ix/"),
-            explanation:
-              "supplies the reduced Ito polynomial, its point at each prescribed argument, and parameters α,β with α+β=1.",
+            explanation: (
+              <>
+                defines the compact curve Γ<sub>f,g</sub><sup>(n)</sup> on
+                each upper Farey interval, supplies its point at each interior
+                argument, and gives parameters α,β with α+β=1.
+              </>
+            ),
           },
           {
             label: "Topic X — the upper comparison",
@@ -918,10 +923,12 @@ export function TopicXIChapter() {
         provedHere={
           <p>
             We derive the characteristic-polynomial expansion over disjoint directed
-            cycles, classify every directed cycle of the sparse realization graph, and compute its characteristic polynomial in
-            both signs of <span className="math-inline">s−dq</span>, realize
-            every point on the Topic IX candidate curve at order at most <var>n</var>, and only then
-            close the constant-parameter conclusion deferred from Topic X.
+            cycles, classify every directed cycle of the constructed weighted digraph, and compute its characteristic polynomial in
+            the cases <span className="math-inline">s≤dq</span> and
+            {" "}<span className="math-inline">s&gt;dq</span>. This proves
+            {" "}<span className="math-inline">Γ<sub>f,g</sub><sup>(n)</sup>⊆Θₙ</span>, including the Farey
+            endpoints and the exceptional order-three real segment, before the
+            equal-parameter conclusion deferred from Topic X is proved.
           </p>
         }
       />
@@ -931,16 +938,68 @@ export function TopicXIChapter() {
           Here Θ<sub>N</sub> is the set of all eigenvalues of row-stochastic
           matrices of order <var>N</var>, and R<sub>N</sub>(θ) is its maximal
           radius on the ray of argument θ. We write ρ=R<sub>N</sub>(θ) for an
-          actual radial maximum and ρ* for the candidate radius constructed in
+          attained radial maximum and ρ* for the candidate radius constructed in
           Topic IX.
         </p>
       </SetupBlock>
 
-      <SetupBlock eyebrow="Matrix convention" title="A weighted graph is a stochastic matrix with its rows drawn">
+      <SetupBlock eyebrow="Farey–Ito data" title="The polynomial to be realized">
         <p>
-          We use the <strong>tail-row convention</strong>: a directed edge
-          {" "}<span className="math-inline">u→v</span> of weight <var>w</var>
-          {" "}is stored as follows.
+          Let <span className="math-inline">f&lt;g</span> be consecutive in
+          {" "}<span className="math-inline">Fₙ⁺=Fₙ∩[0,1/2]</span>, where
+          {" "}<span className="math-inline">Fₙ</span> is the Farey sequence of
+          order <var>n</var>. Write
+          {" "}<span className="math-inline">{"{"}f,g{"}"}={"{"}p/q,r/s{"}"}</span>
+          {" "}with <span className="math-inline">q&lt;s</span>, and set
+          {" "}<span className="math-inline">d=⌊n/q⌋</span>. Only the
+          denominators <var>q</var> and <var>s</var> enter the matrix
+          construction.
+        </p>
+        <p>
+          For <span className="math-inline">α,β≥0</span> with
+          {" "}<span className="math-inline">α+β=1</span>, the nonzero
+          solutions of the Ito equation are precisely the zeros of
+        </p>
+        <math
+          className="proof-setup-equation"
+          display="block"
+          xmlns="http://www.w3.org/1998/Math/MathML"
+          aria-label="P alpha beta of t equals, in the first case, the quantity t to q minus beta to the d minus alpha to the d times t to the d q minus s when s is at most d q; and in the second case, t to the s minus d q times the quantity t to q minus beta to the d minus alpha to the d when s is greater than d q"
+        >
+          <mrow>
+            <msub><mi>P</mi><mrow><mi>α</mi><mo>,</mo><mi>β</mi></mrow></msub>
+            <mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo>
+            <mo>{"{"}</mo>
+            <mtable>
+              <mtr>
+                <mtd>
+                  <msup><mrow><mo>(</mo><msup><mi>t</mi><mi>q</mi></msup><mo>−</mo><mi>β</mi><mo>)</mo></mrow><mi>d</mi></msup>
+                  <mo>−</mo><msup><mi>α</mi><mi>d</mi></msup><msup><mi>t</mi><mrow><mi>d</mi><mi>q</mi><mo>−</mo><mi>s</mi></mrow></msup><mo>,</mo>
+                </mtd>
+                <mtd><mi>s</mi><mo>≤</mo><mi>d</mi><mi>q</mi><mo>,</mo></mtd>
+              </mtr>
+              <mtr>
+                <mtd>
+                  <msup><mi>t</mi><mrow><mi>s</mi><mo>−</mo><mi>d</mi><mi>q</mi></mrow></msup><msup><mrow><mo>(</mo><msup><mi>t</mi><mi>q</mi></msup><mo>−</mo><mi>β</mi><mo>)</mo></mrow><mi>d</mi></msup>
+                  <mo>−</mo><msup><mi>α</mi><mi>d</mi></msup><mo>,</mo>
+                </mtd>
+                <mtd><mi>s</mi><mo>&gt;</mo><mi>d</mi><mi>q</mi><mo>.</mo></mtd>
+              </mtr>
+            </mtable>
+          </mrow>
+        </math>
+        <p>
+          Theorem II.7.3 constructs a row-stochastic matrix of order
+          {" "}<span className="math-inline">N₀=max(dq,s)≤n</span> whose
+          characteristic polynomial is the appropriate displayed polynomial.
+        </p>
+      </SetupBlock>
+
+      <SetupBlock eyebrow="Adjacency convention" title="Weighted-digraph representation of a row-stochastic matrix">
+        <p>
+          A directed edge <span className="math-inline">u→v</span> of weight
+          {" "}<var>w</var> is stored in row <var>u</var> and column
+          {" "}<var>v</var>:
         </p>
         <p id="karp:eq:tail-row-adjacency" className="display-equation proof-setup-equation">
           <span className="math-inline">Aᵤᵥ=w(u,v)</span>.{" "}
@@ -960,8 +1019,9 @@ export function TopicXIChapter() {
         </p>
         <p>
           In the Leibniz expansion of <span className="math-inline">det(tI−A)</span>,
-          a nonzero term selects pairwise vertex-disjoint directed cycles.
-          Every unused vertex contributes a diagonal factor <var>t</var>.
+          group each nonzero term by its nontrivial permutation cycles and any
+          selected loops. These form pairwise vertex-disjoint directed cycles;
+          every remaining vertex contributes a diagonal factor <var>t</var>.
           Lemma II.7.1 derives the sign and exponent directly from the
           permutation expansion.
         </p>
@@ -989,16 +1049,18 @@ export function TopicXIChapter() {
         results={topicXIResults.slice(0, 2)}
       />
 
-      <SetupBlock eyebrow="Two graph regimes" title="Why the construction splits at s=dq">
+      <SetupBlock eyebrow="Two cases" title="The cases s≤dq and s&gt;dq">
         <p>
           The target polynomial contains local cycles of length <var>q</var> and
           one global cycle of length <var>s</var>. With <var>d</var> local
           blocks, the unmodified cycle containing all inter-block edges has length <span className="math-inline">dq</span>.
-          If <span className="math-inline">s≤dq</span>, inter-block edges enter some
-          blocks part-way through and shorten that route. If
-          {" "}<span className="math-inline">s&gt;dq</span>, deterministic
-          subdivision vertices lengthen one inter-block edge. Neither operation
-          changes the local <var>q</var>-cycles.
+          If <span className="math-inline">s&lt;dq</span>, some inter-block edges
+          enter after the first vertex of a block and shorten this cycle. If
+          {" "}<span className="math-inline">s=dq</span>, every inter-block edge
+          enters at the first vertex and no shortening is required. If
+          {" "}<span className="math-inline">s&gt;dq</span>, subdividing one
+          inter-block edge lengthens the cycle. The local <var>q</var>-cycles
+          retain their length in every case.
         </p>
         <p>
           The construction uses
@@ -1008,6 +1070,18 @@ export function TopicXIChapter() {
           never uses more than <var>n</var> states. Absorbing-state padding then
           reaches exactly order <var>n</var> when necessary.
         </p>
+        <p>
+          The limiting cases are included explicitly. If
+          {" "}<span className="math-inline">q=1</span>, the within-block
+          cycles are loops. If <span className="math-inline">d=1</span>, then
+          {" "}<span className="math-inline">s&gt;dq</span>. If
+          {" "}<span className="math-inline">s=dq</span>, coprimality of the
+          consecutive Farey denominators forces
+          {" "}<span className="math-inline">q=1</span>. Finally, the cases
+          {" "}<span className="math-inline">α=0</span> and
+          {" "}<span className="math-inline">α=1</span> follow by polynomial
+          continuity from <span className="math-inline">0&lt;α&lt;1</span>.
+        </p>
         <StochasticFareyFigure kind="sparse-cases" />
       </SetupBlock>
 
@@ -1016,30 +1090,71 @@ export function TopicXIChapter() {
         title="Sparse stochastic realization and attainment"
         introduction={
           <p>
-            The theorem handles both regimes with an explicit graph, checks
-            row sums and endpoint weights, and computes the exact reduced Ito
-            polynomial. The following corollary inserts Topic IX&apos;s candidate.
+            The theorem handles both cases with an explicit weighted digraph,
+            verifies every row sum, treats α=0 and α=1 by polynomial
+            continuity, and computes the exact reduced Ito polynomial. The
+            following corollary applies it to the compact curve defined in
+            Topic IX.
           </p>
         }
         results={topicXIResults.slice(2, 4)}
       />
 
-      <SetupBlock eyebrow="Deferred conclusion" title="Only now do the two inequalities meet">
+      <SetupBlock eyebrow="Concrete example" title="An order-five realization">
         <p>
-          Topic X proved <span className="math-inline">ρ≤ρ*</span> without
-          assuming a stochastic matrix at the candidate radius. Corollary
-          II.7.4 has now constructed that matrix, so maximality of
-          {" "}<span className="math-inline">ρ=R<sub>N</sub>(θ)</span> gives the reverse
-          inequality <span className="math-inline">ρ*≤ρ</span>. Equality is
-          therefore forced, and the strict equality condition in Jensen forces
-          all varying parameters to coincide.
+          On the Farey interval <span className="math-inline">[1/3,2/5]</span>,
+          take <span className="math-inline">n=5</span>,
+          {" "}<span className="math-inline">q=3</span>,
+          {" "}<span className="math-inline">s=5</span>, and
+          {" "}<span className="math-inline">d=1</span>. For
+          {" "}<span className="math-inline">α+β=1</span>, the construction
+          gives the row-stochastic matrix
+        </p>
+        <math
+          display="block"
+          xmlns="http://www.w3.org/1998/Math/MathML"
+          aria-label="A equals the five by five matrix with rows zero one zero zero zero; zero zero one zero zero; beta zero zero alpha zero; zero zero zero zero one; and one zero zero zero zero"
+        >
+          <mrow>
+            <mi>A</mi><mo>=</mo><mo>(</mo>
+            <mtable>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+              <mtr><mtd><mi>β</mi></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mi>α</mi></mtd><mtd><mn>0</mn></mtd></mtr>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+            </mtable>
+            <mo>)</mo><mo>.</mo>
+          </mrow>
+        </math>
+        <p className="display-equation proof-setup-equation">
+          <span className="math-inline">det(tI−A)=t²(t³−β)−α.</span>
+        </p>
+        <p>
+          This is the <span className="math-inline">s&gt;dq</span> formula with
+          two subdivision vertices, written out without requiring the reader to
+          reconstruct the adjacency matrix from the graph.
+        </p>
+      </SetupBlock>
+
+      <SetupBlock eyebrow="Deferred conclusion" title="Combining the radial upper bound with stochastic realization">
+        <p>
+          Topic X gives <span className="math-inline">ρ≤ρ*</span>.
+          Applying Corollary II.7.4 with <span className="math-inline">n=N</span>
+          {" "}gives <span className="math-inline">ρ*e<sup>iθ</sup>∈Θ<sub>N</sub></span>,
+          so <span className="math-inline">ρ*≤R<sub>N</sub>(θ)=ρ</span>.
+          Hence <span className="math-inline">ρ=ρ*</span>. Equality therefore
+          holds in the Jensen step of Theorem II.6.1, and its equality condition
+          gives <span className="math-inline">β₁=···=β<sub>d</sub></span>.
+          Since <span className="math-inline">αⱼ=1−βⱼ</span>, it also gives
+          {" "}<span className="math-inline">α₁=···=α<sub>d</sub></span>.
         </p>
         <StochasticAttainmentComparison />
       </SetupBlock>
 
       <ProofResultGroup
         number="XI.C"
-        title="The outermost parameters are constant"
+        title="Equal parameters at a radial maximum"
         introduction={
           <p>
             Corollary II.6.2 appears here rather than in Topic X because its

@@ -355,14 +355,15 @@ for (const relativePath of [
   assert.match(html, /data-proof-route="topic-xi"/);
   assert.match(visibleText, /Explicit stochastic realization of the candidate curve/i);
   assert.match(visibleText, /Directed-cycle expansion of the characteristic polynomial/i);
-  assert.match(visibleText, /Stochastic realization of the candidate point/i);
+  assert.match(visibleText, /Stochastic realization of the compact candidate (?:arc|curve)/i);
   assert.match(visibleText, /Θ\s*N is the set of all eigenvalues of row-stochastic matrices/i);
   assert.match(html, /data-topic-xi-equation-plate="attainment"/);
   assert.match(html, /data-edge-kind="local-return"/);
   assert.match(html, /data-edge-kind="inter-block"/);
   assert.match(html, /data-edge-weight="beta"/);
   assert.match(html, /data-edge-weight="alpha"/);
-  assert.match(html, /data-regime="s-le-dq"/);
+  assert.match(html, /data-regime="s-lt-dq"/);
+  assert.match(html, /data-boundary-case="s-eq-dq"/);
   assert.match(html, /data-regime="s-gt-dq"/);
   assert.match(html, /id="topic-xi-exact-sources"/);
   assert.match(

@@ -543,8 +543,8 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "How can every candidate point be realized by an actual stochastic matrix?",
     overview: [
-      "A sparse realization graph turns the reduced Ito polynomial into a row-stochastic matrix. A determinant expansion over pairwise vertex-disjoint directed cycles computes its characteristic polynomial without importing the upper-bound argument.",
-      "The resulting construction proves the reverse inclusion independently: every equality point is genuinely attained in the Karpelevič region.",
+      "An explicit sparse row-stochastic matrix is defined by a weighted digraph. A determinant expansion over pairwise vertex-disjoint directed cycles shows that its characteristic polynomial is the reduced Ito polynomial, without importing the upper-bound argument.",
+      "The construction independently proves the inclusion of every compact Topic IX candidate curve in the corresponding Karpelevič region, including the Farey endpoints and the exceptional order-three real segment.",
     ],
     itemNumbers: [],
     manuscriptPages: "91–93",

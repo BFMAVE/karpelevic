@@ -7120,7 +7120,7 @@ math mover > mo[accent="true"] {
 .topic-xi-attainment-grid {
   display: grid;
   padding: clamp(20px, 3vw, 34px) 7px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 1px;
   background: var(--rule-dark);
 }

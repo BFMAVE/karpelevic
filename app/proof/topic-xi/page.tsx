@@ -20,8 +20,8 @@ export default function TopicXIPage() {
       routeKey="topic-xi"
       manuscriptPages="91–93"
       overview={[
-        "A sparse realization graph turns the reduced Ito polynomial into the characteristic polynomial of a row-stochastic matrix. The proof derives the determinant expansion over pairwise vertex-disjoint directed cycles and classifies every directed cycle in the graph.",
-        "This independently realizes every point on the Topic IX candidate curve. Only after that reverse inclusion is established does the chapter combine it with Topic X and activate the strict Jensen equality condition.",
+        "An explicit sparse row-stochastic matrix is defined by a weighted digraph. The proof derives its characteristic polynomial from pairwise vertex-disjoint directed cycles and shows that it is the reduced Ito polynomial.",
+        "For every Farey interval in Topic IX, this independently proves that the complete candidate curve lies in the corresponding Karpelevič region. The chapter then combines this inclusion with Topic X and applies the equality condition in Jensen’s inequality.",
       ]}
       updatedAt={updatedAt}
       stats={[{ value: 5, label: "results" }]}

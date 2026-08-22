@@ -852,21 +852,21 @@ function CycleLedger({ marker, mobile = false }: { marker: string; mobile?: bool
             <text x="20" y={y + 6} fill={ink} fontSize="16">B{index + 1}</text>
             <Dot x={78} y={y} r={5} />
             <Dot x={148} y={y} r={5} />
-            <Dot x={218} y={y} color={red} r={5} />
+            <g data-terminal-vertex={index + 1}><Dot x={218} y={y} color={red} r={5} /></g>
             <path data-edge-kind="internal" d={`M84 ${y} L141 ${y} M154 ${y} L211 ${y}`} stroke={ink} strokeWidth="2.4" markerEnd={`url(#${marker}-ink)`} />
             <path data-edge-kind="local-return" data-edge-weight="beta" d={`M218 ${y - 9} Q148 ${y - 63} 78 ${y - 9}`} fill="none" stroke={copper} strokeWidth="3" markerEnd={`url(#${marker}-copper)`} />
             <text x="145" y={y - 52} fill={copper} fontSize="17" textAnchor="middle">β</text>
           </g>
         ))}
         <g data-cycle-kind="all-inter-block">
-          <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M224 100 Q270 128 78 237" fill="none" stroke={red} strokeWidth="3" markerEnd={`url(#${marker})`} />
-          <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M224 253 Q270 281 78 390" fill="none" stroke={red} strokeWidth="3" markerEnd={`url(#${marker})`} />
-          <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M224 406 Q305 500 292 62 Q286 34 84 83" fill="none" stroke={red} strokeWidth="3" markerEnd={`url(#${marker})`} />
+          <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M224 100 Q270 128 78 237" fill="none" stroke={red} strokeDasharray="9 6" strokeWidth="3" markerEnd={`url(#${marker})`} />
+          <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M224 253 Q270 281 78 390" fill="none" stroke={red} strokeDasharray="9 6" strokeWidth="3" markerEnd={`url(#${marker})`} />
+          <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M224 406 Q305 500 292 62 Q286 34 84 83" fill="none" stroke={red} strokeDasharray="9 6" strokeWidth="3" markerEnd={`url(#${marker})`} />
           <text x="249" y="148" fill={red} fontSize="17">α</text>
           <text x="249" y="301" fill={red} fontSize="17">α</text>
           <text x="278" y="466" fill={red} fontSize="17">α</text>
         </g>
-        <text x="160" y="535" fill={ink} fontSize="16" textAnchor="middle">within-block cycles or the cycle through all blocks</text>
+        <text x="160" y="535" fill={ink} fontSize="16" textAnchor="middle">local q-cycles or the global s-cycle</text>
       </>
     );
   }
@@ -876,22 +876,22 @@ function CycleLedger({ marker, mobile = false }: { marker: string; mobile?: bool
     <>
       {blocks.map((base, index) => (
         <g data-block={index + 1} key={base}>
-          <Dot x={base - 45} y={185} /><Dot x={base} y={185} /><Dot x={base + 45} y={185} color={red} />
+          <Dot x={base - 45} y={185} /><Dot x={base} y={185} /><g data-terminal-vertex={index + 1}><Dot x={base + 45} y={185} color={red} /></g>
           <path data-edge-kind="internal" d={`M${base - 38} 185 L${base - 7} 185 M${base + 7} 185 L${base + 38} 185`} stroke={ink} strokeWidth="2.4" markerEnd={`url(#${marker}-ink)`} />
           <path data-edge-kind="local-return" data-edge-weight="beta" d={`M${base + 45} 170 Q${base} 98 ${base - 45} 170`} fill="none" stroke={copper} strokeWidth="3" markerEnd={`url(#${marker}-copper)`} />
           <text x={base} y="112" fill={copper} fontSize="17" textAnchor="middle">β</text>
-          <text x={base + 35} y="215" fill={red} fontSize="16">T{index + 1}</text>
+          <text x={base} y="222" fill={ink} fontSize="16" textAnchor="middle">B{index + 1}</text>
         </g>
       ))}
       <g data-cycle-kind="all-inter-block">
-        <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M160 200 Q225 285 290 200" fill="none" stroke={red} strokeWidth="3.5" markerEnd={`url(#${marker})`} />
-        <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M380 200 Q445 285 510 200" fill="none" stroke={red} strokeWidth="3.5" markerEnd={`url(#${marker})`} />
-        <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M600 176 Q640 55 340 48 Q40 55 70 176" fill="none" stroke={red} strokeWidth="3.5" markerEnd={`url(#${marker})`} />
+        <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M160 200 Q225 285 290 200" fill="none" stroke={red} strokeDasharray="10 6" strokeWidth="3.5" markerEnd={`url(#${marker})`} />
+        <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M380 200 Q445 285 510 200" fill="none" stroke={red} strokeDasharray="10 6" strokeWidth="3.5" markerEnd={`url(#${marker})`} />
+        <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M600 176 Q640 55 340 48 Q40 55 70 176" fill="none" stroke={red} strokeDasharray="10 6" strokeWidth="3.5" markerEnd={`url(#${marker})`} />
         <text x="225" y="270" fill={red} fontSize="17" textAnchor="middle">α</text>
         <text x="445" y="270" fill={red} fontSize="17" textAnchor="middle">α</text>
         <text x="340" y="38" fill={red} fontSize="17" textAnchor="middle">α</text>
       </g>
-      <text x="340" y="337" fill={ink} fontSize="17" textAnchor="middle">the cycle through all blocks meets every within-block cycle</text>
+      <text x="340" y="337" fill={ink} fontSize="17" textAnchor="middle">the global s-cycle meets every local q-cycle</text>
     </>
   );
 }
@@ -900,25 +900,31 @@ function SparseCases({ marker, mobile = false }: { marker: string; mobile?: bool
   if (mobile) {
     return (
       <>
-        <g data-regime="s-le-dq">
-          <text x="18" y="36" fill={ink} fontSize="17">s ≤ dq: enter a block part-way through</text>
+        <g data-regime="s-lt-dq">
+          <text x="18" y="36" fill={ink} fontSize="17">s &lt; dq: enter B₁ part-way</text>
+          <text x="100" y="79" fill={ink} fontSize="15" textAnchor="middle">B<tspan baselineShift="sub" fontSize="13">d</tspan></text>
+          <text x="240" y="79" fill={ink} fontSize="15" textAnchor="middle">B₁</text>
           <Dot x={40} y={105} r={5} /><Dot x={100} y={105} r={5} /><Dot x={160} y={105} color={red} r={5} />
-          <Dot x={205} y={105} r={5} /><Dot x={260} y={105} color={red} r={5} />
-          <path data-edge-kind="internal" d="M46 105 L93 105 M106 105 L153 105 M211 105 L253 105" stroke={ink} strokeWidth="2.4" markerEnd={`url(#${marker}-ink)`} />
-          <path data-edge-kind="inter-block" data-edge-weight="alpha" data-entry-length="ell-1" d="M166 112 Q184 144 205 112" fill="none" stroke={red} strokeWidth="3" markerEnd={`url(#${marker})`} />
-          <text x="178" y="129" fill={red} fontSize="17">α</text>
-          <text data-math-label="ell-1" x="184" y="157" fill={red} fontSize="17" textAnchor="middle">ℓ₁=s−(d−1)q</text>
+          <Dot x={195} y={105} r={5} /><Dot x={240} y={105} r={5} /><Dot x={285} y={105} color={red} r={5} />
+          <path data-edge-kind="internal" d="M46 105 L93 105 M106 105 L153 105 M201 105 L233 105 M246 105 L278 105" stroke={ink} strokeWidth="2.4" markerEnd={`url(#${marker}-ink)`} />
+          <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M166 112 Q198 154 240 112" fill="none" stroke={red} strokeDasharray="9 6" strokeWidth="3" markerEnd={`url(#${marker})`} />
+          <text x="199" y="143" fill={red} fontSize="17">α</text>
+          <path data-entry-length="ell-1" data-traversed-block-suffix="ell-1" d="M232 154 L293 154 M232 148 L232 160 M293 148 L293 160" fill="none" stroke={ink} strokeWidth="1.7" />
+          <text data-math-label="ell-1" x="262" y="181" fill={ink} fontSize="17" textAnchor="middle">ℓ₁=s−(d−1)q</text>
         </g>
+        <text data-boundary-case="s-eq-dq" x="160" y="210" fill={ink} fontSize="16" textAnchor="middle">s=dq: ℓⱼ=q; enter every block at its first vertex</text>
         <g data-regime="s-gt-dq">
-          <text x="18" y="232" fill={ink} fontSize="17">s &gt; dq: subdivide one inter-block edge</text>
-          <Dot x={25} y={315} color={red} r={5} /><Dot x={91} y={315} color={copper} r={5} /><Dot x={226} y={315} color={copper} r={5} /><Dot x={295} y={315} r={5} />
-          <path data-edge-kind="subdivided-inter-block" data-edge-weight="alpha" d="M31 315 L84 315" stroke={red} strokeWidth="2.8" markerEnd={`url(#${marker})`} />
-          <path data-edge-kind="subdivision" data-edge-weight="one" d="M97 315 L132 315 M184 315 L219 315 M232 315 L288 315" stroke={ink} strokeWidth="2.4" markerEnd={`url(#${marker}-ink)`} />
-          <text x="58" y="296" fill={red} fontSize="17" textAnchor="middle">α</text>
-          <text data-subdivision-vertex="w-1" x="91" y="347" fill={copper} fontSize="17" textAnchor="middle">w₁</text>
-          <text data-subdivision-vertex="ellipsis" x="159" y="322" fill={ink} fontSize="22" textAnchor="middle">⋯</text>
-          <text data-subdivision-vertex="w-K" x="226" y="347" fill={copper} fontSize="17" textAnchor="middle">w<tspan baselineShift="sub" fontSize="16">K</tspan></text>
-          <text x="158" y="382" fill={ink} fontSize="16" textAnchor="middle">K=s−dq new vertices; remaining edge weights are 1</text>
+          <text x="18" y="247" fill={ink} fontSize="17">s &gt; dq: subdivide one inter-block edge</text>
+          <text data-drawn-case="K-ge-2" x="160" y="273" fill={ink} fontSize="16" textAnchor="middle">generic drawing: K=s−dq≥2</text>
+          <Dot x={25} y={330} color={red} r={5} /><Dot x={91} y={330} color={copper} r={5} /><Dot x={226} y={330} color={copper} r={5} /><Dot x={295} y={330} r={5} />
+          <path data-edge-kind="subdivided-inter-block" data-edge-weight="alpha" d="M31 330 L84 330" stroke={red} strokeDasharray="9 6" strokeWidth="2.8" markerEnd={`url(#${marker})`} />
+          <path data-edge-kind="subdivision" data-edge-weight="one" d="M97 330 L132 330 M184 330 L219 330 M232 330 L288 330" stroke={ink} strokeWidth="2.4" markerEnd={`url(#${marker}-ink)`} />
+          <text x="58" y="311" fill={red} fontSize="17" textAnchor="middle">α</text>
+          <text data-subdivision-vertex="w-1" x="91" y="362" fill={copper} fontSize="17" textAnchor="middle">w₁</text>
+          <text data-subdivision-vertex="ellipsis" x="159" y="337" fill={ink} fontSize="22" textAnchor="middle">⋯</text>
+          <text data-subdivision-vertex="w-K" x="226" y="362" fill={copper} fontSize="17" textAnchor="middle">w<tspan baselineShift="sub" fontSize="16">K</tspan></text>
+          <text x="158" y="397" fill={ink} fontSize="16" textAnchor="middle">all remaining replacement edges have weight 1</text>
+          <text data-boundary-case="K-1" x="160" y="422" fill={ink} fontSize="16" textAnchor="middle">K=1: w₁=w<tspan baselineShift="sub" fontSize="14">K</tspan>; omit the ellipsis</text>
         </g>
       </>
     );
@@ -926,25 +932,31 @@ function SparseCases({ marker, mobile = false }: { marker: string; mobile?: bool
 
   return (
     <>
-      <g data-regime="s-le-dq">
-        <text x="56" y="42" fill={ink} fontSize="18">s ≤ dq: an inter-block edge enters part-way through a block</text>
+      <g data-regime="s-lt-dq">
+        <text x="56" y="42" fill={ink} fontSize="18">s &lt; dq: an inter-block edge enters B₁ part-way</text>
+        <text x="145" y="95" fill={ink} fontSize="16" textAnchor="middle">B<tspan baselineShift="sub" fontSize="14">d</tspan></text>
+        <text x="430" y="95" fill={ink} fontSize="16" textAnchor="middle">B₁</text>
         <Dot x={80} y={125} /><Dot x={145} y={125} /><Dot x={210} y={125} color={red} />
         <Dot x={365} y={125} /><Dot x={430} y={125} /><Dot x={495} y={125} color={red} />
         <path data-edge-kind="internal" d="M86 125 L138 125 M151 125 L203 125 M371 125 L423 125 M436 125 L488 125" stroke={ink} strokeWidth="2.5" markerEnd={`url(#${marker}-ink)`} />
-        <path data-edge-kind="inter-block" data-edge-weight="alpha" data-entry-length="ell-1" d="M216 139 Q290 210 365 139" fill="none" stroke={red} strokeWidth="3" markerEnd={`url(#${marker})`} />
-        <text x="246" y="167" fill={red} fontSize="18">α</text>
-        <text data-math-label="ell-1" x="290" y="205" fill={red} fontSize="18" textAnchor="middle">ℓ₁=s−(d−1)q</text>
+        <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M216 139 Q315 211 430 139" fill="none" stroke={red} strokeDasharray="10 6" strokeWidth="3" markerEnd={`url(#${marker})`} />
+        <text x="300" y="180" fill={red} fontSize="18">α</text>
+        <path data-entry-length="ell-1" data-traversed-block-suffix="ell-1" d="M421 174 L504 174 M421 167 L421 181 M504 167 L504 181" fill="none" stroke={ink} strokeWidth="1.8" />
+        <text data-math-label="ell-1" x="462" y="205" fill={ink} fontSize="18" textAnchor="middle">ℓ₁=s−(d−1)q</text>
       </g>
+      <text data-boundary-case="s-eq-dq" x="340" y="232" fill={ink} fontSize="17" textAnchor="middle">s=dq: ℓⱼ=q, so every block is entered at its first vertex</text>
       <g data-regime="s-gt-dq">
-        <text x="56" y="255" fill={ink} fontSize="18">s &gt; dq: K=s−dq subdivision vertices lengthen one inter-block edge</text>
-        <Dot x={75} y={325} color={red} /><Dot x={180} y={325} color={copper} /><Dot x={450} y={325} color={copper} /><Dot x={570} y={325} />
-        <path data-edge-kind="subdivided-inter-block" data-edge-weight="alpha" d="M82 325 L173 325" stroke={red} strokeWidth="3" markerEnd={`url(#${marker})`} />
-        <path data-edge-kind="subdivision" data-edge-weight="one" d="M187 325 L270 325 M370 325 L443 325 M457 325 L563 325" stroke={ink} strokeWidth="2.5" markerEnd={`url(#${marker}-ink)`} />
-        <text x="128" y="305" fill={red} fontSize="18" textAnchor="middle">α</text>
-        <text data-subdivision-vertex="w-1" x="180" y="360" fill={copper} fontSize="18" textAnchor="middle">w₁</text>
-        <text data-subdivision-vertex="ellipsis" x="320" y="333" fill={ink} fontSize="25" textAnchor="middle">⋯</text>
-        <text data-subdivision-vertex="w-K" x="450" y="360" fill={copper} fontSize="18" textAnchor="middle">w<tspan baselineShift="sub" fontSize="16">K</tspan></text>
-        <text x="510" y="305" fill={ink} fontSize="17" textAnchor="middle">weight 1</text>
+        <text x="56" y="267" fill={ink} fontSize="18">s &gt; dq: K=s−dq subdivision vertices lengthen one inter-block edge</text>
+        <text data-drawn-case="K-ge-2" x="565" y="292" fill={ink} fontSize="16" textAnchor="end">generic drawing: K≥2</text>
+        <Dot x={75} y={332} color={red} /><Dot x={180} y={332} color={copper} /><Dot x={450} y={332} color={copper} /><Dot x={570} y={332} />
+        <path data-edge-kind="subdivided-inter-block" data-edge-weight="alpha" d="M82 332 L173 332" stroke={red} strokeDasharray="10 6" strokeWidth="3" markerEnd={`url(#${marker})`} />
+        <path data-edge-kind="subdivision" data-edge-weight="one" d="M187 332 L270 332 M370 332 L443 332 M457 332 L563 332" stroke={ink} strokeWidth="2.5" markerEnd={`url(#${marker}-ink)`} />
+        <text x="128" y="312" fill={red} fontSize="18" textAnchor="middle">α</text>
+        <text data-subdivision-vertex="w-1" x="180" y="367" fill={copper} fontSize="18" textAnchor="middle">w₁</text>
+        <text data-subdivision-vertex="ellipsis" x="320" y="340" fill={ink} fontSize="25" textAnchor="middle">⋯</text>
+        <text data-subdivision-vertex="w-K" x="450" y="367" fill={copper} fontSize="18" textAnchor="middle">w<tspan baselineShift="sub" fontSize="16">K</tspan></text>
+        <text x="510" y="312" fill={ink} fontSize="17" textAnchor="middle">weight 1</text>
+        <text data-boundary-case="K-1" x="340" y="394" fill={ink} fontSize="16" textAnchor="middle">If K=1, w₁=w<tspan baselineShift="sub" fontSize="14">K</tspan> and the ellipsis disappears.</text>
       </g>
     </>
   );
@@ -1029,18 +1041,26 @@ const copy: Record<FigureKind, { title: string; description: string; caption: Re
     caption:
       "Plate X.2. This generic strictly convex curve is schematic; it is not a plot or quadratic model of F. For u₁≠u₂ it shows the two-input case F((u₁+u₂)/2)<(F(u₁)+F(u₂))/2. In the proof, F((Σuⱼ)/d)≤ΣF(uⱼ)/d, with equality exactly when u₁=⋯=u_d. Since β↦u(β) is strictly increasing, equality is equivalent to β₁=⋯=β_d.",
   },
-  "cycle-ledger": { title: "Within-block cycles and the cycle through all blocks", description: "Three directed blocks have copper return edges of weight beta and red inter-block edges of weight alpha. The graph contains all these edges simultaneously.", caption: "Plate XI.1. The graph contains all displayed edges simultaneously. A pairwise vertex-disjoint cycle collection may contain any subset of the within-block cycles, or the single cycle through all blocks; that cycle meets every within-block cycle, so the two alternatives cannot be selected together." },
+  "cycle-ledger": {
+    status: "Schematic d=q=3, s=9 instance",
+    title: "Within-block cycles and the cycle through all blocks",
+    description: "Three directed blocks B one through B three illustrate the unshortened construction when d and q both equal three and s equals nine. Solid copper return edges of weight beta close the local q-cycles. Dashed red inter-block edges of weight alpha form the global s-cycle. The graph contains all these edges simultaneously.",
+    caption: "Plate XI.1. This d=q=3, s=9 schematic labels the blocks B₁,B₂,B₃; the proof allows arbitrary positive d and q and adjusts the global cycle to the required length s. Solid return edges of weight β close the local q-cycles, while dashed inter-block edges of weight α form the global s-cycle. A pairwise vertex-disjoint cycle collection may contain any subset of the local cycles, or the single global cycle. The global cycle meets every local cycle, so the two alternatives cannot be selected together.",
+  },
   "sparse-cases": {
     title: "The two graph regimes before padding",
-    description: "When s is at most d q, an inter-block edge enters part-way through a block. When s exceeds d q, one inter-block edge is subdivided through K new vertices.",
+    description: "When s is less than d q, an inter-block edge enters B one part-way through, and ell one labels the suffix traversed inside that block. At s equal to d q, every block is entered at its first vertex. When s exceeds d q, one inter-block edge is subdivided through K new vertices; the generic drawing shows K at least two, while K equal to one has a single vertex w one equal to w K.",
     caption: (
       <>
-        Plate XI.2. If s≤dq, the chosen entry positions leave ℓⱼ vertices to be
-        traversed in block j and make the cycle through all blocks have length s.
-        If s&gt;dq, inserting K=s−dq vertices w₁,…,w<sub>K</sub> on one
+        Plate XI.2. If s&lt;dq, the chosen entry positions leave ℓⱼ vertices to be
+        traversed in block j and make the cycle through all blocks have length s;
+        the bracket places ℓ₁ on the traversed suffix of B₁. At s=dq, every
+        ℓⱼ=q, so every block is entered at its first vertex. If s&gt;dq, inserting
+        K=s−dq vertices w₁,…,w<sub>K</sub> on one
         inter-block edge increases that cycle&apos;s length from dq to s; the first
         replacement edge has weight α and the remaining replacement edges have
-        weight 1.
+        weight 1. The drawing shows the generic case K≥2; for K=1, w₁=w<sub>K</sub>{" "}
+        and the ellipsis is omitted.
       </>
     ),
   },
@@ -1070,7 +1090,7 @@ export function StochasticFareyFigure({ kind }: { kind: FigureKind }) {
     kind === "cycle-ledger"
       ? "0 0 320 570"
       : kind === "sparse-cases"
-        ? "0 0 320 410"
+        ? "0 0 320 440"
         : kind === "reflection"
       ? "0 0 320 500"
       : kind === "jensen"
@@ -1141,7 +1161,7 @@ export function StochasticAttainmentComparison() {
     <figure className="topic-ii-concept-figure topic-xi-attainment-comparison">
       <div className="topic-ii-concept-heading">
         <span>Exact implication diagram</span>
-        <span>Attainment closes the radial comparison</span>
+        <span>The two radial inequalities force equality</span>
       </div>
       <div
         aria-label="The upper bound rho at most rho star and the realization bound rho star at most rho imply equality and equal Jensen parameters."
@@ -1153,7 +1173,7 @@ export function StochasticAttainmentComparison() {
           <math aria-label="rho is at most rho star" display="block">
             <mrow><mi>ρ</mi><mo>≤</mo><msub><mi>ρ</mi><mo>∗</mo></msub></mrow>
           </math>
-          <span>The strict-convexity argument gives the outward bound.</span>
+          <span>Topic X proves this inequality for every selected radial maximum ρe<sup>iθ</sup>.</span>
         </section>
         <section>
           <p>Topic XI · stochastic realization</p>
@@ -1164,27 +1184,37 @@ export function StochasticAttainmentComparison() {
               <mo>=</mo><mi>ρ</mi>
             </mrow>
           </math>
-          <span>The constructed matrix makes the candidate radius attainable.</span>
+          <span>Corollary II.7.4 constructs A∈ST<sub>N</sub> with ρ*e<sup>iθ</sup>∈σ(A).</span>
         </section>
         <section>
           <p>Equality case</p>
-          <math aria-label="rho equals rho star, all beta parameters agree, and all alpha parameters agree" display="block">
-            <mrow>
-              <mi>ρ</mi><mo>=</mo><msub><mi>ρ</mi><mo>∗</mo></msub>
-              <mo>,</mo>
-              <msub><mi>β</mi><mn>1</mn></msub><mo>=</mo><mo>⋯</mo><mo>=</mo><msub><mi>β</mi><mi>d</mi></msub>
-              <mo>,</mo>
-              <msub><mi>α</mi><mn>1</mn></msub><mo>=</mo><mo>⋯</mo><mo>=</mo><msub><mi>α</mi><mi>d</mi></msub>
-            </mrow>
+          <math aria-label="rho equals rho star, all beta parameters equal beta, and all alpha parameters equal one minus beta" display="block">
+            <mtable columnalign="center" rowspacing="0.35em">
+              <mtr><mtd>
+                <mrow><mi>ρ</mi><mo>=</mo><msub><mi>ρ</mi><mo>∗</mo></msub></mrow>
+              </mtd></mtr>
+              <mtr><mtd>
+                <mrow>
+                  <msub><mi>β</mi><mn>1</mn></msub><mo>=</mo><mo>⋯</mo><mo>=</mo>
+                  <msub><mi>β</mi><mi>d</mi></msub><mo>=</mo><mi>β</mi>
+                </mrow>
+              </mtd></mtr>
+              <mtr><mtd>
+                <mrow>
+                  <msub><mi>α</mi><mn>1</mn></msub><mo>=</mo><mo>⋯</mo><mo>=</mo>
+                  <msub><mi>α</mi><mi>d</mi></msub><mo>=</mo><mn>1</mn><mo>−</mo><mi>β</mi>
+                </mrow>
+              </mtd></mtr>
+            </mtable>
           </math>
-          <span>Equality activates the strict Jensen equality condition.</span>
+          <span>Both bounds are equalities; strict Jensen equality gives the displayed parameter identities.</span>
         </section>
       </div>
       <figcaption>
         Plate XI.3. Topic X supplies ρ≤ρ*. Corollary II.7.4 supplies an order-<var>N</var>
         {" "}stochastic matrix with eigenvalue ρ*e<sup>iθ</sup>, so radial maximality gives
         ρ*≤R<sub>N</sub>(θ)=ρ. Hence ρ=ρ*, and strict Jensen equality forces
-        β₁=⋯=β<sub>d</sub> and α₁=⋯=α<sub>d</sub>.
+        β₁=⋯=β<sub>d</sub>=β and α₁=⋯=α<sub>d</sub>=1−β.
       </figcaption>
     </figure>
   );
