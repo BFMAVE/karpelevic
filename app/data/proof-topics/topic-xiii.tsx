@@ -42,12 +42,56 @@ function exactResult(label: keyof typeof partIIProofHtmlByLabel): string {
   );
 }
 
+function TopicXIIISetup() {
+  return (
+    <section
+      className="topic-i-textbook proof-chapter-group"
+      aria-labelledby="topic-xiii-setup-heading"
+      data-topic-xiii-setup
+    >
+      <header>
+        <div>
+          <p className="section-label">Objects fixed for the final argument</p>
+          <h3 id="topic-xiii-setup-heading">Stochastic regions, Farey intervals, and radial functions</h3>
+        </div>
+        <div>
+          <p>Topic XIII uses the following notation from Topics VIII–XII.</p>
+        </div>
+      </header>
+      <div className="proof-chapter-reading-note">
+        <p>
+          <strong>Stochastic eigenvalue region.</strong> A real matrix <i>A</i>=(<i>a</i><sub>ij</sub>) is
+          row-stochastic when <i>a</i><sub>ij</sub>≥0 and every row sums to 1. The set Θ<sub>n</sub> consists of all
+          eigenvalues of all real <i>n</i>×<i>n</i> row-stochastic matrices.
+        </p>
+        <p>
+          <strong>Farey intervals.</strong> <i>F</i><sub>n</sub><sup>+</sup> is the increasing list of reduced
+          fractions <i>p/q</i> in [0,1/2] with <i>q</i>≤<i>n</i>. Consecutive fractions determine the open angular
+          intervals used below through <i>x</i>=θ/(2π).
+        </p>
+        <p>
+          <strong>Actual and candidate radii.</strong> For 0≤θ≤π, <i>R</i><sub>n</sub>(θ) is the largest ρ≥0 for
+          which ρ<i>e</i><sup><i>iθ</i></sup>∈Θ<sub>n</sub>. On an open Farey interval, <i>K</i><sub>n</sub>(θ) is
+          Topic IX&apos;s unique positive solution of the scalar radius equation; at a Farey endpoint it is defined
+          to be 1. Until the theorem is proved, <i>K</i><sub>n</sub> is only a candidate for <i>R</i><sub>n</sub>.
+        </p>
+        <p>
+          <strong>Curves.</strong> For consecutive <i>f&lt;g</i> in <i>F</i><sub>n</sub><sup>+</sup>,
+          Γ<sub>f,g</sub><sup>(n)</sup> is the closure of the corresponding curve
+          <i> K</i><sub>n</sub>(θ)<i>e</i><sup><i>iθ</i></sup>. At order three, the interval [1/3,1/2] additionally
+          contributes the real boundary segment [−1,−1/2].
+        </p>
+      </div>
+    </section>
+  );
+}
+
 const radialLemma: ProofResultData = {
   id: "topic-xiii-radial-boundary",
   label: "Lemma II.9.1",
   kind: "Lemma",
   title: "Compact star-shaped sets with continuous radial function",
-  purpose: "Prove the final topological step: the outer point on every ray forms the complete topological boundary, not merely a collection of radial maxima.",
+  purpose: "Prove the topological step that turns a positive continuous radial function into an exact description of the set and its boundary.",
   manuscriptHtml: exactResult("karp:lem:continuous-radial-boundary"),
   vocabulary: [
     {
@@ -56,59 +100,31 @@ const radialLemma: ProofResultData = {
       example: <>A closed disk centred at 0 is star-shaped with respect to 0. An annulus is not, because points near its outer circle do not bring the missing segment near 0.</>,
     },
     {
-      term: "Radial maximum rₛ(φ)",
-      definition: <>The largest radius <i>r</i> for which <i>re</i><sup>iφ</sup> lies in <i>S</i>. Compactness makes the maximum attainable rather than merely a supremum.</>,
+      term: "Radial function ρₛ(u)",
+      definition: <>For a direction <i>u</i> on the unit circle, ρ<sub>S</sub>(<i>u</i>) is the largest <i>r</i>≥0 for which <i>ru∈S</i>. Compactness makes this maximum attainable.</>,
     },
     {
       term: "Topological boundary ∂S",
       definition: <>The points for which every sufficiently small open disk meets both <i>S</i> and its complement. Because <i>S</i> is compact and therefore closed, this is also <i>S</i> minus its Euclidean interior in the whole plane ℂ≅ℝ²—not a relative interior inside a line or curve.</>,
     },
-    {
-      term: "Continuous on the circle",
-      definition: <>Nearby directions have nearby radial maxima, including across the identification of the angles −π and π. This prevents cracks or jumps between neighbouring ray segments.</>,
-    },
-    {
-      term: "Positive radial maximum",
-      definition: <>The assumption <i>r</i><sub>S</sub>(φ)&gt;0 for every direction. By continuity on the compact circle it then has a positive minimum, so <i>S</i> contains a small disk about the origin.</>,
-    },
-    {
-      term: "Euclidean open disk",
-      definition: <>For a centre <i>z</i> and radius ε&gt;0, the points <i>w</i> satisfying |<i>w−z</i>|&lt;ε. A point is interior precisely when some such disk around it lies in the set.</>,
-    },
-    {
-      term: "Extreme value theorem",
-      definition: <>A continuous real-valued function on a compact set attains both a minimum and a maximum. Applied to the circle, it turns pointwise positivity of <i>r</i><sub>S</sub> into one uniform positive lower bound.</>,
-    },
   ],
-  intuition: <>Star-shapedness with respect to 0 settles each individual ray, but topology also sees nearby directions. Continuity supplies that transverse control: a point strictly below the graph has room both radially and angularly, so it lies inside a small disk contained in <i>S</i>. An outer endpoint has no such disk because moving slightly farther along its ray leaves <i>S</i>.</>,
+  intuition: <>Star-shapedness determines the intersection with each ray. Continuity in the direction <i>u</i> then shows that every point strictly below ρ<sub>S</sub>(<i>u</i>) has a Euclidean neighborhood inside <i>S</i>, whereas a radial endpoint cannot be interior because every outward displacement leaves <i>S</i>.</>,
   figure: <CompletionFigure kind="radial-boundary" />,
   proofSteps: [
     {
       title: "Describe every ray section exactly",
-      explanation: <>Compactness attains <i>r</i><sub>S</sub>(φ), and star-shapedness with respect to 0 contains every smaller radius. Maximality excludes every larger radius. Thus the intersection with one ray is precisely the closed segment from 0 to the displayed outer point.</>,
+      explanation: <>For each <i>u</i>∈𝕊¹, compactness attains ρ<sub>S</sub>(<i>u</i>), star-shapedness includes every smaller radius, and maximality excludes every larger one. Hence <i>S</i>∩{"{"}<i>ru:r</i>≥0{"}"}={"{"}<i>ru</i>:0≤<i>r</i>≤ρ<sub>S</sub>(<i>u</i>){"}"}.</>,
     },
     {
-      title: "Exclude an outer point from the interior",
-      explanation: <>Every open disk around <i>r</i><sub>S</sub>(φ)<i>e</i><sup>iφ</sup> contains a point obtained by moving a little farther outward on the same ray. That point contradicts maximality and lies outside <i>S</i>.</>,
+      title: "Identify every strictly shorter point as interior",
+      explanation: <>Let <i>z=ru</i> with 0&lt;<i>r</i>&lt;ρ<sub>S</sub>(<i>u</i>). Continuity gives a neighborhood <i>U</i> of <i>u</i> on which the radial function remains larger than <i>r</i> by a fixed margin. Continuity of the direction map <i>w↦w/|w|</i> away from 0 then gives a disk about <i>z</i> whose points have direction in <i>U</i> and modulus below the corresponding radial value. That disk lies in <i>S</i>.</>,
     },
     {
-      title: "Give a strictly shorter point radial room",
-      explanation: <>For <i>z=re</i><sup>iφ</sup> with 0&lt;<i>r&lt;r</i><sub>S</sub>(φ), choose η&gt;0 so that <i>r+3η&lt;r</i><sub>S</sub>(φ). The extra factors of η create a margin that survives small changes of direction and small Euclidean displacement.</>,
-    },
-    {
-      title: "Use continuity for angular room",
-      explanation: <>For ψ near φ, continuity gives <i>r</i><sub>S</sub>(ψ)&gt;<i>r+2η</i>. A sufficiently small Euclidean disk about <i>z</i> consists of points with such nearby arguments and modulus below <i>r+η</i>, hence lies entirely in <i>S</i>.</>,
-    },
-    {
-      title: "Handle the origin",
-      explanation: <>A positive continuous function on a compact circle has a positive minimum <i>c</i>. Every direction contains its radial segment to at least <i>c</i>, so the disk |<i>z</i>|&lt;<i>c</i> lies in <i>S</i> and 0 is interior.</>,
-    },
-    {
-      title: "Exhaust the boundary",
-      explanation: <>Every strictly shorter point is interior; every radial maximum is not interior; every point of <i>S</i> lies on one of the ray segments. No further boundary point remains.</>,
+      title: "Separate the boundary endpoints from the interior",
+      explanation: <>Positivity and compactness of 𝕊¹ give a uniform lower bound, so 0 is interior. Each point ρ<sub>S</sub>(<i>u</i>)<i>u</i> is not interior because a slightly larger point on the same ray is outside <i>S</i>. Since compactness makes <i>S</i> closed and every other point of <i>S</i> is interior, these radial endpoints are exactly ∂<i>S</i>.</>,
     },
   ],
-  takeaway: <>Once the actual radius is known continuously on every ray, the outer radial graph is automatically the full topological boundary and its radial hull is the whole set.</>,
+  takeaway: <>Under the stated hypotheses, <i>S</i>={"{"}<i>t</i>ρ<sub>S</sub>(<i>u</i>)<i>u</i>:0≤<i>t</i>≤1, <i>u</i>∈𝕊¹{"}"} and ∂<i>S</i>={"{"}ρ<sub>S</sub>(<i>u</i>)<i>u</i>:<i>u</i>∈𝕊¹{"}"}.</>,
   provenance: "Classical result",
   sourceIds: ["standard-convexity"],
   sourceRelation: <>This is a standard polar-coordinate fact for compact star-shaped planar sets. The manuscript states and proves the precise version needed here.</>,
@@ -123,47 +139,27 @@ const smallOrders: ProofResultData = {
   manuscriptHtml: exactResult("karp:prop:small-orders"),
   vocabulary: [
     {
-      term: "Actual outer radius Rₙ(θ)",
-      definition: <>The largest radius ρ for which ρ<i>e</i><sup>iθ</sup> belongs to the stochastic eigenvalue region Θ<sub>n</sub>. Topic VIII proves that this maximum is attained.</>,
+      term: "Radial functions Rₙ and Kₙ",
+      definition: <><i>R</i><sub>n</sub>(θ) is the attained maximum modulus in Θ<sub>n</sub> on the ray of angle θ. The function <i>K</i><sub>n</sub>(θ) is the candidate selected by Topic IX&apos;s scalar equation and the endpoint convention.</>,
     },
     {
-      term: "Candidate outer radius Kₙ(θ)",
-      definition: <>Topic XII&apos;s notation for the modulus constructed in Topic IX on an open Farey interval, with value 1 at ordinary Farey endpoints. It remains a candidate until the induction below identifies it with <i>R</i><sub>n</sub>.</>,
-    },
-    {
-      term: "Trace tr(A)",
-      definition: <>The sum of the diagonal entries of <i>A</i>. It also equals the sum of the eigenvalues, counted with algebraic multiplicity.</>,
-    },
-    {
-      term: "Two elementary spectral facts used here",
-      definition: <>A row-stochastic matrix has eigenvalue 1 because it fixes the all-ones column vector. A real matrix has its nonreal eigenvalues in conjugate pairs, so an order-three spectrum containing λ=<i>x+iy</i> also contains λ̄=<i>x−iy</i>.</>,
-    },
-    {
-      term: "Trace of A²",
-      definition: <>It equals the sum of the squares of the eigenvalues, again with algebraic multiplicity. For the spectrum 1,λ,λ̄ this gives tr(<i>A</i>²)=1+2(<i>x</i>²−<i>y</i>²).</>,
-    },
-    {
-      term: "Cauchy–Schwarz in the form used",
-      definition: <>For three real numbers <i>u</i><sub>1</sub>,<i>u</i><sub>2</sub>,<i>u</i><sub>3</sub>, one has (<i>u</i><sub>1</sub>+<i>u</i><sub>2</sub>+<i>u</i><sub>3</sub>)²≤3(<i>u</i><sub>1</sub>²+<i>u</i><sub>2</sub>²+<i>u</i><sub>3</sub>²). The proof applies this to the three diagonal entries.</>,
+      term: "Trace identities",
+      definition: <>For spectrum 1, λ=ξ+<i>i</i>η, and λ̄, one has tr(<i>A</i>)=1+2ξ and tr(<i>A</i>²)=1+2(ξ²−η²). Nonnegative entries and Cauchy–Schwarz imply 3η²≤(1−ξ)².</>,
     },
     {
       term: "Cyclic permutation matrix C₃",
       definition: <>The row-stochastic matrix that sends state 1 to 2, 2 to 3, and 3 back to 1. Its eigenvalues are 1, ω, and ω̄, where ω=<i>e</i><sup>2πi/3</sup>.</>,
     },
     {
-      term: "Convex hull conv{1,ω,ω̄}",
-      definition: <>The filled triangle consisting of all nonnegative weighted averages of the three displayed vertices with weights summing to one.</>,
+      term: "Explicit matrix Mα",
+      definition: <>The displayed row-stochastic matrix has characteristic polynomial (λ−1)(λ²+λ+α). Its two nontrivial roots trace the vertical sides of the triangle and the segment [−1,−1/2].</>,
     },
     {
       term: "Exceptional interval",
-      definition: <>The last upper Farey interval [1/3,1/2]. Its nonreal candidate curve approaches −1/2 rather than the endpoint root −1, so the real segment [−1,−1/2] must be included separately.</>,
-    },
-    {
-      term: "Characteristic polynomial",
-      definition: <>det(<i>tI−A</i>). Its roots, with multiplicity, are exactly the eigenvalues of <i>A</i>.</>,
+      definition: <>On [1/3,1/2], the nonreal root branch runs from ω to −1/2. The outer point at the endpoint ray θ=π is −1, so [−1,−1/2] is a separate real boundary segment.</>,
     },
   ],
-  intuition: <>Orders one and two are elementary. At order three, trace inequalities trap every nonreal eigenvalue inside an equilateral triangle. Two explicit stochastic families attain the triangle’s boundary and the extra negative-real segment. Matching those pieces to the Topic IX candidate curve proves exactly the base identity the order-four induction will use.</>,
+  intuition: <>Orders one and two follow from their general matrix forms. At order three, trace inequalities place every nonreal eigenvalue in the triangle with vertices 1, ω, and ω̄. Two displayed row-stochastic matrix families attain its boundary and the additional real interval. The scalar equation then identifies the two upper nonreal boundary pieces with <i>K</i><sub>3</sub>.</>,
   figure: <CompletionFigure kind="order-three" />,
   proofSteps: [
     {
@@ -172,31 +168,31 @@ const smallOrders: ProofResultData = {
     },
     {
       title: "Parameterize a nonreal order-three spectrum",
-      explanation: <>A real 3×3 matrix with one nonreal eigenvalue λ=<i>x+iy</i> also has λ̄. Row-stochasticity supplies the third eigenvalue 1. Nonnegative diagonal entries give tr(<i>A</i>)=1+2<i>x≥0</i>, hence <i>x≥−1/2</i>.</>,
+      explanation: <>A real 3×3 matrix with λ=ξ+<i>i</i>η also has λ̄, and row-stochasticity supplies eigenvalue 1. Nonnegative diagonal entries give tr(<i>A</i>)=1+2ξ≥0, hence ξ≥−1/2. The unit-disk bound gives ξ≤1.</>,
     },
     {
-      title: "Derive the triangular slope bounds",
-      explanation: <>Cauchy–Schwarz gives (tr <i>A</i>)²≤3∑<i>a</i><sub>ii</sub>². Nonnegativity gives ∑<i>a</i><sub>ii</sub>²≤tr(<i>A</i>²), because the remaining terms <i>a</i><sub>ij</sub><i>a</i><sub>ji</sub> are nonnegative. Substituting the eigenvalue expressions yields 3<i>y</i>²≤(1−<i>x</i>)², the other two sides of the triangle.</>,
+      title: "Derive the triangle inequalities",
+      explanation: <>Cauchy–Schwarz and entrywise nonnegativity give (tr <i>A</i>)²≤3∑<i>a</i><sub>ii</sub>²≤3 tr(<i>A</i>²). Substituting the two trace identities yields 3η²≤(1−ξ)². Together with −1/2≤ξ≤1, this is exactly the closed triangle conv{"{"}1,ω,ω̄{"}"}.</>,
     },
     {
       title: "Attain the first two triangular sides",
       explanation: <>The convex matrix family (1−α)<i>I+αC</i><sub>3</sub> has eigenvalue (1−α)+αω, which runs along the chord [1,ω]. Real matrices give the conjugate chord [1,ω̄]. Star-shapedness with respect to 0 supplies every point between these boundary chords and 0.</>,
     },
     {
-      title: "Attain the terminal arc and real segment",
-      explanation: <>Topic XI’s terminal sparse matrix has characteristic factor λ²+λ+α. For 0≤α≤1/4 its lower real root runs from −1 to −1/2. For 1/4&lt;α≤1 the upper root has real part −1/2 and rises to ω; conjugation supplies the lower branch.</>,
+      title: "Attain the remaining two sides and the real segment",
+      explanation: <>For the displayed matrix <i>M</i><sub>α</sub>, det(λ<i>I−M</i><sub>α</sub>)=(λ−1)(λ²+λ+α). When 0≤α≤1/4, one real root runs from −1 to −1/2. When 1/4&lt;α≤1, its two nonreal roots run from −1/2 to ω and ω̄. The same real matrix contains both conjugate roots.</>,
     },
     {
-      title: "Identify the first candidate curve",
-      explanation: <>On [0,1/3], the cell data reduce the scalar equation to the ray equation for the straight chord β+αω. Its argument increases strictly with α, so each open ray meets it once and Topic IX’s unique radius must be that chord radius.</>,
+      title: "Identify the curve on [0,1/3]",
+      explanation: <>The scalar equation becomes the ray equation for the segment λ=β+αω, where α+β=1. Its argument increases strictly with α, so each ray with 0&lt;θ&lt;2π/3 meets the segment once. Topic IX&apos;s uniqueness therefore identifies its modulus with <i>K</i><sub>3</sub>(θ).</>,
     },
     {
-      title: "Identify the exceptional candidate curve",
-      explanation: <>On [1/3,1/2], the scalar equation is equivalent to λ(λ²−β)=α. Along λ=−1/2+<i>iy</i>, the argument decreases strictly from π to 2π/3 as <i>y</i> rises, so again every open ray is met exactly once. The real interval is an endpoint-ray addition, not part of that open-cell branch.</>,
+      title: "Identify the nonreal curve on [1/3,1/2]",
+      explanation: <>Here the scalar equation is equivalent to λ(λ²−β)=α. Along λ=−1/2+<i>i</i>η, the argument decreases strictly from π to 2π/3 as η rises, so every open ray is met exactly once. The interval [−1,−1/2] lies on the endpoint ray and is not part of this nonreal branch.</>,
     },
     {
       title: "Record the exact induction base",
-      explanation: <>The upper bounds and realizations coincide, and the endpoint convention gives radius 1 at 1, ω, and −1. Therefore the actual and candidate outer radii agree for every upper direction at order three, including the jump at θ=π.</>,
+      explanation: <>The upper bounds and realizations coincide, and the endpoint convention gives radius 1 at 1, ω, and −1. Therefore <i>R</i><sub>3</sub>(θ)=<i>K</i><sub>3</sub>(θ) for every 0≤θ≤π, including the jump at θ=π.</>,
     },
   ],
   takeaway: <>The theorem is completely proved for <i>n≤3</i>, and the exact equality <i>R</i><sub>3</sub>=<i>K</i><sub>3</sub> is ready for the induction step.</>,
@@ -216,40 +212,28 @@ const mainTheorem: ProofResultData = {
   ),
   vocabulary: [
     {
-      term: "Actual outer radius Rₙ(θ)",
-      definition: <>The largest ρ for which ρ<i>e</i><sup>iθ</sup> is an eigenvalue of some <i>n×n</i> row-stochastic matrix. Compactness of Θ<sub>n</sub> makes this largest value attainable.</>,
+      term: "Block-diagonal inclusion",
+      definition: <>If <i>A</i> is row-stochastic of order <i>n−1</i>, then <i>A⊕[1]</i> is row-stochastic of order <i>n</i> and retains every eigenvalue of <i>A</i>. Thus Θ<sub>n−1</sub>⊆Θ<sub>n</sub>.</>,
     },
     {
-      term: "Candidate radius Kₙ(θ)",
-      definition: <>The modulus constructed in Topic IX and compared across orders in Topic XII. Before this theorem it is known to be attained, but has not yet been proved to exclude every farther stochastic eigenvalue at an inherited argument.</>,
+      term: "Two membership cases",
+      definition: <>For λ<sub>n</sub>=<i>R</i><sub>n</sub>(θ)<i>e</i><sup><i>iθ</i></sup>, either λ<sub>n</sub>∉Θ<sub>n−1</sub> or λ<sub>n</sub>∈Θ<sub>n−1</sub>. The first case uses Topics X–XI; the second uses induction and Topic XII.</>,
     },
     {
-      term: "Natural order embedding",
-      definition: <>Given an (<i>n−1</i>)×(<i>n−1</i>) row-stochastic matrix <i>A</i>, the block diagonal matrix <i>A⊕[1]</i> is row-stochastic of order <i>n</i> and retains every eigenvalue of <i>A</i>. Hence Θ<sub>n−1</sub>⊆Θ<sub>n</sub>.</>,
-    },
-    {
-      term: "Non-inherited versus inherited",
-      definition: <>An order-<i>n</i> radial maximum is non-inherited if it is not in Θ<sub>n−1</sub>; it is inherited if it does belong to Θ<sub>n−1</sub>. These alternatives are exhaustive.</>,
-    },
-    {
-      term: "Concatenated candidate curves",
-      definition: <>The continuous concatenation of the curves Γ<sub>f,g</sub><sup>(n)</sup> on consecutive Farey intervals, in increasing Farey order, beginning at 1 and ending at −1 in the upper half-plane.</>,
-    },
-    {
-      term: "Radial hull of the boundary",
-      definition: <>All points obtained by joining the origin to every boundary point: if ζ lies on the boundary, include <i>t</i>ζ for every 0≤<i>t</i>≤1. The theorem proves that this radial hull is exactly Θ<sub>n</sub>.</>,
+      term: "Karpelevič boundary arcs",
+      definition: <>After the equality <i>R</i><sub>n</sub>=<i>K</i><sub>n</sub> is proved, the curves Γ<sub>f,g</sub><sup>(n)</sup> on consecutive Farey intervals are the actual upper boundary arcs, not merely candidate curves.</>,
     },
     {
       term: "Induction on n",
-      definition: <>Prove the statement directly at the base orders, then assume it for <i>n−1</i> and use that assumption to prove it for <i>n</i>.</>,
+      definition: <>Proposition II.9.2 proves orders 1–3. For <i>n</i>≥4, assume <i>R</i><sub>n−1</sub>=<i>K</i><sub>n−1</sub> and prove <i>R</i><sub>n</sub>=<i>K</i><sub>n</sub> first on open Farey intervals and then at their endpoints.</>,
     },
   ],
-  intuition: <>Fix one direction. Attainment puts the candidate no farther out than the actual maximum. If the actual maximum is new, the critical-polygon inequality identifies it with the candidate. If it is inherited, the order embedding and induction identify it with the old candidate, while the pointwise monotonicity from Topic XII and attainment squeeze the new candidate to that same number. Once this equality is known on every ray, continuity turns the radial graph into the topological boundary.</>,
+  intuition: <>Fix a direction in an open order-<i>n</i> Farey interval. Attainment gives <i>K</i><sub>n</sub>≤<i>R</i><sub>n</sub>. If the maximizing point is outside Θ<sub>n−1</sub>, Topics X–XI identify its modulus with <i>K</i><sub>n</sub>. If it lies in Θ<sub>n−1</sub>, block-diagonal inclusion, induction, Topic XII&apos;s monotonicity, and attainment force the same equality. Endpoint matrices settle the remaining rays, and Lemma II.9.1 converts the resulting continuous radial function into the boundary.</>,
   figure: <CompletionFigure kind="induction" />,
   proofSteps: [
     {
       title: "Start from the direct base orders",
-      explanation: <>Proposition II.9.2 proves <i>n=1,2,3</i>, including the exceptional order-three terminal segment. The induction may therefore begin at <i>n=4</i>.</>,
+      explanation: <>Proposition II.9.2 proves <i>n=1,2,3</i>, including the exceptional order-three segment [−1,−1/2]. Assume from now on that <i>n</i>≥4 and that the theorem holds at order <i>n−1</i>.</>,
     },
     {
       title: "Embed the previous stochastic region",
@@ -260,35 +244,31 @@ const mainTheorem: ProofResultData = {
       explanation: <>Topic XI constructs an order-<i>n</i> stochastic matrix with eigenvalue <i>K</i><sub>n</sub>(θ)<i>e</i><sup>iθ</sup>. Thus 0&lt;<i>K</i><sub>n</sub>(θ)≤<i>R</i><sub>n</sub>(θ). At an argument in an open Farey interval, the unit direction is not a root of unity of permitted order, so Topic VIII’s unit-circle result also gives <i>R</i><sub>n</sub>(θ)&lt;1.</>,
     },
     {
-      title: "Resolve the non-inherited case",
-      explanation: <>At this induction stage <i>n</i>≥4. If the actual radial maximum is absent from Θ<sub>n−1</sub>, it satisfies the exact non-inherited-radial-maximum hypotheses, so the N≥4 critical-polygon results apply. Topic XI’s constant-parameter corollary says its modulus is the unique value determined by the Topic IX equation at this argument, namely <i>K</i><sub>n</sub>(θ).</>,
+      title: "Case 1: the maximizing point is outside Θₙ₋₁",
+      explanation: <>If λ<sub>n</sub>=<i>R</i><sub>n</sub>(θ)<i>e</i><sup><i>iθ</i></sup> does not belong to Θ<sub>n−1</sub>, it satisfies the hypotheses established in Topic VIII. Topics X–XI then show that its modulus is the unique solution of Topic IX&apos;s scalar equation. Therefore <i>R</i><sub>n</sub>(θ)=<i>K</i><sub>n</sub>(θ).</>,
     },
     {
-      title: "Freeze the inherited branch",
-      explanation: <>If the point belongs to Θ<sub>n−1</sub>, its modulus is at most <i>R</i><sub>n−1</sub>(θ). The order embedding gives the reverse inequality, so <i>R</i><sub>n</sub>=<i>R</i><sub>n−1</sub>. The induction hypothesis changes this common value to <i>K</i><sub>n−1</sub>.</>,
+      title: "Case 2: the maximizing point lies in Θₙ₋₁",
+      explanation: <>Membership gives <i>R</i><sub>n</sub>(θ)≤<i>R</i><sub>n−1</sub>(θ), while Θ<sub>n−1</sub>⊆Θ<sub>n</sub> gives the reverse inequality. The induction hypothesis and the fact that an open order-<i>n</i> Farey angle is also non-endpoint at order <i>n−1</i> yield <i>R</i><sub>n</sub>=<i>K</i><sub>n−1</sub>. Topic XII and attainment give <i>K</i><sub>n−1</sub>≤<i>K</i><sub>n</sub>≤<i>R</i><sub>n</sub>, so equality holds throughout.</>,
     },
     {
-      title: "Close the inherited squeeze",
-      explanation: <>Topic XII gives <i>K</i><sub>n−1</sub>≤<i>K</i><sub>n</sub>; Topic XI’s attainment gives <i>K</i><sub>n</sub>≤<i>R</i><sub>n</sub>. Combined with <i>R</i><sub>n</sub>=<i>K</i><sub>n−1</sub>, both inequalities are equalities.</>,
+      title: "Prove equality at the Farey endpoints",
+      explanation: <>At <i>p/q∈F</i><sub>n</sub><sup>+</sup>, the row-stochastic matrix <i>C</i><sub>q</sub>⊕<i>I</i><sub>n−q</sub> realizes <i>e</i><sup>2πip/q</sup>. The unit-disk bound prevents a larger modulus, while the endpoint definition gives <i>K</i><sub>n</sub>=1. Hence <i>R</i><sub>n</sub>=<i>K</i><sub>n</sub> for every 0≤θ≤π.</>,
     },
     {
-      title: "Restore the Farey endpoint rays",
-      explanation: <>At an endpoint <i>p/q</i> with <i>q≤n</i>, the order-<i>q</i> cyclic permutation matrix realizes <i>e</i><sup>2πip/q</sup>; absorbing-state padding reaches order <i>n</i>. The unit-disk bound prevents a larger radius, so both actual and candidate radii equal 1.</>,
+      title: "Assemble the upper and lower boundary arcs",
+      explanation: <>For <i>n</i>≥4, Topic IX&apos;s continuity result joins the curves Γ<sub>f,g</sub><sup>(n)</sup> at their Farey endpoints from 1 to −1. Equality <i>R</i><sub>n</sub>=<i>K</i><sub>n</sub> shows that this upper chain contains every upper radial endpoint; conjugation gives the lower chain.</>,
     },
     {
-      title: "Assemble the upper and lower boundary arc chains",
-      explanation: <>Topic IX’s endpoint continuity joins the open-cell graphs from 1 to −1. Equality <i>R</i><sub>n</sub>=<i>K</i><sub>n</sub> says no upper-half-plane stochastic eigenvalue lies beyond that chain. Real coefficients supply its complex-conjugate lower chain.</>,
+      title: "Identify the topological boundary and the whole region",
+      explanation: <>Reflect <i>K</i><sub>n</sub> to a positive continuous radial function on 𝕊¹. Topic VIII gives compactness and star-shapedness of Θ<sub>n</sub> with respect to 0. Lemma II.9.1 shows that its endpoint set is ∂Θ<sub>n</sub> and that Θ<sub>n</sub> consists exactly of the radial segments from 0 to those endpoints.</>,
     },
     {
-      title: "Pass from outer points to the topological boundary",
-      explanation: <>Reflect <i>K</i><sub>n</sub> to a positive continuous full-circle radial maximum. Topic VIII gives compactness and star-shapedness of Θ<sub>n</sub> with respect to 0. Lemma II.9.1 now identifies the radial graph with ∂Θ<sub>n</sub> and its radial hull with the complete set Θ<sub>n</sub>.</>,
-    },
-    {
-      title: "Attach the unit-circle and order-three clauses",
-      explanation: <>Topic VIII already classified unit-modulus points as roots of unity of order at most <i>n</i>. Proposition II.9.2 handled the only discontinuous terminal graph, so the continuous-radius lemma is never applied where its hypothesis fails.</>,
+      title: "Match the remaining clauses of the theorem",
+      explanation: <>Topic VIII&apos;s unit-circle proposition gives exactly Θ<sub>n</sub>∩{"{"}|<i>z</i>|=1{"}"}={"{"}ζ:ζ<sup>q</sup>=1 for some 1≤<i>q</i>≤<i>n</i>{"}"}. Proposition II.9.2 already handled the discontinuity of the nonreal order-three branch, so Lemma II.9.1 is used only when its continuity hypothesis holds.</>,
     },
   ],
-  takeaway: <>The candidate curve is now the actual boundary on every ray, its radial hull is exactly Θ<sub>n</sub>, and the Karpelevič theorem in Ito’s formulation is complete.</>,
+  takeaway: <>The curves Γ<sub>f,g</sub><sup>(n)</sup> are the Karpelevič boundary arcs, their conjugates give the lower boundary, Θ<sub>n</sub> is the union of the radial segments from 0 to that boundary, and the unit-circle points are exactly the roots of unity of order at most <i>n</i>.</>,
   provenance: "Classical result",
   sourceIds: ["karpelevic-1951", "ito-1997"],
   sourceRelation: <>The eigenvalue-region theorem is classical: Karpelevič proved the original form and Ito supplied the modern polynomial-arc formulation. This manuscript gives the displayed self-contained route through critical invariant polygons; the classification applies to the theorem’s statement, not to its proof.</>,
@@ -297,32 +277,34 @@ const mainTheorem: ProofResultData = {
 export function TopicXIIIContent() {
   return (
     <>
+      <TopicXIIISetup />
+
       <ProofDependencyContract
         imported={[
           {
             label: "Topic VIII · Stochastic eigenvalue regions and criticality",
             href: sitePath("/proof/topic-viii/"),
-            explanation: <>defines Θ<sub>n</sub> and <i>R</i><sub>n</sub>, proves compactness, conjugation symmetry, star-shapedness with respect to the origin, the unit-circle classification, and the critical-polygon input for a non-inherited radial maximum.</>,
+            explanation: <>proves that Θ<sub>n</sub> is compact, conjugation-invariant, star-shaped with respect to 0, and contained in the unit disk; it also proves attainment of <i>R</i><sub>n</sub>, the exact unit-circle classification, and the hypotheses used below when a maximizing point lies outside Θ<sub>n−1</sub>.</>,
           },
           {
             label: "Topic IX · candidate curves from the Ito equation",
             href: sitePath("/proof/topic-ix/"),
-            explanation: <>constructs the unique modulus at each prescribed argument, the candidate curves Γ<sub>f,g</sub><sup>(n)</sup>, and their endpoint continuity.</>,
+            explanation: <>for each open Farey interval, constructs the unique positive solution <i>K</i><sub>n</sub>(θ) of the scalar radius equation and the corresponding curve Γ<sub>f,g</sub><sup>(n)</sup>; for <i>n</i>≥4 it proves continuity at the endpoints.</>,
           },
           {
             label: "Topic X · Sharp upper comparison",
             href: sitePath("/proof/topic-x/"),
-            explanation: <>for the induction range <i>n</i>≥4, proves that every varying critical-polygon parameter list lies no farther out than the modulus determined in Topic IX.</>,
+            explanation: <>supplies the upper comparison used, together with Topic XI, when <i>n</i>≥4, θ lies in an open order-<i>n</i> Farey interval, and <i>R</i><sub>n</sub>(θ)<i>e</i><sup><i>iθ</i></sup>∉Θ<sub>n−1</sub>.</>,
           },
           {
             label: "Topic XI · Attainment and constant parameters",
             href: sitePath("/proof/topic-xi/"),
-            explanation: <>independently constructs a stochastic matrix attaining every candidate, then identifies a non-inherited radial maximum with the scalar constant-parameter candidate.</>,
+            explanation: <>proves <i>K</i><sub>n</sub>(θ)<i>e</i><sup><i>iθ</i></sup>∈Θ<sub>n</sub> and, under the preceding open-interval hypotheses, completes the implication <i>R</i><sub>n</sub>(θ)=<i>K</i><sub>n</sub>(θ).</>,
           },
           {
             label: "Topic XII · Monotonicity of the candidate radius",
             href: sitePath("/proof/topic-xii/"),
-            explanation: <>defines the packaged candidate radius <i>K</i><sub>n</sub> and proves <i>K</i><sub>n−1</sub>(θ)≤<i>K</i><sub>n</sub>(θ), the comparison that closes the inherited branch.</>,
+            explanation: <>proves <i>K</i><sub>n−1</sub>(θ)≤<i>K</i><sub>n</sub>(θ) for 0≤θ≤π. This is the comparison used when the order-<i>n</i> maximizing point belongs to Θ<sub>n−1</sub>.</>,
           },
         ]}
         background={[
@@ -331,28 +313,28 @@ export function TopicXIIIContent() {
             explanation: <>the required forms are defined at first use and the compact radial-boundary lemma is proved in full below.</>,
           },
         ]}
-        provedHere={<p>Lemma II.9.1 converts a continuous radial maximum into the topological boundary. Proposition II.9.2 proves the base orders. Theorem II.3.1 then closes the induction and states the complete classical region theorem.</p>}
+        provedHere={<p>Lemma II.9.1 identifies a compact star-shaped set from its positive continuous radial function. Proposition II.9.2 proves orders 1–3. Theorem II.3.1 proves <i>R</i><sub>n</sub>=<i>K</i><sub>n</sub> for every order and then identifies the resulting curves with ∂Θ<sub>n</sub>.</p>}
       />
 
       <section className="topic-i-textbook proof-chapter-group">
         <header>
           <div>
-            <p className="section-label">Structure of the final proof</p>
-            <h3>Three tasks remain—and only three</h3>
+            <p className="section-label">Logical output of Topic XIII</p>
+            <h3>Topology, base orders, and the induction step</h3>
           </div>
-          <div><p>Every deep geometric and analytic estimate has already been proved. This chapter supplies one topological lemma, checks the base orders, and runs one two-branch induction.</p></div>
+          <div><p>The preceding topics provide the comparison and attainment results. This chapter supplies the remaining topological lemma, computes the base orders, and proves the final equality of radial functions.</p></div>
         </header>
         <ol className="topic-xiv-worked-steps">
           <li><span>1</span><div><h4>Topology</h4><p>Show that knowing one continuous maximum on every ray identifies the actual boundary.</p></div></li>
           <li><span>2</span><div><h4>Base cases</h4><p>Compute orders one through three directly, without appealing to the induction.</p></div></li>
-          <li><span>3</span><div><h4>Induction</h4><p>On each ray, separate a genuinely new extremum from an inherited one and prove <i>R</i><sub>n</sub>=<i>K</i><sub>n</sub> in both branches.</p></div></li>
+          <li><span>3</span><div><h4>Induction</h4><p>For λ<sub>n</sub>=<i>R</i><sub>n</sub>(θ)<i>e</i><sup><i>iθ</i></sup>, treat separately λ<sub>n</sub>∉Θ<sub>n−1</sub> and λ<sub>n</sub>∈Θ<sub>n−1</sub>, proving <i>R</i><sub>n</sub>=<i>K</i><sub>n</sub> in both cases.</p></div></li>
         </ol>
       </section>
 
       <ProofResultGroup
         number="I · The topological lemma"
-        title="Outer on every ray becomes boundary everywhere"
-        introduction={<p>Radial maximality is a one-dimensional statement. This lemma adds exactly the continuity needed to recover the two-dimensional topological boundary.</p>}
+        title="A continuous radial function determines the boundary"
+        introduction={<p>The ray sections determine the set once continuity guarantees that all strictly shorter points are interior.</p>}
         results={[radialLemma]}
       />
 
@@ -365,10 +347,31 @@ export function TopicXIIIContent() {
 
       <ProofResultGroup
         number="III · The classical theorem"
-        title="Every ray and the full boundary"
+        title="The radial equality and the complete boundary"
         introduction={<p>The theorem is stated with its original manuscript number from Section II.3. Its complete proof appears here only after all later ingredients have been established, matching the logical rather than the printed order.</p>}
         results={[mainTheorem]}
       />
+
+      <section
+        className="topic-i-textbook proof-chapter-group"
+        aria-labelledby="topic-xiii-closing-heading"
+      >
+        <header>
+          <div>
+            <p className="section-label">Conclusion of the proof sequence</p>
+            <h3 id="topic-xiii-closing-heading">The theorem proved here matches the statement in Section II.3</h3>
+          </div>
+          <div>
+            <p>
+              Topics X and XI settle the case in which the radial maximizer is outside Θ<sub>n−1</sub>;
+              Topic XII supplies the monotonicity used in the complementary membership case. The two cases,
+              the Farey endpoint matrices, conjugation, and Lemma II.9.1 prove every clause of Theorem II.3.1.
+              Topic XIV is a worked order-seven computation illustrating the proved theorem; no part of this
+              proof depends on that example.
+            </p>
+          </div>
+        </header>
+      </section>
     </>
   );
 }

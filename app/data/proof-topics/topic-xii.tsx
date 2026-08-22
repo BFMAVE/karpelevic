@@ -493,7 +493,7 @@ export function TopicXIIContent() {
           </div>
           <div>
             <p>
-              This completes candidate-radius monotonicity. It does not yet identify <i>K</i><sub>n</sub> with the stochastic radial maximum <i>R</i><sub>n</sub>. The base cases, the inherited/non-inherited induction, and the final topological argument remain for Topic XIII.
+              This completes candidate-radius monotonicity. It does not yet identify <i>K</i><sub>n</sub> with the stochastic radial maximum <i>R</i><sub>n</sub>. The base cases, the induction split according as the radial maximizer lies in Θ<sub>n−1</sub>, and the final topological argument remain for Topic XIII.
             </p>
           </div>
         </header>

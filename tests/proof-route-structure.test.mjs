@@ -942,7 +942,7 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.match(topicVIIIText, /orders one, two, and three are reserved for the direct proof in Topic XIII/i);
   assert.match(topicXText, /radial boundary point that first appears at order N[\s\S]*N\s*≥\s*4/i);
   assert.match(topicXIText, /Orders at most three are handled independently in Topic XIII/i);
-  assert.match(topicXIIIText, /At this induction stage n\s*≥\s*4/i);
+  assert.match(topicXIIIText, /Assume (?:from now on|now) that n\s*≥\s*4/i);
 });
 
 test("Topic IV exposes its local setup, typed set-update guide, and five unique plates", async () => {

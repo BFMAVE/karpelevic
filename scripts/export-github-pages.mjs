@@ -58,6 +58,10 @@ const routes = [
     outputPath: "proof/topic-xii/index.html",
   },
   {
+    requestPath: "/proof/topic-xiii",
+    outputPath: "proof/topic-xiii/index.html",
+  },
+  {
     requestPath: "/proof/topic-xiv",
     outputPath: "proof/topic-xiv/index.html",
   },

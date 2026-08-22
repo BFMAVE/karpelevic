@@ -49,7 +49,7 @@ test("the Topic XII download is one continuous self-contained chapter", async ()
     );
     assert.doesNotMatch(html, /<script\b[^>]*\bsrc=/i);
     assert.doesNotMatch(html, /\b(?:href|src)="\/(?!\/)/i);
-    assert.match(text, /Topic XII · Manuscript pages 94–101/);
+    assert.match(text, /Topic XII · Manuscript pages 94–102/);
     assert.match(text, /First published 22 August 2026/);
     assert.match(text, /Last revised 22 August 2026/);
     assert.match(text, /3 lemmas 1 theorem 4 exhaustive cases/);

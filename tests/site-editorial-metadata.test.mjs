@@ -16,7 +16,7 @@ test("archival links distinguish the Zenodo record from the website edition", as
   assert.match(home, /Archival Zenodo record \(24 July 2026\)/);
   assert.match(
     home,
-    /e9031bad2f8621343d6e872e960de4190d57999f2e5bd2fc6cde63e31f55772f/,
+    /6a6d38de39c0e036d2322d15dcbad290268dfacb9004b7b8b4240f892fc0fbe0/,
   );
   assert.match(journeyPage, /archival 24 July 2026 version on Zenodo/);
   assert.doesNotMatch(home, /current archival version/);

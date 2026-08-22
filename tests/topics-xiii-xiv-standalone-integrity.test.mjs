@@ -136,7 +136,7 @@ test("Topics XIII and XIV export as a published, cross-linked standalone pair", 
 
     const topicXIIIText = visibleText(topicXIII);
     assert.match(topicXIII, /data-proof-route="topic-xiii"/);
-    assert.match(topicXIIIText, /Topic XIII · Manuscript pages 101–105/);
+    assert.match(topicXIIIText, /Topic XIII · Manuscript pages 102–106/);
     assert.match(topicXIIIText, /First published 22 August 2026/);
     assert.match(topicXIIIText, /Compact star-shaped sets with continuous radial function/);
     assert.match(topicXIIIText, /Karpelevič theorem in Ito’s formulation/);
@@ -156,7 +156,7 @@ test("Topics XIII and XIV export as a published, cross-linked standalone pair", 
 
     const topicXIVText = visibleText(topicXIV);
     assert.match(topicXIV, /data-proof-route="topic-xiv"/);
-    assert.match(topicXIVText, /Topic XIV · Manuscript pages 105–108/);
+    assert.match(topicXIVText, /Topic XIV · Manuscript pages 107–108/);
     assert.match(topicXIVText, /First published 22 August 2026/);
     assert.match(topicXIVText, /Nine Farey intervals cover 0≤x≤1\/2/);
     assert.match(topicXIVText, /The worked direction x=3\/8/);

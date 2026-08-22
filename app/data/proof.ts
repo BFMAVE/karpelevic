@@ -557,10 +557,10 @@ export const proofTopics: readonly ProofTopic[] = [
       "Why is Kₙ(θ) nondecreasing with respect to n for 0≤θ≤π, and why does conjugation give the reflected lower-half comparison?",
     overview: [
       "Mediant insertion refines one Farey interval into two subintervals. A log-line comparison, the case where the factor count increases, and an exhaustive Farey classification compare the corresponding candidate radii.",
-      "The upper-half inequality Kₙ₋₁(θ)≤Kₙ(θ), together with its conjugate lower-half comparison, is the global arithmetic step that lets the final proof pass from radial maxima first appearing at one order to all stochastic eigenvalues by induction.",
+      "The upper-half inequality Kₙ₋₁(θ)≤Kₙ(θ), together with its conjugate lower-half comparison, is the arithmetic step used in Topic XIII when the order-n radial maximizer belongs to Θₙ₋₁.",
     ],
     itemNumbers: [],
-    manuscriptPages: "94–101",
+    manuscriptPages: "94–102",
   },
   {
     slug: "karpelevic-ito",
@@ -569,11 +569,11 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "How do the upper bound, attainment, and nesting assemble into the complete stochastic eigenvalue region?",
     overview: [
-      "The small orders are proved directly. For every later order, each ray is either genuinely new or inherited from the preceding order; the sharp inequality and nesting identify the same candidate radius in both cases.",
-      "Continuity of the radial graph, conjugation, star-shapedness with respect to the origin, and the unit-circle classification then identify the concatenated candidate curves with the full topological boundary. This is where the classical theorem is finally stated and proved.",
+      "The small orders are proved directly. For n≥4, the induction separates according as the order-n radial maximizer lies outside or inside Θₙ₋₁; the results of Topics X–XII prove Rₙ(θ)=Kₙ(θ) in both cases.",
+      "Continuity of the full-circle radial function, conjugation, star-shapedness with respect to the origin, and the unit-circle classification then identify the Farey-indexed curves with the complete topological boundary. This is where the classical theorem is finally stated and proved.",
     ],
     itemNumbers: [],
-    manuscriptPages: "101–105",
+    manuscriptPages: "102–106",
   },
   {
     slug: "order-seven",
@@ -587,7 +587,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "This interactive computation illustrates the theorem but is not part of its logical proof. Topic XIII remains the endpoint of the necessary argument; Topic XIV lets readers inspect the complete construction at order seven and then explore other orders themselves.",
     ],
     itemNumbers: [],
-    manuscriptPages: "105–108",
+    manuscriptPages: "107–108",
   },
 ] as const;
 

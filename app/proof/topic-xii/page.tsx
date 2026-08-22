@@ -19,7 +19,7 @@ export default function TopicXIIPage() {
       routeKey="topic-xii"
       updatedAt={updatedAt}
       firstPublishedAt={firstPublishedAt}
-      manuscriptPages="94–101"
+      manuscriptPages="94–102"
       stats={[
         { value: 3, label: "lemmas" },
         { value: 1, label: "theorem" },
