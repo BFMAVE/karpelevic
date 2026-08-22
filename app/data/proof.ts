@@ -554,10 +554,10 @@ export const proofTopics: readonly ProofTopic[] = [
     eyebrow: "Topic XII · order comparison",
     title: "Farey refinement and monotonicity of the candidate radius",
     question:
-      "Why is Kₙ(θ) nondecreasing with respect to the order n for every angle θ?",
+      "Why is Kₙ(θ) nondecreasing with respect to n for 0≤θ≤π, and why does conjugation give the reflected lower-half comparison?",
     overview: [
       "Mediant insertion refines one Farey interval into two subintervals. A log-line comparison, the case where the factor count increases, and an exhaustive Farey classification compare the corresponding candidate radii.",
-      "The pointwise inequality Kₙ₋₁(θ)≤Kₙ(θ) is the global arithmetic step that lets the final proof pass from radial maxima first appearing at one order to all stochastic eigenvalues by induction.",
+      "The upper-half inequality Kₙ₋₁(θ)≤Kₙ(θ), together with its conjugate lower-half comparison, is the global arithmetic step that lets the final proof pass from radial maxima first appearing at one order to all stochastic eigenvalues by induction.",
     ],
     itemNumbers: [],
     manuscriptPages: "94–101",

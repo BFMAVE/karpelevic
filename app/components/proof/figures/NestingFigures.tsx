@@ -103,17 +103,17 @@ const copy: Record<NestingFigureKind, { title: string; description: string; capt
   mediant: {
     title: "One Farey interval is divided at its mediant",
     description: "Two ordered interval rows show the old interval from a over b to c over d and the two new subintervals divided at the mediant whose denominator is b plus d equals n. Positions are schematic and not to scale.",
-    caption: "Plate XII.1. Schematic interval diagram (not to scale) of the exact Farey refinement: the newly admitted mediant (a+c)/(b+d), with b+d=n, divides one order-(n−1) interval into two order-n subintervals.",
+    caption: "Plate XII.1. Schematic interval diagram (not to scale): when a/b<c/d are consecutive in F_{n−1} and b+d=n, their mediant (a+c)/(b+d) divides the old interval into two order-n intervals.",
   },
   padding: {
-    title: "Extend the parameter tuple by βM=0",
+    title: "Append the zero parameter",
     description: "A row of equal old beta parameters is extended by beta sub M equals zero; the corresponding algebraic factor is one.",
     caption: "Plate XII.2. The old tuple (β,…,β) is extended by the parameter β_M=0. Its corresponding factor μ^{-q}(μ^q−β_M) equals 1, so the product is unchanged, but the extended tuple is not constant and Topic X gives a strict radius comparison.",
   },
   defect: {
     title: "A sign comparison locates the new radius",
-    description: "In a strict comparison case, the increasing scalar residual is negative at the old radius and vanishes at the new radius, so the old radius is smaller.",
-    caption: "Plate XII.3. Schematic for the strict cases: after a mediant insertion or factor-count increase, the new increasing residual is negative at K_{n−1}(θ) and vanishes at K_n(θ). In the unchanged case, the old radius is already the zero.",
+    description: "In either strict interior comparison case, the increasing scalar residual is negative at the old radius and vanishes at the new radius, so the old radius is smaller.",
+    caption: "Plate XII.3. Schematic for the strict interior cases: after a mediant insertion or factor-count increase, the new increasing residual is negative at K_{n−1}(θ) and vanishes at K_n(θ).",
   },
 };
 

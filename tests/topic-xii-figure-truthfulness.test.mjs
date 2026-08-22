@@ -68,6 +68,32 @@ test("Topic XII plates encode the exact interval, factor, and residual claims", 
   }
   assert.equal([...rendered.matchAll(/data-farey-row="n-1"/g)].length, 1);
   assert.equal([...rendered.matchAll(/data-residual-axis="t"/g)].length, 1);
+  assert.match(
+    rendered,
+    /<span>Append the zero parameter<\/span>[\s\S]*?<title id="nest-padding-title">Append the zero parameter<\/title>/,
+  );
+  assert.doesNotMatch(
+    rendered,
+    /<(?:h6|span|title)\b[^>]*>[^<]*βM=0[^<]*<\/(?:h6|span|title)>/,
+  );
+  assert.match(
+    rendered,
+    /<figcaption>Plate XII\.3\. Schematic for the strict interior cases:/,
+  );
+  assert.doesNotMatch(
+    rendered,
+    /Plate XII\.3\.[^<]*In the unchanged case, the old radius is already the zero\./,
+  );
+  assert.doesNotMatch(
+    rendered,
+    /<h6>[^<]*&amp;(?:lt|gt);[^<]*<\/h6>/,
+    "guided-proof headings must not expose double-escaped inequality entities",
+  );
+  assert.doesNotMatch(
+    rendered,
+    /style="[^"]*text-decoration\s*:\s*overline[^"]*"/i,
+    "complex conjugation must not depend on a visual-only CSS overline",
+  );
 
   const ids = new Set([...rendered.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]));
   for (const match of rendered.matchAll(/\baria-labelledby="([^"]+)"/g)) {

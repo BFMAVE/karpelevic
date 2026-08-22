@@ -8312,6 +8312,61 @@ math mover > mo[accent="true"] {
   margin: 18px clamp(16px, 4vw, 54px) 0;
 }
 
+.proof-chapter-case-table {
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--paper-deep) 48%, white);
+}
+
+.proof-chapter-case-table table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  color: var(--ink);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.proof-chapter-case-table caption {
+  padding: 15px 17px;
+  border-bottom: 3px double var(--rule-dark);
+  color: var(--navy);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.proof-chapter-case-table th,
+.proof-chapter-case-table td {
+  padding: 11px 13px;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+.proof-chapter-case-table tr > :last-child {
+  border-right: 0;
+}
+
+.proof-chapter-case-table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.proof-chapter-case-table thead th {
+  background: color-mix(in srgb, var(--navy) 7%, var(--paper));
+  color: var(--navy);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.proof-chapter-case-table tbody th {
+  color: var(--oxblood);
+  font-weight: 700;
+}
+
 .proof-chapter-local-setup,
 .proof-chapter-scope-reminder,
 .proof-chapter-plate-reference {

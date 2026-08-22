@@ -146,6 +146,7 @@ export function ProofChapterShell({
                     </a>
                   ) : (
                     <span
+                      aria-disabled="true"
                       className="proof-chapter-unavailable"
                       data-proof-topic-number={link.topicNumber}
                     >
@@ -233,6 +234,7 @@ export function ProofChapterShell({
               </a>
             ) : neighbours.next ? (
               <span
+                aria-disabled="true"
                 className="proof-topic-control proof-topic-control-next proof-topic-control-unavailable"
                 data-proof-topic-number={neighbours.next.topicNumber}
               >

@@ -82,7 +82,7 @@ export const homeContent = {
     zenodoChecksum:
       "ca3be77169053635302798aa1ba204502db0a3267d2e76e4d8e763cede138f3b",
     localArxivDraftChecksum:
-      "d3604defeafe17cf6e90ccbf2f20b35820c56107d798e15fb6063f4be628a4ed",
+      "0e5d20801e0187862bd215a5765028f2e20606b7e9356454ceb311b98cbc55bf",
   },
 } as const;
 

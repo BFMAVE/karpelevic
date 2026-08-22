@@ -77,7 +77,39 @@ test("the Topic XII download is one continuous self-contained chapter", async ()
     }
     assert.match(html, /data-farey-row="n-1"/);
     assert.match(html, /data-residual-axis="t"/);
-    assert.match(text, /βM=0|β M =0|βM =0/i);
+    assert.match(text, /Append the zero parameter/i);
+    assert.doesNotMatch(
+      html,
+      /<(?:h6|span|title)\b[^>]*>[^<]*βM=0[^<]*<\/(?:h6|span|title)>/,
+    );
+    assert.match(text, /Plate XII\.3\. Schematic for the strict interior cases:/);
+    assert.doesNotMatch(
+      text,
+      /Plate XII\.3\.[^.]*strict interior cases:[^<]*In the unchanged case/i,
+    );
+    assert.doesNotMatch(
+      html,
+      /<h6>[^<]*&amp;(?:lt|gt);[^<]*<\/h6>/,
+      "guided-proof headings must not expose double-escaped inequality entities",
+    );
+    assert.doesNotMatch(
+      html,
+      /style="[^"]*text-decoration\s*:\s*overline[^"]*"/i,
+      "complex conjugation must not depend on a visual-only CSS overline",
+    );
+    assert.doesNotMatch(text, /for every angle|full-circle statement/i);
+    assert.match(text, /0≤θ≤π/);
+    const caseTableStart = html.indexOf('<div class="proof-chapter-reading-note proof-chapter-case-table">');
+    assert.notEqual(caseTableStart, -1, "the five-case synthesis table is present");
+    const caseTableEnd = html.indexOf("</table>", caseTableStart);
+    assert.notEqual(caseTableEnd, -1, "the five-case synthesis table is complete");
+    const caseTable = html.slice(caseTableStart, caseTableEnd);
+    assert.match(caseTable, /<caption>Five cases in passing from/);
+    assert.equal(
+      [...caseTable.matchAll(/<tr>/g)].length,
+      6,
+      "the synthesis table has one header row and five case rows",
+    );
     assert.match(text, /corresponding factor[^.]*equals 1/i);
 
     assert.match(html, /href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-ix\//);
