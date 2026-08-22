@@ -557,7 +557,7 @@ for (const relativePath of [
   assert.match(html, /href="\/karpelevic\/proof\/topic-xiii\//);
   assert.match(
     visibleText,
-    /Manuscript Topic XIII · Karpelevič theorem in Ito’s formulation/i,
+    /Topic XIII · Karpelevič theorem in Ito’s formulation/i,
   );
   assert.match(
     visibleText,
