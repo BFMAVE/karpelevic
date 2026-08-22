@@ -88,7 +88,7 @@ test("server-renders the scholarly Home page", async () => {
   assert.match(homeText, /Zenodo edition 93 pages/);
   assert.match(
     homeText,
-    /Website edition Last revised 21 August 2026 ↗ 105-page site-hosted PDF/,
+    /Website edition Last revised 22 August 2026 ↗ 106-page site-hosted PDF/,
   );
   assert.match(
     html,
@@ -129,7 +129,7 @@ test("keeps the verified local manuscript available", async () => {
 
   const pdf = await readFile(pdfUrl);
   assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
-  assert.equal(pdf.byteLength, 637_538);
+  assert.equal(pdf.byteLength, 641_358);
 
   const checksum = createHash("sha256").update(pdf).digest("hex");
   const homeSource = await readFile(

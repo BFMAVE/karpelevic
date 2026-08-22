@@ -539,15 +539,15 @@ export const proofTopics: readonly ProofTopic[] = [
   {
     slug: "realization",
     eyebrow: "Topic XI · reverse inclusion",
-    title: "Constructing stochastic matrices and proving attainment",
+    title: "Explicit stochastic realization of the candidate curve",
     question:
-      "How can every candidate boundary point be realized by an actual stochastic matrix?",
+      "How can every candidate point be realized by an actual stochastic matrix?",
     overview: [
-      "A sparse realization graph turns the reduced Ito polynomial into a row-stochastic matrix. A cycle-cover expansion computes its characteristic polynomial without importing the upper-bound argument.",
+      "A sparse realization graph turns the reduced Ito polynomial into a row-stochastic matrix. A determinant expansion over pairwise vertex-disjoint directed cycles computes its characteristic polynomial without importing the upper-bound argument.",
       "The resulting construction proves the reverse inclusion independently: every equality point is genuinely attained in the Karpelevič region.",
     ],
     itemNumbers: [],
-    manuscriptPages: "77–79",
+    manuscriptPages: "90–93",
   },
   {
     slug: "nesting",

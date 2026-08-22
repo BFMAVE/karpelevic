@@ -147,9 +147,9 @@ ingredients are available.
 10. **Topic X — The sharp radial upper bound.**
     PDF pages 73–77. Critical monodromy, the Jensen sheet, log-sine
     equalization, and the sharp cellwise inequality.
-11. **Topic XI — Constructing stochastic matrices and proving attainment.**
-    PDF pages 77–79. Sparse carrier matrices and the independent reverse
-    inclusion.
+11. **Topic XI — Explicit stochastic realization of the candidate curve.**
+    PDF pages 90–93. An exact directed-cycle expansion, sparse stochastic
+    matrices, and the independent reverse inclusion.
 12. **Topic XII — Farey refinement and nesting.**
     PDF pages 79–85. This is expected to be the densest topic after the Part I
     engine.
@@ -725,7 +725,7 @@ full local source history remain later site milestones.
   - Topic VIII — pages 3–5, 59–60, 66, and 71–75.
   - Topic IX — pages 67–71.
   - Topic X — pages 73–77.
-  - Topic XI — pages 77–79.
+  - Topic XI — pages 90–93.
   - Topic XII — pages 79–85.
   - Topic XIII — page 71 and pages 85–89.
   - Topic XIV — pages 89–90; complete order-seven example, verified

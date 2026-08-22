@@ -52,6 +52,7 @@ const publicTopicPublicationDates = [
   ["/proof/topic-viii", "2026-08-20", "20 August 2026"],
   ["/proof/topic-ix", "2026-08-20", "20 August 2026"],
   ["/proof/topic-x", "2026-08-21", "21 August 2026"],
+  ["/proof/topic-xi", "2026-08-22", "22 August 2026"],
 ];
 
 for (const [pathname, expectedResults, expectedProofs] of chapters) {
@@ -169,7 +170,11 @@ test("reader-visible proof terminology uses the coordinated conventional vocabul
   );
   assert.match(
     rendered.get("/proof/topic-xi") ?? "",
-    /Constructing stochastic matrices and proving attainment/,
+    /Explicit stochastic realization of the candidate curve/i,
+  );
+  assert.doesNotMatch(
+    rendered.get("/proof/topic-xi") ?? "",
+    /cycle cover term|global cross cycle|cross edge|tail-row adjacency|constant parameter list|Rᴺ|Θᴺ/i,
   );
 });
 

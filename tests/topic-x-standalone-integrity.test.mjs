@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const exporter = path.join(projectRoot, "scripts/export-proof-standalone.mjs");
 
-test("the Topic X standalone is self-contained and marks only Topic XI onward as forthcoming", async () => {
+test("the Topic X standalone is self-contained and links to published Topic XI", async () => {
   const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), "karpelevic-topic-x-"));
   const output = path.join(temporaryDirectory, "Critical_Invariant_Polygons_Topic_X.html");
   try {
@@ -19,7 +19,7 @@ test("the Topic X standalone is self-contained and marks only Topic XI onward as
         ...process.env,
         PROOF_ROUTE: "/proof/topic-x",
         PROOF_HTML_OUTPUT: output,
-        PROOF_STANDALONE_TOPIC_MAX: "10",
+        PROOF_STANDALONE_TOPIC_MAX: "11",
       },
       stdio: ["ignore", "pipe", "pipe"],
     });
@@ -40,14 +40,17 @@ test("the Topic X standalone is self-contained and marks only Topic XI onward as
     assert.doesNotMatch(html, /\b(?:href|src)="\/(?!\/)/i);
     assert.match(visibleText, /Topic X · Manuscript pages 86–90/);
     assert.match(visibleText, /First published 21 August 2026/);
-    assert.match(visibleText, /Last revised 21 August 2026/);
+    assert.match(visibleText, /Last revised 22 August 2026/);
     assert.match(
       html,
       /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-ix\//,
     );
     assert.doesNotMatch(html, /data-proof-topic-number="10"(?:(?!<\/li>)[\s\S])*Forthcoming/);
-    assert.match(html, /data-proof-topic-number="11"(?:(?!<\/li>)[\s\S])*Forthcoming/);
-    assert.doesNotMatch(html, /href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xi\//);
+    assert.doesNotMatch(html, /data-proof-topic-number="11"(?:(?!<\/li>)[\s\S])*Forthcoming/);
+    assert.match(
+      html,
+      /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xi\//,
+    );
     assert.doesNotMatch(html, /href="Critical_Invariant_Polygons_Topic_[IVX]+\.html/i);
     assert.match(visibleText, /Reflection reverses the selected Farey interval/);
     assert.match(visibleText, /Equality in Jensen’s inequality forces equal factor arguments/);

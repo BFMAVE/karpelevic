@@ -7117,6 +7117,47 @@ math mover > mo[accent="true"] {
   line-height: 1.52;
 }
 
+.topic-xi-attainment-grid {
+  display: grid;
+  padding: clamp(20px, 3vw, 34px) 7px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--rule-dark);
+}
+
+.topic-xi-attainment-grid section {
+  min-width: 0;
+  padding: clamp(18px, 2.5vw, 28px);
+  background: var(--paper);
+  text-align: center;
+}
+
+.topic-xi-attainment-grid section:last-child {
+  background: color-mix(in srgb, var(--paper) 88%, var(--copper));
+}
+
+.topic-xi-attainment-grid p {
+  margin: 0 0 18px;
+  color: var(--oxblood);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.topic-xi-attainment-grid math {
+  min-height: 2.4rem;
+  margin: 0 0 18px;
+  color: var(--ink);
+  font-size: clamp(1.2rem, 2.4vw, 1.75rem);
+}
+
+.topic-xi-attainment-grid section > span {
+  color: var(--ink-soft);
+  font-size: 0.75rem;
+  line-height: 1.48;
+}
+
 .topic-ii-figure-polygon {
   fill: rgba(23, 38, 61, 0.04);
   stroke: var(--ink);
@@ -7498,6 +7539,19 @@ math mover > mo[accent="true"] {
 
   .topic-i-textbook-item-heading {
     grid-template-columns: 42px minmax(0, 1fr);
+  }
+
+  .proof-chapter-result > .topic-i-textbook-item-heading {
+    grid-template-columns: minmax(70px, max-content) minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .topic-xi-attainment-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .topic-xi-attainment-grid section {
+    padding: 22px 18px;
   }
 
   .topic-i-formal {
@@ -7911,6 +7965,14 @@ math mover > mo[accent="true"] {
 
 .proof-chapter-result {
   scroll-margin-top: 24px;
+}
+
+.proof-chapter-result > .topic-i-textbook-item-heading {
+  grid-template-columns: minmax(82px, max-content) minmax(0, 1fr);
+}
+
+.proof-chapter-result > .topic-i-textbook-item-heading > span {
+  white-space: nowrap;
 }
 
 .proof-chapter-provenance {

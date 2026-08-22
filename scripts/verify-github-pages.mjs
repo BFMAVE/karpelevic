@@ -58,6 +58,10 @@ const pages = [
     "The sharp radial upper bound",
   ],
   [
+    "proof/topic-xi/index.html",
+    "Explicit stochastic realization of the candidate curve",
+  ],
+  [
     "prerequisites/index.html",
     "The background used in Topic I",
   ],
@@ -78,6 +82,7 @@ const firstPublicationDates = new Map([
   ["proof/topic-viii/index.html", "20 August 2026"],
   ["proof/topic-ix/index.html", "20 August 2026"],
   ["proof/topic-x/index.html", "21 August 2026"],
+  ["proof/topic-xi/index.html", "22 August 2026"],
 ]);
 
 for (const [relativePath, expectedText] of pages) {
@@ -116,8 +121,8 @@ for (const [relativePath, expectedText] of pages) {
   assert.match(visibleText, /Published on Zenodo/);
   assert.match(visibleText, /24 July 2026/);
   assert.match(visibleText, /Website edition/);
-  assert.match(visibleText, /Last revised\s+21 August 2026/);
-  assert.match(visibleText, /105-page site-hosted PDF/);
+  assert.match(visibleText, /Last revised\s+22 August 2026/);
+  assert.match(visibleText, /106-page site-hosted PDF/);
   assert.doesNotMatch(html, />Prepared</);
 }
 
@@ -148,12 +153,13 @@ for (const relativePath of [
   "proof/topic-viii/index.html",
   "proof/topic-ix/index.html",
   "proof/topic-x/index.html",
+  "proof/topic-xi/index.html",
 ]) {
   const html = await readFile(path.join(outputRoot, relativePath), "utf8");
   assert.match(html, /Forthcoming/);
   assert.doesNotMatch(
     html,
-    /href="\/karpelevic\/proof\/topic-(?:xi|xii(?:\/[ab])?|xiii|xiv)\//,
+    /href="\/karpelevic\/proof\/topic-(?:xii(?:\/[ab])?|xiii|xiv)\//,
   );
 }
 
@@ -308,8 +314,11 @@ for (const relativePath of [
     html,
     /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="\/karpelevic\/proof\/topic-ix\//,
   );
-  assert.doesNotMatch(html, /href="\/karpelevic\/proof\/topic-xi\//);
   assert.match(
+    html,
+    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/karpelevic\/proof\/topic-xi\//,
+  );
+  assert.doesNotMatch(
     html,
     /data-proof-topic-number="11"(?:(?!<\/li>)[\s\S])*Forthcoming/i,
   );
@@ -317,6 +326,41 @@ for (const relativePath of [
     visibleText,
     /log-sine potential|convex equalization|strict Jensen|non-inherited radial maximum|continuous arguments on a zero-free path/i,
   );
+}
+
+{
+  const html = await readFile(
+    path.join(outputRoot, "proof/topic-xi/index.html"),
+    "utf8",
+  );
+  const visibleText = visibleTextFromHtml(html);
+  assert.match(html, /data-proof-route="topic-xi"/);
+  assert.match(visibleText, /Explicit stochastic realization of the candidate curve/i);
+  assert.match(visibleText, /Directed-cycle expansion of the characteristic polynomial/i);
+  assert.match(visibleText, /Stochastic realization of the candidate point/i);
+  assert.match(visibleText, /Θ\s*N is the set of all eigenvalues of row-stochastic matrices/i);
+  assert.match(html, /data-topic-xi-equation-plate="attainment"/);
+  assert.match(html, /data-edge-kind="local-return"/);
+  assert.match(html, /data-edge-kind="inter-block"/);
+  assert.match(html, /data-edge-weight="beta"/);
+  assert.match(html, /data-edge-weight="alpha"/);
+  assert.match(html, /data-regime="s-le-dq"/);
+  assert.match(html, /data-regime="s-gt-dq"/);
+  assert.match(html, /id="topic-xi-exact-sources"/);
+  assert.match(
+    html,
+    /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="\/karpelevic\/proof\/topic-x\//,
+  );
+  assert.doesNotMatch(html, /href="\/karpelevic\/proof\/topic-xii\//);
+  assert.match(
+    html,
+    /data-proof-topic-number="12"(?:(?!<\/li>)[\s\S])*Forthcoming/i,
+  );
+  assert.doesNotMatch(
+    visibleText,
+    /cycle cover term|global cross cycle|cross edge|tail-row adjacency|constant parameter list|Rᴺ|Θᴺ/i,
+  );
+  assert.doesNotMatch(html, /<\/(?:var|sub|sup)>[A-Za-z]/);
 }
 
 {
@@ -451,7 +495,6 @@ await access(path.join(outputRoot, ".nojekyll"));
 await assert.rejects(access(path.join(outputRoot, ".vite")));
 await assert.rejects(access(path.join(outputRoot, "code")));
 for (const futureTopic of [
-  "topic-xi",
   "topic-xii",
   "topic-xiii",
   "topic-xiv",

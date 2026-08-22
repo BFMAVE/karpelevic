@@ -1,7 +1,10 @@
 import { ProofDependencyContract } from "../../components/proof/ProofDependencyContract";
 import { ProofResultGroup } from "../../components/proof/ProofResultGroup";
 import { ProofSourceShelf } from "../../components/proof/ProofSourceShelf";
-import { StochasticFareyFigure } from "../../components/proof/figures/StochasticFareyFigures";
+import {
+  StochasticAttainmentComparison,
+  StochasticFareyFigure,
+} from "../../components/proof/figures/StochasticFareyFigures";
 import { sitePath } from "../../lib/site-path";
 import {
   topicVIIIResults,
@@ -847,8 +850,8 @@ export function TopicXIChapter() {
         ]}
         provedHere={
           <p>
-            We derive the cycle-cover coefficient rule, classify every directed
-            cycle of the sparse realization graph, compute its characteristic polynomial in
+            We derive the characteristic-polynomial expansion over disjoint directed
+            cycles, classify every directed cycle of the sparse realization graph, and compute its characteristic polynomial in
             both signs of <span className="math-inline">s−dq</span>, realize
             every point on the Topic IX candidate curve at order at most <var>n</var>, and only then
             close the constant-parameter conclusion deferred from Topic X.
@@ -856,11 +859,21 @@ export function TopicXIChapter() {
         }
       />
 
+      <SetupBlock eyebrow="Notation recalled" title="The attainable region and its radial maximum">
+        <p>
+          Here Θ<sub>N</sub> is the set of all eigenvalues of row-stochastic
+          matrices of order <var>N</var>, and R<sub>N</sub>(θ) is its maximal
+          radius on the ray of argument θ. We write ρ=R<sub>N</sub>(θ) for an
+          actual radial maximum and ρ* for the candidate radius constructed in
+          Topic IX.
+        </p>
+      </SetupBlock>
+
       <SetupBlock eyebrow="Matrix convention" title="A weighted graph is a stochastic matrix with its rows drawn">
         <p>
           We use the <strong>tail-row convention</strong>: a directed edge
           {" "}<span className="math-inline">u→v</span> of weight <var>w</var>
-          is stored as follows.
+          {" "}is stored as follows.
         </p>
         <p id="karp:eq:tail-row-adjacency" className="display-equation proof-setup-equation">
           <span className="math-inline">Aᵤᵥ=w(u,v)</span>.{" "}
@@ -879,18 +892,18 @@ export function TopicXIChapter() {
           nonnegative and the weights leaving each vertex sum to one.
         </p>
         <p>
-          A <strong>cycle cover term</strong> chooses vertex-disjoint directed
-          cycles; every unused vertex contributes a diagonal factor <var>t</var>
-          in <span className="math-inline">det(tI−A)</span>. Lemma II.7.1
-          derives its sign rather than asking the reader to remember a graph
-          determinant formula.
+          In the Leibniz expansion of <span className="math-inline">det(tI−A)</span>,
+          a nonzero term selects pairwise vertex-disjoint directed cycles.
+          Every unused vertex contributes a diagonal factor <var>t</var>.
+          Lemma II.7.1 derives the sign and exponent directly from the
+          permutation expansion.
         </p>
         <StochasticFareyFigure kind="cycle-ledger" />
       </SetupBlock>
 
       <ProofResultGroup
         number="XI.A"
-        title="Cycle-cover classification"
+        title="Directed-cycle expansion and graph classification"
         introduction={
           <>
             <p>
@@ -913,11 +926,11 @@ export function TopicXIChapter() {
         <p>
           The target polynomial contains local cycles of length <var>q</var> and
           one global cycle of length <var>s</var>. With <var>d</var> local
-          blocks, the unmodified global route has length <span className="math-inline">dq</span>.
-          If <span className="math-inline">s≤dq</span>, cross edges enter some
+          blocks, the unmodified cycle containing all inter-block edges has length <span className="math-inline">dq</span>.
+          If <span className="math-inline">s≤dq</span>, inter-block edges enter some
           blocks part-way through and shorten that route. If
           {" "}<span className="math-inline">s&gt;dq</span>, deterministic
-          subdivision vertices lengthen one cross edge. Neither operation
+          subdivision vertices lengthen one inter-block edge. Neither operation
           changes the local <var>q</var>-cycles.
         </p>
         <p>
@@ -949,12 +962,12 @@ export function TopicXIChapter() {
           Topic X proved <span className="math-inline">ρ≤ρ*</span> without
           assuming a stochastic matrix at the candidate radius. Corollary
           II.7.4 has now constructed that matrix, so maximality of
-          {" "}<span className="math-inline">ρ=Rᴺ(θ)</span> gives the reverse
+          {" "}<span className="math-inline">ρ=R<sub>N</sub>(θ)</span> gives the reverse
           inequality <span className="math-inline">ρ*≤ρ</span>. Equality is
           therefore forced, and the strict equality condition in Jensen forces
           all varying parameters to coincide.
         </p>
-        <StochasticFareyFigure kind="squeeze" />
+        <StochasticAttainmentComparison />
       </SetupBlock>
 
       <ProofResultGroup

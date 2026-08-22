@@ -16,7 +16,7 @@ const outputPath = path.resolve(
 );
 const proofRoute = process.env.PROOF_ROUTE ?? "/proof";
 const publicSite = "https://bfmave.github.io/karpelevic";
-const publishedTopicMaximum = 10;
+const publishedTopicMaximum = 11;
 const bundleLinkMode = process.env.PROOF_STANDALONE_BUNDLE_LINKS === "1";
 const reviewBundleFiles = new Map([
   ["/proof/topic-v", "Critical_Invariant_Polygons_Topic_V.html"],
@@ -499,7 +499,8 @@ function verifyStandaloneHtml(html) {
                     : proofRoute === "/proof/topic-xi"
                       ? [
                           "Topic XI",
-                          "Constructing Stochastic Matrices and Proving Attainment",
+                          "Explicit Stochastic Realization of the Candidate Curve",
+                          "Directed-cycle expansion of the characteristic polynomial",
                           "Sparse stochastic realization and attainment",
                           'data-proof-route="topic-xi"',
                           "Forthcoming",
@@ -823,29 +824,25 @@ function verifyStandaloneHtml(html) {
         "The individual Topic X standalone must link Previous to published Topic IX.",
       );
     }
-    if (
-      !/data-proof-topic-number="11"(?:(?!<\/li>)[\s\S])*Forthcoming/i.test(
-        html,
-      )
-    ) {
+    if (/data-proof-topic-number="11"(?:(?!<\/li>)[\s\S])*Forthcoming/i.test(html)) {
       throw new Error(
-        "The individual Topic X standalone must mark Topic XI as forthcoming.",
+        "The individual Topic X standalone must not mark published Topic XI as forthcoming.",
       );
     }
     if (
-      /href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xi\//i.test(
+      !/class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xi\//i.test(
         html,
       )
     ) {
       throw new Error(
-        "The individual Topic X standalone must not link to unpublished Topic XI.",
+        "The individual Topic X standalone must link Next to published Topic XI.",
       );
     }
 
     const visibleText = visibleTextFromHtml(html).replace(/\s+/g, " ").trim();
     if (
       !/First published 21 August 2026\s*\./i.test(visibleText) ||
-      !/Last revised 21 August 2026\s*\./i.test(visibleText)
+      !/Last revised 22 August 2026\s*\./i.test(visibleText)
     ) {
       throw new Error(
         "Standalone Topic X must expose its first-publication and revision dates.",
@@ -858,6 +855,56 @@ function verifyStandaloneHtml(html) {
     ) {
       throw new Error(
         "Standalone Topic X still contains superseded reader-facing terminology.",
+      );
+    }
+  }
+
+  if (proofRoute === "/proof/topic-xi" && !bundleLinkMode) {
+    if (/href="Critical_Invariant_Polygons_Topic_[IVX]+\.html/i.test(html)) {
+      throw new Error(
+        "The individual Topic XI standalone must not require sibling HTML files.",
+      );
+    }
+    if (
+      !/class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-x\//i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "The individual Topic XI standalone must link Previous to published Topic X.",
+      );
+    }
+    if (
+      !/data-proof-topic-number="12"(?:(?!<\/li>)[\s\S])*Forthcoming/i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "The individual Topic XI standalone must mark Topic XII as forthcoming.",
+      );
+    }
+    if (/href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xii\//i.test(html)) {
+      throw new Error(
+        "The individual Topic XI standalone must not link to unpublished Topic XII.",
+      );
+    }
+
+    const visibleText = visibleTextFromHtml(html).replace(/\s+/g, " ").trim();
+    if (
+      !/First published 22 August 2026\s*\./i.test(visibleText) ||
+      !/Last revised 22 August 2026\s*\./i.test(visibleText)
+    ) {
+      throw new Error(
+        "Standalone Topic XI must expose its first-publication and revision dates.",
+      );
+    }
+    if (
+      /cycle cover term|global cross cycle|cross edge|tail-row adjacency|constant parameter list|Rᴺ|Θᴺ/i.test(
+        visibleText,
+      )
+    ) {
+      throw new Error(
+        "Standalone Topic XI still contains superseded reader-facing terminology.",
       );
     }
   }
