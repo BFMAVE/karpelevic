@@ -3,7 +3,6 @@ import { publicationDates } from "../../data/publication-dates";
 import { proofTopics } from "../../data/proof";
 import {
   getProofReaderNeighbours,
-  getProofReaderParts,
   getProofReaderRoute,
   isProofTopicAvailable,
   proofReaderTopicLinks,
@@ -46,12 +45,10 @@ export function ProofChapterShell({
   const route = getProofReaderRoute(routeKey);
   const topic = proofTopics[route.topicNumber - 1];
   const neighbours = getProofReaderNeighbours(routeKey);
-  const topicParts = getProofReaderParts(route.topicNumber);
   const roman = toRomanNumeral(route.topicNumber);
   const resolvedQuestion = question ?? topic.question;
   const resolvedOverview = overview ?? topic.overview;
   const resolvedPages = manuscriptPages ?? topic.manuscriptPages;
-  const partLabel = route.part ? ` · Part ${route.part}` : "";
 
   return (
     <>
@@ -112,7 +109,7 @@ export function ProofChapterShell({
             </p>
             <div className="proof-edition-meta">
               <span>
-                Topic {roman}{partLabel} of XIV
+                Topic {roman} of XIV
               </span>
               {stats.map((stat) => (
                 <span key={stat.label}>
@@ -163,21 +160,6 @@ export function ProofChapterShell({
           </ol>
         </nav>
 
-        {topicParts.length > 0 ? (
-          <nav className="proof-chapter-parts" aria-label={`Parts of Topic ${roman}`}>
-            {topicParts.map((part) => (
-              <a
-                aria-current={route.part === part.label ? "page" : undefined}
-                href={sitePath(part.href)}
-                key={part.label}
-              >
-                <span>Part {part.label}</span>
-                <strong>{part.title}</strong>
-              </a>
-            ))}
-          </nav>
-        ) : null}
-
         <article
           className="proof-topic-panel proof-chapter-panel"
           data-chapter-reading-mode="guided"
@@ -187,7 +169,7 @@ export function ProofChapterShell({
         >
           <header className="proof-topic-header proof-chapter-heading">
             <p className="section-label">
-              Topic {roman}{partLabel} · Manuscript pages {resolvedPages}
+              Topic {roman} · Manuscript pages {resolvedPages}
             </p>
             <h2>{route.title}</h2>
             <p className="proof-topic-question">{resolvedQuestion}</p>
@@ -224,7 +206,7 @@ export function ProofChapterShell({
           <nav className="proof-topic-controls proof-topic-controls-with-previous" aria-label="Proof chapter navigation">
             <div className="proof-topic-complete">
               <span>
-                End of Topic {roman}{partLabel}
+                End of Topic {roman}
               </span>
               <strong>All results assigned to this topic are proved</strong>
             </div>

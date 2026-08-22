@@ -56,30 +56,23 @@ test("Topic XII plates encode the exact interval, factor, and residual claims", 
   assert.match(residual, /Fₙ,θ\(ρ₋\)&lt;0/);
   assert.match(residual, /unique zero/);
 
-  const [partA, partB] = await Promise.all([
-    render("/proof/topic-xii/a").then((response) => response.text()),
-    render("/proof/topic-xii/b").then((response) => response.text()),
-  ]);
+  const topicXII = await render("/proof/topic-xii").then((response) => response.text());
   const markupOnly = (html) => html.replace(/<script\b[\s\S]*?<\/script>/gi, " ");
-  const renderedA = markupOnly(partA);
-  const renderedB = markupOnly(partB);
-  const combined = renderedA + renderedB;
+  const rendered = markupOnly(topicXII);
   for (const number of [1, 2, 3]) {
     assert.equal(
-      [...combined.matchAll(new RegExp(`Plate XII\\.${number}\\.`, "g"))].length,
+      [...rendered.matchAll(new RegExp(`Plate XII\\.${number}\\.`, "g"))].length,
       1,
       `rendered Plate XII.${number} appears exactly once`,
     );
   }
-  assert.equal([...combined.matchAll(/data-farey-row="n-1"/g)].length, 1);
-  assert.equal([...combined.matchAll(/data-residual-axis="t"/g)].length, 1);
+  assert.equal([...rendered.matchAll(/data-farey-row="n-1"/g)].length, 1);
+  assert.equal([...rendered.matchAll(/data-residual-axis="t"/g)].length, 1);
 
-  for (const [label, html] of [["A", renderedA], ["B", renderedB]]) {
-    const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]));
-    for (const match of html.matchAll(/\baria-labelledby="([^"]+)"/g)) {
-      for (const id of match[1].trim().split(/\s+/)) {
-        assert.ok(ids.has(id), `Part ${label} ARIA label ${id} resolves`);
-      }
+  const ids = new Set([...rendered.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]));
+  for (const match of rendered.matchAll(/\baria-labelledby="([^"]+)"/g)) {
+    for (const id of match[1].trim().split(/\s+/)) {
+      assert.ok(ids.has(id), `Topic XII ARIA label ${id} resolves`);
     }
   }
 });

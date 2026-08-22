@@ -54,12 +54,8 @@ const routes = [
     outputPath: "proof/topic-xi/index.html",
   },
   {
-    requestPath: "/proof/topic-xii/a",
-    outputPath: "proof/topic-xii/a/index.html",
-  },
-  {
-    requestPath: "/proof/topic-xii/b",
-    outputPath: "proof/topic-xii/b/index.html",
+    requestPath: "/proof/topic-xii",
+    outputPath: "proof/topic-xii/index.html",
   },
   {
     requestPath: "/prerequisites",
@@ -80,10 +76,16 @@ const compatibilityRedirects = [
     message: "Topic VI is now one chapter.",
   },
   {
-    outputPath: "proof/topic-xii/index.html",
-    target: `${basePath}/proof/topic-xii/a/`,
-    title: "Topic XII begins with Part A",
-    message: "Topic XII is published in two consecutive parts.",
+    outputPath: "proof/topic-xii/a/index.html",
+    target: `${basePath}/proof/topic-xii/`,
+    title: "Topic XII has moved",
+    message: "Topic XII is now one continuous chapter.",
+  },
+  {
+    outputPath: "proof/topic-xii/b/index.html",
+    target: `${basePath}/proof/topic-xii/#karp:lem:nesting-case-split`,
+    title: "Topic XII has moved",
+    message: "Topic XII is now one continuous chapter.",
   },
 ];
 

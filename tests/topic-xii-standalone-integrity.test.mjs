@@ -8,7 +8,6 @@ import { fileURLToPath } from "node:url";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const exporter = path.join(projectRoot, "scripts/export-proof-standalone.mjs");
-const packager = path.join(projectRoot, "scripts/package-topic-xii-standalone.mjs");
 
 const visibleText = (html) =>
   html
@@ -21,37 +20,24 @@ const visibleText = (html) =>
     .replaceAll("&amp;", "&")
     .replace(/\s+/g, " ");
 
-test("the combined Topic XII download is one coherent self-contained chapter", async () => {
+test("the Topic XII download is one continuous self-contained chapter", async () => {
   const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), "karpelevic-topic-xii-test-"));
-  const inputA = path.join(temporaryDirectory, "Topic_XII_A.html");
-  const inputB = path.join(temporaryDirectory, "Topic_XII_B.html");
   const output = path.join(temporaryDirectory, "Critical_Invariant_Polygons_Topic_XII.html");
 
-  const exportPart = (route, destination) =>
+  const exportChapter = () =>
     execFileSync(process.execPath, [exporter], {
       cwd: projectRoot,
       env: {
         ...process.env,
-        PROOF_ROUTE: route,
-        PROOF_HTML_OUTPUT: destination,
+        PROOF_ROUTE: "/proof/topic-xii",
+        PROOF_HTML_OUTPUT: output,
         PROOF_STANDALONE_TOPIC_MAX: "12",
       },
       stdio: ["ignore", "pipe", "pipe"],
     });
 
   try {
-    exportPart("/proof/topic-xii/a", inputA);
-    exportPart("/proof/topic-xii/b", inputB);
-    execFileSync(process.execPath, [packager], {
-      cwd: projectRoot,
-      env: {
-        ...process.env,
-        TOPIC_XII_INPUT_A: inputA,
-        TOPIC_XII_INPUT_B: inputB,
-        TOPIC_XII_OUTPUT: output,
-      },
-      stdio: ["ignore", "pipe", "pipe"],
-    });
+    exportChapter();
 
     const html = await readFile(output, "utf8");
     const text = visibleText(html);
@@ -63,7 +49,7 @@ test("the combined Topic XII download is one coherent self-contained chapter", a
     );
     assert.doesNotMatch(html, /<script\b[^>]*\bsrc=/i);
     assert.doesNotMatch(html, /\b(?:href|src)="\/(?!\/)/i);
-    assert.match(text, /Topic XII · Parts A–B · Manuscript pages 94–101/);
+    assert.match(text, /Topic XII · Manuscript pages 94–101/);
     assert.match(text, /First published 22 August 2026/);
     assert.match(text, /Last revised 22 August 2026/);
     assert.match(text, /3 lemmas 1 theorem 4 exhaustive cases/);
@@ -103,6 +89,8 @@ test("the combined Topic XII download is one coherent self-contained chapter", a
       html,
       /href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xii\/[ab]\//,
     );
+    assert.doesNotMatch(html, /<nav\b[^>]*class="[^"]*proof-chapter-parts/i);
+    assert.doesNotMatch(text, /Part A|Part B|Topic XII-A|Topic XII-B/i);
     assert.doesNotMatch(
       html,
       /data-proof-topic-number="12"(?:(?!<\/li>)[\s\S])*Forthcoming/i,
@@ -117,7 +105,7 @@ test("the combined Topic XII download is one coherent self-contained chapter", a
     );
 
     const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
-    assert.equal(new Set(ids).size, ids.length, "combined IDs are unique");
+    assert.equal(new Set(ids).size, ids.length, "Topic XII IDs are unique");
     const idSet = new Set(ids);
     for (const fragment of [...html.matchAll(/href="#([^"]+)"/g)].map((match) => match[1])) {
       assert.ok(idSet.has(fragment), `local fragment #${fragment} resolves`);

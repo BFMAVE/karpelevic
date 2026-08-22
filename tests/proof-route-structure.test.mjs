@@ -34,8 +34,7 @@ const chapters = [
   ["/proof/topic-ix", 6, 3],
   ["/proof/topic-x", 3, 3],
   ["/proof/topic-xi", 5, 5],
-  ["/proof/topic-xii/a", 2, 2],
-  ["/proof/topic-xii/b", 2, 2],
+  ["/proof/topic-xii", 4, 4],
   ["/proof/topic-xiii", 3, 3],
 ];
 
@@ -53,8 +52,7 @@ const publicTopicPublicationDates = [
   ["/proof/topic-ix", "2026-08-20", "20 August 2026"],
   ["/proof/topic-x", "2026-08-21", "21 August 2026"],
   ["/proof/topic-xi", "2026-08-22", "22 August 2026"],
-  ["/proof/topic-xii/a", "2026-08-22", "22 August 2026"],
-  ["/proof/topic-xii/b", "2026-08-22", "22 August 2026"],
+  ["/proof/topic-xii", "2026-08-22", "22 August 2026"],
 ];
 
 for (const [pathname, expectedResults, expectedProofs] of chapters) {
@@ -1183,18 +1181,30 @@ test("every internal proof-reader fragment resolves on its target page", async (
   }
 });
 
-test("Topic XII publishes as one continuous two-part monotonicity argument", async () => {
-  const redirect = await render("/proof/topic-xii");
-  assert.equal(redirect.status, 308);
+test("Topic XII publishes as one continuous monotonicity argument", async () => {
+  const [legacyA, legacyB] = await Promise.all([
+    render("/proof/topic-xii/a"),
+    render("/proof/topic-xii/b"),
+  ]);
+  assert.equal(legacyA.status, 308);
+  assert.equal(legacyB.status, 308);
   assert.equal(
-    new URL(redirect.headers.get("location") ?? "", "http://localhost").pathname,
-    "/proof/topic-xii/a/",
+    new URL(legacyA.headers.get("location") ?? "", "http://localhost").pathname,
+    "/proof/topic-xii/",
   );
+  const legacyBTarget = new URL(
+    legacyB.headers.get("location") ?? "",
+    "http://localhost",
+  );
+  assert.equal(legacyBTarget.pathname, "/proof/topic-xii/");
+  assert.equal(legacyBTarget.hash, "#karp:lem:nesting-case-split");
 
-  const [topicXI, partA, partB] = await Promise.all([
+  const [topicXI, topicXII] = await Promise.all([
     render("/proof/topic-xi").then((response) => response.text()),
-    render("/proof/topic-xii/a").then((response) => response.text()),
-    render("/proof/topic-xii/b").then((response) => response.text()),
+    render("/proof/topic-xii").then((response) => {
+      assert.equal(response.status, 200);
+      return response.text();
+    }),
   ]);
   const visibleText = (html) =>
     html
@@ -1209,76 +1219,71 @@ test("Topic XII publishes as one continuous two-part monotonicity argument", asy
 
   assert.match(
     topicXI,
-    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/proof\/topic-xii\/a\//,
+    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/proof\/topic-xii\//,
   );
   assert.match(
-    partA,
+    topicXII,
     /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="\/proof\/topic-xi\//,
   );
   assert.match(
-    partA,
-    /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/proof\/topic-xii\/b\//,
-  );
-  assert.match(
-    partB,
-    /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="\/proof\/topic-xii\/a\//,
-  );
-  assert.match(
-    partB,
+    topicXII,
     /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="\/proof\/topic-xiii\//,
   );
 
-  assert.match(partA, /href="\/proof\/topic-ix\//);
-  assert.match(partA, /href="\/proof\/topic-x\/#karp:thm:hetero-sharp"/);
+  assert.match(topicXII, /data-proof-route="topic-xii"/);
+  assert.match(topicXII, /href="\/proof\/topic-ix\//);
+  assert.match(topicXII, /href="\/proof\/topic-x\/#karp:thm:hetero-sharp"/);
   for (const anchor of [
     "karp:eq:padding-explicit-scalar-sign",
     "karp:lem:mediant-expansion",
     "karp:eq:Kn-pi-definition",
   ]) {
-    assert.match(partB, new RegExp(`href="/proof/topic-xii/a/#${anchor}"`));
+    assert.match(topicXII, new RegExp(`href="#${anchor}"`));
   }
 
-  const setup = partA.indexOf("data-topic-xii-setup");
-  const firstResult = partA.indexOf('id="topic-xii-mediant-expansion"');
+  const setup = topicXII.indexOf("data-topic-xii-setup");
+  const firstResult = topicXII.indexOf('id="topic-xii-mediant-expansion"');
   assert.ok(setup >= 0 && firstResult > setup, "K_n is defined before its first use");
-  assert.match(partA, /id="karp:eq:Kn-pi-definition"/);
+  for (const anchor of [
+    "karp:lem:mediant-expansion",
+    "karp:lem:multiplicity-padding",
+    "karp:lem:nesting-case-split",
+    "karp:thm:candidate-nesting",
+  ]) {
+    assert.match(topicXII, new RegExp(`id="${anchor}"`));
+  }
+  assert.match(topicXII, /id="karp:eq:Kn-pi-definition"/);
   assert.equal(
-    [...partA.matchAll(/\sid="topic-xii-a-contract-heading"/g)].length,
+    [...topicXII.matchAll(/\sid="topic-xii-contract-heading"/g)].length,
     1,
   );
-  assert.equal(
-    [...partB.matchAll(/\sid="topic-xii-b-contract-heading"/g)].length,
-    1,
-  );
+  assert.doesNotMatch(topicXII, /proof-chapter-parts|\/proof\/topic-xii\/[ab]\//i);
 
-  const card = (html, id, nextId) => {
-    const start = html.indexOf(`id="${id}"`);
-    const end = nextId ? html.indexOf(`id="${nextId}"`, start + 1) : html.length;
+  const card = (id, nextId) => {
+    const start = topicXII.indexOf(`id="${id}"`);
+    const end = nextId ? topicXII.indexOf(`id="${nextId}"`, start + 1) : topicXII.length;
     assert.notEqual(start, -1, `${id} exists`);
-    return html.slice(start, end < 0 ? html.length : end);
+    return topicXII.slice(start, end < 0 ? topicXII.length : end);
   };
   assert.doesNotMatch(
-    card(partA, "topic-xii-mediant-expansion", "topic-xii-multiplicity-padding"),
+    card("topic-xii-mediant-expansion", "topic-xii-multiplicity-padding"),
     /proof-chapter-provenance/,
   );
   assert.doesNotMatch(
-    card(partA, "topic-xii-multiplicity-padding"),
+    card("topic-xii-multiplicity-padding", "topic-xii-refinement-split"),
     /proof-chapter-provenance/,
   );
   assert.doesNotMatch(
-    card(partB, "topic-xii-refinement-split", "topic-xii-candidate-nesting"),
+    card("topic-xii-refinement-split", "topic-xii-candidate-nesting"),
     /proof-chapter-provenance/,
   );
   assert.doesNotMatch(
-    card(partB, "topic-xii-candidate-nesting"),
+    card("topic-xii-candidate-nesting"),
     /proof-chapter-provenance/,
   );
 
-  for (const [label, html] of [["A", partA], ["B", partB]]) {
-    assert.doesNotMatch(
-      visibleText(html),
-      /Farey cell|subcell|reciprocal chord|multiplicity padding|candidate outer radius|candidate nesting|moves outward|radial excess/i,
-      `Part ${label} exposes superseded terminology`,
-    );
-  }
+  assert.doesNotMatch(
+    visibleText(topicXII),
+    /Part A|Part B|Topic XII-A|Topic XII-B|Farey cell|subcell|reciprocal chord|multiplicity padding|candidate outer radius|candidate nesting|moves outward|radial excess/i,
+  );
 });

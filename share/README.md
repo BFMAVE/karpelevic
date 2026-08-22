@@ -11,7 +11,5 @@ and then creates the Topic VIII–IX review ZIP from temporary cross-linked
 copies. Building the ZIP never overwrites the individual Topic IX file.
 
 For Topic XII, run `npm run package:topic-xii-review`. The command builds the
-site, exports Parts A and B to a temporary directory, and writes one portable
-file, `Critical_Invariant_Polygons_Topic_XII.html`, to this folder. The
-temporary part files are removed automatically; only the combined Topic XII
-edition is retained.
+site and exports the continuous `/proof/topic-xii/` chapter directly to the
+portable file `Critical_Invariant_Polygons_Topic_XII.html` in this folder.

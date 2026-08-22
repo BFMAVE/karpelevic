@@ -1,15 +1,8 @@
 import { proofTopics } from "./proof";
 
-export type ProofReaderPart = {
-  label: "A" | "B";
-  title: string;
-  href: string;
-};
-
 export type ProofReaderRoute = {
   key: string;
   topicNumber: number;
-  part?: "A" | "B";
   href: string;
   title: string;
   shortTitle: string;
@@ -112,19 +105,10 @@ export const proofReaderRoutes: readonly ProofReaderRoute[] = [
     shortTitle: "Realization",
   },
   {
-    key: "topic-xii-a",
+    key: "topic-xii",
     topicNumber: 12,
-    part: "A",
-    href: "/proof/topic-xii/a/",
-    title: `${topicTitle(12)} — two Farey-refinement comparisons`,
-    shortTitle: "Two comparisons",
-  },
-  {
-    key: "topic-xii-b",
-    topicNumber: 12,
-    part: "B",
-    href: "/proof/topic-xii/b/",
-    title: `${topicTitle(12)} — monotonicity of the candidate radius`,
+    href: "/proof/topic-xii/",
+    title: topicTitle(12),
     shortTitle: "Order monotonicity",
   },
   {
@@ -175,19 +159,6 @@ export function getProofReaderNeighbours(key: string): {
     previous: proofReaderRoutes[index - 1],
     next: proofReaderRoutes[index + 1],
   };
-}
-
-export function getProofReaderParts(topicNumber: number): readonly ProofReaderPart[] {
-  return proofReaderRoutes
-    .filter(
-      (route): route is ProofReaderRoute & { part: "A" | "B" } =>
-        route.topicNumber === topicNumber && route.part !== undefined,
-    )
-    .map((route) => ({
-      label: route.part,
-      title: route.title.replace(/^.*?—\s*/, ""),
-      href: route.href,
-    }));
 }
 
 export function toRomanNumeral(number: number): string {

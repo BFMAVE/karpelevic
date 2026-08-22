@@ -54,7 +54,7 @@ test("the Topic XI standalone is self-contained and links to published Topic XII
     assert.doesNotMatch(html, /data-proof-topic-number="12"(?:(?!<\/li>)[\s\S])*Forthcoming/);
     assert.match(
       html,
-      /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xii\/a\//,
+      /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xii\//,
     );
     assert.doesNotMatch(
       text,

@@ -23,7 +23,7 @@ const crossTopicAnchors: Readonly<Record<string, string>> = {
   "karp:prop:unit-circle": sitePath("/proof/topic-viii/#karp:prop:unit-circle"),
   "karp:eq:new-shell": sitePath("/proof/topic-viii/#topic-viii-new-shell-critical"),
   "karp:cor:equal-profile": sitePath("/proof/topic-xi/#karp:cor:equal-profile"),
-  "karp:thm:candidate-nesting": sitePath("/proof/topic-xii/b/#karp:thm:candidate-nesting"),
+  "karp:thm:candidate-nesting": sitePath("/proof/topic-xii/#karp:thm:candidate-nesting"),
   "karp:prop:compact": sitePath("/proof/topic-viii/#karp:prop:compact"),
   "karp:cor:radial-filling": sitePath("/proof/topic-viii/#karp:cor:radial-filling"),
 };
@@ -321,7 +321,7 @@ export function TopicXIIIContent() {
           },
           {
             label: "Topic XII · Monotonicity of the candidate radius",
-            href: sitePath("/proof/topic-xii/b/"),
+            href: sitePath("/proof/topic-xii/"),
             explanation: <>defines the packaged candidate radius <i>K</i><sub>n</sub> and proves <i>K</i><sub>n−1</sub>(θ)≤<i>K</i><sub>n</sub>(θ), the comparison that closes the inherited branch.</>,
           },
         ]}

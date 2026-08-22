@@ -53,7 +53,7 @@ const crossTopicAnchors: Readonly<Record<string, string>> = {
     "/proof/topic-x/#karp:thm:hetero-sharp",
   ),
   "karp:sec:realization": sitePath("/proof/topic-xi/"),
-  "karp:sec:nesting": sitePath("/proof/topic-xii/b/"),
+  "karp:sec:nesting": sitePath("/proof/topic-xii/"),
   "karp:sec:completion": sitePath("/proof/topic-xiii/"),
 };
 

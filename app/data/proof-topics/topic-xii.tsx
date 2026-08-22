@@ -18,9 +18,6 @@ const crossTopicAnchors: Readonly<Record<string, string>> = {
   "karp:eq:A-B-absolute": sitePath("/proof/topic-ix/#topic-ix-scalar-ray"),
   "karp:eq:A+B-range": sitePath("/proof/topic-ix/#karp:eq:A+B-range"),
   "karp:prop:scalar-ray": sitePath("/proof/topic-ix/#karp:prop:scalar-ray"),
-  "karp:eq:padding-explicit-scalar-sign": sitePath("/proof/topic-xii/a/#karp:eq:padding-explicit-scalar-sign"),
-  "karp:lem:mediant-expansion": sitePath("/proof/topic-xii/a/#karp:lem:mediant-expansion"),
-  "karp:eq:Kn-pi-definition": sitePath("/proof/topic-xii/a/#karp:eq:Kn-pi-definition"),
 };
 
 function relinkCrossTopicReferences(html: string): string {
@@ -62,7 +59,7 @@ const commonImports = [
   },
 ] as const;
 
-const partAResults: readonly ProofResultData[] = [
+const comparisonResults: readonly ProofResultData[] = [
   {
     id: "topic-xii-mediant-expansion",
     label: "Lemma II.8.1",
@@ -211,7 +208,7 @@ const partAResults: readonly ProofResultData[] = [
   },
 ] as const;
 
-const partBResults: readonly ProofResultData[] = [
+const assemblyResults: readonly ProofResultData[] = [
   {
     id: "topic-xii-refinement-split",
     label: "Lemma II.8.3",
@@ -252,7 +249,7 @@ const partBResults: readonly ProofResultData[] = [
         explanation: <>For a fixed smaller denominator <i>q</i>, the difference <i>D</i><sub>n</sub>(<i>q</i>)−<i>D</i><sub>n−1</sub>(<i>q</i>) is either zero or one. This completes case (iii).</>,
       },
     ],
-    takeaway: <>The two local comparisons from Part A cover every open-ray change; endpoint rays require only their defining value 1.</>,
+    takeaway: <>The two preceding local comparisons cover every open-ray change; endpoint rays require only their defining value 1.</>,
     sourceIds: ["standard-farey"],
     sourceRelation: <>This classification is derived from the classical Farey adjacency and mediant properties; the proof records explicitly why these four cases are exhaustive for the radius comparison.</>,
   },
@@ -312,6 +309,11 @@ const partBResults: readonly ProofResultData[] = [
   },
 ] as const;
 
+const topicXIIResults: readonly ProofResultData[] = [
+  ...comparisonResults,
+  ...assemblyResults,
+];
+
 function TopicXIISetup() {
   return (
     <section
@@ -325,7 +327,7 @@ function TopicXIISetup() {
           <h3 id="topic-xii-setup-heading">Farey data, factor count, and candidate radius</h3>
         </div>
         <div>
-          <p>These conventions are used in both parts of Topic XII.</p>
+          <p>These conventions are used throughout Topic XII.</p>
         </div>
       </header>
       <div className="proof-chapter-reading-note">
@@ -333,6 +335,9 @@ function TopicXIISetup() {
           <strong>Farey intervals and rays.</strong> <i>F</i><sub>n</sub> is the Farey sequence of order <i>n</i>,
           <i> F</i><sub>n</sub><sup>+</sup>=<i>F</i><sub>n</sub>∩[0,1/2], and
           ℛ<sub>θ</sub>={"{"}<i>te</i><sup><i>iθ</i></sup>:<i>t</i>≥0{"}"} is the ray of angle θ.
+          The endpoints of an interval may be labelled <i>p/q</i> and <i>r/s</i> so that <i>q&lt;s</i>;
+          this denominator-based labelling need not be their left-to-right order. The absolute definitions of
+          <i> A</i> and <i>B</i> cover both orientations.
         </p>
         <p>
           <strong>Factor count and determinant.</strong> For an endpoint denominator <i>q</i>,
@@ -355,13 +360,17 @@ function TopicXIISetup() {
   );
 }
 
-export function TopicXIIAContent() {
+export function TopicXIIContent() {
   return (
     <>
       <ProofDependencyContract
-        headingId="topic-xii-a-contract-heading"
+        headingId="topic-xii-contract-heading"
         imported={commonImports}
         background={[
+          {
+            label: "Classical Farey refinement",
+            explanation: <>a newly admitted reduced fraction has denominator exactly <i>n</i>, and an interval between unimodular neighbours is divided at their mediant.</>,
+          },
           {
             label: "Strict convexity of −log cos",
             explanation: <>on every interval where a line has a positive radial intersection, its log-radius has second derivative sec²&gt;0. The two-line derivation is reproduced before the first lemma in its exact proof.</>,
@@ -371,8 +380,12 @@ export function TopicXIIAContent() {
             href: sitePath("/proof/#part-i-item-10"),
             explanation: <>supply the signed side test; multiplication by a nonzero complex number scales every real determinant by its positive squared modulus.</>,
           },
+          {
+            label: "Monotone zero comparison",
+            explanation: <>if a strictly increasing function is nonpositive at <i>a</i> and vanishes at <i>b</i>, then <i>a≤b</i>.</>,
+          },
         ]}
-        provedHere={<p>Lemma II.8.1 handles a Farey interval divided by a newly inserted mediant in both denominator orientations. Lemma II.8.2 handles an unchanged interval whose factor count rises. Together they provide every nontrivial comparison at a prescribed argument needed in Part B.</p>}
+        provedHere={<p>Lemmas II.8.1 and II.8.2 prove the two strict local comparisons. Lemma II.8.3 shows that these and the endpoint or unchanged cases exhaust Farey refinement. Theorem II.8.4 then obtains the pointwise inequality <i>K</i><sub>n−1</sub>(θ)≤<i>K</i><sub>n</sub>(θ).</p>}
       />
 
       <TopicXIISetup />
@@ -428,62 +441,10 @@ export function TopicXIIAContent() {
       </section>
 
       <ProofResultGroup
-        number="Part A · Two comparison lemmas"
-        title="The two cases where Kₙ(θ)&gt;Kₙ₋₁(θ)"
-        introduction={<p>The first result changes the Farey interval. The second keeps the interval but changes the factor count. Their proofs are independent and together cover the only two ways the formula at an interior argument can change from order <i>n−1</i> to order <i>n</i>.</p>}
-        results={partAResults}
-      />
-    </>
-  );
-}
-
-export function TopicXIIBContent() {
-  return (
-    <>
-      <ProofDependencyContract
-        headingId="topic-xii-b-contract-heading"
-        imported={[
-          ...commonImports,
-          {
-            label: "Topic XII-A · The two comparison lemmas",
-            href: sitePath("/proof/topic-xii/a/"),
-            explanation: <>supplies the strict line-intersection comparison after a mediant insertion and the strict scalar-residual sign after a factor-count increase.</>,
-          },
-        ]}
-        background={[
-          {
-            label: "Classical Farey refinement",
-            explanation: <>a newly admitted reduced fraction has denominator exactly <i>n</i>, and an interval between unimodular neighbours is divided at their mediant.</>,
-          },
-          {
-            label: "Monotone zero comparison",
-            explanation: <>if a strictly increasing function is nonpositive at <i>a</i> and vanishes at <i>b</i>, then <i>a≤b</i>.</>,
-          },
-        ]}
-        provedHere={<p>Lemma II.8.3 proves that the Farey refinement cases are exhaustive. Theorem II.8.4 applies one scalar sign test in every case and obtains the pointwise inequality <i>K</i><sub>n−1</sub>(θ)≤<i>K</i><sub>n</sub>(θ).</p>}
-      />
-
-      <section className="topic-i-textbook proof-chapter-group" aria-labelledby="topic-xii-b-candidate-radius-heading" data-topic-xii-b-recall>
-        <header>
-          <div>
-            <p className="section-label">Notation recalled from Part A</p>
-            <h3 id="topic-xii-b-candidate-radius-heading">The candidate radius Kₙ</h3>
-          </div>
-          <div>
-            <p>Part A states the full definition before either comparison lemma.</p>
-          </div>
-        </header>
-        <div className="proof-chapter-reading-note">
-          <p>On an open Farey-interval ray, <i>K</i><sub>n</sub>(θ) is Topic IX’s unique scalar equality radius. It equals 1 at Farey endpoints and, by the separate convention in <a href={sitePath("/proof/topic-xii/a/#karp:eq:Kn-pi-definition")}>Part A</a>, at θ=π.</p>
-          <p>The endpoints of an interval may be labelled <i>p/q</i> and <i>r/s</i> so that <i>q&lt;s</i>; this denominator-based labelling need not be their left-to-right order. The absolute definitions of <i>A</i> and <i>B</i> cover both orientations.</p>
-        </div>
-      </section>
-
-      <ProofResultGroup
-        number="Part B · Exhaustion and assembly"
-        title="Proof that Kₙ₋₁(θ)≤Kₙ(θ)"
-        introduction={<p>The case split first proves that every ray is accounted for. The theorem then evaluates the new scalar residual at the old candidate and reads the sign against a unique zero.</p>}
-        results={partBResults}
+        number="Four-result proof sequence"
+        title="From local Farey comparisons to global monotonicity"
+        introduction={<p>Lemmas II.8.1 and II.8.2 treat the two strict ways the formula at an interior argument can change. Lemma II.8.3 proves that these, the unchanged case, and the endpoint cases exhaust the refinement. Theorem II.8.4 then evaluates the new scalar residual at the old candidate and compares its unique zero.</p>}
+        results={topicXIIResults}
       />
     </>
   );

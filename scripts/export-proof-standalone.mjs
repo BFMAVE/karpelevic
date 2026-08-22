@@ -37,8 +37,6 @@ const proofTopicNumbers = new Map([
   ["/proof/topic-x", 10],
   ["/proof/topic-xi", 11],
   ["/proof/topic-xii", 12],
-  ["/proof/topic-xii/a", 12],
-  ["/proof/topic-xii/b", 12],
   ["/proof/topic-xiii", 13],
   ["/proof/topic-xiv", 14],
 ]);
@@ -505,22 +503,16 @@ function verifyStandaloneHtml(html) {
                           'data-proof-route="topic-xi"',
                           "Forthcoming",
                         ]
-                      : proofRoute === "/proof/topic-xii/a"
+                      : proofRoute === "/proof/topic-xii"
                         ? [
-                            "Topic XII-A",
-                            "Two Farey-Refinement Comparisons",
-                            "The two cases where",
-                            'data-proof-route="topic-xii-a"',
+                            "Topic XII",
+                            "Farey refinement and monotonicity of the candidate radius",
+                            "From local Farey comparisons to global monotonicity",
+                            "Comparison after inserting a Farey mediant",
+                            "Monotonicity of Kₙ(θ) with respect to n",
+                            'data-proof-route="topic-xii"',
                             "Forthcoming",
                           ]
-                        : proofRoute === "/proof/topic-xii/b"
-                          ? [
-                              "Topic XII-B",
-                              "Monotonicity of the Candidate Radius",
-                              "Proof that",
-                              'data-proof-route="topic-xii-b"',
-                              "Forthcoming",
-                            ]
         : [
             "How the Proof Works",
             "Definition 1.1",
@@ -880,12 +872,12 @@ function verifyStandaloneHtml(html) {
       );
     }
     if (
-      !/class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xii\/a\//i.test(
+      !/class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xii\//i.test(
         html,
       )
     ) {
       throw new Error(
-        "The individual Topic XI standalone must link Next to published Topic XII-A.",
+        "The individual Topic XI standalone must link Next to published Topic XII.",
       );
     }
 
@@ -909,80 +901,62 @@ function verifyStandaloneHtml(html) {
     }
   }
 
-  if (proofRoute === "/proof/topic-xii/a" && !bundleLinkMode) {
+  if (proofRoute === "/proof/topic-xii" && !bundleLinkMode) {
     if (/href="Critical_Invariant_Polygons_Topic_[IVX]+\.html/i.test(html)) {
       throw new Error(
-        "The individual Topic XII-A standalone must not require sibling HTML files.",
+        "The individual Topic XII standalone must not require sibling HTML files.",
       );
     }
     if (
       !/class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xi\//i.test(
         html,
       ) ||
-      !/class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xii\/b\//i.test(
+      !/data-proof-topic-number="13"[^>]*aria-disabled="true"/i.test(
         html,
       )
     ) {
       throw new Error(
-        "The individual Topic XII-A standalone must link from Topic XI to Topic XII-B.",
+        "The individual Topic XII standalone must link Previous to Topic XI and keep Topic XIII unavailable.",
       );
     }
     if (/data-proof-topic-number="12"(?:(?!<\/li>)[\s\S])*Forthcoming/i.test(html)) {
-      throw new Error("The individual Topic XII-A standalone marks Topic XII as forthcoming.");
+      throw new Error("The individual Topic XII standalone marks Topic XII as forthcoming.");
+    }
+    if (/proof\/topic-xii\/[ab]\//i.test(html)) {
+      throw new Error("The individual Topic XII standalone still links to a superseded part route.");
+    }
+    if (/<nav\b[^>]*class="[^"]*proof-chapter-parts/i.test(html)) {
+      throw new Error("The individual Topic XII standalone still contains part navigation.");
+    }
+    if (!/href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-ix\//i.test(html)) {
+      throw new Error("The individual Topic XII standalone is missing its exact Topic IX dependency.");
     }
     if (!/href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-x\/#karp:thm:hetero-sharp"/i.test(html)) {
-      throw new Error("The individual Topic XII-A standalone is missing its exact Topic X dependency.");
+      throw new Error("The individual Topic XII standalone is missing its exact Topic X dependency.");
     }
 
     const visibleText = visibleTextFromHtml(html).replace(/\s+/g, " ").trim();
     if (
-      !/Topic XII · Part A · Manuscript pages 94–100/i.test(visibleText) ||
+      !/Topic XII · Manuscript pages 94–101/i.test(visibleText) ||
       !/First published 22 August 2026\s*\./i.test(visibleText) ||
       !/Last revised 22 August 2026\s*\./i.test(visibleText)
     ) {
-      throw new Error("Standalone Topic XII-A has incorrect range or publication metadata.");
+      throw new Error("Standalone Topic XII has incorrect range or publication metadata.");
     }
-    if (/Farey cell|subcell|reciprocal chord|multiplicity padding|candidate outer radius|candidate nesting|moves outward|radial excess/i.test(visibleText)) {
-      throw new Error("Standalone Topic XII-A still contains superseded terminology.");
+    if (/Part A|Part B|Topic XII-A|Topic XII-B|Farey cell|subcell|reciprocal chord|multiplicity padding|candidate outer radius|candidate nesting|moves outward|radial excess/i.test(visibleText)) {
+      throw new Error("Standalone Topic XII still contains split labels or superseded terminology.");
     }
-  }
-
-  if (proofRoute === "/proof/topic-xii/b" && !bundleLinkMode) {
-    if (/href="Critical_Invariant_Polygons_Topic_[IVX]+\.html/i.test(html)) {
-      throw new Error(
-        "The individual Topic XII-B standalone must not require sibling HTML files.",
-      );
-    }
-    if (
-      !/class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xii\/a\//i.test(
-        html,
-      ) ||
-      !/data-proof-topic-number="13"[^>]*aria-disabled="true"/i.test(html)
-    ) {
-      throw new Error(
-        "The individual Topic XII-B standalone must link Previous to XII-A and keep Topic XIII unavailable.",
-      );
-    }
-    for (const anchor of [
-      "karp:eq:padding-explicit-scalar-sign",
-      "karp:lem:mediant-expansion",
-      "karp:eq:Kn-pi-definition",
-    ]) {
-      if (!html.includes(`href="https://bfmave.github.io/karpelevic/proof/topic-xii/a/#${anchor}"`)) {
-        throw new Error(`The individual Topic XII-B standalone is missing its Part-A link to ${anchor}.`);
-      }
-    }
-
-    const visibleText = visibleTextFromHtml(html).replace(/\s+/g, " ").trim();
-    if (
-      !/Topic XII · Part B · Manuscript pages 100–101/i.test(visibleText) ||
-      !/First published 22 August 2026\s*\./i.test(visibleText) ||
-      !/Last revised 22 August 2026\s*\./i.test(visibleText)
-    ) {
-      throw new Error("Standalone Topic XII-B has incorrect range or publication metadata.");
-    }
-    if (/Farey cell|subcell|reciprocal chord|multiplicity padding|candidate outer radius|candidate nesting|moves outward|radial excess/i.test(visibleText)) {
-      throw new Error("Standalone Topic XII-B still contains superseded terminology.");
+    const classLists = [...html.matchAll(/class="([^"]+)"/g)].map((match) =>
+      match[1].split(/\s+/),
+    );
+    const resultCount = classLists.filter((tokens) =>
+      tokens.includes("topic-i-textbook-item"),
+    ).length;
+    const proofCount = classLists.filter((tokens) =>
+      tokens.includes("topic-i-proof-disclosure"),
+    ).length;
+    if (resultCount !== 4 || proofCount !== 4) {
+      throw new Error("Standalone Topic XII must contain all four formal results and proofs.");
     }
   }
 
