@@ -53,6 +53,8 @@ const publicTopicPublicationDates = [
   ["/proof/topic-x", "2026-08-21", "21 August 2026"],
   ["/proof/topic-xi", "2026-08-22", "22 August 2026"],
   ["/proof/topic-xii", "2026-08-22", "22 August 2026"],
+  ["/proof/topic-xiii", "2026-08-22", "22 August 2026"],
+  ["/proof/topic-xiv", "2026-08-22", "22 August 2026"],
 ];
 
 for (const [pathname, expectedResults, expectedProofs] of chapters) {
@@ -699,7 +701,7 @@ test("the N=3 exception and the N>=4 projective scope remain coherent across top
   assert.match(topicV, /B_a=\\begin\{pmatrix\}0&amp;1-a&amp;a/);
   assert.match(topicVText, /\(φ,κ\)=\(3,2\)/);
   assert.match(topicVText, /Δ=3−1=2/);
-  assert.match(topicVText, /Topic XIII is forthcoming on the public site/);
+  assert.match(topicVText, /Topic XIII gives that direct small-order proof/);
   const exceptionalCaseStart = topicV.indexOf("Exceptional case N=3");
   const projectiveScopeStart = topicV.indexOf('id="topic-v-return-setup"');
   const lemmaSevenOneStart = topicV.indexOf('id="part-i-item-40"');
@@ -1137,8 +1139,26 @@ test("Topic XIV provides the complete example and executable boundary explorer",
   const html = await response.text();
   assert.match(html, /complete order-seven/i);
   assert.match(html, /worked direction[^<]*x=3\/8/i);
-  assert.match(html, /Download the [^<]*boundary generator/i);
-  assert.match(html, /Interactive boundary explorer/i);
+  assert.match(html, /Download source module/i);
+  assert.match(html, /Download regression tests/i);
+  assert.match(html, /Interactive numerical boundary plot/i);
+  assert.match(html, /class="topic-xiv-interval-table"/);
+  const tableStart = html.indexOf('class="topic-xiv-interval-table"');
+  const tableEnd = html.indexOf("</table>", tableStart);
+  assert.ok(tableStart >= 0 && tableEnd > tableStart);
+  assert.equal(
+    [...html.slice(tableStart, tableEnd).matchAll(/<tr>/g)].length,
+    10,
+    "the header and all nine Farey-pair rows are present",
+  );
+  assert.match(html, /data-order-seven-boundary-figure/);
+  assert.match(html, /data-order-seven-boundary-path/);
+  assert.match(html, /data-worked-ray/);
+  assert.match(html, /data-worked-boundary-point/);
+  assert.doesNotMatch(html, /data-proof-chapter-controls="true"/);
+  assert.doesNotMatch(html, /src="\/proof-chapter\.js"/);
+  assert.match(html, /Worked example, source, tests, and numerical plot complete/);
+  assert.doesNotMatch(html, /Only the radius changes|homogeneous form/i);
   assert.match(html, /<time dateTime="[^"]+"/);
   assert.doesNotMatch(html, /Unhandled Script Error|Internal Server Error/i);
 });

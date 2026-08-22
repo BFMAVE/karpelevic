@@ -242,7 +242,7 @@ const topicVProjectiveScope: AdvancedProofSetup = {
           Δ=3−1=2. Hence φ&gt;δ but Δ≠1. Topic XIII proves the stochastic
           eigenvalue region for orders one, two, and three directly; it does
           not pass this exceptional triangle through the projective-geometric
-          proof that Δ=1. <strong>Topic XIII is forthcoming on the public site.</strong>
+          proof that Δ=1. <strong>Topic XIII gives that direct small-order proof.</strong>
         </p>
       </div>
     </details>

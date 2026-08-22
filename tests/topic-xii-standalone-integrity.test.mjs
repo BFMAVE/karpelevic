@@ -31,7 +31,7 @@ test("the Topic XII download is one continuous self-contained chapter", async ()
         ...process.env,
         PROOF_ROUTE: "/proof/topic-xii",
         PROOF_HTML_OUTPUT: output,
-        PROOF_STANDALONE_TOPIC_MAX: "12",
+        PROOF_STANDALONE_TOPIC_MAX: "14",
       },
       stdio: ["ignore", "pipe", "pipe"],
     });
@@ -129,8 +129,9 @@ test("the Topic XII download is one continuous self-contained chapter", async ()
     );
     assert.match(
       html,
-      /data-proof-topic-number="13"[^>]*aria-disabled="true"[\s\S]*?Forthcoming/i,
+      /class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xiii\//i,
     );
+    assert.doesNotMatch(html, /Forthcoming/i);
     assert.doesNotMatch(
       text,
       /Farey cell|subcell|reciprocal chord|multiplicity padding|candidate outer radius|candidate nesting|moves outward|radial excess/i,

@@ -18,9 +18,16 @@ export type FareyCell = {
   q: number;
   r: number;
   s: number;
-  repeats: number;
-  closingExponent: number;
+  d: number;
+  e: number;
 };
+
+function positiveSafeInteger(value: number, name: string): number {
+  if (!Number.isSafeInteger(value) || value < 1) {
+    throw new RangeError(`${name} must be a positive safe integer`);
+  }
+  return value;
+}
 
 function greatestCommonDivisor(a: number, b: number): number {
   let left = Math.abs(a);
@@ -34,9 +41,10 @@ function greatestCommonDivisor(a: number, b: number): number {
 }
 
 export function fareyUpper(order: number): FareyFraction[] {
+  const n = positiveSafeInteger(order, "order");
   const fractions: FareyFraction[] = [];
 
-  for (let denominator = 1; denominator <= order; denominator += 1) {
+  for (let denominator = 1; denominator <= n; denominator += 1) {
     for (
       let numerator = 0;
       numerator <= Math.floor(denominator / 2);
@@ -56,12 +64,13 @@ export function fareyUpper(order: number): FareyFraction[] {
 }
 
 export function fareyCells(order: number): FareyCell[] {
-  const fractions = fareyUpper(order);
+  const n = positiveSafeInteger(order, "order");
+  const fractions = fareyUpper(n);
   return fractions.slice(0, -1).map((left, index) => {
     const right = fractions[index + 1];
     const first = left.denominator <= right.denominator ? left : right;
     const second = first === left ? right : left;
-    const repeats = Math.floor(order / first.denominator);
+    const d = Math.floor(n / first.denominator);
     return {
       left,
       right,
@@ -69,8 +78,8 @@ export function fareyCells(order: number): FareyCell[] {
       q: first.denominator,
       r: second.numerator,
       s: second.denominator,
-      repeats,
-      closingExponent: second.denominator - repeats * first.denominator,
+      d,
+      e: second.denominator - d * first.denominator,
     };
   });
 }
@@ -219,7 +228,8 @@ export function thetaBoundaryForOrder(
   upperFareyNodes: PlotPoint[];
   kind: "point" | "interval" | "region";
 } {
-  const normalizedOrder = Math.max(1, Math.trunc(order));
+  const normalizedOrder = positiveSafeInteger(order, "order");
+  positiveSafeInteger(samplesPerCell, "samplesPerCell");
   if (normalizedOrder === 1) {
     return {
       boundary: [toPlotPoint(0, 1, { numerator: 0, denominator: 1 })],

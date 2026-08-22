@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ProofChapterShell } from "../../components/proof/ProofChapterShell";
+import { publicationDates } from "../../data/publication-dates";
 import { TopicXIIIContent } from "../../data/proof-topics/topic-xiii";
 import { getPageTimestamp } from "../../lib/git-dates";
 
@@ -14,6 +15,7 @@ const updatedAt = getPageTimestamp("app/data/proof-topics/topic-xiii.tsx");
 export default function TopicXIIIPage() {
   return (
     <ProofChapterShell
+      firstPublishedAt={publicationDates.pages.topicXIII}
       routeKey="topic-xiii"
       updatedAt={updatedAt}
       stats={[

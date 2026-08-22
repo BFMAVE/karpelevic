@@ -12,7 +12,7 @@ execFileSync(process.execPath, [exporter], {
     ...process.env,
     PROOF_ROUTE: "/proof/topic-xii",
     PROOF_HTML_OUTPUT: output,
-    PROOF_STANDALONE_TOPIC_MAX: "12",
+    PROOF_STANDALONE_TOPIC_MAX: "14",
   },
   stdio: "inherit",
 });

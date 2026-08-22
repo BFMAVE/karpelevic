@@ -8580,6 +8580,21 @@ math mover > mo[accent="true"] {
   line-height: 1.55;
 }
 
+.boundary-laboratory-error {
+  margin: 0;
+  padding: 12px clamp(24px, 4vw, 42px);
+  border-bottom: 1px solid color-mix(in srgb, var(--oxblood) 45%, var(--rule));
+  background: color-mix(in srgb, var(--oxblood) 7%, var(--paper));
+  color: var(--oxblood);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.boundary-laboratory input[aria-invalid="true"] {
+  border-color: var(--oxblood);
+  outline: 2px solid color-mix(in srgb, var(--oxblood) 22%, transparent);
+}
+
 .boundary-laboratory-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.55fr) minmax(16rem, 0.75fr);
@@ -8690,20 +8705,31 @@ math mover > mo[accent="true"] {
   padding-bottom: 12px;
 }
 
-.boundary-cell-ledger > div {
-  display: grid;
-  gap: 3px;
-  padding: 9px 0;
-  border-top: 1px solid var(--rule);
-  font-size: 0.78rem;
+.boundary-cell-ledger table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.76rem;
 }
 
-.boundary-cell-ledger strong {
-  color: var(--ink);
-}
-
-.boundary-cell-ledger span {
+.boundary-cell-ledger caption {
+  padding: 10px 0;
   color: var(--ink-soft);
+  text-align: left;
+}
+
+.boundary-cell-ledger th,
+.boundary-cell-ledger td {
+  padding: 8px 6px;
+  border-top: 1px solid var(--rule);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.boundary-cell-ledger thead th {
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 @media (max-width: 860px) {
@@ -8723,40 +8749,53 @@ math mover > mo[accent="true"] {
   }
 }
 
-.topic-xiv-cell-strip {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
+.topic-xiv-table-wrap {
   margin: 26px 0;
-  padding: 1px;
-  background: var(--rule);
+  overflow-x: auto;
 }
 
-.topic-xiv-cell-strip article {
-  display: grid;
-  grid-template-columns: 2rem minmax(0, 1fr);
-  gap: 4px 10px;
-  padding: 16px;
+.topic-xiv-interval-table {
+  width: 100%;
+  min-width: 44rem;
+  border-collapse: collapse;
   background: var(--paper);
 }
 
-.topic-xiv-cell-strip article > span {
-  grid-row: 1 / 3;
-  color: var(--oxblood);
-  font-family: var(--font-display), Georgia, serif;
-  font-size: 1.1rem;
-  font-weight: 700;
+.topic-xiv-interval-table caption {
+  padding: 0 0 12px;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  text-align: left;
 }
 
-.topic-xiv-cell-strip strong {
+.topic-xiv-interval-table th,
+.topic-xiv-interval-table td {
+  padding: 10px 12px;
+  border: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+.topic-xiv-interval-table thead th {
+  background: color-mix(in srgb, var(--ink) 5%, var(--paper));
+  color: var(--ink-soft);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.topic-xiv-interval-table tbody th {
   color: var(--ink);
   font-family: var(--font-display), Georgia, serif;
-  font-size: 1.05rem;
+  white-space: nowrap;
 }
 
-.topic-xiv-cell-strip small {
-  color: var(--ink-soft);
-  font-size: 0.75rem;
+.topic-xiv-interval-table code {
+  color: var(--ink);
+  font-family: var(--font-reading), Georgia, serif;
+  font-size: 0.92rem;
+  white-space: nowrap;
 }
 
 .topic-xiv-manuscript {
@@ -8783,8 +8822,48 @@ math mover > mo[accent="true"] {
   border: 1px solid var(--rule);
 }
 
+.topic-xiv-manuscript-body .center,
 .topic-xiv-manuscript-body .longtable {
   overflow-x: auto;
+}
+
+.topic-xiv-boundary-figure {
+  margin: 0;
+  padding: 0 clamp(18px, 4vw, 38px) clamp(22px, 4vw, 40px);
+}
+
+.topic-xiv-boundary-figure svg {
+  display: block;
+  width: min(100%, 48rem);
+  height: auto;
+  margin: 0 auto;
+}
+
+.topic-xiv-boundary-figure figcaption {
+  max-width: 58rem;
+  margin: 14px auto 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.topic-xiv-boundary-figure figcaption span {
+  color: var(--oxblood);
+  font-weight: 700;
+}
+
+.topic-xiv-worked-ray {
+  stroke: var(--copper);
+  stroke-dasharray: 9 7;
+  stroke-width: 2.5;
+}
+
+.topic-xiv-worked-point {
+  fill: var(--copper);
+  stroke: var(--paper);
+  stroke-width: 2;
 }
 
 .topic-xiv-worked-steps {
@@ -8861,6 +8940,9 @@ math mover > mo[accent="true"] {
 }
 
 .topic-xiv-download {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   margin: 22px 0 0;
 }
 
@@ -8879,7 +8961,6 @@ math mover > mo[accent="true"] {
 }
 
 @media (max-width: 840px) {
-  .topic-xiv-cell-strip,
   .topic-xiv-code-ledger {
     grid-template-columns: 1fr;
   }

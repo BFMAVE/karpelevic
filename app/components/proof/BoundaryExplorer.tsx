@@ -6,25 +6,57 @@ import {
   svgCoordinates,
   svgPath,
   thetaBoundaryForOrder,
+  type PlotPoint,
 } from "../../lib/theta-region";
 
 const size = 760;
 const padding = 78;
+const maximumInteractiveOrder = 40;
+const fullMarkerOrderLimit = 12;
+const sparseMarkerDenominatorLimit = 12;
 
 function fractionText(numerator: number, denominator: number): string {
-  return `${numerator}/${denominator}`;
+  return numerator + "/" + denominator;
+}
+
+function parseOrder(draft: string): number | null {
+  if (!/^\d+$/.test(draft)) return null;
+  const candidate = Number(draft);
+  return Number.isSafeInteger(candidate) &&
+    candidate >= 1 &&
+    candidate <= maximumInteractiveOrder
+    ? candidate
+    : null;
+}
+
+function markerNodes(order: number, upperNodes: PlotPoint[]): PlotPoint[] {
+  const selected =
+    order <= fullMarkerOrderLimit
+      ? upperNodes
+      : upperNodes.filter(
+          (point) =>
+            (point.fraction?.denominator ?? Number.POSITIVE_INFINITY) <=
+            sparseMarkerDenominatorLimit,
+        );
+  const reflected = selected
+    .filter((point) => Math.abs(point.y) > 1e-12)
+    .map((point) => ({ ...point, y: -point.y, angle: 1 - point.angle }));
+  return [...selected, ...reflected];
 }
 
 export function BoundaryExplorer() {
+  const [orderDraft, setOrderDraft] = useState("7");
   const [order, setOrder] = useState(7);
-  const normalizedOrder = order;
-  const region = useMemo(
-    () => thetaBoundaryForOrder(normalizedOrder, 54),
-    [normalizedOrder],
-  );
-  const cells = useMemo(
-    () => (normalizedOrder >= 3 ? fareyCells(normalizedOrder) : []),
-    [normalizedOrder],
+  const parsedDraft = parseOrder(orderDraft);
+  const errorMessage =
+    parsedDraft === null
+      ? "Enter an integer from 1 to 40. The plot remains at n=" + order + "."
+      : null;
+  const region = useMemo(() => thetaBoundaryForOrder(order, 54), [order]);
+  const cells = useMemo(() => (order >= 3 ? fareyCells(order) : []), [order]);
+  const nodes = useMemo(
+    () => markerNodes(order, region.upperFareyNodes),
+    [order, region.upperFareyNodes],
   );
   const boundaryPath =
     region.kind === "region" ? svgPath(region.boundary, size, padding) : "";
@@ -43,66 +75,85 @@ export function BoundaryExplorer() {
     <section className="boundary-laboratory" aria-labelledby="boundary-laboratory-heading">
       <header>
         <div>
-          <p className="section-label">Interactive boundary explorer</p>
-          <h3 id="boundary-laboratory-heading">Choose an order and draw Θ<sub>n</sub></h3>
+          <p className="section-label">Interactive numerical boundary plot</p>
+          <h3 id="boundary-laboratory-heading">
+            Choose n and plot an approximation to ∂Θ<sub>n</sub>
+          </h3>
         </div>
         <label>
-          Matrix order
+          Matrix order n
           <input
-            aria-describedby="boundary-order-help"
+            aria-describedby={
+              errorMessage
+                ? "boundary-order-help boundary-order-error"
+                : "boundary-order-help"
+            }
+            aria-errormessage={errorMessage ? "boundary-order-error" : undefined}
+            aria-invalid={errorMessage ? "true" : undefined}
+            data-boundary-order-input
             inputMode="numeric"
-            max="40"
+            max={maximumInteractiveOrder}
             min="1"
             onChange={(event) => {
-              const candidate = Number(event.target.value);
-              setOrder(
-                Number.isFinite(candidate)
-                  ? Math.min(40, Math.max(1, Math.trunc(candidate)))
-                  : 1,
-              );
+              const draft = event.target.value;
+              const candidate = parseOrder(draft);
+              setOrderDraft(draft);
+              if (candidate !== null) setOrder(candidate);
             }}
             step="1"
             type="number"
-            value={order}
+            value={orderDraft}
           />
         </label>
       </header>
       <p id="boundary-order-help" className="boundary-laboratory-help">
         Enter an integer from 1 to 40. Orders 1 and 2 use their exact
         elementary descriptions. From order 3 onward, each curved arc is
-        sampled from the manuscript’s scalar radius equation using ninety
-        bisection steps per sample. At order 3, the terminal interval from
-        −1/2 to −1 on the real axis is inserted exactly.
+        sampled from the proved scalar equation using ninety bisection steps
+        per sample. At order 3, the segment [−1,−1/2] on the real axis is
+        inserted exactly.
       </p>
+      {errorMessage ? (
+        <p
+          className="boundary-laboratory-error"
+          data-boundary-order-error
+          id="boundary-order-error"
+          role="alert"
+        >
+          {errorMessage}
+        </p>
+      ) : null}
 
       <div className="boundary-laboratory-grid">
         <figure>
           <svg
             aria-describedby="boundary-plot-description"
-            aria-label={`Boundary of Theta ${normalizedOrder}`}
+            aria-label={"Boundary of Theta " + order}
             role="img"
-            viewBox={`0 0 ${size} ${size}`}
+            viewBox={"0 0 " + size + " " + size}
           >
             <desc id="boundary-plot-description">
-              The stochastic eigenvalue region of order {normalizedOrder},
-              drawn in the complex plane from exact Farey intervals, numerical
-              solutions of the scalar radial equation, and, at order three,
-              the exact exceptional real segment from minus one half to minus
-              one.
+              The stochastic eigenvalue region of order {order}, drawn in the
+              complex plane. The dashed circle is the unit circle. Farey
+              fractions determine boundary endpoints exactly, while the
+              curved arcs and displayed coordinates are numerical.
+              {order === 3
+                ? " The exceptional real segment from minus one to minus one half is included exactly."
+                : ""}
             </desc>
             <line className="boundary-lab-axis" x1={padding - 22} x2={size - padding + 22} y1={size / 2} y2={size / 2} />
             <line className="boundary-lab-axis" x1={size / 2} x2={size / 2} y1={padding - 22} y2={size - padding + 22} />
             <circle className="boundary-lab-unit" cx={size / 2} cy={size / 2} r={(size - 2 * padding) / 2} />
             {region.kind === "region" ? (
-              <path className="boundary-lab-region" d={boundaryPath} />
+              <path className="boundary-lab-region" data-boundary-region d={boundaryPath} />
             ) : null}
             {region.kind === "interval" ? (
-              <line className="boundary-lab-interval" x1={intervalStart.x} x2={intervalEnd.x} y1={intervalStart.y} y2={intervalEnd.y} />
+              <line className="boundary-lab-interval" data-boundary-interval x1={intervalStart.x} x2={intervalEnd.x} y1={intervalStart.y} y2={intervalEnd.y} />
             ) : null}
             {region.kind === "point" ? (
-              <circle className="boundary-lab-point" cx={intervalEnd.x} cy={intervalEnd.y} r="9" />
+              <circle className="boundary-lab-point" data-boundary-point cx={intervalEnd.x} cy={intervalEnd.y} r="9" />
             ) : null}
-            {region.upperFareyNodes.map((point) => {
+            {nodes.map((point) => {
               const coordinate = svgCoordinates(point, size, padding);
               return (
                 <circle
@@ -110,7 +161,13 @@ export function BoundaryExplorer() {
                   className="boundary-lab-root"
                   cx={coordinate.x}
                   cy={coordinate.y}
-                  key={`${point.fraction?.numerator}/${point.fraction?.denominator}`}
+                  data-farey-root
+                  key={
+                    fractionText(
+                      point.fraction?.numerator ?? 0,
+                      point.fraction?.denominator ?? 1,
+                    ) + (point.y < 0 ? ":lower" : ":upper")
+                  }
                   r="4.5"
                 />
               );
@@ -119,69 +176,87 @@ export function BoundaryExplorer() {
             <text className="boundary-lab-label" x={size / 2 + 12} y={padding - 24}>Im λ</text>
           </svg>
           <figcaption>
-            <span>Computational plate.</span>{" "}
+            <span>Numerical boundary plot.</span>{" "}
             {region.kind === "point" ? (
               <>Θ<sub>1</sub> is the exact single point 1.</>
             ) : region.kind === "interval" ? (
               <>Θ<sub>2</sub> is the exact real interval [−1,1].</>
             ) : (
               <>
-                Θ<sub>{normalizedOrder}</sub> has {cells.length}{" "}
-                upper-half-plane Farey interval{cells.length === 1 ? "" : "s"}.
-                The dark nodes are exact roots of unity; curved arcs between
-                them are sampled numerically.
-                {normalizedOrder === 3
-                  ? " The real segment from −1/2 to −1 is exact."
+                Θ<sub>{order}</sub> has {cells.length} Farey interval
+                {cells.length === 1 ? "" : "s"} in 0≤x≤1/2, reflected across
+                the real axis.
+                {order === 3
+                  ? " The segment [−1,−1/2] is exact."
                   : ""}
               </>
-            )}
+            )}{" "}
+            The dashed circle is |λ|=1. Farey fractions specify endpoint
+            roots exactly, but their SVG coordinates and all sampled arc
+            coordinates are floating-point approximations.{" "}
+            {order <= fullMarkerOrderLimit
+              ? "All endpoint roots are marked in both half-planes."
+              : "To reduce overlap above order 12, markers are limited to endpoints with denominator at most 12; the table retains every Farey pair."}
           </figcaption>
         </figure>
 
         <aside>
           <section>
-            <p className="section-label">Exact input</p>
-            <h4>Farey intervals and Ito-polynomial data</h4>
+            <p className="section-label">Exact combinatorial data</p>
+            <h4>Farey pairs and reduced Ito-polynomial data</h4>
             <p>
-              Fractions, denominator order, the repeat count <i>d</i>, the
-              closing exponent <i>e</i>, and every endpoint angle are computed
-              exactly with integer arithmetic. The corresponding root-of-unity
-              coordinates are evaluated numerically only when the SVG is drawn.
+              Fractions, Farey-neighbour tests, denominator order, and the
+              integers <i>d</i> and <i>e</i> are computed exactly. The
+              corresponding root-of-unity coordinates are evaluated in
+              floating-point arithmetic only when the SVG is drawn.
             </p>
           </section>
           <section>
             <p className="section-label">Numerical output</p>
-            <h4>Radius and plotted curve</h4>
+            <h4>Modulus and plotted curve</h4>
             <p>
               {region.kind === "region" ? (
                 <>
-                  Interior radii are found by fixed-iteration bisection. The
-                  SVG joins finitely many sampled points, so it is a drawing
-                  of the verified equation rather than an exact symbolic
+                  Interior moduli are found by fixed-iteration bisection. The
+                  SVG joins finitely many sampled points, so it is a numerical
+                  plot of the proved boundary formula, not an exact symbolic
                   curve.
-                  {normalizedOrder === 3
-                    ? " The exceptional real segment is added from its exact endpoints, not obtained by sampling that equation."
+                  {order === 3
+                    ? " The exceptional real segment is added from exact endpoints rather than sampled from that equation."
                     : ""}
                 </>
               ) : (
-                <>No numerical radius solve is used at this order; the plotted description is exact.</>
+                <>No numerical modulus solve is used at this order; the plotted description is exact.</>
               )}
             </p>
           </section>
           {cells.length > 0 ? (
             <details>
-              <summary>Open the complete cell table for n={normalizedOrder}</summary>
+              <summary>Open all Farey pairs for n={order}</summary>
               <div className="boundary-cell-ledger">
-                {cells.map((cell) => (
-                  <div key={`${cell.left.numerator}/${cell.left.denominator}-${cell.right.numerator}/${cell.right.denominator}`}>
-                    <strong>
-                      {fractionText(cell.left.numerator, cell.left.denominator)} → {fractionText(cell.right.numerator, cell.right.denominator)}
-                    </strong>
-                    <span>
-                      (q,s)=({cell.q},{cell.s}), d={cell.repeats}, e={cell.closingExponent}
-                    </span>
-                  </div>
-                ))}
+                <table>
+                  <caption>Consecutive Farey pairs and denominator-ordered data for n={order}</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Farey pair</th>
+                      <th scope="col">(q,s)</th>
+                      <th scope="col">d</th>
+                      <th scope="col">e</th>
+                    </tr>
+                  </thead>
+                  <tbody data-boundary-cell-rows>
+                    {cells.map((cell) => (
+                      <tr key={fractionText(cell.left.numerator, cell.left.denominator) + "-" + fractionText(cell.right.numerator, cell.right.denominator)}>
+                        <th scope="row">
+                          {fractionText(cell.left.numerator, cell.left.denominator)} → {fractionText(cell.right.numerator, cell.right.denominator)}
+                        </th>
+                        <td>({cell.q},{cell.s})</td>
+                        <td>{cell.d}</td>
+                        <td>{cell.e}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </details>
           ) : null}

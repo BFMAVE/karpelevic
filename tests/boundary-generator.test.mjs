@@ -3,7 +3,7 @@ import test from "node:test";
 import {
   MAX_EXACT_ORDER,
   boundaryRadius,
-  cellData,
+  fareyPairParameters,
   fareySequence,
   fullBoundary,
   upperBoundary,
@@ -29,7 +29,7 @@ test("order-seven Farey table is exact", () => {
 
   assert.deepEqual(
     fractions.slice(0, -1).map((left, index) => {
-      const { q, s, d, e } = cellData(left, fractions[index + 1], 7);
+      const { q, s, d, e } = fareyPairParameters(left, fractions[index + 1], 7);
       return [q, s, d, e];
     }),
     [
@@ -55,7 +55,7 @@ test("worked ray x=3/8 reproduces the manuscript", () => {
     (fraction) => fraction.numerator === 2 && fraction.denominator === 5,
   );
   assert.ok(left && right);
-  assert.deepEqual(cellData(left, right, 7), {
+  assert.deepEqual(fareyPairParameters(left, right, 7), {
     p: 1,
     q: 3,
     r: 2,
@@ -110,7 +110,7 @@ test("sampled cell radii solve the scalar equation", () => {
           right.numerator / right.denominator) /
         2;
       const rho = boundaryRadius(x, left, right, order);
-      const { p, q, r, s, d } = cellData(left, right, order);
+      const { p, q, r, s, d } = fareyPairParameters(left, right, order);
       const A = 2 * Math.PI * Math.abs(q * x - p);
       const B = (2 * Math.PI * Math.abs(s * x - r)) / d;
       const residual =
@@ -187,6 +187,34 @@ test("public functions reject ambiguous or unsafe input", () => {
         3 / 8,
         { numerator: 1, denominator: 4 },
         right,
+        7,
+      ),
+    RangeError,
+  );
+  assert.throws(() => fareyPairParameters(right, left, 7), RangeError);
+  assert.throws(
+    () =>
+      fareyPairParameters(
+        { numerator: 1, denominator: 3 },
+        { numerator: 1, denominator: 2 },
+        7,
+      ),
+    RangeError,
+  );
+  assert.throws(
+    () =>
+      fareyPairParameters(
+        { numerator: 1, denominator: 8 },
+        { numerator: 1, denominator: 7 },
+        7,
+      ),
+    RangeError,
+  );
+  assert.throws(
+    () =>
+      fareyPairParameters(
+        { numerator: 0, denominator: 1 },
+        { numerator: 2, denominator: 7 },
         7,
       ),
     RangeError,

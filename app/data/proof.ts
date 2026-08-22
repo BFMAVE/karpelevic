@@ -582,8 +582,8 @@ export const proofTopics: readonly ProofTopic[] = [
     question:
       "What does the theorem produce at one concrete order, and how can a reader draw further orders for themselves?",
     overview: [
-      "Order seven turns the abstract boundary arc chain into a complete table of explicit cells, equations, and boundary arcs. The worked ray at x = 3/8 shows the scalar construction numerically from beginning to end.",
-      "The chapter will also document the verified boundary-generation routine and publish that code through the project’s GitHub repository. Its final section will provide a widget in which the reader selects n and receives the corresponding drawing, with exact Farey data kept visibly distinct from numerical root-finding and plotting.",
+      "For order seven, the general theorem yields a complete table of consecutive Farey pairs, reduced Ito polynomials, and parametrized boundary arcs. The direction x = 3/8 shows the scalar calculation numerically from beginning to end.",
+      "The chapter documents the numerical boundary-plot implementation and publishes its source and regression tests. Its final section lets the reader select n and obtain the corresponding plot, with exact Farey data kept visibly distinct from floating-point root-finding and plotting.",
       "This interactive computation illustrates the theorem but is not part of its logical proof. Topic XIII remains the endpoint of the necessary argument; Topic XIV lets readers inspect the complete construction at order seven and then explore other orders themselves.",
     ],
     itemNumbers: [],

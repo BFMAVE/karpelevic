@@ -129,7 +129,7 @@ test("keeps the verified local manuscript available", async () => {
 
   const pdf = await readFile(pdfUrl);
   assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
-  assert.equal(pdf.byteLength, 653_806);
+  assert.equal(pdf.byteLength, 654_186);
 
   const checksum = createHash("sha256").update(pdf).digest("hex");
   const homeSource = await readFile(

@@ -123,7 +123,7 @@ export const proofReaderRoutes: readonly ProofReaderRoute[] = [
     topicNumber: 14,
     href: "/proof/topic-xiv/",
     title: topicTitle(14),
-    shortTitle: "Order-seven explorer",
+    shortTitle: "Order-seven example",
   },
 ] as const;
 

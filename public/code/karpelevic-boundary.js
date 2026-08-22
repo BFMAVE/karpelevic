@@ -1,8 +1,8 @@
 /**
  * Farey–Ito boundary generator for the Karpelevič region.
  *
- * Exact data: reduced Farey fractions, neighbouring cells, denominators,
- * repeat count d=floor(n/q), and closing exponent e=s-dq.
+ * Exact combinatorial data: reduced Farey fractions, consecutive pairs,
+ * denominator ordering, and the integers d=floor(n/q) and e=s-dq.
  * Numerical data: interior radii, obtained by 90 fixed bisection steps.
  *
  * This file has no dependencies and can be imported as an ES module.
@@ -76,12 +76,22 @@ export function upperFarey(order) {
   );
 }
 
-export function cellData(left, right, order) {
+export function fareyPairParameters(left, right, order) {
   const n = exactOrder(order);
   const leftFraction = reducedFraction(left, "left");
   const rightFraction = reducedFraction(right, "right");
-  if (leftFraction.denominator > n || rightFraction.denominator > n) {
-    throw new RangeError("cell denominators must not exceed order");
+  const determinant =
+    leftFraction.denominator * rightFraction.numerator -
+    leftFraction.numerator * rightFraction.denominator;
+  if (
+    leftFraction.denominator > n ||
+    rightFraction.denominator > n ||
+    determinant !== 1 ||
+    leftFraction.denominator + rightFraction.denominator <= n
+  ) {
+    throw new RangeError(
+      "left and right must be consecutive increasing fractions in the Farey sequence of this order",
+    );
   }
   const first =
     leftFraction.denominator <= rightFraction.denominator
@@ -108,24 +118,15 @@ export function boundaryRadius(angleFraction, left, right, order, iterations = 9
   }
   const leftFraction = reducedFraction(left, "left");
   const rightFraction = reducedFraction(right, "right");
-  if (
-    leftFraction.denominator > n ||
-    rightFraction.denominator > n ||
-    leftFraction.denominator * rightFraction.numerator -
-      leftFraction.numerator * rightFraction.denominator !==
-      1 ||
-    leftFraction.denominator + rightFraction.denominator <= n
-  ) {
-    throw new RangeError("left and right must be consecutive fractions in the Farey sequence of this order");
-  }
+  const parameters = fareyPairParameters(leftFraction, rightFraction, n);
   const leftValue = leftFraction.numerator / leftFraction.denominator;
   const rightValue = rightFraction.numerator / rightFraction.denominator;
   if (angleFraction === leftValue || angleFraction === rightValue) return 1;
   if (!(leftValue < angleFraction && angleFraction < rightValue)) {
-    throw new RangeError("angleFraction must lie in the specified Farey cell");
+    throw new RangeError("angleFraction must lie in the specified Farey interval");
   }
 
-  const { p, q, r, s, d } = cellData(leftFraction, rightFraction, n);
+  const { p, q, r, s, d } = parameters;
   const A = 2 * Math.PI * Math.abs(q * angleFraction - p);
   const B = (2 * Math.PI * Math.abs(s * angleFraction - r)) / d;
   const target = Math.sin(A + B);

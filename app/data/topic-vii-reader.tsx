@@ -559,7 +559,7 @@ export const topicVIIGroups: readonly AdvancedProofGroup[] = [
             for <strong>N≥4</strong>. The finite Farey lemmas above do
             not require that restriction. The stochastic regions of orders
             one, two, and three are established by a separate direct proof in
-            Topic XIII, which is forthcoming on the public site.
+            Topic XIII.
           </p>
         `,
       },

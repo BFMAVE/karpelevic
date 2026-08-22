@@ -13,3 +13,10 @@ copies. Building the ZIP never overwrites the individual Topic IX file.
 For Topic XII, run `npm run package:topic-xii-review`. The command builds the
 site and exports the continuous `/proof/topic-xii/` chapter directly to the
 portable file `Critical_Invariant_Polygons_Topic_XII.html` in this folder.
+
+For the final two chapters, run `npm run package:topics-xiii-xiv-review`. The
+command writes the single archive
+`Critical_Invariant_Polygons_Topics_XIII_XIV_Review_Bundle.zip`. It contains
+two self-contained, cross-linked HTML files. Links to other topics use the
+published website. Topic XIV embeds the interactive boundary plot, source
+module, and regression-test download.

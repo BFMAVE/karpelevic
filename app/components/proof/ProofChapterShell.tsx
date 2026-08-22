@@ -27,6 +27,8 @@ type ProofChapterShellProps = {
   stats?: readonly ChapterStat[];
   readingConvention?: React.ReactNode;
   deck?: React.ReactNode;
+  showReadingControls?: boolean;
+  completionMessage?: React.ReactNode;
   children: React.ReactNode;
 };
 
@@ -40,6 +42,8 @@ export function ProofChapterShell({
   stats = [],
   readingConvention,
   deck,
+  showReadingControls = true,
+  completionMessage,
   children,
 }: ProofChapterShellProps) {
   const route = getProofReaderRoute(routeKey);
@@ -200,7 +204,7 @@ export function ProofChapterShell({
             </div>
           </details>
 
-          <ProofChapterReadingControls />
+          {showReadingControls ? <ProofChapterReadingControls /> : null}
 
           {children}
 
@@ -209,7 +213,9 @@ export function ProofChapterShell({
               <span>
                 End of Topic {roman}
               </span>
-              <strong>All results assigned to this topic are proved</strong>
+              <strong>
+                {completionMessage ?? "All results assigned to this topic are proved"}
+              </strong>
             </div>
             {neighbours.previous &&
             isProofTopicAvailable(neighbours.previous.topicNumber) ? (
@@ -276,7 +282,9 @@ export function ProofChapterShell({
           </a>
         </div>
       </footer>
-      <script src={sitePath("/proof-chapter.js")} defer />
+      {showReadingControls ? (
+        <script src={sitePath("/proof-chapter.js")} defer />
+      ) : null}
     </>
   );
 }

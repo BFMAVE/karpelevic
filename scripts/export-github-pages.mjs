@@ -1,4 +1,4 @@
-import { cp, mkdir, readdir, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
@@ -58,6 +58,14 @@ const routes = [
     outputPath: "proof/topic-xii/index.html",
   },
   {
+    requestPath: "/proof/topic-xiii",
+    outputPath: "proof/topic-xiii/index.html",
+  },
+  {
+    requestPath: "/proof/topic-xiv",
+    outputPath: "proof/topic-xiv/index.html",
+  },
+  {
     requestPath: "/prerequisites",
     outputPath: "prerequisites/index.html",
   },
@@ -109,14 +117,7 @@ function redirectPage(target, title, message) {
 function makeStatic(html, requestPath) {
   const withoutScripts = html
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
-    .replace(/<link\b[^>]*rel="modulepreload"[^>]*>/gi, "")
-    // Keep mathematical forward-reference labels visible, but do not publish
-    // live links to unavailable proof routes. The chapter atlas already
-    // renders later topics as text with a Forthcoming label.
-    .replace(
-      /\s+href="(?:\/karpelevic)?\/proof\/topic-(?:xiii|xiv)\/?[^\"]*"/gi,
-      "",
-    );
+    .replace(/<link\b[^>]*rel="modulepreload"[^>]*>/gi, "");
   const withProjectAssets = withoutScripts.replaceAll(
     "/assets/",
     `${basePath}/assets/`,
@@ -126,12 +127,17 @@ function makeStatic(html, requestPath) {
     requestPath === "/proof"
       ? `<script src="${basePath}/proof.js" defer></script>`
       : "";
-  const proofChapterScript = requestPath.startsWith("/proof/topic-")
+  const proofChapterScript =
+    requestPath.startsWith("/proof/topic-") && requestPath !== "/proof/topic-xiv"
     ? `<script src="${basePath}/proof-chapter.js" defer></script>`
     : "";
+  const topicXIVScript =
+    requestPath === "/proof/topic-xiv"
+      ? `<script src="${basePath}/topic-xiv.js" defer></script>`
+      : "";
   return withProjectAssets.replace(
     "</body>",
-    `<script src="${basePath}/contact.js" defer></script>${proofReaderScript}${proofChapterScript}</body>`,
+    `<script src="${basePath}/contact.js" defer></script>${proofReaderScript}${proofChapterScript}${topicXIVScript}</body>`,
   );
 }
 
@@ -166,18 +172,32 @@ await cp(path.join(projectRoot, "dist/client"), outputRoot, {
   recursive: true,
 });
 
-// The client build contains artifacts for every local proof route. The public
-// Pages edition intentionally publishes only the rendered routes above, so
-// remove build metadata, later-topic downloads, and client bundles that the
-// script-free static pages do not reference.
+// The Pages edition uses server-rendered HTML plus small explicit controllers.
+// Remove build metadata and framework client bundles, while retaining the
+// readable source and regression-test files under /code.
 await rm(path.join(outputRoot, ".vite"), { force: true, recursive: true });
-await rm(path.join(outputRoot, "code"), { force: true, recursive: true });
 const assetDirectory = path.join(outputRoot, "assets");
 for (const entry of await readdir(assetDirectory, { withFileTypes: true })) {
   if (entry.isFile() && entry.name.endsWith(".js")) {
     await rm(path.join(assetDirectory, entry.name), { force: true });
   }
 }
+
+const boundaryGenerator = (
+  await readFile(
+    path.join(projectRoot, "public/code/karpelevic-boundary.js"),
+    "utf8",
+  )
+).replace(/^export\s+/gm, "");
+const boundaryController = await readFile(
+  path.join(projectRoot, "scripts/standalone-topic-xiv.js"),
+  "utf8",
+);
+await writeFile(
+  path.join(outputRoot, "topic-xiv.js"),
+  `;(() => {\n${boundaryGenerator}\n${boundaryController}\n})();\n`,
+  "utf8",
+);
 
 const serverEntry = pathToFileURL(
   path.join(projectRoot, "dist/server/index.js"),

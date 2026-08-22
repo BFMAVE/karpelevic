@@ -16,7 +16,7 @@ const outputPath = path.resolve(
 );
 const proofRoute = process.env.PROOF_ROUTE ?? "/proof";
 const publicSite = "https://bfmave.github.io/karpelevic";
-const publishedTopicMaximum = 12;
+const publishedTopicMaximum = 14;
 const bundleLinkMode = process.env.PROOF_STANDALONE_BUNDLE_LINKS === "1";
 const reviewBundleFiles = new Map([
   ["/proof/topic-v", "Critical_Invariant_Polygons_Topic_V.html"],
@@ -24,6 +24,8 @@ const reviewBundleFiles = new Map([
   ["/proof/topic-vii", "Critical_Invariant_Polygons_Topic_VII.html"],
   ["/proof/topic-viii", "Critical_Invariant_Polygons_Topic_VIII.html"],
   ["/proof/topic-ix", "Critical_Invariant_Polygons_Topic_IX.html"],
+  ["/proof/topic-xiii", "Critical_Invariant_Polygons_Topic_XIII.html"],
+  ["/proof/topic-xiv", "Critical_Invariant_Polygons_Topic_XIV.html"],
 ]);
 const proofTopicNumbers = new Map([
   ["/proof/topic-ii", 2],
@@ -71,6 +73,14 @@ function validateBundleConfiguration() {
   if (hasTopicVIII !== hasTopicIX) {
     throw new Error(
       "The offline Topic VIII–IX review bundle must declare both topics 8 and 9.",
+    );
+  }
+
+  const hasTopicXIII = explicitlyBundledTopicNumbers.has(13);
+  const hasTopicXIV = explicitlyBundledTopicNumbers.has(14);
+  if (hasTopicXIII !== hasTopicXIV) {
+    throw new Error(
+      "The offline Topic XIII–XIV review pair must declare both topics 13 and 14.",
     );
   }
 
@@ -351,19 +361,80 @@ function removeRuntimeMarkup(html) {
     );
 }
 
+async function readBoundaryGeneratorSource() {
+  return readFile(
+    path.join(projectRoot, "public/code/karpelevic-boundary.js"),
+    "utf8",
+  );
+}
+
+async function readBoundaryGeneratorTestSource() {
+  return readFile(
+    path.join(projectRoot, "public/code/karpelevic-boundary.test.mjs"),
+    "utf8",
+  );
+}
+
+async function inlineTopicXIVBoundaryDownload(html) {
+  if (normalizeRoutePath(proofRoute) !== "/proof/topic-xiv") return html;
+
+  const source = await readBoundaryGeneratorSource();
+  const testSource = await readBoundaryGeneratorTestSource();
+  const sourceDataUrl = `data:text/javascript;charset=utf-8;base64,${Buffer.from(
+    source,
+    "utf8",
+  ).toString("base64")}`;
+  const testDataUrl = `data:text/javascript;charset=utf-8;base64,${Buffer.from(
+    testSource,
+    "utf8",
+  ).toString("base64")}`;
+  const sourceInlined = html.replace(
+    /href="(?:https:\/\/bfmave\.github\.io\/karpelevic)?\/code\/karpelevic-boundary\.js"/i,
+    `href="${sourceDataUrl}" data-standalone-boundary-download data-standalone-boundary-source-download`,
+  );
+  const sourceNamed = sourceInlined.replace(
+    /(<a\b[^>]*\bdata-standalone-boundary-source-download\b[^>]*?)\sdownload(?:="[^"]*")?/i,
+    '$1 download="karpelevic-boundary.js"',
+  );
+  const testInlined = sourceNamed.replace(
+    /href="(?:https:\/\/bfmave\.github\.io\/karpelevic)?\/code\/karpelevic-boundary\.test\.mjs"/i,
+    `href="${testDataUrl}" data-standalone-boundary-test-download`,
+  );
+  return testInlined.replace(
+    /(<a\b[^>]*\bdata-standalone-boundary-test-download\b[^>]*?)\sdownload(?:="[^"]*")?/i,
+    '$1 download="karpelevic-boundary.test.mjs"',
+  );
+}
+
 async function addStandaloneProofScript(html) {
   const isCombinedReader = proofRoute === "/proof";
   const isChapter = proofRoute.startsWith("/proof/topic-");
   if (!isCombinedReader && !isChapter) return html;
 
-  const scriptName = isCombinedReader ? "proof.js" : "proof-chapter.js";
-  const marker = isCombinedReader
-    ? "data-standalone-proof-script"
-    : "data-standalone-proof-chapter-script";
-  const proofScript = await readFile(
-    path.join(projectRoot, "public", scriptName),
-    "utf8",
-  );
+  const isTopicXIV = normalizeRoutePath(proofRoute) === "/proof/topic-xiv";
+  let proofScript = "";
+  let marker = "";
+  if (isTopicXIV) {
+    const boundaryGenerator = (await readBoundaryGeneratorSource()).replace(
+      /^export\s+/gm,
+      "",
+    );
+    const boundaryExplorer = await readFile(
+      path.join(projectRoot, "scripts/standalone-topic-xiv.js"),
+      "utf8",
+    );
+    proofScript = `;(() => {\n${boundaryGenerator}\n${boundaryExplorer}\n})();`;
+    marker = "data-standalone-topic-xiv-script";
+  } else {
+    const scriptName = isCombinedReader ? "proof.js" : "proof-chapter.js";
+    proofScript = await readFile(
+      path.join(projectRoot, "public", scriptName),
+      "utf8",
+    );
+    marker = isCombinedReader
+      ? "data-standalone-proof-script"
+      : "data-standalone-proof-chapter-script";
+  }
   const safeScript = proofScript.replace(/<\/script/gi, "<\\/script");
   return html.replace(
     "</body>",
@@ -401,10 +472,21 @@ function verifyStandaloneHtml(html) {
         "The combined standalone proof reader must contain one marked inline reading-mode script.",
       );
     }
+  } else if (normalizeRoutePath(proofRoute) === "/proof/topic-xiv") {
+    if (
+      scripts.length !== 1 ||
+      !/<script\b(?=[^>]*\bdata-standalone-topic-xiv-script\b)(?![^>]*\bsrc=)[^>]*>/i.test(
+        scripts[0],
+      )
+    ) {
+      throw new Error(
+        "Standalone Topic XIV must contain one marked inline boundary-explorer script.",
+      );
+    }
   } else if (proofRoute.startsWith("/proof/topic-")) {
     if (
       scripts.length !== 1 ||
-      !/<script data-standalone-proof-chapter-script>(?![\s\S]*\bsrc=)/i.test(
+      !/<script\b(?=[^>]*\bdata-standalone-proof-chapter-script\b)(?![^>]*\bsrc=)[^>]*>/i.test(
         scripts[0],
       )
     ) {
@@ -425,7 +507,6 @@ function verifyStandaloneHtml(html) {
           "Half-open sides and image-edge half-plane intersections",
           "Hausdorff convergence",
           "Old-vertex bound on discarded boundary arcs",
-          "Forthcoming",
           "data-proof-route=\"topic-iii\"",
         ]
       : proofRoute === "/proof/topic-ii"
@@ -433,7 +514,6 @@ function verifyStandaloneHtml(html) {
             "Topic II",
             "Support inequalities and boundary contact",
             "data-proof-route=\"topic-ii\"",
-            "Forthcoming",
           ]
       : proofRoute === "/proof/topic-iv"
         ? [
@@ -447,7 +527,6 @@ function verifyStandaloneHtml(html) {
               "Rotation arithmetic, the first-return decomposition, and projective preparation",
               "Lattice parallelogram count",
               "data-proof-route=\"topic-v\"",
-              "Forthcoming",
             ]
           : proofRoute === "/proof/topic-vi"
             ? [
@@ -456,7 +535,6 @@ function verifyStandaloneHtml(html) {
                 "Notation and exact facts imported from Topics II–V",
                 "The first-return step satisfies Δ = 1",
                 "data-proof-route=\"topic-vi\"",
-                "Forthcoming",
               ]
           : proofRoute === "/proof/topic-vii"
                 ? [
@@ -464,7 +542,6 @@ function verifyStandaloneHtml(html) {
                     "Consecutive Farey fractions and the finite product equation",
                     "Consecutive Farey fractions and reflection",
                     "data-proof-route=\"topic-vii\"",
-                    "Forthcoming",
                   ]
               : proofRoute === "/proof/topic-viii"
                 ? [
@@ -473,7 +550,6 @@ function verifyStandaloneHtml(html) {
                     "Stochastic eigenvalues and invariant polytopes",
                     "A radial boundary point new at order N is N-critical",
                     'data-proof-route="topic-viii"',
-                    "Forthcoming",
                   ]
                 : proofRoute === "/proof/topic-ix"
                   ? [
@@ -484,7 +560,6 @@ function verifyStandaloneHtml(html) {
                       "Endpoint limits, including the case n=3",
                       "Certified numerical evaluation",
                       'data-proof-route="topic-ix"',
-                      "Forthcoming",
                     ]
                   : proofRoute === "/proof/topic-x"
                     ? [
@@ -492,7 +567,6 @@ function verifyStandaloneHtml(html) {
                         "The Radial Upper Bound and Its Equality Case",
                         "Jensen’s inequality and the radial upper bound",
                         'data-proof-route="topic-x"',
-                        "Forthcoming",
                       ]
                     : proofRoute === "/proof/topic-xi"
                       ? [
@@ -501,7 +575,6 @@ function verifyStandaloneHtml(html) {
                           "Directed-cycle expansion of the characteristic polynomial",
                           "Sparse stochastic realization and attainment",
                           'data-proof-route="topic-xi"',
-                          "Forthcoming",
                         ]
                       : proofRoute === "/proof/topic-xii"
                         ? [
@@ -511,8 +584,25 @@ function verifyStandaloneHtml(html) {
                             "Comparison after inserting a Farey mediant",
                             "Monotonicity of Kₙ(θ) with respect to n",
                             'data-proof-route="topic-xii"',
-                            "Forthcoming",
                           ]
+                        : proofRoute === "/proof/topic-xiii"
+                          ? [
+                              "Topic XIII",
+                              "The Karpelevič theorem in Ito’s formulation",
+                              "Compact star-shaped sets with continuous radial function",
+                              "Orders one, two, and three",
+                              "Karpelevič theorem in Ito’s formulation",
+                              'data-proof-route="topic-xiii"',
+                            ]
+                          : proofRoute === "/proof/topic-xiv"
+                            ? [
+                                "Topic XIV",
+                                "The complete order-seven example and an interactive boundary plot",
+                                "Nine Farey intervals cover 0≤x≤1/2",
+                                "The worked direction x=3/8",
+                                "Interactive numerical boundary plot",
+                                'data-proof-route="topic-xiv"',
+                              ]
         : [
             "How the Proof Works",
             "Definition 1.1",
@@ -911,12 +1001,12 @@ function verifyStandaloneHtml(html) {
       !/class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xi\//i.test(
         html,
       ) ||
-      !/data-proof-topic-number="13"[^>]*aria-disabled="true"/i.test(
+      !/class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xiii\//i.test(
         html,
       )
     ) {
       throw new Error(
-        "The individual Topic XII standalone must link Previous to Topic XI and keep Topic XIII unavailable.",
+        "The individual Topic XII standalone must link Previous to Topic XI and Next to Topic XIII.",
       );
     }
     if (/data-proof-topic-number="12"(?:(?!<\/li>)[\s\S])*Forthcoming/i.test(html)) {
@@ -957,6 +1047,135 @@ function verifyStandaloneHtml(html) {
     ).length;
     if (resultCount !== 4 || proofCount !== 4) {
       throw new Error("Standalone Topic XII must contain all four formal results and proofs.");
+    }
+  }
+
+  if (proofRoute === "/proof/topic-xiii") {
+    if (
+      !/class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xii\//i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "Standalone Topic XIII must link Previous to the published Topic XII page.",
+      );
+    }
+    if (
+      bundleLinkMode &&
+      !/class="[^"]*proof-topic-control-next[^"]*"[^>]*href="Critical_Invariant_Polygons_Topic_XIV\.html/i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "The Topic XIII–XIV review pair must link Topic XIII to its local Topic XIV companion.",
+      );
+    }
+    if (
+      !bundleLinkMode &&
+      !/class="[^"]*proof-topic-control-next[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-xiv\//i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "Standalone Topic XIII must link Next to the published Topic XIV page.",
+      );
+    }
+
+    const visibleText = visibleTextFromHtml(html).replace(/\s+/g, " ").trim();
+    if (
+      !/Topic XIII · Manuscript pages 101–105/i.test(visibleText) ||
+      !/First published 22 August 2026\s*\./i.test(visibleText)
+    ) {
+      throw new Error(
+        "Standalone Topic XIII has incorrect range or publication metadata.",
+      );
+    }
+    const classLists = [...html.matchAll(/class="([^"]+)"/g)].map((match) =>
+      match[1].split(/\s+/),
+    );
+    const resultCount = classLists.filter((tokens) =>
+      tokens.includes("topic-i-textbook-item"),
+    ).length;
+    const proofCount = classLists.filter((tokens) =>
+      tokens.includes("topic-i-proof-disclosure"),
+    ).length;
+    if (resultCount !== 3 || proofCount !== 3) {
+      throw new Error(
+        "Standalone Topic XIII must contain its lemma, proposition, theorem, and all three proofs.",
+      );
+    }
+    for (const plate of [1, 2, 3]) {
+      if (!html.includes(`Plate XIII.${plate}.`)) {
+        throw new Error(`Standalone Topic XIII is missing Plate XIII.${plate}.`);
+      }
+    }
+  }
+
+  if (proofRoute === "/proof/topic-xiv") {
+    if (
+      bundleLinkMode &&
+      !/class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="Critical_Invariant_Polygons_Topic_XIII\.html/i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "The Topic XIII–XIV review pair must link Topic XIV to its local Topic XIII companion.",
+      );
+    }
+    if (
+      !/<script\b(?=[^>]*\bdata-standalone-topic-xiv-script\b)(?![^>]*\bdata-standalone-proof-chapter-script\b)[^>]*>/i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "Standalone Topic XIV is missing its inline boundary-explorer controller.",
+      );
+    }
+    if (
+      !/href="data:text\/javascript;charset=utf-8;base64,[^"]+" data-standalone-boundary-download data-standalone-boundary-source-download[^>]*download="karpelevic-boundary\.js"/i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "Standalone Topic XIV must embed its dependency-free boundary generator download.",
+      );
+    }
+    if (
+      !/href="data:text\/javascript;charset=utf-8;base64,[^"]+" data-standalone-boundary-test-download[^>]*download="karpelevic-boundary\.test\.mjs"/i.test(
+        html,
+      )
+    ) {
+      throw new Error(
+        "Standalone Topic XIV must embed its published regression tests.",
+      );
+    }
+
+    const visibleText = visibleTextFromHtml(html).replace(/\s+/g, " ").trim();
+    if (
+      !/Topic XIV · Manuscript pages 105–108/i.test(visibleText) ||
+      !/First published 22 August 2026\s*\./i.test(visibleText)
+    ) {
+      throw new Error(
+        "Standalone Topic XIV has incorrect range or publication metadata.",
+      );
+    }
+    const table = html.match(
+      /<table class="topic-xiv-interval-table"[\s\S]*?<\/table>/i,
+    )?.[0];
+    if (!table || [...table.matchAll(/<tr>/g)].length !== 10) {
+      throw new Error(
+        "Standalone Topic XIV must contain its header and all nine Farey-pair rows.",
+      );
+    }
+    if (
+      !/data-order-seven-boundary-svg/i.test(html) ||
+      !/data-order-seven-boundary-path/i.test(html) ||
+      /data-proof-chapter-controls="true"/i.test(html) ||
+      /Only the radius changes|homogeneous form/i.test(visibleText)
+    ) {
+      throw new Error(
+        "Standalone Topic XIV has a missing figure, inert controls, or superseded mathematical wording.",
+      );
     }
   }
 
@@ -1015,6 +1234,23 @@ function verifyStandaloneHtml(html) {
         );
       }
     }
+
+    if (
+      explicitlyBundledTopicNumbers.has(13) &&
+      explicitlyBundledTopicNumbers.has(14)
+    ) {
+      const companionFilename =
+        normalizeRoutePath(proofRoute) === "/proof/topic-xiii"
+          ? reviewBundleFiles.get("/proof/topic-xiv")
+          : normalizeRoutePath(proofRoute) === "/proof/topic-xiv"
+            ? reviewBundleFiles.get("/proof/topic-xiii")
+            : undefined;
+      if (companionFilename && !html.includes(`href="${companionFilename}`)) {
+        throw new Error(
+          `The Topic XIII–XIV review pair is missing its companion link to ${companionFilename}.`,
+        );
+      }
+    }
   }
 }
 
@@ -1047,6 +1283,7 @@ html = await inlineStylesheets(html);
 html = await inlineCssAssets(html, clientRoot);
 html = removeRuntimeMarkup(html);
 html = rewriteInternalLinks(html);
+html = await inlineTopicXIVBoundaryDownload(html);
 html = markUnavailableTopicLinks(html);
 html = markUnavailableProofAnchors(html);
 html = await addStandaloneProofScript(html);

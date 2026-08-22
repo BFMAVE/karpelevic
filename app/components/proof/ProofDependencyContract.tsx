@@ -9,6 +9,7 @@ type ProofDependencyContractProps = {
   importedHeading?: string;
   background?: readonly ProofDependency[];
   headingId?: string;
+  provedHeading?: string;
   provedHere: React.ReactNode;
 };
 
@@ -31,6 +32,7 @@ export function ProofDependencyContract({
   importedHeading = "Imported from earlier topics",
   background = [],
   headingId = "chapter-contract-heading",
+  provedHeading = "Proved on this page",
   provedHere,
 }: ProofDependencyContractProps) {
   return (
@@ -56,7 +58,7 @@ export function ProofDependencyContract({
           </section>
         ) : null}
         <section>
-          <h4>Proved on this page</h4>
+          <h4>{provedHeading}</h4>
           <div>{provedHere}</div>
         </section>
       </div>
