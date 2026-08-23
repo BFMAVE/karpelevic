@@ -392,6 +392,15 @@ for (const relativePath of [
   assert.match(html, /data-edge-kind="inter-block"/);
   assert.match(html, /data-edge-weight="beta"/);
   assert.match(html, /data-edge-weight="alpha"/);
+  assert.match(visibleText, /Exact F₉ data — graph layout schematic/i);
+  assert.match(visibleText, /1\/3<3\/8 are consecutive because 3·3−1·8=1 and 3\+8=11>9/i);
+  assert.match(html, /data-farey-order="9"/);
+  assert.match(html, /data-farey-left="1\/3"/);
+  assert.match(html, /data-farey-right="3\/8"/);
+  assert.match(html, /data-global-cycle-decomposition="2\+3\+3"/);
+  assert.match(html, /data-global-cycle-length="8"/);
+  assert.match(html, /data-entry-length="2"/);
+  assert.doesNotMatch(visibleText, /d=q=3,\s*s=9|s equals nine/i);
   assert.match(html, /data-regime="s-lt-dq"/);
   assert.match(html, /data-boundary-case="s-eq-dq"/);
   assert.match(html, /data-regime="s-gt-dq"/);

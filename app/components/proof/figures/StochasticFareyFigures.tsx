@@ -858,14 +858,24 @@ function CycleLedger({ marker, mobile = false }: { marker: string; mobile?: bool
             <text x="145" y={y - 52} fill={copper} fontSize="17" textAnchor="middle">β</text>
           </g>
         ))}
-        <g data-cycle-kind="all-inter-block">
+        <g
+          data-block-count="3"
+          data-block-length="3"
+          data-cycle-kind="all-inter-block"
+          data-farey-left="1/3"
+          data-farey-order="9"
+          data-farey-right="3/8"
+          data-global-cycle-decomposition="2+3+3"
+          data-global-cycle-length="8"
+        >
           <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M224 100 Q270 128 78 237" fill="none" stroke={red} strokeDasharray="9 6" strokeWidth="3" markerEnd={`url(#${marker})`} />
           <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M224 253 Q270 281 78 390" fill="none" stroke={red} strokeDasharray="9 6" strokeWidth="3" markerEnd={`url(#${marker})`} />
-          <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M224 406 Q305 500 292 62 Q286 34 84 83" fill="none" stroke={red} strokeDasharray="9 6" strokeWidth="3" markerEnd={`url(#${marker})`} />
+          <path data-edge-kind="inter-block" data-edge-weight="alpha" data-entry-block="1" data-entry-length="2" data-entry-vertex="2" d="M224 406 Q305 500 292 62 Q286 34 154 83" fill="none" stroke={red} strokeDasharray="9 6" strokeWidth="3" markerEnd={`url(#${marker})`} />
           <text x="249" y="148" fill={red} fontSize="17">α</text>
           <text x="249" y="301" fill={red} fontSize="17">α</text>
           <text x="278" y="466" fill={red} fontSize="17">α</text>
         </g>
+        <text data-entry-label="ell-1" x="148" y="128" fill={ink} fontSize="16" textAnchor="middle">ℓ₁=2</text>
         <text x="160" y="535" fill={ink} fontSize="16" textAnchor="middle">local q-cycles or the global s-cycle</text>
       </>
     );
@@ -883,14 +893,24 @@ function CycleLedger({ marker, mobile = false }: { marker: string; mobile?: bool
           <text x={base} y="222" fill={ink} fontSize="16" textAnchor="middle">B{index + 1}</text>
         </g>
       ))}
-      <g data-cycle-kind="all-inter-block">
+      <g
+        data-block-count="3"
+        data-block-length="3"
+        data-cycle-kind="all-inter-block"
+        data-farey-left="1/3"
+        data-farey-order="9"
+        data-farey-right="3/8"
+        data-global-cycle-decomposition="2+3+3"
+        data-global-cycle-length="8"
+      >
         <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M160 200 Q225 285 290 200" fill="none" stroke={red} strokeDasharray="10 6" strokeWidth="3.5" markerEnd={`url(#${marker})`} />
         <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M380 200 Q445 285 510 200" fill="none" stroke={red} strokeDasharray="10 6" strokeWidth="3.5" markerEnd={`url(#${marker})`} />
-        <path data-edge-kind="inter-block" data-edge-weight="alpha" d="M600 176 Q640 55 340 48 Q40 55 70 176" fill="none" stroke={red} strokeDasharray="10 6" strokeWidth="3.5" markerEnd={`url(#${marker})`} />
+        <path data-edge-kind="inter-block" data-edge-weight="alpha" data-entry-block="1" data-entry-length="2" data-entry-vertex="2" d="M600 176 Q640 55 340 48 Q40 55 115 176" fill="none" stroke={red} strokeDasharray="10 6" strokeWidth="3.5" markerEnd={`url(#${marker})`} />
         <text x="225" y="270" fill={red} fontSize="17" textAnchor="middle">α</text>
         <text x="445" y="270" fill={red} fontSize="17" textAnchor="middle">α</text>
         <text x="340" y="38" fill={red} fontSize="17" textAnchor="middle">α</text>
       </g>
+      <text data-entry-label="ell-1" x="115" y="252" fill={ink} fontSize="16" textAnchor="middle">ℓ₁=2</text>
       <text x="340" y="337" fill={ink} fontSize="17" textAnchor="middle">the global s-cycle meets every local q-cycle</text>
     </>
   );
@@ -1042,10 +1062,10 @@ const copy: Record<FigureKind, { title: string; description: string; caption: Re
       "Plate X.2. This generic strictly convex curve is schematic; it is not a plot or quadratic model of F. For u₁≠u₂ it shows the two-input case F((u₁+u₂)/2)<(F(u₁)+F(u₂))/2. In the proof, F((Σuⱼ)/d)≤ΣF(uⱼ)/d, with equality exactly when u₁=⋯=u_d. Since β↦u(β) is strictly increasing, equality is equivalent to β₁=⋯=β_d.",
   },
   "cycle-ledger": {
-    status: "Schematic d=q=3, s=9 instance",
+    status: "Exact F₉ data — graph layout schematic",
     title: "Within-block cycles and the cycle through all blocks",
-    description: "Three directed blocks B one through B three illustrate the unshortened construction when d and q both equal three and s equals nine. Solid copper return edges of weight beta close the local q-cycles. Dashed red inter-block edges of weight alpha form the global s-cycle. The graph contains all these edges simultaneously. The drawn weighted edges represent the generic case with alpha and beta strictly between zero and one; zero-weight endpoint cases are treated by continuity in the prose.",
-    caption: "Plate XI.1. This d=q=3, s=9 schematic labels the blocks B₁,B₂,B₃; the proof allows arbitrary positive d and q and adjusts the global cycle to the required length s. Solid return edges of weight β close the local q-cycles, while dashed inter-block edges of weight α form the global s-cycle. The drawn weighted edges represent the generic case 0<α,β<1; the zero-weight endpoint cases are treated by continuity in the prose. A pairwise vertex-disjoint cycle collection may contain any subset of the local cycles, or the single global cycle. The global cycle meets every local cycle, so the two alternatives cannot be selected together.",
+    description: "The reduced fractions one third and three eighths are consecutive in the Farey sequence of order nine: three times three minus one times eight equals one, and their denominator sum eleven exceeds nine. Thus q equals three, s equals eight, and d equals the floor of nine divided by three, namely three. Three directed blocks B one through B three each have three vertices. The final inter-block edge enters B one at its second vertex, so the global cycle traverses two plus three plus three, or eight, vertices. Solid copper return edges of weight beta close the local q-cycles. Dashed red inter-block edges of weight alpha form the global s-cycle. The graph contains all these edges simultaneously. The drawn weighted edges represent the generic case with alpha and beta strictly between zero and one; zero-weight endpoint cases are treated by continuity in the prose.",
+    caption: "Plate XI.1. Exact F₉ parameter data with a schematic graph layout: 1/3<3/8 are consecutive because 3·3−1·8=1 and 3+8=11>9; hence q=3, s=8, and d=⌊9/3⌋=3. The final inter-block edge from B₃ enters B₁ at its second vertex, so ℓ₁=2 and the cycle through all blocks has length 2+3+3=8. Solid return edges of weight β close the local q-cycles, while dashed inter-block edges of weight α form the global s-cycle. The drawn weighted edges represent the generic case 0<α,β<1; the zero-weight endpoint cases are treated by continuity in the prose. A pairwise vertex-disjoint cycle collection may contain any subset of the local cycles, or the single global cycle. The global cycle meets every local cycle, so the two alternatives cannot be selected together.",
   },
   "sparse-cases": {
     status: "Schematic construction — not to scale",

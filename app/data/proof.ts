@@ -324,7 +324,7 @@ const rawItems: readonly [
   [6, "Proposition", "Real-linear invariance of polygonal complexity", "Shows that changing real coordinates does not alter the least number of vertices needed for an invariant polygon."],
   [7, "Lemma", "Real-linear covariance of faces and boundary incidences", "Carries vertices, sides, faces, boundary incidences, and their labels faithfully through an invertible real-linear change of coordinates."],
   [8, "Lemma", "Coordinate reversal, orientation, and endpoint assignment", "Records how orientation, the chosen complex eigenvalue, and half-open endpoint membership change under a reversing coordinate map."],
-  [9, "Lemma", "Origin is interior for a nonreal contraction", "Ensures that the invariant polygon surrounds the origin, making angular order and polarity available."],
+  [9, "Lemma", "Origin is interior for a nonreal contraction", "For multiplication by a nonreal scalar λ with 0<|λ|<1, every non-singleton compact convex hull P of finitely many points satisfying λP⊆P has nonempty interior and 0∈int(P)."],
   [10, "Lemma", "Oriented order on a convex boundary", "Relates the cyclic order of vertices and sides to the orientation seen from an interior point."],
   [11, "Lemma", "Triple-sign criterion for strict convex position", "Recognizes a polygon with the required complete cyclic vertex list from consistent signs of oriented triples."],
   [12, "Lemma", "Simultaneous preservation of convexity and side conditions under perturbation", "Shows that finitely many convexity, relative-interior, and strict determinant conditions persist during a sufficiently small deformation."],
@@ -410,7 +410,7 @@ export const proofTopics: readonly ProofTopic[] = [
       "How can the polygon problem be stated without tying it to a particular matrix or coordinate system?",
     overview: [
       "We work on a two-dimensional real vector space and study how a linear transformation acts on compact convex polygons. The first task is to define the transformation, the polygons it preserves, and the least number of vertices such a polygon can have.",
-      "Only after that vocabulary is fixed do we define radial criticality. The rest of the chapter proves that these objects behave naturally under changes of coordinates, fixes the orientation conventions, and shows that every nontrivial invariant polygon surrounds the origin.",
+      "Only after that vocabulary is fixed do we define radial criticality. The rest of the chapter proves that these objects behave naturally under changes of coordinates, fixes the orientation conventions, and shows that, when the acting map is multiplication by a nonreal scalar λ with 0<|λ|<1, every non-singleton compact convex hull P of finitely many points satisfying λP⊆P has nonempty interior and 0∈int(P).",
     ],
     itemNumbers: [1, 2, 5, 6, 7, 8, 9, 10, 66],
     manuscriptPages: "2–3 and 6–10",

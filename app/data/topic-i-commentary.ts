@@ -188,7 +188,7 @@ export const topicICommentary: Readonly<Record<number, TopicICommentary>> = {
       },
     ],
     takeaway:
-      "The origin is not merely fixed by the contraction: it lies strictly inside every nontrivial invariant polygon.",
+      "For multiplication by a nonreal scalar λ with 0<|λ|<1, every non-singleton compact convex hull P of finitely many points satisfying λP⊆P has nonempty interior and 0∈int(P).",
   },
   10: {
     number: 10,

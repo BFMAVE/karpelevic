@@ -294,6 +294,18 @@ test("server-renders the Part I proof reader", async () => {
   assert.match(html, /Topic I of (?:<!-- -->)?XIV/);
   assert.doesNotMatch(html, /Topic I of fourteen|Topic 1 of 14/);
   assert.doesNotMatch(html, /How to read this page|orientation layer/);
+  assert.match(
+    topicIPanelHtml,
+    /when the acting map is multiplication by a nonreal scalar λ with 0&lt;\|λ\|&lt;1,[\s\S]*?every non-singleton compact convex hull P of finitely many points satisfying λP⊆P has nonempty interior and 0∈int\(P\)/,
+  );
+  assert.match(
+    topicIPanelHtml,
+    /For multiplication by a nonreal scalar λ with 0&lt;\|λ\|&lt;1, every non-singleton compact convex hull P of finitely many points satisfying λP⊆P has nonempty interior and 0∈int\(P\)/,
+  );
+  assert.doesNotMatch(
+    topicIPanelHtml,
+    /every nontrivial invariant polygon surrounds the origin|lies strictly inside every nontrivial invariant polygon/i,
+  );
   const atlasStart = html.indexOf('class="proof-chapter-atlas"');
   const atlasEnd = html.indexOf('class="proof-reader', atlasStart);
   assert.ok(atlasStart >= 0 && atlasEnd > atlasStart);

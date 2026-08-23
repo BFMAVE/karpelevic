@@ -62,7 +62,16 @@ test("Plate XI.1 distinguishes within-block and inter-block edges", () => {
   assert.match(figureSource, /data-cycle-kind="all-inter-block"/);
   assert.match(figureSource, /cannot be selected together/);
   assert.match(figureSource, /url\(#\$\{marker\}-copper\)/);
-  assert.match(figureSource, /Schematic d=q=3, s=9 instance/);
+  assert.match(figureSource, /Exact F₉ data — graph layout schematic/);
+  assert.match(figureSource, /1\/3<3\/8 are consecutive because 3·3−1·8=1 and 3\+8=11>9/);
+  assert.match(figureSource, /data-farey-order="9"/);
+  assert.match(figureSource, /data-farey-left="1\/3"/);
+  assert.match(figureSource, /data-farey-right="3\/8"/);
+  assert.match(figureSource, /data-global-cycle-decomposition="2\+3\+3"/);
+  assert.match(figureSource, /data-global-cycle-length="8"/);
+  assert.match(figureSource, /data-entry-length="2"/);
+  assert.match(figureSource, /data-entry-vertex="2"/);
+  assert.doesNotMatch(figureSource, /d=q=3, s=9|s equals nine/);
   assert.match(figureSource, /generic case 0<α,β<1/);
   assert.match(figureSource, /zero-weight endpoint cases are treated by continuity in the prose/);
   assert.match(figureSource, /B\{index \+ 1\}/);
