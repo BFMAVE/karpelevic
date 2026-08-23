@@ -168,8 +168,6 @@ export function itoArcRadius(
   positiveInteger(iterations, "iterations");
   const {
     n,
-    leftFraction,
-    rightFraction,
     leftValue,
     rightValue,
     parameters,
@@ -186,34 +184,49 @@ export function itoArcRadius(
   }
 
   const { p, q, r, s, d } = parameters;
-  const terminalOrderThree =
-    n === 3 &&
-    leftFraction.numerator === 1 &&
-    leftFraction.denominator === 3 &&
-    rightFraction.numerator === 1 &&
-    rightFraction.denominator === 2;
-  let sineA;
-  let sineB;
-  let target;
-  if (terminalOrderThree) {
-    // With delta=1/2-x, the apparently near-pi angles have the stable form
-    // sin(A)=sin(4*pi*delta), sin(B)=sin(6*pi*delta), and
-    // sin(A+B)=sin(2*pi*delta).
-    const delta = 0.5 - angleFraction;
-    sineA = sineOfPiMultiple(4 * delta);
-    sineB = sineOfPiMultiple(6 * delta);
-    target = sineOfPiMultiple(2 * delta);
-  } else {
-    const aOverPi = 2 * Math.abs(q * angleFraction - p);
-    const bOverPi = (2 * Math.abs(s * angleFraction - r)) / d;
-    sineA = sineOfPiMultiple(aOverPi);
-    sineB = sineOfPiMultiple(bOverPi);
-    target = sineOfPiMultiple(aOverPi + bOverPi);
-  }
+  // Subtract the represented endpoint first. The algebraically equivalent
+  // forms q*x-p and s*x-r can round to zero at the next binary64 number after
+  // a Farey endpoint and would erase a valid strict-interior displacement.
+  const terminalOrderThreeArc =
+    n === 3 && p === 1 && q === 2 && r === 1 && s === 3;
+  const terminalDistance = terminalOrderThreeArc
+    ? rightValue - angleFraction
+    : 0;
+  const aOverPi = terminalOrderThreeArc
+    ? 4 * terminalDistance
+    : 2 * q * Math.abs(angleFraction - p / q);
+  const bOverPi = terminalOrderThreeArc
+    ? 1 - 6 * terminalDistance
+    : (2 * s * Math.abs(angleFraction - r / s)) / d;
+  const sineA = sineOfPiMultiple(aOverPi);
+  const sineB = sineOfPiMultiple(bOverPi);
+  // On the terminal order-three arc, A+B=pi(1-2*delta). Computing
+  // sin(2*pi*delta) directly preserves the final binary64 point below 1/2.
+  const target = terminalOrderThreeArc
+    ? sineOfPiMultiple(2 * terminalDistance)
+    : sineOfPiMultiple(aOverPi + bOverPi);
   const residual = (rho) =>
     rho ** (s / d) * sineA +
     rho ** q * sineB -
     target;
+
+  const lowerResidual = residual(0);
+  // This factored identity avoids catastrophic cancellation in
+  // sin(A)+sin(B)-sin(A+B) at representable points next to an endpoint.
+  const upperResidual =
+    4 *
+    sineOfPiMultiple(aOverPi / 2) *
+    sineOfPiMultiple(bOverPi / 2) *
+    sineOfPiMultiple((aOverPi + bOverPi) / 2);
+  if (
+    !Number.isFinite(lowerResidual) ||
+    !Number.isFinite(upperResidual) ||
+    !(lowerResidual < 0 && upperResidual > 0)
+  ) {
+    throw new RangeError(
+      "the scalar radial equation must have a finite sign-changing bracket on (0,1)",
+    );
+  }
 
   let lower = 0;
   let upper = 1;
@@ -223,7 +236,8 @@ export function itoArcRadius(
     if (residual(midpoint) < 0) lower = midpoint;
     else upper = midpoint;
   }
-  return (lower + upper) / 2;
+  const estimate = (lower + upper) / 2;
+  return estimate < 1 ? estimate : lower;
 }
 
 /**
@@ -249,7 +263,10 @@ export function radialBoundaryRadius(
   return itoArcRadius(angleFraction, left, right, order, iterations);
 }
 
-// Backward-compatible name with an explicit radial-boundary contract.
+/**
+ * @deprecated Use `radialBoundaryRadius`; this name is retained for backward
+ * compatibility with earlier downloadable examples.
+ */
 export function boundaryRadius(
   angleFraction,
   left,
