@@ -5,6 +5,10 @@ document.addEventListener("submit", (event) => {
     return;
   }
 
+  if (event.defaultPrevented) {
+    return;
+  }
+
   event.preventDefault();
 
   const data = new FormData(form);
@@ -31,3 +35,44 @@ document.addEventListener("submit", (event) => {
     subject,
   )}&body=${encodeURIComponent(body)}`;
 });
+
+document.addEventListener("click", (event) => {
+  const link = event.target instanceof Element
+    ? event.target.closest("a.skip-link")
+    : null;
+  if (!(link instanceof HTMLAnchorElement)) return;
+
+  const href = link.getAttribute("href");
+  if (!href || !href.startsWith("#")) return;
+  const target = document.getElementById(href.slice(1));
+  if (!target) return;
+
+  window.requestAnimationFrame(() => {
+    if (typeof target.focus === "function") {
+      target.focus({ preventScroll: true });
+    }
+  });
+});
+
+function revealFallbackContactForms() {
+  document.querySelectorAll("form.contact-form").forEach((form) => {
+    if (!(form instanceof HTMLFormElement)) return;
+    if (form.dataset.contactController === "react") return;
+
+    form.dataset.contactController = "fallback";
+    form.hidden = false;
+    form.removeAttribute("aria-hidden");
+    const submit = form.querySelector("[data-contact-submit]");
+    if (submit instanceof HTMLButtonElement) submit.disabled = false;
+  });
+}
+
+if (document.readyState === "complete") {
+  window.setTimeout(revealFallbackContactForms, 0);
+} else {
+  window.addEventListener(
+    "load",
+    () => window.setTimeout(revealFallbackContactForms, 0),
+    { once: true },
+  );
+}

@@ -10,19 +10,29 @@ const sourcePath = path.join(
   projectRoot,
   "app/lib/karpelevic-boundary-core.js",
 );
-const publicPath = path.join(
+const publicModulePath = path.join(
+  projectRoot,
+  "public/code/karpelevic-boundary.mjs",
+);
+const legacyPublicPath = path.join(
   projectRoot,
   "public/code/karpelevic-boundary.js",
 );
 
 const source = await readFile(sourcePath, "utf8");
 if (process.argv.includes("--check")) {
-  const published = await readFile(publicPath, "utf8");
-  if (published !== source) {
+  const [published, legacyPublished] = await Promise.all([
+    readFile(publicModulePath, "utf8"),
+    readFile(legacyPublicPath, "utf8"),
+  ]);
+  if (published !== source || legacyPublished !== source) {
     throw new Error(
-      "public/code/karpelevic-boundary.js is not synchronized with the canonical numerical core; run npm run content:boundary",
+      "The public boundary modules are not synchronized with the canonical numerical core; run npm run content:boundary",
     );
   }
 } else {
-  await writeFile(publicPath, source, "utf8");
+  await Promise.all([
+    writeFile(publicModulePath, source, "utf8"),
+    writeFile(legacyPublicPath, source, "utf8"),
+  ]);
 }

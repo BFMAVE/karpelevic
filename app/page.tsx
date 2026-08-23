@@ -1,24 +1,33 @@
-import type { Metadata } from "next";
 import { ContactForm } from "./components/ContactForm";
 import { ThetaAtlasPlate } from "./components/ThetaAtlasPlate";
 import { homeContent, primaryNavigation } from "./data/home";
 import { publicationDates } from "./data/publication-dates";
 import {
   formatDate,
+  getBuildRevision,
   getBuildTimestamp,
   getPageTimestamp,
 } from "./lib/git-dates";
 import { sitePath } from "./lib/site-path";
+import { createPageMetadata } from "./lib/site-metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title:
     "Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic Spectra",
   description:
     "An accessible companion to the paper by Brecht Verbeken and Vincent Ginis.",
-};
+  pathname: "/",
+  scholarlyLandingPage: true,
+});
 
-const pageTimestamp = getPageTimestamp("app/data/home.ts");
+const pageTimestamp = getPageTimestamp([
+  "app/page.tsx",
+  "app/data/home.ts",
+  "app/components/ContactForm.tsx",
+  "public/contact.js",
+]);
 const buildTimestamp = getBuildTimestamp();
+const buildRevision = getBuildRevision();
 const firstPublished = publicationDates.pages.home;
 
 export default function Home() {
@@ -57,12 +66,12 @@ export default function Home() {
           ))}
         </nav>
         <p className="construction-notice" role="status">
-          <span aria-hidden="true">🚧</span>
-          <span>Under construction</span>
+          <span aria-hidden="true">◆</span>
+          <span>Working edition — revised 23 August 2026</span>
         </p>
       </header>
 
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
         <div className="first-block">
           <section className="hero-section" aria-labelledby="paper-title">
             <header className="hero-copy">
@@ -123,7 +132,20 @@ export default function Home() {
                     </small>
                   </dd>
                 </div>
+                <div>
+                  <dt>Source revision</dt>
+                  <dd><code>{buildRevision}</code></dd>
+                </div>
               </dl>
+
+              <details className="checksum">
+                <summary>Verify the website-edition PDF</summary>
+                <code>SHA-256 {homeContent.manuscript.localArxivDraftChecksum}</code>
+                <p>
+                  This 110-page working edition is newer than the immutable
+                  93-page Zenodo v1 record and does not yet have its own DOI.
+                </p>
+              </details>
 
               <p className="page-publication-meta">
                 <time dateTime={firstPublished}>
@@ -258,10 +280,10 @@ export default function Home() {
             <p className="section-label">Manuscript status</p>
             <h2 id="arxiv-heading">Why is this paper not on arXiv?</h2>
             <p>
-              Generative AI makes projects such as this website possible, but
-              it has also contributed to a flood of submissions on arXiv. This
-              paper is currently in the moderation queue. Once it gets through,
-              I will update this website with the arXiv record.
+              As of 23 August 2026, the manuscript is awaiting arXiv
+              moderation. The archival Zenodo v1 and the newer checksummed
+              website edition remain available in the meantime. This page
+              will link the arXiv record if and when it becomes public.
             </p>
           </article>
 

@@ -41,6 +41,24 @@ export function getBuildTimestamp(): string {
   return buildTimestamp;
 }
 
+export function getBuildRevision(): string {
+  try {
+    const revision = execFileSync(
+      "git",
+      ["rev-parse", "--short=12", "HEAD"],
+      {
+        cwd: process.cwd(),
+        encoding: "utf8",
+        stdio: ["ignore", "pipe", "ignore"],
+      },
+    ).trim();
+    if (/^[0-9a-f]{7,40}$/i.test(revision)) return revision;
+  } catch {
+    // Source archives need not include Git metadata.
+  }
+  return "source archive";
+}
+
 export function formatDate(timestamp: string): string {
   return new Intl.DateTimeFormat("en-GB", {
     day: "numeric",

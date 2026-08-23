@@ -79,12 +79,12 @@ function TopicXIIISetup() {
           <i> n</i>≥2 and 0&lt;θ&lt;π, <i>R</i><sub>n</sub>(θ) is the largest ρ≥0 for which
           ρ<i>e</i><sup><i>iθ</i></sup>∈Θ<sub>n</sub>. At Farey endpoints with 0&lt;θ&lt;π, the endpoint step of
           Theorem II.3.1 proves <i>R</i><sub>n</sub>(θ)=1; the same step extends <i>R</i><sub>n</sub> to θ=0,π
-          with value 1. On an open Farey interval, <i>K</i><sub>n</sub>(θ) is Topic IX&apos;s unique positive
+          with value 1. For <i>n</i>≥3, on an open Farey interval, <i>K</i><sub>n</sub>(θ) is Topic IX&apos;s unique positive
           solution of the scalar radius equation; at a Farey endpoint it is defined to be 1. Until the theorem
           is proved, <i>K</i><sub>n</sub> is the candidate radial function.
         </p>
         <p>
-          <strong>Curves.</strong> For consecutive <i>f&lt;g</i> in <i>F</i><sub>n</sub><sup>+</sup>,
+          <strong>Curves.</strong> For <i>n</i>≥3 and consecutive <i>f&lt;g</i> in <i>F</i><sub>n</sub><sup>+</sup>,
           Γ<sub>f,g</sub><sup>(n)</sup> is the closure of the corresponding curve
           <i> K</i><sub>n</sub>(θ)<i>e</i><sup><i>iθ</i></sup>. At order three, the interval [1/3,1/2] additionally
           contributes the real boundary segment [−1,−1/2].
@@ -133,7 +133,6 @@ const radialLemma: ProofResultData = {
     },
   ],
   takeaway: <>Under the stated hypotheses, <i>S</i>={"{"}<i>t</i>ρ<sub>S</sub>(<i>u</i>)<i>u</i>:0≤<i>t</i>≤1, <i>u</i>∈𝕊¹{"}"} and ∂<i>S</i>={"{"}ρ<sub>S</sub>(<i>u</i>)<i>u</i>:<i>u</i>∈𝕊¹{"}"}.</>,
-  provenance: "Standard lemma; proof included",
   sourceIds: ["standard-convexity"],
   sourceRelation: <>This is a standard polar-coordinate fact for compact star-shaped planar sets. The manuscript states and proves the precise version needed here.</>,
 };
@@ -148,7 +147,7 @@ const smallOrders: ProofResultData = {
   vocabulary: [
     {
       term: "Radial functions Rₙ and Kₙ",
-      definition: <><i>R</i><sub>n</sub>(θ) is the attained radial maximum in Θ<sub>n</sub> on the ray of angle θ. Before Theorem II.3.1 proves equality, <i>K</i><sub>n</sub>(θ) is the candidate radial function selected by Topic IX&apos;s scalar equation and endpoint convention.</>,
+      definition: <>For <i>n</i>≥2, <i>R</i><sub>n</sub>(θ) is the attained radial maximum in Θ<sub>n</sub> on the ray of angle θ. For <i>n</i>≥3, <i>K</i><sub>n</sub>(θ) is the candidate radial function selected by Topic IX&apos;s scalar equation and endpoint convention. Proposition II.9.2 compares these functions only at order three; Θ<sub>1</sub> and Θ<sub>2</sub> are computed directly.</>,
     },
     {
       term: "Trace identities",
@@ -160,7 +159,7 @@ const smallOrders: ProofResultData = {
     },
     {
       term: "Explicit matrix Mα",
-      definition: <>The displayed row-stochastic matrix has characteristic polynomial (λ−1)(λ²+λ+α). Its two nontrivial roots trace the vertical sides of the triangle and the segment [−1,−1/2].</>,
+      definition: <>The displayed row-stochastic matrix has characteristic polynomial (λ−1)(λ²+λ+α). For 0≤α≤1/4, one nontrivial root traces [−1,−1/2], while the other remains in [−1/2,0]. For 1/4&lt;α≤1, the conjugate roots trace the upper and lower halves of the triangle&apos;s single vertical side.</>,
     },
     {
       term: "Exceptional interval",
@@ -187,8 +186,8 @@ const smallOrders: ProofResultData = {
       explanation: <>The convex matrix family (1−α)<i>I+αC</i><sub>3</sub> has eigenvalue (1−α)+αω, which runs along the chord [1,ω]. Real matrices give the conjugate chord [1,ω̄]. Star-shapedness with respect to 0 supplies every point between these boundary chords and 0.</>,
     },
     {
-      title: "Attain the remaining two sides and the real segment",
-      explanation: <>For the displayed matrix <i>M</i><sub>α</sub>, det(λ<i>I−M</i><sub>α</sub>)=(λ−1)(λ²+λ+α). When 0≤α≤1/4, one real root runs from −1 to −1/2. When 1/4&lt;α≤1, its two nonreal roots run from −1/2 to ω and ω̄. The same real matrix contains both conjugate roots.</>,
+      title: "Attain the remaining side and the real segment",
+      explanation: <>For the displayed matrix <i>M</i><sub>α</sub>, det(λ<i>I−M</i><sub>α</sub>)=(λ−1)(λ²+λ+α). When 0≤α≤1/4, one real root runs from −1 to −1/2, while the other runs from 0 to −1/2 and stays inside the triangle. When 1/4&lt;α≤1, the conjugate roots run from −1/2 to ω and ω̄, tracing the upper and lower halves of the single vertical side.</>,
     },
     {
       title: "Identify the curve on [0,1/3]",
@@ -204,7 +203,7 @@ const smallOrders: ProofResultData = {
     },
   ],
   takeaway: <>The theorem is completely proved for <i>n≤3</i>, and the exact equality <i>R</i><sub>3</sub>=<i>K</i><sub>3</sub> is ready for the induction step.</>,
-  provenance: "Classical special case; direct proof included",
+  provenance: "Classical result",
   sourceIds: ["dmitriev-dynkin-1946", "karpelevic-1951", "ito-1997"],
   sourceRelation: <>The small stochastic regions and the exceptional order-three candidate curve belong to the classical theory. The proposition includes the direct calculation needed by this manuscript’s induction.</>,
 };
@@ -214,7 +213,7 @@ const mainTheorem: ProofResultData = {
   label: "Theorem II.3.1",
   kind: "Theorem",
   title: "Karpelevič theorem in Ito’s formulation",
-  purpose: "Identify every boundary arc, the complete region star-shaped with respect to 0, and all unit-circle points for every matrix order.",
+  purpose: "Compute Θ₁ and Θ₂ separately; for n≥3, identify the Farey-indexed boundary arcs and radial description of Θₙ; and classify the unit-circle points at every order.",
   manuscriptHtml: relinkCrossTopicReferences(
     partIIHtmlByLabel["karp:thm:main"] + partIIMainTheoremProofHtml,
   ),
@@ -225,7 +224,7 @@ const mainTheorem: ProofResultData = {
     },
     {
       term: "Karpelevič boundary arcs",
-      definition: <>After the equality <i>R</i><sub>n</sub>=<i>K</i><sub>n</sub> is proved, the curves Γ<sub>f,g</sub><sup>(n)</sup> are the Karpelevič arcs. The upper boundary means ∂Θ<sub>n</sub>∩{"{"}Im <i>z</i>≥0{"}"}, and the lower boundary means ∂Θ<sub>n</sub>∩{"{"}Im <i>z</i>≤0{"}"}.</>,
+      definition: <>For <i>n</i>≥3, after the equality <i>R</i><sub>n</sub>=<i>K</i><sub>n</sub> is proved, the curves Γ<sub>f,g</sub><sup>(n)</sup> are the Karpelevič arcs. The upper boundary means ∂Θ<sub>n</sub>∩{"{"}Im <i>z</i>≥0{"}"}, and the lower boundary means ∂Θ<sub>n</sub>∩{"{"}Im <i>z</i>≤0{"}"}.</>,
     },
   ],
   intuition: <>Fix a direction in an open order-<i>n</i> Farey interval. Attainment gives <i>K</i><sub>n</sub>≤<i>R</i><sub>n</sub>. If the maximizing point is outside Θ<sub>n−1</sub>, Topics X–XI identify its modulus with <i>K</i><sub>n</sub>. If it lies in Θ<sub>n−1</sub>, block-diagonal inclusion, induction, Topic XII&apos;s monotonicity, and attainment force the same equality. Endpoint matrices settle the remaining rays, and Lemma II.9.1 converts the resulting continuous radial function into the boundary.</>,
@@ -268,7 +267,7 @@ const mainTheorem: ProofResultData = {
       explanation: <>Topic VIII&apos;s unit-circle proposition gives exactly Θ<sub>n</sub>∩{"{"}|<i>z</i>|=1{"}"}={"{"}ζ:ζ<sup>q</sup>=1 for some 1≤<i>q</i>≤<i>n</i>{"}"}. Proposition II.9.2 already handled the discontinuity of the nonreal order-three branch, so Lemma II.9.1 is used only when its continuity hypothesis holds.</>,
     },
   ],
-  takeaway: <>The curves Γ<sub>f,g</sub><sup>(n)</sup> are the Karpelevič boundary arcs, their conjugates give the lower boundary, Θ<sub>n</sub> is the union of the radial segments from 0 to that boundary, and the unit-circle points are exactly the roots of unity of order at most <i>n</i>.</>,
+  takeaway: <>For <i>n</i>=1, Θ<sub>1</sub>={"{"}1{"}"}, and for <i>n</i>=2, Θ<sub>2</sub>=[−1,1]. For every <i>n</i>≥3, the curves Γ<sub>f,g</sub><sup>(n)</sup> are the upper Karpelevič boundary arcs, their conjugates give the lower boundary, and Θ<sub>n</sub> is the union of the radial segments from 0 to that boundary. At every order, the unit-circle points are exactly the roots of unity of order at most <i>n</i>.</>,
   provenance: "Classical result",
   sourceIds: ["karpelevic-1951", "ito-1997"],
   sourceRelation: <>The eigenvalue-region theorem is classical: Karpelevič proved the original form and Ito supplied the modern polynomial-arc formulation. This manuscript gives the displayed self-contained route through critical invariant polygons; the classification applies to the theorem’s statement, not to its proof.</>,
@@ -284,7 +283,7 @@ export function TopicXIIIContent() {
           {
             label: "Topic VIII · Returning to stochastic eigenvalue regions",
             href: sitePath("/proof/topic-viii/"),
-            explanation: <>proves that Θ<sub>n</sub> is compact, conjugation-invariant, star-shaped with respect to 0, and contained in the unit disk; it also proves attainment of <i>R</i><sub>n</sub>, the exact unit-circle classification, and the hypotheses used below when a maximizing point lies outside Θ<sub>n−1</sub>.</>,
+            explanation: <>proves compactness, conjugation invariance, and the unit-disk bound at every order; for <i>n</i>≥2 it proves star-shapedness with respect to 0 and attainment of <i>R</i><sub>n</sub>; it also proves the exact unit-circle classification and the hypotheses used below when a maximizing point lies outside Θ<sub>n−1</sub>.</>,
           },
           {
             label: "Topic IX · Candidate curves from the Ito equation on Farey intervals",
@@ -313,7 +312,7 @@ export function TopicXIIIContent() {
             explanation: <>the required forms are defined at first use, and Lemma II.9.1 on radial functions of compact star-shaped sets is proved in full below.</>,
           },
         ]}
-        provedHere={<p>Lemma II.9.1 identifies a compact star-shaped set from its positive continuous radial function. Proposition II.9.2 proves orders 1–3. Theorem II.3.1 proves <i>R</i><sub>n</sub>=<i>K</i><sub>n</sub> for every order and then identifies the resulting curves with ∂Θ<sub>n</sub>.</p>}
+        provedHere={<p>Lemma II.9.1 identifies a compact star-shaped set from its positive continuous radial function. Proposition II.9.2 proves orders 1–3 directly. Theorem II.3.1 records Θ<sub>1</sub> and Θ<sub>2</sub> separately; for every <i>n</i>≥3 it proves <i>R</i><sub>n</sub>=<i>K</i><sub>n</sub> and identifies the resulting curves with ∂Θ<sub>n</sub>. At every order it classifies the unit-circle points.</p>}
       />
 
       <section className="topic-i-textbook proof-chapter-group">
@@ -327,7 +326,7 @@ export function TopicXIIIContent() {
         <ol className="topic-xiv-worked-steps">
           <li><span>1</span><div><h4>Topology</h4><p>Show that a positive continuous radial function identifies the actual boundary.</p></div></li>
           <li><span>2</span><div><h4>Base cases</h4><p>Compute orders one through three directly, without appealing to the induction.</p></div></li>
-          <li><span>3</span><div><h4>Induction</h4><p>For λ<sub>n</sub>=<i>R</i><sub>n</sub>(θ)<i>e</i><sup><i>iθ</i></sup>, treat separately λ<sub>n</sub>∉Θ<sub>n−1</sub> and λ<sub>n</sub>∈Θ<sub>n−1</sub>, proving <i>R</i><sub>n</sub>=<i>K</i><sub>n</sub> in both cases.</p></div></li>
+          <li><span>3</span><div><h4>Induction</h4><p>For <i>n</i>≥4 and λ<sub>n</sub>=<i>R</i><sub>n</sub>(θ)<i>e</i><sup><i>iθ</i></sup>, treat separately λ<sub>n</sub>∉Θ<sub>n−1</sub> and λ<sub>n</sub>∈Θ<sub>n−1</sub>, proving <i>R</i><sub>n</sub>=<i>K</i><sub>n</sub> in both cases.</p></div></li>
         </ol>
       </section>
 

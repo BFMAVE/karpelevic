@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { ProofTopicFigure } from "../components/ProofTopicFigure";
 import { Proposition22ExpandedProof } from "../components/Proposition22ExpandedProof";
 import { StrictPolygonExplainer } from "../components/StrictPolygonExplainer";
@@ -38,14 +37,26 @@ import {
   getPageTimestamp,
 } from "../lib/git-dates";
 import { sitePath } from "../lib/site-path";
+import { requiredGeneratedHtml } from "../lib/generated-content";
+import { createPageMetadata } from "../lib/site-metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "How the Proof Works",
   description:
     "Topic I of a fourteen-topic annotated proof that works from critical invariant polygons to the Karpelevič theorem in Ito's formulation.",
-};
+  pathname: "/proof/",
+});
 
-const pageTimestamp = getPageTimestamp("app/data/proof.ts");
+const pageTimestamp = getPageTimestamp([
+  "app/proof/page.tsx",
+  "app/data/proof.ts",
+  "app/data/topic-i-commentary.ts",
+  "app/data/part-i-content.generated.ts",
+  "app/components/TopicILocalExplainers.tsx",
+  "app/components/StrictPolygonExplainer.tsx",
+  "app/components/Proposition22ExpandedProof.tsx",
+  "public/proof.js",
+]);
 const firstPublishedAt = publicationDates.pages.topicI;
 const visibleProofTopics = proofTopics.slice(0, 1);
 const visibleTopicItems = getProofItems(
@@ -244,7 +255,7 @@ export default function ProofPage() {
         </nav>
       </header>
 
-      <main className="proof-page" id="main-content">
+      <main className="proof-page" id="main-content" tabIndex={-1}>
         <header className="proof-hero">
           <div>
             <p className="kicker">An annotated route through the argument</p>
@@ -273,6 +284,12 @@ export default function ProofPage() {
 
         <nav className="proof-chapter-atlas" aria-label="Fourteen proof topics">
           <p className="section-label">Proof topics</p>
+          <a
+            className="proof-chapter-prerequisite-link"
+            href={sitePath("/prerequisites/")}
+          >
+            Prerequisites for Topic I
+          </a>
           <ol>
             {proofReaderTopicLinks.map((link) => (
               <li key={link.topicNumber}>
@@ -371,6 +388,8 @@ export default function ProofPage() {
                     <p className="proof-topic-question">{topic.question}</p>
                     <div
                       className="proof-reading-mode"
+                      data-proof-reading-controls
+                      hidden
                       role="group"
                       aria-label="Reading mode"
                     >
@@ -697,9 +716,11 @@ export default function ProofPage() {
                       {definitionItems.map((item) => {
                         const commentary = topicICommentary[item.number];
                         const formalHtml = qualifyTopicIRoadmapLinks(
-                          topicIHtmlByItem[
-                            item.number as keyof typeof topicIHtmlByItem
-                          ],
+                          requiredGeneratedHtml(
+                            topicIHtmlByItem,
+                            item.number,
+                            "Topic I formal content",
+                          ),
                         );
 
                         return (
@@ -712,7 +733,7 @@ export default function ProofPage() {
                               <p className="section-label">
                                 {topicIManuscriptLabels[item.number]}
                               </p>
-                              <h5>{item.title}</h5>
+                              <h4>{item.title}</h4>
                               <p>
                                 {topicIReadingOverrides[item.number] ??
                                   item.reading}
@@ -766,7 +787,7 @@ export default function ProofPage() {
                                       <li key={detail.title}>
                                         <span>{index + 1}</span>
                                         <div>
-                                          <h6>{detail.title}</h6>
+                                          <h5>{detail.title}</h5>
                                           <p>{detail.text}</p>
                                         </div>
                                       </li>
@@ -812,9 +833,11 @@ export default function ProofPage() {
                         const commentary = topicICommentary[item.number];
                         const guide = topicIResultGuides[item.number];
                         const formalHtml = qualifyTopicIRoadmapLinks(
-                          topicIHtmlByItem[
-                            item.number as keyof typeof topicIHtmlByItem
-                          ],
+                          requiredGeneratedHtml(
+                            topicIHtmlByItem,
+                            item.number,
+                            "Topic I formal content",
+                          ),
                         );
                         const { statementHtml, proofHtml } =
                           splitFormalProof(formalHtml);
@@ -1083,8 +1106,9 @@ export default function ProofPage() {
         <noscript>
           <style>{`.proof-topic-panel[hidden]{display:block!important}`}</style>
           <p className="proof-noscript">
-            JavaScript is unavailable. Topic I remains fully readable, and
-            Topic II is available through the ordinary next-page link.
+            JavaScript is unavailable. Reading-mode controls are hidden, while
+            Topic I remains fully readable and Topic II remains available
+            through the ordinary next-page link.
           </p>
         </noscript>
 

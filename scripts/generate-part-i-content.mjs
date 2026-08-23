@@ -1,22 +1,24 @@
 import { execFileSync } from "node:child_process";
-import { createHash } from "node:crypto";
-import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  readCanonicalManuscript,
+  sha256,
+  writeOrCheckGeneratedFile,
+} from "./lib/manuscript-source.mjs";
 
 const projectRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "..",
 );
-const manuscriptPath =
-  process.env.PART_I_TEX_PATH ??
-  "/Users/brechtverbeken/Desktop/research/on arxiv or submitted/Karp/Files and check/arxiv/Complete_Karp_arXiv.tex";
+const { manuscriptPath, source, manuscriptHash } =
+  readCanonicalManuscript("PART_I_TEX_PATH");
+const checkMode = process.argv.includes("--check");
 const outputPath = path.join(
   projectRoot,
   "app/data/part-i-content.generated.ts",
 );
 
-const source = readFileSync(manuscriptPath, "utf8");
 const partEndMarker = "% ===== END UNCHANGED PART I TECHNICAL BODY =====";
 const partEnd = source.indexOf(partEndMarker);
 
@@ -797,7 +799,7 @@ const topicHtml = {
   spectra: html.slice(start(markers.stochastic)),
 };
 
-const sourceHash = createHash("sha256").update(source).digest("hex");
+const sourceHash = sha256(partISource);
 const statementCount = [...statementLabels.keys()].length;
 const proofCount = (html.match(/class="proof"/g) ?? []).length;
 const displayMathCount = (html.match(/<math display="block"/g) ?? []).length;
@@ -807,6 +809,7 @@ const generated = `// Generated mechanically from the canonical Part I TeX sourc
 export const partIContentMetadata = ${JSON.stringify(
   {
     sourceHash,
+    manuscriptHash,
     statementCount,
     proofCount,
     displayMathCount,
@@ -838,4 +841,9 @@ export const topicVIIHtmlByItem = ${JSON.stringify(topicVIIHtmlByItem)} as const
 export const partIMainTheoremHtmlById = ${JSON.stringify(partIMainTheoremHtmlById)} as const;
 `;
 
-writeFileSync(outputPath, generated, "utf8");
+writeOrCheckGeneratedFile({
+  outputPath,
+  generated,
+  check: checkMode,
+  regenerateCommand: "npm run content:part-i",
+});

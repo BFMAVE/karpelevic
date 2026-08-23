@@ -130,7 +130,7 @@ export const topicICommentary: Readonly<Record<number, TopicICommentary>> = {
       {
         title: "Cyclic labels",
         text:
-          "When the target boundary receives the orientation transported by A, the induced side bijection sends the next-side map s, the interior-contact side set I, and the cyclic shift σ to their corresponding maps and set on AP.",
+          "When the target boundary receives the orientation transported by A, the induced side bijection sends the next-side map succ, the interior-contact side set I, and the cyclic shift σ to their corresponding maps and set on AP.",
       },
     ],
     takeaway:

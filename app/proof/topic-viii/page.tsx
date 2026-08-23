@@ -1,20 +1,25 @@
-import type { Metadata } from "next";
 import { ProofChapterShell } from "../../components/proof/ProofChapterShell";
 import { TopicVIIIChapter } from "../../data/proof-topics/topics-viii-xi";
 import { publicationDates } from "../../data/publication-dates";
 import { getPageTimestamp } from "../../lib/git-dates";
+import { createPageMetadata } from "../../lib/site-metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Topic VIII — Returning to Stochastic Eigenvalue Regions",
   description:
     "A complete, illustrated account of Karpelevič regions, invariant polytopes, star-shapedness, and the N-criticality of radial boundary points new at a given matrix order.",
-};
+  pathname: "/proof/topic-viii/",
+});
 
 const updatedAt = getPageTimestamp([
+  "app/proof/topic-viii/page.tsx",
   "app/data/proof-topics/topics-viii-xi.tsx",
   "app/data/topics-viii-xi-reader.tsx",
   "app/data/part-ii-content.generated.ts",
   "app/data/topics-viii-xi-proofs.generated.ts",
+  "app/components/proof/ProofChapterShell.tsx",
+  "app/components/proof/ProofChapterReadingControls.tsx",
+  "public/proof-chapter.js",
 ]);
 const firstPublishedAt = publicationDates.pages.topicVIII;
 

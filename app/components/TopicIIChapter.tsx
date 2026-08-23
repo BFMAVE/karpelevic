@@ -16,6 +16,7 @@ import {
   SaturationGapExplainer,
 } from "./TopicIILocalExplainers";
 import { sitePath } from "../lib/site-path";
+import { requiredGeneratedHtml } from "../lib/generated-content";
 
 function resultNumber(label: string): string {
   return label.replace(/^(?:Proposition|Lemma|Theorem|Remark)\s+/, "");
@@ -220,7 +221,11 @@ function TopicIIResult({ itemNumber }: { itemNumber: number }) {
   const guide = topicIIResultGuides[itemNumber];
   const commentary = topicIICommentary[itemNumber];
   const formalHtml = qualifyTopicIImports(
-    topicIIHtmlByItem[itemNumber as keyof typeof topicIIHtmlByItem],
+    requiredGeneratedHtml(
+      topicIIHtmlByItem,
+      itemNumber,
+      "Topic II formal content",
+    ),
   );
   const { statementHtml, proofHtml } = splitFormalProof(formalHtml);
   const isRemark = item.kind === "Remark";
@@ -299,7 +304,7 @@ function TopicIIResult({ itemNumber }: { itemNumber: number }) {
         />
 
         {proofHtml ? (
-          <details className="topic-i-proof-disclosure">
+          <details className="topic-i-proof-disclosure proof-chapter-proof">
             <summary>
               <span>Proof</span>
               Open the complete proof of {guide.manuscriptLabel}
@@ -482,7 +487,7 @@ export function TopicIIChapter() {
               <li>
                 Earlier side-intersection arguments occur in
                 Dmitriev–Dynkin (1946), accessible in Swift’s 1972 thesis.
-                Theorem 3.2 proves the stronger version used here, which
+                Theorem 3.2 proves the formulation used here, which
                 applies to every invariant polygon with at most <i>N</i>{" "}
                 vertices.
               </li>

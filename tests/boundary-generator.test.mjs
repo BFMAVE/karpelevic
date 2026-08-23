@@ -12,7 +12,7 @@ import {
   radialBoundaryRadius,
   upperBoundary,
   upperFarey,
-} from "../public/code/karpelevic-boundary.js";
+} from "../public/code/karpelevic-boundary.mjs";
 import { composeTopicXIVRuntime } from "../scripts/lib/topic-xiv-runtime.mjs";
 
 function determinant(matrix) {
@@ -56,12 +56,14 @@ function nextUp(value) {
   return adjacentFloatView.getFloat64(0, false);
 }
 
-test("the downloadable module is byte-identical to the canonical numerical core", async () => {
-  const [canonical, published] = await Promise.all([
+test("the downloadable modules are byte-identical to the canonical numerical core", async () => {
+  const [canonical, published, legacyPublished] = await Promise.all([
     readFile(new URL("../app/lib/karpelevic-boundary-core.js", import.meta.url), "utf8"),
+    readFile(new URL("../public/code/karpelevic-boundary.mjs", import.meta.url), "utf8"),
     readFile(new URL("../public/code/karpelevic-boundary.js", import.meta.url), "utf8"),
   ]);
   assert.equal(published, canonical);
+  assert.equal(legacyPublished, canonical);
 });
 
 test("the composed classic-script runtime is strict, valid, and executable", async () => {
@@ -287,6 +289,30 @@ test("resolvable near-endpoint points retain open-interval radii", () => {
       }
     }
   }
+});
+
+test("subnormal strict-interior angles retain a positive bracket", () => {
+  const radius = itoArcRadius(
+    Number.MIN_VALUE,
+    { numerator: 0, denominator: 1 },
+    { numerator: 1, denominator: 15 },
+    15,
+  );
+
+  assert.ok(Number.isFinite(radius));
+  assert.ok(radius > 0 && radius < 1);
+});
+
+test("the denominator-order contract excludes the degenerate order-one pair", () => {
+  assert.throws(
+    () =>
+      fareyPairParameters(
+        { numerator: 0, denominator: 1 },
+        { numerator: 1, denominator: 1 },
+        1,
+      ),
+    RangeError,
+  );
 });
 
 test("endpoint subtraction preserves an ordinary adjacent binary64 point", () => {

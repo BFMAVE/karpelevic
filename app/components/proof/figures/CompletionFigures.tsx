@@ -37,8 +37,10 @@ function OrderThree() {
   const realAxisY = 235;
   const halfX = 235;
   const rightX = 550;
-  const topY = 55;
-  const bottomY = 415;
+  const unitScale = (rightX - halfX) / 1.5;
+  const omegaImaginaryOffset = unitScale * Math.sqrt(3) / 2;
+  const topY = realAxisY - omegaImaginaryOffset;
+  const bottomY = realAxisY + omegaImaginaryOffset;
   const minusOneX = 130;
   return (
     <>

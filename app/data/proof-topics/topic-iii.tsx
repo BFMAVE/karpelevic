@@ -16,14 +16,11 @@ const crossTopicLinks: Readonly<Record<string, string>> = {
   "lem:strict-separation": sitePath("/proof/#lem:strict-separation"),
   "lem:triple-sign-criterion": sitePath("/proof/topic-ii/#lem:triple-sign-criterion"),
   "thm:hereditary-saturation": sitePath("/proof/topic-ii/#thm:hereditary-saturation"),
+  "lem:contact-surgery": sitePath("/proof/topic-iv/#lem:contact-surgery"),
 };
 
 function repairCrossTopicLinks(html: string): string {
-  const withoutUnpublishedLink = html.replace(
-    /<a\b[^>]*href="#lem:contact-surgery"[^>]*>[\s\S]*?<\/a>/g,
-    '<span class="proof-forthcoming-reference">Topic IV, forthcoming</span>',
-  );
-  const withReaderTitles = withoutUnpublishedLink.replaceAll(
+  const withReaderTitles = html.replaceAll(
     "Assignment to half-open sides",
     "Right-half-open side convention",
   );

@@ -102,6 +102,8 @@
 
       setMode(chapter.dataset.chapterReadingMode, false);
       updateProofButtons();
+      controls.dataset.enhanced = "true";
+      controls.hidden = false;
     });
   }
 

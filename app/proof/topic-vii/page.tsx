@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { AdvancedProofChapter } from "../../components/proof/AdvancedProofChapter";
 import {
   topicVIIBackground,
@@ -9,15 +8,26 @@ import {
 } from "../../data/topic-vii-reader";
 import { publicationDates } from "../../data/publication-dates";
 import { getPageTimestamp } from "../../lib/git-dates";
+import { createPageMetadata } from "../../lib/site-metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title:
     "Topic VII — Consecutive Farey Fractions and the Finite Product Equation for N≥4",
   description:
     "For N≥4, a complete guided derivation of consecutive Farey fractions, finite recurrence and product equations, and bounds for chosen real arguments of the factors.",
-};
+  pathname: "/proof/topic-vii/",
+});
 
-const updatedAt = getPageTimestamp("app/data/topic-vii-reader.tsx");
+const updatedAt = getPageTimestamp([
+  "app/proof/topic-vii/page.tsx",
+  "app/data/topic-vii-reader.tsx",
+  "app/data/topic-v-vii-html.ts",
+  "app/data/part-i-content.generated.ts",
+  "app/components/proof/AdvancedProofChapter.tsx",
+  "app/components/proof/ProofChapterShell.tsx",
+  "app/components/proof/ProofChapterReadingControls.tsx",
+  "public/proof-chapter.js",
+]);
 const firstPublishedAt = publicationDates.pages.topicVII;
 
 export default function TopicVIIPage() {

@@ -8,7 +8,7 @@ export async function readCanonicalBoundarySource(projectRoot) {
   );
   const publicPath = path.join(
     projectRoot,
-    "public/code/karpelevic-boundary.js",
+    "public/code/karpelevic-boundary.mjs",
   );
   const [canonical, published] = await Promise.all([
     readFile(canonicalPath, "utf8"),

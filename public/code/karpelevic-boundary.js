@@ -4,7 +4,7 @@
  * This dependency-free module is the single numerical source used by the
  * website, the GitHub Pages controller, and the downloadable source file.
  * `scripts/generate-boundary-module.mjs` copies it byte-for-byte to
- * `public/code/karpelevic-boundary.js`.
+ * `public/code/karpelevic-boundary.mjs` (with a legacy `.js` copy).
  *
  * Exact combinatorial data: reduced Farey fractions, consecutive pairs,
  * endpoint relabelling, and the integers d=floor(n/q) and e=s-dq.
@@ -83,6 +83,11 @@ export function upperFarey(order) {
 
 export function fareyPairParameters(left, right, order) {
   const n = exactOrder(order);
+  if (n < 2) {
+    throw new RangeError(
+      "fareyPairParameters requires order at least 2 so the relabelled denominators satisfy q < s",
+    );
+  }
   const leftFraction = reducedFraction(left, "left");
   const rightFraction = reducedFraction(right, "right");
   const determinant =
@@ -213,15 +218,17 @@ export function itoArcRadius(
   const lowerResidual = residual(0);
   // This factored identity avoids catastrophic cancellation in
   // sin(A)+sin(B)-sin(A+B) at representable points next to an endpoint.
-  const upperResidual =
-    4 *
-    sineOfPiMultiple(aOverPi / 2) *
-    sineOfPiMultiple(bOverPi / 2) *
-    sineOfPiMultiple((aOverPi + bOverPi) / 2);
+  const upperResidualFactors = [
+    sineOfPiMultiple(aOverPi / 2),
+    sineOfPiMultiple(bOverPi / 2),
+    sineOfPiMultiple((aOverPi + bOverPi) / 2),
+  ];
   if (
     !Number.isFinite(lowerResidual) ||
-    !Number.isFinite(upperResidual) ||
-    !(lowerResidual < 0 && upperResidual > 0)
+    !(lowerResidual < 0) ||
+    !upperResidualFactors.every(
+      (factor) => Number.isFinite(factor) && factor > 0,
+    )
   ) {
     throw new RangeError(
       "the scalar radial equation must have a finite sign-changing bracket on (0,1)",

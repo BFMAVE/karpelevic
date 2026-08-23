@@ -390,12 +390,12 @@ async function inlineTopicXIVBoundaryDownload(html) {
     "utf8",
   ).toString("base64")}`;
   const sourceInlined = html.replace(
-    /href="(?:https:\/\/bfmave\.github\.io\/karpelevic)?\/code\/karpelevic-boundary\.js"/i,
+    /href="(?:https:\/\/bfmave\.github\.io\/karpelevic)?\/code\/karpelevic-boundary\.mjs"/i,
     `href="${sourceDataUrl}" data-standalone-boundary-download data-standalone-boundary-source-download`,
   );
   const sourceNamed = sourceInlined.replace(
     /(<a\b[^>]*\bdata-standalone-boundary-source-download\b[^>]*?)\sdownload(?:="[^"]*")?/i,
-    '$1 download="karpelevic-boundary.js"',
+    '$1 download="karpelevic-boundary.mjs"',
   );
   const testInlined = sourceNamed.replace(
     /href="(?:https:\/\/bfmave\.github\.io\/karpelevic)?\/code\/karpelevic-boundary\.test\.mjs"/i,
@@ -1125,7 +1125,7 @@ function verifyStandaloneHtml(html) {
       );
     }
     if (
-      !/href="data:text\/javascript;charset=utf-8;base64,[^"]+" data-standalone-boundary-download data-standalone-boundary-source-download[^>]*download="karpelevic-boundary\.js"/i.test(
+      !/href="data:text\/javascript;charset=utf-8;base64,[^"]+" data-standalone-boundary-download data-standalone-boundary-source-download[^>]*download="karpelevic-boundary\.mjs"/i.test(
         html,
       )
     ) {
@@ -1200,10 +1200,16 @@ function verifyStandaloneHtml(html) {
       }
     }
 
+    const anchorTargets = [
+      ...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/gi),
+    ].map((match) => match[1]);
+
     for (const [route, topicNumber] of proofTopicNumbers) {
       if (
         explicitlyBundledTopicNumbers.has(topicNumber) &&
-        html.includes(`href="${publicSite}${route}/`)
+        anchorTargets.some((target) =>
+          target.startsWith(`${publicSite}${route}/`),
+        )
       ) {
         throw new Error(
           `A standalone bundle chapter still links publicly to bundled Topic ${topicNumber}.`,

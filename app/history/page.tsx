@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { historyContent, historyReferences } from "../data/history";
 import { primaryNavigation } from "../data/home";
 import { publicationDates } from "../data/publication-dates";
@@ -8,14 +7,19 @@ import {
   getPageTimestamp,
 } from "../lib/git-dates";
 import { sitePath } from "../lib/site-path";
+import { createPageMetadata } from "../lib/site-metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "History",
   description:
     "A sourced history of the Karpelevič problem, from invariant polygons to the theorem in Ito’s formulation and realizing stochastic matrices.",
-};
+  pathname: "/history/",
+});
 
-const pageTimestamp = getPageTimestamp("app/data/history.ts");
+const pageTimestamp = getPageTimestamp([
+  "app/history/page.tsx",
+  "app/data/history.ts",
+]);
 const buildTimestamp = getBuildTimestamp();
 const firstPublished = publicationDates.pages.history;
 const referenceNumbers = new Map(
@@ -85,7 +89,7 @@ export default function HistoryPage() {
         </nav>
       </header>
 
-      <main className="history-page" id="main-content">
+      <main className="history-page" id="main-content" tabIndex={-1}>
         <header className="history-hero">
           <div className="history-hero-title">
             <p className="kicker">History of the problem</p>

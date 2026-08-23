@@ -118,7 +118,11 @@ function redirectPage(target, title, message) {
 function makeStatic(html, requestPath) {
   const withoutScripts = html
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
-    .replace(/<link\b[^>]*rel="modulepreload"[^>]*>/gi, "");
+    .replace(/<link\b[^>]*rel="modulepreload"[^>]*>/gi, "")
+    .replace(
+      /<link\b(?=[^>]*\brel="preload")(?=[^>]*\bas="font")[^>]*>/gi,
+      "",
+    );
   const withProjectAssets = withoutScripts.replaceAll(
     "/assets/",
     `${basePath}/assets/`,
@@ -173,6 +177,25 @@ await cp(path.join(projectRoot, "dist/client"), outputRoot, {
   recursive: true,
 });
 
+await Promise.all([
+  rm(path.join(outputRoot, "_headers"), { force: true }),
+  rm(path.join(outputRoot, ".assetsignore"), { force: true }),
+]);
+
+const fontRoot = path.join(outputRoot, "assets/_vinext_fonts");
+try {
+  for (const entry of await readdir(fontRoot, { withFileTypes: true })) {
+    if (entry.isDirectory() && /^geist(?:-mono)?-/.test(entry.name)) {
+      await rm(path.join(fontRoot, entry.name), {
+        force: true,
+        recursive: true,
+      });
+    }
+  }
+} catch (error) {
+  if (error?.code !== "ENOENT") throw error;
+}
+
 // The Pages edition uses server-rendered HTML plus small explicit controllers.
 // Remove build metadata and framework client bundles, while retaining the
 // readable source and regression-test files under /code.
@@ -217,3 +240,20 @@ for (const redirect of compatibilityRedirects) {
 }
 
 await writeFile(path.join(outputRoot, ".nojekyll"), "", "utf8");
+
+const canonicalUrls = routes.map(({ requestPath }) =>
+  requestPath === "/"
+    ? "https://bfmave.github.io/karpelevic/"
+    : `https://bfmave.github.io/karpelevic${requestPath}/`,
+);
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${canonicalUrls.map((url) => `  <url><loc>${url}</loc></url>`).join("\n")}
+</urlset>
+`;
+await writeFile(path.join(outputRoot, "sitemap.xml"), sitemap, "utf8");
+await writeFile(
+  path.join(outputRoot, "robots.txt"),
+  "User-agent: *\nAllow: /karpelevic/\nSitemap: https://bfmave.github.io/karpelevic/sitemap.xml\n",
+  "utf8",
+);

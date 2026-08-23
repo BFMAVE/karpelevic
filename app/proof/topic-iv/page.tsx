@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { ProofChapterShell } from "../../components/proof/ProofChapterShell";
 import { ProofSourceShelf } from "../../components/proof/ProofSourceShelf";
 import {
@@ -7,14 +6,23 @@ import {
 } from "../../data/proof-topics/topic-iv";
 import { publicationDates } from "../../data/publication-dates";
 import { getPageTimestamp } from "../../lib/git-dates";
+import { createPageMetadata } from "../../lib/site-metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Topic IV — From Endpoint Order to One Interval of Relative-Interior Contacts",
   description:
     "A complete, illustrated account of consistent half-open contact assignment, exact vertex replacement, permitted updates of a cyclic index set, and reduction to one interval of relative-interior contacts.",
-};
+  pathname: "/proof/topic-iv/",
+});
 
-const updatedAt = getPageTimestamp("app/data/proof-topics/topic-iv.tsx");
+const updatedAt = getPageTimestamp([
+  "app/proof/topic-iv/page.tsx",
+  "app/data/proof-topics/topic-iv.tsx",
+  "app/data/part-i-content.generated.ts",
+  "app/components/proof/ProofChapterShell.tsx",
+  "app/components/proof/ProofChapterReadingControls.tsx",
+  "public/proof-chapter.js",
+]);
 const firstPublishedAt = publicationDates.pages.topicIV;
 
 export default function TopicIVPage() {

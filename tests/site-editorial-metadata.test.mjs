@@ -33,6 +33,22 @@ test("archival links distinguish the Zenodo record from the website edition", as
   assert.doesNotMatch(journeyPage, /current paper on Zenodo/);
 });
 
+test("rights notices preserve the archival v1 CC BY 4.0 license", async () => {
+  const [rights, publicRights, readme] = await Promise.all([
+    source("RIGHTS.md"),
+    source("public/RIGHTS.txt"),
+    source("README.md"),
+  ]);
+
+  for (const notice of [rights, publicRights]) {
+    assert.match(notice, /10\.5281\/zenodo\.21529144/);
+    assert.match(notice, /CC BY 4\.0/);
+    assert.match(notice, /continues to\s+govern the archived edition/);
+  }
+  assert.match(readme, /archived 24 July 2026 manuscript v1 is licensed CC BY 4\.0/);
+  assert.doesNotMatch(readme, /^No open license has been selected\./m);
+});
+
 test("history states the finite root-of-unity set and literal Farey arithmetic", async () => {
   const [historyPage, historyData] = await Promise.all([
     source("app/history/page.tsx"),

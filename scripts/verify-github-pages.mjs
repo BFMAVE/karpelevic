@@ -16,8 +16,9 @@ const visibleTextFromHtml = (html) =>
     .replace(/<[^>]*>/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const pages = [
-  ["index.html", "Under construction"],
+  ["index.html", "Working edition"],
   ["history/index.html", "How a geometric question became an arithmetic boundary"],
   ["journey/index.html", "An eigenvalue region for Leslie matrices"],
   ["proof/index.html", "How the Proof Works"],
@@ -103,8 +104,22 @@ const firstPublicationDates = new Map([
 for (const [relativePath, expectedText] of pages) {
   const html = await readFile(path.join(outputRoot, relativePath), "utf8");
   const visibleText = visibleTextFromHtml(html);
+  const routePath =
+    relativePath === "index.html"
+      ? ""
+      : relativePath.replace(/index\.html$/, "");
+  const canonicalUrl = `https://bfmave.github.io/karpelevic/${routePath}`;
 
   assert.match(html, new RegExp(expectedText));
+  assert.match(
+    html,
+    new RegExp(`<link rel="canonical" href="${escapeRegExp(canonicalUrl)}"`),
+  );
+  assert.match(
+    html,
+    new RegExp(`<meta property="og:url" content="${escapeRegExp(canonicalUrl)}"`),
+  );
+  assert.match(html, /<meta name="twitter:card" content="summary"/);
   assert.match(visibleText, /Website online since\s+28 July 2026/);
   assert.match(visibleText, /Last revised\s+\d{1,2} [A-Z][a-z]+ 20\d{2}/);
   assert.doesNotMatch(visibleText, /Site build|Last updated/);
@@ -116,6 +131,10 @@ for (const [relativePath, expectedText] of pages) {
   }
   assert.doesNotMatch(html, /(?:href|src)="\/assets\//);
   assert.doesNotMatch(html, /<script\b[^>]*>self\.__VINEXT/);
+  assert.doesNotMatch(
+    html,
+    /<link\b(?=[^>]*\brel="preload")(?=[^>]*\bas="font")[^>]*>/i,
+  );
   assert.match(html, /\/karpelevic\/assets\//);
   assert.match(html, /\/karpelevic\/contact\.js/);
   if (relativePath === "proof/index.html") {
@@ -147,6 +166,17 @@ for (const [relativePath, expectedText] of pages) {
   assert.match(visibleText, /Last revised\s+23 August 2026/);
   assert.match(visibleText, /110-page site-hosted PDF/);
   assert.doesNotMatch(html, />Prepared</);
+  assert.match(html, /<meta name="citation_title"/);
+  assert.equal(
+    [...html.matchAll(/<meta name="citation_author"/g)].length,
+    2,
+    "The scholarly landing page must identify both authors.",
+  );
+  assert.match(html, /<meta name="citation_publication_date" content="2026\/07\/24"/);
+  assert.match(
+    html,
+    /<meta name="citation_pdf_url" content="https:\/\/bfmave\.github\.io\/karpelevic\/paper\/critical-invariant-polygons\.pdf"/,
+  );
 }
 
 {
@@ -615,7 +645,7 @@ for (const relativePath of [
   assert.match(html, /data-worked-boundary-point/);
   assert.match(visibleText, /marked endpoint is the complex point\s+λ=/i);
   assert.match(visibleText, /ρ is the unique solution/i);
-  assert.match(html, /href="\/karpelevic\/code\/karpelevic-boundary\.js"/);
+  assert.match(html, /href="\/karpelevic\/code\/karpelevic-boundary\.mjs"/);
   assert.match(html, /href="\/karpelevic\/code\/karpelevic-boundary\.test\.mjs"/);
   assert.match(html, /data-boundary-order-input/);
   assert.match(html, /Enter an integer from 1 to 40/i);
@@ -756,10 +786,23 @@ await access(path.join(outputRoot, "proof.js"));
 await access(path.join(outputRoot, "proof-chapter.js"));
 await access(path.join(outputRoot, "topic-xiv.js"));
 await access(path.join(outputRoot, "code/karpelevic-boundary.js"));
+await access(path.join(outputRoot, "code/karpelevic-boundary.mjs"));
 await access(path.join(outputRoot, "code/karpelevic-boundary.test.mjs"));
 await access(path.join(outputRoot, ".nojekyll"));
+await access(path.join(outputRoot, "paper/critical-invariant-polygons.pdf"));
+const rightsNotice = await readFile(path.join(outputRoot, "RIGHTS.txt"), "utf8");
+assert.match(rightsNotice, /10\.5281\/zenodo\.21529144/);
+assert.match(rightsNotice, /CC BY 4\.0/);
+assert.match(rightsNotice, /continues to\s+govern the archived edition/);
+await access(path.join(outputRoot, "robots.txt"));
+await access(path.join(outputRoot, "sitemap.xml"));
 
 await assert.rejects(access(path.join(outputRoot, ".vite")));
+await assert.rejects(access(path.join(outputRoot, "_headers")));
+await assert.rejects(access(path.join(outputRoot, ".assetsignore")));
+await assert.rejects(access(path.join(outputRoot, "file.svg")));
+await assert.rejects(access(path.join(outputRoot, "globe.svg")));
+await assert.rejects(access(path.join(outputRoot, "window.svg")));
 await access(path.join(outputRoot, "proof/topic-xiii/index.html"));
 await access(path.join(outputRoot, "proof/topic-xiv/index.html"));
 await access(path.join(outputRoot, "proof/topic-xii/a/index.html"));
@@ -770,4 +813,40 @@ assert.equal(
   publicAssetEntries.some((entry) => entry.endsWith(".js")),
   false,
   "The public static asset directory must not expose later-topic client bundles.",
+);
+
+const fontRoot = path.join(outputRoot, "assets/_vinext_fonts");
+try {
+  const fontEntries = await readdir(fontRoot);
+  assert.equal(
+    fontEntries.some((entry) => /^geist(?:-mono)?-/.test(entry)),
+    false,
+    "Unused Geist font families must not be shipped.",
+  );
+} catch (error) {
+  if (error?.code !== "ENOENT") throw error;
+}
+
+{
+  const sitemap = await readFile(path.join(outputRoot, "sitemap.xml"), "utf8");
+  const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
+    (match) => match[1],
+  );
+  assert.equal(urls.length, 18, "The sitemap must contain all 18 primary routes.");
+  assert.equal(new Set(urls).size, 18, "Sitemap URLs must be unique.");
+  assert.deepEqual(
+    urls,
+    pages.map(([relativePath]) => {
+      const routePath =
+        relativePath === "index.html"
+          ? ""
+          : relativePath.replace(/index\.html$/, "");
+      return `https://bfmave.github.io/karpelevic/${routePath}`;
+    }),
+  );
+}
+
+assert.equal(
+  await readFile(path.join(outputRoot, "robots.txt"), "utf8"),
+  "User-agent: *\nAllow: /karpelevic/\nSitemap: https://bfmave.github.io/karpelevic/sitemap.xml\n",
 );

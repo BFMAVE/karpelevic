@@ -204,7 +204,7 @@ export function Proposition22ExpandedProof() {
 
         <ol className="topic-i-expanded-proof-steps">
           <li>
-            <h6>The candidate polygons correspond bijectively.</h6>
+            <h4>The candidate polygons correspond bijectively.</h4>
             <p>
               The assignment <i>P</i> ↦ <i>AP</i> has inverse{" "}
               <i>Q</i> ↦ <i>A</i>
@@ -219,7 +219,7 @@ export function Proposition22ExpandedProof() {
           </li>
 
           <li>
-            <h6>The correspondence preserves extreme points.</h6>
+            <h4>The correspondence preserves extreme points.</h4>
             <p>
               Suppose <i>x</i> is extreme in <i>P</i> and{" "}
               <i>Ax</i> = <i>s y</i>
@@ -249,7 +249,7 @@ export function Proposition22ExpandedProof() {
           </li>
 
           <li>
-            <h6>Invariance is transported exactly.</h6>
+            <h4>Invariance is transported exactly.</h4>
             <p>
               Applying an injective map preserves and reflects set inclusion.
               Therefore
@@ -264,7 +264,7 @@ export function Proposition22ExpandedProof() {
           </li>
 
           <li>
-            <h6>The two minimisation problems are identical.</h6>
+            <h4>The two minimisation problems are identical.</h4>
             <p>
               We have a bijection between all polygons satisfying{" "}
               <i>TP</i>⊆<i>P</i> and all polygons satisfying the corresponding
@@ -278,7 +278,7 @@ export function Proposition22ExpandedProof() {
           </li>
 
           <li>
-            <h6>Radial criticality is preserved as well.</h6>
+            <h4>Radial criticality is preserved as well.</h4>
             <p>For every scalar <i>t</i>&gt;0,</p>
             <ScalingEquation />
             <p>
@@ -297,7 +297,7 @@ export function Proposition22ExpandedProof() {
           </li>
 
           <li>
-            <h6>The adjoint identity is the reflection case.</h6>
+            <h4>The adjoint identity is the reflection case.</h4>
             <p>
               Proposition 2.1 supplies an orientation-reversing reflection{" "}
               <i>S</i> in the adapted inner product such that{" "}

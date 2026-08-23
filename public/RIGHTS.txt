@@ -1,0 +1,18 @@
+RIGHTS AND REUSE
+
+Copyright (c) 2026 Brecht Verbeken and Vincent Ginis.
+
+The 93-page archival v1 deposited on 24 July 2026 at
+https://doi.org/10.5281/zenodo.21529144 was released under the Creative Commons
+Attribution 4.0 International license (CC BY 4.0). That license continues to
+govern the archived edition and material reused from it.
+
+Except where that existing license applies or an item states otherwise, no
+additional open-source or open-content license is granted for this repository,
+later website-only revisions, newly created figures, or the downloadable
+numerical code. Their public availability does not by itself grant permission
+for redistribution, adaptation, or republication. Contact the authors to
+request permission for material not already covered by CC BY 4.0.
+
+The cited third-party works retain their respective rights. Standard
+exceptions and limitations under applicable law are unaffected.

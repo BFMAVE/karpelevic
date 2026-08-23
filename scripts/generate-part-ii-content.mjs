@@ -1,16 +1,18 @@
 import { execFileSync } from "node:child_process";
-import { createHash } from "node:crypto";
-import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  readCanonicalManuscript,
+  sha256,
+  writeOrCheckGeneratedFile,
+} from "./lib/manuscript-source.mjs";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const manuscriptPath =
-  process.env.PART_II_TEX_PATH ??
-  "/Users/brechtverbeken/Desktop/research/on arxiv or submitted/Karp/Files and check/arxiv/Complete_Karp_arXiv.tex";
+const { manuscriptPath, source, manuscriptHash } =
+  readCanonicalManuscript("PART_II_TEX_PATH");
+const checkMode = process.argv.includes("--check");
 const outputPath = path.join(projectRoot, "app/data/part-ii-content.generated.ts");
 
-const source = readFileSync(manuscriptPath, "utf8");
 const beginDocument = source.indexOf("\\begin{document}");
 const partStartMarker = "% ===== BEGIN NAMESPACED PART II TECHNICAL BODY =====";
 const partEndMarker = "% ===== END NAMESPACED PART II TECHNICAL BODY =====";
@@ -354,7 +356,8 @@ const orderSevenHtml = html.slice(orderSevenStart, concludingStart);
 
 const generated = `// Generated mechanically from the canonical Part II TeX source.\n// Regenerate with: npm run content:part-ii\nexport const partIIContentMetadata = ${JSON.stringify(
   {
-    sourceHash: createHash("sha256").update(source).digest("hex"),
+    sourceHash: sha256(partIISource),
+    manuscriptHash,
     statementCount: statementLabels.size,
     equationCount: equationLabels.size,
   },
@@ -362,4 +365,9 @@ const generated = `// Generated mechanically from the canonical Part II TeX sour
   2,
 )} as const;\n\nexport const partIIHtmlByLabel = ${JSON.stringify(partIIHtmlByLabel)} as const;\n\nexport const partIIProofHtmlByLabel = ${JSON.stringify(partIIProofHtmlByLabel)} as const;\n\nexport const partIIMainTheoremProofHtml = ${JSON.stringify(mainTheoremProofHtml)} as const;\n\nexport const partIIOrderSevenHtml = ${JSON.stringify(orderSevenHtml)} as const;\n`;
 
-writeFileSync(outputPath, generated, "utf8");
+writeOrCheckGeneratedFile({
+  outputPath,
+  generated,
+  check: checkMode,
+  regenerateCommand: "npm run content:part-ii",
+});

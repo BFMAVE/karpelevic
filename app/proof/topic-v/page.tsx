@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { AdvancedProofChapter } from "../../components/proof/AdvancedProofChapter";
 import {
   topicVBackground,
@@ -9,14 +8,25 @@ import {
 } from "../../data/topic-v-reader";
 import { publicationDates } from "../../data/publication-dates";
 import { getPageTimestamp } from "../../lib/git-dates";
+import { createPageMetadata } from "../../lib/site-metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Topic V — Rotation Arithmetic, the First-Return Decomposition, and Projective Preparation",
   description:
     "A complete guided account of finite rotation records for N≥2 and the projective construction used in Topic VI to prove Δ=1 for N≥4.",
-};
+  pathname: "/proof/topic-v/",
+});
 
-const updatedAt = getPageTimestamp("app/data/topic-v-reader.tsx");
+const updatedAt = getPageTimestamp([
+  "app/proof/topic-v/page.tsx",
+  "app/data/topic-v-reader.tsx",
+  "app/data/topic-v-vii-html.ts",
+  "app/data/part-i-content.generated.ts",
+  "app/components/proof/AdvancedProofChapter.tsx",
+  "app/components/proof/ProofChapterShell.tsx",
+  "app/components/proof/ProofChapterReadingControls.tsx",
+  "public/proof-chapter.js",
+]);
 const firstPublishedAt = publicationDates.pages.topicV;
 
 export default function TopicVPage() {

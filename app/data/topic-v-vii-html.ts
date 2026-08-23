@@ -6,6 +6,7 @@ import {
   topicVIIHtmlByItem,
 } from "./part-i-content.generated";
 import { sitePath } from "../lib/site-path";
+import { requiredGeneratedHtml } from "../lib/generated-content";
 
 type HtmlMap = Readonly<Record<number, string>>;
 type ProofIdMap = Readonly<Record<number, string>>;
@@ -300,17 +301,23 @@ export const topicVCorridorDictionary = {
 export const topicVFormalSetups = [topicVRotationSetup] as const;
 
 const topicVIAStatements = Object.fromEntries(
-  [45, 46, 47].map((key) => [String(key), topicVIHtmlByItem[key]]),
+  [45, 46, 47].map((key) => [
+    String(key),
+    requiredGeneratedHtml(topicVIHtmlByItem, key, "Topic VI formal content"),
+  ]),
 );
 
 const topicVIBStatements = Object.fromEntries(
-  [48, 49, 50, 51, 52].map((key) => [String(key), topicVIHtmlByItem[key]]),
+  [48, 49, 50, 51, 52].map((key) => [
+    String(key),
+    requiredGeneratedHtml(topicVIHtmlByItem, key, "Topic VI formal content"),
+  ]),
 );
 
 const topicVIStatements = Object.fromEntries(
   [45, 46, 47, 48, 49, 50, 51, 52].map((key) => [
     String(key),
-    topicVIHtmlByItem[key],
+    requiredGeneratedHtml(topicVIHtmlByItem, key, "Topic VI formal content"),
   ]),
 );
 

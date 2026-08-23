@@ -4,6 +4,7 @@ export function ProofChapterReadingControls() {
       className="proof-chapter-reading-controls"
       aria-labelledby="proof-chapter-reading-controls-heading"
       data-proof-chapter-controls
+      hidden
     >
       <div>
         <p className="section-label">Reading controls</p>

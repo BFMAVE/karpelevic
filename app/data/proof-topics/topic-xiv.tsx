@@ -293,8 +293,9 @@ export function TopicXIVContent() {
                 direct sum with the 1×1 matrix [1] is row-stochastic of order
                 seven. In the leading block, the cycles 1→2→3→1 and
                 4→5→6→4 have entry products β, while 2→3→4→5→6→2 has
-                entry product α<sup>2</sup>. The directed-cycle determinant
-                expansion gives the
+                entry product α<sup>2</sup>. Expanding the determinant by
+                permutations, equivalently by the pairwise vertex-disjoint
+                directed cycles listed above, gives the
                 characteristic polynomial (t−1)((t<sup>3</sup>−β)<sup>2</sup>
                 −α<sup>2</sup>t). Since λ satisfies
                 (λ<sup>3</sup>−β)<sup>2</sup>=α<sup>2</sup>λ, it follows that
@@ -336,17 +337,20 @@ export function TopicXIVContent() {
           </div>
         </div>
         <nav className="topic-xiv-download" aria-label="Boundary generator source files">
-          <a href={sitePath("/code/karpelevic-boundary.js")} download>
+          <a href={sitePath("/code/karpelevic-boundary.mjs")} download>
             Download source module
           </a>
           <a href={sitePath("/code/karpelevic-boundary.test.mjs")} download>
             Download regression tests
           </a>
-          <a href="https://github.com/BFMAVE/karpelevic/blob/main/code/karpelevic-boundary.js">
+          <a href="https://github.com/BFMAVE/karpelevic/blob/main/public/code/karpelevic-boundary.mjs">
             View source on GitHub
           </a>
-          <a href="https://github.com/BFMAVE/karpelevic/blob/main/code/karpelevic-boundary.test.mjs">
+          <a href="https://github.com/BFMAVE/karpelevic/blob/main/public/code/karpelevic-boundary.test.mjs">
             View tests on GitHub
+          </a>
+          <a href={sitePath("/RIGHTS.txt")}>
+            Usage and reuse terms
           </a>
         </nav>
         <p>

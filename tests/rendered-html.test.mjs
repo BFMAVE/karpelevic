@@ -67,7 +67,8 @@ test("server-renders the scholarly Home page", async () => {
     /class="primary-navigation"[\s\S]*?href="(?:\/karpelevic)?\/proof\/">The Proof/,
   );
   assert.match(html, /Where can a stochastic eigenvalue live/);
-  assert.match(html, /Under construction/);
+  assert.match(html, /Working edition/);
+  assert.doesNotMatch(html, /Under construction/);
   assert.match(html, /role="status"/);
   assert.match(html, /Determine Θ/);
   assert.match(html, /Why this site exists/);
@@ -80,7 +81,7 @@ test("server-renders the scholarly Home page", async () => {
   assert.match(html, /How this site is being made/);
   assert.match(html, /generative-AI assistance/);
   assert.match(html, /Why is this paper not on arXiv/);
-  assert.match(html, /currently in the moderation queue/);
+  assert.match(html, /manuscript is awaiting arXiv moderation/);
   assert.match(html, /href="https:\/\/zenodo\.org\/records\/21529144"/);
   const homeText = visibleText(html);
   assert.match(homeText, /Archival Zenodo record/);
@@ -113,7 +114,8 @@ test("server-renders the scholarly Home page", async () => {
   assert.doesNotMatch(html, /No\. I · 2026/);
   assert.doesNotMatch(html, /Local manuscript/);
   assert.doesNotMatch(html, /Zenodo · forthcoming/);
-  assert.doesNotMatch(html, /@gmail\.com/);
+  assert.doesNotMatch(html, /mailto:brecht\.verbeken@gmail\.com/);
+  assert.match(html, /mailto:brecht\.verbeken%40gmail\.com/);
   assert.doesNotMatch(html, /href="\/contribution\/"/);
   assert.doesNotMatch(html, /Continue to the full introduction/);
   assert.doesNotMatch(html, /footer-navigation/);
@@ -324,7 +326,8 @@ test("server-renders the Part I proof reader", async () => {
   assert.doesNotMatch(html, /Before beginning Topic I/);
   assert.doesNotMatch(html, /The small library this reader assumes/);
   assert.doesNotMatch(html, /class="proof-prerequisites"/);
-  assert.doesNotMatch(html, /href="(?:\/karpelevic)?\/prerequisites\//);
+  assert.match(html, /href="(?:\/karpelevic)?\/prerequisites\//);
+  assert.match(html, /Prerequisites for Topic I/);
   assert.match(html, /The objects, one at a time/);
   assert.match(html, /Real plane/);
   assert.match(html, /Real-linear map/);
@@ -970,12 +973,16 @@ test("server-renders the Part I proof reader", async () => {
     9,
   );
   assert.equal(
-    (topicIIPanelHtml.match(/class="topic-i-proof-disclosure"/g) ?? []).length,
+    (
+      topicIIPanelHtml.match(
+        /class="topic-i-proof-disclosure proof-chapter-proof"/g,
+      ) ?? []
+    ).length,
     9,
   );
   assert.doesNotMatch(
     topicIIPanelHtml,
-    /class="topic-i-proof-disclosure" open/,
+    /class="topic-i-proof-disclosure proof-chapter-proof" open/,
   );
   assert.equal(
     (

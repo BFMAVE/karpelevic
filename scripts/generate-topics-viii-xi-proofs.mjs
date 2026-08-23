@@ -22,6 +22,11 @@ source = source.replace(
   'const outputPath = path.join(projectRoot, "app/data/topics-viii-xi-proofs.generated.ts");',
 );
 
+source = source.replace(
+  'regenerateCommand: "npm run content:part-ii"',
+  'regenerateCommand: "npm run content:part-ii-reader"',
+);
+
 const extractionAnchor = `const partIIHtmlByLabel = Object.fromEntries(
   labels.map(([id, kind]) => [id, statementBlock(id, kind)]),
 );`;
@@ -84,10 +89,14 @@ source = source.replace(outputAnchor, outputReplacement);
 
 writeFileSync(temporaryGeneratorPath, source, "utf8");
 try {
-  execFileSync(process.execPath, [temporaryGeneratorPath], {
+  execFileSync(
+    process.execPath,
+    [temporaryGeneratorPath, ...(process.argv.includes("--check") ? ["--check"] : [])],
+    {
     cwd: projectRoot,
     stdio: "inherit",
-  });
+    },
+  );
 } finally {
   unlinkSync(temporaryGeneratorPath);
 }

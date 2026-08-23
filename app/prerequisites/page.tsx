@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { PrerequisitePlate } from "../components/PrerequisitePlate";
 import { primaryNavigation } from "../data/home";
 import { publicationDates } from "../data/publication-dates";
@@ -14,14 +13,19 @@ import {
   getPageTimestamp,
 } from "../lib/git-dates";
 import { sitePath } from "../lib/site-path";
+import { createPageMetadata } from "../lib/site-metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Prerequisites for Topic I",
   description:
     "Illustrated prerequisites for Topic I: intrinsic real-linear maps, elliptic contractions, invariant polygons, orientation, and strict separation.",
-};
+  pathname: "/prerequisites/",
+});
 
-const pageTimestamp = getPageTimestamp("app/data/prerequisites.ts");
+const pageTimestamp = getPageTimestamp([
+  "app/prerequisites/page.tsx",
+  "app/data/prerequisites.ts",
+]);
 const buildTimestamp = getBuildTimestamp();
 const firstPublished = publicationDates.pages.prerequisites;
 const referenceNumbers = new Map(
@@ -87,7 +91,7 @@ export default function PrerequisitesPage() {
         </nav>
       </header>
 
-      <main className="prerequisites-page" id="main-content">
+      <main className="prerequisites-page" id="main-content" tabIndex={-1}>
         <header className="prerequisites-hero">
           <div className="prerequisites-hero-title">
             <p className="kicker">{prerequisitesContent.title}</p>

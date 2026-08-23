@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Mechanical TeX extracts are validated by the content-generation checks.
+    "app/data/**/*.generated.ts",
   ]),
 ]);
 

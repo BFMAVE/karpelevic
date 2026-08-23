@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { ProofChapterShell } from "../../components/proof/ProofChapterShell";
 import { ProofSourceShelf } from "../../components/proof/ProofSourceShelf";
 import {
@@ -7,12 +6,14 @@ import {
 } from "../../data/proof-topics/topic-iii";
 import { publicationDates } from "../../data/publication-dates";
 import { getPageTimestamp } from "../../lib/git-dates";
+import { createPageMetadata } from "../../lib/site-metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Topic III — Half-Open Sides and Image-Edge Half-Plane Intersections",
   description:
     "A complete, illustrated account of assigning boundary contacts to half-open sides, intersecting with image-edge half-planes, Hausdorff compactness, and the least-area boundary-arc bound.",
-};
+  pathname: "/proof/topic-iii/",
+});
 
 const updatedAt = getPageTimestamp([
   "app/proof/topic-iii/page.tsx",
@@ -20,7 +21,10 @@ const updatedAt = getPageTimestamp([
   "app/data/part-i-content.generated.ts",
   "app/data/proof.ts",
   "app/components/proof/ProofResult.tsx",
+  "app/components/proof/ProofChapterShell.tsx",
+  "app/components/proof/ProofChapterReadingControls.tsx",
   "app/components/proof/figures/OwnershipMutationFigures.tsx",
+  "public/proof-chapter.js",
 ]);
 const firstPublishedAt = publicationDates.pages.topicIII;
 

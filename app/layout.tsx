@@ -12,6 +12,7 @@ const displaySerif = Cormorant_Garamond({
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   fallback: ["Georgia", "Times New Roman"],
+  preload: false,
 });
 
 const readingSerif = Source_Serif_4({
@@ -20,15 +21,21 @@ const readingSerif = Source_Serif_4({
   weight: ["400", "600", "700"],
   style: ["normal", "italic"],
   fallback: ["Georgia", "Times New Roman"],
+  preload: false,
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bfmave.github.io/karpelevic/"),
   title: {
     default: "Critical Invariant Polygons",
     template: "%s · Critical Invariant Polygons",
   },
   description:
     "A scholarly companion to Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic Spectra.",
+  authors: [{ name: "Brecht Verbeken" }, { name: "Vincent Ginis" }],
+  creator: "Brecht Verbeken",
+  publisher: "Brecht Verbeken and Vincent Ginis",
+  robots: { index: true, follow: true },
   icons: {
     icon: sitePath("/favicon.svg"),
     shortcut: sitePath("/favicon.svg"),

@@ -417,7 +417,7 @@ export function AffineContactExplainer() {
             <span>side <i>Ae</i> in the corresponding target set</span>
           </div>
           <div>
-            <span>next side <i>s</i>(<i>e</i>)</span>
+            <span>next side <i>succ</i>(<i>e</i>)</span>
             <span aria-hidden="true">→</span>
             <span>next side after <i>Ae</i></span>
           </div>

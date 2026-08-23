@@ -126,7 +126,8 @@ export function TopicVIIIChapter() {
         ]}
         provedHere={
           <p>
-            We prove compactness and star-shapedness of Θ<sub>n</sub>, the exact
+            We prove compactness of Θ<sub>n</sub> at every order,
+            star-shapedness for <i>n</i>≥2, the exact
             equivalence between stochastic eigenpairs and invariant polytopes,
             the unit-circle classification, the interior-origin lemma, and the
             two literal conclusions ν<sub>poly</sub>(T<sub>λ</sub>)=<var>N</var>{" "}

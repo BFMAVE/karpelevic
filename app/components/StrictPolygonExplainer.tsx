@@ -203,7 +203,7 @@ export function StrictPolygonExplainer() {
       <div className="strict-polygon-explainer-body">
         <section>
           <p className="section-label">1 · Extreme points only</p>
-          <h6>Adjacent and collinear sides</h6>
+          <h5>Adjacent and collinear sides</h5>
           <p>
             Two sides are <strong>adjacent</strong> when they occur one after
             the other along the polygon boundary and share an endpoint. They
@@ -246,7 +246,7 @@ export function StrictPolygonExplainer() {
 
         <section>
           <p className="section-label">2 · How a line can touch a corner</p>
-          <h6>Normal cones and vertex-exposing supporting lines</h6>
+          <h5>Normal cones and vertex-exposing supporting lines</h5>
           <p>
             A <strong>supporting line</strong> through a vertex <i>v</i>{" "}
             leaves the entire polygon in one of its two closed half-planes.

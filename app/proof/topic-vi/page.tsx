@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { AdvancedProofChapter } from "../../components/proof/AdvancedProofChapter";
 import {
   topicVIBackground,
@@ -9,14 +8,25 @@ import {
 } from "../../data/topic-vi-reader";
 import { publicationDates } from "../../data/publication-dates";
 import { getPageTimestamp } from "../../lib/git-dates";
+import { createPageMetadata } from "../../lib/site-metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Topic VI — A Projective Deformation and the First-Return Step Δ = 1",
   description:
     "For N≥4, one continuous chapter proving that a small projective deformation and the boundary condition for invariant polygons force the first-return step to be one.",
-};
+  pathname: "/proof/topic-vi/",
+});
 
-const updatedAt = getPageTimestamp("app/data/topic-vi-reader.tsx");
+const updatedAt = getPageTimestamp([
+  "app/proof/topic-vi/page.tsx",
+  "app/data/topic-vi-reader.tsx",
+  "app/data/topic-v-vii-html.ts",
+  "app/data/part-i-content.generated.ts",
+  "app/components/proof/AdvancedProofChapter.tsx",
+  "app/components/proof/ProofChapterShell.tsx",
+  "app/components/proof/ProofChapterReadingControls.tsx",
+  "public/proof-chapter.js",
+]);
 const firstPublishedAt = publicationDates.pages.topicVI;
 
 export default function TopicVIPage() {

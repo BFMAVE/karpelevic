@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { primaryNavigation } from "../data/home";
 import { publicationDates } from "../data/publication-dates";
 import {
@@ -13,14 +12,19 @@ import {
   getPageTimestamp,
 } from "../lib/git-dates";
 import { sitePath } from "../lib/site-path";
+import { createPageMetadata } from "../lib/site-metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "My Journey",
   description:
     "Brecht Verbeken’s personal account of finding the Karpelevič problem through structured stochastic matrices, collaboration, and generative-AI-assisted research.",
-};
+  pathname: "/journey/",
+});
 
-const pageTimestamp = getPageTimestamp("app/data/journey.ts");
+const pageTimestamp = getPageTimestamp([
+  "app/journey/page.tsx",
+  "app/data/journey.ts",
+]);
 const buildTimestamp = getBuildTimestamp();
 const firstPublished = publicationDates.pages.journey;
 const referenceNumbers = new Map(
@@ -69,7 +73,7 @@ function Chapter({ chapter }: { chapter: JourneyChapter }) {
       <header className="journey-chapter-heading">
         <p className="section-number">{chapter.number}</p>
         <p className="section-label">{chapter.label}</p>
-        <time>{chapter.era}</time>
+        <span className="journey-era">{chapter.era}</span>
         <h2 id={`journey-${chapter.number}`}>{chapter.title}</h2>
       </header>
       <div className="journey-reading-column">
@@ -118,7 +122,7 @@ export default function JourneyPage() {
         </nav>
       </header>
 
-      <main className="journey-page" id="main-content">
+      <main className="journey-page" id="main-content" tabIndex={-1}>
         <header className="journey-hero">
           <div className="journey-hero-title">
             <p className="kicker">My journey</p>
@@ -151,7 +155,7 @@ export default function JourneyPage() {
                 <span className="journey-route-marker" aria-hidden="true">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <time>{stop.era}</time>
+                <span className="journey-era">{stop.era}</span>
                 <p>{stop.label}</p>
               </li>
             ))}
@@ -236,7 +240,7 @@ export default function JourneyPage() {
           <header>
             <p className="section-number">{journeyContent.returnChapter.number}</p>
             <p className="section-label">{journeyContent.returnChapter.label}</p>
-            <time>{journeyContent.returnChapter.era}</time>
+            <span className="journey-era">{journeyContent.returnChapter.era}</span>
             <h2 id="journey-VI">{journeyContent.returnChapter.title}</h2>
           </header>
           <div>

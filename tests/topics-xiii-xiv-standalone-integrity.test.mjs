@@ -93,7 +93,7 @@ test("Topics XIII and XIV export as a published, cross-linked standalone pair", 
       await Promise.all([
         readFile(topicXIIIPath, "utf8"),
         readFile(topicXIVPath, "utf8"),
-        readFile(path.join(projectRoot, "public/code/karpelevic-boundary.js")),
+        readFile(path.join(projectRoot, "public/code/karpelevic-boundary.mjs")),
         readFile(path.join(projectRoot, "public/code/karpelevic-boundary.test.mjs")),
       ]);
 
@@ -184,7 +184,7 @@ test("Topics XIII and XIV export as a published, cross-linked standalone pair", 
     assert.equal([...table.matchAll(/<tr>/g)].length, 10);
 
     const sourceDownload = topicXIV.match(
-      /href="data:text\/javascript;charset=utf-8;base64,([^"]+)" data-standalone-boundary-download data-standalone-boundary-source-download[^>]*download="karpelevic-boundary\.js"/i,
+      /href="data:text\/javascript;charset=utf-8;base64,([^"]+)" data-standalone-boundary-download data-standalone-boundary-source-download[^>]*download="karpelevic-boundary\.mjs"/i,
     );
     const testDownload = topicXIV.match(
       /href="data:text\/javascript;charset=utf-8;base64,([^"]+)" data-standalone-boundary-test-download[^>]*download="karpelevic-boundary\.test\.mjs"/i,

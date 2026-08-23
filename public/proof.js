@@ -9,6 +9,7 @@
   const readingModeButtons = Array.from(
     reader.querySelectorAll("[data-reading-mode-button]"),
   );
+  const readingControls = reader.querySelector("[data-proof-reading-controls]");
   const guidedLayers = Array.from(
     reader.querySelectorAll("[data-guided-layer]"),
   );
@@ -171,16 +172,22 @@
     revealAnchor(anchorId, false);
   });
 
-  window.addEventListener(
-    "load",
-    () => {
+  function initializeReader() {
       showPanel(panelForHash(window.location.hash), false);
       setReadingMode(reader.dataset.readingMode);
       const anchorId = window.location.hash.replace(/^#/, "");
       if (anchorId && !anchorId.startsWith("topic-")) {
         revealAnchor(anchorId, false);
       }
-    },
-    { once: true },
-  );
+      if (readingControls) {
+        readingControls.dataset.enhanced = "true";
+        readingControls.hidden = false;
+      }
+  }
+
+  if (document.readyState === "complete") {
+    window.setTimeout(initializeReader, 0);
+  } else {
+    window.addEventListener("load", initializeReader, { once: true });
+  }
 })();

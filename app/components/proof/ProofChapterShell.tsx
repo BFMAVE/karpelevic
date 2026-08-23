@@ -80,7 +80,6 @@ export function ProofChapterShell({
         <nav className="primary-navigation" aria-label="Primary navigation">
           {primaryNavigation.map((item) => (
             <a
-              aria-current={item.href === "/proof/" ? "page" : undefined}
               href={sitePath(item.href)}
               key={item.href}
             >
@@ -90,7 +89,7 @@ export function ProofChapterShell({
         </nav>
       </header>
 
-      <main className="proof-page proof-chapter-page" id="chapter-content">
+      <main className="proof-page proof-chapter-page" id="chapter-content" tabIndex={-1}>
         <header className="proof-hero proof-chapter-hero">
           <div>
             <p className="kicker">The fourteen-topic proof reader</p>
@@ -134,6 +133,12 @@ export function ProofChapterShell({
 
         <nav className="proof-chapter-atlas" aria-label="Fourteen proof topics">
           <p className="section-label">Proof topics</p>
+          <a
+            className="proof-chapter-prerequisite-link"
+            href={sitePath("/prerequisites/")}
+          >
+            Prerequisites for Topic I
+          </a>
           <ol>
             {proofReaderTopicLinks.map((link) => {
               const isCurrent = link.topicNumber === route.topicNumber;
@@ -204,7 +209,18 @@ export function ProofChapterShell({
             </div>
           </details>
 
-          {showReadingControls ? <ProofChapterReadingControls /> : null}
+          {showReadingControls ? (
+            <>
+              <ProofChapterReadingControls />
+              <noscript>
+                <p className="proof-noscript">
+                  JavaScript is unavailable. Reading-mode and bulk-proof
+                  controls are hidden, but every statement and each individual
+                  proof disclosure remains readable.
+                </p>
+              </noscript>
+            </>
+          ) : null}
 
           {children}
 

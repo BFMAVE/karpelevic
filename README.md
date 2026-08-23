@@ -24,6 +24,7 @@ The default preview is <http://localhost:3000>.
 ## Checks
 
 ```bash
+npm run typecheck
 npm run lint
 npm test
 ```
@@ -53,6 +54,30 @@ files are generated locally and ignored by Git. The complete working project
 lives in this one repository folder; the canonical manuscript files remain in
 their author-designated research location and are read by the deterministic
 content generators.
+
+## Regenerating manuscript-derived content
+
+The generators deliberately have no author-specific path fallback. Point them
+to the canonical TeX file explicitly. The checked-in extracts were produced
+and byte-checked with Pandoc 3.8.3; another Pandoc version may normalize the
+generated MathML differently.
+
+```bash
+KARPELEVIC_TEX_PATH="/absolute/path/to/Complete_Karp_arXiv.tex" npm run content:proof
+KARPELEVIC_TEX_PATH="/absolute/path/to/Complete_Karp_arXiv.tex" npm run content:proof:check
+```
+
+For the website edition revised 23 August 2026, the canonical TeX SHA-256 is
+`91f64dba9b9e89f6b0ee0fb5cf252f8cbed1f105f89362641c7875a6a361537e`.
+Each generated file records both this whole-manuscript hash and the hash of the
+actual Part I or Part II slice from which its HTML was extracted.
+
+## Rights
+
+The archived 24 July 2026 manuscript v1 is licensed CC BY 4.0. No additional
+blanket license has been selected for later website-only material; see
+[`RIGHTS.md`](./RIGHTS.md) before redistributing or adapting the prose, figures,
+or numerical code.
 
 ## Project record
 

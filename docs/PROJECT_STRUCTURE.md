@@ -2,13 +2,10 @@
 
 ## Canonical project home
 
-The complete website project belongs in:
-
-`/Users/brechtverbeken/paper-project-site`
-
-Do not create a second website tree beside this repository. The canonical TeX
-and PDF remain in the author-designated research folder; generators read them
-from there and write derived website content into this repository.
+This repository is the complete website project. Do not create a second
+website tree beside it. The canonical TeX and PDF remain in the authors'
+research records; generators read the TeX path supplied through
+`KARPELEVIC_TEX_PATH` and write derived website content into this repository.
 
 ## What is authoritative
 
@@ -38,7 +35,6 @@ file.
 | `docs/` | Drafts, technical audits, student readings, and maintainers' documentation | Authoritative and versioned |
 | `.github/` | GitHub Pages build and deployment workflow | Authoritative and versioned |
 | `.openai/`, `build/`, `worker/` | Vinext/Sites/Cloudflare build scaffold used by the current local build | Auxiliary infrastructure; versioned |
-| `db/`, `drizzle/`, `examples/` | Optional database scaffold and example, currently unused by the paper site | Auxiliary infrastructure; versioned |
 | `share/` | Portable standalone editions for sending to readers | Local derived output; HTML is ignored |
 | `dist/` | Vinext production build consumed by exporters | Generated and ignored |
 | `pages-out/` | Verified static GitHub Pages artifact | Generated and ignored |
@@ -122,6 +118,3 @@ Make the change in `app/`, `public/`, or `scripts/`, then rebuild.
   It has no imports or content and should not receive generated files. It can be
   removed in a later approved housekeeping pass; nothing was moved or deleted
   during this audit.
-- The database example/scaffold is not generated output, but it is inactive.
-  Keep future paper-site data out of `examples/`; add persistence only after a
-  deliberate architectural decision.

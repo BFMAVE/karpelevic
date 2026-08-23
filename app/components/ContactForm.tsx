@@ -1,12 +1,25 @@
 "use client";
 
-import type { FormEvent } from "react";
+import { useEffect, useRef, type FormEvent } from "react";
 
 function contactAddress(): string {
   return `${["brecht", "verbeken"].join(".")}@${["gmail", "com"].join(".")}`;
 }
 
 export function ContactForm() {
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    const form = formRef.current;
+    if (!form) return;
+
+    form.dataset.contactController = "react";
+    form.hidden = false;
+    form.removeAttribute("aria-hidden");
+    const submit = form.querySelector<HTMLButtonElement>("[data-contact-submit]");
+    if (submit) submit.disabled = false;
+  }, []);
+
   function prepareEmail(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -40,7 +53,10 @@ export function ContactForm() {
         comments are welcome—especially if you spot an error.
       </p>
       <form
+        ref={formRef}
         className="contact-form"
+        hidden
+        aria-hidden="true"
         onSubmit={prepareEmail}
       >
         <label>
@@ -64,7 +80,12 @@ export function ContactForm() {
           <textarea name="message" rows={6} required />
         </label>
         <div className="contact-actions contact-wide">
-          <button className="button button-primary" type="submit">
+          <button
+            className="button button-primary"
+            data-contact-submit
+            disabled
+            type="submit"
+          >
             Open email to send
           </button>
           <p>
@@ -73,6 +94,16 @@ export function ContactForm() {
           </p>
         </div>
       </form>
+      <noscript>
+        <p className="contact-noscript">
+          The contact form needs JavaScript so that no message data can enter a
+          website URL. You can instead email{" "}
+          <a href="mailto:brecht.verbeken%40gmail.com?subject=Question%20about%20Critical%20Invariant%20Polygons">
+            brecht.verbeken&#64;gmail.com
+          </a>
+          .
+        </p>
+      </noscript>
     </section>
   );
 }
