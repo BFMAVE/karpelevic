@@ -10,7 +10,12 @@ export const metadata: Metadata = {
     "A complete, illustrated construction of the unique modulus at each prescribed argument between consecutive Farey fractions, including endpoint limits and the case n=3.",
 };
 
-const updatedAt = getPageTimestamp("app/data/proof-topics/topics-viii-xi.tsx");
+const updatedAt = getPageTimestamp([
+  "app/data/proof-topics/topics-viii-xi.tsx",
+  "app/data/topics-viii-xi-reader.tsx",
+  "app/data/part-ii-content.generated.ts",
+  "app/data/topics-viii-xi-proofs.generated.ts",
+]);
 const firstPublishedAt = publicationDates.pages.topicIX;
 
 export default function TopicIXPage() {

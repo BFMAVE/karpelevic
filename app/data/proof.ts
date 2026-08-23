@@ -570,10 +570,10 @@ export const proofTopics: readonly ProofTopic[] = [
       "How do the upper bound, attainment, and nesting assemble into the complete stochastic eigenvalue region?",
     overview: [
       "The small orders are proved directly. For n≥4, the induction separates according as the order-n radial maximizer lies outside or inside Θₙ₋₁; the results of Topics X–XII prove Rₙ(θ)=Kₙ(θ) in both cases.",
-      "Continuity of the full-circle radial function, conjugation, star-shapedness with respect to the origin, and the unit-circle classification then identify the Farey-indexed curves with the complete topological boundary. This is where the classical theorem is finally stated and proved.",
+      "Continuity of the even extension of Kₙ to the full circle, conjugation, star-shapedness with respect to the origin, and the unit-circle classification then identify the Farey-indexed curves with the complete topological boundary. This is where the classical theorem is finally stated and proved.",
     ],
     itemNumbers: [],
-    manuscriptPages: "102–106",
+    manuscriptPages: "103–107",
   },
   {
     slug: "order-seven",

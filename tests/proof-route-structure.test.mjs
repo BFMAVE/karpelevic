@@ -1143,6 +1143,16 @@ test("Topic XIV provides the complete example and executable boundary explorer",
     .replace(/<[^>]*>/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+  const domFaithfulText = html
+    .replace(/<script\b[\s\S]*?<\/script>/gi, "")
+    .replace(/<style\b[\s\S]*?<\/style>/gi, "")
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<[^>]*>/g, "")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&amp;", "&")
+    .replace(/\s+/g, " ")
+    .trim();
   assert.match(html, /complete order-seven/i);
   assert.match(html, /computation at[^<]*x=3\/8/i);
   assert.match(html, /Download source module/i);
@@ -1168,6 +1178,11 @@ test("Topic XIV provides the complete example and executable boundary explorer",
   assert.match(visibleText, /3·2−1·5=1 and 3\+5=8&gt;7/);
   assert.match(visibleText, /0&lt;α&lt;1, 0&lt;β&lt;1, and α\+β=1/);
   assert.match(visibleText, /55 points/);
+  assert.doesNotMatch(
+    domFaithfulText,
+    /Θ1=\{1\}and|Fnexactly|Fnin|qandr\/s|givesp\/q|55points/,
+    "inline elements retain the spaces that a browser text node exposes",
+  );
   assert.match(visibleText, /73\s*-point polyline/);
   assert.match(visibleText, /No bound on (?:the|its) geometric (?:error|approximation error)/i);
   assert.match(html, /data-order-seven-boundary-figure/);

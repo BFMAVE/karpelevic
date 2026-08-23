@@ -10,7 +10,12 @@ export const metadata: Metadata = {
     "An explicit sparse stochastic-matrix construction, an exact directed-cycle expansion of its characteristic polynomial, and the resulting attainment theorem.",
 };
 
-const updatedAt = getPageTimestamp("app/data/proof-topics/topics-viii-xi.tsx");
+const updatedAt = getPageTimestamp([
+  "app/data/proof-topics/topics-viii-xi.tsx",
+  "app/data/topics-viii-xi-reader.tsx",
+  "app/data/part-ii-content.generated.ts",
+  "app/data/topics-viii-xi-proofs.generated.ts",
+]);
 const firstPublishedAt = publicationDates.pages.topicXI;
 
 export default function TopicXIPage() {

@@ -917,7 +917,7 @@ function verifyStandaloneHtml(html) {
     const visibleText = visibleTextFromHtml(html).replace(/\s+/g, " ").trim();
     if (
       !/First published 21 August 2026\s*\./i.test(visibleText) ||
-      !/Last revised 22 August 2026\s*\./i.test(visibleText)
+      !/Last revised 23 August 2026\s*\./i.test(visibleText)
     ) {
       throw new Error(
         "Standalone Topic X must expose its first-publication and revision dates.",
@@ -967,7 +967,7 @@ function verifyStandaloneHtml(html) {
     const visibleText = visibleTextFromHtml(html).replace(/\s+/g, " ").trim();
     if (
       !/First published 22 August 2026\s*\./i.test(visibleText) ||
-      !/Last revised 22 August 2026\s*\./i.test(visibleText)
+      !/Last revised 23 August 2026\s*\./i.test(visibleText)
     ) {
       throw new Error(
         "Standalone Topic XI must expose its first-publication and revision dates.",
@@ -1076,7 +1076,7 @@ function verifyStandaloneHtml(html) {
 
     const visibleText = visibleTextFromHtml(html).replace(/\s+/g, " ").trim();
     if (
-      !/Topic XIII · Manuscript pages 102–106/i.test(visibleText) ||
+      !/Topic XIII · Manuscript pages 103–107/i.test(visibleText) ||
       !/First published 22 August 2026\s*\./i.test(visibleText)
     ) {
       throw new Error(

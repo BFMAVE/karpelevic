@@ -20,6 +20,22 @@ function fractionText(numerator: number, denominator: number): string {
   return numerator + "/" + denominator;
 }
 
+function endpointMarkerTitle(point: PlotPoint): string {
+  const fraction = fractionText(
+    point.fraction?.numerator ?? 0,
+    point.fraction?.denominator ?? 1,
+  );
+  return point.y < 0
+    ? "e^(−2πi·" +
+        fraction +
+        "), conjugate of the endpoint root corresponding to the upper-half parameter x=" +
+        fraction
+    : "e^(2πi·" +
+        fraction +
+        "), endpoint root; normalized angle x=" +
+        fraction;
+}
+
 function parseOrder(draft: string): number | null {
   if (!/^\d+$/.test(draft)) return null;
   const candidate = Number(draft);
@@ -79,11 +95,11 @@ export function BoundaryExplorer() {
   );
 
   return (
-    <section className="boundary-laboratory" aria-labelledby="boundary-laboratory-heading">
+    <section className="boundary-explorer" aria-labelledby="boundary-explorer-heading">
       <header>
         <div>
           <p className="section-label">Interactive numerical boundary plot</p>
-          <h3 id="boundary-laboratory-heading">
+          <h3 id="boundary-explorer-heading">
             Choose n and plot an approximation to ∂Θ<sub>n</sub>
           </h3>
         </div>
@@ -113,18 +129,19 @@ export function BoundaryExplorer() {
           />
         </label>
       </header>
-      <p id="boundary-order-help" className="boundary-laboratory-help">
+      <p id="boundary-order-help" className="boundary-explorer-help">
         Enter an integer from 1 to 40. Orders 1 and 2 use their exact
         elementary descriptions. From order 3 onward, each nonreal Farey
         branch is represented by {samplesPerInterval} points, including its
         endpoints before shared endpoints are removed. Each interior modulus
-        requests at most ninety bisection updates and stops when binary64 can
-        no longer refine the bracket. At order 3, the segment [−1,−1/2] on
+        requests at most ninety bisection updates and stops when IEEE 754
+        binary64 double precision can no longer refine the bracket. At order
+        3, the segment [−1,−1/2] on
         the real axis is inserted exactly.
       </p>
       {errorMessage ? (
         <p
-          className="boundary-laboratory-error"
+          className="boundary-explorer-error"
           data-boundary-order-error
           id="boundary-order-error"
           role="alert"
@@ -133,7 +150,7 @@ export function BoundaryExplorer() {
         </p>
       ) : null}
 
-      <div className="boundary-laboratory-grid">
+      <div className="boundary-explorer-grid">
         <figure>
           <svg
             aria-describedby="boundary-plot-description"
@@ -150,24 +167,24 @@ export function BoundaryExplorer() {
                 ? " The exceptional real segment from minus one to minus one half is included exactly."
                 : ""}
             </desc>
-            <line className="boundary-lab-axis" x1={padding - 22} x2={size - padding + 22} y1={size / 2} y2={size / 2} />
-            <line className="boundary-lab-axis" x1={size / 2} x2={size / 2} y1={padding - 22} y2={size - padding + 22} />
-            <circle className="boundary-lab-unit" cx={size / 2} cy={size / 2} r={(size - 2 * padding) / 2} />
+            <line className="boundary-plot-axis" x1={padding - 22} x2={size - padding + 22} y1={size / 2} y2={size / 2} />
+            <line className="boundary-plot-axis" x1={size / 2} x2={size / 2} y1={padding - 22} y2={size - padding + 22} />
+            <circle className="boundary-plot-unit" cx={size / 2} cy={size / 2} r={(size - 2 * padding) / 2} />
             {region.kind === "region" ? (
-              <path className="boundary-lab-region" data-boundary-region d={boundaryPath} />
+              <path className="boundary-plot-region" data-boundary-region d={boundaryPath} />
             ) : null}
             {region.kind === "interval" ? (
-              <line className="boundary-lab-interval" data-boundary-interval x1={intervalStart.x} x2={intervalEnd.x} y1={intervalStart.y} y2={intervalEnd.y} />
+              <line className="boundary-plot-interval" data-boundary-interval x1={intervalStart.x} x2={intervalEnd.x} y1={intervalStart.y} y2={intervalEnd.y} />
             ) : null}
             {region.kind === "point" ? (
-              <circle className="boundary-lab-point" data-boundary-point cx={intervalEnd.x} cy={intervalEnd.y} r="9" />
+              <circle className="boundary-plot-point" data-boundary-point cx={intervalEnd.x} cy={intervalEnd.y} r="9" />
             ) : null}
             {nodes.map((point) => {
               const coordinate = svgCoordinates(point, size, padding);
               return (
                 <circle
                   aria-hidden="true"
-                  className="boundary-lab-root"
+                  className="boundary-plot-root"
                   cx={coordinate.x}
                   cy={coordinate.y}
                   data-farey-root
@@ -179,18 +196,12 @@ export function BoundaryExplorer() {
                   }
                   r="4.5"
                 >
-                  <title>
-                    {point.y < 0 ? "Conjugate of " : ""}Farey endpoint root{" "}
-                    {fractionText(
-                      point.fraction?.numerator ?? 0,
-                      point.fraction?.denominator ?? 1,
-                    )}
-                  </title>
+                  <title>{endpointMarkerTitle(point)}</title>
                 </circle>
               );
             })}
-            <text className="boundary-lab-label" x={size - padding + 15} y={size / 2 + 28}>Re λ</text>
-            <text className="boundary-lab-label" x={size / 2 + 12} y={padding - 24}>Im λ</text>
+            <text className="boundary-plot-label" x={size - padding + 15} y={size / 2 + 28}>Re λ</text>
+            <text className="boundary-plot-label" x={size / 2 + 12} y={padding - 24}>Im λ</text>
           </svg>
           <figcaption>
             <span>Numerical boundary plot.</span>{" "}
@@ -209,8 +220,11 @@ export function BoundaryExplorer() {
               </>
             )}{" "}
             The dashed circle is |λ|=1. Farey fractions specify endpoint
-            roots exactly, but their SVG coordinates and all sampled arc
-            coordinates are floating-point approximations.{" "}
+            roots exactly, but plotted coordinates are floating-point
+            approximations.
+            {region.kind === "region"
+              ? " Region-path coordinates are rounded to the nearest 0.01 in viewBox coordinates."
+              : ""}{" "}
             {order <= fullMarkerOrderLimit
               ? "The roots of unity associated with the Farey endpoints are marked on the closed upper semicircle and, except for ±1, at their conjugates below the real axis."
               : "To reduce overlap above order 12, markers are limited to endpoints with denominator at most 12; the table retains every Farey pair."}
@@ -220,9 +234,10 @@ export function BoundaryExplorer() {
         <aside>
           <section>
             <p className="section-label">Exact combinatorial data</p>
-            <h4>Farey pairs and reduced Ito-polynomial data</h4>
+            <h4>Farey pairs and reduced Ito polynomial data</h4>
             <p>
-              Fractions, Farey-neighbour tests, relabelling so that <i>q</i>
+              Fractions, tests for consecutive fractions in <i>F</i><sub>n</sub>,
+              relabelling so that <i>q</i>
               &lt;<i>s</i>, and the integers <i>d</i> and <i>e</i> are computed exactly. The
               corresponding root-of-unity coordinates are evaluated in
               floating-point arithmetic only when the SVG is drawn.
@@ -235,7 +250,8 @@ export function BoundaryExplorer() {
               {region.kind === "region" ? (
                 <>
                   Moduli for parameters in the open Farey intervals are found
-                  by binary64 bisection. Each nonreal branch uses {samplesPerInterval}
+                  by binary64 bisection. Each nonreal branch uses{" "}
+                  {samplesPerInterval}{" "}
                   points, and the SVG joins them by line segments. No bound on
                   the geometric error of this polyline approximation is
                   asserted.
@@ -251,7 +267,7 @@ export function BoundaryExplorer() {
           {intervals.length > 0 ? (
             <details>
               <summary>Open all Farey pairs for n={order}</summary>
-              <div className="boundary-cell-ledger">
+              <div className="farey-pair-table">
                 <table>
                   <caption>Consecutive Farey pairs and relabelled data with q&lt;s for n={order}</caption>
                   <thead>
@@ -262,7 +278,7 @@ export function BoundaryExplorer() {
                       <th scope="col">e</th>
                     </tr>
                   </thead>
-                  <tbody data-boundary-cell-rows>
+                  <tbody data-farey-pair-rows>
                     {intervals.map((interval) => (
                       <tr key={fractionText(interval.left.numerator, interval.left.denominator) + "-" + fractionText(interval.right.numerator, interval.right.denominator)}>
                         <th scope="row">

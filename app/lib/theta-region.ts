@@ -10,7 +10,6 @@ import type {
 
 export type { FareyFraction } from "./karpelevic-boundary-core.js";
 export {
-  boundaryRadius,
   itoArcRadius,
   radialBoundaryRadius,
 } from "./karpelevic-boundary-core.js";

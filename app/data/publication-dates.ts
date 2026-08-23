@@ -1,7 +1,7 @@
 export const publicationDates = {
   manuscript: {
     zenodoPublished: "2026-07-24",
-    websiteEditionRevised: "2026-08-22",
+    websiteEditionRevised: "2026-08-23",
   },
   websiteOnlineSince: "2026-07-28",
   pages: {

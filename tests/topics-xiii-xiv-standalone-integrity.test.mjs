@@ -136,7 +136,7 @@ test("Topics XIII and XIV export as a published, cross-linked standalone pair", 
 
     const topicXIIIText = visibleText(topicXIII);
     assert.match(topicXIII, /data-proof-route="topic-xiii"/);
-    assert.match(topicXIIIText, /Topic XIII · Manuscript pages 102–106/);
+    assert.match(topicXIIIText, /Topic XIII · Manuscript pages 103–107/);
     assert.match(topicXIIIText, /First published 22 August 2026/);
     assert.match(topicXIIIText, /Compact star-shaped sets with continuous radial function/);
     assert.match(topicXIIIText, /Karpelevič theorem in Ito’s formulation/);

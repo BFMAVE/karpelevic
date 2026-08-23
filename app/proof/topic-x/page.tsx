@@ -10,7 +10,12 @@ export const metadata: Metadata = {
     "An illustrated Jensen comparison proving the radial upper bound for a new order-N boundary point and characterizing equality under the finite-product hypotheses.",
 };
 
-const updatedAt = getPageTimestamp("app/data/proof-topics/topics-viii-xi.tsx");
+const updatedAt = getPageTimestamp([
+  "app/data/proof-topics/topics-viii-xi.tsx",
+  "app/data/topics-viii-xi-reader.tsx",
+  "app/data/part-ii-content.generated.ts",
+  "app/data/topics-viii-xi-proofs.generated.ts",
+]);
 const firstPublishedAt = publicationDates.pages.topicX;
 
 export default function TopicXPage() {

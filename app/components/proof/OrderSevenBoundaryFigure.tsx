@@ -17,6 +17,22 @@ function reflectedFareyNodes(nodes: PlotPoint[]): PlotPoint[] {
   return [...nodes, ...reflected];
 }
 
+function endpointMarkerTitle(point: PlotPoint): string {
+  const fraction =
+    String(point.fraction?.numerator) +
+    "/" +
+    String(point.fraction?.denominator);
+  return point.y < 0
+    ? "e^(−2πi·" +
+        fraction +
+        "), conjugate of the endpoint root corresponding to the upper-half parameter x=" +
+        fraction
+    : "e^(2πi·" +
+        fraction +
+        "), endpoint root; normalized angle x=" +
+        fraction;
+}
+
 export function OrderSevenBoundaryFigure() {
   const region = thetaBoundaryForOrder(7, samplesPerInterval);
   const boundaryPath = svgPath(region.boundary, size, padding);
@@ -51,28 +67,28 @@ export function OrderSevenBoundaryFigure() {
           three pi over four to the marked boundary point lambda.
         </desc>
         <line
-          className="boundary-lab-axis"
+          className="boundary-plot-axis"
           x1={padding - 22}
           x2={size - padding + 22}
           y1={size / 2}
           y2={size / 2}
         />
         <line
-          className="boundary-lab-axis"
+          className="boundary-plot-axis"
           x1={size / 2}
           x2={size / 2}
           y1={padding - 22}
           y2={size - padding + 22}
         />
         <circle
-          className="boundary-lab-unit"
+          className="boundary-plot-unit"
           cx={size / 2}
           cy={size / 2}
           data-unit-circle
           r={(size - 2 * padding) / 2}
         />
         <path
-          className="boundary-lab-region"
+          className="boundary-plot-region"
           d={boundaryPath}
           data-order-seven-boundary-path
         />
@@ -81,7 +97,7 @@ export function OrderSevenBoundaryFigure() {
           return (
             <circle
               aria-hidden="true"
-              className="boundary-lab-root"
+              className="boundary-plot-root"
               cx={coordinate.x}
               cy={coordinate.y}
               data-farey-root
@@ -93,10 +109,7 @@ export function OrderSevenBoundaryFigure() {
               }
               r="4.5"
             >
-              <title>
-                {point.y < 0 ? "Conjugate of " : ""}Farey endpoint root{" "}
-                {String(point.fraction?.numerator)}/{String(point.fraction?.denominator)}
-              </title>
+              <title>{endpointMarkerTitle(point)}</title>
             </circle>
           );
         })}
@@ -117,10 +130,10 @@ export function OrderSevenBoundaryFigure() {
           data-worked-boundary-point
           r="7"
         />
-        <text className="boundary-lab-label" x={size - padding + 15} y={size / 2 + 28}>
+        <text className="boundary-plot-label" x={size - padding + 15} y={size / 2 + 28}>
           Re λ
         </text>
-        <text className="boundary-lab-label" x={size / 2 + 12} y={padding - 24}>
+        <text className="boundary-plot-label" x={size / 2 + 12} y={padding - 24}>
           Im λ
         </text>
       </svg>
@@ -134,7 +147,8 @@ export function OrderSevenBoundaryFigure() {
         λ=ρe<sup>3πi/4</sup>, where ρ is the unique solution of{" "}
         <a href="#karp:eq:n7-ray-equation">equation (II.10.2)</a>. Farey
         fractions specify the root-of-unity markers exactly; all displayed
-        coordinates are floating-point approximations.
+        coordinates are floating-point approximations. Region-path coordinates
+        are rounded to the nearest 0.01 in viewBox coordinates.
       </figcaption>
     </figure>
   );

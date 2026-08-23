@@ -8527,14 +8527,14 @@ math mover > mo[accent="true"] {
   }
 }
 
-.boundary-laboratory {
+.boundary-explorer {
   margin: 38px 0;
   border: 1px solid var(--rule-dark);
   background: color-mix(in srgb, var(--paper) 92%, white);
   box-shadow: 0 22px 54px rgb(15 31 54 / 8%);
 }
 
-.boundary-laboratory > header {
+.boundary-explorer > header {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 24px;
@@ -8543,14 +8543,14 @@ math mover > mo[accent="true"] {
   border-bottom: 1px solid var(--rule);
 }
 
-.boundary-laboratory h3 {
+.boundary-explorer h3 {
   margin: 5px 0 0;
   font-family: var(--font-display), Georgia, serif;
   font-size: clamp(1.7rem, 3.2vw, 2.7rem);
   line-height: 1.02;
 }
 
-.boundary-laboratory > header label {
+.boundary-explorer > header label {
   display: grid;
   gap: 6px;
   color: var(--ink-soft);
@@ -8560,7 +8560,7 @@ math mover > mo[accent="true"] {
   text-transform: uppercase;
 }
 
-.boundary-laboratory input {
+.boundary-explorer input {
   width: 7.5rem;
   min-height: 2.8rem;
   border: 1px solid var(--ink);
@@ -8571,7 +8571,7 @@ math mover > mo[accent="true"] {
   padding: 8px 10px;
 }
 
-.boundary-laboratory-help {
+.boundary-explorer-help {
   margin: 0;
   padding: 14px clamp(24px, 4vw, 42px);
   border-bottom: 1px solid var(--rule);
@@ -8580,7 +8580,7 @@ math mover > mo[accent="true"] {
   line-height: 1.55;
 }
 
-.boundary-laboratory-error {
+.boundary-explorer-error {
   margin: 0;
   padding: 12px clamp(24px, 4vw, 42px);
   border-bottom: 1px solid color-mix(in srgb, var(--oxblood) 45%, var(--rule));
@@ -8590,65 +8590,65 @@ math mover > mo[accent="true"] {
   font-weight: 700;
 }
 
-.boundary-laboratory input[aria-invalid="true"] {
+.boundary-explorer input[aria-invalid="true"] {
   border-color: var(--oxblood);
   outline: 2px solid color-mix(in srgb, var(--oxblood) 22%, transparent);
 }
 
-.boundary-laboratory-grid {
+.boundary-explorer-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.55fr) minmax(16rem, 0.75fr);
 }
 
-.boundary-laboratory figure {
+.boundary-explorer figure {
   margin: 0;
   padding: clamp(20px, 3vw, 36px);
   border-right: 1px solid var(--rule);
 }
 
-.boundary-laboratory svg {
+.boundary-explorer svg {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.boundary-lab-axis {
+.boundary-plot-axis {
   stroke: color-mix(in srgb, var(--ink) 30%, transparent);
   stroke-width: 1;
 }
 
-.boundary-lab-unit {
+.boundary-plot-unit {
   fill: none;
   stroke: color-mix(in srgb, var(--copper) 58%, transparent);
   stroke-dasharray: 5 7;
   stroke-width: 1.2;
 }
 
-.boundary-lab-region {
+.boundary-plot-region {
   fill: color-mix(in srgb, var(--ink) 7%, transparent);
   stroke: var(--ink);
   stroke-linejoin: round;
   stroke-width: 3;
 }
 
-.boundary-lab-interval {
+.boundary-plot-interval {
   stroke: var(--ink);
   stroke-width: 4;
 }
 
-.boundary-lab-point,
-.boundary-lab-root {
+.boundary-plot-point,
+.boundary-plot-root {
   fill: var(--oxblood);
   stroke: var(--paper);
   stroke-width: 2;
 }
 
-.boundary-lab-label {
+.boundary-plot-label {
   fill: var(--ink-soft);
   font: 600 17px var(--font-reading), Georgia, serif;
 }
 
-.boundary-laboratory figcaption {
+.boundary-explorer figcaption {
   padding-top: 14px;
   border-top: 1px solid var(--rule);
   color: var(--ink-soft);
@@ -8656,42 +8656,42 @@ math mover > mo[accent="true"] {
   line-height: 1.55;
 }
 
-.boundary-laboratory figcaption span {
+.boundary-explorer figcaption span {
   color: var(--oxblood);
   font-weight: 700;
 }
 
-.boundary-laboratory aside {
+.boundary-explorer aside {
   padding: clamp(22px, 3vw, 34px);
 }
 
-.boundary-laboratory aside section + section {
+.boundary-explorer aside section + section {
   margin-top: 26px;
   padding-top: 24px;
   border-top: 1px solid var(--rule);
 }
 
-.boundary-laboratory aside h4 {
+.boundary-explorer aside h4 {
   margin: 5px 0 8px;
   color: var(--ink);
   font-family: var(--font-display), Georgia, serif;
   font-size: 1.35rem;
 }
 
-.boundary-laboratory aside p:not(.section-label) {
+.boundary-explorer aside p:not(.section-label) {
   margin: 0;
   color: var(--ink-soft);
   font-size: 0.88rem;
   line-height: 1.62;
 }
 
-.boundary-laboratory aside > details {
+.boundary-explorer aside > details {
   margin-top: 28px;
   border-top: 1px solid var(--rule-dark);
   border-bottom: 1px solid var(--rule-dark);
 }
 
-.boundary-laboratory aside > details > summary {
+.boundary-explorer aside > details > summary {
   cursor: pointer;
   padding: 13px 0;
   color: var(--oxblood);
@@ -8699,33 +8699,33 @@ math mover > mo[accent="true"] {
   font-weight: 700;
 }
 
-.boundary-cell-ledger {
+.farey-pair-table {
   max-height: 21rem;
   overflow: auto;
   padding-bottom: 12px;
 }
 
-.boundary-cell-ledger table {
+.farey-pair-table table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.76rem;
 }
 
-.boundary-cell-ledger caption {
+.farey-pair-table caption {
   padding: 10px 0;
   color: var(--ink-soft);
   text-align: left;
 }
 
-.boundary-cell-ledger th,
-.boundary-cell-ledger td {
+.farey-pair-table th,
+.farey-pair-table td {
   padding: 8px 6px;
   border-top: 1px solid var(--rule);
   text-align: left;
   white-space: nowrap;
 }
 
-.boundary-cell-ledger thead th {
+.farey-pair-table thead th {
   color: var(--ink-soft);
   font-size: 0.68rem;
   letter-spacing: 0.06em;
@@ -8733,18 +8733,18 @@ math mover > mo[accent="true"] {
 }
 
 @media (max-width: 860px) {
-  .boundary-laboratory-grid {
+  .boundary-explorer-grid {
     grid-template-columns: 1fr;
   }
 
-  .boundary-laboratory figure {
+  .boundary-explorer figure {
     border-right: 0;
     border-bottom: 1px solid var(--rule);
   }
 }
 
 @media (max-width: 560px) {
-  .boundary-laboratory > header {
+  .boundary-explorer > header {
     grid-template-columns: 1fr;
   }
 }
@@ -8910,7 +8910,7 @@ math mover > mo[accent="true"] {
   margin-top: 12px;
 }
 
-.topic-xiv-code-ledger {
+.topic-xiv-computation-summary {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1px;
@@ -8919,12 +8919,12 @@ math mover > mo[accent="true"] {
   background: var(--rule);
 }
 
-.topic-xiv-code-ledger > div {
+.topic-xiv-computation-summary > div {
   padding: 20px;
   background: var(--paper);
 }
 
-.topic-xiv-code-ledger span {
+.topic-xiv-computation-summary span {
   color: var(--oxblood);
   font-size: 0.68rem;
   font-weight: 700;
@@ -8932,7 +8932,7 @@ math mover > mo[accent="true"] {
   text-transform: uppercase;
 }
 
-.topic-xiv-code-ledger p {
+.topic-xiv-computation-summary p {
   margin: 9px 0 0;
   color: var(--ink-soft);
   font-size: 0.86rem;
@@ -8961,7 +8961,7 @@ math mover > mo[accent="true"] {
 }
 
 @media (max-width: 840px) {
-  .topic-xiv-code-ledger {
+  .topic-xiv-computation-summary {
     grid-template-columns: 1fr;
   }
 }

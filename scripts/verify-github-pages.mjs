@@ -144,7 +144,7 @@ for (const [relativePath, expectedText] of pages) {
   assert.match(visibleText, /Published on Zenodo/);
   assert.match(visibleText, /24 July 2026/);
   assert.match(visibleText, /Website edition/);
-  assert.match(visibleText, /Last revised\s+22 August 2026/);
+  assert.match(visibleText, /Last revised\s+23 August 2026/);
   assert.match(visibleText, /110-page site-hosted PDF/);
   assert.doesNotMatch(html, />Prepared</);
 }
@@ -488,10 +488,10 @@ for (const relativePath of [
   const visibleText = visibleTextFromHtml(html);
   assert.match(html, /data-proof-route="topic-xiii"/);
   assert.match(html, /data-topic-xiii-setup/);
-  assert.match(visibleText, /Manuscript pages\s+102–106/);
+  assert.match(visibleText, /Manuscript pages\s+103–107/);
   assert.match(visibleText, /Karpelevič theorem in Ito’s formulation/i);
   assert.match(visibleText, /First published\s+22 August 2026/);
-  assert.match(visibleText, /Actual and candidate radii/i);
+  assert.match(visibleText, /The radial functions R n and K n/i);
   assert.match(visibleText, /Case 1: the maximizing point is outside Θₙ₋₁/i);
   assert.match(visibleText, /Case 2: the maximizing point lies in Θₙ₋₁/i);
   assert.match(visibleText, /Schematic radial geometry — not to scale/i);
@@ -570,7 +570,7 @@ for (const relativePath of [
   assert.match(html, /href="\/karpelevic\/proof\/topic-xiii\//);
   assert.match(
     visibleText,
-    /Topic XIII · Karpelevič theorem in Ito’s formulation/i,
+    /Topic XIII · The Karpelevič Theorem in Ito’s Formulation/i,
   );
   assert.match(
     visibleText,

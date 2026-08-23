@@ -88,7 +88,7 @@ test("server-renders the scholarly Home page", async () => {
   assert.match(homeText, /Zenodo edition 93 pages/);
   assert.match(
     homeText,
-    /Website edition Last revised 22 August 2026 ↗ 110-page site-hosted PDF/,
+    /Website edition Last revised 23 August 2026 ↗ 110-page site-hosted PDF/,
   );
   assert.match(
     html,

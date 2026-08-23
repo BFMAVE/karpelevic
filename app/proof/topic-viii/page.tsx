@@ -10,7 +10,12 @@ export const metadata: Metadata = {
     "A complete, illustrated account of Karpelevič regions, invariant polytopes, star-shapedness, and the N-criticality of radial boundary points new at a given matrix order.",
 };
 
-const updatedAt = getPageTimestamp("app/data/proof-topics/topics-viii-xi.tsx");
+const updatedAt = getPageTimestamp([
+  "app/data/proof-topics/topics-viii-xi.tsx",
+  "app/data/topics-viii-xi-reader.tsx",
+  "app/data/part-ii-content.generated.ts",
+  "app/data/topics-viii-xi-proofs.generated.ts",
+]);
 const firstPublishedAt = publicationDates.pages.topicVIII;
 
 export default function TopicVIIIPage() {

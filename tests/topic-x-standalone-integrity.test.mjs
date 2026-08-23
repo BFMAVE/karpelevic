@@ -40,7 +40,7 @@ test("the Topic X standalone is self-contained and links to published Topic XI",
     assert.doesNotMatch(html, /\b(?:href|src)="\/(?!\/)/i);
     assert.match(visibleText, /Topic X · Manuscript pages 86–91/);
     assert.match(visibleText, /First published 21 August 2026/);
-    assert.match(visibleText, /Last revised 22 August 2026/);
+    assert.match(visibleText, /Last revised 23 August 2026/);
     assert.match(
       html,
       /class="[^"]*proof-topic-control-previous[^"]*"[^>]*href="https:\/\/bfmave\.github\.io\/karpelevic\/proof\/topic-ix\//,

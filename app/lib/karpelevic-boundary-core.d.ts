@@ -49,7 +49,10 @@ export function radialBoundaryRadius(
   order: number,
   iterations?: number,
 ): number;
-/** Backward-compatible alias for radialBoundaryRadius. */
+/**
+ * @deprecated Use radialBoundaryRadius. This alias is retained for backward
+ * compatibility with earlier downloadable examples.
+ */
 export function boundaryRadius(
   angleFraction: number,
   left: FareyFraction,

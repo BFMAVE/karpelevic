@@ -1,4 +1,4 @@
-const boundaryExplorerRoot = document.querySelector(".boundary-laboratory");
+const boundaryExplorerRoot = document.querySelector(".boundary-explorer");
 
 if (boundaryExplorerRoot) {
   const svgNamespace = "http://www.w3.org/2000/svg";
@@ -14,13 +14,13 @@ if (boundaryExplorerRoot) {
   const plot = boundaryExplorerRoot.querySelector('svg[role="img"]');
   const plotDescription = plot?.querySelector("desc");
   const plotCaption = boundaryExplorerRoot.querySelector("figure figcaption");
-  const sidePanel = boundaryExplorerRoot.querySelector(".boundary-laboratory-grid aside");
+  const sidePanel = boundaryExplorerRoot.querySelector(".boundary-explorer-grid aside");
   const numericalCopy = sidePanel?.querySelector("section:nth-of-type(2) p:last-child");
-  const cellDetails = sidePanel?.querySelector("details");
-  const cellSummary = cellDetails?.querySelector("summary");
-  const cellLedger = cellDetails?.querySelector(".boundary-cell-ledger");
-  const cellTableCaption = cellLedger?.querySelector("caption");
-  const cellRows = cellLedger?.querySelector("[data-boundary-cell-rows]");
+  const fareyPairDetails = sidePanel?.querySelector("details");
+  const fareyPairSummary = fareyPairDetails?.querySelector("summary");
+  const fareyPairTable = fareyPairDetails?.querySelector(".farey-pair-table");
+  const fareyPairTableCaption = fareyPairTable?.querySelector("caption");
+  const fareyPairRows = fareyPairTable?.querySelector("[data-farey-pair-rows]");
   let acceptedOrder = 7;
 
   function parseExplorerOrder(value) {
@@ -35,7 +35,7 @@ if (boundaryExplorerRoot) {
     let error = boundaryExplorerRoot.querySelector("[data-boundary-order-error]");
     if (!error) {
       error = document.createElement("p");
-      error.className = "boundary-laboratory-error";
+      error.className = "boundary-explorer-error";
       error.dataset.boundaryOrderError = "";
       error.id = "boundary-order-error";
       error.setAttribute("role", "alert");
@@ -89,7 +89,7 @@ if (boundaryExplorerRoot) {
   }
 
   function insertPlotElement(element) {
-    const firstLabel = plot.querySelector(".boundary-lab-label");
+    const firstLabel = plot.querySelector(".boundary-plot-label");
     plot.insertBefore(element, firstLabel);
   }
 
@@ -99,20 +99,22 @@ if (boundaryExplorerRoot) {
 
   function updateFareyTable(order) {
     const fractions = order >= 3 ? upperFarey(order) : [];
-    const cells = fractions.slice(0, -1).map((left, index) => {
+    const fareyPairs = fractions.slice(0, -1).map((left, index) => {
       const right = fractions[index + 1];
       return { left, right, ...fareyPairParameters(left, right, order) };
     });
 
-    if (!cellDetails || !cellSummary || !cellRows) return cells;
-    cellDetails.hidden = cells.length === 0;
-    cellSummary.textContent = "Open all Farey pairs for n=" + order;
-    if (cellTableCaption) {
-      cellTableCaption.textContent =
+    if (!fareyPairDetails || !fareyPairSummary || !fareyPairRows) {
+      return fareyPairs;
+    }
+    fareyPairDetails.hidden = fareyPairs.length === 0;
+    fareyPairSummary.textContent = "Open all Farey pairs for n=" + order;
+    if (fareyPairTableCaption) {
+      fareyPairTableCaption.textContent =
         "Consecutive Farey pairs and relabelled data with q<s for n=" + order;
     }
-    cellRows.replaceChildren();
-    for (const cell of cells) {
+    fareyPairRows.replaceChildren();
+    for (const fareyPair of fareyPairs) {
       const row = document.createElement("tr");
       const pair = document.createElement("th");
       const denominators = document.createElement("td");
@@ -120,23 +122,25 @@ if (boundaryExplorerRoot) {
       const e = document.createElement("td");
       pair.scope = "row";
       pair.textContent =
-        fractionLabel(cell.left) + " → " + fractionLabel(cell.right);
+        fractionLabel(fareyPair.left) +
+        " → " +
+        fractionLabel(fareyPair.right);
       denominators.textContent =
         "(" +
-        cell.p +
+        fareyPair.p +
         "/" +
-        cell.q +
+        fareyPair.q +
         "," +
-        cell.r +
+        fareyPair.r +
         "/" +
-        cell.s +
+        fareyPair.s +
         ")";
-      d.textContent = String(cell.d);
-      e.textContent = String(cell.e);
+      d.textContent = String(fareyPair.d);
+      e.textContent = String(fareyPair.e);
       row.append(pair, denominators, d, e);
-      cellRows.append(row);
+      fareyPairRows.append(row);
     }
-    return cells;
+    return fareyPairs;
   }
 
   function appendFareyMarkers(order) {
@@ -154,14 +158,18 @@ if (boundaryExplorerRoot) {
       const upperCoordinate = toSvgCoordinate(Math.cos(angle), Math.sin(angle));
       const upperMarker = createSvgElement("circle", {
         "aria-hidden": "true",
-        class: "boundary-lab-root",
+        class: "boundary-plot-root",
         cx: upperCoordinate.x,
         cy: upperCoordinate.y,
         "data-farey-root": "",
         r: 4.5,
       });
       const upperTitle = createSvgElement("title", {});
-      upperTitle.textContent = "Farey endpoint root " + fractionLabel(fraction);
+      upperTitle.textContent =
+        "e^(2πi·" +
+        fractionLabel(fraction) +
+        "), endpoint root; normalized angle x=" +
+        fractionLabel(fraction);
       upperMarker.append(upperTitle);
       insertPlotElement(upperMarker);
       markerCount += 1;
@@ -172,7 +180,7 @@ if (boundaryExplorerRoot) {
         );
         const lowerMarker = createSvgElement("circle", {
           "aria-hidden": "true",
-          class: "boundary-lab-root",
+          class: "boundary-plot-root",
           cx: lowerCoordinate.x,
           cy: lowerCoordinate.y,
           "data-farey-root": "",
@@ -180,7 +188,10 @@ if (boundaryExplorerRoot) {
         });
         const lowerTitle = createSvgElement("title", {});
         lowerTitle.textContent =
-          "Conjugate of Farey endpoint root " + fractionLabel(fraction);
+          "e^(−2πi·" +
+          fractionLabel(fraction) +
+          "), conjugate of the endpoint root corresponding to the upper-half parameter x=" +
+          fractionLabel(fraction);
         lowerMarker.append(lowerTitle);
         insertPlotElement(lowerMarker);
         markerCount += 1;
@@ -193,7 +204,7 @@ if (boundaryExplorerRoot) {
     if (!plot || !orderInput) return;
 
     plot.querySelectorAll(
-      ".boundary-lab-region, .boundary-lab-interval, .boundary-lab-point, .boundary-lab-root",
+      ".boundary-plot-region, .boundary-plot-interval, .boundary-plot-point, .boundary-plot-root",
     ).forEach((element) => element.remove());
 
     const kind = order === 1 ? "point" : order === 2 ? "interval" : "region";
@@ -202,7 +213,7 @@ if (boundaryExplorerRoot) {
       const coordinate = toSvgCoordinate(1, 0);
       insertPlotElement(
         createSvgElement("circle", {
-          class: "boundary-lab-point",
+          class: "boundary-plot-point",
           cx: coordinate.x,
           cy: coordinate.y,
           "data-boundary-point": "",
@@ -214,7 +225,7 @@ if (boundaryExplorerRoot) {
       const right = toSvgCoordinate(1, 0);
       insertPlotElement(
         createSvgElement("line", {
-          class: "boundary-lab-interval",
+          class: "boundary-plot-interval",
           x1: left.x,
           x2: right.x,
           y1: left.y,
@@ -226,7 +237,7 @@ if (boundaryExplorerRoot) {
       boundary = fullBoundary(order, samplesPerInterval);
       insertPlotElement(
         createSvgElement("path", {
-          class: "boundary-lab-region",
+          class: "boundary-plot-region",
           d: boundaryPath(boundary),
           "data-boundary-region": "",
         }),
@@ -234,7 +245,7 @@ if (boundaryExplorerRoot) {
     }
 
     const markerCount = appendFareyMarkers(order);
-    const cells = updateFareyTable(order);
+    const fareyPairs = updateFareyTable(order);
     plot.setAttribute("aria-label", "Boundary of Theta " + order);
     if (plotDescription) {
       plotDescription.textContent =
@@ -264,20 +275,20 @@ if (boundaryExplorerRoot) {
             : "<span>Numerical boundary plot.</span> Θ<sub>" +
               order +
               "</sub> has " +
-              cells.length +
+              fareyPairs.length +
               " Farey interval" +
-              (cells.length === 1 ? "" : "s") +
+              (fareyPairs.length === 1 ? "" : "s") +
               " in 0≤x≤1/2, reflected across the real axis." +
               (order === 3
                 ? " The segment [−1,−1/2] is exact; the closed SVG walk traverses this attached segment once in each direction."
                 : "") +
-              " The dashed circle is |λ|=1. Farey fractions specify endpoint roots exactly, but their SVG coordinates and all sampled arc coordinates are floating-point approximations. " +
+              " The dashed circle is |λ|=1. Farey fractions specify endpoint roots exactly, but their SVG coordinates and all sampled arc coordinates are floating-point approximations; region-path coordinates are rounded to the nearest 0.01 in viewBox coordinates. " +
               markerCopy;
     }
     if (numericalCopy) {
       numericalCopy.textContent =
         kind === "region"
-          ? "Moduli for parameters in the open Farey intervals are found by binary64 bisection. Each nonreal branch uses " +
+          ? "Moduli for parameters in the open Farey intervals are found by IEEE 754 binary64 (double-precision) bisection. Each nonreal branch uses " +
             samplesPerInterval +
             " points, and the SVG joins them by line segments. No bound on the geometric error of this polyline approximation is asserted." +
             (order === 3
@@ -291,7 +302,9 @@ if (boundaryExplorerRoot) {
     boundaryExplorerRoot.dataset.boundaryOrder = String(order);
     boundaryExplorerRoot.dataset.boundaryKind = kind;
     boundaryExplorerRoot.dataset.boundaryPointCount = String(boundary.length);
-    boundaryExplorerRoot.dataset.boundaryCellCount = String(cells.length);
+    boundaryExplorerRoot.dataset.boundaryFareyPairCount = String(
+      fareyPairs.length,
+    );
     boundaryExplorerRoot.dataset.boundaryMarkerCount = String(markerCount);
   }
 

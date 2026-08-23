@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
@@ -7,16 +8,25 @@ async function source(relativePath) {
 }
 
 test("archival links distinguish the Zenodo record from the website edition", async () => {
-  const [home, journeyPage] = await Promise.all([
+  const [home, journeyPage, websiteEdition] = await Promise.all([
     source("app/data/home.ts"),
     source("app/journey/page.tsx"),
+    readFile(
+      new URL(
+        "../public/paper/critical-invariant-polygons.pdf",
+        import.meta.url,
+      ),
+    ),
   ]);
+  const websiteEditionChecksum = createHash("sha256")
+    .update(websiteEdition)
+    .digest("hex");
 
   assert.match(home, /archival 24 July 2026 version on Zenodo/);
   assert.match(home, /Archival Zenodo record \(24 July 2026\)/);
   assert.match(
     home,
-    /a7b3cf7be74794b15f1b5b3c73bd0b41464c7964fd358d5394a255d720d7430b/,
+    new RegExp(websiteEditionChecksum),
   );
   assert.match(journeyPage, /archival 24 July 2026 version on Zenodo/);
   assert.doesNotMatch(home, /current archival version/);

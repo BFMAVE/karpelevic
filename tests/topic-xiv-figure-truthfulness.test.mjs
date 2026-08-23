@@ -55,6 +55,7 @@ test("Topic XIV's restored order-seven figure is accessible and geometrically tr
   const pathData = attribute(pathTag, "d");
   assert.ok(pathData.length > 1_000, "the boundary path is nonempty and well sampled");
   assert.doesNotMatch(pathData, /NaN|Infinity/);
+  assert.match(pathData, /\sZ$/, "the rendered boundary path is explicitly closed");
 
   const rayTag = figure.match(/<line\b[^>]*data-worked-ray[^>]*>/)?.[0];
   const pointTag = figure.match(/<circle\b[^>]*data-worked-boundary-point[^>]*>/)?.[0];
@@ -81,6 +82,20 @@ test("Topic XIV's restored order-seven figure is accessible and geometrically tr
     "each endpoint marker has a native SVG tooltip",
   );
   assert.equal(rootTags.length, 18);
+  const tooltipText = [...figure.matchAll(/<title[^>]*>([\s\S]*?)<\/title>/g)]
+    .map((match) =>
+      match[1].replace(/<!--[\s\S]*?-->/g, "").replace(/<[^>]*>/g, "").trim(),
+    );
+  assert.ok(
+    tooltipText.includes(
+      "e^(2πi·0/1), endpoint root; normalized angle x=0/1",
+    ),
+  );
+  assert.ok(
+    tooltipText.includes(
+      "e^(−2πi·1/7), conjugate of the endpoint root corresponding to the upper-half parameter x=1/7",
+    ),
+  );
   const roots = rootTags.map((tag) => ({
     x: Number(attribute(tag, "cx")),
     y: Number(attribute(tag, "cy")),
@@ -105,4 +120,5 @@ test("Topic XIV's restored order-seven figure is accessible and geometrically tr
   assert.match(caption, /By Topic XIII/i);
   assert.match(caption, /73\s*-point polyline/i);
   assert.match(caption, /no bound on its geometric approximation error/i);
+  assert.match(caption, /rounded to the nearest 0\.01 in viewBox coordinates/i);
 });
