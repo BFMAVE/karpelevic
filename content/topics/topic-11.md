@@ -59,14 +59,14 @@ $$
 
 For $z_0=4/5$, $z_1=e^{i\pi/6}$, and $\chi=\pi/8$, points of the segment have arguments from zero to $\pi/6$. The rotated derivative $e^{i\chi}2z$ has arguments from $\pi/8$ to $7\pi/24$, all strictly above the real axis. Averaging these derivative vectors cannot change the sign of their imaginary parts. The mediant calculation uses this same observation for arbitrary $m$, with segments chosen to match its algebra.
 
-Reflect the old interval if necessary so that $b<d$. Fix $x$ in one of the new open intervals and let $\rho=K_{n-1}(2\pi x)$. Define
+Fix the original upper angle $\theta$, and set $x=\theta/(2\pi)$. It lies in an old interval that is split at order $n$. Define $\rho=K_{n-1}(\theta)$ before making any reflection: this radius always belongs to the original upper ray. Write the oriented old endpoints as $a/b<c/d$, with $b<d$, and use $y=x$ if their original order already had the smaller denominator on the left, or $y=1-x$ after reflection. The new fraction is $\xi=(a+c)/(b+d)$ in these oriented coordinates. Assume $y\ne\xi$, and define
 
 $$
 m=\lfloor(n-1)/b\rfloor,\quad
-A=2\pi(bx-a),\quad B=2\pi(c-dx)/m.
+A=2\pi(by-a),\quad B=2\pi(c-dy)/m.
 $$
 
-The old scalar equation is $\rho^{d/m}\sin A+\rho^b\sin B=\sin(A+B)$. Since $n=b+d$, the sign of $mB-A$ tells us which new interval contains $x$: it is positive on the left of $\xi$ and negative on the right.
+The old scalar equation is $\rho^{d/m}\sin A+\rho^b\sin B=\sin(A+B)$. We evaluate it using $y$, without writing $K_{n-1}(2\pi y)$ at a lower-half-plane angle. The Farey calculation above gives $n=b+d$, so $mB-A=2\pi(a+c-ny)$. Its sign tells us which new interval contains $y$: it is positive on the left of $\xi$ and negative on the right. Reflection may interchange left and right in the original picture, but it leaves this radius comparison unchanged.
 
 Evaluate each new equation at the old radius. For the left interval, temporarily keep $m$ factors. For the right interval, reflection makes $d$ the smaller denominator and its required factor count is one. The right side minus the left side is respectively
 
@@ -115,6 +115,8 @@ On the left, the segment from $u$ to $e^{i\eta}$ has arguments between zero and 
 The right count is already correct. The left required count $\lfloor n/b\rfloor$ differs from $m$ only if $b$ divides $n$, equivalently $d$. Coprimality forces $b=1$. In that case the adding-factor argument increases the left root once more. Every new open subinterval therefore has a strictly larger candidate radius.
 
 ### An arithmetic check and the equality cases
+
+Unchanged endpoints can still give a larger radius. Return to Topic VIII's reflected example $x=7/24$, $y=17/24$ in $(2/3,3/4)$. These endpoints remain consecutive at orders four, five, and six: their denominators sum to seven. The factor count is one at orders four and five, so the two scalar equations agree and $K_4(7\pi/12)=K_5(7\pi/12)\approx0.86752212$. At order six the count rises to two. Now $A=\pi/4$ stays fixed, but $B$ decreases from $\pi/3$ to $\pi/6$. Appending a zero weight gives the strict comparison, and the new numerical radius is $K_6(7\pi/12)\approx0.91141595$. A Farey interval can therefore stay unchanged while its product has gained one factor.
 
 From order seven to eight, the interval $(1/3,2/5)$ splits because $3+5=8$, inserting $3/8$. The angle fraction $5/14$ satisfies $1/3<5/14<3/8$, so the split comparison gives $K_8(5\pi/7)>K_7(5\pi/7)$.
 

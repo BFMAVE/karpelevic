@@ -65,9 +65,11 @@ export function ProofChapterShell({
             </details>
           </nav>
           {chapterSections.length ? <nav className="reader-section-directory" aria-label="On this topic">
-            <p className="section-label">On this topic</p>
+            <details data-reader-section-directory open>
+            <summary>On this topic</summary>
             <ol>{chapterSections.map((section) => <li key={section.id}><a href={"#" + section.id}>{section.title}</a></li>)}</ol>
             <a href="#source-argument">Source statements and proofs</a>
+            </details>
           </nav> : null}
         </aside>
         <article className="proof-topic-panel proof-chapter-panel reader-chapter" data-chapter-reading-mode="guided" data-proof-chapter data-proof-route={routeKey}>

@@ -8,7 +8,7 @@ export const lateOrientations: Record<number, TopicOrientation> = {
       { term: "Intermediate value theorem and monotonicity", from: null, use: "A continuous increasing function crossing a target value has exactly one solution." },
     ],
     definitions: [
-      { term: "Oriented fractional angle y", meaning: "Use y = θ/(2π), or 1 − θ/(2π) after conjugation, so the smaller denominator q is on the left." },
+      { term: "Original angle θ and oriented coordinate y", meaning: "The radius Kₙ(θ) always refers to the original upper ray. Use y = θ/(2π), or 1 − θ/(2π) after conjugation, so the smaller denominator q is on the left." },
       { term: "Factor count m and angle budget A, B", meaning: "m = floor(n/q), A = 2π(qy − p), B = 2π(r − sy)/m. Both angles are positive inside the interval." },
       { term: "Interval position t", meaning: "t = (y − p/q)/(r/s − p/q), between 0 and 1; A = 2πt/s and B = 2π(1 − t)/(mq)." },
       { term: "Candidate radius Kₙ(θ)", meaning: "The unique ρ in (0,1) solving ρ^(s/m) sin A + ρ^q sin B = sin(A+B). Its boundary interpretation will be proved in Topics IX–XII." },
@@ -20,14 +20,15 @@ export const lateOrientations: Record<number, TopicOrientation> = {
     imports: [
       { term: "Product together with its real phase", from: 7, anchor: "eq:product-phase", use: "The product fixes a sum of logarithmic sizes; the real phase fixes the average factor argument." },
       { term: "Candidate scalar root", from: 8, anchor: "def:candidate", use: "An inequality for the same increasing scalar function becomes an upper bound on the radius." },
-      { term: "Jensen's inequality", from: null, use: "For a convex F, F at the average is at most the average of F. Strict convexity makes equality possible only for equal inputs." },
+      { term: "Derivatives and the fundamental theorem of calculus", from: null, use: "A strictly increasing derivative puts the graph above its tangent. Summing this inequality proves the finite form of Jensen needed here." },
     ],
     definitions: [
       { term: "Normalised factor gⱼ", meaning: "gⱼ = (w − βⱼ)/(1 − βⱼ), with w = z^q = a + ib and b > 0. Normalisation preserves its argument." },
       { term: "The common line and its angular size", meaning: "c = (1 − a)/b; every factor obeys Re gⱼ + c Im gⱼ = 1. Writing its angle as u gives |gⱼ| = 1/(cos u + c sin u)." },
       { term: "Logarithmic size F(u)", meaning: "F(u) = −log(cos u + c sin u) on 0 < u < M, where M = Arg(w − 1). Its second derivative is at least 1." },
+      { term: "Average argument ū", meaning: "ū = (u₁+⋯+uₘ)/m. The real phase fixes ū=A+B; the tangent-line proof shows F(ū)≤(F(u₁)+⋯+F(uₘ))/m." },
     ],
-    strategy: "Draw the normalised factors on their common line, then use their arguments as the one-dimensional variable. Jensen compares all allowed weight choices at once.",
+    strategy: "Draw the normalised factors on their common line, then use their arguments as the one-dimensional variable. Derive the convexity by differentiation, and prove Jensen by summing tangent-line inequalities whose linear terms cancel.",
     payoff: "The radius cannot exceed the candidate. Equality holds precisely when all contact weights βⱼ agree, under the specified product and real phase hypotheses.",
   },
   10: {
@@ -38,12 +39,13 @@ export const lateOrientations: Record<number, TopicOrientation> = {
       { term: "Determinant expansion", from: null, use: "Group permutation terms by disjoint directed cycles to find the full characteristic polynomial." },
     ],
     definitions: [
-      { term: "Weighted transition graph", meaning: "An arrow u → v of weight a means Aᵤᵥ = a: u is the row and v is the column." },
+      { term: "Weighted transition matrix M", meaning: "An arrow u → v of weight a means Mᵤᵥ = a: u is the row and v is the column. M is distinct from the scalar angle A." },
       { term: "Local and connecting cycles", meaning: "m local q-cycles close with weights βⱼ; complementary weights 1 − βⱼ connect them into one cycle of length s." },
       { term: "Realisation order n₀", meaning: "n₀ = max(mq,s). The final connection skips or inserts vertices to obtain the required length s." },
+      { term: "Selected arc parameter β(ϑ)", meaning: "The equal weight chosen at each oriented angle. We prove it decreases strictly from 1 to 0, so each interior weight corresponds to exactly one selected point." },
     ],
-    strategy: "Build the rows first, verify their sums, and only then compute the eigenvalue polynomial. Local cycles may be selected together in a determinant term; the connecting cycle meets them all.",
-    payoff: "Every candidate point is an actual stochastic eigenvalue, realised independently of the boundary theorem. Independent local weights give the full unequal-parameter polynomial family.",
+    strategy: "Build the rows first and translate the determinant into disjoint cycle choices, including their signs and powers. Then use nonvanishing derivatives to prove that the equal weight traverses the chosen arc once.",
+    payoff: "Every candidate point is a stochastic eigenvalue, and each equal weight selects one point on its arc. The full characteristic polynomial distinguishes actual zero eigenvalues from zeros introduced by clearing the Ito equation.",
   },
   11: {
     imports: [
@@ -53,6 +55,7 @@ export const lateOrientations: Record<number, TopicOrientation> = {
       { term: "Fundamental theorem of calculus along a segment", from: null, use: "Apply ordinary real-variable calculus to the real and imaginary parts of a complex polynomial." },
     ],
     definitions: [
+      { term: "Original radius and reflected coordinate", meaning: "Set ρ = Kₙ₋₁(θ) on the original upper ray first. Use x=θ/(2π), or the distinct coordinate y=1−x after reflection, in the scalar calculations." },
       { term: "Mediant ξ", meaning: "Between a/b and c/d, ξ = (a+c)/(b+d). A new order-n fraction appears in an old interval exactly when b+d=n." },
       { term: "Scalar residual", meaning: "The left side of the new scalar equation minus its right side. A negative residual at the old radius places the new root farther out." },
     ],
@@ -71,8 +74,9 @@ export const lateOrientations: Record<number, TopicOrientation> = {
       { term: "Actual radial maximum Rₙ(θ)", meaning: "The largest r with re^(iθ) in Θₙ. Compactness ensures the maximum is attained." },
       { term: "Least realising order k", meaning: "The smallest matrix order that can have the selected maximiser as an eigenvalue; k ≤ n." },
       { term: "The exceptional order-three region", meaning: "Θ₃ is the triangle with vertices 1 and the two cubic roots of unity, together with the real segment [−1,−1/2]." },
+      { term: "Interior radial gap", meaning: "At a point of radius r<Kₙ(θ), the difference Kₙ(θ)−r is positive. Continuity keeps this gap positive nearby, proving the point is interior." },
     ],
-    strategy: "Prove the small orders and the unit-circle classification, then trap Rₙ between the attained candidate below and the least-order bound above. Use radial filling to recover the whole region.",
+    strategy: "Check the order-three scalar domains and the unit-circle classification, then combine attainment below with the least-order bound above. Radial filling gives the whole region; continuity of the positive radial gap identifies its boundary.",
     payoff: "Rₙ = Kₙ for n ≥ 4: the candidates are exactly the boundary. At order three, the nonreal radius tends to 1/2 near angle π but the negative-ray maximum is 1.",
   },
   13: {
@@ -87,6 +91,7 @@ export const lateOrientations: Record<number, TopicOrientation> = {
       { term: "Optimal factor Γₙ", meaning: "The smallest γ for which ρRθ P is contained in γP among polygons with at most N vertices and zero in their interior; N ≥ 4." },
       { term: "Badly approximable angle fraction", meaning: "An irrational x for which |x−a/b| ≥ cₓ/b² for all rationals, for some fixed cₓ > 0." },
       { term: "Uniform relative asymptotic", meaning: "The error divided by the positive leading gap is O(N⁻²), with one constant for all open Farey intervals and all interior positions t." },
+      { term: "Positive leading gap Lₙ(θ)", meaning: "The displayed Farey expression without its final error factor. Uniformity means |(1−Kₙ)−Lₙ|≤(C/N²)Lₙ with one constant C for every interval and interior position." },
     ],
     strategy: "First solve the exact polygon-measurement problem by rescaling an invariant inclusion. Then factor the sine defect so that the small endpoint factor t(1−t) survives the error estimate.",
     payoff: "Γₙ = ρ/Kₙ. The worst-angle loss is of order N⁻²; a fixed badly approximable angle has loss of order N⁻³. Endpoint-uniform relative error does not mean every irrational angle has the same rate.",

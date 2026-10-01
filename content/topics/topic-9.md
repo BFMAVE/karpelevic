@@ -59,13 +59,13 @@ $$
 F(u)=-\log\mathcal D(u),\qquad 0<u<M.
 $$
 
-For our factors $F(u_j)=\log|g_j|$. Equivalently, $F$ is a constant minus the logarithm of a sine, which explains the term log-sine convexity. Differentiating $\mathcal D''=-\mathcal D$ yields
+For our factors $F(u_j)=\log|g_j|$. Equivalently, $F$ is a constant minus the logarithm of a sine, which explains the term log-sine convexity. The derivatives are $\mathcal D'=-\sin u+c\cos u$ and $\mathcal D''=-\mathcal D$. First $F'=-\mathcal D'/\mathcal D$; differentiating this quotient gives
 
 $$
 F''(u)=1+\left(\frac{\mathcal D'(u)}{\mathcal D(u)}\right)^2\ge1.
 $$
 
-This proves strict convexity: bending the argument to either side of its average increases the average logarithmic size. We also need to distinguish weights, and differentiation gives
+The denominator is positive on the entire domain, so these derivatives are valid there. This proves strict convexity: bending the argument to either side of its average increases the average logarithmic size. We also need to distinguish weights. For a moving upper-half-plane point $X+iY$, its argument derivative is $(XY'-YX')/(X^2+Y^2)$. Here $X=a-\beta$ and $Y=b$, so $X'=-1$ and $Y'=0$. Thus
 
 $$
 \frac{d}{d\beta}\operatorname{Arg}(w-\beta)
@@ -92,7 +92,19 @@ The logarithmic size at the average angle is strictly smaller. Two factors at th
 
 ### Applying the average fixed by geometry
 
-For a convex function, Jensen's inequality states that its value at an average is at most the average of its values. Strict convexity makes equality possible only when the input values all agree. The geometric argument identity fixes our average:
+We can prove the finite form of Jensen's inequality needed here from ordinary calculus. Let $\bar u=m^{-1}\sum_j u_j$. This average also lies in $(0,M)$. Since $F''>0$, the derivative $F'$ is strictly increasing. Integrating $F'$ between $\bar u$ and any $u$ shows
+
+$$
+F(u)\ge F(\bar u)+F'(\bar u)(u-\bar u),
+$$
+
+with equality only at $u=\bar u$. For $u>\bar u$, the integrand $F'(v)$ is larger than $F'(\bar u)$; for $u<\bar u$, reverse the integral and use the smaller derivative. The graph therefore lies above its tangent at $\bar u$. Sum these tangent-line inequalities over $u_1,\ldots,u_m$. Their linear terms cancel because $\sum_j(u_j-\bar u)=0$, leaving
+
+$$
+F(\bar u)\le\frac1m\sum_j F(u_j).
+$$
+
+Equality is possible precisely when every $u_j=\bar u$. This is Jensen's inequality, including its equality condition, proved for our function. The geometric argument identity fixes the average itself:
 
 $$
 \bar u=\frac1m\sum_j u_j

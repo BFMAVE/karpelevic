@@ -39,7 +39,7 @@ test("all fourteen topics have visible teaching contracts, figures, local naviga
     assert.match(html, /reader-figure-visual/);
     assert.match(html, /aria-label="On this topic"/);
     assert.match(html.replace(/<!--[\s\S]*?-->/g, ""), new RegExp(`Read the source argument for Topic ${roman[index].toUpperCase()}`));
-    assert.doesNotMatch(html, /Complete argumentOpen|reader-figure:(?:early|late)/);
+    assert.doesNotMatch(html, /Complete argumentOpen|reader-figure:/);
     for (const match of html.matchAll(/href="#([^"?]+)"/g)) {
       assert.ok(html.includes(`id="${match[1]}"`), `${route}: missing local section ${match[1]}`);
     }
@@ -86,12 +86,17 @@ test("reading controls open the full formal proof, close all levels, and reveal 
   outer.parentElement = chapter;
   const target = { parentElement: inner, closest() { return null; }, scrollIntoView(options) { this.scrolled = options; } };
   const directory = { open: true };
-  const compact = { matches: true, addEventListener() {} };
+  const sections = { open: true };
+  const compact = { matches: true, addEventListener(type, callback) { this.resize = callback; } };
   const window = { location: { hash: "" }, matchMedia() { return compact; }, setTimeout(callback) { scheduled.push(callback); }, addEventListener(type, callback) { listeners.set(type, callback); } };
-  const document = { readyState: "complete", querySelectorAll(selector) { return selector.includes("projection") ? [] : selector.includes("directory") ? [directory] : [chapter]; }, getElementById() { return target; } };
+  const document = { readyState: "complete", querySelectorAll(selector) { return selector.includes("projection") ? [] : selector.includes("directory") ? [directory, sections] : [chapter]; }, getElementById() { return target; } };
   vm.runInNewContext(await read("public/proof-chapter.js"), { window, document });
   scheduled[0]();
   assert.equal(directory.open, false, "mobile topic directory starts compact");
+  assert.equal(sections.open, false, "mobile section directory starts compact and remains available");
+  compact.matches = false;
+  compact.resize();
+  assert.equal(directory.open && sections.open, true, "both navigation directories expand on desktop");
   assert.equal(controls.hidden, false);
   formal.callbacks.get("click")();
   assert.equal(chapter.dataset.chapterReadingMode, "formal");
@@ -107,4 +112,78 @@ test("reading controls open the full formal proof, close all levels, and reveal 
   guided.callbacks.get("click")();
   assert.equal(chapter.dataset.chapterReadingMode, "guided");
   assert.equal(guided.attributes["aria-pressed"], "true");
+});
+
+test("supplementary diagrams appear at their guide placements with accessible keyboard regions", async () => {
+  const supplemented = new Set([2, 6, 7, 8, 10, 12]);
+  for (const [index, route] of routes.entries()) {
+    const html = await render(route);
+    const figures = [...html.matchAll(/<figure\b[^>]*class="[^"]*reader-teaching-figure[^\"]*"[\s\S]*?<\/figure>/g)].map((match) => match[0]);
+    assert.equal(figures.length, (index === 5 ? 2 : 1) + Number(supplemented.has(index + 1)), `${route}: all planned figures are rendered`);
+    for (const figure of figures) {
+      assert.match(figure, /class="reader-figure-visual"[^>]*tabindex="0"[^>]*role="region"[^>]*aria-label=/, `${route}: scrollable diagram is keyboard accessible`);
+      assert.match(figure, /<title\b/);
+      assert.match(figure, /<desc\b/);
+      assert.match(figure, /<figcaption\b/);
+    }
+    assert.match(html, /<details[^>]*data-reader-section-directory/);
+  }
+});
+
+test("the starting averaging diagram represents the actual row product and discloses its scope", async () => {
+  const html = await render("/prerequisites/");
+  const figure = html.match(/<figure\b[^>]*reader-average-figure[\s\S]*?<\/figure>/)?.[0];
+  assert.ok(figure);
+  const point = figure.match(/<polygon points="([^"]+)" fill="#7c302e"/);
+  assert.ok(point);
+  const vertices = point[1].split(" ").map((pair) => pair.split(",").map(Number));
+  const centre = vertices.reduce(([x, y], [px, py]) => [x + px / 4, y + py / 4], [0, 0]);
+  assert.equal((centre[0] - 230) / 125, .5, "real part is the first row weight");
+  assert.equal((188 - centre[1]) / 125, .5, "imaginary part is the second row weight");
+  assert.match(figure, /0\.707/);
+  assert.match(figure, /This diagram shows one row/);
+  assert.match(figure.replace(/<!--[\s\S]*?-->/g, ""), /Taking all rows together gives λP ⊆ P/);
+  assert.match(figure, /aria-valuetext="0\.5 on 1; 0\.5 on i"/);
+  assert.match(figure, /<noscript>/);
+});
+
+test("comparison diagrams distinguish series without requiring colour perception", async () => {
+  for (const route of ["/proof/topic-xi/", "/proof/topic-xiii/"]) {
+    const html = await render(route);
+    const drawing = html.match(/<figure\b[^>]*reader-teaching-figure[\s\S]*?<\/figure>/)?.[0];
+    assert.ok(drawing);
+    assert.match(drawing, /stroke-dasharray=/, route);
+  }
+});
+
+test("the averaging controller enables the exported example and keeps geometry, weights and announcements together", async () => {
+  const callbacks = new Map(), scheduled = [];
+  const element = () => ({ disabled: true, value: "0.5", textContent: "", attributes: {}, setAttribute(name, value) { this.attributes[name] = value; }, addEventListener(name, callback) { callbacks.set(name, callback); } });
+  const input = element(), point = element(), row = element(), coordinate = element(), weight = element(), description = element(), status = element();
+  const presets = [0, .5, 1].map((value) => ({ ...element(), dataset: { averagePreset: String(value) }, events: new Map(), addEventListener(name, callback) { this.events.set(name, callback); } }));
+  const nodes = { input, point, row, coordinate, weight, description, status };
+  const figure = { querySelector(selector) { return nodes[selector.match(/data-average-(\w+)/)[1]]; }, querySelectorAll() { return presets; } };
+  const document = { readyState: "complete", querySelectorAll() { return [figure]; } };
+  const window = { setTimeout(callback) { scheduled.push(callback); } };
+  vm.runInNewContext(await read("public/weighted-average.js"), { window, document });
+  scheduled[0]();
+  assert.equal(input.disabled, false);
+  assert.ok(presets.every((preset) => !preset.disabled));
+  for (const value of [0, .15, .5, .9, 1]) {
+    input.value = String(value);
+    callbacks.get("input")();
+    const vertices = point.attributes.points.split(" ").map((pair) => pair.split(",").map(Number));
+    const [x, y] = vertices.reduce(([a, b], [px, py]) => [a + px / 4, b + py / 4], [0, 0]);
+    assert.ok(Math.abs((x - 230) / 125 - value) < 1e-14);
+    assert.ok(Math.abs((188 - y) / 125 - (1 - value)) < 1e-14);
+    assert.ok(Math.abs((x - 230) + (188 - y) - 125) < 1e-12, "the point stays on the side");
+    assert.match(status.textContent, new RegExp(Math.hypot(value, 1 - value).toFixed(3).replace(".", "\\.")));
+    assert.match(description.textContent, /current coordinates/);
+  }
+  presets[1].events.get("click")();
+  assert.equal(input.value, "0.5");
+  assert.equal(presets[1].attributes["aria-pressed"], "true");
+  assert.equal(presets[0].attributes["aria-pressed"], "false");
+  assert.equal(row.textContent, "(0.5, 0.5, 0, 0)");
+  assert.equal(input.attributes["aria-valuetext"], "0.5 on 1; 0.5 on i");
 });

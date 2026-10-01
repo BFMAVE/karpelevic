@@ -1,6 +1,6 @@
 ### An extremal eigenvalue has no room to move outward
 
-Fix a nonreal number $\zeta=\rho e^{i\theta_\zeta}$ with $0<\rho<1$. We study it under two assumptions. First, $N$ is the least number of vertices of a polygon invariant under $Tz=\zeta z$. By Topic I, $N$ is also its least realizing stochastic-matrix order. Second, no $t\zeta$ with $t>1$ has an invariant polygon with at most $N$ vertices. This is **radial extremality**: increasing the modulus without changing the angle costs more vertices.
+Fix a nonreal number $\zeta=\rho e^{i\theta_\zeta}$ with $0<\rho<1$, choosing its argument representative $0<\theta_\zeta<2\pi$. We study it under two assumptions. First, $N$ is the least number of vertices of a polygon invariant under $Tz=\zeta z$. By Topic I, $N$ is also its least realizing stochastic-matrix order. Second, no $t\zeta$ with $t>1$ has an invariant polygon with at most $N$ vertices. This is **radial extremality**: increasing the modulus without changing the angle costs more vertices. If we later conjugate $\zeta$, its chosen argument becomes $2\pi-\theta_\zeta$.
 
 These assumptions hold when we choose a maximal eigenvalue on a ray in $\Theta_n$ and let $N\le n$ be its least realizing order. Indeed, an outward realization of order at most $N$ would also be one of order $n$ after padding. We do not assume that $N=n$. That distinction is why the independent order comparison in Topic XI is necessary.
 
@@ -40,7 +40,7 @@ Similarity by $D$ preserves eigenvalues, while division by $r$ enlarges the non-
 
 ### An interior image would give exactly that forbidden row
 
-Let the polygon vertices be $v_1,\ldots,v_N$. If $\zeta v_i$ lies in the interior, choose a small $\eta>0$ such that
+Let the polygon vertices be $v_1,\ldots,v_N$. If $\zeta v_i$ lies in the interior, choose $0<\eta<1/N$ small enough that
 
 $$w=\frac{\zeta v_i-\eta\sum_jv_j}{1-N\eta}\in P.$$
 
@@ -62,9 +62,25 @@ The **polar polygon** is
 
 $$P^\circ=\{a:\langle a,x\rangle\le1\text{ for every }x\in P\}.$$
 
-Its vertices correspond to the sides of $P$, and it has $N$ vertices. The **adjoint** $T^*$ is the transpose map in real coordinates; it satisfies $\langle T^*a,x\rangle=\langle a,Tx\rangle$. For complex multiplication by $\zeta$, it is multiplication by $\bar\zeta$. Invariance of $P$ gives $T^*P^\circ\subseteq P^\circ$.
+We need to prove that this new polygon has exactly one vertex for each original side. First, checking its inequalities at the original vertices is enough, by convexity:
 
-Conjugation preserves the two extremality assumptions. Apply the vertex-contact result to $P^\circ$: for each polar vertex $a$, $T^*a$ is on its boundary. Hence some $x\in P$ satisfies $\langle T^*a,x\rangle=1$. Equivalently $Tx$ lies on the original side $\langle a,Tx\rangle=1$. Every side meets $TP$.
+$$
+P^\circ=\{a:\langle a,v_j\rangle\le1\quad(1\le j\le N)\}.
+$$
+
+It is bounded because $P$ contains a disk of some radius $r>0$ about zero: for nonzero $a$, testing the point $r a/|a|$ gives $|a|\le1/r$, and $a=0$ already satisfies that bound. It has interior because all its inequalities are strict for $a$ sufficiently close to zero. It is therefore a genuine polygon described by finitely many half-planes.
+
+Let $a_i$ be the normal defining the original side from $v_{i-1}$ to $v_i$, so that $\langle a_i,v_{i-1}\rangle=\langle a_i,v_i\rangle=1$. The two endpoint vectors are linearly independent: their line does not pass through zero, since zero is interior to $P$. These two linear equations determine $a_i$ uniquely. If $a_i$ were a nontrivial average of two polar points, both points would have to satisfy both equalities; otherwise their average would be strictly below one. Uniqueness forces them both to be $a_i$. Thus $a_i$ is a polar vertex.
+
+Conversely, a polar vertex must have two linearly independent **active inequalities**, meaning inequalities attaining equality there. If the active endpoint vectors spanned at most one line, a small motion perpendicular to that line in both directions would keep all active equalities, and the finitely many strict inequalities would remain strict. The point would lie inside a polar segment and would not be a vertex. Two independent active original vertices lie on the supporting line $\langle a,x\rangle=1$; in a polygon they are the endpoints of one side. This identifies the polar vertex as its normal. The correspondence is therefore exact, and $P^\circ$ has $N$ vertices.
+
+For the diamond from Topic I, the side endpoints $(1,0)$ and $(0,1)$ give the equations $a_x=1$ and $a_y=1$. They meet at the polar vertex $a=(1,1)$. The next figure displays the original side and these two active polar inequalities in their respective coordinate planes.
+
+<!-- reader-figure:early-extra -->
+
+The **adjoint** $T^*$ is the transpose map in real coordinates; it satisfies $\langle T^*a,x\rangle=\langle a,Tx\rangle$. For complex multiplication by $\zeta$, it is multiplication by $\bar\zeta$. Invariance of $P$ gives $T^*P^\circ\subseteq P^\circ$: each polar inequality remains valid when tested at $Tx\in P$.
+
+Conjugation preserves the two extremality assumptions. Apply the vertex-contact result to $P^\circ$: for each polar vertex $a$, $T^*a$ is on its boundary. A polar point satisfying all $N$ vertex inequalities strictly has a whole small neighbourhood satisfying them, so it is interior. Thus at least one original vertex $x$ satisfies $\langle T^*a,x\rangle=1$. Equivalently $Tx$ lies on the original side $\langle a,Tx\rangle=1$. Every side meets $TP$.
 
 For the same diamond $P=\{|x|+|y|\le1\}$, the polar is the square $P^\circ=[-1,1]^2$. A polar vertex $a=(1,1)$ represents the original side $x+y=1$. With the contact map $Tz=((1+i)/2)z$, its adjoint sends $a$ to $(1,0)$, a point on the polar boundary. Choosing the original vertex $x=(1,0)$ gives $\langle T^*a,x\rangle=1$, and its image $Tx=(1/2,1/2)$ lies on $x+y=1$. This exact model shows how a polar vertex contact certifies an original side contact; the general proof obtains that contact from extremality.
 

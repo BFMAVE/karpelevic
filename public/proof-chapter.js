@@ -19,7 +19,7 @@
       showStep(3);
       controls.hidden = false;
     });
-    const directories = Array.from(document.querySelectorAll("[data-reader-directory]"));
+    const directories = Array.from(document.querySelectorAll("[data-reader-directory], [data-reader-section-directory]"));
     const compact = window.matchMedia("(max-width: 860px)");
     function sizeDirectory() {
       directories.forEach((directory) => { directory.open = !compact.matches; });

@@ -21,7 +21,7 @@ e\vartheta+\sum_{j=1}^{m}u_j=2\pi(r-mp),
 \qquad u_j=\operatorname{Arg}(\omega^q-\beta_j).
 $$
 
-The second is an equality of real numbers. It specifies the full number of turns, information that the first equation alone cannot retain.
+Here $\operatorname{Arg}$ is the principal argument, the representative in $(-\pi,\pi]$. The construction will put every $u_j$ in $(0,\pi)$. The second equation is an equality of real numbers. It specifies the full number of turns, information that the first equation alone cannot retain.
 
 The product has two kinds of information to carry. Its absolute value measures accumulated contraction along the return paths. Its angle measures their accumulated turning. Complex multiplication records the latter only modulo a full turn, so we must carry the real angular sum alongside the algebra. Losing that integer here would later allow the convexity calculation to compare the wrong branch of the polynomial.
 
@@ -91,7 +91,7 @@ $$
 
 Together with Topic III's bound $\theta_\zeta/(2\pi)<\kappa/N$, this places the angle between $p/q$ and $\kappa/N$. We take $\omega=\zeta$, $r=\kappa$, and $s=N$.
 
-Each factor angle is the side increment $u_j=\Phi_j-\Phi_{j-1}\in(0,\pi)$. Define the integer $g=\kappa-mp$. The closing path has unreduced index advance
+Each factor angle is the side increment $u_j=\Phi_j-\Phi_{j-1}\in(0,\pi)$. Define the integer $g=\kappa-mp$. Starting from index $m$, the closing path adds $e\kappa$, so its unreduced ending index is
 
 $$
 m+e\kappa=gN,
@@ -104,6 +104,33 @@ e\vartheta+\sum_j u_j=2\pi g=2\pi(r-mp).
 $$
 
 When $e=0$, the equality uses the continued angle at $v_N=v_0$; those two labels still differ by a full turn.
+
+### Continue the eight-state towers through the closing path
+
+Topic V's index example had $N=8$, $\kappa=3$, and two interior-contact bases. Its return data give $q=3$, $m=2$, $e=2$, and the Farey pair $p/q=1/3$, $r/s=3/8$. There is no need to add bases. The five-step return from $v_2$ passes through $v_0$ after two steps, leaving a three-step path to contact $c_1$. Thus the paths yield
+
+$$
+(\zeta^3-\beta_1)v_0=\alpha_1v_1,\qquad
+(\zeta^3-\beta_2)v_1=\alpha_2v_2,\qquad
+\zeta^2v_2=v_0.
+$$
+
+The two averaging equations eliminate $v_1$, and the closing equation eliminates $v_0,v_2$:
+
+$$
+\zeta^2(\zeta^3-\beta_1)(\zeta^3-\beta_2)=\alpha_1\alpha_2.
+$$
+
+Read the angles from the same paths. The factor angles are $u_1=\Phi_1-\Phi_0$ and $u_2=\Phi_2-\Phi_1$. Starting from index two, the closing path advances by $2\cdot3=6$ index positions, so its unreduced ending index is $2+2\cdot3=8$. Therefore
+
+$$
+\Phi_2+2\theta_\zeta=\Phi_8=\Phi_0+2\pi,
+\qquad2\theta_\zeta+u_1+u_2=2\pi.
+$$
+
+The index zero at the closing endpoint and the continued index eight name the same vertex, but their real angles differ by a full turn. Also, $u_j$ is the argument of $\zeta^3-\beta_j$, not the raw rotation angle $3\theta_\zeta$: subtracting the real endpoint weight changes the factor direction. For an exact angular check, $\theta_\zeta=5\pi/7$ and $u_1=u_2=2\pi/7$ give $10\pi/7+2\pi/7+2\pi/7=2\pi$. The diagram's angle bar uses those values. This checks the winding arithmetic; the return data and angle assignments alone do not establish an invariant polygon or an extremal eigenvalue. Topic XIV supplies the full eight-state matrix and radius calculation.
+
+<!-- reader-figure:early-extra -->
 
 ### Coprime shift with a single interior contact
 
@@ -166,6 +193,16 @@ $$
 =\omega^{mq}\prod_j(1-\beta_j).
 $$
 
+The three cases now have one common output. This table keeps track of the changes made before using the product; $L,K,h,b,s_0,r_0$ in its last row are the integers just defined for the multiple-cycle case.
+
+| Contact pattern | How $q$ is obtained | Orientation and Farey endpoints | Closing data |
+| --- | --- | --- | --- |
+| $\delta=1$, $\varphi>1$ | No-skipping gives $q\kappa-pN=1$ from the record basis. | $\omega=\zeta$; endpoints $p/q<\kappa/N$. | $m=\lfloor N/q\rfloor$, $s=N$, $e=N-mq\ge0$. |
+| $\delta=\varphi=1$ | Choose the modular inverse of $\kappa$ directly, without a successor record. | $\omega=\zeta$; the same endpoint form $p/q<\kappa/N$. | The same $m,s,e$; the suspension also covers a single base. |
+| $\varphi=\delta\ge2$ | Each index cycle has length $q=L=N/\delta$. | Conjugate and reverse: $\omega=\bar\zeta$; endpoints $(L-K)/L<(s_0-r_0)/s_0$. | $m=\delta$, $s=s_0=N-h$, $e=-h$. |
+
+In the last case conjugation sends a fraction $f$ to $1-f$ and reverses the ordered interval. It takes the smaller denominator from the right endpoint to the left. Reversing the base list then restores forward recurrences with positive side-angle increments. The negative closing exponent records this reversed path; it is consistent with the exact real phase, which may now be a negative number of full turns.
+
 ### Why these endpoints really are Farey neighbours
 
 For reduced fractions with denominators at most $N$, the neighbour criterion is
@@ -193,7 +230,7 @@ Both coefficients lie in $(0,1)$. If their sum is larger than one, replace $Q$ b
 
 ### The factor angles lie in one controlled interval
 
-Put $A=q\vartheta-2\pi p$. Farey adjacency and $N\ge4$ give $0<A<2\pi/s<\pi$. Thus $\omega^q=\rho^qe^{iA}$ lies in the upper half-plane. Subtracting a real number $t\in[0,1]$ moves it horizontally left; its principal argument increases strictly from $A$ to $M=\operatorname{Arg}(\omega^q-1)<\pi$. The principal argument is the representative in $(-\pi,\pi]$.
+Put $A=q\vartheta-2\pi p$. The determinant identity gives $r/s-p/q=1/(qs)$, hence $0<A<2\pi/s$. Since $q<s$ and $q+s>N\ge4$, the larger denominator satisfies $s\ge3$, so $2\pi/s<\pi$. Thus $\omega^q=\rho^qe^{iA}$ lies in the upper half-plane. Subtracting a real number $t\in[0,1]$ moves it horizontally left; its principal argument increases strictly from $A$ to $M=\operatorname{Arg}(\omega^q-1)<\pi$.
 
 Therefore each $\beta_j\in[0,1)$ gives $A\le u_j<M$. These are exactly the positive side increments used above, so no extra multiples of $2\pi$ need to be inserted into individual factor arguments.
 

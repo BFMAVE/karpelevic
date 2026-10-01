@@ -4,6 +4,8 @@ import { BoundaryExplorer } from "./BoundaryExplorer";
 import { ReaderTopicOrientation } from "./ReaderTopicOrientation";
 import { ReaderEarlyFigure } from "./ReaderEarlyFigures";
 import { ReaderLateFigure } from "./ReaderLateFigures";
+import { ReaderEarlyExtra } from "./ReaderEarlyExtras";
+import { ReaderLateExtra } from "./ReaderLateExtras";
 import { readerTopics } from "../../data/reader-topics";
 import reader from "../../data/reader.generated.json";
 import { publicationDates } from "../../data/publication-dates";
@@ -18,12 +20,14 @@ export function readerMetadata(number: number) {
 }
 
 function GuidedChapter({ number, html }: { number: number; html: string }) {
-  const parts = html.split(/<!-- reader-figure:(?:early|late) -->\s*/);
+  const parts = html.split(/<!-- reader-figure:(early|late|early-extra|late-extra) -->\s*/);
   return <div className="reader-guide proof-guided-layer">
-    {parts.map((part, index) => <Fragment key={index}>
-      <div dangerouslySetInnerHTML={{ __html: part }} />
-      {index < parts.length - 1 ? number <= 7 ? <ReaderEarlyFigure number={number} /> : <ReaderLateFigure number={number} /> : null}
-    </Fragment>)}
+    {parts.map((part, index) => index % 2 === 0
+      ? <div key={index} dangerouslySetInnerHTML={{ __html: part }} />
+      : <Fragment key={index}>{part === "early" ? <ReaderEarlyFigure number={number} />
+        : part === "late" ? <ReaderLateFigure number={number} />
+        : part === "early-extra" ? <ReaderEarlyExtra number={number} />
+        : <ReaderLateExtra number={number} />}</Fragment>)}
   </div>;
 }
 
@@ -44,6 +48,8 @@ export function CurrentProofChapter({ number }: { number: number }) {
     "app/components/proof/ReaderTopicOrientation.tsx",
     number <= 7 ? "app/data/reader-orientation-early.ts" : "app/data/reader-orientation-late.ts",
     number <= 7 ? "app/components/proof/ReaderEarlyFigures.tsx" : "app/components/proof/ReaderLateFigures.tsx",
+    number <= 7 ? "app/components/proof/ReaderEarlyExtras.tsx" : "app/components/proof/ReaderLateExtras.tsx",
+    "public/proof-chapter.js",
     "app/globals.css",
   ]);
   return <ProofChapterShell routeKey={"topic-" + numerals[number - 1]} updatedAt={revised} firstPublishedAt={firstPublished} question={topic.question} manuscriptPages={topic.source} completionMessage={topic.takeaway} chapterSections={sections}>

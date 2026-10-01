@@ -87,13 +87,13 @@ $$
 
 All vertex indices are read modulo $N$. The coefficient $\beta_i=0$ means the image is the ending vertex; $\beta_i>0$ means it is strictly inside the side. The exceptional shift $N$ can be converted to shift one by reflection, so it need not be retained.
 
-Choose increasing real vertex angles $\Phi_i$ and continue them by $\Phi_{i+N}=\Phi_i+2\pi$. Each side spans less than half a turn because zero lies inside the polygon. Its image assignment gives
+Choose increasing real vertex angles $\Phi_i$ and continue them by $\Phi_{i+N}=\Phi_i+2\pi$. Retain the argument representative $0<\theta_\zeta<2\pi$ for the multiplier after any reflection. Each side spans less than half a turn because zero lies inside the polygon. Its image assignment gives
 
 $$
 \Phi_{i-1}<\Phi_{i-\kappa}+\theta_\zeta\le\Phi_i,
 \qquad\frac{\kappa-1}{N}<\frac{\theta_\zeta}{2\pi}<\frac\kappa N.
 $$
 
-Summing yields the angle bounds. Equality at the upper bound would make every image a vertex; following the resulting finite cycle would give $v=\zeta^L v$ for a positive integer $L$, impossible when $v\ne0$ and $|\zeta|<1$.
+There is no hidden multiple of $2\pi$ in the first inequality. After subtracting $\Phi_{i-\kappa}$, its interval lies between zero and $2\pi$, because $1\le\kappa<N$; the chosen $\theta_\zeta$ lies there too. The geometric argument relation therefore selects this exact representative. Summing the $N$ inequalities gives $2\pi(\kappa-1)<N\theta_\zeta\le2\pi\kappa$: each wrap of the continued index adds $2\pi$. Equality at the upper bound would make every image a vertex; following the resulting finite cycle would give $v=\zeta^L v$ for a positive integer $L$, impossible when $v\ne0$ and $|\zeta|<1$.
 
 As a small check, if $\beta_i=1/4$, then $c_i=(1/4)v_{i-1}+(3/4)v_i$ is inside the side and contributes one to $b_T$. If $\beta_i=0$, it contributes zero and belongs only to the half-open side ending at $v_i$. This convention prevents double counting throughout the later return paths.

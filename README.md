@@ -21,6 +21,14 @@ explanations. Source statements remain available throughout, with individual
 proof disclosures. The journal-style typography and mathematical atlas are
 retained, and the site's public identity is **The Karpelevič theorem**.
 
+The second clarity pass corrects the angle representative, projectivity
+hypothesis, and reflected-radius notation in the guides. It expands the
+polar correspondence, integer tools, local-to-global deformation, strict
+Jensen argument, arc traversal, and final boundary inference. Six additional
+topic diagrams and an interactive starting example explain these steps.
+Both topic and section directories remain available on mobile, and wide
+diagrams can be focused and scrolled with the keyboard.
+
 ## Development and checks
 
 Node.js 22.13 or newer is required. Run `npm ci` and `npm run dev`.
@@ -70,3 +78,6 @@ been selected for website-only material; see `RIGHTS.md`.
 `PROJECT_STATUS.md` records the current rewrite and verification.
 `docs/proof-audits/reader-2026-10-01.md` records the dependency map,
 version comparison, independent review, and corrected teaching bottlenecks.
+`docs/proof-audits/reader-clarity-2026-10-02.md` records the fresh mathematical
+double-check, the three precise guide corrections, and the further teaching
+and figure improvements.

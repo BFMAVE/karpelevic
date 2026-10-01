@@ -35,7 +35,7 @@ $$
 L_j=F^{-H_j}(\operatorname{aff}E_{\sigma(j)}).
 $$
 
-Here $\operatorname{aff}E$ means the full line containing the side. This preimage line supports $P$ at $v_j$. It touches no other point of $P$. Otherwise it would contain an incident side. One incident side would force $F^{H_j}v_j$ to be a vertex; the other would force the preceding base's image to remain a vertex. Both are impossible, because the preceding base has already returned inside a side by time $H_j$. Thus $L_j$ **exposes** $v_j$: its intersection with $P$ is the single point $v_j$.
+Here $\operatorname{aff}E$ means the full line containing the side. This preimage line supports $P$ at $v_j$. It touches no other point of $P$. Otherwise it would contain an incident side. One incident side would force $F^{H_j}v_j$ to be a vertex; the other would force the preceding base's image to remain a vertex. The heights from Topic V are $q$ on an initial block and $q+h$ on the final block, so $H_{j-1}\le H_j$. The preceding base has therefore already returned inside a side by time $H_j$, and face persistence prevents it from becoming a vertex during any extra steps. Both incident-side possibilities are impossible. Thus $L_j$ **exposes** $v_j$: its intersection with $P$ is the single point $v_j$. This height ordering handles the transition between short and tall towers.
 
 ### Build the motion by intersecting lines
 
@@ -146,7 +146,7 @@ The signs follow from $0<r<g$, $H>0$, and $d<s<D$. Since $G$ is affine, it cross
 
 ### The closing motion can have zero first derivative
 
-Let $S:\Lambda\to K$ be an invertible line map sending $X_0$ to $C_\ell$ and $X_1$ to $C_{\ell+1}$. In the application it is the restriction of a power of $F$. Parametrise $K$ by
+Let $S:\overline\Lambda\to\overline K$ be a **projectivity**, an invertible fractional-linear map between the completed lines, sending $X_0$ to $C_\ell$ and $X_1$ to $C_{\ell+1}$. The bar here means that the direction-point at infinity is included, not complex conjugation. In the application $S$ is the restriction of a power of $F$, hence is such a projectivity. Parametrise the finite part of $K$ by
 
 $$
 Y(t)=(1-t)C_{\ell+1}+tC_\ell,\qquad X_1(t)=S^{-1}Y(t).
@@ -192,8 +192,18 @@ $$
 
 They are disjoint: an intersection would require $\varphi$ to divide $t+r$, but $1\le t+r\le2\ell-2<\varphi$. Thus the contacts on internal moving sides come from fixed bases. The projection construction keeps those fixed contacts on their moving sides. Every moving base except the first lies on its exposing preimage line, so its return stays on its fixed target side line. The first moving base alone has both a moving source and the final moving target side; the closing comparison puts its return strictly inward.
 
-Propagate each moved base $\widehat v_j$ along its entire tower by setting the new level-$t$ vertex equal to $F^t\widehat v_j$ for $0\le t<H_j$. Topic V's partition ensures this defines every vertex exactly once. All intermediate vertex-to-vertex identities are preserved. The remaining returns either stay on their corresponding side lines or are unchanged.
+The following index example displays the three kinds of contact that this argument separates. Take the hypothetical skipped-return data
 
-For sufficiently small motion, strict convexity and distinctness of the original vertices persist, and every preserved contact remains strictly between its endpoints. The exceptional contact starts inside its final side and strictly inside every other supporting half-plane. Moving it inward across the final line therefore makes it strictly interior to the new $N$-gon $Q$.
+$$
+(N,\kappa,\varphi,\Delta,q,h)=(17,10,7,3,2,1).
+$$
+
+They satisfy $q\varphi+h\Delta=17$. Here $\ell=3$, the moving bases are $M=\{1,2,3\}$, their target sides are $\sigma(M)=\{4,5,6\}$, and the internal moving sides are $J=\{2,3\}$. Fixed bases six and seven return to the moving side lines two and three; the projections keep these fixed contacts on those lines. Moving bases two and three return to fixed side lines five and six; their exposing lines preserve those returns. Only moving base one returns to the moving final side four. Its image is the contact made interior. These integer data illustrate the contradiction construction; the no-skipping theorem says that an extremal polygon with this skipped return cannot exist.
+
+<!-- reader-figure:early-extra -->
+
+Propagate each moved base $\widehat v_j$ along its entire tower by setting the new level-$t$ vertex equal to $F^t\widehat v_j$ for $0\le t<H_j$. Topic V's partition ensures this defines every vertex exactly once. All intermediate vertex-to-vertex identities are preserved. The remaining returns either stay on their corresponding side lines or are unchanged. In the displayed example the moving towers are $(1,11)$, $(2,12)$, and $(3,13)$, each of height two; the fixed towers contain every other index. A moved base therefore carries its subsequent vertices with it, rather than leaving incompatible copies behind.
+
+For sufficiently small motion, the vertices remain distinct and form a convex $N$-gon in the same cyclic order. This follows from finitely many strict side inequalities: each original side has every other vertex strictly on its inward side, and these inequalities persist by continuity. Every preserved contact remains strictly between its endpoints. The exceptional contact starts inside its final side and strictly inside every other supporting half-plane. Moving it inward across the final line therefore makes it strictly interior to the new $N$-gon $Q$.
 
 All vertex images belong to $Q$, so convexity gives $FQ\subseteq Q$. One vertex image is interior. The universal contact theorem contradicts that conclusion, proving $\Delta=1$. Since $\gcd(\Delta,\varphi)=\gcd(N,\kappa)$, this case also forces $\gcd(N,\kappa)=1$.

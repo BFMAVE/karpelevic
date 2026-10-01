@@ -35,7 +35,7 @@ function TeachingFigure({ id, title, description, height, children, caption, con
     <figure className="reader-teaching-figure">
       <p className="reader-figure-scroll-hint">Scroll across the diagram →</p>
       {controls}
-      <div className="reader-figure-visual">
+      <div className="reader-figure-visual" tabIndex={0} role="region" aria-label={`${title}; scroll horizontally if needed`}>
         <svg viewBox={`0 0 660 ${height}`} role="img" aria-labelledby={`${id}-title ${id}-desc`} style={{ display: "block", width: "100%", background: paper, fontFamily: "ui-sans-serif, system-ui, sans-serif" }}>
           <title id={`${id}-title`}>{title}</title>
           <desc id={`${id}-desc`}>{description}</desc>
@@ -155,7 +155,7 @@ function LocalReplacement() {
   const left = (p: Point) => plane(p, [70, 240], 50);
   const right = (p: Point) => plane(p, [400, 240], 50);
   return (
-    <TeachingFigure id={id} height={450} title="A factor reversal replaces one corner by its side contact" description="A convex polygon corner vi is replaced by the midpoint ci on its preceding side, forming a proper subpolygon. The removed corner and old edges are dashed. The coefficient update makes alpha at i equal one and multiplies alpha at i+kappa by the old alpha at i." caption={<>The corner diagram is a local geometric model: cᵢ is the midpoint of vᵢ₋₁vᵢ. In the proof, βᵢ &gt; 0, βᵢ₊₁ = 0 and the factor reversal establish that this move preserves invariance and the eigenvalue. The numerical coefficient update shown below is a hypothetical collision: 1/2 and 3/4 would merge two positive logarithmic weights. Minimum contact count forbids that collision in the selected polygon; a permitted transfer there has target αᵢ₊κ = 1.</>}>
+    <TeachingFigure id={id} height={450} title="A factor reversal replaces one corner and transfers its positive weight" description="A convex polygon corner vi is replaced by the midpoint ci on its preceding side, forming a proper subpolygon. The removed corner and old edges are dashed. The displayed permitted coefficient transfer changes alpha at i from one half to one and alpha at i+kappa from one to one half, preserving one positive logarithmic weight." caption={<>The corner diagram is a local geometric model: cᵢ is the midpoint of vᵢ₋₁vᵢ. In the proof, βᵢ &gt; 0, βᵢ₊₁ = 0 and the factor reversal establish that this move preserves invariance and the eigenvalue. The permitted numerical transfer takes αᵢ = 1/2 and αᵢ₊κ = 1 to 1 and 1/2: the weight log 2 changes its index without changing the contact count. A positive target weight would instead merge two contacts, which minimum count forbids.</>}>
       <Label at={[170, 50]} anchor="middle">Before</Label>
       <Label at={[500, 50]} anchor="middle">After</Label>
       <polygon points={points(old.map(left))} fill={pale} stroke={teal} strokeWidth={3} />
@@ -176,7 +176,7 @@ function LocalReplacement() {
       <Label at={[429, 179]} color={red}>v′ᵢ = cᵢ</Label>
       <Segment from={[315, 245]} to={[365, 245]} color={ink} arrow={`${id}-arrow`} />
       <Label at={[330, 386]} anchor="middle">αᵢ: 1/2 → 1</Label>
-      <Label at={[330, 425]} anchor="middle">αᵢ₊κ: 3/4 → 3/8</Label>
+      <Label at={[330, 425]} anchor="middle">αᵢ₊κ: 1 → 1/2</Label>
     </TeachingFigure>
   );
 }

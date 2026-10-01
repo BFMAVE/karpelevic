@@ -37,6 +37,16 @@ $$
 
 For these order-$n$ data, $s,mq\ge3$. Consequently $A+B<\pi$. All the sines appearing below are positive; this is a domain condition that makes the comparison work.
 
+Here is an example where reflection is necessary. At order five, take $x=7/24$ in $(1/4,1/3)$. The smaller denominator is on the right. Set $y=1-x=17/24$ and use the reflected interval $(2/3,3/4)$. Now $p=2$, $q=3$, $r=3$, $s=4$, and $m=\lfloor5/3\rfloor=1$. The determinant is $3\cdot3-2\cdot4=1$, and the denominator sum is seven, larger than five. The position is $t=1/2$, giving
+
+$$
+A=\frac\pi4,\qquad B=\frac\pi3,\qquad A+B=\frac{7\pi}{12}<\pi.
+$$
+
+The original angle is $\theta=7\pi/12$, whereas the oriented angle is $\vartheta=17\pi/12$. We keep $K_5(\theta)$ as the radius of the original upper ray; only the coordinates used in its equation have been reflected. Although $e^{i\vartheta}$ is in the lower half-plane, its third power has argument $A=\pi/4$ after subtracting the full turns. That upper-half-plane factor is what the convexity calculation in Topic IX needs. The two angle budgets in the diagram add to less than a half-turn.
+
+<!-- reader-figure:late-extra -->
+
 ### Why the scalar equation has exactly one answer
 
 Define $K_n(\theta)$ inside the interval to be the solution $\rho\in(0,1)$ of

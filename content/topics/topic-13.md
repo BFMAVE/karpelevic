@@ -16,6 +16,8 @@ TP\subseteq\gamma P
 V_P(Tx)\le\gamma V_P(x)\quad\text{for every }x.
 $$
 
+To see both directions, first note that $P$ is the unit sublevel set $\{x:V_P(x)\le1\}$. For $x\ne0$, boundedness of $P$ makes its gauge positive, and closedness makes the least scale attained; thus $x/V_P(x)\in P$. If $TP\subseteq\gamma P$, apply the inclusion to this rescaled vector and use homogeneity to obtain the gauge inequality. At $x=0$ both sides are zero. Conversely, if the inequality holds for every vector, then every $x\in P$ has $V_P(x)\le1$, so $V_P(Tx)\le\gamma$ and $Tx\in\gamma P$. The inclusion follows. This is the bridge from a statement about one measuring shape to a statement about every vector.
+
 For example, take the asymmetric rectangle $P=[-1,2]\times[-1,1]$ and $e_1=(1,0)$. Containing $e_1$ requires scale $1/2$, but containing $-e_1$ requires scale one. Thus $V_P(e_1)=1/2$ and $V_P(-e_1)=1$. The gauge records the shape we chose, including its directional asymmetry. The contraction question asks whether the same shape controls the image of every vector, not just the length of one vector.
 
 Dividing the inclusion by $\gamma$ makes $P$ invariant under multiplication by $(\rho/\gamma)e^{i\theta}$. The polygon criterion from Topic I puts this number in $\Theta_N$. Its modulus cannot exceed $K_N(\theta)$, hence $\gamma\ge\rho/K_N(\theta)$.
@@ -65,7 +67,14 @@ $$
 \bigl(1+O(N^{-2})\bigr).
 $$
 
-The notation $O(N^{-2})$ means an error bounded in absolute value by a constant times $N^{-2}$. Here that constant is independent of the Farey interval and of $t$. The error is relative to the displayed leading term, even when $t$ approaches either endpoint arbitrarily fast.
+For precision, call the displayed positive leading term $L_N(\theta)$, omitting its final factor $1+O(N^{-2})$. There are constants $C>0$ and $N_0$, independent of the interval and $t$, such that for every $N\ge N_0$ and every angle strictly inside an order-$N$ Farey interval,
+
+$$
+\left|(1-K_N(\theta))-L_N(\theta)\right|
+\le\frac{C}{N^2}L_N(\theta).
+$$
+
+This is what the notation $1+O(N^{-2})$ means here. Dividing by $L_N(\theta)>0$ gives a relative error bounded by $C/N^2$, even when $t$ approaches either endpoint arbitrarily fast. An absolute error bound with no factor $L_N$ would be a weaker statement near those endpoints.
 
 For the derivation set $H(u)=u^{s/m}\sin A+u^q\sin B$ and $K=K_N(\theta)$. Since $q+s>N$ and $q<s$, we have $s>N/2$; also $mq>N/2$. Thus $A+B=O(N^{-1})$. The scalar equation gives $H(K)=\sin(A+B)$, while
 

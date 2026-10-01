@@ -33,17 +33,19 @@ Conversely, let $C_3$ be the three-cycle permutation matrix. For nonnegative $a,
 
 The upper boundary of the triangle ends at the vertical segment from $\xi$ to $-1/2$. Its radial maximum tends to $1/2$ as $\theta\uparrow\pi$. On the negative real ray itself, the extra segment reaches $-1$, so the radial maximum is one. This is a genuine discontinuity. The order-three scalar equations describe the nonreal rays, with limiting equation $2\rho^3+3\rho^2=1$ at that endpoint; they must not be continuously assigned value one there.
 
-The order-three scalar candidates really do give the radii of these triangle sides. For $0<x=\theta/(2\pi)<1/3$, the data are $q=1$ and $s=m=3$. Topic X's positive equal weights $\alpha,\beta$, with $\alpha+\beta=1$, give $(z-\beta)^3=\alpha^3$. The selected upper root is $z=\beta+\alpha\xi$, on the side from one to $\xi$.
+The order-three scalar candidates really do give the radii of these triangle sides. The equal-weight algebra in Topic X needs positive $A,B$ with $A+B<\pi$, rather than an order-four assumption. We check those conditions before using it at order three.
 
-For $1/3<x<1/2$, use the conjugate-oriented point $w=\rho e^{2\pi i(1-x)}$. Here $q=2$, $s=3$, and $m=1$. Cancelling nonzero powers in the Ito equation gives
+For $0<x=\theta/(2\pi)<1/3$, the data are $q=1$ and $s=m=3$. Thus $A=\theta$, $B=2\pi/3-\theta$, and $A+B=2\pi/3<\pi$. The same increasing scalar function has a unique positive root $\rho<1$. Its equal weights $\alpha,\beta$ are positive and sum to one. With $z=\rho e^{i\theta}\ne0$, the reduced product is $(z-\beta)^3=\alpha^3$. The selected factor argument is $2\pi/3$, giving $z=\beta+\alpha\xi$, on the side from one to $\xi$.
+
+For $1/3<x<1/2$, use the conjugate-oriented point $w=\rho e^{i\vartheta}$, where $\vartheta=2\pi(1-x)=2\pi-\theta$. The oriented interval is $(1/2,2/3)$, so $q=2$, $s=3$, and $m=1$. Now $A=2\pi-2\theta>0$, $B=3\theta-2\pi>0$, and $A+B=\theta<\pi$. Thus the scalar root and positive equal weights are valid here as well. Since $w\ne0$, we may cancel its powers in the Ito equation, obtaining
 
 $$
 w^3-\beta w-\alpha=(w-1)(w^2+w+\alpha)=0.
 $$
 
-Its nonreal roots have real part $-1/2$. Conjugating back gives the point $z=-1/2+(i/2)\sqrt{4\alpha-1}$ on the vertical side. The selected factor argument and the scalar root's uniqueness identify the radius in both ranges with the ray's intersection with the corresponding triangle side.
+The point $w$ is nonreal, so it cannot be the root one and must solve $w^2+w+\alpha=0$. A nonreal quadratic root requires $4\alpha-1>0$, hence $1/4<\alpha<1$. Its real part is $-1/2$. Conjugating back gives $z=-1/2+(i/2)\sqrt{4\alpha-1}$, strictly between $-1/2$ and $\xi$ on the vertical side. The selected factor argument and the scalar root's uniqueness identify the radius in both ranges with the ray's intersection with the corresponding triangle side.
 
-We may therefore begin the comparison at order four with these scalar radii. The interval $(0,1/3)$ splits by insertion of $1/4$, and Topic XI's split argument applies. On $(1/3,1/2)$ the endpoints stay fixed while the factor count rises from one to two, so its adding-factor argument applies. At the relevant endpoints direct realisations give the required comparison. Thus the order-three radial maximum is at most $K_4$ on every upper ray.
+We may therefore begin the comparison at order four with these scalar radii. The interval $(0,1/3)$ splits by insertion of $1/4$, and Topic XI's split argument applies because its old angle sum is $2\pi/3<\pi$. On $(1/3,1/2)$ the endpoints stay fixed while the factor count rises from one to two, so its adding-factor argument applies because the old angle sum is $\theta<\pi$. At the inserted fraction $1/4$, the new radius is one while the triangle radius is smaller than one. At $x=0,1/3,1/2$, both actual maxima are one, realised directly. Thus the order-three radial maximum is at most $K_4$ on every upper ray, including the exceptional negative ray itself.
 
 On that vertical triangle side, the real coordinate of $\rho e^{i\theta}$ is $\rho\cos\theta=-1/2$. Therefore
 
@@ -86,6 +88,10 @@ $$
 
 Both chains force $R_n(\theta)=K_n(\theta)$. Complex conjugation supplies the lower half-plane.
 
+The order of these inequalities matters. Attainment puts the proposed radius below the actual maximum. The geometric product bounds that maximum at its least realising order, and the independent order comparison carries that bound up to order $n$. We obtain both inequalities without assuming the conclusion in either one. The diagram records these dependencies and shows where the separate order-three argument enters.
+
+<!-- reader-figure:late-extra -->
+
 ### Filling the region and a check
 
 Every segment from zero to an attainable point is attainable for $n\ge2$. One matrix explanation uses a stationary probability row $\pi^T$, satisfying $\pi^TA=\pi^T$, and the column $\mathbf1$ of ones. If $Av=\lambda v$ and $\lambda\ne1$, then $\pi^Tv=0$. For $0\le t\le1$, the stochastic matrix $tA+(1-t)\mathbf1\pi^T$ has eigenvalue $t\lambda$. The segment $[0,1]$ is already realised at order two, covering $\lambda=1$.
@@ -98,6 +104,8 @@ $$
 \Theta_n=\{re^{i\theta}:-\pi\le\theta\le\pi,\ 0\le r\le K_n(\theta)\}.
 $$
 
-The positive continuous radius means its boundary is exactly the outer curve $K_n(\theta)e^{i\theta}$. Topic X's equal weights trace the Ito arcs between the appropriate roots of unity.
+We should also justify why this radial description has exactly the stated boundary. For a nonzero point with $r<K_n(\theta)$, there is a positive gap between its radius and the outer radius. Radius and angle vary continuously in a sufficiently small neighbourhood of that point, and $K_n$ is continuous. Shrink the neighbourhood until the gap remains positive throughout it. Every point of that neighbourhood still belongs to $\Theta_n$, so the original point is interior. The origin is interior too: the positive continuous function $K_n$ has a positive minimum on the circle of angles, and the disk of any smaller radius lies in $\Theta_n$.
+
+Conversely, at a point $K_n(\theta)e^{i\theta}$, moving outward by any positive distance on the same ray leaves $\Theta_n$. Such exterior points approach the given point arbitrarily closely. The given point itself belongs to the compact, hence closed, set $\Theta_n$, so it is a boundary point. Every other point of the set was shown to be interior. Therefore its boundary is exactly the outer curve. The endpoint values $K_n(0)=K_n(\pi)=1$ and conjugation join this continuous curve around the full circle for $n\ge4$. Topic X's strictly varying equal weights trace its Ito arcs between the appropriate roots of unity.
 
 Does order three have a boundary point of modulus $3/4$ at an angle just below $\pi$? Its radial maximum tends to $1/2$, so for angles sufficiently close to $\pi$ the answer is no. At angle exactly $\pi$, $-3/4$ is available on the extra real segment. This check prevents the small-order exception from being hidden by a picture of a continuous radial curve.

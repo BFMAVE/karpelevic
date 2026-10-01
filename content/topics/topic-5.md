@@ -46,7 +46,9 @@ Here $q=h'-h>0$ and $0<\Delta<\nu$. The determinant $qb-ph$ is the signed area o
 
 Why introduce a second coordinate $b$ when the residues are one-dimensional? Reducing $h\kappa$ modulo $N$ forgets how many multiples of $N$ were crossed. The pair $(h,b)$ retains that information. Its determinant relates elapsed time to the change in the remaining gap, and the identity $q\nu+h\Delta=N$ will count exactly how many vertices the towers contain.
 
-Why must it be one? A record vector has coprime coordinates. If both were divisible by $g>1$, dividing by $g$ would yield an earlier positive time with smaller deficit, contradicting the record. Using this coprimality, an integer vector complementary to $V$ can be found with determinant one, by Bézout's identity. Bézout's identity says that coprime integers have an integer linear combination equal to one.
+Why must it be one? A record vector has coprime coordinates. If both were divisible by $g>1$, dividing by $g$ would yield an earlier positive time with smaller deficit, contradicting the record. The initial vector $(0,1)$ is also coprime. Using this coprimality, an integer vector complementary to $V$ can be found with determinant one, by Bézout's identity: coprime integers have an integer linear combination equal to one.
+
+Here is a proof of that integer tool. For integers $h,b$ not both zero, take the smallest positive integer $d=hr+bs$ obtainable with integer coefficients $r,s$. Such a positive combination exists. Divide $h$ by $d$ with remainder $0\le z<d$. That remainder is also an integer combination of $h,b$, so minimality forces $z=0$. The same argument gives $d\mid b$. Conversely, every common divisor of $h,b$ divides $d$. Hence $d=\gcd(h,b)$; for a coprime pair it is one. This supplies the complementary vector using ordinary integer division.
 
 Here is the integer-vector construction. Set $D=-\det(V,V')=(h'\nu-h\nu')/N$, which is a positive integer. Choose integers $r,s$ with $hr+bs=1$, and put $W_0=(s,-r)$, so $\det(V,W_0)=-1$. These vectors form an integer basis, and we can write $V'=aV+DW_0$ for an integer $a$. Since $V'$ has coprime coordinates, $\gcd(a,D)=1$.
 
@@ -58,6 +60,8 @@ W=\left\lceil\frac aD\right\rceil V+W_0
 $$
 
 has the form $W=\xi V+\eta V'$ with $0<\xi,\eta<1$. If $\xi+\eta>1$, replace $W$ by $V+V'-W$; its two coefficients remain positive and now sum to less than one. The time coordinate is $0<\xi h+\eta h'<h'$, and its deficit is $0<\xi\nu+\eta\nu'<\nu$. This integer time would improve the old record before the next record, a contradiction. Therefore $D=1$, which gives $\det(U,V)=1$.
+
+For a concrete check of the rounding contradiction, consider $N=17$ and $\kappa=3$. The residues at times two and five are six and fifteen, so $V=(2,1)$ and $V'=(5,1)$ are both records, with deficits eleven and two. They cannot be consecutive: $-\det(V,V')=3$. Choose $W_0=(1,0)$, so $V'=V+3W_0$. The displayed rounding rule gives $W=V+W_0=(3,1)=(2/3)V+(1/3)V'$. Its time is three and its deficit is eight. It is an intervening better record, exactly the obstruction the general proof finds whenever the determinant exceeds one.
 
 The two equations involving $L$ follow by subtraction. Expanding the determinant gives $q\nu+h\Delta=N$. Finally, because $U,V$ form an integer basis, the possible values of $L$ are all integer combinations of $\Delta,\nu$. By definition they are also all integer combinations of $\kappa,N$. Their positive greatest common divisors are therefore equal.
 

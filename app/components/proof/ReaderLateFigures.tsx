@@ -22,6 +22,10 @@ function Dot({ x, y, color = ink, open = false, r = 5 }: Point & { color?: strin
   return <circle cx={x} cy={y} r={r} fill={open ? "white" : color} stroke={color} strokeWidth="2" />;
 }
 
+function Square({ x, y, color, r = 5 }: Point & { color: string; r?: number }) {
+  return <rect x={x - r} y={y - r} width={2 * r} height={2 * r} fill={color} stroke={color} strokeWidth="2" />;
+}
+
 function numericalRadius(order: number, x: number) {
   const fractions = upperFarey(order);
   for (let i = 0; i < fractions.length - 1; i++) {
@@ -122,7 +126,7 @@ function RealisationFigure({ marker }: { marker: string }) {
     <Edge d="M500 142 L500 257" label="1−β₀ = 0.6" x={596} y={210} marker={marker} color={teal} />
     <Edge d="M172 259 L318 138" label="1−β₁ = 0.3" x={190} y={198} marker={marker} color={teal} />
     {[[160, 123, "0"], [330, 123, "1"], [500, 123, "2"], [500, 276, "3"], [330, 276, "4"], [160, 276, "5"]].map(([x, y, label]) => <GraphNode key={label} x={Number(x)} y={Number(y)} label={String(label)} />)}
-    <text x="380" y="396" textAnchor="middle" fill={ink}>det(tI−A) = (t³−0.4)(t³−0.7) − 0.18t</text>
+    <text x="380" y="396" textAnchor="middle" fill={ink}>det(tI−M) = (t³−0.4)(t³−0.7) − 0.18t</text>
   </>;
 }
 
@@ -137,11 +141,11 @@ function RefinementFigure() {
     <line x1="87" x2="685" y1={sy(1)} y2={sy(1)} stroke={faint} strokeDasharray="4 4" />
     <line x1={sx(mediant)} x2={sx(mediant)} y1={sy(1)} y2="307" stroke={copper} strokeDasharray="5 5" />
     <path d={curve(120, start, end, (x) => ({ x: sx(x), y: sy(numericalRadius(7, x)) }))} fill="none" stroke={red} strokeWidth="3" data-order-seven-comparison />
-    <path d={curve(90, start, mediant, (x) => ({ x: sx(x), y: sy(numericalRadius(8, x)) }))} fill="none" stroke={teal} strokeWidth="3" />
-    <path d={curve(60, mediant, end, (x) => ({ x: sx(x), y: sy(numericalRadius(8, x)) }))} fill="none" stroke={teal} strokeWidth="3" />
+    <path d={curve(90, start, mediant, (x) => ({ x: sx(x), y: sy(numericalRadius(8, x)) }))} fill="none" stroke={teal} strokeWidth="3" strokeDasharray="8 5" />
+    <path d={curve(60, mediant, end, (x) => ({ x: sx(x), y: sy(numericalRadius(8, x)) }))} fill="none" stroke={teal} strokeWidth="3" strokeDasharray="8 5" />
     <line x1={sx(worked)} x2={sx(worked)} y1={sy(numericalRadius(7, worked))} y2={sy(numericalRadius(8, worked))} stroke={copper} strokeWidth="3" />
     <Dot x={sx(worked)} y={sy(numericalRadius(7, worked))} color={red} />
-    <Dot x={sx(worked)} y={sy(numericalRadius(8, worked))} color={teal} />
+    <Square x={sx(worked)} y={sy(numericalRadius(8, worked))} color={teal} />
     <text x="67" y={sy(1) + 6} textAnchor="end" fill={ink}>1</text>
     <text x="67" y={sy(.94) + 6} textAnchor="end" fill={ink}>0.94</text>
     <text x={sx(start)} y="339" textAnchor="middle" fill={ink}>1/3</text>
@@ -207,8 +211,8 @@ function GaugeFigure() {
     <text x="205" y="349" textAnchor="middle" fill={ink}>V(x,y) = max(|x|,|y|)</text>
     <Axes left={456} top={75} width={239} height={244} xLabel="vertex bound N (log scale)" yLabel="Γₙ/ρ − 1 (log scale)" />
     <path d={path(orders.map(n => ({ x: px(n), y: py(worst(n)) })))} fill="none" stroke={red} strokeWidth="2.5" />
-    <path d={path(orders.map(n => ({ x: px(n), y: py(fixed(n)) })))} fill="none" stroke={teal} strokeWidth="2.5" />
-    {orders.map(n => <g key={n}><Dot x={px(n)} y={py(worst(n))} color={red} r={3} /><Dot x={px(n)} y={py(fixed(n))} color={teal} r={3} /></g>)}
+    <path d={path(orders.map(n => ({ x: px(n), y: py(fixed(n)) })))} fill="none" stroke={teal} strokeWidth="2.5" strokeDasharray="7 5" />
+    {orders.map(n => <g key={n}><Dot x={px(n)} y={py(worst(n))} color={red} r={3} /><Square x={px(n)} y={py(fixed(n))} color={teal} r={3} /></g>)}
     {[4, 16, 64].map(n => <text key={n} x={px(n)} y="342" fill={ink} textAnchor="middle">{n}</text>)}
     {[.1, .001, .00001].map(loss => <text key={loss} x="446" y={py(loss) + 5} fill={ink} textAnchor="end" fontSize="14">{loss.toExponential(0)}</text>)}
     <text x="520" y="90" fill={red}>worst angle</text><text x="522" y="279" fill={teal}>fixed irrational x</text>
@@ -241,10 +245,10 @@ function EightStateFigure({ marker }: { marker: string }) {
 const copy: Record<number, { title: string; description: string; caption: string }> = {
   8: { title: "A computed scalar crossing selects one radius", description: "The actual order-seven scalar residual at angle five pi over seven increases from a negative value to a positive value, crossing zero once at approximately 0.944301. Horizontal positions are radii between zero and one.", caption: "Numerical illustration of the exact scalar equation, with q=3, s=5, m=2. The curve is sampled at 121 points and its marked root is obtained by bisection. Existence and uniqueness follow from monotonicity and the endpoint signs, not from the drawing." },
   9: { title: "Normalisation turns the weights into angles on a convex graph", description: "For w=(1+i)/2, the normalised factors lie on x+y=1. Weights zero and one half give angles pi over four and pi over two. The plotted function minus log of cosine u plus sine u lies strictly below the chord at their average angle three pi over eight.", caption: "Exact line geometry for the illustrative value w=(1+i)/2, beside a sampled graph of F(u)=−log(cos u+sin u). The two red factor arguments have average 3π/8. At that average, the teal curve point is below the red chord: F(average)≈−0.2674 < average F≈−0.1733. This illustration isolates Jensen's mechanism; it does not assert an eigenvalue product or boundary point for these two weights." },
-  10: { title: "The six-state graph exposes the characteristic polynomial", description: "Two three-cycles on vertices zero one two and three four five close with weights 0.4 and 0.7. Complementary weights 0.6 and 0.3 join them in the five-cycle one two three four five one. All remaining arrows have weight one.", caption: "An exact weighted graph, laid out schematically. Red arrows close the local three-cycles; blue arrows connect them. Their five-cycle shares vertices with both local cycles, whereas the two local cycles are disjoint. Those intersection facts give det(tI−A)=(t³−0.4)(t³−0.7)−0.18t. The example illustrates unequal parameters; it makes no claim that its non-Perron roots lie on the boundary." },
-  11: { title: "Mediant insertion moves the candidate outward", description: "Computed radii at orders seven and eight are compared over the fraction interval from one third to two fifths. Order eight inserts three eighths and has radius one there. At fraction five fourteenths the order-eight radius is about 0.970613 and the order-seven radius is about 0.944301.", caption: "Numerical polylines from the scalar solver on (1/3,2/5). Inserting the exact mediant 3/8 splits the order-seven interval into two order-eight intervals. The proof gives strict inequality on both new open intervals; the plot illustrates that comparison and does not establish it. Values agree at the retained endpoints. No geometric error bound for the sampled polylines is asserted." },
+  10: { title: "The six-state graph exposes the characteristic polynomial", description: "Two three-cycles on vertices zero one two and three four five close with weights 0.4 and 0.7. Complementary weights 0.6 and 0.3 join them in the five-cycle one two three four five one. All remaining arrows have weight one.", caption: "An exact weighted graph, laid out schematically. Red arrows close the local three-cycles; blue arrows connect them. Their five-cycle shares vertices with both local cycles, whereas the two local cycles are disjoint. Those intersection facts give det(tI−M)=(t³−0.4)(t³−0.7)−0.18t. The example illustrates unequal parameters; it makes no claim that its non-Perron roots lie on the boundary." },
+  11: { title: "Mediant insertion moves the candidate outward", description: "Computed radii at orders seven and eight are compared over the fraction interval from one third to two fifths. Order seven has a solid red curve and circular marker; order eight has a dashed blue curve and square marker. Order eight inserts three eighths and has radius one there. At fraction five fourteenths the order-eight radius is about 0.970613 and the order-seven radius is about 0.944301.", caption: "Numerical polylines from the scalar solver on (1/3,2/5): order seven is solid with a circle, order eight dashed with a square. Inserting the exact mediant 3/8 splits the order-seven interval into two order-eight intervals. The proof gives strict inequality on both new open intervals; the plot illustrates that comparison and does not establish it. Values agree at the retained endpoints. No geometric error bound for the sampled polylines is asserted." },
   12: { title: "The small-order exception is visible in the region and the radius", description: "The exact order-three region is the triangle with vertices one and the two cubic roots of unity, plus the real segment from minus one to minus one half. On angles from two pi over three to pi, its nonreal radial maximum is minus one divided by twice cosine theta. That radius tends to one half, while its value at pi is one.", caption: "Left: the exact region Θ₃, drawn to scale; the dashed unit circle is a reference. Right: R₃(θ)=−1/(2cos θ) on 2π/3≤θ<π, with an open point at its limit 1/2 and a filled point at R₃(π)=1. The extra real segment reaches −1 only on the negative real ray. This is why the order-three nonreal arc cannot be assigned a continuous endpoint value of one." },
-  13: { title: "Polygon measurement and the loss of accuracy", description: "A square and its images under rotation by pi over four with dilations 0.7 and 0.8 are shown. The 0.7 image fits inside; the 0.8 image protrudes. A second logarithmic graph compares worst-angle relative loss with scalar-computed loss at the fixed quadratic irrational angle fraction (square root of five minus one) divided by four, at vertex bounds from four through sixty-four.", caption: "The square P=[−1,1]² has gauge max(|x|,|y|). Its exact rotated images have extreme coordinates 0.7√2≈0.98995 and 0.8√2≈1.13137; the square is optimal at θ=π/4 and N=4. Right: numerical loss samples Γₙ/ρ−1=1/Kₙ−1 at N=4,6,8,12,16,24,32,48,64, on logarithmic axes. Red is the exact worst-angle formula sec(π/N)−1; blue uses x=(√5−1)/4. Connecting samples does not imply a rate for every irrational angle. The proof's N⁻³ rate requires bad approximability." },
+  13: { title: "Polygon measurement and the loss of accuracy", description: "A square and its images under rotation by pi over four with dilations 0.7 and 0.8 are shown. The 0.7 image fits inside; the 0.8 image protrudes. A second logarithmic graph compares worst-angle relative loss, solid red with circles, with scalar-computed loss at a fixed quadratic irrational angle, dashed blue with squares. Its angle fraction is (square root of five minus one) divided by four, and the vertex bounds run from four through sixty-four.", caption: "The square P=[−1,1]² has gauge max(|x|,|y|). Its exact rotated images have extreme coordinates 0.7√2≈0.98995 and 0.8√2≈1.13137; the square is optimal at θ=π/4 and N=4. Right: numerical loss samples Γₙ/ρ−1=1/Kₙ−1 at N=4,6,8,12,16,24,32,48,64, on logarithmic axes. The solid red series with circles is the exact worst-angle formula sec(π/N)−1; the dashed blue series with squares uses x=(√5−1)/4. Connecting samples does not imply a rate for every irrational angle. The proof's N⁻³ rate requires bad approximability." },
   14: { title: "Every row of the eight-state matrix can be checked", description: "The exact source transition graph has unit-weight paths zero to three to six, one to four to seven, and two to five to zero. State six branches with beta to zero and alpha to one; state seven branches with beta to one and alpha to two. The displayed weights come from the numerical radius at angle five pi over seven and the exact formulas beta equals one divided by one plus rho and alpha equals rho divided by one plus rho.", caption: "Exact transition pattern from the paper, with a schematic vertex layout and numerical weight labels. Arrow direction determines matrix row and column. The checked eigenvector in the text satisfies all six deterministic rows and both branching rows. The displayed phase adds to exactly one full turn. This graph constructs an eigenvalue; its drawn nodes are states, not a claim that the eigenvector coordinates form the assumed eight-vertex contact polygon." },
 };
 
@@ -266,7 +270,7 @@ export function ReaderLateFigure({ number }: { number: number }) {
   return <figure className="reader-teaching-figure" data-reader-late-figure={number}>
     <h4>{content.title}</h4>
     <p className="reader-figure-scroll-hint">Scroll across the diagram →</p>
-    <div className="reader-figure-visual">
+    <div className="reader-figure-visual" tabIndex={0} role="region" aria-label={`${content.title}. Scroll horizontally when needed to see the full diagram.`}>
       <svg viewBox="0 0 760 420" role="img" aria-labelledby={`reader-late-${number}-title reader-late-${number}-desc`} fontSize="17" fontFamily="inherit">
         <title id={`reader-late-${number}-title`}>{content.title}</title>
         <desc id={`reader-late-${number}-desc`}>{content.description}</desc>

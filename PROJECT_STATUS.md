@@ -1,5 +1,27 @@
 # Project Status
 
+## Second audit and clarity pass — 2 October 2026
+
+A fresh independent mathematical audit preceded implementation. It identified
+three guide corrections: the chosen real angle representative, the projectivity
+hypothesis in VI, and the original-angle radius before reflection in XI. These
+are fixed. The polar correspondence, elementary integer tools, ordered tower
+heights, exact product winding, finite Jensen argument, arc traversal,
+order-three domains, boundary inference, and gauge/error explanations are now
+more explicit. Both manuscripts and both downloadable PDFs remain unchanged.
+
+Six supplementary diagrams bring the proof reader to 21 teaching figures.
+A seventh new figure on the background page has an interactive weighted
+average and a worked disk-bound estimate. Mobile section navigation remains
+available; every wide diagram supports keyboard scrolling; numerical comparison
+series use different lines and markers as well as colour.
+
+Independent mathematical review, all 62 tests, TypeScript, ESLint, production
+build, and Pages export validation pass. Desktop/mobile browser checks cover
+all chapters, figure labels, section navigation, proof controls, and the
+exported introductory slider. The audit is recorded in
+`docs/proof-audits/reader-clarity-2026-10-02.md`.
+
 ## Current edition — 2 October 2026
 
 The author's follow-up audit restored the teaching and visual structure lost

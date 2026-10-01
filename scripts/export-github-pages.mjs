@@ -136,9 +136,12 @@ function makeStatic(html, requestPath) {
     requestPath === "/proof/topic-xiv"
       ? `<script src="${basePath}/topic-xiv.js" defer></script>`
       : "";
+  const averageScript = requestPath === "/prerequisites"
+    ? `<script src="${basePath}/weighted-average.js" defer></script>`
+    : "";
   return withProjectAssets.replace(
     "</body>",
-    `<script src="${basePath}/contact.js" defer></script>${proofChapterScript}${topicXIVScript}</body>`,
+    `<script src="${basePath}/contact.js" defer></script>${proofChapterScript}${topicXIVScript}${averageScript}</body>`,
   );
 }
 

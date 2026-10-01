@@ -155,6 +155,12 @@ function convertGuide(markdown, index) {
   html = html.replace(/\bid="([^"]+)"/g, (_, id) => `id="${prefix}${id}"`);
   html = html.replace(/href="#([^"]+)"/g, (original, id) => ids.includes(id) ? `href="#${prefix}${id}"` : original);
   if ((html.match(/<!-- reader-figure:(?:early|late) -->/g) ?? []).length !== 1) throw new Error(`Topic ${index + 1} needs one teaching-figure placement marker`);
+  const kinds = [...html.matchAll(/<!-- reader-figure:([^ ]+) -->/g)].map((match) => match[1]);
+  const family = index < 7 ? "early" : "late";
+  if (kinds.some((kind) => kind !== family && kind !== `${family}-extra`)) throw new Error(`Unknown or misplaced figure in Topic ${index + 1}`);
+  const extras = kinds.filter((kind) => kind.endsWith("-extra"));
+  if (extras.length > 1) throw new Error(`Topic ${index + 1} has repeated supplementary figures`);
+  if (extras.length && ![2, 6, 7, 8, 10, 12].includes(index + 1)) throw new Error(`No supplementary figure registered for Topic ${index + 1}`);
   return html;
 }
 

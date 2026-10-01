@@ -68,15 +68,15 @@ $$
 w_i'=0,\qquad w_{i+\kappa}'=w_i+w_{i+\kappa}.
 $$
 
-For example, $\alpha_i=1/2$ and $\alpha_{i+\kappa}=3/4$ give a new coefficient $3/8$. Its weight is $-\log(3/8)=-\log(1/2)-\log(3/4)$. If both old weights were positive, the operation would combine two interior contacts into one, contradicting minimum count. Thus every permitted move sends its positive weight to an index that previously had weight zero.
+For a permitted transfer in the selected polygon, take $\alpha_i=1/2$ and $\alpha_{i+\kappa}=1$. Their new values are $1$ and $1/2$: the positive weight $\log2$ moves from $i$ to $i+\kappa$, while the number of positive weights stays the same. Why must the target have weight zero? If instead $\alpha_{i+\kappa}=3/4$, the new coefficient would be $3/8$, with weight $-\log(3/8)=-\log(1/2)-\log(3/4)$. Two positive weights would merge into one, reducing the minimum contact count. Thus every permitted move in the selected polygon has a target that previously had weight zero.
 
 <!-- reader-figure:early -->
 
-The numerical update illustrates the collision that minimality forbids; it is not a claim that those two positive weights can occur at a permitted move in our selected polygon. When the target weight is zero, $\alpha_{i+\kappa}=1$, and the update simply transfers $-\log\alpha_i$ without changing the contact count. This is the case used in the later weight walk.
+The numerical update in the figure shows the allowed transfer. The two-positive-weight calculation is the contradiction that excludes a collision; those data cannot occur at a permitted move in our selected polygon. Later transfers preserve the contact count by the same zero-target rule.
 
 ### Why all interior contacts form one run
 
-Let $I=\{i:w_i>0\}$ and $\varphi=|I|$. At the ending index of any run, $\beta_i>0$ and $\beta_{i+1}=0$, so the move applies. It removes part of a corner and produces a proper subpolygon with the same minimum count.
+Let $I=\{i:w_i>0\}$ and $\varphi=|I|$. If $I$ contains every index, it is already one cyclic run. Otherwise each run has an ending index with $\beta_i>0$ and $\beta_{i+1}=0$, so the move applies there. It removes part of a corner and produces a proper subpolygon with the same minimum count.
 
 Every contact has modulus at most $\rho<1$. If any radius-one vertex other than $v_i$ remained, the subpolygon would still be normalised and would have smaller area. Therefore the ending vertex of each run would have to be the unique radius-one vertex. Two distinct runs have different ending vertices, which is impossible. After choosing the starting label, we have
 

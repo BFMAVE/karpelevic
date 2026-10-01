@@ -9118,12 +9118,14 @@ math mover > mo[accent="true"] {
 }
 .reader-topic-directory a[aria-current="step"] > strong { font-weight: 700; }
 .reader-section-directory { margin: 24px 0 0; font-size: .81rem; line-height: 1.55; }
-.reader-section-directory .section-label { margin-bottom: 10px; }
+.reader-section-directory summary { cursor: pointer; margin-bottom: 10px; font-weight: 700; color: var(--oxblood); }
 .reader-section-directory ol { margin: 0 0 12px; padding-left: 18px; }
 .reader-section-directory li { margin: 6px 0; padding-left: 2px; }
 .reader-section-directory a { color: var(--ink-soft); text-decoration: none; }
+.reader-section-directory li a { display: block; padding-block: 3px; }
 .reader-section-directory a:hover { color: var(--oxblood); text-decoration: underline; text-underline-offset: .18em; }
-.reader-section-directory > a { color: var(--oxblood); }
+.reader-section-directory details > a { color: var(--oxblood); }
+.reader-section-directory summary:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 4px; }
 .reader-chapter.proof-chapter-panel {
   width: 100%; max-width: none; margin: 0; padding: 0; min-width: 0;
   background: transparent; border: 0; box-shadow: none; text-align: left;
@@ -9183,6 +9185,7 @@ math mover > mo[accent="true"] {
 }
 .reader-teaching-figure svg { display: block; width: 100%; height: auto; overflow: visible; }
 .reader-figure-visual { overflow-x: auto; overscroll-behavior-x: contain; }
+.reader-figure-visual:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 4px; }
 .reader-figure-scroll-hint { display: none; }
 .reader-projection-controls { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
 .reader-projection-controls[hidden], [data-projection-phase][hidden] { display: none; }
@@ -9193,7 +9196,7 @@ math mover > mo[accent="true"] {
 .reader-projection-controls button[aria-pressed="true"] { background: var(--ink); color: var(--paper-light); }
 .reader-projection-controls button:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 3px; }
 .reader-projection-controls [data-projection-status] { flex-basis: 100%; min-height: 3.2em; margin: 12px 0 0; font-size: .96rem; color: var(--oxblood); line-height: 1.55; }
-.reader-teaching-figure svg text { font-family: var(--font-body), Georgia, serif; }
+.reader-teaching-figure svg text { font-family: var(--font-reading), Georgia, serif; }
 .reader-teaching-figure figcaption { margin-top: 16px; padding-top: 13px; border-top: 1px solid var(--rule); font-size: .93rem; line-height: 1.6; color: var(--ink-soft); text-align: left; }
 .reader-teaching-figure figcaption strong { color: var(--ink); }
 .reader-formal { margin: 42px 0; padding-top: 28px; border-top: 4px double var(--ink); scroll-margin-top: 24px; }
@@ -9231,6 +9234,17 @@ math mover > mo[accent="true"] {
 .reader-background dl { line-height: 1.6; }
 .reader-background dl > div { margin-bottom: 15px; }
 .reader-background dd { margin-left: 0; }
+.reader-average-controls { border-top: 1px solid var(--rule); padding-top: 18px; margin-top: 18px; }
+.reader-average-figure > h3 { margin: 0 0 14px; padding: 0; font-size: 1.35rem; color: var(--oxblood); }
+.reader-average-controls > label { display: block; color: var(--oxblood); font-size: 1rem; font-weight: 700; }
+.reader-average-controls input[type="range"] { display: block; width: min(100%, 380px); accent-color: var(--oxblood); margin: 12px 0 18px; }
+.reader-average-presets { display: flex; gap: 8px; flex-wrap: wrap; }
+.reader-average-presets button { padding: 8px 12px; border: 1px solid var(--rule-dark); color: var(--ink); background: transparent; cursor: pointer; font: inherit; font-size: .9rem; }
+.reader-average-presets button[aria-pressed="true"] { background: var(--ink); color: var(--paper-light); }
+.reader-average-controls :is(button, input):focus-visible { outline: 2px solid var(--oxblood); outline-offset: 4px; }
+.reader-average-result { min-height: 3.5em; font-size: 1rem; line-height: 1.55; }
+.reader-proof-route { border-left: 3px solid var(--copper); padding: 5px 0 5px 25px; }
+.reader-proof-route li { padding-left: 4px; margin: 12px 0; }
 @media (max-width: 1050px) {
   .reader-page-grid { grid-template-columns: 195px minmax(0, 1fr); gap: 26px; }
   .reader-orientation-grid { gap: 20px; }
@@ -9239,7 +9253,10 @@ math mover > mo[accent="true"] {
 @media (max-width: 860px) {
   .reader-page-grid { grid-template-columns: minmax(0, 1fr); gap: 25px; }
   .reader-sidebar { position: static; max-height: none; overflow: visible; padding: 0; }
-  .reader-section-directory { display: none; }
+  .reader-section-directory { margin-top: 10px; padding: 10px 16px; border: 1px solid var(--rule); }
+  .reader-section-directory summary { margin: 0; font-size: .92rem; }
+  .reader-section-directory a { display: block; padding-block: 6px; min-height: 40px; }
+  .reader-section-directory details[open] summary { margin-bottom: 12px; }
   .reader-topic-directory { border: 1px solid var(--rule); padding: 10px 16px; }
   .reader-topic-directory summary { padding: 3px 0; }
   .reader-topic-directory details[open] summary { margin-bottom: 12px; }
@@ -9262,7 +9279,7 @@ math mover > mo[accent="true"] {
   .reader-orientation-grid > section + section { padding-top: 20px; border-top: 1px solid var(--rule); }
   .reader-guide { font-size: 1.08rem; }
   .reader-teaching-figure { padding: 12px; box-shadow: 3px 3px 0 color-mix(in srgb, var(--rule) 25%, transparent); }
-  .reader-figure-visual svg { min-width: 600px; }
+  .reader-figure-visual svg { min-width: 660px; }
   .reader-figure-scroll-hint { display: block; margin: 0 0 10px; color: var(--oxblood); font-size: .8rem; }
   .reader-source-text { padding: 8px 10px 18px; }
   .reader-source-text .theorem, .reader-source-text .lemma, .reader-source-text .proposition,
