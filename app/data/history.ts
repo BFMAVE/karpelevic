@@ -235,7 +235,7 @@ export const historyContent = {
     },
     {
       text:
-        "The decisive early observation was geometric. If Az = λz and P is the convex hull of the complex coordinates of z, then every coordinate of λz is a convex combination of the coordinates of z. Thus λP lies inside P. Conversely, the convex coefficients in such an inclusion can be read as the rows of a stochastic matrix. A spectral existence problem can therefore be studied as a problem about a contracted and rotated polygon.",
+        "The decisive early observation was geometric. If Az = λz for a nonzero eigenvector z and P is the convex hull of its complex coordinates, then every coordinate of λz is a convex combination of those coordinates. Thus λP lies inside P. For a nonreal eigenvalue, P is a genuine polygon. Conversely, the convex coefficients expressing invariance of a polygon can be read as the rows of a stochastic matrix. The nonreal spectral existence problem can therefore be studied through a contracted and rotated polygon.",
       citations: [
         "dmitriev-dynkin-1946",
         "johnson-paparella-2017",
@@ -398,10 +398,10 @@ export const historyContent = {
     },
     {
       year: "2026",
-      label: "This manuscript",
+      label: "The current preprint",
       title: "Returning to the invariant polygon",
       text:
-        "Our manuscript starts from a radially critical elliptic contraction and studies the contact geometry of an invariant polygon. Permitted vertex replacements and a finite first-return decomposition are followed, for N≥4, by a projective argument ruling out skipped returns; the resulting structure has a product of possibly varying Ito factors as its scalar consequence. The aim is a new geometric route to the already classical boundary of the Karpelevič region in Ito’s formulation, not a claim that the boundary theorem itself is new.",
+        "The 2026 preprint starts from a radially critical elliptic contraction and studies the contact geometry of an invariant polygon. Permitted vertex replacements and a finite first-return decomposition are followed, for N≥4, by a projective argument ruling out skipped returns. The resulting structure gives a product of possibly varying Ito factors, from which a scalar comparison and explicit stochastic matrices recover the classical boundary in Ito’s formulation.",
       citations: ["verbeken-ginis-2026"],
     },
   ],
@@ -410,7 +410,7 @@ export const historyContent = {
       number: "I",
       title: "Invariant polygons",
       text:
-        "The eigenvector coordinates form a polygon P and stochasticity becomes the inclusion λP ⊆ P. Extremality is encoded by where the image touches the boundary. This is the natural geometric language of Dmitriev–Dynkin and of the present manuscript.",
+        "For a nonreal eigenvalue, the convex hull of the eigenvector coordinates is a polygon P, and stochasticity becomes the inclusion λP ⊆ P. Extremality is encoded by where the image touches the boundary. This is the natural geometric language of Dmitriev–Dynkin and of the current preprint.",
       citations: ["dmitriev-dynkin-1946", "verbeken-ginis-2026"],
     },
     {
@@ -464,10 +464,10 @@ export const historyContent = {
     {
       title: "The claim made here",
       text:
-        "The present manuscript seeks a derivation of the known boundary of the Karpelevič region in Ito’s formulation from the contact-return structure of critical invariant polygons. Its contribution must therefore be judged as proof architecture, structural geometry, and interpretation—not as discovery of the classical region.",
+        "The current preprint derives the known boundary in Ito’s formulation from the contact and return structure of critical invariant polygons. Its contribution is a geometric proof of a classical theorem. This website follows that argument through the teaching manuscript, A proof of the Karpelevič theorem via invariant polygons, while the reference below identifies the posted arXiv preprint.",
       citations: ["verbeken-ginis-2026"],
     },
   ],
   sourceNote:
-    "The 1946 and 1951 papers were published in Russian; the English titles used here follow their bibliographic records. For claims about how the formulations relate, this page also cites later papers that explicitly compare them. This working bibliography should grow when a missing branch of the story becomes relevant.",
+    "The 1946 and 1951 papers were published in Russian; the English titles used here follow their bibliographic records. For claims about how the formulations relate, this page also cites later papers that explicitly compare them. The final entry identifies the current arXiv v2 preprint, revised 23 September 2026.",
 } as const;

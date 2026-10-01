@@ -1,6 +1,23 @@
 # Project Status
 
-## Current edition — 1 October 2026
+## Current edition — 2 October 2026
+
+The author's follow-up audit restored the teaching and visual structure lost
+in the first rewrite. Every topic now begins with its imported tools,
+definitions, strategy, and payoff. All fourteen guides have more worked
+intuition and fifteen accessible teaching figures, with staged projection
+controls in Topic VI. Chapters use a left-aligned reading area and a sticky
+topic/section sidebar, compact on mobile. Named source-proof disclosures
+replace the concatenated expansion label. The Problem page and the shared
+site identity have also been updated.
+
+Independent mathematical and rendered-source audits pass. All 58 tests,
+type-checking, lint, production build, and Pages export verification pass.
+Desktop and mobile browser checks cover every topic, both reading modes,
+proof controls, imported source links, and the other public pages. The audit
+is recorded in `docs/proof-audits/reader-design-2026-10-02.md`.
+
+## Manuscript rewrite — 1 October 2026
 
 The complete fourteen-topic reader has been rewritten at the author's request
 from the supplied `karpelevic-invariant-polygons.tex`. Its guided explanations
@@ -12,8 +29,8 @@ and the numerical explorer.
 
 The current public paper is *A structural proof of the Karpelevič theorem*,
 [arXiv:2609.26058v2](https://arxiv.org/abs/2609.26058v2), revised 23 September
-2026. The supplied teaching manuscript is an expanded exposition of the same
-mathematical route. Both versions are identified and available separately.
+2026. The supplied teaching manuscript follows the same mathematical route
+with different exposition. Both versions are identified and available separately.
 The construction notice has been removed.
 
 Independent review covered all fourteen guides and the source. Numerical

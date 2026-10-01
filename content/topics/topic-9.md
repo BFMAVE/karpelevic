@@ -2,6 +2,8 @@
 
 The geometric product permits different weights on different sides. To prove a sharp bound, we must compare all those possibilities at once. Normalising each factor puts them on a single straight line. On that line, the logarithm of the distance from zero is a strictly convex function of the angle. Averaging then says precisely why equal weights are optimal.
 
+The product fixes a multiplicative constraint on factor sizes, while the real phase fixes an additive constraint on their angles. Taking logarithms makes the sizes additive too. We can then compare factors by moving their angles toward the same average. The straight-line normalisation is what makes their sizes a single function of those angles; without it, an average angle alone would not determine a size comparison.
+
 Use the oriented Farey data from Topic VIII: integers $p,r$, positive integers $q<s$ and $m$, and an angle $\vartheta$ between $2\pi p/q$ and $2\pi r/s$. Set
 
 $$
@@ -71,6 +73,22 @@ $$
 $$
 
 Different weights have different factor arguments.
+
+For a concrete line calculation, choose $w=(1+i)/2$. Then $a=b=1/2$, $c=1$, and the line is $\operatorname{Re}g+\operatorname{Im}g=1$. At weight zero the normalised factor is $g(0)=(1+i)/2$, with angle $\pi/4$ and size $1/\sqrt2$. At weight $1/2$ it is $g(1/2)=i$, with angle $\pi/2$ and size one. Their average angle is $3\pi/8$. Hence
+
+$$
+\frac{F(\pi/4)+F(\pi/2)}2=-\frac14\log2\approx-0.1733,
+$$
+
+whereas
+
+$$
+F(3\pi/8)=-\log\bigl(\sqrt2\cos(\pi/8)\bigr)\approx-0.2674.
+$$
+
+The logarithmic size at the average angle is strictly smaller. Two factors at that average angle therefore have a smaller product of sizes than these two unequal factors. Their common weight would be $1-1/\sqrt2$. This calculation illustrates the convexity mechanism only; these illustrative weights are not being asserted to satisfy an eigenvalue product or its real phase identity.
+
+<!-- reader-figure:late -->
 
 ### Applying the average fixed by geometry
 

@@ -8,10 +8,9 @@ export function ProofChapterReadingControls() {
     >
       <div>
         <p className="section-label">Reading controls</p>
-        <h3 id="proof-chapter-reading-controls-heading">Choose a reading layer</h3>
+        <h2 id="proof-chapter-reading-controls-heading">How to read this topic</h2>
         <p>
-          Guided view keeps the added definitions and explanations available.
-          Formal view leaves the manuscript statements and proofs in focus.
+          Read the illustrated explanation, or go directly to the full source proof.
         </p>
       </div>
       <div className="proof-chapter-reading-actions">

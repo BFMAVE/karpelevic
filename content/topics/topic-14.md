@@ -35,6 +35,8 @@ $$
 z^2(z^3-\beta_1)(z^3-\beta_2)=\alpha_1\alpha_2.
 $$
 
+The cancellation has a useful geometric meaning. Dividing the first two recurrences by their positive weights gives the ratios $v_1/v_0$ and $v_2/v_1$. Their product is $v_2/v_0$, so intermediate bases disappear. The closing relation $z^2v_2=v_0$ supplies its inverse. What survives is a condition on the rotation-dilation $z$ and the contact weights, independent of the scale at which the polygon was drawn.
+
 Let $\Phi_j$ be continued real vertex angles, with $\Phi_8=\Phi_0+2\pi$. Define $u_1=\Phi_1-\Phi_0$ and $u_2=\Phi_2-\Phi_1$. The closing path says $\Phi_2+2\theta=\Phi_8$. Hence
 
 $$
@@ -78,6 +80,8 @@ $$
 
 weight one. The remaining arrows are $6\to0$ with weight $\beta$, $6\to1$ with weight $\alpha$, $7\to1$ with weight $\beta$, and $7\to2$ with weight $\alpha$. Let $M$ be the matrix whose entries are these arrow weights, with all other entries zero. Every row sums to one, so $M$ is stochastic.
 
+<!-- reader-figure:late -->
+
 To prove that $z$ is an eigenvalue, set
 
 $$
@@ -85,6 +89,8 @@ v_0=1,\qquad v_1=(z^3-\beta)/\alpha,\qquad v_2=z^{-2},
 $$
 
 and define the remaining coordinates along each weight-one arrow by $v_j=zv_i$. Thus $v_3=z$, $v_6=z^2$, $v_4=zv_1$, $v_7=z^2v_1$, and $v_5=z^{-1}$. All six weight-one rows satisfy $Mv=zv$. Row six satisfies it because $\beta v_0+\alpha v_1=z^3=zv_6$. For row seven the product identity gives $(z^3-\beta)v_1=\alpha v_2$, hence $\beta v_1+\alpha v_2=z^3v_1=zv_7$. The vector is nonzero since $v_0=1$.
+
+Choosing $v_0=1$ fixes only the eigenvector's scale. The last deterministic path returns to it consistently because $zv_5=z\cdot z^{-1}=1$. The other coordinates then propagate forward along unit-weight arrows; only the two branching rows require the product recurrences. This is why all eight rows can be checked without calculating the roots of an eighth-degree determinant.
 
 This eigenvector construction establishes a stochastic realisation. By itself it does not show that all eight coordinates are extreme vertices of a polygon with the assumed contact arrangement. That geometric arrangement was the starting illustration; the independent convexity and Farey arguments prove boundary maximality.
 

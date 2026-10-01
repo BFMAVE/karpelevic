@@ -4,6 +4,8 @@ Topic II fixed a nonreal number $\zeta=\rho e^{i\theta_\zeta}$, with $0<\rho<1$,
 
 Every vertex image lies on the boundary of $P$, and every side meets $TP$. These properties apply to every invariant polygon with at most $N$ vertices for this same $\zeta$. The remaining problem is organisation: an image might be an old vertex or might lie strictly between the endpoints of a side. We want one unambiguous image assignment per side.
 
+There are $N$ images and $N$ sides, but those two numbers alone do not produce a bijection. A corner belongs to two closed sides; two images might initially sit on one side while another side is met only at a corner. The proof must choose a polygon and an endpoint convention that remove these ambiguities simultaneously. This is the purpose of the count and area optimisation.
+
 ### Count interior contacts before minimising area
 
 For a polygon with vertex set $V$, define
@@ -15,6 +17,8 @@ $$
 The vertical bars around a finite set mean its number of elements. Because every image is on the boundary, $b_T(P)$ counts images strictly inside sides. An image at a vertex is excluded from this count.
 
 Scale the polygon about zero until $\max_{x\in P}|x|=1$. Scaling preserves invariance and both counts. Among these normalised polygons, first minimise $b_T(P)$; among the minimisers of that count, minimise area. The order matters. We will move vertices while controlling the count, and use area only when a replacement also preserves the chosen scale.
+
+Without fixing scale, area could be made arbitrarily small just by multiplying every coordinate by $1/2$ repeatedly. Without first fixing the contact count, a smaller-area polygon might have more contacts to organise. The two choices solve different problems: the integer count prevents unnecessary branching in the image paths, and the fixed-scale area prevents a corner from being cut away while all those paths remain just as complicated.
 
 These minima exist. Every vertex is in the closed unit disk, so a sequence has a subsequence with convergent vertex coordinates. Their convex hull remains invariant, contains zero, and has maximal radius one. The last two properties exclude collapse to a point. A nonreal rotation cannot preserve a nonzero line segment containing zero; therefore it cannot collapse to a segment. A limit with fewer than $N$ vertices would contradict the least realising order. Thus the limit is still an $N$-gon. Vertex-to-vertex equalities persist under limits, and new equalities can appear, so a minimum count is preserved. Area is continuous in the vertex coordinates and therefore attains its minimum on that class.
 
@@ -28,6 +32,8 @@ TP\subseteq Q\subseteq P,\qquad |\operatorname{ext}Q|=|\operatorname{ext}P|,
 $$
 
 Here $\operatorname{ext}$ denotes the vertices. The last condition says that every new vertex is the image of an old one. Since $TQ\subseteq TP\subseteq Q$, the new polygon is invariant.
+
+The subtlety is that removing a vertex can destroy a vertex-to-vertex image relation. A new image vertex compensates for that loss. The following count matches those gains and losses without assuming that the particular old relation survives. It is the reason we restrict new vertices to old vertices and their images.
 
 Let $R$ be the removed old vertices and $U$ the newly added vertices. Equal vertex counts give $|R|=|U|$. No removed vertex belongs to $TV$, because all of $TV$ lies in $Q$; an old vertex retained in $Q$ remains a vertex there. Because $T$ is one-to-one, the set $S=T^{-1}U$ contains exactly $|U|$ old vertices. Let $E$ be the old vertices that already mapped to old vertices.
 
@@ -44,6 +50,10 @@ The last inequality holds because $E\cap R$ and $S\cap R$ are disjoint subsets o
 
 List the vertices of $TP$ as $y_1,\ldots,y_N$ counterclockwise. The boundary arc $(y_j,y_{j+1}]$ excludes its starting point and includes its ending point. These arcs partition the boundary, so each old vertex is counted exactly once.
 
+At a shared corner $v_i$, the incoming side $(v_{i-1},v_i]$ includes the point and the outgoing side $(v_i,v_{i+1}]$ excludes it. Nothing moves geometrically when we make this convention. It is a bookkeeping rule, like a half-open partition of a real interval, except that the included endpoint here is the ending one.
+
+<!-- reader-figure:early -->
+
 Cut $P$ along the line joining $y_j$ to $y_{j+1}$, retaining the half-plane containing $TP$. If their closed boundary arc contains $k_j$ old vertices, a proper cut has at most $N+2-k_j$ vertices: it discards those vertices and adds back the two image endpoints. The new polygon is invariant, so minimal order requires at least $N$ vertices. Consequently $k_j\le2$.
 
 A cut with $k_j=2$ preserves the vertex count and cannot increase $b_T$. It must therefore remove every radius-one vertex, or it would contradict minimum area. Different discarded arcs are disjoint, so there is at most one such proper cut.
@@ -54,7 +64,9 @@ $$
 \sum_j r_j=N,\qquad k_j=r_j+\varepsilon_j,\qquad 0\le r_j\le2.
 $$
 
-There is at most one count of two. Either every $r_j=1$, or exactly one is two and exactly one is zero. In the latter case, the count of two forces a change from a nonvertex image to a vertex image. Every change back must occur at the count of zero; another would create a second forbidden cut with $k_j=2$. Switching endpoint conventions therefore changes every count to one:
+There is at most one count of two. Either every $r_j=1$, or exactly one is two and exactly one is zero. In the latter case, the count of two forces a change from a nonvertex image to a vertex image. Every change back must occur at the count of zero; another would create a second forbidden cut with $k_j=2$. Switching endpoint conventions therefore changes every count to one.
+
+The formula below is just an endpoint ledger: adding the starting endpoint contributes $\varepsilon_j$, and deleting the ending endpoint removes $\varepsilon_{j+1}$. At the unique doubled arc the change is $0-1$, so two becomes one; at the empty arc it is $1-0$, so zero becomes one. Every other arc keeps its count.
 
 $$
 |V\cap[y_j,y_{j+1})|=r_j+\varepsilon_j-\varepsilon_{j+1}=1.

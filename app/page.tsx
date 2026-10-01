@@ -1,6 +1,8 @@
 import { ContactForm } from "./components/ContactForm";
+import { PrerequisitePlate } from "./components/PrerequisitePlate";
+import { SiteHeader } from "./components/SiteHeader";
 import { ThetaAtlasPlate } from "./components/ThetaAtlasPlate";
-import { homeContent, primaryNavigation } from "./data/home";
+import { homeContent } from "./data/home";
 import { publicationDates } from "./data/publication-dates";
 import {
   formatDate,
@@ -12,10 +14,9 @@ import { sitePath } from "./lib/site-path";
 import { createPageMetadata } from "./lib/site-metadata";
 
 export const metadata = createPageMetadata({
-  title:
-    "A structural proof of the Karpelevič theorem",
+  title: homeContent.title,
   description:
-    "An accessible companion to the paper by Brecht Verbeken and Vincent Ginis.",
+    "An illustrated geometric proof of the Karpelevič theorem for readers with basic analysis and linear algebra, by Brecht Verbeken and Vincent Ginis.",
   pathname: "/",
   scholarlyLandingPage: true,
 });
@@ -23,7 +24,11 @@ export const metadata = createPageMetadata({
 const pageTimestamp = getPageTimestamp([
   "app/page.tsx",
   "app/data/home.ts",
+  "app/components/SiteHeader.tsx",
+  "app/components/PrerequisitePlate.tsx",
+  "app/components/ThetaAtlasPlate.tsx",
   "app/components/ContactForm.tsx",
+  "app/lib/site-metadata.ts",
   "public/contact.js",
 ]);
 const buildTimestamp = getBuildTimestamp();
@@ -37,42 +42,13 @@ export default function Home() {
         Skip to the article
       </a>
 
-      <header className="site-header" id="top">
-        <div className="masthead">
-          <a
-            className="site-identity"
-            href={sitePath("/")}
-            aria-label="Critical Invariant Polygons — Home"
-          >
-            <span className="site-monogram" aria-hidden="true">
-              Θ
-            </span>
-            <span>
-              <strong>Critical Invariant Polygons</strong>
-              <small>A companion to the manuscript</small>
-            </span>
-          </a>
-        </div>
-
-        <nav className="primary-navigation" aria-label="Primary navigation">
-          {primaryNavigation.map((item) => (
-            <a
-              aria-current={item.href === "/" ? "page" : undefined}
-              href={sitePath(item.href)}
-              key={item.href}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-
-      </header>
+      <SiteHeader current="problem" />
 
       <main id="main-content" tabIndex={-1}>
         <div className="first-block">
           <section className="hero-section" aria-labelledby="paper-title">
             <header className="hero-copy">
-              <p className="kicker">The Karpelevič theorem, step by step</p>
+              <p className="kicker">From averaging matrices to the eigenvalue region</p>
               <h1 id="paper-title">{homeContent.title}</h1>
               <p className="subtitle">{homeContent.subtitle}</p>
               <p className="authors">
@@ -84,14 +60,14 @@ export default function Home() {
                 <div><dt>Current preprint</dt><dd><a href="https://arxiv.org/abs/2609.26058v2">arXiv:2609.26058v2</a></dd></div>
                 <div><dt>Last revised on arXiv</dt><dd><time dateTime="2026-09-23">23 September 2026</time></dd></div>
                 <div><dt>arXiv edition</dt><dd>40 pages · <a href="https://arxiv.org/pdf/2609.26058v2">Read the paper</a></dd></div>
-                <div><dt>Teaching source</dt><dd><a href={sitePath("/paper/teaching-manuscript.pdf")}>The supplied invariant-polygon manuscript</a></dd></div>
+                <div><dt>Teaching manuscript</dt><dd><a href={sitePath("/paper/teaching-manuscript.pdf")}>A proof of the Karpelevič theorem via invariant polygons</a></dd></div>
                 <div><dt>Source revision</dt><dd><code>{buildRevision}</code></dd></div>
               </dl>
               <p className="reader-home-start"><a href={sitePath("/proof/")}>Start with Topic I: matrices become polygons</a></p>
               <details className="checksum">
                 <summary>Verify the downloadable arXiv PDF</summary>
                 <code>SHA-256 {homeContent.manuscript.localArxivDraftChecksum}</code>
-                <p>The <a href={sitePath("/paper/critical-invariant-polygons.pdf")}>downloadable PDF</a> is the current arXiv v2. The teaching reader follows the supplied expanded manuscript; its title and exposition differ from the posted preprint.</p>
+                <p>The <a href={sitePath("/paper/critical-invariant-polygons.pdf")}>downloadable PDF</a> is the current arXiv v2. The chapter explanations and detailed proofs follow the teaching manuscript linked above. The two documents have different titles and exposition.</p>
               </details>
 
               <p className="page-publication-meta">
@@ -164,6 +140,45 @@ export default function Home() {
               <p className="problem-statement">
                 Determine Θ<sub>n</sub> for every integer n ≥ 1.
               </p>
+              <p>{homeContent.problemOrientation}</p>
+            </div>
+          </section>
+
+          <div className="article-rule" aria-hidden="true"><span>✦</span></div>
+
+          <section className="section-grid" aria-labelledby="geometric-idea-heading">
+            <header className="section-heading">
+              <p className="section-number">II</p>
+              <p className="section-label">The geometric idea</p>
+              <h2 id="geometric-idea-heading">Turn an eigenvector into a polygon</h2>
+            </header>
+            <div className="reading-column">
+              <p>{homeContent.invariantPolygon}</p>
+              <div className="display-equation">
+                <math display="block" aria-label="The matrix equation A z equals lambda z gives the geometric inclusion lambda P is a subset of P.">
+                  <mrow><mi>A</mi><mi>z</mi><mo>=</mo><mi>λ</mi><mi>z</mi><mo>⇒</mo><mi>λ</mi><mi>P</mi><mo>⊆</mo><mi>P</mi></mrow>
+                </math>
+              </div>
+              <PrerequisitePlate slug="invariant-polygons" />
+              <p className="context-note">No background in polygon geometry or number theory is assumed. The reader introduces convex combinations, supporting lines, first returns, and Farey fractions at the points where the proof needs them.</p>
+              <a className="text-link" href={sitePath("/proof/")}>See the bridge worked out in Topic I →</a>
+            </div>
+          </section>
+
+          <section className="section-grid" aria-labelledby="proof-route-heading">
+            <header className="section-heading">
+              <p className="section-number">III</p>
+              <p className="section-label">The route through the proof</p>
+              <h2 id="proof-route-heading">Three ideas hold the argument together</h2>
+            </header>
+            <div className="reading-column">
+              {homeContent.proofOrientation.map((step) => (
+                <article key={step.title}>
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+                </article>
+              ))}
+              <p>Read the topics in order, or use the <a href={sitePath("/prerequisites/")}>background page</a> to refresh the analysis and linear algebra used along the way.</p>
             </div>
           </section>
         </div>
@@ -173,9 +188,7 @@ export default function Home() {
             <p className="section-label">Continue reading</p>
             <h2 id="routes-heading">Choose where to go next</h2>
             <p>
-              If you want to go to the paper immediately, read a little
-              history first, or learn more about where I encountered this
-              problem, choose one of the three paths below.
+              Begin with <a href={sitePath("/proof/")}>Topic I</a> for the guided proof. You can also read the current paper, trace the history of the problem, or follow the personal story behind this project.
             </p>
           </header>
 
@@ -227,7 +240,7 @@ export default function Home() {
             <p className="section-label">Manuscript status</p>
             <h2 id="arxiv-heading">The current arXiv version</h2>
             <p><a href="https://arxiv.org/abs/2609.26058v2">A structural proof of the Karpelevič theorem</a>, by Brecht Verbeken and Vincent Ginis, is available as arXiv:2609.26058v2, revised 23 September 2026. The <a href="https://arxiv.org/abs/2609.26058">unversioned record</a> points to the latest arXiv version.</p>
-            <p>The earlier <a href="https://zenodo.org/records/21529144">Zenodo record</a> remains an archival edition. The fourteen topics teach the invariant-polygon argument from the supplied expanded manuscript.</p>
+            <p>The fourteen topics follow <a href={sitePath("/paper/teaching-manuscript.pdf")}>A proof of the Karpelevič theorem via invariant polygons</a>, the teaching manuscript used for this website. The earlier <a href="https://zenodo.org/records/21529144">Zenodo record</a> remains available as an archival edition.</p>
           </article>
 
           <ContactForm />

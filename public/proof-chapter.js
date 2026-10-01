@@ -1,5 +1,31 @@
 (() => {
   function enhanceProofChapters() {
+    document.querySelectorAll("[data-projection-controls]").forEach((controls) => {
+      const figure = controls.closest(".reader-teaching-figure");
+      const phases = Array.from(figure.querySelectorAll("[data-projection-phase]"));
+      const buttons = Array.from(controls.querySelectorAll("[data-projection-step]"));
+      const status = figure.querySelector("[data-projection-status]");
+      const explanations = [
+        "The convex chain, its fixed contacts, and the two target lines.",
+        "Project X₀ through the fixed contact C₂ onto the exposing line L₂. The intersection is Z₂.",
+        "Project Z₂ from X₃ onto the contact line K. The final point lies strictly between C₂ and C₃.",
+      ];
+      function showStep(step) {
+        phases.forEach((phase) => phase.toggleAttribute("hidden", Number(phase.dataset.projectionPhase) > step));
+        buttons.forEach((button) => button.setAttribute("aria-pressed", String(Number(button.dataset.projectionStep) === step)));
+        if (status) status.textContent = explanations[step - 1];
+      }
+      buttons.forEach((button) => button.addEventListener("click", () => showStep(Number(button.dataset.projectionStep))));
+      showStep(3);
+      controls.hidden = false;
+    });
+    const directories = Array.from(document.querySelectorAll("[data-reader-directory]"));
+    const compact = window.matchMedia("(max-width: 860px)");
+    function sizeDirectory() {
+      directories.forEach((directory) => { directory.open = !compact.matches; });
+    }
+    sizeDirectory();
+    compact.addEventListener("change", sizeDirectory);
     const chapters = Array.from(
       document.querySelectorAll("[data-proof-chapter]"),
     );
@@ -35,11 +61,15 @@
             String(button.dataset.chapterReadingModeButton === resolvedMode),
           );
         });
+        if (resolvedMode === "formal") {
+          proofs.forEach((proof) => { proof.open = true; });
+          updateProofButtons();
+        }
         if (shouldAnnounce) {
           announce(
             resolvedMode === "formal"
-              ? "Formal view selected. Added vocabulary, intuition, and guided proof notes are hidden."
-              : "Guided view selected. Added explanatory layers are available again.",
+              ? "Formal view selected. The complete source argument and its proofs are open."
+              : "Guided view selected. The illustrated explanation and topic introduction are visible.",
           );
         }
       }
@@ -58,11 +88,9 @@
           proof.open = open;
         });
         updateProofButtons();
-        announce(
-          `${proofs.length} complete proof${proofs.length === 1 ? "" : "s"} ${
-            open ? "opened" : "closed"
-          }.`,
-        );
+        announce(open
+          ? "The source argument and all individual proofs are open."
+          : "The source argument and all individual proofs are closed.");
       }
 
       modeButtons.forEach((button) => {
@@ -110,12 +138,13 @@
         if (!id) return;
         const target = document.getElementById(id);
         if (!target || !chapter.contains(target)) return;
+        if (target.closest(".proof-guided-layer")) setMode("guided", true);
         let parent = target.parentElement;
         while (parent && parent !== chapter) {
           if (parent.tagName === "DETAILS") parent.open = true;
           parent = parent.parentElement;
         }
-        target.scrollIntoView({ block: "start" });
+        target.scrollIntoView({ block: "start", behavior: "instant" });
         updateProofButtons();
       }
       revealSourceTarget();

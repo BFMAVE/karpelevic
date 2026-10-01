@@ -23,6 +23,8 @@ $$
 
 The second is an equality of real numbers. It specifies the full number of turns, information that the first equation alone cannot retain.
 
+The product has two kinds of information to carry. Its absolute value measures accumulated contraction along the return paths. Its angle measures their accumulated turning. Complex multiplication records the latter only modulo a full turn, so we must carry the real angular sum alongside the algebra. Losing that integer here would later allow the convexity calculation to compare the wrong branch of the polynomial.
+
 ### The cancellation mechanism
 
 Suppose successive nonzero base coordinates $W_0,\ldots,W_m$ satisfy
@@ -36,6 +38,25 @@ Multiplying the first $m$ equations cancels $W_1,\ldots,W_{m-1}$. Substituting t
 
 Every $\alpha_j$ is positive, so it contributes no angle. The factor angle equals the real angular increment from $W_{j-1}$ to $W_j$ once that increment is shown to lie in $(0,\pi)$. Adding these increments makes the intermediate vertex angles cancel as well. The closing path retains the integer multiples of $2\pi$.
 
+### Five midpoint averages show the mechanism
+
+Let $\eta=e^{2\pi i/5}$ and take the regular pentagon with vertices $v_j=\eta^j$. The number
+
+$$
+\lambda=\frac{1+\eta}{2}=\cos(\pi/5)e^{i\pi/5}
+$$
+
+sends each vertex to the midpoint of the side from that vertex to the next. Thus the contact equation is
+
+$$
+\lambda v_{j-1}=\tfrac12v_{j-1}+\tfrac12v_j,
+\qquad(\lambda-\tfrac12)v_{j-1}=\tfrac12v_j.
+$$
+
+Multiplying the five equations cancels all five vertices and gives $(\lambda-1/2)^5=(1/2)^5$. Each factor $\lambda-1/2=\eta/2$ has principal argument $2\pi/5$, and their real argument sum is $2\pi$, although the product is positive real. Here $q=1$, $m=5$, and $e=0$. This exact invariant-polygon example illustrates elimination and winding; the argument below must obtain comparable equations from an arbitrary extremal polygon, without assuming regularity or equal coefficients.
+
+<!-- reader-figure:early -->
+
 ### Coprime shift with more than one interior contact
 
 Assume $\delta=1$ and $\varphi>1$. The return arithmetic supplies integers $q,p,h$ with
@@ -45,6 +66,8 @@ q\kappa-pN=1,\qquad q\varphi+h=N.
 $$
 
 In particular $1\le q<N$. Put $m=\lfloor N/q\rfloor$ and $e=N-mq$, so $m\ge\varphi$ and $0\le e<q$. We enlarge the base list to $v_1,\ldots,v_m$. A new base beyond $\varphi$ is an existing vertex on a vertex-to-vertex path; it has $\beta_j=0$ and introduces no new interior contact.
+
+Adding a base is just splitting an already known path into shorter pieces. A zero-coefficient contact contributes the factor $\zeta^q$ and a right-side coefficient one. The product still represents the same total path, but its $m$ factors now all have the common exponent $q$. This regularity is what will make a comparison of their arguments possible.
 
 The suspension argument of Topic V applies to these $m$ bases with displacement one and extra height $e$, since
 

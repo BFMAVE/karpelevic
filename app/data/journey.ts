@@ -446,5 +446,5 @@ export const journeyContent = {
     ],
   } satisfies JourneyChapter,
   sourceNote:
-    "These are the works mentioned in this personal account. The longer historical and mathematical bibliography belongs on the History and Paper pages.",
+    "These are the works mentioned in this personal account. The History page gives the longer historical bibliography; the proof reader retains the teaching manuscript’s mathematical references. The final entry identifies the current arXiv v2 preprint, revised 23 September 2026.",
 } as const;

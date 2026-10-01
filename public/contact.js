@@ -16,7 +16,7 @@ document.addEventListener("submit", (event) => {
   const replyTo = String(data.get("email") ?? "").trim();
   const subject =
     String(data.get("subject") ?? "").trim() ||
-    "Question about Critical Invariant Polygons";
+    "Question about the Karpelevič theorem";
   const message = String(data.get("message") ?? "").trim();
   const address = `${["brecht", "verbeken"].join(".")}@${[
     "gmail",
@@ -28,7 +28,7 @@ document.addEventListener("submit", (event) => {
     "—",
     `From: ${name}`,
     `Reply-to: ${replyTo}`,
-    "Sent from the paper website contact form.",
+    "Sent from the Karpelevič theorem website contact form.",
   ].join("\n");
 
   window.location.href = `mailto:${address}?subject=${encodeURIComponent(

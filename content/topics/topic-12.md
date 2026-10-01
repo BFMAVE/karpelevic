@@ -45,6 +45,16 @@ Its nonreal roots have real part $-1/2$. Conjugating back gives the point $z=-1/
 
 We may therefore begin the comparison at order four with these scalar radii. The interval $(0,1/3)$ splits by insertion of $1/4$, and Topic XI's split argument applies. On $(1/3,1/2)$ the endpoints stay fixed while the factor count rises from one to two, so its adding-factor argument applies. At the relevant endpoints direct realisations give the required comparison. Thus the order-three radial maximum is at most $K_4$ on every upper ray.
 
+On that vertical triangle side, the real coordinate of $\rho e^{i\theta}$ is $\rho\cos\theta=-1/2$. Therefore
+
+$$
+R_3(\theta)=-\frac1{2\cos\theta}\qquad(2\pi/3\le\theta<\pi).
+$$
+
+At $\theta=5\pi/6$ this gives $1/\sqrt3\approx0.57735$; at $11\pi/12$ it is approximately $0.51764$. The radii approach $1/2$, while the extra real segment gives $R_3(\pi)=1$. The two panels below show why approaching a direction and evaluating at that direction can give different answers at order three.
+
+<!-- reader-figure:late -->
+
 ### Exactly which points lie on the unit circle?
 
 Every root of unity of order $\ell\le n$ is an eigenvalue of an $\ell$-cycle permutation matrix enlarged to order $n$. The converse has a useful elementary proof. Suppose $Av=\lambda v$, $v\ne0$, and $|\lambda|=1$. Let $M=\max_j|v_j|$ and let $S$ be the indices attaining this positive maximum. For $i\in S$,
@@ -79,6 +89,8 @@ Both chains force $R_n(\theta)=K_n(\theta)$. Complex conjugation supplies the lo
 ### Filling the region and a check
 
 Every segment from zero to an attainable point is attainable for $n\ge2$. One matrix explanation uses a stationary probability row $\pi^T$, satisfying $\pi^TA=\pi^T$, and the column $\mathbf1$ of ones. If $Av=\lambda v$ and $\lambda\ne1$, then $\pi^Tv=0$. For $0\le t\le1$, the stochastic matrix $tA+(1-t)\mathbf1\pi^T$ has eigenvalue $t\lambda$. The segment $[0,1]$ is already realised at order two, covering $\lambda=1$.
+
+The added matrix $\mathbf1\pi^T$ resets every row to the same probability distribution. It annihilates this eigenvector because its weighted mean $\pi^Tv$ is zero. For a small exact check, take $A=\left(\begin{smallmatrix}1/5&4/5\\4/5&1/5\end{smallmatrix}\right)$, whose vector $(1,-1)^T$ has eigenvalue $-3/5$ and whose stationary row is $(1/2,1/2)$. At $t=1/2$, the reset mixture is $\left(\begin{smallmatrix}7/20&13/20\\13/20&7/20\end{smallmatrix}\right)$ and has eigenvalue $-3/10$. It has moved exactly halfway toward zero while retaining stochastic rows.
 
 Thus, for $n\ge4$,
 

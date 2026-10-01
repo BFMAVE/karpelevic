@@ -9,6 +9,8 @@ $$
 
 The positive coefficients $\beta_i$ identify the sides with interior contacts. We will show that their indices form one consecutive run. The permitted move is concrete: if $\beta_i>0$ and $\beta_{i+1}=0$, replace $v_i$ by its side contact $c_i$. The proof must verify invariance and preserve the eigenvalue; a picture of a smaller polygon alone does not do that.
 
+Think of following vertex images until a path reaches a point inside a side. Those points are the places where the motion stops being a permutation of vertices and becomes an average of two endpoints. Fewer such stopping places make the later path equations simpler. The operation below moves one stopping place along the index shift while retaining the same eigenvalue, so two stopping places cannot collide when the count has already been minimised.
+
 ### Reversing stochastic factors
 
 A row-stochastic matrix has nonnegative entries and row sums one. Products of such matrices are row-stochastic, because multiplying a vector of all ones still gives that vector and all product entries are nonnegative.
@@ -20,6 +22,8 @@ A'=SH=SAS^{-1}.
 $$
 
 Thus $A'$ is stochastic and similar to $A$. Similarity preserves eigenvalues: if $Av=\zeta v$, then $A'(Sv)=\zeta(Sv)$. We use a matrix $S$ that changes just one coordinate of the vertex vector $v=(v_1,\ldots,v_N)^T$.
+
+The factor order has two separate jobs. Both factors are stochastic, so either order still gives nonnegative averaging rows. Invertibility of $S$ makes the reversal a change of basis, so the eigenvalue does not move. An arbitrary inward corner movement would give neither assurance; the factorisation is what makes this particular geometric move legitimate.
 
 Define $E_i$ to copy coordinate $i-1$ into coordinate $i$, leaving every other coordinate unchanged. It satisfies $E_i^2=E_i$. For $0\le t<1$,
 
@@ -66,6 +70,10 @@ $$
 
 For example, $\alpha_i=1/2$ and $\alpha_{i+\kappa}=3/4$ give a new coefficient $3/8$. Its weight is $-\log(3/8)=-\log(1/2)-\log(3/4)$. If both old weights were positive, the operation would combine two interior contacts into one, contradicting minimum count. Thus every permitted move sends its positive weight to an index that previously had weight zero.
 
+<!-- reader-figure:early -->
+
+The numerical update illustrates the collision that minimality forbids; it is not a claim that those two positive weights can occur at a permitted move in our selected polygon. When the target weight is zero, $\alpha_{i+\kappa}=1$, and the update simply transfers $-\log\alpha_i$ without changing the contact count. This is the case used in the later weight walk.
+
 ### Why all interior contacts form one run
 
 Let $I=\{i:w_i>0\}$ and $\varphi=|I|$. At the ending index of any run, $\beta_i>0$ and $\beta_{i+1}=0$, so the move applies. It removes part of a corner and produces a proper subpolygon with the same minimum count.
@@ -75,6 +83,8 @@ Every contact has modulus at most $\rho<1$. If any radius-one vertex other than 
 $$
 I=\{1,\ldots,\varphi\}.
 $$
+
+The area argument is applied separately to the original polygon at each possible run ending. It does not assume that successive intermediate polygons continue to minimise area. Once one run has been obtained, later transfers preserve only the minimum contact count; that is enough to prevent a weight collision.
 
 Let $\delta=\gcd(N,\kappa)$, the greatest common divisor. Adding $\kappa$ modulo $N$ runs through each residue class modulo $\delta$ separately. Every class must meet $I$, or it would consist entirely of vertex-to-vertex contacts and would give $v=\zeta^{N/\delta}v$. Hence $\varphi\ge\delta$.
 

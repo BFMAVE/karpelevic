@@ -178,8 +178,11 @@ export function ThetaAtlasPlate() {
         <sub>7</sub> in one coordinate plane. Orders one, two, and three are
         drawn from their exact elementary descriptions; the contours for
         orders four through seven are evaluated cell by cell from the
-        radial boundary equation in the manuscript. Each contour encloses its
-        corresponding region, and the sequence is nested.
+        radial boundary equation in the manuscript. Those contours are
+        sampled numerical polylines, with 34 points per Farey interval before
+        shared endpoints are removed; SVG coordinates are rounded to 0.01.
+        The exact regions are nested by the matrix-padding argument in Topic I;
+        Topic XI compares their scalar candidates.
       </figcaption>
     </figure>
   );

@@ -1288,7 +1288,7 @@ html = markUnavailableProofAnchors(html);
 html = await addStandaloneProofScript(html);
 html = html.replace(
   "<head>",
-  '<head><meta name="generator" content="Standalone HTML edition generated from the Critical Invariant Polygons companion site"/>',
+  '<head><meta name="generator" content="Standalone HTML edition generated from The Karpelevič theorem illustrated proof site"/>',
 );
 
 verifyStandaloneHtml(html);

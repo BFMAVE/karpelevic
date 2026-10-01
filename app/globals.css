@@ -9031,8 +9031,8 @@ math mover > mo[accent="true"] {
   line-height: 1.6;
 }
 .reader-guide, .reader-formal, .reader-source-text {
-  max-width: 76ch;
-  margin-inline: auto;
+  max-width: 100%;
+  margin-inline: 0;
   font-size: 1.125rem;
   line-height: 1.8;
   overflow-wrap: break-word;
@@ -9059,7 +9059,7 @@ math mover > mo[accent="true"] {
 .reader-source-text table { display: block; max-width: 100%; overflow-x: auto; }
 .source-equation-anchor { scroll-margin-top: 3rem; }
 .source-equation-label { display: block; text-align: right; color: var(--oxblood); font-size: 1rem; }
-.reader-diagram { margin: 2rem auto; max-width: 36rem; }
+.reader-diagram { margin: 2rem 0; max-width: 36rem; }
 .reader-diagram svg { display: block; width: 100%; height: auto; }
 .reader-diagram svg text { font-size: 17px; fill: #18334a; }
 .reader-diagram figcaption { font-size: 1rem; line-height: 1.6; }
@@ -9074,4 +9074,208 @@ math mover > mo[accent="true"] {
   .topic-xiv-computation-summary {
     grid-template-columns: 1fr;
   }
+}
+
+/* Illustrated reader: chapter navigation beside the mathematical narrative. */
+.reader-page { padding: 0 clamp(20px, 3.2vw, 52px); }
+.reader-series-heading {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 20px;
+  max-width: var(--page-width); margin: 32px auto 28px; padding-bottom: 18px;
+  border-bottom: 4px double var(--ink);
+}
+.reader-series-heading p { margin: 0; }
+.reader-series-heading a { color: var(--oxblood); font-size: .86rem; text-underline-offset: .2em; }
+.reader-page-grid {
+  display: grid; grid-template-columns: 235px minmax(0, 1fr);
+  align-items: start; gap: clamp(28px, 4vw, 64px); max-width: var(--page-width); margin: 0 auto;
+}
+.reader-sidebar {
+  position: sticky; top: 18px; max-height: calc(100vh - 36px); overflow-y: auto;
+  scrollbar-width: thin; padding-right: 8px; min-width: 0;
+}
+.reader-topic-directory {
+  width: 100%; margin: 0; padding: 0 0 18px; border-top: 0;
+  background: transparent; text-align: left;
+}
+.reader-topic-directory summary {
+  cursor: pointer; padding: 6px 0 12px; color: var(--ink); font-size: .92rem;
+  font-weight: 700; line-height: 1.4;
+}
+.reader-topic-directory .proof-chapter-prerequisite-link {
+  display: inline-block; min-height: 0; padding: 0; margin: 0 0 14px; font-size: .77rem;
+}
+.reader-topic-directory ol { display: block; padding: 0; background: transparent; }
+.reader-topic-directory li { border-top: 1px solid color-mix(in srgb, var(--rule) 55%, transparent); background: transparent; }
+.reader-topic-directory a[data-proof-topic-number] {
+  grid-template-columns: 1.65rem minmax(0, 1fr); align-items: start; gap: 7px;
+  padding: 10px 8px; min-height: 0; border-left: 2px solid transparent;
+}
+.reader-topic-directory a[data-proof-topic-number] > span { font-size: .83rem; line-height: 1.4; }
+.reader-topic-directory a[data-proof-topic-number] > strong { font-size: .83rem; line-height: 1.4; font-weight: 500; overflow: visible; }
+.reader-topic-directory a[aria-current="step"] {
+  color: var(--oxblood); background: color-mix(in srgb, var(--oxblood) 6%, var(--paper));
+  border-left-color: var(--oxblood);
+}
+.reader-topic-directory a[aria-current="step"] > strong { font-weight: 700; }
+.reader-section-directory { margin: 24px 0 0; font-size: .81rem; line-height: 1.55; }
+.reader-section-directory .section-label { margin-bottom: 10px; }
+.reader-section-directory ol { margin: 0 0 12px; padding-left: 18px; }
+.reader-section-directory li { margin: 6px 0; padding-left: 2px; }
+.reader-section-directory a { color: var(--ink-soft); text-decoration: none; }
+.reader-section-directory a:hover { color: var(--oxblood); text-decoration: underline; text-underline-offset: .18em; }
+.reader-section-directory > a { color: var(--oxblood); }
+.reader-chapter.proof-chapter-panel {
+  width: 100%; max-width: none; margin: 0; padding: 0; min-width: 0;
+  background: transparent; border: 0; box-shadow: none; text-align: left;
+}
+.reader-chapter > .reader-chapter-heading {
+  margin: 0; padding: 2px 0 26px; color: var(--ink);
+  background: transparent; border-bottom: 1px solid var(--rule-strong); box-shadow: none;
+}
+.reader-chapter-heading .section-label { color: var(--oxblood); margin: 0 0 14px; }
+.reader-chapter-heading h1 {
+  max-width: 24ch; margin: 0; font-weight: 500;
+  font-size: clamp(2.5rem, 4.5vw, 4.8rem); letter-spacing: -.045em; line-height: 1.02;
+}
+.reader-chapter-question { max-width: 55ch; margin: 22px 0 16px; color: var(--oxblood); font-size: 1.35rem; line-height: 1.4; font-style: italic; }
+.reader-chapter-source { color: var(--ink-soft); font-size: .88rem; line-height: 1.5; margin: 0 0 18px; }
+.reader-chapter-meta { margin: 0; gap: 8px 22px; }
+.reader-chapter-meta time { color: var(--ink-soft); font-size: .65rem; }
+.reader-chapter .proof-chapter-reading-controls {
+  display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: center; justify-content: space-between;
+  margin: 20px 0 30px; padding: 14px 0; background: transparent; border: 0; border-bottom: 1px solid var(--rule);
+}
+.reader-chapter .proof-chapter-reading-controls[hidden] { display: none; }
+.reader-chapter .proof-chapter-reading-controls h2 { font-size: 1rem; margin: 0 0 3px; }
+.reader-chapter .proof-chapter-reading-controls > div:first-child > .section-label { display: none; }
+.reader-chapter .proof-chapter-reading-controls p { font-size: .82rem; max-width: 42ch; margin: 0; }
+.reader-chapter .proof-chapter-reading-actions { gap: 8px; }
+.reader-chapter .proof-chapter-reading-actions button { padding: 8px 10px; font-size: .69rem; }
+.reader-chapter .proof-chapter-reading-actions [role="group"] > span { font-size: .58rem; padding: 8px; }
+.reader-orientation { margin: 0 0 34px; padding: 25px 28px; border: 1px solid var(--rule); background: var(--paper-light); }
+.reader-orientation > header { padding-bottom: 18px; border-bottom: 1px solid var(--rule); margin-bottom: 20px; }
+.reader-orientation .section-label { margin: 0 0 7px; }
+.reader-orientation h2 { font-size: 1.7rem; margin: 0; line-height: 1.2; font-weight: 500; letter-spacing: -.02em; }
+.reader-orientation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.reader-orientation h3 { font-size: 1.03rem; color: var(--oxblood); margin: 0 0 14px; line-height: 1.4; }
+.reader-orientation dl { margin: 0; font-size: .95rem; line-height: 1.55; }
+.reader-orientation dl > div + div { margin-top: 15px; }
+.reader-orientation dt { font-weight: 700; line-height: 1.4; margin-bottom: 5px; }
+.reader-orientation dt a { color: var(--ink); text-decoration-color: var(--rule); text-underline-offset: .2em; }
+.reader-origin { font-size: .75rem; white-space: nowrap; color: var(--oxblood); font-weight: 500; }
+.reader-orientation dd { margin: 0; color: var(--ink-soft); }
+.reader-strategy { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--rule); }
+.reader-strategy h3 { margin-bottom: 8px; }
+.reader-strategy p, .reader-payoff { font-size: 1.02rem; line-height: 1.65; margin: 0; }
+.reader-payoff { margin-top: 14px; color: var(--ink-soft); }
+.reader-guide { font-size: 1.13rem; line-height: 1.78; }
+.reader-guide > div > p, .reader-guide > div > ul, .reader-guide > div > ol,
+.reader-guide > p, .reader-guide > ul, .reader-guide > ol { max-width: 69ch; }
+.reader-guide h3 { scroll-margin-top: 22px; margin-top: 42px; padding-top: 8px; font-size: 1.65rem; font-weight: 500; }
+.reader-guide > div:first-child > h3:first-child { margin-top: 12px; }
+.reader-guide blockquote { margin: 24px 0; padding: 14px 22px; border-left: 3px solid var(--copper); background: color-mix(in srgb, var(--copper) 5%, transparent); }
+.reader-guide blockquote p { margin: 0; }
+.reader-guide table { display: block; overflow-x: auto; max-width: 100%; border-collapse: collapse; font-size: .98rem; }
+.reader-guide th, .reader-guide td { padding: 9px 13px; border-bottom: 1px solid var(--rule); text-align: left; }
+.reader-teaching-figure {
+  margin: 30px 0 38px; padding: 22px; border: 1px solid var(--rule-dark);
+  background: var(--paper-light); box-shadow: 5px 5px 0 color-mix(in srgb, var(--rule) 25%, transparent);
+}
+.reader-teaching-figure svg { display: block; width: 100%; height: auto; overflow: visible; }
+.reader-figure-visual { overflow-x: auto; overscroll-behavior-x: contain; }
+.reader-figure-scroll-hint { display: none; }
+.reader-projection-controls { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.reader-projection-controls[hidden], [data-projection-phase][hidden] { display: none; }
+.reader-projection-controls button {
+  padding: 9px 12px; border: 1px solid var(--rule-dark); background: transparent;
+  color: var(--ink); font: inherit; font-size: .85rem; cursor: pointer;
+}
+.reader-projection-controls button[aria-pressed="true"] { background: var(--ink); color: var(--paper-light); }
+.reader-projection-controls button:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 3px; }
+.reader-projection-controls [data-projection-status] { flex-basis: 100%; min-height: 3.2em; margin: 12px 0 0; font-size: .96rem; color: var(--oxblood); line-height: 1.55; }
+.reader-teaching-figure svg text { font-family: var(--font-body), Georgia, serif; }
+.reader-teaching-figure figcaption { margin-top: 16px; padding-top: 13px; border-top: 1px solid var(--rule); font-size: .93rem; line-height: 1.6; color: var(--ink-soft); text-align: left; }
+.reader-teaching-figure figcaption strong { color: var(--ink); }
+.reader-formal { margin: 42px 0; padding-top: 28px; border-top: 4px double var(--ink); scroll-margin-top: 24px; }
+.reader-formal > h2 { margin: 0 0 12px; font-size: 1.75rem; font-weight: 500; }
+.reader-formal > p { font-size: 1rem; line-height: 1.65; max-width: 66ch; }
+.reader-source-note { font-size: .94rem; padding: 0; margin: 20px 0; border: 0; color: var(--ink-soft); }
+.reader-source-proof { border: 1px solid var(--rule); margin: 20px 0; }
+.reader-source-proof > summary,
+.reader-result-proof > summary {
+  display: flex; gap: 18px; align-items: center; justify-content: space-between;
+  position: relative; padding: 16px 20px; font-size: 1rem; line-height: 1.45; cursor: pointer;
+  color: var(--ink); background: var(--paper-deep); list-style: none;
+}
+.reader-source-proof > summary::-webkit-details-marker, .reader-result-proof > summary::-webkit-details-marker { display: none; }
+.reader-source-proof > summary::before, .reader-result-proof > summary::before { content: none; }
+.reader-source-proof > summary::after, .reader-result-proof > summary::after {
+  content: "+"; display: block; flex: 0 0 auto; position: static;
+  width: auto; height: auto; margin: 0; font-size: 1.3rem; font-weight: 400; color: var(--oxblood);
+}
+.reader-source-proof[open] > summary::after, .reader-result-proof[open] > summary::after { content: "−"; }
+.reader-source-text { padding: 14px 20px 24px; font-size: 1.03rem; line-height: 1.75; }
+.reader-source-text .theorem, .reader-source-text .lemma, .reader-source-text .proposition,
+.reader-source-text .corollary, .reader-source-text .definition, .reader-source-text .remark { padding: 20px; }
+.reader-result-proof { margin: 18px 0 28px; border: 1px solid var(--rule); }
+.reader-result-proof > summary { padding: 13px 16px; background: var(--paper-light); font-size: .94rem; }
+.reader-result-proof .proof { margin: 0; border: 0; padding: 20px; background: transparent; box-shadow: none; }
+.reader-source-text math[display="block"] { padding-block: 14px; font-size: 1em; }
+.reader-neighbours { margin-top: 40px; }
+.reader-responsibility { padding: 55px 0; max-width: var(--page-width); margin: 55px auto 0; }
+.reader-background { max-width: var(--page-width); padding: 48px clamp(20px, 3.2vw, 52px); margin: 0 auto; }
+.reader-background .reader-guide { max-width: 70ch; margin: 0; }
+.reader-background h1 { max-width: 22ch; font-size: clamp(2.4rem, 5vw, 5.4rem); line-height: 1.03; letter-spacing: -.04em; }
+.reader-background .proof-deck { max-width: 62ch; }
+.reader-background .reader-guide h2 { font-size: 1.7rem; margin-top: 36px; font-weight: 500; }
+.reader-background dl { line-height: 1.6; }
+.reader-background dl > div { margin-bottom: 15px; }
+.reader-background dd { margin-left: 0; }
+@media (max-width: 1050px) {
+  .reader-page-grid { grid-template-columns: 195px minmax(0, 1fr); gap: 26px; }
+  .reader-orientation-grid { gap: 20px; }
+  .reader-orientation { padding: 22px; }
+}
+@media (max-width: 860px) {
+  .reader-page-grid { grid-template-columns: minmax(0, 1fr); gap: 25px; }
+  .reader-sidebar { position: static; max-height: none; overflow: visible; padding: 0; }
+  .reader-section-directory { display: none; }
+  .reader-topic-directory { border: 1px solid var(--rule); padding: 10px 16px; }
+  .reader-topic-directory summary { padding: 3px 0; }
+  .reader-topic-directory details[open] summary { margin-bottom: 12px; }
+  .reader-topic-directory ol { columns: 2; }
+  .reader-topic-directory li { break-inside: avoid; }
+  .reader-chapter-heading h1 { max-width: 25ch; font-size: clamp(2.5rem, 7vw, 4.7rem); }
+}
+@media (max-width: 560px) {
+  .reader-page { padding-inline: 20px; }
+  .reader-series-heading { margin-top: 24px; margin-bottom: 20px; display: block; }
+  .reader-series-heading a { display: inline-block; margin-top: 10px; }
+  .reader-topic-directory ol { columns: 1; }
+  .reader-chapter-heading h1 { font-size: 2.65rem; }
+  .reader-chapter-question { font-size: 1.2rem; }
+  .reader-chapter .proof-chapter-reading-controls { margin-block: 16px 24px; padding-bottom: 14px; }
+  .reader-chapter .proof-chapter-reading-actions { flex-wrap: wrap; justify-content: flex-start; }
+  .reader-orientation { padding: 20px; }
+  .reader-orientation h2 { font-size: 1.55rem; }
+  .reader-orientation-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .reader-orientation-grid > section + section { padding-top: 20px; border-top: 1px solid var(--rule); }
+  .reader-guide { font-size: 1.08rem; }
+  .reader-teaching-figure { padding: 12px; box-shadow: 3px 3px 0 color-mix(in srgb, var(--rule) 25%, transparent); }
+  .reader-figure-visual svg { min-width: 600px; }
+  .reader-figure-scroll-hint { display: block; margin: 0 0 10px; color: var(--oxblood); font-size: .8rem; }
+  .reader-source-text { padding: 8px 10px 18px; }
+  .reader-source-text .theorem, .reader-source-text .lemma, .reader-source-text .proposition,
+  .reader-source-text .corollary, .reader-source-text .definition, .reader-source-text .remark,
+  .reader-result-proof .proof { padding: 16px 12px; }
+  .reader-source-proof > summary { padding: 14px; }
+  .reader-responsibility { padding-block: 35px; margin-top: 40px; }
+}
+@media print {
+  .reader-series-heading, .reader-sidebar, .reader-neighbours { display: none; }
+  .reader-page-grid { display: block; }
+  .reader-chapter .reader-chapter-heading { border-bottom: 1px solid black; color: black; }
+  .reader-orientation, .reader-teaching-figure { background: white; box-shadow: none; }
+  .reader-page { padding: 0; }
+  .reader-chapter[data-chapter-reading-mode="formal"] .proof-guided-layer { display: block; }
 }

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 
 export const PUBLIC_SITE_ORIGIN = "https://bfmave.github.io";
 export const PUBLIC_SITE_BASE_PATH = "/karpelevic";
-export const SITE_NAME = "Critical Invariant Polygons";
+export const SITE_NAME = "The Karpelevič theorem";
+export const SITE_SUBTITLE = "An illustrated geometric proof";
 
 export function publicSiteUrl(pathname: string): string {
   const path = pathname.startsWith("/") ? pathname : `/${pathname}`;
@@ -25,7 +26,7 @@ export function createPageMetadata({
   const url = publicSiteUrl(pathname);
 
   return {
-    title,
+    title: pathname === "/" ? { absolute: title } : title,
     description,
     alternates: { canonical: url },
     openGraph: {

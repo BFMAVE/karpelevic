@@ -16,6 +16,8 @@ TP\subseteq\gamma P
 V_P(Tx)\le\gamma V_P(x)\quad\text{for every }x.
 $$
 
+For example, take the asymmetric rectangle $P=[-1,2]\times[-1,1]$ and $e_1=(1,0)$. Containing $e_1$ requires scale $1/2$, but containing $-e_1$ requires scale one. Thus $V_P(e_1)=1/2$ and $V_P(-e_1)=1$. The gauge records the shape we chose, including its directional asymmetry. The contraction question asks whether the same shape controls the image of every vector, not just the length of one vector.
+
 Dividing the inclusion by $\gamma$ makes $P$ invariant under multiplication by $(\rho/\gamma)e^{i\theta}$. The polygon criterion from Topic I puts this number in $\Theta_N$. Its modulus cannot exceed $K_N(\theta)$, hence $\gamma\ge\rho/K_N(\theta)$.
 
 This bound is attained. A nonreal boundary point inside the unit disk supplies an invariant polygon with zero in its interior. A nonreal unit-circle boundary point is a root of unity of order at most $N$; its orbit gives a regular invariant polygon. At angles zero and $\pi$, a centred square works. Thus, if $\Gamma_N(T)$ denotes the smallest factor over allowed polygons,
@@ -39,6 +41,10 @@ $$
 At $\theta=\pi/N$ the lower bound is attained. Consequently the largest relative factor is $1/\cos(\pi/N)$.
 
 For $N=4$ and $\theta=\pi/4$, $K_4=1/\sqrt2$. A map with $\rho=0.7$ therefore has optimal gauge factor $0.7\sqrt2\approx0.98995<1$. Replacing $0.7$ by $0.8$ gives a factor $0.8\sqrt2>1$, so no four-vertex gauge gives strict contraction at that angle, even though the map decreases Euclidean lengths.
+
+The centred square $P=[-1,1]^2$ makes these numbers visible. Its gauge is $V_P(x_1,x_2)=\max\{|x_1|,|x_2|\}$. Its corner $(1,1)$ has gauge one. After a $\pi/4$ rotation and dilation $\rho$, it becomes $(0,\rho\sqrt2)$, with gauge $\rho\sqrt2$. The entire rotated square is the diamond with extreme coordinates $\pm\rho\sqrt2$, so its containment condition is exactly that factor. The theorem shows that changing to another four-vertex polygon cannot improve it at this angle.
+
+<!-- reader-figure:late -->
 
 ### The gap near the unit circle
 
@@ -80,6 +86,8 @@ The mean-value theorem gives $D=(1-K)H'(\xi)$ for some $K<\xi<1$. Replacing $H'(
 
 The relative statement is for open intervals. At an endpoint both the leading term and the gap vanish; dividing them there would be undefined.
 
+The first Farey interval gives a useful check on the word uniform. There $q=1$ and $s=m=N$, so the leading gap simplifies to $2\pi^2t(1-t)/N^2$. If we choose a moving angle with $t=N^{-10}$, the gap is of order $N^{-12}$, and the same relative error $O(N^{-2})$ still applies. An absolute error merely of order $N^{-4}$ would overwhelm that tiny gap; the factored sine defect avoids this loss. This moving-angle example does not claim an $N^{-12}$ rate for a fixed irrational angle.
+
 ### Rational angles, irrational angles, and vertex budgets
 
 If $x=\theta/(2\pi)=a/b$ in lowest terms, the radius is exactly one once $N\ge b$, and only then. This follows from the unit-circle classification. If $x$ is irrational, the radius is below one at every finite order. The uniform formula applies to every irrational angle, but does not assign the same power-law rate to all of them.
@@ -99,3 +107,5 @@ $$
 $$
 
 The worst-angle loss is $1/\cos(\pi/N)-1\sim\pi^2/(2N^2)$. This explains the different exponents: accuracy at one badly approximable angle and accuracy at every angle are different demands. Both relative budgets are independent of the dilation $\rho$.
+
+The blue loss samples in the figure use $x=(\sqrt5-1)/4$, which is indeed badly approximable. To check the hypothesis, set $f(u)=4u^2+2u-1$, so $f(x)=0$. For a rational $a/b\in[0,1/2]$, the nonzero integer $4a^2+2ab-b^2$ gives $|f(a/b)|\ge1/b^2$. Since $|f'(u)|\le6$ on this interval, the mean-value theorem gives $|x-a/b|\ge1/(6b^2)$. Rationals outside the interval have distance at least $\min\{x,1/2-x\}$, so decreasing the positive constant if needed covers all rationals. This verifies the assumption behind the fixed-angle rate; it is not inferred from the plotted samples.

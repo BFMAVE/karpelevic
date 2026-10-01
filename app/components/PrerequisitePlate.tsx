@@ -36,9 +36,9 @@ const plateCopy: Readonly<
   "invariant-polygons": {
     title: "A square and its rotated contracted image",
     description:
-      "A square contains the image obtained by a ninety-degree rotation followed by contraction by one half. The image vertices suffice to verify the full containment.",
+      "A square contains the image obtained by a forty-five-degree rotation followed by contraction by one half. Each image vertex is calculated from the original vertex, and all four lie strictly inside the square.",
     caption:
-      "Plate III. For P = conv{v₁,…,vN}, linearity makes TP the convex hull of Tv₁,…,TvN. Checking the finitely many image vertices therefore proves TP ⊆ P.",
+      "Here λ = ½eⁱπ/⁴. For P = conv{v₁,…,vN}, linearity makes λP the convex hull of λv₁,…,λvN. Checking the four image vertices proves λP ⊆ P. This is an invariant model, without a claim of radial extremality.",
   },
   "orientation-separation": {
     title: "Cyclic order inside; strict separation outside",
@@ -134,24 +134,24 @@ function LinearMapsDrawing() {
 }
 
 function InvariantPolygonDrawing() {
+  const vertices = [[238, 45], [522, 45], [522, 329], [238, 329]];
+  const images = vertices.map(([x, y]) => {
+    const real = x - 380, imaginary = 187 - y;
+    return [380 + (real - imaginary) / (2 * Math.sqrt(2)), 187 - (real + imaginary) / (2 * Math.sqrt(2))];
+  });
   return (
     <>
       <ArrowMarker id="prerequisite-arrow-invariant" />
       <polygon
         className="prerequisite-polygon"
-        points="158,45 602,45 602,329 158,329"
+        points={vertices.map((point) => point.join(",")).join(" ")}
       />
       <polygon
         className="prerequisite-polygon prerequisite-polygon-dual"
-        points="380,116 523,187 380,258 237,187"
+        points={images.map((point) => point.join(",")).join(" ")}
       />
       <circle className="prerequisite-origin" cx="380" cy="187" r="5" />
-      {[
-        [380, 116],
-        [523, 187],
-        [380, 258],
-        [237, 187],
-      ].map(([x, y], index) => (
+      {images.map(([x, y], index) => (
         <g key={`${x}-${y}`}>
           <circle className="prerequisite-contact" cx={x} cy={y} r="7" />
           <text className="prerequisite-svg-small" x={x + 12} y={y - 10}>
@@ -161,17 +161,17 @@ function InvariantPolygonDrawing() {
       ))}
       <path
         className="prerequisite-vector prerequisite-vector-image"
-        d="M575 69 Q520 94 394 114"
+        d="M522 45 Q500 74 380 86.59"
         markerEnd="url(#prerequisite-arrow-invariant)"
       />
-      <text className="prerequisite-svg-label" x="613" y="42">
+      <text className="prerequisite-svg-label" x="536" y="42">
         P
       </text>
-      <text className="prerequisite-svg-label prerequisite-svg-accent" x="525" y="221">
+      <text className="prerequisite-svg-label prerequisite-svg-accent" x="481" y="236">
         TP
       </text>
-      <text className="prerequisite-svg-small" x="512" y="89">
-        rotate + contract
+      <text className="prerequisite-svg-small" x="538" y="89">
+        45° rotation, half size
       </text>
       <text className="prerequisite-svg-equation" x="380" y="363" textAnchor="middle">
         Tvᵢ ∈ P for every vertex  ⇒  TP ⊆ P

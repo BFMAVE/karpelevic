@@ -12,6 +12,8 @@ $$
 
 Their heights are three and five. They use each of the eight indices once before their returns. The tower equations are $\zeta^3v_1=c_2$ and $\zeta^5v_2=c_1$. These equations describe what an invariant polygon with this contact data would satisfy; index arithmetic alone does not prove that such a polygon exists.
 
+Keep the distinction between a destination index and a destination point. Returning to index two means that the image lands at $c_2$, inside the side ending at $v_2$; it does not mean that it equals $v_2$. All intermediate destinations outside the base set really are vertices. This is why a height records a power of $\zeta$ up to one final averaging equation.
+
 ### Encode records with integer pairs
 
 Topic IV proved that $\varphi$ is the deficit of a record in $a_t=[t\kappa]_N$: a record exceeds every earlier residue, and its deficit is $N-a_t$. Let $\delta=\gcd(N,\kappa)$. Only multiples of $\delta$ occur, so the last record has deficit $\delta$.
@@ -41,6 +43,8 @@ q\nu+h\Delta=N,\qquad\gcd(\Delta,\nu)=\delta.
 $$
 
 Here $q=h'-h>0$ and $0<\Delta<\nu$. The determinant $qb-ph$ is the signed area of the parallelogram spanned by the two integer vectors $U,V$. Determinant one means that every integer pair has unique integer coordinates in this basis: the inverse of the $2\times2$ matrix has integer entries.
+
+Why introduce a second coordinate $b$ when the residues are one-dimensional? Reducing $h\kappa$ modulo $N$ forgets how many multiples of $N$ were crossed. The pair $(h,b)$ retains that information. Its determinant relates elapsed time to the change in the remaining gap, and the identity $q\nu+h\Delta=N$ will count exactly how many vertices the towers contain.
 
 Why must it be one? A record vector has coprime coordinates. If both were divisible by $g>1$, dividing by $g$ would yield an earlier positive time with smaller deficit, contradicting the record. Using this coprimality, an integer vector complementary to $V$ can be found with determinant one, by Bézout's identity. Bézout's identity says that coprime integers have an integer linear combination equal to one.
 
@@ -88,6 +92,10 @@ $$
 positions. Addition by $\kappa$ modulo $N$ also has period $N/\delta$, so these positions visit every index in their class exactly once. Different cycles use different classes. All $N$ indices therefore occur once. No intermediate level can lie in $I$, because that index already occurs as a base. Hence the displayed $H_j$ really is the first-return time.
 
 For the eight-index check, the records of $0,3,6,1,4,7,\ldots$ have deficits $8,5,2,1$. The record of deficit two has $V=(2,1)$, and its successor has $V'=(5,2)$. Thus $(q,p)=(3,1)$ and $\Delta=1$. The determinant is $3\cdot1-1\cdot2=1$, and $q\varphi+h\Delta=3\cdot2+2=8$. The formulas recover the two paths above.
+
+<!-- reader-figure:early -->
+
+This example also explains why the count is a proof of **first** returns. There are eight tower positions and exactly eight residues. If, say, an intermediate level of the first tower were already base two, that residue would occur both at that level and at the second tower's base. The joined-cycle calculation rules out every such repetition, so no return can happen earlier than the displayed height.
 
 ### Preserve the full turns as well as the residues
 

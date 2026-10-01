@@ -1,12 +1,11 @@
 import { historyContent, historyReferences } from "../data/history";
-import { primaryNavigation } from "../data/home";
+import { SiteHeader } from "../components/SiteHeader";
 import { publicationDates } from "../data/publication-dates";
 import {
   formatDate,
   getBuildTimestamp,
   getPageTimestamp,
 } from "../lib/git-dates";
-import { sitePath } from "../lib/site-path";
 import { createPageMetadata } from "../lib/site-metadata";
 
 export const metadata = createPageMetadata({
@@ -19,6 +18,7 @@ export const metadata = createPageMetadata({
 const pageTimestamp = getPageTimestamp([
   "app/history/page.tsx",
   "app/data/history.ts",
+  "app/components/SiteHeader.tsx",
 ]);
 const buildTimestamp = getBuildTimestamp();
 const firstPublished = publicationDates.pages.history;
@@ -59,35 +59,7 @@ export default function HistoryPage() {
         Skip to the article
       </a>
 
-      <header className="site-header" id="top">
-        <div className="masthead">
-          <a
-            className="site-identity"
-            href={sitePath("/")}
-            aria-label="Critical Invariant Polygons — Home"
-          >
-            <span className="site-monogram" aria-hidden="true">
-              Θ
-            </span>
-            <span>
-              <strong>Critical Invariant Polygons</strong>
-              <small>A companion to the manuscript</small>
-            </span>
-          </a>
-        </div>
-
-        <nav className="primary-navigation" aria-label="Primary navigation">
-          {primaryNavigation.map((item) => (
-            <a
-              aria-current={item.href === "/history/" ? "page" : undefined}
-              href={sitePath(item.href)}
-              key={item.href}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-      </header>
+      <SiteHeader current="history" />
 
       <main className="history-page" id="main-content" tabIndex={-1}>
         <header className="history-hero">

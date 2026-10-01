@@ -28,7 +28,7 @@ export function ContactForm() {
     const replyTo = String(form.get("email") ?? "").trim();
     const subject =
       String(form.get("subject") ?? "").trim() ||
-      "Question about Critical Invariant Polygons";
+      "Question about the Karpelevič theorem";
     const message = String(form.get("message") ?? "").trim();
     const body = [
       message,
@@ -36,7 +36,7 @@ export function ContactForm() {
       "—",
       `From: ${name}`,
       `Reply-to: ${replyTo}`,
-      "Sent from the paper website contact form.",
+      "Sent from the Karpelevič theorem website contact form.",
     ].join("\n");
 
     window.location.href = `mailto:${contactAddress()}?subject=${encodeURIComponent(
@@ -72,7 +72,7 @@ export function ContactForm() {
           <input
             name="subject"
             type="text"
-            defaultValue="Question about Critical Invariant Polygons"
+            defaultValue="Question about the Karpelevič theorem"
           />
         </label>
         <label className="contact-wide">
@@ -98,7 +98,7 @@ export function ContactForm() {
         <p className="contact-noscript">
           The contact form needs JavaScript so that no message data can enter a
           website URL. You can instead email{" "}
-          <a href="mailto:brecht.verbeken%40gmail.com?subject=Question%20about%20Critical%20Invariant%20Polygons">
+          <a href="mailto:brecht.verbeken%40gmail.com?subject=Question%20about%20the%20Karpelevi%C4%8D%20theorem">
             brecht.verbeken&#64;gmail.com
           </a>
           .

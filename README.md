@@ -4,7 +4,7 @@ The public site is https://bfmave.github.io/karpelevic/.
 
 The current preprint is **A structural proof of the Karpelevič theorem**, by
 Brecht Verbeken and Vincent Ginis, [arXiv:2609.26058v2](https://arxiv.org/abs/2609.26058v2),
-revised 23 September 2026. The reader uses the supplied expanded manuscript,
+revised 23 September 2026. The reader uses the supplied teaching manuscript,
 **A proof of the Karpelevič theorem via invariant polygons**, as its teaching
 source. These versions have the same mathematical proof route; their titles
 and exposition differ.
@@ -13,6 +13,13 @@ All fourteen topics were rewritten on 1 October 2026 for readers with basic
 analysis and linear algebra. Topics I–XII build and complete the theorem;
 Topic XIII treats gauges and asymptotics; Topic XIV gives the eight-state
 worked example and retains the order-selectable boundary explorer.
+
+The illustrated edition restores visible topic introductions (imported
+results, new definitions, strategy, and payoff), chapter and section
+navigation, and fourteen teaching-figure sets placed beside the relevant
+explanations. Source statements remain available throughout, with individual
+proof disclosures. The journal-style typography and mathematical atlas are
+retained, and the site's public identity is **The Karpelevič theorem**.
 
 ## Development and checks
 
@@ -32,7 +39,7 @@ GitHub Pages artifact. The existing Pages workflow publishes pushes to main.
 - `scripts/generate-reader.mjs`: deterministic conversion and source-reference resolution.
 - `app/components/proof/CurrentProofChapter.tsx`: the shared reader and exact diagrams.
 - `public/paper/critical-invariant-polygons.pdf`: the downloaded arXiv v2 PDF.
-- `public/paper/teaching-manuscript.pdf`: the supplied expanded manuscript PDF.
+- `public/paper/teaching-manuscript.pdf`: the supplied teaching manuscript PDF.
 - `app/lib/karpelevic-boundary-core.js` and `public/code/`: unchanged numerical source and checks.
 
 After editing a guide or teaching source, run `npm run content:reader` with
@@ -40,8 +47,11 @@ Pandoc installed. Generation validates all cross-topic references. Builds
 run `npm run content:reader:check`, which checks the source and all guide
 hashes without requiring Pandoc in CI. All 50 labeled equations, 26 proofs,
 three figure captions, and 35 references from the supplied manuscript remain
-available in the reader. Original diagrams remain in the supplied PDF; two
-exact mathematical diagrams are also drawn on the website.
+available in the reader. Original diagrams remain in the supplied PDF.
+The teaching figures distinguish exact models and verified numerical
+illustrations from critical configurations and from proofs of extremality.
+On narrow screens, wide diagrams scroll inside their own frames so their
+labels remain legible and the page itself does not overflow.
 
 The previous edition's hand-authored and generated reader files are retained
 for provenance but no longer supply the public proof routes. Its obsolete

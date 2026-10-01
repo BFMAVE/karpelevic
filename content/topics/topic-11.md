@@ -2,6 +2,8 @@
 
 The product geometry uses the smallest order at which an eigenvalue can be realised. The website's boundary, however, is requested at a specified order $n$. We therefore need to prove that the scalar candidates increase with the order. Using the boundary theorem for this comparison would be circular: the comparison is one of the ingredients proving that theorem.
 
+The practical test is a sign test. Insert the old radius into the new scalar equation. If its left side is still below the new target, the increasing function has not yet reached its zero, so the new radius must be larger. Most of the work below proves that sign without already knowing where either boundary lies. The figure near the worked comparison shows the actual old and new roots.
+
 When the order increases by one, the Farey interval containing an angle can change in only two ways. Its endpoints may stay the same, in which case its number of product factors may increase. Alternatively it is split by a mediant. Topic VIII defined the scalar candidate $K_n(\theta)$; below all angles remain strictly inside the intervals used in a scalar equation.
 
 ### Adding a product factor
@@ -47,6 +49,15 @@ $$
 $$
 
 If every integrand, after multiplication by $e^{i\chi}$, has positive imaginary part, the left side has positive imaginary part after that same rotation. We will verify this by keeping the derivative's angle strictly between zero and $\pi$.
+
+The square case shows the mechanism without an integral calculation. When $k=2$, the identity reduces to
+
+$$
+(\overline{z_1}-\overline{z_0})(z_1^2-z_0^2)
+=|z_1-z_0|^2(z_1+z_0).
+$$
+
+For $z_0=4/5$, $z_1=e^{i\pi/6}$, and $\chi=\pi/8$, points of the segment have arguments from zero to $\pi/6$. The rotated derivative $e^{i\chi}2z$ has arguments from $\pi/8$ to $7\pi/24$, all strictly above the real axis. Averaging these derivative vectors cannot change the sign of their imaginary parts. The mediant calculation uses this same observation for arbitrary $m$, with segments chosen to match its algebra.
 
 Reflect the old interval if necessary so that $b<d$. Fix $x$ in one of the new open intervals and let $\rho=K_{n-1}(2\pi x)$. Define
 
@@ -106,5 +117,9 @@ The right count is already correct. The left required count $\lfloor n/b\rfloor$
 ### An arithmetic check and the equality cases
 
 From order seven to eight, the interval $(1/3,2/5)$ splits because $3+5=8$, inserting $3/8$. The angle fraction $5/14$ satisfies $1/3<5/14<3/8$, so the split comparison gives $K_8(5\pi/7)>K_7(5\pi/7)$.
+
+The computed radii are approximately $0.94430114$ and $0.97061308$. In this example the new equation simplifies to $\rho^4+\rho^3=2\cos(\pi/7)$. At the old radius its left side minus the target is about $-0.164763$. The new increasing function therefore needs a larger radius to reach zero. This numerical check illustrates the general sign proof; the proof covers every angle in the two new open intervals.
+
+<!-- reader-figure:late -->
 
 If an old Farey endpoint is retained, both radii are one. Inside an unchanged interval the radii agree exactly when $\lfloor(n-1)/q\rfloor=\lfloor n/q\rfloor$, with $q$ the smaller denominator; otherwise the inequality is strict. At an inserted mediant the new radius is one and the old one is below one. These cases prove $K_{n-1}\le K_n$ for $n\ge5$. Topic XII handles the initial passage from order three to four and then completes the boundary theorem.

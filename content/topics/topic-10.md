@@ -35,6 +35,15 @@ We can also let $\beta_0,\ldots,\beta_{m-1}\in[0,1]$ be independent weights and 
 
 A directed arrow of weight $a$ from vertex $u$ to vertex $v$ means that the matrix entry $A_{uv}$ is $a$. Rows describe departure vertices. The final row of a block splits its total weight as $\beta_j+\alpha_j=1$; every other row has one arrow of weight one. This is why the matrix is row-stochastic.
 
+The blocks are designed to reproduce the product factors. For a three-vertex block labelled $0,1,2$ followed by a block starting at $3$, consider an eigenvector with coordinates $x_i$ and eigenvalue $\lambda$. Its two weight-one rows require $x_1=\lambda x_0$ and $x_2=\lambda x_1$. The branching row then requires
+
+$$
+\lambda x_2=\beta_0x_0+\alpha_0x_3,
+\qquad (\lambda^3-\beta_0)x_0=\alpha_0x_3.
+$$
+
+Thus a deterministic path followed by one averaging row produces exactly a factor $\lambda^q-\beta_j$. The links between blocks let those coordinate ratios telescope around a cycle. The final route length supplies the remaining power of $\lambda$.
+
 Following the closing arrows gives $m$ separate cycles of length $q$, each with product of weights $\beta_j$. Following the connecting arrows gives a cycle through the blocks. Its length would initially be $mq$; only its final connection needs adjustment to make its length $s$.
 
 If $s\le mq$, set $d=mq-s$. Redirect the last connecting arrow into $v_{0,d}$. The assumption $s>(m-1)q$ guarantees $0\le d<q$. The connecting cycle skips the first $d$ vertices of block zero and has length $s$. The graph has $mq$ vertices.
@@ -70,6 +79,10 @@ Choose $q=3$, $m=2$, and $s=5$. Label the blocks $0,1,2$ and $3,4,5$. Give $0\to
 $$
 \det(tI-A)=(t^3-\beta_0)(t^3-\beta_1)-t(1-\beta_0)(1-\beta_1).
 $$
+
+For the concrete weights $\beta_0=0.4$ and $\beta_1=0.7$, the two branch rows have weights $(0.4,0.6)$ and $(0.7,0.3)$. Their connecting-cycle weight is $0.6\cdot0.3=0.18$, so the polynomial is $t^6-1.1t^3-0.18t+0.28$. At $t=1$ it vanishes: $1-1.1-0.18+0.28=0$. This checks the expected eigenvalue one of a stochastic matrix. The graph below shows exactly which cycles account for these terms.
+
+<!-- reader-figure:late -->
 
 At all weights one, the nonzero eigenvalues are the $q$th roots of unity; at all weights zero, they are the $s$th roots of unity, with any remaining eigenvalues zero. For weights strictly between zero and one the graph is connected in both directions by directed paths. For Farey data $q$ and $s$ are coprime, which also ensures positivity of every sufficiently high matrix power.
 

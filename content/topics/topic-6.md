@@ -11,6 +11,8 @@ Here $N$ is the polygon's vertex count, $\kappa$ its contact-index shift, and $I
 
 The proof constructs a small deformation of the polygon while keeping the map $F(x)=\zeta x$ fixed. All vertex images will stay inside the new polygon, and one will become strictly interior. Topic II's contact theorem forbids that for **every** invariant polygon with at most $N$ vertices. The theorem's universal scope is essential: the deformed polygon need not minimise area or contact count.
 
+A side contact is an equality constraint: its image must remain on one particular line. Moving a base freely would generally break several such equalities. The construction moves a chain by solving those equalities one after another as line intersections. Only the final contact is left unconstrained. The projective calculation determines whether that one contact falls inward, while the tower arithmetic ensures that no other contact was accidentally broken.
+
 ### A point inside a side cannot later become a vertex
 
 A supporting line touches a convex polygon while leaving it in one closed half-plane. A supporting linear functional is a linear function maximised on that touching part. A face is a vertex, a side, or the whole polygon. The smallest face containing a point is the vertex itself, its side if it lies strictly inside that side, or the whole polygon if it is interior.
@@ -46,6 +48,32 @@ X_i(t)=L_i\cap\operatorname{aff}(X_{i-1}(t),C_i),\qquad2\le i\le\ell.
 $$
 
 The parameter $t$ measures a small real motion. Each intersection keeps contact $C_i$ on the corresponding side line. At zero the intersections are the original vertices, so for sufficiently small $t$ they are finite and vary smoothly. The issue is how the final side moves relative to its returning contact.
+
+### A chain whose closing defect can be calculated exactly
+
+The polygon with consecutive vertices
+
+$$
+X_0=(0,0),\quad X_1=(1,0),\quad X_2=(2,1),\quad X_3=(3,3)
+$$
+
+is a model for the projection lemma. It is not being proposed as an invariant eigenvalue polygon. Take $C_2=(3/2,1/2)$ and $C_3=(5/2,2)$, the midpoints of its last two chain sides. The line $L_2:y=3x/2-2$ exposes $X_2$: the affine function $y-3x/2+2$ vanishes there and is positive at the other three vertices.
+
+Move $X_1$ to $X_1(t)=(1-t,0)$ and project through $C_2$ onto $L_2$. Solving the two line equations gives
+
+$$
+X_2(t)=\left(\frac{2(1+5t)}{1+6t},\frac{1+3t}{1+6t}\right).
+$$
+
+On the contact line $K=C_2C_3$, write $Y(t)=(5/2-t,2-3t/2)$. The moving final line through $X_2(t)$ and fixed $X_3$ meets $K$ at $Y(u(t))$, where direct substitution gives
+
+$$
+u(t)=\frac{t}{1+6t},\qquad t-u(t)=\frac{6t^2}{1+6t}.
+$$
+
+This positive difference, for sufficiently small nonzero $t$, puts the returning point $Y(t)$ inward of the moving final side. At $t=0$ the first derivative of the difference is zero, so the actual movement is detected at second order. Starting the same projection chain at $X_0$ instead of $X_1$ corresponds to $t=1$ and gives $Z_2=(12/7,4/7)$ and $\Pi(X_0)=(33/14,25/14)=C_3+(C_2-C_3)/7$. The global comparison lies strictly between the contacts; the formula then identifies the locally usable motion. The following proof obtains the same strict comparison for every permitted chain, without relying on these special coordinates.
+
+<!-- reader-figure:early -->
 
 A projection from a fixed point between two lines is a fractional-linear function of line coordinates:
 

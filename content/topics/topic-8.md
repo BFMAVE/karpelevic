@@ -2,6 +2,8 @@
 
 The geometric work in Topics IV–VII has reduced an extremal eigenvalue to a product and an exact count of its turns. This topic constructs the radius that this information will eventually force. At this stage it is a candidate: Topic IX proves the upper bound, Topic X constructs a matrix attaining it, and Topics XI–XII identify it with the complete boundary.
 
+Fixing the angle means fixing a ray from the origin. The only unknown position on that ray is its distance from zero. A complex polynomial can have several roots, including roots on other rays or on another winding branch. We therefore look for an equation in the one positive real variable $\rho$, together with the turn count that identifies which polynomial branch it represents. An increasing scalar left side will turn this selection into a checkable crossing of one target value.
+
 Let $n\ge4$ be the required matrix order. Write $F_n$ for the increasing list of reduced fractions in $[0,1]$ with denominator at most $n$. Fix an angle $\theta$ in the upper half-plane and set $x=\theta/(2\pi)$. Suppose $x$ lies strictly between consecutive fractions $f<g$ in $F_n\cap[0,1/2]$. Consecutive fractions $p/q<r/s$ satisfy
 
 $$
@@ -52,6 +54,15 @@ $$
 
 The intermediate value theorem gives a solution between zero and one; strict increase proves uniqueness. Bisection therefore computes the candidate reliably: if the left side is too small, increase the radius; if too large, decrease it.
 
+For a first calculation, take order four and the interval $(0/1,1/4)$ at $\theta=\pi/4$. Then $q=1$, $s=m=4$, and $A=B=\pi/4$. Both powers in the equation are just $\rho$, so it reduces to
+
+$$
+\rho\left(\frac1{\sqrt2}+\frac1{\sqrt2}\right)=1,
+\qquad \rho=\frac1{\sqrt2}.
+$$
+
+The candidate point is $\rho e^{i\pi/4}=(1+i)/2$. This example explains the equation's role: it locates where a prescribed ray meets an arc. The order-seven example below requires fractional powers, but the same increasing-function argument gives its unique answer without solving a polynomial by hand.
+
 The candidate changes continuously with the angle. To see this without assuming a differentiability theorem, take angles tending to an interior angle and any convergent subsequence of their radii in $[0,1]$. Passing to the limit in the equation gives the equation at the limiting angle. Its unique solution determines every possible subsequential limit, so the whole sequence converges.
 
 At the left endpoint $A\to0$, while $B\to2\pi/(mq)\in(0,\pi)$. The limiting equation is $\rho^q\sin B=\sin B$, hence $\rho=1$. At the right endpoint the same reasoning gives $\rho^{s/m}=1$. Assigning $K_n=1$ at Farey fractions joins the candidates continuously to the endpoint roots of unity.
@@ -83,5 +94,9 @@ $$
 $$
 
 Why can there be only one radius? Both powers are positive and both sine coefficients are positive, so the left side strictly increases. Notice also that $e=5-6=-1$. This is a legitimate example of the negative-exponent case, not a reason to change the Farey data.
+
+The numerical crossing is $\rho\approx0.94430114$. Substituting a smaller trial radius makes the left side too small; substituting a larger one makes it too large. The following plot is computed from this actual scalar function, rather than an assumed curve shape.
+
+<!-- reader-figure:late -->
 
 Order three needs a separate endpoint convention. Its nonreal boundary radius approaches $1/2$ as $\theta\uparrow\pi$, although $-1$ is itself an order-three eigenvalue. Topic XII explains this discontinuity; the continuous endpoint rule above is for $n\ge4$.

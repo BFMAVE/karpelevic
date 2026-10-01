@@ -1,13 +1,13 @@
+import { SITE_NAME, SITE_SUBTITLE } from "../lib/site-metadata";
+
 export const homeContent = {
-  title:
-    "A structural proof of the Karpelevič theorem",
-  subtitle:
-    "An accessible route from averaging matrices to the exact eigenvalue boundary",
+  title: SITE_NAME,
+  subtitle: SITE_SUBTITLE,
   authors: ["Brecht Verbeken", "Vincent Ginis"],
   descriptor:
-    "A geometric route from invariant polygons to the classical boundary of stochastic eigenvalue regions.",
+    "Which complex numbers can be eigenvalues of an averaging matrix? Follow the answer from elementary linear algebra to polygons, rational angles, and the exact boundary.",
   projectAim:
-    "This website develops the complete proof for readers with basic analysis and linear algebra. New ideas are introduced where they are needed, with worked checks and the full source arguments available throughout.",
+    "The fourteen topics develop the proof for readers with basic analysis and linear algebra. Each topic introduces the extra ideas it needs, connects them to a geometric picture, and includes the detailed source argument. The aim is to understand why the theorem is true, as well as what it says.",
   readingRoutes: [
     {
       label: "The paper",
@@ -38,8 +38,24 @@ export const homeContent = {
     "A row-stochastic matrix is a nonnegative matrix whose rows each add to one. Such matrices encode finite Markov chains, averaging processes, and many other systems in which mass or probability is redistributed without being lost.",
     "For a fixed size n, which complex numbers can occur as an eigenvalue of one of these matrices? The union of all possibilities is denoted by Θₙ. The problem is to determine this set for every n.",
   ],
+  problemOrientation:
+    "The eigenvalue 1 is always present, and every eigenvalue lies in the closed unit disc. Those bounds leave much unanswered: at a fixed matrix size, most points on the unit circle are impossible, and the boundary inside the disc has a precise curved shape. The atlas above shows how the allowed region grows as n increases.",
   invariantPolygon:
-    "The bridge to geometry is simple to state. An eigenvalue λ belongs to Θₙ exactly when multiplication by λ leaves some polygon with at most n vertices invariant. On the boundary, the contracted and rotated image presses against the polygon. The resulting contacts turn a spectral question into a finite geometric return problem.",
+    "Place the complex coordinates of an eigenvector in the plane and take their convex hull. Each row of the matrix forms an average of these points, so the eigenvalue equation says that multiplication by λ sends the hull into itself. For a nonreal eigenvalue, this hull is a genuine polygon. Conversely, the averages expressing that inclusion give the rows of a stochastic matrix. Topic I proves both directions and handles the real eigenvalues and smaller matrix sizes separately.",
+  proofOrientation: [
+    {
+      title: "Averages become geometry",
+      text: "For a nonreal eigenvalue, multiplication rotates and scales the plane. The problem becomes finding a polygon, with at most n vertices, that contains its rotated and scaled image.",
+    },
+    {
+      title: "The boundary forces contact",
+      text: "Fix a direction and push the eigenvalue as far from the origin as possible. The image polygon must then touch the original in a rigid pattern. The middle topics explain how these contacts lead to first returns and a finite product equation.",
+    },
+    {
+      title: "Geometry determines the curve",
+      text: "An inequality turns the product equation into a sharp bound. Explicit stochastic matrices attain it, and rational angles identify the endpoints of every boundary arc. The final topics assemble the theorem and work through an example.",
+    },
+  ],
   contributionSummary: [
     {
       label: "Part I",
@@ -71,8 +87,6 @@ export const homeContent = {
   ],
   paperSummary:
     "The paper studies the least polygonal complexity of an elliptic contraction and, for complexities at least four, derives a finite first-return description and product equation at radial criticality. Combined with a direct treatment of the smaller orders, this produces a geometric derivation of the classical boundary of the Karpelevič region in Ito’s formulation for real row-stochastic matrices.",
-  personalPrompt:
-    "Author prompt — replace before publication: How did you first encounter the Karpelevič region? What feature of the problem made you keep returning to it, and when did invariant polygons become the decisive point of view?",
   manuscript: {
     status: "Archival Zenodo record (24 July 2026)",
     zenodoUrl: "https://zenodo.org/records/21529144",

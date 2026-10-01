@@ -4,6 +4,7 @@ import {
   Source_Serif_4,
 } from "next/font/google";
 import { sitePath } from "./lib/site-path";
+import { SITE_NAME } from "./lib/site-metadata";
 import "./globals.css";
 
 const displaySerif = Cormorant_Garamond({
@@ -27,8 +28,8 @@ const readingSerif = Source_Serif_4({
 export const metadata: Metadata = {
   metadataBase: new URL("https://bfmave.github.io/karpelevic/"),
   title: {
-    default: "Critical Invariant Polygons",
-    template: "%s · Critical Invariant Polygons",
+    default: SITE_NAME,
+    template: `%s · ${SITE_NAME}`,
   },
   description:
     "A complete guided proof of the Karpelevič theorem, starting from basic analysis and linear algebra.",

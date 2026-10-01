@@ -1,4 +1,4 @@
-import { primaryNavigation } from "../data/home";
+import { SiteHeader } from "../components/SiteHeader";
 import { sitePath } from "../lib/site-path";
 import { createPageMetadata } from "../lib/site-metadata";
 import { formatDate, getPageTimestamp } from "../lib/git-dates";
@@ -22,9 +22,9 @@ const introduced = [
 export default function BackgroundPage() {
   return <>
     <a className="skip-link" href="#main-content">Skip to the background reminders</a>
-    <header className="site-header" id="top"><div className="masthead"><a className="site-identity" href={sitePath("/")}><span className="site-monogram" aria-hidden="true">Θ</span><span><strong>Critical Invariant Polygons</strong><small>A companion to the manuscript</small></span></a></div><nav className="primary-navigation" aria-label="Primary navigation">{primaryNavigation.map((item) => <a key={item.href} href={sitePath(item.href)}>{item.label}</a>)}</nav></header>
-    <main className="proof-page" id="main-content" tabIndex={-1}>
-      <header className="proof-hero"><div><p className="kicker">Before Topic I</p><h1>Basic analysis and linear algebra are enough to begin</h1></div><p className="proof-deck">The reader introduces its additional tools when they become necessary. You do not need previous courses in probability, number theory, or projective geometry. The proof takes sustained work; these reminders show where to start.</p></header>
+    <SiteHeader current="proof" />
+    <main className="proof-page reader-background" id="main-content" tabIndex={-1}>
+      <header><p className="kicker">Before Topic I</p><h1>Basic analysis and linear algebra are enough to begin</h1><p className="proof-deck">The reader introduces its additional tools when they become necessary. You do not need previous courses in probability, number theory, or projective geometry. The proof takes sustained work; these reminders show where to start.</p></header>
       <div className="reader-guide">{basics.map(([title, explanation, use]) => <section key={title}><h2>{title}</h2><p>{explanation}</p><p>{use}</p></section>)}<h2>The tools taught inside the topics</h2><dl>{introduced.map(([topic, tools]) => <div key={topic}><dt><strong>Topic {topic}</strong></dt><dd>{tools}</dd></div>)}</dl><h2>A quick starting check</h2><p>If a row has nonnegative entries summing to one, its product with a column is a weighted average of that column&apos;s coordinates. If you can explain why the absolute value of that average is at most the largest coordinate absolute value, you have the first estimate needed in Topic I.</p><p><a href={sitePath("/proof/")}>Begin Topic I: from stochastic matrices to invariant polygons</a></p></div>
     </main>
     <footer className="site-footer"><div className="footer-meta"><time dateTime="2026-07-29">First published 29 July 2026.</time><time dateTime={revised}>Last revised {formatDate(revised)}.</time><time dateTime="2026-07-28">Website online since 28 July 2026.</time></div></footer>

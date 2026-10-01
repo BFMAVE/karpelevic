@@ -1,0 +1,130 @@
+import type { TopicOrientation } from "./reader-orientation";
+
+export const earlyOrientations: Record<number, TopicOrientation> = {
+  1: {
+    imports: [
+      { term: "Eigenvectors and complex numbers", from: null, use: "Use Av = λv and read each complex coordinate as a point in the real plane." },
+      { term: "Basic limits and the triangle inequality", from: null, use: "Bound eigenvalue moduli and pass from finite orbit averages to zero." },
+    ],
+    definitions: [
+      { term: "Row-stochastic matrix", meaning: "A matrix whose rows are weighted averaging instructions: entries are nonnegative and each row sums to one." },
+      { term: "Eigenvalue region Θₙ", meaning: "The set of single complex numbers that can occur as eigenvalues of some stochastic matrix with n rows." },
+      { term: "Convex hull and vertex", meaning: "The hull contains all weighted averages of the given points. A vertex is a point that cannot be obtained by averaging other hull points." },
+      { term: "Invariant polygon", meaning: "A polygon P satisfying λP ⊆ P: rotating and scaling any point of P keeps it in P." },
+      { term: "Supporting line", meaning: "A line touching the polygon while all its points lie on one side of that line." },
+      { term: "Stationary probability row", meaning: "A nonnegative row πᵀ with total mass one that is unchanged by multiplication by A." },
+      { term: "Radial filling", meaning: "If λ is attainable, every tλ with 0 ≤ t ≤ 1 is attainable in the same order, for n ≥ 2." },
+    ],
+    strategy: "Read every matrix row as a weighted average. Its eigenvector coordinates then form a polygon containing their rotated and contracted images. Reverse the averaging instructions to recover a stochastic matrix from any such polygon.",
+    payoff: "The eigenvalue question becomes a planar containment question with a fixed budget of vertices. Compactness lets us look for the largest feasible radius at each angle.",
+  },
+  2: {
+    imports: [
+      { term: "Matrix–polygon correspondence", from: 1, anchor: "eq:polygon-criterion", use: "Turn a polygon with fewer vertices into a stochastic realisation of smaller order." },
+      { term: "Stationary probability row and unit-disk bound", from: 1, use: "Identify an invariant subspace on which a rank-one subtraction changes no eigenvalues." },
+      { term: "Conjugation symmetry", from: 1, use: "Apply the same vertex-contact argument to the transposed planar map." },
+      { term: "Positive eigenvectors for irreducible nonnegative matrices", from: null, use: "The required Perron–Frobenius statement is given here, then recovered from stationary averages for the matrix used in the proof." },
+    ],
+    definitions: [
+      { term: "Least realising order N", meaning: "The smallest number of states, equivalently polygon vertices, that can realise this particular nonreal eigenvalue." },
+      { term: "Radial extremality", meaning: "Any increase of the modulus at the same angle requires more than N vertices." },
+      { term: "Irreducible matrix", meaning: "Its positive-entry arrows allow a directed path from every state to every other state." },
+      { term: "Spectral radius and Perron root", meaning: "The largest eigenvalue modulus; for the nonnegative irreducible matrix used here it is a positive eigenvalue with a positive eigenvector." },
+      { term: "Deflation", meaning: "Subtract a small rank-one matrix to lower the eigenvalue 1 while leaving the other eigenvalues unchanged." },
+      { term: "Polar polygon and adjoint", meaning: "The polar records inequalities a · x ≤ 1 instead of points x. The adjoint moves those inequalities by the rule (T* a) · x = a · Tx." },
+      { term: "Face and relative interior", meaning: "A boundary face is a vertex or a whole side. A point in a side's relative interior is strictly between its endpoints." },
+    ],
+    strategy: "An interior vertex image allows a strictly positive averaging row. Deflation then preserves the chosen eigenvalue while lowering the positive Perron root; restoring row sums to one enlarges the chosen eigenvalue. Polarity turns the resulting vertex statement into a side statement.",
+    payoff: "Every vertex image is on the boundary and every side meets the image polygon, for every invariant polygon with at most N vertices. This remains available after later deformations.",
+  },
+  3: {
+    imports: [
+      { term: "Universal vertex and side contact", from: 2, anchor: "thm:saturation", use: "Know that every image lies on the boundary and no side is missed, even after a permitted cut." },
+      { term: "Least realising order", from: 2, anchor: "thm:saturation", use: "Prevent a cut or a limit from producing an invariant polygon with fewer than N vertices." },
+      { term: "Zero is interior", from: 1, use: "Order vertices by angles and ensure each side spans less than half a turn." },
+    ],
+    definitions: [
+      { term: "Contact count b_T", meaning: "Count the vertices whose images lie strictly inside sides; d_T counts those whose images are vertices." },
+      { term: "Normalised polygon", meaning: "Its largest distance from zero is one, so shrinking all coordinates cannot artificially lower the area." },
+      { term: "Count-then-area selection", meaning: "First minimise the integer contact count; use smallest area only to choose among polygons with that count and fixed scale." },
+      { term: "Half-open side (vᵢ₋₁, vᵢ]", meaning: "The ending corner belongs to this side and the starting corner belongs to the preceding side, so each boundary point is assigned once." },
+      { term: "Cyclic shift κ", meaning: "The fixed number of index positions by which multiplication moves the side assignment." },
+      { term: "Contact coefficients αᵢ, βᵢ", meaning: "The weights expressing an image as βᵢvᵢ₋₁ + αᵢvᵢ, with αᵢ + βᵢ = 1. A zero βᵢ means an endpoint contact." },
+      { term: "Continued vertex angles Φᵢ", meaning: "Real angles that keep increasing as the labels pass around the polygon; Φᵢ₊ₙ = Φᵢ + 2π retains whole turns." },
+    ],
+    strategy: "Choose an invariant polygon that cannot be simplified by reducing its interior-contact count. Cut along image edges and count removed and added vertices. The remaining endpoint ambiguity is resolved by one consistent half-open convention, with reflection if needed.",
+    payoff: "Every side receives one image vertex, with one cyclic shift and explicit two-endpoint averaging coefficients. Later index arithmetic now has a precise geometric meaning.",
+  },
+  4: {
+    imports: [
+      { term: "Half-open contact equations", from: 3, anchor: "eq:contacts", use: "Write the stochastic matrix using a cyclic shift and two-endpoint rows." },
+      { term: "Minimum contact count and area at fixed scale", from: 3, use: "Forbid merging two positive contacts and forbid removing two different corners while retaining normalisation." },
+      { term: "Universal contact and the face rule", from: 2, use: "Apply the boundary rule to the new polygon and eliminate an unwanted third vertex in a changed row." },
+    ],
+    definitions: [
+      { term: "Stochastic factor reversal", meaning: "Replace HS by SH; when S is invertible the new matrix is similar to the old one and preserves its eigenvalues." },
+      { term: "Local vertex replacement", meaning: "Move one vertex to its already known contact on the preceding side, while a matrix factorisation proves invariance." },
+      { term: "Logarithmic weight wᵢ", meaning: "The number −log αᵢ. Multiplying contact coefficients becomes adding these nonnegative weights." },
+      { term: "Consecutive contact run I", meaning: "One uninterrupted interval of side indices with βᵢ > 0, interpreted around the closed boundary." },
+      { term: "Residue [a]ₙ and index orbit", meaning: "Reduce a to 0,…,N−1. Repeated addition of κ visits one of gcd(N,κ) cycles." },
+      { term: "Record and deficit", meaning: "A residue larger than every earlier residue is a record; its deficit is its distance below N." },
+    ],
+    strategy: "Transfer a positive contact weight across the cyclic shift by reversing two stochastic factors. Minimal count prevents collisions of weights; minimum area forces all movable ending corners to belong to one run. Follow one transferred weight until its first entrance into the fixed block.",
+    payoff: "Interior contacts occupy the consecutive indices 1,…,φ, and φ is a record deficit of the cyclic shift. This is the geometric input for the tower arithmetic.",
+  },
+  5: {
+    imports: [
+      { term: "Consecutive contact run and record deficit", from: 4, anchor: "prop:interval", use: "Select the bases 1,…,φ and two consecutive records that determine their return lengths." },
+      { term: "Endpoint contacts", from: 3, anchor: "eq:contacts", use: "Outside the contact run, every image is a vertex, so iterating multiplies its coordinate by powers of ζ." },
+      { term: "Continued real angles", from: 3, anchor: "eq:lift", use: "Retain the whole turns lost by reducing indices modulo N." },
+    ],
+    definitions: [
+      { term: "Base and first return", meaning: "Start at an index in the contact run; the first return is the first later index in that run, whose image lands inside its assigned side." },
+      { term: "Tower and height Hⱼ", meaning: "The finite list of vertices before that first return; its height is the number of steps before the contact." },
+      { term: "Record vector (h,b)", meaning: "An integer pair recording the record time h and the multiple bN just above hκ." },
+      { term: "Determinant-one integer basis", meaning: "Two integer vectors whose 2×2 determinant is one, so every integer pair has unique integer coordinates in them." },
+      { term: "Bézout's identity", meaning: "Coprime integers have an integer linear combination equal to one; it supplies a complementary integer basis vector." },
+      { term: "Return displacement Δ", meaning: "The number of base positions advanced by the first-return permutation; it is the drop between two consecutive record deficits." },
+      { term: "Arithmetic suspension", meaning: "Replace each base by its tower of vertices. Counting joined tower cycles proves these lists cover every polygon index exactly once." },
+    ],
+    strategy: "Encode consecutive records as integer vectors. A determinant-one calculation yields two possible tower heights. Join towers according to their proposed returns and compare the cycle length with the period of adding κ modulo N; this excludes overlaps and earlier returns.",
+    payoff: "Every vertex belongs to exactly one tower, and its first-return height and target side are known. The geometry must now decide whether the arithmetic displacement Δ can exceed one.",
+  },
+  6: {
+    imports: [
+      { term: "Universal boundary contact", from: 2, anchor: "thm:saturation", use: "Contradict an interior vertex image in the deformed polygon, which need not minimise area or contact count." },
+      { term: "Half-open contact assignment", from: 3, anchor: "eq:contacts", use: "Identify which endpoint must stay a vertex when an entire side remains on the boundary." },
+      { term: "Consecutive contact bases", from: 4, anchor: "prop:interval", use: "Choose a chain of adjacent bases instead of unrelated vertices." },
+      { term: "Tower partition and return data", from: 5, anchor: "lem:suspension", use: "Transport each moved base along its whole tower and check every final contact without assigning a vertex twice." },
+    ],
+    definitions: [
+      { term: "Smallest face and face persistence", meaning: "A point's containing face is its vertex, side, or polygon interior. Under an invertible invariant map this face cannot drop in dimension." },
+      { term: "Exposing line", meaning: "A supporting line meeting the polygon at just one vertex, supplying a line along which that vertex can be moved." },
+      { term: "Projectivity", meaning: "A composition of line intersections through fixed centres; in one-dimensional coordinates it has the form (aτ+b)/(dτ+e)." },
+      { term: "Point at infinity", meaning: "The direction-point added to a line so a parallel projection still has a defined intersection." },
+      { term: "Positive-denominator coordinates", meaning: "Coordinates obtained by dividing affine functions by one that stays positive on the polygon; they preserve segments and their interiors." },
+      { term: "Closing defect t−u(t)", meaning: "Compare the returning point's coordinate with where the moving final side meets the contact line. Its positive sign means the point has moved inward." },
+      { term: "Transported tower motion", meaning: "After choosing a moved base, move its level-t vertex to Fᵗ of that base, preserving every vertex-to-vertex relation." },
+    ],
+    strategy: "If a return skips a base, expose a short chain of vertices and move them by line intersections through the fixed contacts. Positive reciprocal coordinates locate the closing projection. Its fractional-linear defect supplies an inward direction even when the first derivative is zero. Extend the motion along all towers.",
+    payoff: "A skipped return would create an invariant N-gon with an interior vertex image. Hence Δ = 1, and this case forces gcd(N,κ) = 1.",
+  },
+  7: {
+    imports: [
+      { term: "Contact coefficients and continued angles", from: 3, anchor: "eq:contacts", use: "Convert a side return into a two-endpoint equation and read its factor argument as a real side increment." },
+      { term: "Consecutive contact run", from: 4, anchor: "prop:interval", use: "Distinguish the one-cycle and multiple-cycle contact cases." },
+      { term: "Tower partition and integer basis", from: 5, anchor: "lem:suspension", use: "Build regular q-step recurrences, including added bases with zero contact coefficient, and determine Farey neighbours." },
+      { term: "No-skipping conclusion", from: 6, anchor: "thm:no-skipping", use: "Reduce the possible return patterns to a coprime shift or one interior contact per index cycle." },
+    ],
+    definitions: [
+      { term: "Farey list Fₙ", meaning: "The ordered reduced fractions between zero and one whose denominators are at most N." },
+      { term: "Farey neighbour criterion", meaning: "Fractions p/q < r/s are consecutive exactly when rq−ps = 1 and q+s > N." },
+      { term: "Mediant", meaning: "Add two numerators and two denominators separately: (p+r)/(q+s). This gives a fraction between the original pair." },
+      { term: "Factor count m and closing exponent e", meaning: "Take m = floor(N/q) regular q-step factors and e = s−mq remaining closing steps; after reflection e can be negative." },
+      { term: "Principal factor argument uⱼ", meaning: "The angle of ωᵠ−βⱼ chosen in (−π,π]; this construction places it in the positive interval [A,M)." },
+      { term: "Exact winding identity", meaning: "The real sum eϑ + Σuⱼ equals the specified full-turn value 2π(r−mp), not just that value modulo 2π." },
+    ],
+    strategy: "Write return relations between successive bases, close the list, and multiply to cancel every vertex coordinate. Add their continued angle differences separately. Treat the singleton case explicitly and reverse/conjugate the multiple-cycle case before putting the smaller Farey denominator on the left.",
+    payoff: "The extremal eigenvalue satisfies both the unequal-parameter product equation and the exact real winding identity. The latter fixes the average factor angle needed for the convexity bound.",
+  },
+};

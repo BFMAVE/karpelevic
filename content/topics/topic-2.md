@@ -6,6 +6,8 @@ These assumptions hold when we choose a maximal eigenvalue on a ray in $\Theta_n
 
 Every invariant polygon under consideration has exactly $N$ vertices. The goal is stronger than finding a single well-chosen polygon: **for every such polygon, each vertex image lies on the boundary and every side meets the image polygon**. We will need this universal statement after changing vertices in Topics IV and VI.
 
+If the entire image polygon were strictly inside $P$, increasing $\rho$ a little would preserve containment by continuity. But that argument does not settle a mixed configuration: perhaps one vertex image is interior while all the others already touch the boundary. Those other contacts prevent a direct outward expansion of the same polygon. Deflation changes the realising matrix, and with it the polygon, so that even one interior vertex image becomes impossible at an extremal eigenvalue.
+
 ### The small amount of Perron–Frobenius theory we use
 
 A nonnegative matrix is **irreducible** if its directed graph has a path from every vertex to every other, drawing an arrow $i\to j$ when $a_{ij}>0$. For an irreducible stochastic matrix, a stationary probability row $\pi^T$ has strictly positive entries. More generally, an irreducible nonnegative matrix has a positive right eigenvector for its spectral radius and a positive left eigenvector; a positive left eigenvector identifies that radius. These are the precise Perron–Frobenius facts used below. They extend familiar eigenvector theory to matrices with nonnegative entries.
@@ -16,6 +18,8 @@ For the nonnegative irreducible matrix $B$ used below, we explicitly know $\pi^T
 
 Any stochastic realization from an invariant $N$-gon is irreducible. If not, its graph has a nonempty proper set $I$ with no arrows leaving it. The submatrix on $I$ is stochastic and the corresponding coordinates of the polygon eigenvector still realize $\zeta$. Those coordinates are nonzero because zero is interior to the polygon. This would realize $\zeta$ with fewer than $N$ states.
 
+The graph language has a concrete matrix meaning: a set with no arrows leaving it has zero entries in columns outside the set. Its own rows still sum to one, so those rows can run independently as a smaller stochastic matrix. Least order excludes precisely this way of hiding the chosen eigenvalue in a smaller closed subsystem.
+
 ### Lower one eigenvalue and preserve the others
 
 Suppose one row of a realizing matrix $A$ is strictly positive. Let $e_i$ be the column with a $1$ in position $i$ and zeros elsewhere. Choose $\varepsilon>0$ small enough to keep that row positive, and set
@@ -25,6 +29,8 @@ $$B=A-\varepsilon e_i\pi^T,\qquad r=1-\varepsilon\pi_i\in(0,1).$$
 Then $\pi^TB=r\pi^T$. Since the pattern of positive entries is unchanged, $B$ remains irreducible. Perron–Frobenius gives a positive column $h$ with $Bh=rh$.
 
 Why are the other eigenvalues preserved? The subspace $H=\{x:\pi^Tx=0\}$ is invariant under both matrices, and $Bx=Ax$ on $H$. The space splits as $H\oplus\operatorname{span}\{\mathbf1\}$. In a basis adapted to this splitting, $A$ and $B$ have the same block on $H$, with final diagonal entries $1$ and $r$. Their other eigenvalues, including algebraic multiplicities, agree.
+
+The subtraction acts only on vectors whose stationary weighted average is nonzero. Every eigenvector of an eigenvalue other than one has weighted average zero, since $\pi^TAv=\pi^Tv=\zeta\pi^Tv$. On those vectors the rank-one term vanishes. The block argument adds what an eigenvector calculation alone would miss: it also preserves algebraic multiplicities and covers matrices that cannot be diagonalised.
 
 Put $D=\operatorname{diag}(h_1,\ldots,h_N)$ and
 
@@ -40,6 +46,14 @@ $$w=\frac{\zeta v_i-\eta\sum_jv_j}{1-N\eta}\in P.$$
 
 This is possible because $w\to\zeta v_i$ as $\eta\to0$. Express $w$ as a convex combination of the vertices. Rearranging expresses $\zeta v_i$ with weight at least $\eta$ on every vertex. That makes row $i$ of the realizing matrix strictly positive, giving the contradiction just proved. Every vertex image must therefore lie on the boundary.
 
+For a numerical picture, use the diamond with vertices $1,i,-1,-i$ from Topic I. The interior point $(1+i)/4$ is
+
+$$
+\frac38(1)+\frac38(i)+\frac18(-1)+\frac18(-i).
+$$
+
+Every vertex has positive weight. The boundary midpoint $(1+i)/2$ cannot have such a representation: the side inequality $x+y\le1$ is strict at $-1$ and $-i$, so giving either of them positive weight would lower the average below one. The distinction is geometric, rather than a special choice of matrix entries.
+
 ### A second polygon detects contact with every side
 
 To transfer the vertex conclusion to sides, encode a side by a linear inequality. Identify the complex plane with $\mathbb R^2$ and write $\langle a,x\rangle$ for the usual dot product. Because zero is interior, each supporting side line can be normalized to $\langle a,x\rangle=1$, with the polygon in $\langle a,x\rangle\le1$.
@@ -51,6 +65,10 @@ $$P^\circ=\{a:\langle a,x\rangle\le1\text{ for every }x\in P\}.$$
 Its vertices correspond to the sides of $P$, and it has $N$ vertices. The **adjoint** $T^*$ is the transpose map in real coordinates; it satisfies $\langle T^*a,x\rangle=\langle a,Tx\rangle$. For complex multiplication by $\zeta$, it is multiplication by $\bar\zeta$. Invariance of $P$ gives $T^*P^\circ\subseteq P^\circ$.
 
 Conjugation preserves the two extremality assumptions. Apply the vertex-contact result to $P^\circ$: for each polar vertex $a$, $T^*a$ is on its boundary. Hence some $x\in P$ satisfies $\langle T^*a,x\rangle=1$. Equivalently $Tx$ lies on the original side $\langle a,Tx\rangle=1$. Every side meets $TP$.
+
+For the same diamond $P=\{|x|+|y|\le1\}$, the polar is the square $P^\circ=[-1,1]^2$. A polar vertex $a=(1,1)$ represents the original side $x+y=1$. With the contact map $Tz=((1+i)/2)z$, its adjoint sends $a$ to $(1,0)$, a point on the polar boundary. Choosing the original vertex $x=(1,0)$ gives $\langle T^*a,x\rangle=1$, and its image $Tx=(1/2,1/2)$ lies on $x+y=1$. This exact model shows how a polar vertex contact certifies an original side contact; the general proof obtains that contact from extremality.
+
+<!-- reader-figure:early -->
 
 ### Boundary averages use one face
 

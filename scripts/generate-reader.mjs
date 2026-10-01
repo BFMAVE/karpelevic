@@ -9,7 +9,7 @@ const source = readFileSync(path.join(root, "content/paper/karpelevic-invariant-
 const digest = (text) => createHash("sha256").update(text).digest("hex");
 const output = path.join(root, "app/data/reader.generated.json");
 const guides = Array.from({ length: 14 }, (_, i) => readFileSync(path.join(root, `content/topics/topic-${i + 1}.md`), "utf8"));
-const hashes = { manuscript: digest(source), guides: guides.map(digest) };
+const hashes = { manuscript: digest(source), guides: guides.map(digest), generator: digest(readFileSync(fileURLToPath(import.meta.url), "utf8")) };
 if (process.argv.includes("--check")) {
   const stored = JSON.parse(readFileSync(output, "utf8"));
   if (JSON.stringify(stored.hashes) !== JSON.stringify(hashes)) throw new Error("Reader is stale: run npm run content:reader with Pandoc installed.");
@@ -84,6 +84,29 @@ function captionOf(figure) {
   return figure.slice(start + 9, end - 1);
 }
 
+function foldSourceProofs(html) {
+  const parts = [];
+  let cursor = 0;
+  while (true) {
+    const start = html.indexOf('<div class="proof">', cursor);
+    if (start < 0) break;
+    const statements = [...html.slice(0, start).matchAll(/<div id="[^"]+" class="(?:theorem|lemma|proposition|corollary)">\s*<p><strong>([^<]+)<\/strong>/g)];
+    const label = statements.at(-1)?.[1].replace(/\.\s*$/, "") ?? "the source result";
+    const tags = /<\/?div\b[^>]*>/g;
+    tags.lastIndex = start;
+    let depth = 0, end = start;
+    for (let tag; (tag = tags.exec(html));) {
+      depth += tag[0].startsWith("</") ? -1 : 1;
+      if (depth === 0) { end = tags.lastIndex; break; }
+    }
+    if (end === start) throw new Error(`Unclosed source proof for ${label}`);
+    parts.push(html.slice(cursor, start), `<details class="proof-chapter-proof reader-result-proof" data-source-proof><summary>Proof of ${label}</summary>${html.slice(start, end)}</details>`);
+    cursor = end;
+  }
+  parts.push(html.slice(cursor));
+  return parts.join("");
+}
+
 function convert(tex, topicIndex) {
   const equations = [];
   tex = tex.replace(/\\begin\{figure\}[\s\S]*?\\end\{figure\}/g, (figure) => {
@@ -122,11 +145,21 @@ function convert(tex, topicIndex) {
   });
   html = html.replace(/<h([1-6])\b/g, (_, n) => `<h${Math.min(6, Number(n) + 2)}`).replace(/<\/h([1-6])>/g, (_, n) => `</h${Math.min(6, Number(n) + 2)}>`);
   if (/class="math (?:inline|display)"/.test(html) || /data-reference="/.test(html)) throw new Error(`Unrendered formula or reference in topic ${topicIndex + 1}`);
+  return foldSourceProofs(html);
+}
+
+function convertGuide(markdown, index) {
+  let html = execFileSync("pandoc", ["-f", "markdown", "-t", "html5", "--mathml", "--wrap=none"], { input: markdown, encoding: "utf8", maxBuffer: 8 * 1024 * 1024 });
+  const prefix = `guide-${index + 1}-`;
+  const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
+  html = html.replace(/\bid="([^"]+)"/g, (_, id) => `id="${prefix}${id}"`);
+  html = html.replace(/href="#([^"]+)"/g, (original, id) => ids.includes(id) ? `href="#${prefix}${id}"` : original);
+  if ((html.match(/<!-- reader-figure:(?:early|late) -->/g) ?? []).length !== 1) throw new Error(`Topic ${index + 1} needs one teaching-figure placement marker`);
   return html;
 }
 
 const chapters = slices.map((slice, i) => ({
-  guideHtml: execFileSync("pandoc", ["-f", "markdown", "-t", "html5", "--mathml", "--wrap=none"], { input: guides[i], encoding: "utf8", maxBuffer: 8 * 1024 * 1024 }),
+  guideHtml: convertGuide(guides[i], i),
   sourceHtml: convert(slice, i),
 }));
 
