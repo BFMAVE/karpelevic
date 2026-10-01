@@ -1,0 +1,115 @@
+### Why equal contact weights give the largest radius
+
+The geometric product permits different weights on different sides. To prove a sharp bound, we must compare all those possibilities at once. Normalising each factor puts them on a single straight line. On that line, the logarithm of the distance from zero is a strictly convex function of the angle. Averaging then says precisely why equal weights are optimal.
+
+Use the oriented Farey data from Topic VIII: integers $p,r$, positive integers $q<s$ and $m$, and an angle $\vartheta$ between $2\pi p/q$ and $2\pi r/s$. Set
+
+$$
+A=q\vartheta-2\pi p,\qquad
+B=(2\pi r-s\vartheta)/m,\qquad e=s-mq,
+$$
+
+with $A,B>0$ and $A+B<\pi$. Let $z=\rho e^{i\vartheta}$, where $0<\rho<1$. Suppose $0\le\beta_j<1$ for $j=1,\ldots,m$, and suppose both the product and the real argument identity of Topic VIII hold. These are the hypotheses; an arbitrary polynomial root need not satisfy the second one.
+
+Write
+
+$$
+w=z^q=\rho^qe^{iA}=a+ib.
+$$
+
+Here $a=\rho^q\cos A$ and $b=\rho^q\sin A>0$. Also $a<1$ because $\rho^q<1$. Define the normalised factors and their arguments by
+
+$$
+g_j=\frac{w-\beta_j}{1-\beta_j},\qquad
+u_j=\operatorname{Arg}(w-\beta_j),\qquad
+c=\frac{1-a}{b}>0.
+$$
+
+The denominator $1-\beta_j$ is positive, so normalisation leaves the argument unchanged. It changes the complex product into $z^e\prod_jg_j=1$.
+
+### A line becomes a convex function
+
+The same linear equation holds for every $g_j$:
+
+$$
+\operatorname{Re}g_j+c\operatorname{Im}g_j
+=\frac{a-\beta_j+cb}{1-\beta_j}=1.
+$$
+
+Writing $g_j=|g_j|e^{iu_j}$, define
+
+$$
+\mathcal D(u)=\cos u+c\sin u.
+$$
+
+Then $|g_j|\mathcal D(u_j)=1$. Thus the size of a normalised factor is determined by its angle, rather than by a separate unknown weight.
+
+Let $M=\operatorname{Arg}(w-1)\in(A,\pi)$. Subtracting a real number from $w$ moves it horizontally to the left in the upper half-plane. Its angle therefore increases from $A$ to $M$ as that number increases from zero to one. Since every $\beta_j<1$, we have $A\le u_j<M$. The relation $c=-\cot M$ gives
+
+$$
+\mathcal D(u)=\frac{\sin(M-u)}{\sin M}>0
+\qquad(0<u<M).
+$$
+
+We may consequently define
+
+$$
+F(u)=-\log\mathcal D(u),\qquad 0<u<M.
+$$
+
+For our factors $F(u_j)=\log|g_j|$. Equivalently, $F$ is a constant minus the logarithm of a sine, which explains the term log-sine convexity. Differentiating $\mathcal D''=-\mathcal D$ yields
+
+$$
+F''(u)=1+\left(\frac{\mathcal D'(u)}{\mathcal D(u)}\right)^2\ge1.
+$$
+
+This proves strict convexity: bending the argument to either side of its average increases the average logarithmic size. We also need to distinguish weights, and differentiation gives
+
+$$
+\frac{d}{d\beta}\operatorname{Arg}(w-\beta)
+=\frac{b}{|w-\beta|^2}>0.
+$$
+
+Different weights have different factor arguments.
+
+### Applying the average fixed by geometry
+
+For a convex function, Jensen's inequality states that its value at an average is at most the average of its values. Strict convexity makes equality possible only when the input values all agree. The geometric argument identity fixes our average:
+
+$$
+\bar u=\frac1m\sum_j u_j
+=\frac{2\pi(r-mp)-e\vartheta}{m}=A+B.
+$$
+
+Taking absolute values in $z^e\prod_jg_j=1$ and then real logarithms gives $\sum_jF(u_j)=-e\log\rho$. This remains valid when $e<0$, since $\rho>0$. Therefore
+
+$$
+F(A+B)\le-\frac em\log\rho,
+\qquad
+\mathcal D(A+B)\ge\rho^{e/m}.
+$$
+
+Substitute the value $c=(1-\rho^q\cos A)/(\rho^q\sin A)$. The angle-addition formulas reduce the left side to
+
+$$
+\mathcal D(A+B)
+=\frac{\sin(A+B)-\rho^q\sin B}{\rho^q\sin A}.
+$$
+
+Multiplication by the positive denominator, and $q+e/m=s/m$, now give
+
+$$
+\rho^{s/m}\sin A+\rho^q\sin B\le\sin(A+B).
+$$
+
+The left side strictly increases with $\rho$. Its equality radius is the candidate $K_n$ from Topic VIII, so $\rho\le K_n$. Every algebraic step after Jensen is reversible. Equality holds exactly when all $u_j$ agree, and the strictly increasing weight-to-angle map makes that equivalent to $\beta_1=\cdots=\beta_m$.
+
+### Check the source of strictness
+
+Suppose $m=2$ and the factor arguments are $\bar u-h$ and $\bar u+h$, both in $(0,M)$, where $h\ne0$. Do they give the same bound as two factors with argument $\bar u$? No. Strict convexity gives
+
+$$
+\frac{F(\bar u-h)+F(\bar u+h)}2>F(\bar u).
+$$
+
+In fact $F''\ge1$ gives a gap of at least $h^2/2$. These unequal arguments therefore produce a strict scalar inequality and a radius strictly below the candidate. When $m=1$, equality of all weights is automatic; the one-factor product and the specified real phase already force the scalar equality. Topic X supplies the missing existence step by building a stochastic matrix at the equality radius.

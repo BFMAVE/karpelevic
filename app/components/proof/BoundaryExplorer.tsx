@@ -238,7 +238,7 @@ export function BoundaryExplorer() {
             <p>
               Fractions, tests for consecutive fractions in <i>F</i><sub>n</sub>,
               relabelling so that <i>q</i>
-              &lt;<i>s</i>, and the integers <i>d</i> and <i>e</i> are computed exactly. The
+              &lt;<i>s</i>, and the integers <i>m</i> and <i>e</i> are computed exactly. The
               corresponding root-of-unity coordinates are evaluated in
               floating-point arithmetic only when the SVG is drawn.
             </p>
@@ -274,7 +274,7 @@ export function BoundaryExplorer() {
                     <tr>
                       <th scope="col">Farey pair</th>
                       <th scope="col">(p/q,r/s), q&lt;s</th>
-                      <th scope="col">d</th>
+                      <th scope="col">m</th>
                       <th scope="col">e</th>
                     </tr>
                   </thead>

@@ -14,10 +14,10 @@
     "content:part-ii:check": "node scripts/generate-part-ii-content.mjs --check",
     "content:part-ii-reader": "node scripts/generate-topics-viii-xi-proofs.mjs",
     "content:part-ii-reader:check": "node scripts/generate-topics-viii-xi-proofs.mjs --check",
-    "content:proof": "npm run content:part-i && npm run content:part-ii && npm run content:part-ii-reader",
-    "content:proof:check": "npm run content:part-i:check && npm run content:part-ii:check && npm run content:part-ii-reader:check",
+    "content:proof": "npm run content:reader",
+    "content:proof:check": "npm run content:reader:check",
     "dev": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext dev",
-    "build": "npm run content:boundary:check && WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext build",
+    "build": "npm run content:reader:check && npm run content:boundary:check && WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext build",
     "export:proof-html": "npm run build && node scripts/export-proof-standalone.mjs",
     "export:topic-ix-html": "PROOF_ROUTE=/proof/topic-ix PROOF_HTML_OUTPUT=share/Critical_Invariant_Polygons_Topic_IX.html node scripts/export-proof-standalone.mjs",
     "export:topic-xi-html": "PROOF_ROUTE=/proof/topic-xi PROOF_HTML_OUTPUT=share/Critical_Invariant_Polygons_Topic_XI.html node scripts/export-proof-standalone.mjs",
@@ -32,7 +32,9 @@
     "test": "npm run build && npm run test:unit",
     "typecheck": "tsc --noEmit --incremental false",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern pages-out",
-    "release:check": "npm run typecheck && npm run lint && npm test && npm run build:pages"
+    "release:check": "npm run typecheck && npm run lint && npm test && npm run build:pages",
+    "content:reader": "node scripts/generate-reader.mjs",
+    "content:reader:check": "node scripts/generate-reader.mjs --check"
   },
   "dependencies": {
     "next": "16.3.2",

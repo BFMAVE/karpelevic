@@ -104,6 +104,22 @@
       updateProofButtons();
       controls.dataset.enhanced = "true";
       controls.hidden = false;
+      function revealSourceTarget() {
+        let id;
+        try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return; }
+        if (!id) return;
+        const target = document.getElementById(id);
+        if (!target || !chapter.contains(target)) return;
+        let parent = target.parentElement;
+        while (parent && parent !== chapter) {
+          if (parent.tagName === "DETAILS") parent.open = true;
+          parent = parent.parentElement;
+        }
+        target.scrollIntoView({ block: "start" });
+        updateProofButtons();
+      }
+      revealSourceTarget();
+      window.addEventListener("hashchange", revealSourceTarget);
     });
   }
 

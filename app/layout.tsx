@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     template: "%s · Critical Invariant Polygons",
   },
   description:
-    "A scholarly companion to Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic Spectra.",
+    "A complete guided proof of the Karpelevič theorem, starting from basic analysis and linear algebra.",
   authors: [{ name: "Brecht Verbeken" }, { name: "Vincent Ginis" }],
   creator: "Brecht Verbeken",
   publisher: "Brecht Verbeken and Vincent Ginis",

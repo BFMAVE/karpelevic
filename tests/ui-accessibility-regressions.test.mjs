@@ -16,7 +16,6 @@ test("every page-family skip target is programmatically focusable", async () => 
       "app/history/page.tsx",
       "app/journey/page.tsx",
       "app/prerequisites/page.tsx",
-      "app/proof/page.tsx",
       "app/components/proof/ProofChapterShell.tsx",
     ].map(source),
   );
@@ -26,30 +25,18 @@ test("every page-family skip target is programmatically focusable", async () => 
   }
 });
 
-test("proof navigation and controls expose only truthful enhanced state", async () => {
-  const [topicI, chapterShell, topicIScript, chapterScript] = await Promise.all([
-    source("app/proof/page.tsx"),
+test("shared proof navigation and controls expose truthful enhanced state", async () => {
+  const [shell, controls, controller] = await Promise.all([
     source("app/components/proof/ProofChapterShell.tsx"),
-    source("public/proof.js"),
+    source("app/components/proof/ProofChapterReadingControls.tsx"),
     source("public/proof-chapter.js"),
   ]);
-
-  assert.match(topicI, /data-proof-reading-controls[\s\S]*?hidden/);
-  assert.match(topicI, /href=\{sitePath\("\/prerequisites\/"\)\}/);
-  assert.match(chapterShell, /href=\{sitePath\("\/prerequisites\/"\)\}/);
-  assert.doesNotMatch(
-    chapterShell,
-    /aria-current=\{item\.href === "\/proof\/" \? "page"/,
-  );
-  assert.match(chapterShell, /aria-current=\{isCurrent \? "step"/);
-  assert.ok(
-    topicIScript.indexOf("addEventListener") <
-      topicIScript.lastIndexOf("readingControls.hidden = false"),
-  );
-  assert.ok(
-    chapterScript.indexOf("addEventListener") <
-      chapterScript.lastIndexOf("controls.hidden = false"),
-  );
+  assert.match(controls, /data-proof-chapter-controls[\s\S]*?hidden/);
+  assert.match(shell, /href=\{sitePath\("\/prerequisites\/"\)\}/);
+  assert.match(shell, /aria-current=\{isCurrent \? "step"/);
+  assert.ok(controller.indexOf("addEventListener") < controller.lastIndexOf("controls.hidden = false"));
+  assert.match(controller, /hashchange/);
+  assert.match(controller, /parent.open = true/);
 });
 
 test("Journey reserves time elements for machine-readable dates", async () => {

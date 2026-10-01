@@ -1,0 +1,61 @@
+### An extremal eigenvalue has no room to move outward
+
+Fix a nonreal number $\zeta=\rho e^{i\theta_\zeta}$ with $0<\rho<1$. We study it under two assumptions. First, $N$ is the least number of vertices of a polygon invariant under $Tz=\zeta z$. By Topic I, $N$ is also its least realizing stochastic-matrix order. Second, no $t\zeta$ with $t>1$ has an invariant polygon with at most $N$ vertices. This is **radial extremality**: increasing the modulus without changing the angle costs more vertices.
+
+These assumptions hold when we choose a maximal eigenvalue on a ray in $\Theta_n$ and let $N\le n$ be its least realizing order. Indeed, an outward realization of order at most $N$ would also be one of order $n$ after padding. We do not assume that $N=n$. That distinction is why the independent order comparison in Topic XI is necessary.
+
+Every invariant polygon under consideration has exactly $N$ vertices. The goal is stronger than finding a single well-chosen polygon: **for every such polygon, each vertex image lies on the boundary and every side meets the image polygon**. We will need this universal statement after changing vertices in Topics IV and VI.
+
+### The small amount of Perron–Frobenius theory we use
+
+A nonnegative matrix is **irreducible** if its directed graph has a path from every vertex to every other, drawing an arrow $i\to j$ when $a_{ij}>0$. For an irreducible stochastic matrix, a stationary probability row $\pi^T$ has strictly positive entries. More generally, an irreducible nonnegative matrix has a positive right eigenvector for its spectral radius and a positive left eigenvector; a positive left eigenvector identifies that radius. These are the precise Perron–Frobenius facts used below. They extend familiar eigenvector theory to matrices with nonnegative entries.
+
+These particular facts can also be obtained from Topic I's averaging argument. A stationary probability row of an irreducible stochastic matrix is positive: if its $j$th entry were zero, stationarity and nonnegative entries would force every incoming predecessor with a positive arrow to have zero stationary mass too. Connectivity propagates this to all states, contradicting total mass one.
+
+For the nonnegative irreducible matrix $B$ used below, we explicitly know $\pi^TB=r\pi^T$ with $\pi>0$ and $r>0$. Put $P_\pi=\operatorname{diag}(\pi_1,\ldots,\pi_N)$. The matrix $Q=r^{-1}P_\pi^{-1}B^TP_\pi$ is irreducible and row-stochastic, since $Q\mathbf1=\mathbf1$. Its stationary probability column $\mu>0$ satisfies $Q^T\mu=\mu$. Therefore $h=P_\pi^{-1}\mu>0$ satisfies $Bh=rh$. This proves the exact positive-eigenvector statement our deflation needs using only stationary averages and matrix algebra. Also $B$ is similar to $rQ^T$, so its spectral radius is $r$ by the unit-disk bound from Topic I.
+
+Any stochastic realization from an invariant $N$-gon is irreducible. If not, its graph has a nonempty proper set $I$ with no arrows leaving it. The submatrix on $I$ is stochastic and the corresponding coordinates of the polygon eigenvector still realize $\zeta$. Those coordinates are nonzero because zero is interior to the polygon. This would realize $\zeta$ with fewer than $N$ states.
+
+### Lower one eigenvalue and preserve the others
+
+Suppose one row of a realizing matrix $A$ is strictly positive. Let $e_i$ be the column with a $1$ in position $i$ and zeros elsewhere. Choose $\varepsilon>0$ small enough to keep that row positive, and set
+
+$$B=A-\varepsilon e_i\pi^T,\qquad r=1-\varepsilon\pi_i\in(0,1).$$
+
+Then $\pi^TB=r\pi^T$. Since the pattern of positive entries is unchanged, $B$ remains irreducible. Perron–Frobenius gives a positive column $h$ with $Bh=rh$.
+
+Why are the other eigenvalues preserved? The subspace $H=\{x:\pi^Tx=0\}$ is invariant under both matrices, and $Bx=Ax$ on $H$. The space splits as $H\oplus\operatorname{span}\{\mathbf1\}$. In a basis adapted to this splitting, $A$ and $B$ have the same block on $H$, with final diagonal entries $1$ and $r$. Their other eigenvalues, including algebraic multiplicities, agree.
+
+Put $D=\operatorname{diag}(h_1,\ldots,h_N)$ and
+
+$$C=r^{-1}D^{-1}BD.$$
+
+Similarity by $D$ preserves eigenvalues, while division by $r$ enlarges the non-Perron ones. Also $C\mathbf1=r^{-1}D^{-1}Bh=\mathbf1$, so $C$ is stochastic. In particular it realizes $\zeta/r$, on the same ray and strictly farther from zero. Extremality forbids a positive row.
+
+### An interior image would give exactly that forbidden row
+
+Let the polygon vertices be $v_1,\ldots,v_N$. If $\zeta v_i$ lies in the interior, choose a small $\eta>0$ such that
+
+$$w=\frac{\zeta v_i-\eta\sum_jv_j}{1-N\eta}\in P.$$
+
+This is possible because $w\to\zeta v_i$ as $\eta\to0$. Express $w$ as a convex combination of the vertices. Rearranging expresses $\zeta v_i$ with weight at least $\eta$ on every vertex. That makes row $i$ of the realizing matrix strictly positive, giving the contradiction just proved. Every vertex image must therefore lie on the boundary.
+
+### A second polygon detects contact with every side
+
+To transfer the vertex conclusion to sides, encode a side by a linear inequality. Identify the complex plane with $\mathbb R^2$ and write $\langle a,x\rangle$ for the usual dot product. Because zero is interior, each supporting side line can be normalized to $\langle a,x\rangle=1$, with the polygon in $\langle a,x\rangle\le1$.
+
+The **polar polygon** is
+
+$$P^\circ=\{a:\langle a,x\rangle\le1\text{ for every }x\in P\}.$$
+
+Its vertices correspond to the sides of $P$, and it has $N$ vertices. The **adjoint** $T^*$ is the transpose map in real coordinates; it satisfies $\langle T^*a,x\rangle=\langle a,Tx\rangle$. For complex multiplication by $\zeta$, it is multiplication by $\bar\zeta$. Invariance of $P$ gives $T^*P^\circ\subseteq P^\circ$.
+
+Conjugation preserves the two extremality assumptions. Apply the vertex-contact result to $P^\circ$: for each polar vertex $a$, $T^*a$ is on its boundary. Hence some $x\in P$ satisfies $\langle T^*a,x\rangle=1$. Equivalently $Tx$ lies on the original side $\langle a,Tx\rangle=1$. Every side meets $TP$.
+
+### Boundary averages use one face
+
+A supporting functional takes its maximum on a boundary face. If a convex combination with all weights positive attains that maximum, every point used must also attain it: averaging smaller values could not give the maximum. Thus a boundary average lies in one common face. In a polygon, it uses either one vertex or the two endpoints of one side. A **relative-interior contact** means an image strictly between those endpoints.
+
+Check why an interior image is different: it can be expressed with positive weights on every vertex after the small adjustment above. A side-interior point cannot do this, because vertices away from that side satisfy its supporting inequality strictly. This distinction drives both deflation and the contact arithmetic.
+
+We now know that every vertex image touches the boundary. Topic III counts which images touch vertices and which lie inside sides, then chooses a polygon whose contacts can be organized without losing extremality.

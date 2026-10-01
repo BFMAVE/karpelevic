@@ -1,6 +1,3 @@
-import { permanentRedirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import { sitePath } from "../../../lib/site-path";
-
-export default function LegacyTopicXIIBPage() {
-  permanentRedirect(sitePath("/proof/topic-xii/#karp:lem:nesting-case-split"));
-}
+export default function MovedTopic() { redirect(sitePath("/proof/topic-xi/#thm:order-monotonicity")); }

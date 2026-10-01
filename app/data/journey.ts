@@ -244,16 +244,16 @@ export const journeyReferences: readonly JourneyReference[] = [
     id: "critical-polygons-2026",
     authors: "B. Verbeken and V. Ginis",
     title:
-      "Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic Spectra",
-    publication: "Zenodo, version dated 24 July 2026.",
+      "A structural proof of the Karpelevič theorem",
+    publication: "arXiv:2609.26058v2, revised 23 September 2026.",
     links: [
       {
-        label: "Zenodo",
-        href: "https://zenodo.org/records/21529144",
+        label: "arXiv v2",
+        href: "https://arxiv.org/abs/2609.26058v2",
       },
       {
         label: "DOI",
-        href: "https://doi.org/10.5281/zenodo.21529144",
+        href: "https://doi.org/10.48550/arXiv.2609.26058",
       },
     ],
   },

@@ -1,3 +1,4 @@
+import { readerTopics } from "./reader-topics";
 export type ProofProvenance =
   | "Classical result"
   | "Previously known"
@@ -401,195 +402,15 @@ export const proofItems: readonly ProofItem[] = rawItems.map(
   }),
 );
 
-export const proofTopics: readonly ProofTopic[] = [
-  {
-    slug: "language",
-    eyebrow: "Topic I · 2 definitions · 7 results",
-    title: "Critical maps and invariant polygons",
-    question:
-      "How can the polygon problem be stated without tying it to a particular matrix or coordinate system?",
-    overview: [
-      "We work on a two-dimensional real vector space and study how a linear transformation acts on compact convex polygons. The first task is to define the transformation, the polygons it preserves, and the least number of vertices such a polygon can have.",
-      "Only after that vocabulary is fixed do we define radial criticality. The rest of the chapter proves that these objects behave naturally under changes of coordinates, fixes the orientation conventions, and shows that, when the acting map is multiplication by a nonreal scalar λ with 0<|λ|<1, every non-singleton compact convex hull P of finitely many points satisfying λP⊆P has nonempty interior and 0∈int(P).",
-    ],
-    itemNumbers: [1, 2, 5, 6, 7, 8, 9, 10, 66],
-    manuscriptPages: "2–3 and 6–10",
-    appendixPages: "Lemma A.2 on page 63",
-  },
-  {
-    slug: "active-sides",
-    eyebrow: "Topic II · 7 core results · 2 foundational lemmas · 1 remark",
-    title: "Support inequalities and boundary contact",
-    question:
-      "Why must the image polygon TR intersect every side of an invariant polygon for an N-critical map?",
-    overview: [
-      "The determinant inequalities for a polygon displayed by its complete cyclic vertex list turn cyclic order into finitely many sign conditions. Proposition 3.1 then rewrites polygon invariance as the componentwise support inequality ρBΦ(θ)h≤h.",
-      "A left Perron vector forces every support inequality to be attained, so TR intersects every side of R; polarity proves that every vertex of TR lies on the boundary of R. These conclusions hold for every invariant polygon with at most N vertices, not only for one initially chosen polygon.",
-    ],
-    itemNumbers: [11, 12, 13, 14, 15, 16, 17, 18, 65, 67],
-    manuscriptPages: "10–15",
-    appendixPages: "Lemmas A.1 and A.3 on pages 61 and 63",
-  },
-  {
-    slug: "ownership",
-    eyebrow: "Topic III · 1 definition · 9 results",
-    title: "Half-open sides and image-edge half-plane intersections",
-    question:
-      "When a contact lands at a vertex, how do we assign it to exactly one of the two incident sides?",
-    overview: [
-      "A boundary contact is ambiguous only when it is a vertex, because that vertex lies on two closed sides. The half-open sides (xᵢ₋₁,xᵢ] form a disjoint partition of the boundary, so every contact receives one side index.",
-      "Definition 4.2 and Lemmas 4.3–4.7 make the assignment precise and prepare the endpoint-order argument of Topic IV. Independently, Lemmas 4.8–4.9 use image-edge clipping, compactness, and area comparison to prove the boundary-arc bound needed there. This topic does not assume the later global interlacing result.",
-    ],
-    itemNumbers: [19, 20, 21, 22, 23, 24, 25, 26, 68, 69],
-    manuscriptPages: "15–19",
-    appendixPages: "Lemmas A.4 and A.5 on page 64",
-  },
-  {
-    slug: "mutation",
-    eyebrow: "Topic IV · 10 items",
-    title: "From endpoint order to one interval of relative-interior contacts",
-    question:
-      "How does a geometric contact become a permitted update of a finite cyclic index set?",
-    overview: [
-      "The remaining endpoint lemmas finish the order-preserving half-open contact assignment. A contacted vertex can then be replaced by its image-contact point without losing the complete cyclic vertex-list property or invariance.",
-      "The exact vertex replacement updates the subset S of indices whose sides have relative-interior contact. Every permitted finite update sequence is realized geometrically, and a reachable set reduces to one cyclic interval. The source notes distinguish Karpelevič’s antecedent mechanisms from the exact statements proved here.",
-    ],
-    itemNumbers: [27, 28, 29, 30, 31, 32, 33, 34, 35, 36],
-    manuscriptPages: "19–30",
-  },
-  {
-    slug: "rotation",
-    eyebrow: "Topic V · 9 items",
-    title: "Rotation arithmetic, the first-return decomposition, and projective preparation",
-    question:
-      "How does one cyclic interval determine its first-return decomposition, and how does Topic V prepare the N≥4 proof of Δ=1 completed in Topic VI?",
-    overview: [
-      "A finite cyclic rotation converts the interval from Topic IV into first-return data. Consecutive record vectors and determinant-one lattice pairs produce a two-height tower decomposition.",
-      "For N≥4, the tower identities determine exposing supporting lines along a boundary arc that omits at least one side. A finite partition of return source–target pairs and a composition of perspectivities prepare the deformation argument completed in Topic VI; the page exhibits the N=3 exception separately.",
-    ],
-    itemNumbers: [37, 38, 39, 40, 41, 42, 43, 44, 70],
-    manuscriptPages: "31–40",
-    appendixPages: "Lemma A.6 on page 74",
-  },
-  {
-    slug: "unit-return",
-    eyebrow: "Topic VI · 9 results",
-    title: "A projective deformation and the first-return step Δ = 1",
-    question:
-      "For N≥4, why does a hypothetical first-return step Δ>1 produce an invariant polygon forbidden by criticality?",
-    overview: [
-      "Successive perspectivities along a convex boundary chain define a real projectivity. Its behaviour near a fixed point supplies a small parameter for which the final image crosses into the polygon-interior half-plane.",
-      "The return-time bijection then defines all N deformed vertices, and finitely many incidence and side inequalities remain valid simultaneously. The resulting invariant polygon has an extreme point of its image in the polygon interior, contradicting the boundary conclusion proved in Topic II and forcing Δ=1.",
-    ],
-    itemNumbers: [45, 46, 47, 48, 49, 50, 51, 52],
-    manuscriptPages: "41–58",
-  },
-  {
-    slug: "farey-return",
-    eyebrow: "Topic VII · 7 items",
-    title: "Consecutive Farey fractions and the finite product equation for N≥4",
-    question:
-      "For N≥4, how do the three first-return cases yield consecutive Farey fractions and one finite product equation?",
-    overview: [
-      "Determinant-one adjacency identifies the relevant Farey interval, and reflection orders its denominators correctly for the selected complex orientation.",
-      "The proof then separates the case with exactly one relative-interior contact in each orbit from the case with more than one in some orbit. Both produce the same finite product equation with possibly different parameters βⱼ; the chosen real arguments of all factors satisfy uⱼ∈[A,M).",
-    ],
-    itemNumbers: [53, 54, 55, 56, 57, 58, 59],
-    manuscriptPages: "4–5 and 58–67",
-  },
-  {
-    slug: "spectra",
-    eyebrow: "Topic VIII · 1 definition and 6 results",
-    title: "Returning to stochastic eigenvalue regions",
-    question:
-      "How does a radial boundary point new at order N satisfy the manuscript’s N-critical vertex-count conditions?",
-    overview: [
-      "Topic VII proves Theorem 1.4's finite product equation conditionally for an N-critical planar map. This topic returns to row-stochastic matrices and proves the invariant-polytope criterion in both directions.",
-      "Compactness, star-shapedness with respect to the origin, and the unit-circle classification make the radial function precise. For N≥4, a radial boundary point that first appears at order N has exact polygonal complexity N, while every outward scalar multiple has greater complexity, so the Topic VII theorem applies; orders at most three use the direct small-order argument.",
-    ],
-    itemNumbers: [3, 4, 60, 61, 62, 63, 64],
-    manuscriptPages: "83–86",
-  },
-  {
-    slug: "candidate-boundary",
-    eyebrow: "Topic IX · the Ito equation on Farey intervals",
-    title: "Candidate curves from the Ito equation on Farey intervals",
-    question:
-      "How does the Ito equation determine a unique modulus at each prescribed argument between consecutive Farey fractions?",
-    overview: [
-      "Consecutive Farey fractions determine one interval at a time. At each argument in that interval, a strictly increasing real equation determines a unique modulus and connects the resulting point to the corresponding reduced Ito polynomial.",
-      "Endpoint limits and the exceptional order-three behaviour are handled explicitly. This topic constructs only the candidate curve; stochastic realization, the sharp outer bound, nesting, and identification with the boundary of the Karpelevič region remain for later topics.",
-    ],
-    itemNumbers: [],
-    manuscriptPages: "76–82",
-  },
-  {
-    slug: "sharp-radius",
-    eyebrow: "Topic X · upper bound",
-    title: "The radial upper bound and its equality case",
-    question:
-      "For an upper-half-plane radial boundary point that first appears at order N, why is its modulus no greater than the Topic IX radius on the corresponding Farey interval?",
-    overview: [
-      "For N≥4, Topic X starts with an upper-half-plane radial boundary point that belongs to the order-N region but not the order-(N−1) region. Topics VII and VIII supply a finite product equation, an exact phase equation, and bounds on the arguments of its factors; lower-half-plane points follow by complex conjugation.",
-      "Jensen’s inequality for an explicitly defined strictly convex function gives the radial upper bound and characterizes equality within the finite-product hypotheses. Topic XI supplies stochastic attainment, while Topic XII handles inherited boundary points through nesting.",
-    ],
-    itemNumbers: [],
-    manuscriptPages: "86–91",
-  },
-  {
-    slug: "realization",
-    eyebrow: "Topic XI · reverse inclusion",
-    title: "Explicit stochastic realization of the candidate curve",
-    question:
-      "How can every candidate point be realized by an actual stochastic matrix?",
-    overview: [
-      "An explicit sparse row-stochastic matrix is defined by a weighted digraph. A determinant expansion over pairwise vertex-disjoint directed cycles shows that its characteristic polynomial is the reduced Ito polynomial, without importing the upper-bound argument.",
-      "The construction independently proves the inclusion of every compact Topic IX candidate curve in the corresponding Karpelevič region, including the Farey endpoints and the exceptional order-three real segment.",
-    ],
-    itemNumbers: [],
-    manuscriptPages: "91–93",
-  },
-  {
-    slug: "nesting",
-    eyebrow: "Topic XII · order comparison",
-    title: "Farey refinement and monotonicity of the candidate radius",
-    question:
-      "Why is Kₙ(θ) nondecreasing with respect to n for 0≤θ≤π, and why does conjugation give the reflected lower-half comparison?",
-    overview: [
-      "Mediant insertion refines one Farey interval into two subintervals. A log-line comparison, the case where the factor count increases, and an exhaustive Farey classification compare the corresponding candidate radii.",
-      "The upper-half inequality Kₙ₋₁(θ)≤Kₙ(θ), together with its conjugate lower-half comparison, is the arithmetic step used in Topic XIII when the order-n radial maximizer belongs to Θₙ₋₁.",
-    ],
-    itemNumbers: [],
-    manuscriptPages: "94–102",
-  },
-  {
-    slug: "karpelevic-ito",
-    eyebrow: "Topic XIII · final theorem",
-    title: "The Karpelevič theorem in Ito’s formulation",
-    question:
-      "How do the upper bound, attainment, and nesting assemble into the complete stochastic eigenvalue region?",
-    overview: [
-      "The small orders are proved directly. For n≥4, the induction separates according as the order-n radial maximizer lies outside or inside Θₙ₋₁; the results of Topics X–XII prove Rₙ(θ)=Kₙ(θ) in both cases.",
-      "Continuity of the even extension of Kₙ to the full circle, conjugation, star-shapedness with respect to the origin, and the unit-circle classification then identify the Farey-indexed curves with the complete topological boundary. This is where the classical theorem is finally stated and proved.",
-    ],
-    itemNumbers: [],
-    manuscriptPages: "103–107",
-  },
-  {
-    slug: "order-seven",
-    eyebrow: "Topic XIV · worked example and interactive computation",
-    title: "The complete order-seven example and an interactive boundary plot",
-    question:
-      "What does the theorem produce at one concrete order, and how can a reader draw further orders for themselves?",
-    overview: [
-      "For order seven, the general theorem yields a complete table of consecutive Farey pairs, reduced Ito polynomials, and parametrized boundary arcs. The computation at the normalized angular parameter x = 3/8 follows the scalar calculation numerically from beginning to end.",
-      "The chapter documents the numerical boundary-plot implementation and publishes its source and regression tests. Its final section lets the reader select n and obtain the corresponding plot, with exact Farey data kept visibly distinct from floating-point root-finding and plotting.",
-      "This interactive computation illustrates the theorem but is not part of its logical proof. Topic XIII remains the endpoint of the necessary argument; Topic XIV lets readers inspect the complete construction at order seven and then explore other orders themselves.",
-    ],
-    itemNumbers: [],
-    manuscriptPages: "107–109",
-  },
-] as const;
+export const proofTopics: readonly ProofTopic[] = readerTopics.map((topic, index) => ({
+  slug: `reader-${index + 1}`,
+  eyebrow: `Topic ${index + 1}`,
+  title: topic.title,
+  question: topic.question,
+  overview: [topic.takeaway],
+  itemNumbers: [],
+  manuscriptPages: topic.source,
+}));
 
 export const proofContent = {
   title: "How the Proof Works",

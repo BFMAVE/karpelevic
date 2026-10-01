@@ -1,20 +1,20 @@
 export const homeContent = {
   title:
-    "Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic Spectra",
+    "A structural proof of the Karpelevič theorem",
   subtitle:
-    "Boundary Contacts, First Returns, and the Karpelevič Theorem in Ito’s Formulation",
+    "An accessible route from averaging matrices to the exact eigenvalue boundary",
   authors: ["Brecht Verbeken", "Vincent Ginis"],
   descriptor:
     "A geometric route from invariant polygons to the classical boundary of stochastic eigenvalue regions.",
   projectAim:
-    "The aim of this project is to make the paper, together with its archival Zenodo record, more approachable and digestible—both for me and for the wider community.",
+    "This website develops the complete proof for readers with basic analysis and linear algebra. New ideas are introduced where they are needed, with worked checks and the full source arguments available throughout.",
   readingRoutes: [
     {
       label: "The paper",
       title: "Go directly to the manuscript",
       text:
-        "Open the archival 24 July 2026 version on Zenodo and begin with that citable record.",
-      href: "https://zenodo.org/records/21529144",
+        "Read the current arXiv v2, revised 23 September 2026.",
+      href: "https://arxiv.org/abs/2609.26058v2",
       external: true,
     },
     {
@@ -78,11 +78,11 @@ export const homeContent = {
     zenodoUrl: "https://zenodo.org/records/21529144",
     zenodoPages: 93,
     websiteEditionUrl: "/paper/critical-invariant-polygons.pdf",
-    websiteEditionPages: 110,
+    websiteEditionPages: 40,
     zenodoChecksum:
       "ca3be77169053635302798aa1ba204502db0a3267d2e76e4d8e763cede138f3b",
     localArxivDraftChecksum:
-      "65fd34e14563d37f78ac3832667a28d3d4d500b8fe022ac8e96b71beff4eb607",
+      "82fb42c36499d19b7c7e1f3f14c86b53ff6ae035d11ccd5bf7a1ed7dfc50d21f",
   },
 } as const;
 

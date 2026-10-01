@@ -74,25 +74,25 @@ const routes = [
 const compatibilityRedirects = [
   {
     outputPath: "proof/topic-vi/a/index.html",
-    target: `${basePath}/proof/topic-vi/#lem:holonomy-calibration`,
+    target: `${basePath}/proof/topic-vi/#lem:chain-holonomy`,
     title: "Topic VI has moved",
     message: "Topic VI is now one chapter.",
   },
   {
     outputPath: "proof/topic-vi/b/index.html",
-    target: `${basePath}/proof/topic-vi/#lem:deformation-admissibility`,
+    target: `${basePath}/proof/topic-vi/#thm:no-skipping`,
     title: "Topic VI has moved",
     message: "Topic VI is now one chapter.",
   },
   {
     outputPath: "proof/topic-xii/a/index.html",
-    target: `${basePath}/proof/topic-xii/`,
+    target: `${basePath}/proof/topic-xi/`,
     title: "Topic XII has moved",
     message: "Topic XII is now one continuous chapter.",
   },
   {
     outputPath: "proof/topic-xii/b/index.html",
-    target: `${basePath}/proof/topic-xii/#karp:lem:nesting-case-split`,
+    target: `${basePath}/proof/topic-xi/#thm:order-monotonicity`,
     title: "Topic XII has moved",
     message: "Topic XII is now one continuous chapter.",
   },
@@ -128,12 +128,8 @@ function makeStatic(html, requestPath) {
     `${basePath}/assets/`,
   );
 
-  const proofReaderScript =
-    requestPath === "/proof"
-      ? `<script src="${basePath}/proof.js" defer></script>`
-      : "";
   const proofChapterScript =
-    requestPath.startsWith("/proof/topic-") && requestPath !== "/proof/topic-xiv"
+    requestPath === "/proof" || requestPath.startsWith("/proof/topic-")
     ? `<script src="${basePath}/proof-chapter.js" defer></script>`
     : "";
   const topicXIVScript =
@@ -142,7 +138,7 @@ function makeStatic(html, requestPath) {
       : "";
   return withProjectAssets.replace(
     "</body>",
-    `<script src="${basePath}/contact.js" defer></script>${proofReaderScript}${proofChapterScript}${topicXIVScript}</body>`,
+    `<script src="${basePath}/contact.js" defer></script>${proofChapterScript}${topicXIVScript}</body>`,
   );
 }
 

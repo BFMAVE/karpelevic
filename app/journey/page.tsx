@@ -249,9 +249,9 @@ export default function JourneyPage() {
             ))}
             <a
               className="journey-paper-link"
-              href="https://zenodo.org/records/21529144"
+              href="https://arxiv.org/abs/2609.26058v2"
             >
-              Read the archival 24 July 2026 version on Zenodo{" "}
+              Read the current arXiv v2, revised 23 September 2026{" "}
               <span aria-hidden="true">↗</span>
             </a>
           </div>

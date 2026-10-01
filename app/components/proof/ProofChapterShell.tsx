@@ -137,7 +137,7 @@ export function ProofChapterShell({
             className="proof-chapter-prerequisite-link"
             href={sitePath("/prerequisites/")}
           >
-            Prerequisites for Topic I
+            Background reminders
           </a>
           <ol>
             {proofReaderTopicLinks.map((link) => {
@@ -179,7 +179,7 @@ export function ProofChapterShell({
         >
           <header className="proof-topic-header proof-chapter-heading">
             <p className="section-label">
-              Topic {roman} · Manuscript pages {resolvedPages}
+              Topic {roman} · {resolvedPages}
             </p>
             <h2>{route.title}</h2>
             <p className="proof-topic-question">{resolvedQuestion}</p>

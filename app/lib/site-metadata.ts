@@ -45,9 +45,9 @@ export function createPageMetadata({
       ? {
           other: {
             citation_title:
-              "Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic Spectra",
+              "A structural proof of the Karpelevič theorem",
             citation_author: ["Brecht Verbeken", "Vincent Ginis"],
-            citation_publication_date: "2026/07/24",
+            citation_publication_date: "2026/09/23",
             citation_pdf_url: publicSiteUrl(
               "/paper/critical-invariant-polygons.pdf",
             ),

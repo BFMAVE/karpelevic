@@ -1,5 +1,42 @@
 # Project Status
 
+## Current edition — 1 October 2026
+
+The complete fourteen-topic reader has been rewritten at the author's request
+from the supplied `karpelevic-invariant-polygons.tex`. Its guided explanations
+start from basic analysis and linear algebra, introduce each additional tool
+when needed, and retain the complete source arguments and cross-references.
+The theorem is completed in Topic XII; Topic XIII develops polygonal gauges
+and asymptotics, and Topic XIV works through the source's eight-state example
+and the numerical explorer.
+
+The current public paper is *A structural proof of the Karpelevič theorem*,
+[arXiv:2609.26058v2](https://arxiv.org/abs/2609.26058v2), revised 23 September
+2026. The supplied teaching manuscript is an expanded exposition of the same
+mathematical route. Both versions are identified and available separately.
+The construction notice has been removed.
+
+Independent review covered all fourteen guides and the source. Numerical
+cross-checks, all 54 current tests, type-checking, lint, production build,
+and the GitHub Pages export verification pass. Browser checks confirm the
+guided/formal controls, proof expansion, source deep links, responsive
+layout, and explorer handling of orders 3 and 8 and invalid input. The audit
+and protected mathematical distinctions are recorded in
+`docs/proof-audits/reader-2026-10-01.md`.
+
+Canonical inputs for this edition are the checked-in supplied source,
+`content/paper/karpelevic-invariant-polygons.tex`, the verified current arXiv
+source, `content/paper/arxiv-v2.tex`, and the fourteen guides in
+`content/topics/`. `npm run content:reader` regenerates the native MathML
+reader; the build checks that it agrees with those inputs. GitHub Pages
+remains the established publishing provider for the requested site update.
+
+## Historical planning record
+
+The earlier plan and milestones below are retained for provenance. Their
+manuscript paths, topic partition, release statuses, and initial-deployment
+approval gate describe previous editions rather than the current reader.
+
 ## Project
 
 **Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic Spectra**

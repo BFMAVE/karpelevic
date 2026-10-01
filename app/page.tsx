@@ -13,7 +13,7 @@ import { createPageMetadata } from "./lib/site-metadata";
 
 export const metadata = createPageMetadata({
   title:
-    "Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic Spectra",
+    "A structural proof of the Karpelevič theorem",
   description:
     "An accessible companion to the paper by Brecht Verbeken and Vincent Ginis.",
   pathname: "/",
@@ -65,17 +65,14 @@ export default function Home() {
             </a>
           ))}
         </nav>
-        <p className="construction-notice" role="status">
-          <span aria-hidden="true">◆</span>
-          <span>Working edition — revised 23 August 2026</span>
-        </p>
+
       </header>
 
       <main id="main-content" tabIndex={-1}>
         <div className="first-block">
           <section className="hero-section" aria-labelledby="paper-title">
             <header className="hero-copy">
-              <p className="kicker">A paper in two parts</p>
+              <p className="kicker">The Karpelevič theorem, step by step</p>
               <h1 id="paper-title">{homeContent.title}</h1>
               <p className="subtitle">{homeContent.subtitle}</p>
               <p className="authors">
@@ -84,67 +81,17 @@ export default function Home() {
               <p className="hero-deck">{homeContent.descriptor}</p>
 
               <dl className="paper-facts">
-                <div>
-                  <dt>Status</dt>
-                  <dd>
-                    <a
-                      className="manuscript-link"
-                      href={homeContent.manuscript.zenodoUrl}
-                    >
-                      {homeContent.manuscript.status}{" "}
-                      <span aria-hidden="true">↗</span>
-                    </a>
-                  </dd>
-                </div>
-                <div>
-                  <dt>Published on Zenodo</dt>
-                  <dd>
-                    <time dateTime={publicationDates.manuscript.zenodoPublished}>
-                      {formatDate(publicationDates.manuscript.zenodoPublished)}
-                    </time>
-                  </dd>
-                </div>
-                <div>
-                  <dt>Zenodo edition</dt>
-                  <dd>{homeContent.manuscript.zenodoPages} pages</dd>
-                </div>
-                <div>
-                  <dt>Website edition</dt>
-                  <dd>
-                    <a
-                      className="manuscript-link"
-                      href={sitePath(homeContent.manuscript.websiteEditionUrl)}
-                    >
-                      Last revised{" "}
-                      <time
-                        dateTime={
-                          publicationDates.manuscript.websiteEditionRevised
-                        }
-                      >
-                        {formatDate(
-                          publicationDates.manuscript.websiteEditionRevised,
-                        )}
-                      </time>{" "}
-                      <span aria-hidden="true">↗</span>
-                    </a>
-                    <small className="paper-fact-note">
-                      {`${homeContent.manuscript.websiteEditionPages}-page site-hosted PDF`}
-                    </small>
-                  </dd>
-                </div>
-                <div>
-                  <dt>Source revision</dt>
-                  <dd><code>{buildRevision}</code></dd>
-                </div>
+                <div><dt>Current preprint</dt><dd><a href="https://arxiv.org/abs/2609.26058v2">arXiv:2609.26058v2</a></dd></div>
+                <div><dt>Last revised on arXiv</dt><dd><time dateTime="2026-09-23">23 September 2026</time></dd></div>
+                <div><dt>arXiv edition</dt><dd>40 pages · <a href="https://arxiv.org/pdf/2609.26058v2">Read the paper</a></dd></div>
+                <div><dt>Teaching source</dt><dd><a href={sitePath("/paper/teaching-manuscript.pdf")}>The supplied invariant-polygon manuscript</a></dd></div>
+                <div><dt>Source revision</dt><dd><code>{buildRevision}</code></dd></div>
               </dl>
-
+              <p className="reader-home-start"><a href={sitePath("/proof/")}>Start with Topic I: matrices become polygons</a></p>
               <details className="checksum">
-                <summary>Verify the website-edition PDF</summary>
+                <summary>Verify the downloadable arXiv PDF</summary>
                 <code>SHA-256 {homeContent.manuscript.localArxivDraftChecksum}</code>
-                <p>
-                  This 110-page working edition is newer than the immutable
-                  93-page Zenodo v1 record and does not yet have its own DOI.
-                </p>
+                <p>The <a href={sitePath("/paper/critical-invariant-polygons.pdf")}>downloadable PDF</a> is the current arXiv v2. The teaching reader follows the supplied expanded manuscript; its title and exposition differ from the posted preprint.</p>
               </details>
 
               <p className="page-publication-meta">
@@ -278,13 +225,9 @@ export default function Home() {
         <section className="bottom-information">
           <article className="arxiv-note" aria-labelledby="arxiv-heading">
             <p className="section-label">Manuscript status</p>
-            <h2 id="arxiv-heading">Why is this paper not on arXiv?</h2>
-            <p>
-              As of 23 August 2026, the manuscript is awaiting arXiv
-              moderation. The archival Zenodo v1 and the newer checksummed
-              website edition remain available in the meantime. This page
-              will link the arXiv record if and when it becomes public.
-            </p>
+            <h2 id="arxiv-heading">The current arXiv version</h2>
+            <p><a href="https://arxiv.org/abs/2609.26058v2">A structural proof of the Karpelevič theorem</a>, by Brecht Verbeken and Vincent Ginis, is available as arXiv:2609.26058v2, revised 23 September 2026. The <a href="https://arxiv.org/abs/2609.26058">unversioned record</a> points to the latest arXiv version.</p>
+            <p>The earlier <a href="https://zenodo.org/records/21529144">Zenodo record</a> remains an archival edition. The fourteen topics teach the invariant-polygon argument from the supplied expanded manuscript.</p>
           </article>
 
           <ContactForm />

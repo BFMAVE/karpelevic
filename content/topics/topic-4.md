@@ -1,0 +1,91 @@
+### Move a vertex without changing the eigenvalue
+
+Topic III gave a normalised invariant $N$-gon $P$, chosen first to minimise the number of images inside sides and then to minimise area. Its vertices are $v_i$ in counterclockwise order, with indices modulo $N$, and
+
+$$
+\zeta v_{i-\kappa}=c_i=\beta_i v_{i-1}+\alpha_i v_i,
+\qquad \alpha_i=1-\beta_i>0.
+$$
+
+The positive coefficients $\beta_i$ identify the sides with interior contacts. We will show that their indices form one consecutive run. The permitted move is concrete: if $\beta_i>0$ and $\beta_{i+1}=0$, replace $v_i$ by its side contact $c_i$. The proof must verify invariance and preserve the eigenvalue; a picture of a smaller polygon alone does not do that.
+
+### Reversing stochastic factors
+
+A row-stochastic matrix has nonnegative entries and row sums one. Products of such matrices are row-stochastic, because multiplying a vector of all ones still gives that vector and all product entries are nonnegative.
+
+Suppose $A=HS$, where $H,S$ are row-stochastic and $S$ is invertible. Reversing the factors gives
+
+$$
+A'=SH=SAS^{-1}.
+$$
+
+Thus $A'$ is stochastic and similar to $A$. Similarity preserves eigenvalues: if $Av=\zeta v$, then $A'(Sv)=\zeta(Sv)$. We use a matrix $S$ that changes just one coordinate of the vertex vector $v=(v_1,\ldots,v_N)^T$.
+
+Define $E_i$ to copy coordinate $i-1$ into coordinate $i$, leaving every other coordinate unchanged. It satisfies $E_i^2=E_i$. For $0\le t<1$,
+
+$$
+S_i(t)=(1-t)I+tE_i,\qquad S_i(t)^{-1}=\frac{I-tE_i}{1-t},
+$$
+
+where $I$ is the identity matrix. The transformed vertex is $(1-t)v_i+t v_{i-1}$. With $t=\beta_i$, it is exactly $c_i$.
+
+To see the factorisation, define matrices $C$ and $B$ by
+
+$$
+(Cx)_r=x_{r+1},\qquad(Bx)_j=\beta_jx_{j-1}+\alpha_jx_j.
+$$
+
+Here $x$ is any column vector of $N$ coordinates. The contact equations say that $A=C^\kappa B$ satisfies $Av=\zeta v$. Replace row $i$ of $B$ by the row that copies coordinate $i$, calling the result $\widehat B$. Then
+
+$$
+B=\widehat B S_i(\beta_i),\qquad H=C^\kappa\widehat B.
+$$
+
+Right multiplication restores row $i$. The only other row that could change is row $i+1$, and it does not use coordinate $i$ because $\beta_{i+1}=0$. This explains the condition on the neighbouring contact.
+
+The new eigenvector has one moved vertex, so its convex hull $P'$ is invariant. It has at most $N$ vertices; least realising order forces exactly $N$. Topic II's universal contact theorem applies to $P'$ as well: every vertex image is on its boundary.
+
+### The contact theorem controls the changed row
+
+Set $j=i+\kappa$, modulo $N$. Reversing the factors changes one additional contact row. Before using geometry, that row can involve three consecutive vertices $v'_{j-2},v'_{j-1},v'_j$. The coefficients at the last two vertices are positive. Its image is on the boundary of $P'$.
+
+A boundary point expressed as a convex combination can use positive weights only on one supporting face. Indeed, a linear functional maximal at the boundary point is at most that maximum on every vertex. A weighted average can attain the maximum only if each positive-weight vertex attains it. Two consecutive distinct vertices already determine the side; a third polygon vertex cannot lie on it. The coefficient at $v'_{j-2}$ must therefore vanish.
+
+Consequently the new contacts retain the same two-endpoint form, with
+
+$$
+\alpha_i'=1,\qquad\alpha_{i+\kappa}'=\alpha_i\alpha_{i+\kappa},
+\qquad\alpha_j'=\alpha_j\text{ at every other index}.
+$$
+
+Introduce $w_j=-\log\alpha_j\ge0$. The update becomes addition:
+
+$$
+w_i'=0,\qquad w_{i+\kappa}'=w_i+w_{i+\kappa}.
+$$
+
+For example, $\alpha_i=1/2$ and $\alpha_{i+\kappa}=3/4$ give a new coefficient $3/8$. Its weight is $-\log(3/8)=-\log(1/2)-\log(3/4)$. If both old weights were positive, the operation would combine two interior contacts into one, contradicting minimum count. Thus every permitted move sends its positive weight to an index that previously had weight zero.
+
+### Why all interior contacts form one run
+
+Let $I=\{i:w_i>0\}$ and $\varphi=|I|$. At the ending index of any run, $\beta_i>0$ and $\beta_{i+1}=0$, so the move applies. It removes part of a corner and produces a proper subpolygon with the same minimum count.
+
+Every contact has modulus at most $\rho<1$. If any radius-one vertex other than $v_i$ remained, the subpolygon would still be normalised and would have smaller area. Therefore the ending vertex of each run would have to be the unique radius-one vertex. Two distinct runs have different ending vertices, which is impossible. After choosing the starting label, we have
+
+$$
+I=\{1,\ldots,\varphi\}.
+$$
+
+Let $\delta=\gcd(N,\kappa)$, the greatest common divisor. Adding $\kappa$ modulo $N$ runs through each residue class modulo $\delta$ separately. Every class must meet $I$, or it would consist entirely of vertex-to-vertex contacts and would give $v=\zeta^{N/\delta}v$. Hence $\varphi\ge\delta$.
+
+### A record in the cyclic shift
+
+For an integer $a$, write $[a]_N$ for its residue in $\{0,\ldots,N-1\}$. If $\varphi<N$, relabel the positive indices temporarily as $\{N-\varphi+1,\ldots,N-1\}\cup\{0\}$. Move the weight at zero repeatedly by the permitted operation. Before reaching the final block, its successive positions are $[t\kappa]_N<N-\varphi$, so its next ordinary neighbour has zero weight and the operation remains available.
+
+That block contains $\varphi\ge\delta$ consecutive residues, so it contains a multiple of $\delta$. The orbit of zero under addition by $\kappa$ visits every multiple of $\delta$, proving that an entrance occurs. The first entrance cannot land on an already positive index. It must land exactly at $N-\varphi$. There is therefore a time $h>0$ such that
+
+$$
+[h\kappa]_N=N-\varphi,\qquad[t\kappa]_N<N-\varphi\quad(0\le t<h).
+$$
+
+The new residue exceeds every earlier one: it is a strict record. For $\varphi=N$, the initial record at time zero has deficit $N$. Topic V translates these records into exact first-return paths; later moves require only the minimum contact count, so rescaling them never requires a new area-minimisation argument.

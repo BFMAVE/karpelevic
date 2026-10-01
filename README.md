@@ -1,97 +1,62 @@
-# Critical Invariant Polygons — paper website
+# The Karpelevič theorem — guided proof website
 
-Offline development site for:
+The public site is https://bfmave.github.io/karpelevic/.
 
-> **Critical Invariant Polygons and the Farey–Ito Boundary of Stochastic
-> Spectra**
->
-> Brecht Verbeken and Vincent Ginis
+The current preprint is **A structural proof of the Karpelevič theorem**, by
+Brecht Verbeken and Vincent Ginis, [arXiv:2609.26058v2](https://arxiv.org/abs/2609.26058v2),
+revised 23 September 2026. The reader uses the supplied expanded manuscript,
+**A proof of the Karpelevič theorem via invariant polygons**, as its teaching
+source. These versions have the same mathematical proof route; their titles
+and exposition differ.
 
-The approved public release is available at
-<https://bfmave.github.io/karpelevic/>.
+All fourteen topics were rewritten on 1 October 2026 for readers with basic
+analysis and linear algebra. Topics I–XII build and complete the theorem;
+Topic XIII treats gauges and asymptotics; Topic XIV gives the eight-state
+worked example and retains the order-selectable boundary explorer.
 
-## Local development
+## Development and checks
 
-Requires Node.js 22.13 or newer.
+Node.js 22.13 or newer is required. Run `npm ci` and `npm run dev`.
 
-```bash
-npm install
-npm run dev
-```
+`npm run release:check` type-checks, lints, builds, runs the numerical,
+accessibility, source-retention, and rendered-page tests, then verifies the
+GitHub Pages artifact. The existing Pages workflow publishes pushes to main.
 
-The default preview is <http://localhost:3000>.
+## Source and educational content
 
-## Checks
+- `content/paper/karpelevic-invariant-polygons.tex`: the supplied teaching source.
+- `content/paper/arxiv-v2.tex`: the downloaded current arXiv source, retained for version comparison.
+- `content/topics/topic-1.md` through `topic-14.md`: editable educational guides.
+- `app/data/reader-topics.ts`: titles, reader questions, and source locations.
+- `app/data/reader.generated.json`: native MathML guides and complete source passages.
+- `scripts/generate-reader.mjs`: deterministic conversion and source-reference resolution.
+- `app/components/proof/CurrentProofChapter.tsx`: the shared reader and exact diagrams.
+- `public/paper/critical-invariant-polygons.pdf`: the downloaded arXiv v2 PDF.
+- `public/paper/teaching-manuscript.pdf`: the supplied expanded manuscript PDF.
+- `app/lib/karpelevic-boundary-core.js` and `public/code/`: unchanged numerical source and checks.
 
-```bash
-npm run typecheck
-npm run lint
-npm test
-```
+After editing a guide or teaching source, run `npm run content:reader` with
+Pandoc installed. Generation validates all cross-topic references. Builds
+run `npm run content:reader:check`, which checks the source and all guide
+hashes without requiring Pandoc in CI. All 50 labeled equations, 26 proofs,
+three figure captions, and 35 references from the supplied manuscript remain
+available in the reader. Original diagrams remain in the supplied PDF; two
+exact mathematical diagrams are also drawn on the website.
 
-`npm test` creates a production Vinext build and verifies the public-facing
-pages, all formal proof-reader routes, complete-proof inventories, internal
-proof links, the bundled PDF, and the numerical boundary generator.
-
-## Project layout
-
-- `app/` — website routes, components, styles, and mathematical content.
-- `app/data/proof-topics/` — the hand-authored educational layer for the
-  later proof-reader topics.
-- `public/paper/` — the verified PDF served by the website.
-- `public/code/` — dependency-free mathematical code offered for download.
-- `scripts/` — deterministic TeX extraction, export, and verification tools.
-- `tests/` — rendered-page, proof-structure, link, and numerical checks.
-- `docs/proof-drafts/` — working chapter plans and expository drafts.
-- `docs/proof-audits/` — mathematical, implementation, and source audits.
-- `docs/student-reviews/` — two independent student-perspective readings of
-  every physical proof page and their consolidated recommendations.
-- `share/` — locally generated standalone HTML editions; these large derived
-  files stay local and are not committed.
-
-Build artifacts such as `dist/`, `pages-out/`, `tmp/`, and TypeScript cache
-files are generated locally and ignored by Git. The complete working project
-lives in this one repository folder; the canonical manuscript files remain in
-their author-designated research location and are read by the deterministic
-content generators.
-
-## Regenerating manuscript-derived content
-
-The generators deliberately have no author-specific path fallback. Point them
-to the canonical TeX file explicitly. The checked-in extracts were produced
-and byte-checked with Pandoc 3.8.3; another Pandoc version may normalize the
-generated MathML differently.
-
-```bash
-KARPELEVIC_TEX_PATH="/absolute/path/to/Complete_Karp_arXiv.tex" npm run content:proof
-KARPELEVIC_TEX_PATH="/absolute/path/to/Complete_Karp_arXiv.tex" npm run content:proof:check
-```
-
-For the website edition revised 23 August 2026, the canonical TeX SHA-256 is
-`91f64dba9b9e89f6b0ee0fb5cf252f8cbed1f105f89362641c7875a6a361537e`.
-Each generated file records both this whole-manuscript hash and the hash of the
-actual Part I or Part II slice from which its HTML was extracted.
+The previous edition's hand-authored and generated reader files are retained
+for provenance but no longer supply the public proof routes. Its obsolete
+result/plate/standalone inventories are retained in `tests/previous-edition/`.
+The active tests verify the new source-based edition and preserve the
+numerical solver and live accessibility regressions.
 
 ## Rights
 
-The archived 24 July 2026 manuscript v1 is licensed CC BY 4.0. No additional
-blanket license has been selected for later website-only material; see
-[`RIGHTS.md`](./RIGHTS.md) before redistributing or adapting the prose, figures,
-or numerical code.
+The archived 24 July 2026 manuscript v1 is licensed CC BY 4.0. The current
+arXiv record also supplies its license. No additional blanket license has
+been selected for website-only material; see `RIGHTS.md`.
 
 ## Project record
 
-- [`PROJECT_STATUS.md`](./PROJECT_STATUS.md) is the living progress and review
-  record.
-- [`PHASE_1_DISCOVERY.md`](./PHASE_1_DISCOVERY.md) contains the original
-  content audit, architecture proposal, visual tokens, and source inventory.
-- [`docs/README.md`](./docs/README.md) indexes the project’s drafts, technical
-  audits, and student-review reports.
-- [`docs/PROJECT_STRUCTURE.md`](./docs/PROJECT_STRUCTURE.md) records the
-  canonical project root, source-of-truth hierarchy, generated artifacts, and
-  the local/public boundary.
-
-`npm run build:pages` creates and verifies the static `pages-out/` artifact
-under the repository base path. The GitHub Actions workflow checks out full
-history so each page can derive its visible timestamp from the latest commit
-that touched its source content.
+`PROJECT_STATUS.md` records the current rewrite and verification.
+`docs/proof-audits/reader-2026-10-01.md` records the dependency map,
+version comparison, independent review, and corrected teaching bottlenecks.

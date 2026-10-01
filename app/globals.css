@@ -9023,6 +9023,53 @@ math mover > mo[accent="true"] {
   color: var(--paper);
 }
 
+.reader-source-note {
+  border-left: 3px solid var(--oxblood);
+  padding: .4rem 1.25rem;
+  margin: 1.5rem 0 2.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.reader-guide, .reader-formal, .reader-source-text {
+  max-width: 76ch;
+  margin-inline: auto;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  overflow-wrap: break-word;
+}
+.reader-guide h3, .reader-formal > h3 {
+  margin-top: 2.5rem;
+  font-size: 1.6rem;
+  line-height: 1.3;
+  color: var(--navy);
+}
+.reader-guide math[display="block"], .reader-source-text math[display="block"] {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: .65rem 0;
+}
+.reader-source-proof { margin: 1.5rem 0; }
+.reader-source-proof > summary { font-size: 1.05rem; line-height: 1.5; }
+.reader-source-text { padding: 1rem 1.25rem; }
+.reader-source-text .theorem, .reader-source-text .lemma,
+.reader-source-text .proposition, .reader-source-text .corollary {
+  margin-top: 2rem;
+}
+.reader-source-text table { display: block; max-width: 100%; overflow-x: auto; }
+.source-equation-anchor { scroll-margin-top: 3rem; }
+.source-equation-label { display: block; text-align: right; color: var(--oxblood); font-size: 1rem; }
+.reader-diagram { margin: 2rem auto; max-width: 36rem; }
+.reader-diagram svg { display: block; width: 100%; height: auto; }
+.reader-diagram svg text { font-size: 17px; fill: #18334a; }
+.reader-diagram figcaption { font-size: 1rem; line-height: 1.6; }
+.reader-home-start { font-size: 1.2rem; font-weight: 600; }
+[data-chapter-reading-mode="formal"] .proof-guided-layer { display: none; }
+@media (max-width: 640px) {
+  .reader-source-text { padding-inline: .5rem; }
+  .reader-guide, .reader-source-text { font-size: 1.05rem; }
+}
+
 @media (max-width: 840px) {
   .topic-xiv-computation-summary {
     grid-template-columns: 1fr;
