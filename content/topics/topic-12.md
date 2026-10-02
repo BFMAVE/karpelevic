@@ -2,6 +2,8 @@
 
 The earlier topics have produced three ingredients: an upper bound from every extremal polygon, a stochastic matrix attaining the scalar candidate, and an independent comparison between candidate radii at different orders. This topic assembles them. Small orders and the unit circle must be treated explicitly, because the geometric product applies to nonreal eigenvalues of modulus less than one whose least realising order is at least four.
 
+The small orders are both a useful first answer and a necessary part of the final proof: order two gives the whole real interval, while order three gives a triangle with one attached segment. A maximiser requested at a larger order might already occur at order three, where the product machinery is not the argument we use. We therefore establish this case before closing the inequalities.
+
 Write $\Theta_n$ for the set of individual eigenvalues of real row-stochastic $n\times n$ matrices. Such a matrix has nonnegative entries and row sums one. Its action cannot increase the largest absolute coordinate of a vector, so every eigenvalue has modulus at most one. Compactness of the matrix set and continuity of the determinant make $\Theta_n$ compact. Hence a largest radius on each ray exists whenever that ray meets the set.
 
 ### The first three orders
@@ -70,6 +72,23 @@ Equality forces every positive-weight destination $j$ to belong to $S$ and to sa
 
 ### The two inequalities meet
 
+::: {.reader-checkpoint #proof-closure-retrieval}
+**Retrieval checkpoint.** In the main case $k\ge4$, identify the ingredient behind each link of $R_n\le K_k\le K_n\le R_n$. Which link would be missing if we had only solved the scalar equation?
+
+<details>
+<summary>Hint</summary>
+
+Match the three links with “upper bound”, “independent order comparison”, and “attainment”. Then distinguish defining a candidate from proving it is an eigenvalue.
+
+</details>
+<details>
+<summary>Solution</summary>
+
+Topics VII and IX give the least-order upper bound $R_n\le K_k$. Topic XI gives $K_k\le K_n$. Topic X constructs an eigenvalue at the candidate, giving $K_n\le R_n$. Solving the scalar equation alone supplies the definition of $K_n$ and none of these three proofs. In particular, it supplies no attaining matrix. The order-three case replaces the first bound by the explicit triangle calculation and the comparison $R_3\le K_4$.
+
+</details>
+:::
+
 Fix $n\ge4$ and an upper angle $\theta$. Define $R_n(\theta)$ to be the largest attainable radius. At Farey angles the unit-circle classification gives $R_n=K_n=1$. At any other angle Topic X gives $K_n\le R_n$.
 
 Choose the maximiser $z=R_n(\theta)e^{i\theta}$ and let $k\le n$ be its least realising order. It is nonzero, nonreal, and strictly inside the unit disk. It is also a radial maximiser in $\Theta_k$: a larger point there would remain available at order $n$ by adjoining an identity block.
@@ -109,3 +128,5 @@ We should also justify why this radial description has exactly the stated bounda
 Conversely, at a point $K_n(\theta)e^{i\theta}$, moving outward by any positive distance on the same ray leaves $\Theta_n$. Such exterior points approach the given point arbitrarily closely. The given point itself belongs to the compact, hence closed, set $\Theta_n$, so it is a boundary point. Every other point of the set was shown to be interior. Therefore its boundary is exactly the outer curve. The endpoint values $K_n(0)=K_n(\pi)=1$ and conjugation join this continuous curve around the full circle for $n\ge4$. Topic X's strictly varying equal weights trace its Ito arcs between the appropriate roots of unity.
 
 Does order three have a boundary point of modulus $3/4$ at an angle just below $\pi$? Its radial maximum tends to $1/2$, so for angles sufficiently close to $\pi$ the answer is no. At angle exactly $\pi$, $-3/4$ is available on the extra real segment. This check prevents the small-order exception from being hidden by a picture of a continuous radial curve.
+
+Continue with Topic XIV to follow the eight-state example from return paths through its actual invariant polygon. Topic XIII is an optional continuation about polygonal measurement and asymptotics; the worked example can be read first.

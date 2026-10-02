@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ReaderFigureCaption } from "./ReaderFigureCaption";
 
 type Point = readonly [number, number];
 
@@ -31,6 +32,16 @@ function Segment({ from, to, color = ink, dashed = false, width = 2.5, arrow }: 
 }
 
 function TeachingFigure({ id, title, description, height, children, caption, controls }: { id: string; title: string; description: string; height: number; children: ReactNode; caption: ReactNode; controls?: ReactNode }) {
+  const notes: Record<string, { takeaway: string; status: string }> = {
+    "reader-i-averaging": { takeaway: "Each row sends a vertex to a side midpoint; the image square stays inside the diamond.", status: "Exact invariant example. Containment supplies an eigenvalue; maximality needs the later proof." },
+    "reader-ii-polar": { takeaway: "An interior image has room to move outward; a polar boundary equality identifies contact with an original side.", status: "Exact averaging and polar models. The interior-image example is nonextremal." },
+    "reader-iii-half-open": { takeaway: "One side owns the ending corner, so the contact is counted exactly once.", status: "Exact endpoint-assignment diagram; a bookkeeping model." },
+    "reader-iv-replacement": { takeaway: "A legal replacement transfers one positive contact weight without changing the minimum contact count.", status: "Local corner and coefficient diagram. The proof's factor reversal establishes invariance; the drawing illustrates its effect." },
+    "reader-v-towers": { takeaway: "Two return paths partition all eight indices, but visiting v₀ is not a return to the half-open base set.", status: "Exact return-index diagram for N=8, κ=3; the layout shows labels and paths." },
+    "reader-vi-projection": { takeaway: "Successive intersections keep the intermediate contacts fixed and put the final projection between the two contacts.", status: "Exact local projection model; not an invariant eigenvalue polygon." },
+    "reader-vi-closing": { takeaway: "The preserved contact stays on its line; the closing contact moves inward even though the first derivative vanishes.", status: "Exact local deformation model; not an invariant eigenvalue polygon. The graph samples an exact fractional-linear formula." },
+    "reader-vii-winding": { takeaway: "Five principal factor increments add to one real full turn, although their product is positive real.", status: "Exact regular-pentagon midpoint example. Equal weights here are not an assumption in the general theorem." },
+  };
   return (
     <figure className="reader-teaching-figure">
       <p className="reader-figure-scroll-hint">Scroll across the diagram →</p>
@@ -47,7 +58,7 @@ function TeachingFigure({ id, title, description, height, children, caption, con
           {children}
         </svg>
       </div>
-      <figcaption>{caption}</figcaption>
+      <ReaderFigureCaption takeaway={notes[id].takeaway} status={notes[id].status}>{caption}</ReaderFigureCaption>
     </figure>
   );
 }
@@ -273,23 +284,74 @@ function QuadraticClosing() {
   const diagonal = samples.map((t) => xy(t, t));
   const zero = xy(0, 0);
   const test = 0.1;
+  const u = test / (1 + 6 * test);
+  const original: Point[] = [[0, 0], [1, 0], [2, 1], [3, 3]];
+  const model = (p: Point) => plane(p, [100, 685], 70);
+  const x0: Point = [0, 0];
+  const x1: Point = [1 - test, 0];
+  const x2: Point = [2 * (1 + 5 * test) / (1 + 6 * test), (1 + 3 * test) / (1 + 6 * test)];
+  const x3: Point = [3, 3];
+  const c2: Point = [1.5, 0.5];
+  const returned: Point = [2.5 - test, 2 - 1.5 * test];
+  const intersection: Point = [2.5 - u, 2 - 1.5 * u];
+  const controls = <div className="reader-chain-motion-controls" data-chain-motion-controls hidden>
+    <label htmlFor={`${id}-parameter`}>Deformation parameter t</label>
+    <input id={`${id}-parameter`} type="range" min="-0.05" max="0.1" step="0.001" defaultValue="0.1" disabled data-chain-motion-input aria-describedby={`${id}-status`} />
+    <button type="button" data-chain-motion-reset>Reset to t = 0</button>
+    <p id={`${id}-status`} data-chain-motion-status role="status" aria-live="polite">At t = 1/10, u = 1/16 and the inward coordinate gap is 3/80. The fixed contact C₂ remains exactly on its moving side line.</p>
+  </div>;
   return (
-    <TeachingFigure id={id} height={380} title="A positive closing defect can be second order" description="For the exact projection chain, u(t)=t/(1+6t). The graph u(t) lies below the diagonal u=t on both sides of zero near zero, while sharing the same tangent there. Their vertical difference is 6t²/(1+6t), positive for sufficiently small nonzero t. At t=1/10 the difference is 3/80." caption={<>For the preceding chain, moving X₁ to (1 − t,0) gives a final-side intersection with coordinate u(t) = t/(1 + 6t). The returning point has coordinate t. Their gap is 6t²/(1 + 6t), positive on either side of zero near zero even though its first derivative vanishes. At t = 1/10, u = 1/16 and the gap is 3/80. This is the second-order possibility the general proof must retain.</>}>
-      <polygon points={points([...diagonal, ...curve.toReversed()])} fill={red} fillOpacity={0.1} />
-      <Segment from={[61, zero[1]]} to={[589, zero[1]]} color={muted} width={1.5} />
-      <Segment from={[zero[0], 322]} to={[zero[0], 56]} color={muted} width={1.5} />
-      <polyline points={points(diagonal)} fill="none" stroke={gold} strokeWidth={3} strokeDasharray="7 6" />
-      <polyline points={points(curve)} fill="none" stroke={teal} strokeWidth={3.5} />
-      <Segment from={xy(test, test)} to={xy(test, test / (1 + 6 * test))} color={red} width={5} />
-      <Dot at={zero} color={ink} radius={5} />
-      <Label at={[zero[0] - 20, zero[1] + 28]}>0</Label>
-      <Label at={[597, zero[1] + 8]}>t</Label>
-      <Label at={[zero[0] + 17, 68]}>u</Label>
-      <Label at={[555, 68]} color={gold}>u = t</Label>
-      <Label at={[455, 160]} color={teal}>u(t)</Label>
-      <Label at={[490, 117]} color={red} size={20}>gap</Label>
-      <Label at={[330, 35]} anchor="middle">u(t) = t / (1 + 6t)</Label>
-      <Label at={[330, 350]} anchor="middle">same tangent at 0 • positive inward gap</Label>
+    <TeachingFigure id={id} height={755} controls={controls} title="An exact local deformation preserves its contact and opens inward to second order" description="For the exact quadrilateral model, u(t)=t/(1+6t), and its graph lies below the diagonal near zero on both sides while sharing the same tangent there. The lower diagram starts at t=1/10: X1=(9/10,0), X2=(15/8,13/16), Y(t)=(12/5,37/20), and Y(u)=(39/16,61/32). X2 stays on the exposing line and the fixed contact C2 stays on the moving internal side line. Y(t) lies inward of the final side, whose intersection with K is Y(u). Their coordinate gap is 3/80. This is a local projection model, not an invariant eigenvalue polygon." caption={<>The exact local model has X₁(t) = (1 − t,0), X₂(t) = (2(1 + 5t)/(1 + 6t),(1 + 3t)/(1 + 6t)), and u(t) = t/(1 + 6t). The gold internal side always passes through the fixed contact C₂; X₂ always stays on its exposing line. These equalities are imposed by construction. The red returning point Y(t) and black final-line intersection Y(u(t)) have positive coordinate gap 6t²/(1 + 6t) for either sufficiently small nonzero sign. The static view uses t = 1/10, u = 1/16 and gap 3/80. Convexity and interior segment membership are separate inequalities, preserved for small changes. The diagram illustrates the local lemma; it is not a claimed invariant eigenvalue polygon.</>}>
+      <g data-chain-motion-graph data-origin-x="78" data-origin-y="298" data-t-min="-0.08" data-t-span="0.22" data-u-min="-0.18" data-u-span="0.34" data-width="482" data-height="228">
+        <polygon points={points([...diagonal, ...curve.toReversed()])} fill={red} fillOpacity={0.1} />
+        <Segment from={[61, zero[1]]} to={[589, zero[1]]} color={muted} width={1.5} />
+        <Segment from={[zero[0], 322]} to={[zero[0], 56]} color={muted} width={1.5} />
+        <polyline points={points(diagonal)} fill="none" stroke={gold} strokeWidth={3} strokeDasharray="7 6" />
+        <polyline points={points(curve)} fill="none" stroke={teal} strokeWidth={3.5} />
+        <line data-chain-motion-graph-gap x1={xy(test, test)[0]} y1={xy(test, test)[1]} x2={xy(test, u)[0]} y2={xy(test, u)[1]} stroke={red} strokeWidth={5} />
+        <circle data-chain-motion-curve-point cx={xy(test, u)[0]} cy={xy(test, u)[1]} r={5} fill={teal} />
+        <Dot at={zero} color={ink} radius={5} />
+        <Label at={[zero[0] - 20, zero[1] + 28]}>0</Label>
+        <Label at={[597, zero[1] + 8]}>t</Label>
+        <Label at={[zero[0] + 17, 68]}>u</Label>
+        <Label at={[555, 68]} color={gold}>u = t</Label>
+        <Label at={[455, 160]} color={teal}>u(t)</Label>
+        <Label at={[490, 117]} color={red} size={20}>gap</Label>
+        <Label at={[330, 35]} anchor="middle">u(t) = t / (1 + 6t)</Label>
+        <Label at={[330, 350]} anchor="middle">same tangent at 0 • positive inward gap</Label>
+      </g>
+      <Label at={[330, 402]} anchor="middle">The same parameter in the exact quadrilateral</Label>
+      <g data-chain-motion-geometry data-origin-x="100" data-origin-y="685" data-scale="70">
+        <polygon points={points(original.map(model))} fill="none" stroke={muted} strokeWidth={2} strokeDasharray="6 5" />
+        <polygon data-chain-motion-polygon points={points([x0, x1, x2, x3].map(model))} fill={pale} fillOpacity={0.8} stroke={teal} strokeWidth={2.5} />
+        <Segment from={model([1.1, -0.35])} to={model([3.15, 2.725])} color={teal} dashed />
+        <Segment from={model([1.1, -0.1])} to={model([3.15, 2.975])} color={gold} width={2} />
+        <line data-chain-motion-contact-side x1={model(x1)[0]} y1={model(x1)[1]} x2={model(x2)[0]} y2={model(x2)[1]} stroke={gold} strokeWidth={4} />
+        <line data-chain-motion-final-side x1={model(x2)[0]} y1={model(x2)[1]} x2={model(x3)[0]} y2={model(x3)[1]} stroke={teal} strokeWidth={4} />
+        <line data-chain-motion-model-gap x1={model(returned)[0]} y1={model(returned)[1]} x2={model(intersection)[0]} y2={model(intersection)[1]} stroke={red} strokeWidth={4} />
+        <Dot at={model(x0)} />
+        <Dot at={model(x3)} />
+        <Dot at={model(c2)} color={gold} radius={7} />
+        <circle data-chain-motion-x1 cx={model(x1)[0]} cy={model(x1)[1]} r={6} fill={teal} />
+        <circle data-chain-motion-x2 cx={model(x2)[0]} cy={model(x2)[1]} r={6} fill={teal} />
+        <circle data-chain-motion-y cx={model(returned)[0]} cy={model(returned)[1]} r={7} fill={red} />
+        <circle data-chain-motion-intersection cx={model(intersection)[0]} cy={model(intersection)[1]} r={4} fill={ink} />
+        <Label at={[75, 720]} size={21}>X₀</Label>
+        <Label at={[323, 475]} size={21}>X₃</Label>
+        <text data-chain-motion-label="x1" x={model(x1)[0] - 12} y={model(x1)[1] + 35} textAnchor="middle" fill={teal} fontSize={21}>X₁(t)</text>
+        <text data-chain-motion-label="x2" x={model(x2)[0] + 16} y={model(x2)[1] + 18} fill={teal} fontSize={21}>X₂(t)</text>
+        <Label at={[188, 649]} anchor="end" color={gold} size={21}>C₂</Label>
+        <Label at={[337, 534]} color={teal} size={21}>L₂</Label>
+        <Label at={[337, 503]} color={gold} size={21}>K</Label>
+      </g>
+      <Dot at={[427, 565]} color={gold} />
+      <Label at={[444, 572]} color={gold} size={20}>C₂: fixed contact</Label>
+      <Dot at={[427, 610]} color={red} />
+      <Label at={[444, 617]} color={red} size={20}>Y(t): return</Label>
+      <Dot at={[427, 655]} color={ink} />
+      <Label at={[444, 662]} size={20}>Y(u): final line</Label>
+      <Label at={[444, 688]} size={20}>meets K here</Label>
+      <Label at={[330, 749]} anchor="middle" size={19}>Exact local model; no invariant eigenvalue polygon is asserted</Label>
     </TeachingFigure>
   );
 }

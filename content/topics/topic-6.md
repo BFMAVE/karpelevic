@@ -13,7 +13,7 @@ The proof constructs a small deformation of the polygon while keeping the map $F
 
 A side contact is an equality constraint: its image must remain on one particular line. Moving a base freely would generally break several such equalities. The construction moves a chain by solving those equalities one after another as line intersections. Only the final contact is left unconstrained. The projective calculation determines whether that one contact falls inward, while the tower arithmetic ensures that no other contact was accidentally broken.
 
-### A point inside a side cannot later become a vertex
+### Lesson 1: find the lines along which bases may move
 
 A supporting line touches a convex polygon while leaving it in one closed half-plane. A supporting linear functional is a linear function maximised on that touching part. A face is a vertex, a side, or the whole polygon. The smallest face containing a point is the vertex itself, its side if it lies strictly inside that side, or the whole polygon if it is interior.
 
@@ -37,19 +37,9 @@ $$
 
 Here $\operatorname{aff}E$ means the full line containing the side. This preimage line supports $P$ at $v_j$. It touches no other point of $P$. Otherwise it would contain an incident side. One incident side would force $F^{H_j}v_j$ to be a vertex; the other would force the preceding base's image to remain a vertex. The heights from Topic V are $q$ on an initial block and $q+h$ on the final block, so $H_{j-1}\le H_j$. The preceding base has therefore already returned inside a side by time $H_j$, and face persistence prevents it from becoming a vertex during any extra steps. Both incident-side possibilities are impossible. Thus $L_j$ **exposes** $v_j$: its intersection with $P$ is the single point $v_j$. This height ordering handles the transition between short and tall towers.
 
-### Build the motion by intersecting lines
+The first lesson supplies movement lines, rather than a finished deformation. A base moved along $L_j$ has its returning image on the required target line by definition of $F^{-H_j}$. We must still coordinate neighbouring bases so that their other contacts remain on their side lines. The next lesson shows how successive line intersections do that.
 
-Consider consecutive vertices $X_0,X_1,\ldots,X_{\ell+1}$ of a convex polygon, in either boundary direction, with $\ell\ge2$ and at least one side outside the chain. For each internal side choose a contact $C_i\in(X_{i-1},X_i)$, for $2\le i\le\ell+1$. At $X_i$, for $2\le i\le\ell$, choose an exposing line $L_i$.
-
-Keep $X_0,X_{\ell+1}$ fixed and move $X_1$ slightly along the line $X_0X_1$. Define successive moved vertices by
-
-$$
-X_i(t)=L_i\cap\operatorname{aff}(X_{i-1}(t),C_i),\qquad2\le i\le\ell.
-$$
-
-The parameter $t$ measures a small real motion. Each intersection keeps contact $C_i$ on the corresponding side line. At zero the intersections are the original vertices, so for sufficiently small $t$ they are finite and vary smoothly. The issue is how the final side moves relative to its returning contact.
-
-### A chain whose closing defect can be calculated exactly
+### Lesson 2: calculate one local motion before proving the general lemma
 
 The polygon with consecutive vertices
 
@@ -71,9 +61,47 @@ $$
 u(t)=\frac{t}{1+6t},\qquad t-u(t)=\frac{6t^2}{1+6t}.
 $$
 
-This positive difference, for sufficiently small nonzero $t$, puts the returning point $Y(t)$ inward of the moving final side. At $t=0$ the first derivative of the difference is zero, so the actual movement is detected at second order. Starting the same projection chain at $X_0$ instead of $X_1$ corresponds to $t=1$ and gives $Z_2=(12/7,4/7)$ and $\Pi(X_0)=(33/14,25/14)=C_3+(C_2-C_3)/7$. The global comparison lies strictly between the contacts; the formula then identifies the locally usable motion. The following proof obtains the same strict comparison for every permitted chain, without relying on these special coordinates.
+This positive difference, for sufficiently small nonzero $t$, puts the returning point $Y(t)$ inward of the moving final side. At $t=0$ the first derivative of the difference is zero, so the actual movement is detected at second order. Starting the same projection chain at $X_0$ instead of $X_1$ corresponds to $t=1$ and gives $Z_2=(12/7,4/7)$ and
+
+$$
+\Pi(X_0)=(33/14,25/14)=C_3+(C_2-C_3)/7.
+$$
+
+The global comparison lies strictly between the contacts; the formula then identifies the locally usable motion. The following proof obtains the same strict comparison for every permitted chain, without relying on these special coordinates.
+
+Two equalities hold because we constructed $X_2(t)$ by an intersection: $X_2(t)\in L_2$ and $C_2\in\operatorname{aff}(X_1(t),X_2(t))$. They hold exactly for every sufficiently small parameter, not approximately. Convexity of the moved quadrilateral and the fact that $C_2$ stays between its moving endpoints are separate strict inequalities; they persist only after restricting the parameter to a sufficiently small neighbourhood of zero.
+
+<div class="reader-checkpoint" data-retrieval-checkpoint>
+
+**Second-order checkpoint.** Evaluate the closing defect at $t=1/20$ and $t=-1/20$. Does either sign fail? Would the derivative at zero detect this movement?
+
+<details class="reader-checkpoint-hint">
+<summary>Hint</summary>
+
+Use $6t^2/(1+6t)$. The numerator is positive for either nonzero sign; check that both denominators remain positive.
+
+</details>
+<details class="reader-checkpoint-solution">
+<summary>Solution</summary>
+
+The two defects are $3/260$ and $3/140$, respectively, both positive. The first derivative at zero is zero, because the numerator begins with $t^2$. An argument requiring a nonzero first derivative would miss both inward motions.
+
+</details>
+</div>
 
 <!-- reader-figure:early -->
+
+#### Build the general motion by intersecting lines
+
+Consider consecutive vertices $X_0,X_1,\ldots,X_{\ell+1}$ of a convex polygon, in either boundary direction, with $\ell\ge2$ and at least one side outside the chain. For each internal side choose a contact $C_i\in(X_{i-1},X_i)$, for $2\le i\le\ell+1$. At $X_i$, for $2\le i\le\ell$, choose an exposing line $L_i$.
+
+Keep $X_0,X_{\ell+1}$ fixed and move $X_1$ slightly along the line $X_0X_1$. Define successive moved vertices by
+
+$$
+X_i(t)=L_i\cap\operatorname{aff}(X_{i-1}(t),C_i),\qquad2\le i\le\ell.
+$$
+
+The parameter $t$ measures a small real motion. Each intersection keeps contact $C_i$ on the corresponding side line. At zero the intersections are the original vertices, so for sufficiently small $t$ they are finite and vary smoothly. The issue is how the final side moves relative to its returning contact.
 
 A projection from a fixed point between two lines is a fractional-linear function of line coordinates:
 
@@ -83,7 +111,7 @@ $$
 
 The letters $a,b,d,e$ here are real coefficients of this particular function, not the tower parameters. The formula follows by solving two linear equations for the intersection; their common denominator is linear in the starting coordinate $\tau$. The projection centre must lie on neither the source nor the target line. Projection back from the same centre is then its inverse. A zero denominator describes a parallel intersection, represented by a point at infinity. Adding that one direction-point to each line makes the projection invertible everywhere. This is what “projective” means in this proof: compositions of these ordinary line-intersection maps.
 
-### Why the long comparison has a definite direction
+#### Why the long comparison has a definite direction
 
 Let $\Lambda$ be the initial line $X_0X_1$, and let $K$ be the line through $C_\ell,C_{\ell+1}$. Project from $\Lambda$ through $C_2$ to $L_2$, continue through the remaining contacts to the exposing lines, then project through $X_{\ell+1}$ to $K$. Call this combined projection $\Pi$. The centre condition holds at every step: exposure excludes interior contacts from both adjoining exposing lines, and distinct adjoining sides exclude $C_2$ from $\Lambda$. At the last step, exposure excludes $X_{\ell+1}$ from $L_\ell$, and the two contacts on distinct adjacent sides ensure $X_{\ell+1}\notin K$.
 
@@ -144,7 +172,7 @@ $$
 
 The signs follow from $0<r<g$, $H>0$, and $d<s<D$. Since $G$ is affine, it crosses zero strictly between the contacts. The final projection therefore lands inside their segment. This establishes the comparison without assuming that an arbitrary projection chain stays finite in the original coordinates.
 
-### The closing motion can have zero first derivative
+#### The closing motion can have zero first derivative
 
 Let $S:\overline\Lambda\to\overline K$ be a **projectivity**, an invertible fractional-linear map between the completed lines, sending $X_0$ to $C_\ell$ and $X_1$ to $C_{\ell+1}$. The bar here means that the direction-point at infinity is included, not complex conjugation. In the application $S$ is the restriction of a power of $F$, hence is such a projectivity. Parametrise the finite part of $K$ by
 
@@ -168,7 +196,18 @@ If $a\ne1$, choose the sign of $t$ so that $(1-a)t>0$. If $a=1$, the inequality 
 
 As a check, $u(t)=t/(1+t)$ has derivative one at zero, yet $t-u(t)=t^2/(1+t)>0$ near zero for both nonzero signs. A purely first-order argument would miss the usable motion.
 
-### Extend the chain motion to an invariant polygon
+### Lesson 3: preserve the polygon’s complete contact network
+
+The local projection lemma opens one contact inward. To obtain a contradiction, all other returns must remain admissible in the *same* deformed polygon. Keep the following four cases in view while choosing the chain and transporting its vertices:
+
+| Returning base source | Target side line | How its constraint is handled |
+| --- | --- | --- |
+| Fixed | Moving | The contact is fixed; the projection intersection keeps it on the moving line. |
+| Moving | Fixed | The base moves on the preimage of that fixed target line. |
+| Fixed | Fixed | The returning point and its line are unchanged. |
+| Moving | Moving | This is the unique exceptional closing return; the local lemma places it strictly inward. |
+
+The first three rows preserve line equalities exactly. Being on a line does not yet prove that a point is on the side segment; that requires the endpoint and convexity inequalities checked after the tower extension below. The last row deliberately replaces a line equality by an inward inequality.
 
 Suppose now that $\Delta>1$. Choose the chain and the power $a$ explicitly:
 
@@ -203,6 +242,17 @@ They satisfy $q\varphi+h\Delta=17$. Here $\ell=3$, the moving bases are $M=\{1,2
 <!-- reader-figure:early-extra -->
 
 Propagate each moved base $\widehat v_j$ along its entire tower by setting the new level-$t$ vertex equal to $F^t\widehat v_j$ for $0\le t<H_j$. Topic V's partition ensures this defines every vertex exactly once. All intermediate vertex-to-vertex identities are preserved. The remaining returns either stay on their corresponding side lines or are unchanged. In the displayed example the moving towers are $(1,11)$, $(2,12)$, and $(3,13)$, each of height two; the fixed towers contain every other index. A moved base therefore carries its subsequent vertices with it, rather than leaving incompatible copies behind.
+
+The final admissibility check uses two kinds of reasoning:
+
+| Exact because of the construction | Retained for a sufficiently small motion |
+| --- | --- |
+| Each tower level is $F^t$ of its moved base, so intermediate vertex identities hold. | Distinctness and all strict supporting-side inequalities preserve the convex $N$-gon and its cyclic order. |
+| Projection intersections keep fixed contacts on moving side lines. | Those contacts remain between their moving endpoints. |
+| Exposing preimage lines keep moving returns on fixed target lines. | Those returns remain in the relative interiors of their side segments. |
+| The closing lemma proves positive inward defect for arbitrarily small nonzero parameters. | The exceptional image remains strictly inside every other supporting half-plane, where it already had positive slack. |
+
+The closing defect is a newly proved inequality. Continuity alone cannot open it inward, since its original value is zero; continuity preserves the strict inequalities that were already present.
 
 For sufficiently small motion, the vertices remain distinct and form a convex $N$-gon in the same cyclic order. This follows from finitely many strict side inequalities: each original side has every other vertex strictly on its inward side, and these inequalities persist by continuity. Every preserved contact remains strictly between its endpoints. The exceptional contact starts inside its final side and strictly inside every other supporting half-plane. Moving it inward across the final line therefore makes it strictly interior to the new $N$-gon $Q$.
 

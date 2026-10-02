@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ReaderFigureCaption } from "./ReaderFigureCaption";
 
 type Point = readonly [number, number];
 
@@ -36,6 +37,11 @@ function Subscript({ children }: { children: ReactNode }) {
 }
 
 function ExtraFigure({ id, title, description, height, children, caption }: { id: string; title: string; description: string; height: number; children: ReactNode; caption: ReactNode }) {
+  const notes: Record<string, { takeaway: string; status: string }> = {
+    "reader-ii-polar-correspondence": { takeaway: "Two active endpoint inequalities identify one polar vertex; moving normals moves supporting-side constraints.", status: "Exact polygon–polar correspondence, drawn from the displayed coordinates." },
+    "reader-vi-network": { takeaway: "The return-index network separates the contacts preserved by construction from the one closing contact proved inward.", status: "Hypothetical skipped-return index diagram. It is not an existing invariant polygon." },
+    "reader-vii-eight-state-phase": { takeaway: "The closing steps and the two factor angles together use exactly one full turn.", status: "Exact eight-state return and winding data; schematic paths and a scaled angle budget." },
+  };
   return (
     <figure className="reader-teaching-figure">
       <p className="reader-figure-scroll-hint">Scroll across the diagram →</p>
@@ -51,7 +57,7 @@ function ExtraFigure({ id, title, description, height, children, caption }: { id
           {children}
         </svg>
       </div>
-      <figcaption>{caption}</figcaption>
+      <ReaderFigureCaption takeaway={notes[id].takeaway} status={notes[id].status}>{caption}</ReaderFigureCaption>
     </figure>
   );
 }

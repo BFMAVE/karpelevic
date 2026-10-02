@@ -22,7 +22,7 @@
     const directories = Array.from(document.querySelectorAll("[data-reader-directory], [data-reader-section-directory]"));
     const compact = window.matchMedia("(max-width: 860px)");
     function sizeDirectory() {
-      directories.forEach((directory) => { directory.open = !compact.matches; });
+      directories.forEach((directory) => { directory.open = directory.hasAttribute("data-reader-section-directory") && !compact.matches; });
     }
     sizeDirectory();
     compact.addEventListener("change", sizeDirectory);
@@ -68,8 +68,8 @@
         if (shouldAnnounce) {
           announce(
             resolvedMode === "formal"
-              ? "Formal view selected. The complete source argument and its proofs are open."
-              : "Guided view selected. The illustrated explanation and topic introduction are visible.",
+              ? "Source proof selected. The complete source argument and its proofs are open."
+              : "Guided lesson selected. The illustrated explanation and topic introduction are visible.",
           );
         }
       }

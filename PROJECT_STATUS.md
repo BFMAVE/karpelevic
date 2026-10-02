@@ -1,5 +1,29 @@
 # Project Status
 
+## Learning review implemented — 2 October 2026
+
+The supplied review's sequencing, retrieval, practice and hierarchy recommendations
+are implemented. Two reading routes now distinguish a clearly scoped main-ideas
+overview from the complete proof. Topic openings are shorter, imports/definitions
+remain expandable, notation is searchable while reading, navigation groups the
+proof stages, and the recommended order is I–XII, XIV, optional XIII.
+
+All fourteen topics have targeted teaching improvements, especially VI's three
+lessons and exact deformation slider, VII's winding-branch exercise, explicit
+upper-bound/attainment roles, and XIV's actual eight-state invariant octagon.
+Its supporting-side/contact verification includes a reproducible exact rational
+certificate. The explorer starts at eight with an explicit order-seven comparison.
+Figures have layered captions and fit/enlarge controls. The homepage starts with
+one filled region and clear learning/exploration/paper actions.
+
+Independent mathematical review, source retention, all 67 tests, type-checking,
+lint, production build and Pages export verification pass. The fourteen formal
+source passages and both PDFs remain unchanged. Desktop/phone checks cover every
+chapter; the 390-pixel Topic I opening is reduced from the review's approximate
+2400 pixels to 890. No complete screen-reader audit is claimed. Implementation
+and mathematical records are in `docs/proof-audits/reader-learning-review-2026-10-02.md`
+and `docs/proof-audits/reader-learning-mathematics-2026-10-02.md`.
+
 ## Second audit and clarity pass — 2 October 2026
 
 A fresh independent mathematical audit preceded implementation. It identified

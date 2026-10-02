@@ -28,7 +28,7 @@ test("every public page uses the current identity and every topic has its own pr
   }
 });
 
-test("all fourteen topics have visible teaching contracts, figures, local navigation, and distinct proof labels", async () => {
+test("all fourteen topics have concise strategies, retrievable teaching contracts, figures and distinct proof labels", async () => {
   for (const [index, route] of routes.entries()) {
     const html = await render(route);
     assert.match(html, /What we bring in, and what we build here/);
@@ -85,8 +85,8 @@ test("reading controls open the full formal proof, close all levels, and reveal 
   const chapter = { dataset: { chapterReadingMode: "guided" }, querySelector(selector) { return selector.includes("announcement") ? announcement : controls; }, querySelectorAll() { return [outer, inner]; }, contains() { return true; } };
   outer.parentElement = chapter;
   const target = { parentElement: inner, closest() { return null; }, scrollIntoView(options) { this.scrolled = options; } };
-  const directory = { open: true };
-  const sections = { open: true };
+  const directory = { open: true, hasAttribute() { return false; } };
+  const sections = { open: true, hasAttribute(name) { return name === "data-reader-section-directory"; } };
   const compact = { matches: true, addEventListener(type, callback) { this.resize = callback; } };
   const window = { location: { hash: "" }, matchMedia() { return compact; }, setTimeout(callback) { scheduled.push(callback); }, addEventListener(type, callback) { listeners.set(type, callback); } };
   const document = { readyState: "complete", querySelectorAll(selector) { return selector.includes("projection") ? [] : selector.includes("directory") ? [directory, sections] : [chapter]; }, getElementById() { return target; } };
@@ -96,7 +96,8 @@ test("reading controls open the full formal proof, close all levels, and reveal 
   assert.equal(sections.open, false, "mobile section directory starts compact and remains available");
   compact.matches = false;
   compact.resize();
-  assert.equal(directory.open && sections.open, true, "both navigation directories expand on desktop");
+  assert.equal(sections.open, true, "local sections expand on desktop");
+  assert.equal(directory.open, false, "the complete catalogue stays available without dominating the current lesson");
   assert.equal(controls.hidden, false);
   formal.callbacks.get("click")();
   assert.equal(chapter.dataset.chapterReadingMode, "formal");
@@ -115,7 +116,7 @@ test("reading controls open the full formal proof, close all levels, and reveal 
 });
 
 test("supplementary diagrams appear at their guide placements with accessible keyboard regions", async () => {
-  const supplemented = new Set([2, 6, 7, 8, 10, 12]);
+  const supplemented = new Set([2, 6, 7, 8, 10, 12, 14]);
   for (const [index, route] of routes.entries()) {
     const html = await render(route);
     const figures = [...html.matchAll(/<figure\b[^>]*class="[^"]*reader-teaching-figure[^\"]*"[\s\S]*?<\/figure>/g)].map((match) => match[0]);

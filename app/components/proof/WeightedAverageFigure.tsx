@@ -1,4 +1,5 @@
 const ink = "#1d3347", blue = "#306580", red = "#7c302e";
+import { ReaderFigureCaption } from "./ReaderFigureCaption";
 
 export function WeightedAverageFigure() {
   return <figure className="reader-teaching-figure reader-average-figure" aria-labelledby="average-heading" data-weighted-average>
@@ -37,6 +38,6 @@ export function WeightedAverageFigure() {
       <p id="average-result" className="reader-average-result" role="status" data-average-status>The average is <strong>0.5 + 0.5i</strong>. Its absolute value is approximately 0.707, at most 1. Both weights are positive, so the average lies between the two endpoints.</p>
     </div>
     <noscript><p>The diagram shows the equal-weight example. JavaScript enables the slider and the three choices.</p></noscript>
-    <figcaption><strong>From averaging to geometry.</strong> A nonnegative row whose entries sum to one chooses a convex combination of the column coordinates. This diagram shows one row. For an eigenvector, every row&apos;s average equals λ times its corresponding coordinate. Taking all rows together gives λP ⊆ P, where P is the polygon spanned by those coordinates.</figcaption>
+    <ReaderFigureCaption takeaway="Changing two nonnegative weights moves the average along the segment joining the two coordinates." status="Exact one-row averaging model; it does not by itself establish extremality."><strong>From averaging to geometry.</strong> A nonnegative row whose entries sum to one chooses a convex combination of the column coordinates. This diagram shows one row. For an eigenvector, every row&apos;s average equals λ times its corresponding coordinate. Taking all rows together gives λP ⊆ P, where P is the polygon spanned by those coordinates.</ReaderFigureCaption>
   </figure>;
 }

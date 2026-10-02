@@ -11,6 +11,32 @@ import {
 import { formatDate } from "../../lib/git-dates";
 import { sitePath } from "../../lib/site-path";
 import { ProofChapterReadingControls } from "./ProofChapterReadingControls";
+import { readerOrientations } from "../../data/reader-orientation";
+import { readerNotationEntries } from "./ReaderNotation";
+
+const stages = [
+  { title: "Foundations", topics: [1, 2] },
+  { title: "The structural core", topics: [3, 4, 5, 6, 7] },
+  { title: "Bound, attainment, completion", topics: [8, 9, 10, 11, 12] },
+  { title: "Worked example", topics: [14] },
+  { title: "Optional extension", topics: [13] },
+];
+const checkpoints = [
+  "Explain how one stochastic row becomes a point in a convex hull, and why containment alone does not prove extremality.",
+  "Explain why universal contact applies to a new admissible polygon, even when that polygon was not the chosen minimizer.",
+  "Assign a corner to its half-open side, and distinguish the contact-count minimization from the area minimization.",
+  "Identify what the vertex replacement changes and which averaging relations it preserves.",
+  "Distinguish a return to the base set from a visit to a familiar vertex label.",
+  "Explain why the closing contact becomes interior and how every other contact survives the deformation.",
+  "Give two solutions of the same product polynomial that have different accumulated winding angles.",
+  "Explain why a unique scalar root is still a candidate until bound and attainment are proved.",
+  "Explain why logarithms turn the product bound into an inequality about an average, and identify its equality case.",
+  "Translate a graph edge into a matrix entry and an eigenvector equation; distinguish a state from an extreme coordinate.",
+  "Explain why comparing scalar candidates needs an independent argument before they are identified with the region.",
+  "Identify the result behind each inequality in the closing chain, and explain the order-three negative-axis exception.",
+  "Explain why uniform relative error near an endpoint is stronger than a uniform absolute estimate.",
+  "Check one deterministic row, one branching row and one polygon contact in the eight-state example.",
+];
 
 type ProofChapterShellProps = {
   routeKey: string;
@@ -48,41 +74,43 @@ export function ProofChapterShell({
       </div>
       <div className="reader-page-grid">
         <aside className="reader-sidebar">
+          {chapterSections.length ? <nav className="reader-section-directory" aria-label="On this topic">
+            <details data-reader-section-directory open>
+            <summary>On this topic · {roman}</summary>
+            <ol>{chapterSections.map((section) => <li key={section.id}><a href={"#" + section.id}>{section.title}</a></li>)}</ol>
+            <a href="#source-argument">Source statements and proofs</a>
+            </details>
+          </nav> : null}
           <nav className="proof-chapter-atlas reader-topic-directory" aria-label="Fourteen proof topics">
-            <details data-reader-directory open>
-              <summary>The proof, topic by topic</summary>
-              <a className="proof-chapter-prerequisite-link" href={sitePath("/prerequisites/")}>Background reminders</a>
-              <ol>
-                {proofReaderTopicLinks.map((link) => {
+            <details data-reader-directory>
+              <summary>All topics and reading routes</summary>
+              <a className="proof-chapter-prerequisite-link" href={sitePath("/prerequisites/#reading-routes")}>Main ideas or complete proof?</a>
+              <label className="reader-topic-search" hidden data-topic-search-label>Find a topic or symbol<input type="search" data-topic-search placeholder="For example: convexity, κ, winding" /></label>
+              {stages.map((stage) => <section key={stage.title} data-topic-stage><h2>{stage.title}</h2><ol>
+                {proofReaderTopicLinks.filter((link) => stage.topics.includes(link.topicNumber)).map((link) => {
                   const isCurrent = link.topicNumber === route.topicNumber;
-                  return <li key={link.topicNumber}>
+                  const searchText = [link.title, toRomanNumeral(link.topicNumber), String(link.topicNumber), ...readerNotationEntries(link.topicNumber).flat(), ...readerOrientations[link.topicNumber].imports.map((item) => item.term)].join(" ");
+                  return <li key={link.topicNumber} data-topic-entry data-topic-search-text={searchText}>
                     {link.available ? <a aria-current={isCurrent ? "step" : undefined} data-proof-topic-number={link.topicNumber} href={sitePath(link.href)}>
                       <span>{toRomanNumeral(link.topicNumber)}</span><strong>{link.title}</strong>
                     </a> : <span aria-disabled="true" className="proof-chapter-unavailable"><span>{toRomanNumeral(link.topicNumber)}</span><strong>{link.title}</strong><small>Forthcoming</small></span>}
                   </li>;
                 })}
-              </ol>
+              </ol></section>)}
+              <p className="reader-search-status" aria-live="polite" data-topic-search-status />
             </details>
           </nav>
-          {chapterSections.length ? <nav className="reader-section-directory" aria-label="On this topic">
-            <details data-reader-section-directory open>
-            <summary>On this topic</summary>
-            <ol>{chapterSections.map((section) => <li key={section.id}><a href={"#" + section.id}>{section.title}</a></li>)}</ol>
-            <a href="#source-argument">Source statements and proofs</a>
-            </details>
-          </nav> : null}
         </aside>
         <article className="proof-topic-panel proof-chapter-panel reader-chapter" data-chapter-reading-mode="guided" data-proof-chapter data-proof-route={routeKey}>
           <header className="proof-chapter-heading reader-chapter-heading">
             <p className="section-label">Topic {roman} of XIV</p>
             <h1>{route.title}</h1>
             <p className="reader-chapter-question">{question ?? topic.question}</p>
-            <p className="reader-chapter-source">{manuscriptPages ?? topic.manuscriptPages}</p>
-            <div className="proof-edition-meta reader-chapter-meta">
+            <details className="reader-chapter-publication"><summary>Source and revision</summary><p className="reader-chapter-source">{manuscriptPages ?? topic.manuscriptPages}</p><div className="proof-edition-meta reader-chapter-meta">
               {stats.map((stat) => <span key={stat.label}>{stat.value} {stat.label}</span>)}
               {firstPublishedAt ? <time dateTime={firstPublishedAt}>First published {formatDate(firstPublishedAt)}.</time> : null}
               <time dateTime={updatedAt}>Last revised {formatDate(updatedAt)}.</time>
-            </div>
+            </div></details>
           </header>
           {showReadingControls ? <>
             <ProofChapterReadingControls />
@@ -97,7 +125,7 @@ export function ProofChapterShell({
         </article>
       </div>
       <section className="proof-responsibility reader-responsibility">
-        <div><p className="footer-disclosure-label">Corrections are welcome</p><h2>Accessibility does not lower the standard of proof.</h2></div>
+        <div><p className="footer-disclosure-label">Before you continue</p><h2>Check your understanding</h2><p>{checkpoints[route.topicNumber - 1]}</p></div>
         <p>This reader was developed with generative-AI assistance. Mathematical and editorial responsibility remains with the authors. If a definition, proof step, source, diagram, or historical classification is unclear or incorrect, please <a href={sitePath("/#contact-heading")}>send a correction</a>.</p>
       </section>
     </main>
@@ -108,5 +136,6 @@ export function ProofChapterShell({
       <a className="to-top" href="#top">To the top ↑</a>
     </div></footer>
     <script src={sitePath("/proof-chapter.js")} defer />
+    <script src={sitePath("/reader-learning.js")} defer />
   </>;
 }

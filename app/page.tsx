@@ -56,18 +56,23 @@ export default function Home() {
               </p>
               <p className="hero-deck">{homeContent.descriptor}</p>
 
-              <dl className="paper-facts">
+              <nav className="reader-home-actions" aria-label="Start here">
+                <a href={sitePath("/prerequisites/#reading-routes")}>Start learning →</a>
+                <a href="#region-atlas">Explore the region</a>
+                <a href="https://arxiv.org/abs/2609.26058v2">Read the research paper ↗</a>
+              </nav>
+              <details className="reader-home-publication"><summary>Publication, editions and verification</summary><dl className="paper-facts">
                 <div><dt>Current preprint</dt><dd><a href="https://arxiv.org/abs/2609.26058v2">arXiv:2609.26058v2</a></dd></div>
                 <div><dt>Last revised on arXiv</dt><dd><time dateTime="2026-09-23">23 September 2026</time></dd></div>
                 <div><dt>arXiv edition</dt><dd>40 pages · <a href="https://arxiv.org/pdf/2609.26058v2">Read the paper</a></dd></div>
                 <div><dt>Teaching manuscript</dt><dd><a href={sitePath("/paper/teaching-manuscript.pdf")}>A proof of the Karpelevič theorem via invariant polygons</a></dd></div>
                 <div><dt>Source revision</dt><dd><code>{buildRevision}</code></dd></div>
               </dl>
-              <p className="reader-home-start"><a href={sitePath("/proof/")}>Start with Topic I: matrices become polygons</a></p>
               <details className="checksum">
                 <summary>Verify the downloadable arXiv PDF</summary>
                 <code>SHA-256 {homeContent.manuscript.localArxivDraftChecksum}</code>
                 <p>The <a href={sitePath("/paper/critical-invariant-polygons.pdf")}>downloadable PDF</a> is the current arXiv v2. The chapter explanations and detailed proofs follow the teaching manuscript linked above. The two documents have different titles and exposition.</p>
+              </details>
               </details>
 
               <p className="page-publication-meta">
@@ -178,7 +183,7 @@ export default function Home() {
                   <p>{step.text}</p>
                 </article>
               ))}
-              <p>Read the topics in order, or use the <a href={sitePath("/prerequisites/")}>background page</a> to refresh the analysis and linear algebra used along the way.</p>
+              <p>Choose <a href={sitePath("/prerequisites/#main-ideas")}>the main-ideas route</a> to see the complete mechanism with identified lemmas accepted temporarily, or <a href={sitePath("/proof/")}>study the complete proof through Topics I–XII</a>. Both lead to <a href={sitePath("/proof/topic-xiv/")}>the eight-state example</a>; XIII is an optional extension.</p>
             </div>
           </section>
         </div>

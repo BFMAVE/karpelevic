@@ -4,6 +4,8 @@ The question is simple to ask. Fix a positive integer $n$. Which complex numbers
 
 One row, such as $(1/2,1/2,0,0)$, asks us to replace four available values by the average of the first two. A matrix applies one such instruction at every coordinate. The eigenvector condition asks for a pattern of complex values that all these instructions reproduce after one common multiplication by $\lambda$. The coordinates may have different arguments, so this common multiplication rotates the whole pattern. Geometry lets us see which rotations an averaging operation can reproduce.
 
+Here $Av$ averages a **column of values**. Under the row-stochastic convention, a probability distribution instead evolves as a **row** $\mu^T\mapsto\mu^TA$. The eigenvector picture uses the first interpretation; stationary probabilities later use the second.
+
 If $Av=\lambda v$, choose a coordinate $v_i$ of largest absolute value. The triangle inequality gives
 
 $$|\lambda|\,|v_i|=\left|\sum_j a_{ij}v_j\right|\le\sum_j a_{ij}|v_j|\le |v_i|.$$
@@ -14,13 +16,32 @@ View each complex coordinate $v_j$ as a point of the plane. A **convex combinati
 
 $$P=\operatorname{conv}\{v_1,\ldots,v_n\}.$$
 
+Before proceeding, [move the weights in the background interaction](/prerequisites/#average-heading). Keep the two points fixed and vary their nonnegative weights while their sum stays one. The average travels along their joining segment. A stochastic row makes exactly this choice among its available coordinates.
+
 The eigenvector equation says that $\lambda v_i$ is a convex combination of the original points. Consequently $\lambda P\subseteq P$. Multiplying by $\lambda=\rho e^{i\theta}$ rotates every point through $\theta$ and scales its distance from zero by $\rho$. The matrix equation has become a rotation and contraction fitting inside a polygon.
 
 A **vertex** is an extreme point: it cannot be expressed as a nontrivial average of other points of the hull. Some coordinates may repeat or lie inside the hull, so the polygon has at most $n$ vertices. A finite convex hull is called a **polytope**; in the plane it can also be a segment or a single point.
 
 ### An exact four-point picture
 
-Take $v=(1,i,-1,-i)^T$, and let $C$ shift each coordinate to the next one, returning from the fourth to the first. Then $Cv=iv$. The stochastic matrix $A=(I+C)/2$, where $I$ is the identity, satisfies
+Take $v=(1,i,-1,-i)^T$, and let $C$ shift each coordinate to the next one, returning from the fourth to the first. Then $Cv=iv$. Writing out the stochastic matrix $A=(I+C)/2$, where $I$ is the identity, gives
+
+$$
+A=\begin{pmatrix}
+1/2&1/2&0&0\\
+0&1/2&1/2&0\\
+0&0&1/2&1/2\\
+1/2&0&0&1/2
+\end{pmatrix}.
+$$
+
+Its first row computes
+
+$$
+(Av)_1=\tfrac12(1)+\tfrac12(i)=\frac{1+i}{2}.
+$$
+
+Algebraically, this is the first coordinate of $\lambda v$. Geometrically, it is the midpoint of the side joining the points $1$ and $i$. The remaining rows make the same midpoint choice on the other three sides. Hence
 
 $$
 Av=\frac{1+i}{2}v=\lambda v,\qquad
@@ -46,6 +67,8 @@ $$\lambda\in\Theta_n\quad\Longleftrightarrow\quad\lambda P\subseteq P\text{ for 
 There is one small detail in the forward direction. If all eigenvector coordinates are the same nonzero number, the equation forces $\lambda=1$. We then use any nontrivial segment, which multiplication by $1$ preserves. The one-state case is handled separately: $\Theta_1=\{1\}$.
 
 Why check only vertex images? Any point of $P$ is an average $x=\sum_jc_jw_j$. Linearity gives $\lambda x=\sum_jc_j\lambda w_j$. If each vertex image belongs to $P$, convexity puts this average in $P$ too. Conversely, invariance of the whole polygon certainly includes the vertices. This observation will let later deformations verify finitely many contacts instead of every point of a two-dimensional region.
+
+The main bridge is now complete: stochastic eigenvectors and invariant finite hulls describe the same objects. The rest of this topic supplies three tools used later: zero lies inside a nonreal invariant polygon, maximal radii are attained, and attainable rays are filled inward. On a first pass through the main ideas, retain those statements; the complete-proof route includes their justifications below.
 
 ### Why zero is inside a nonreal invariant polygon
 
@@ -83,6 +106,22 @@ is stochastic and satisfies $A_tv=t\lambda v$. For $\lambda=1$, the stochastic m
 
 Take the three-cycle matrix $A=\begin{pmatrix}0&1&0\\0&0&1\\1&0&0\end{pmatrix}$ and $\omega=e^{2\pi i/3}$. With $v=(1,\omega,\omega^2)^T$, direct multiplication gives $Av=\omega v$. Its coordinate hull is an equilateral triangle; multiplication by $\omega$ permutes the vertices. For $0\le t\le1$, the matrix $tA+(1-t)\mathbf1\mathbf1^T/3$ realizes $t\omega$.
 
-Check the reverse translation: if a vertex image is the midpoint of two adjacent vertices, which matrix row represents it? The answer puts $1/2$ in those two columns and zero elsewhere. Rows are geometric averaging instructions.
+<div class="reader-checkpoint" data-retrieval-checkpoint>
+
+**Row checkpoint.** Replace the first row of the four-point example by $(1/4,3/4,0,0)$. Which point does that row compute, and where does it lie? Does changing this row alone establish a new eigenpair for the whole matrix?
+
+<details class="reader-checkpoint-hint">
+<summary>Hint</summary>
+
+Multiply that row by $(1,i,-1,-i)^T$. The eigenvector equation must use the same multiplier at every row, not just the first.
+
+</details>
+<details class="reader-checkpoint-solution">
+<summary>Solution</summary>
+
+The row computes $(1+3i)/4$, strictly inside the side from $1$ to $i$ and closer to $i$. Its modulus is $\sqrt{10}/4<1$. This is a valid averaging instruction, but the unchanged other rows still give the old multiplier $(1+i)/2$. Thus the one altered row does not make this same column an eigenvector for a new common multiplier. To build a matrix eigenpair from geometry, we must specify compatible averaging instructions at every vertex.
+
+</details>
+</div>
 
 Topic II asks what must happen when this rotation and contraction has the largest feasible radius for its angle. The answer is boundary contact at every vertex image and at every side.

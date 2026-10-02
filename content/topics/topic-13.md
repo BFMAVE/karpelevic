@@ -1,5 +1,7 @@
 ### Measuring a rotation with a polygon
 
+This is an optional application of the completed theorem. If you have just finished Topic XII, Topic XIV's eight-state example provides a concrete consolidation before the asymptotic estimates here.
+
 The boundary theorem also answers a concrete question about measuring vector size. Suppose a planar map rotates through $\theta$ and multiplies Euclidean lengths by a positive number $\rho$. If the measuring shape is a polygon with at most $N$ vertices, how small can its contraction factor be? The answer is controlled by the same boundary radius $K_N(\theta)$.
 
 Let $N\ge4$, take $0\le\theta\le\pi$, let $R_\theta$ denote rotation through $\theta$, and set $T=\rho R_\theta$. Reflection covers the other directions. Choose a convex polygon $P$ with at most $N$ vertices and zero in its interior. Define its gauge by
@@ -91,7 +93,13 @@ H'(1)=\frac{s}{m}\sin A+q\sin B
 =\frac{2\pi}{m}\bigl(1+O(N^{-2})\bigr).
 $$
 
-The mean-value theorem gives $D=(1-K)H'(\xi)$ for some $K<\xi<1$. Replacing $H'(\xi)$ by $H'(1)$ needs care. The bound $K\ge\cos(\pi/N)$ first gives $1-K=O(N^{-2})$, enough for derivative relative error $O(N^{-1})$. Substituting this weaker estimate back gives $1-K=O(mN^{-3})=O((qN^2)^{-1})$. Since $s/m<2q$, the powers of $\xi$ in the derivative now differ from one by $O(N^{-2})$. This improves the derivative comparison to the required relative error. Therefore $1-K=mAB(A+B)/(4\pi)\,(1+O(N^{-2}))$, which gives the formula above.
+The mean-value theorem gives $D=(1-K)H'(\xi)$ for some $K<\xi<1$. Replacing $H'(\xi)$ by $H'(1)$ needs care. The bound $K\ge\cos(\pi/N)$ first gives $1-K=O(N^{-2})$, enough for derivative relative error $O(N^{-1})$. Substituting this weaker estimate back gives $1-K=O(mN^{-3})=O((qN^2)^{-1})$. Since $s/m<2q$, the powers of $\xi$ in the derivative now differ from one by $O(N^{-2})$. This improves the derivative comparison to the required relative error. Therefore
+
+$$
+1-K=\frac{mAB(A+B)}{4\pi}\,(1+O(N^{-2})),
+$$
+
+which gives the formula above.
 
 The relative statement is for open intervals. At an endpoint both the leading term and the gap vanish; dividing them there would be undefined.
 

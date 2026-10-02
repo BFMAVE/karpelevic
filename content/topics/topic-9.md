@@ -2,6 +2,12 @@
 
 The geometric product permits different weights on different sides. To prove a sharp bound, we must compare all those possibilities at once. Normalising each factor puts them on a single straight line. On that line, the logarithm of the distance from zero is a strictly convex function of the angle. Averaging then says precisely why equal weights are optimal.
 
+::: {.reader-sharpness-ledger}
+**Upper bound — proved here.** Under the product and exact real phase hypotheses, no radius can exceed the scalar candidate. We will also identify exactly when equality holds.
+
+**Attainment — next in Topic X.** Knowing the equality condition does not yet produce a stochastic matrix. That construction supplies the other half of sharpness.
+:::
+
 The product fixes a multiplicative constraint on factor sizes, while the real phase fixes an additive constraint on their angles. Taking logarithms makes the sizes additive too. We can then compare factors by moving their angles toward the same average. The straight-line normalisation is what makes their sizes a single function of those angles; without it, an average angle alone would not determine a size comparison.
 
 Use the oriented Farey data from Topic VIII: integers $p,r$, positive integers $q<s$ and $m$, and an angle $\vartheta$ between $2\pi p/q$ and $2\pi r/s$. Set
@@ -73,6 +79,23 @@ $$
 $$
 
 Different weights have different factor arguments.
+
+::: {.reader-checkpoint #jensen-prediction}
+**Prediction checkpoint.** Keep the average of two unequal factor angles fixed. If both angles are replaced by that common average on the normalised line, should the product of factor sizes increase, decrease, or stay the same? Make a prediction before reading the numbers below.
+
+<details>
+<summary>Hint</summary>
+
+The size is $e^{F(u)}$, so the product of two sizes is $e^{F(u_1)+F(u_2)}$. Compare the point on a strictly convex graph at the average angle with the midpoint of the chord.
+
+</details>
+<details>
+<summary>Solution</summary>
+
+It decreases. With $\bar u=(u_1+u_2)/2$ and $u_1\ne u_2$, strict convexity gives $2F(\bar u)<F(u_1)+F(u_2)$. Exponentiation preserves this inequality. This prediction concerns the factors at a fixed $w$; it does not assert that both weight choices satisfy an eigenvalue product. The next calculation isolates this comparison.
+
+</details>
+:::
 
 For a concrete line calculation, choose $w=(1+i)/2$. Then $a=b=1/2$, $c=1$, and the line is $\operatorname{Re}g+\operatorname{Im}g=1$. At weight zero the normalised factor is $g(0)=(1+i)/2$, with angle $\pi/4$ and size $1/\sqrt2$. At weight $1/2$ it is $g(1/2)=i$, with angle $\pi/2$ and size one. Their average angle is $3\pi/8$. Hence
 

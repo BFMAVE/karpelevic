@@ -7,11 +7,7 @@ export function ProofChapterReadingControls() {
       hidden
     >
       <div>
-        <p className="section-label">Reading controls</p>
-        <h2 id="proof-chapter-reading-controls-heading">How to read this topic</h2>
-        <p>
-          Read the illustrated explanation, or go directly to the full source proof.
-        </p>
+        <h2 id="proof-chapter-reading-controls-heading" className="proof-visually-hidden">Choose the reading layer</h2>
       </div>
       <div className="proof-chapter-reading-actions">
         <div role="group" aria-label="Reading layer">
@@ -21,14 +17,14 @@ export function ProofChapterReadingControls() {
             data-chapter-reading-mode-button="guided"
             type="button"
           >
-            Guided
+            Guided lesson
           </button>
           <button
             aria-pressed="false"
             data-chapter-reading-mode-button="formal"
             type="button"
           >
-            Formal
+            Source proof
           </button>
         </div>
         <div role="group" aria-label="Complete proofs">

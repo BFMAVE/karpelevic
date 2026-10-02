@@ -4,11 +4,41 @@ Fix a nonreal number $\zeta=\rho e^{i\theta_\zeta}$ with $0<\rho<1$, choosing it
 
 These assumptions hold when we choose a maximal eigenvalue on a ray in $\Theta_n$ and let $N\le n$ be its least realizing order. Indeed, an outward realization of order at most $N$ would also be one of order $n$ after padding. We do not assume that $N=n$. That distinction is why the independent order comparison in Topic XI is necessary.
 
+For example, any three-state realization can be enlarged to eight states by appending a five-state identity block. Those extra states preserve its eigenvalue; they do not force its geometric proof to use eight vertices. Our reduction therefore starts at the least order $N$. Later we obtain a radius formula at that order and must compare it independently with the formula for the requested order $n$, before identifying either formula with the full boundary.
+
 Every invariant polygon under consideration has exactly $N$ vertices. The goal is stronger than finding a single well-chosen polygon: **for every such polygon, each vertex image lies on the boundary and every side meets the image polygon**. We will need this universal statement after changing vertices in Topics IV and VI.
 
 If the entire image polygon were strictly inside $P$, increasing $\rho$ a little would preserve containment by continuity. But that argument does not settle a mixed configuration: perhaps one vertex image is interior while all the others already touch the boundary. Those other contacts prevent a direct outward expansion of the same polygon. Deflation changes the realising matrix, and with it the polygon, so that even one interior vertex image becomes impossible at an extremal eigenvalue.
 
-### The small amount of Perron–Frobenius theory we use
+### Lesson 1: watch deflation move an eigenvalue outward
+
+The subtraction and normalization can be seen before introducing their general machinery. Let $\omega=e^{2\pi i/3}$ and $v=(1,\omega,\omega^2)^T$, so $1+\omega+\omega^2=0$. Take
+
+$$
+A=\frac16\begin{pmatrix}1&4&1\\1&1&4\\4&1&1\end{pmatrix},
+\qquad \pi^T=(1/3,1/3,1/3).
+$$
+
+Every row and column sums to one, so $A$ is stochastic and $\pi^TA=\pi^T$. Its first row gives $(1+4\omega+\omega^2)/6=\omega/2$. Cyclically, the other rows give $Av=(\omega/2)v$.
+
+Subtract the same small reset row from all three rows:
+
+$$
+B=A-\tfrac14\mathbf1\pi^T
+=\frac1{12}\begin{pmatrix}1&7&1\\1&1&7\\7&1&1\end{pmatrix}.
+$$
+
+Each entry remains positive, and each row now sums to $r=3/4$. Because $\pi^Tv=0$, the subtracted rank-one matrix annihilates $v$, so $Bv=(\omega/2)v$. Dividing by the new row sum gives the stochastic matrix
+
+$$
+\widehat A=\frac{B}{r}
+=\frac19\begin{pmatrix}1&7&1\\1&1&7\\7&1&1\end{pmatrix},
+\qquad \widehat Av=\frac{2\omega}{3}v.
+$$
+
+The chosen eigenvalue has moved from radius $1/2$ to radius $2/3$ at the same angle. This is an exact nonextremal example. All its rows are positive, allowing a uniform subtraction and an especially simple normalization. The general proof below needs only one positive row; then the row sums differ, and a positive diagonal change of coordinates restores them before division by $r$. At a radially extremal eigenvalue, that outward movement is forbidden.
+
+### The positive eigenvector needed for the general normalization
 
 A nonnegative matrix is **irreducible** if its directed graph has a path from every vertex to every other, drawing an arrow $i\to j$ when $a_{ij}>0$. For an irreducible stochastic matrix, a stationary probability row $\pi^T$ has strictly positive entries. More generally, an irreducible nonnegative matrix has a positive right eigenvector for its spectral radius and a positive left eigenvector; a positive left eigenvector identifies that radius. These are the precise Perron–Frobenius facts used below. They extend familiar eigenvector theory to matrices with nonnegative entries.
 
@@ -54,13 +84,25 @@ $$
 
 Every vertex has positive weight. The boundary midpoint $(1+i)/2$ cannot have such a representation: the side inequality $x+y\le1$ is strict at $-1$ and $-i$, so giving either of them positive weight would lower the average below one. The distinction is geometric, rather than a special choice of matrix entries.
 
-### A second polygon detects contact with every side
+### Lesson 2: exchange points for side inequalities
 
 To transfer the vertex conclusion to sides, encode a side by a linear inequality. Identify the complex plane with $\mathbb R^2$ and write $\langle a,x\rangle$ for the usual dot product. Because zero is interior, each supporting side line can be normalized to $\langle a,x\rangle=1$, with the polygon in $\langle a,x\rangle\le1$.
 
 The **polar polygon** is
 
 $$P^\circ=\{a:\langle a,x\rangle\le1\text{ for every }x\in P\}.$$
+
+The **adjoint** $T^*$ is the transpose map in real coordinates; it satisfies $\langle T^*a,x\rangle=\langle a,Tx\rangle$. For multiplication by $\zeta$, it is multiplication by $\bar\zeta$. The dictionary we will prove and use is:
+
+| Original polygon $P$ | Polar polygon $P^\circ$ |
+| --- | --- |
+| A vertex $x$ to be tested. | An inequality $\langle a,x\rangle\le1$ imposed on polar points $a$. |
+| A side with normalized outward normal $a_i$. | A vertex $a_i$, determined by its two endpoint equalities. |
+| The original image $Tx$ meets that side. | The polar image $T^*a_i$ has equality in the inequality associated with $x$. |
+
+For the same diamond $P=\{|x|+|y|\le1\}$, the polar is the square $P^\circ=[-1,1]^2$. A polar vertex $a=(1,1)$ represents the original side $x+y=1$. With the contact map $Tz=((1+i)/2)z$, its adjoint sends $a$ to $(1,0)$, a point on the polar boundary. Choosing the original vertex $x=(1,0)$ gives $\langle T^*a,x\rangle=1$, and its image $Tx=(1/2,1/2)$ lies on $x+y=1$. This exact model shows how a polar vertex contact certifies an original side contact; the general proof obtains that contact from extremality.
+
+<!-- reader-figure:early -->
 
 We need to prove that this new polygon has exactly one vertex for each original side. First, checking its inequalities at the original vertices is enough, by convexity:
 
@@ -78,13 +120,9 @@ For the diamond from Topic I, the side endpoints $(1,0)$ and $(0,1)$ give the eq
 
 <!-- reader-figure:early-extra -->
 
-The **adjoint** $T^*$ is the transpose map in real coordinates; it satisfies $\langle T^*a,x\rangle=\langle a,Tx\rangle$. For complex multiplication by $\zeta$, it is multiplication by $\bar\zeta$. Invariance of $P$ gives $T^*P^\circ\subseteq P^\circ$: each polar inequality remains valid when tested at $Tx\in P$.
+Invariance of $P$ gives $T^*P^\circ\subseteq P^\circ$: for $a\in P^\circ$ and $x\in P$, the adjoint identity reads $\langle T^*a,x\rangle=\langle a,Tx\rangle\le1$, because $Tx\in P$.
 
 Conjugation preserves the two extremality assumptions. Apply the vertex-contact result to $P^\circ$: for each polar vertex $a$, $T^*a$ is on its boundary. A polar point satisfying all $N$ vertex inequalities strictly has a whole small neighbourhood satisfying them, so it is interior. Thus at least one original vertex $x$ satisfies $\langle T^*a,x\rangle=1$. Equivalently $Tx$ lies on the original side $\langle a,Tx\rangle=1$. Every side meets $TP$.
-
-For the same diamond $P=\{|x|+|y|\le1\}$, the polar is the square $P^\circ=[-1,1]^2$. A polar vertex $a=(1,1)$ represents the original side $x+y=1$. With the contact map $Tz=((1+i)/2)z$, its adjoint sends $a$ to $(1,0)$, a point on the polar boundary. Choosing the original vertex $x=(1,0)$ gives $\langle T^*a,x\rangle=1$, and its image $Tx=(1/2,1/2)$ lies on $x+y=1$. This exact model shows how a polar vertex contact certifies an original side contact; the general proof obtains that contact from extremality.
-
-<!-- reader-figure:early -->
 
 ### Boundary averages use one face
 

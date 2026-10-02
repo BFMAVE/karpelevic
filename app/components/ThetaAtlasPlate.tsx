@@ -34,10 +34,14 @@ export function ThetaAtlasPlate() {
   }));
 
   return (
-    <figure className="plate theta-atlas">
+    <figure className="plate theta-atlas" id="region-atlas">
+      <fieldset className="reader-atlas-controls"><legend>Explore the eigenvalue region</legend>
+        <label><input type="radio" name="atlas-view" value="single" defaultChecked /> One region: order four</label>
+        <label><input type="radio" name="atlas-view" value="comparison" /> Compare orders one–seven</label>
+      </fieldset>
       <div className="plate-heading" aria-hidden="true">
         <span>Plate I</span>
-        <span>Orders I–VII</span>
+        <span className="atlas-single-copy">Allowed region · order IV</span><span className="atlas-comparison-copy">Orders I–VII</span>
       </div>
       <svg
         className="theta-figure"
@@ -46,10 +50,10 @@ export function ThetaAtlasPlate() {
         aria-labelledby="theta-atlas-title theta-atlas-description"
       >
         <title id="theta-atlas-title">
-          The stochastic eigenvalue regions from order one through order seven
+          The stochastic eigenvalue region and its comparison with other orders
         </title>
         <desc id="theta-atlas-description">
-          One comparison plot showing the nested boundaries of Theta four
+          The starting view shows the filled order-four eigenvalue region, with a dashed unit circle for reference. The comparison view shows the nested boundaries of Theta four
           through Theta seven, the exact triangle and real interval for
           Theta three, the interval Theta two, and the point Theta one.
         </desc>
@@ -92,10 +96,17 @@ export function ThetaAtlasPlate() {
         />
 
         <path
+          data-atlas-single-fill
+          className="theta-atlas-fill"
+          d={regions[0].path}
+        />
+        <path
+          data-atlas-comparison-fill
           className="theta-atlas-fill"
           d={regions[regions.length - 1].path}
         />
         <path
+          data-atlas-comparison-fill
           className="theta-atlas-hatching"
           d={regions[regions.length - 1].path}
         />
@@ -174,7 +185,10 @@ export function ThetaAtlasPlate() {
       </div>
 
       <figcaption>
-        <span>Figure 1.</span> The regions Θ<sub>1</sub> through Θ
+        <p className="atlas-single-copy"><strong>The shading represents the allowed region Θ₄.</strong> Every point in Θ₄ is an eigenvalue of some four-state stochastic matrix; a point outside the exact region cannot occur at order four. The drawing approximates its boundary. The dashed circle marks the elementary bound |λ| ≤ 1.</p>
+        <p className="atlas-comparison-copy"><strong>More states allow a larger region.</strong> Compare the labelled boundaries; the shaded outer region belongs to order seven. Orders two and three provide elementary starting examples.</p>
+        <p>Orders four–seven are sampled numerical drawings of the proved boundary equations.</p>
+        <details><summary>Exact cases and numerical provenance</summary><p>The regions Θ<sub>1</sub> through Θ
         <sub>7</sub> in one coordinate plane. Orders one, two, and three are
         drawn from their exact elementary descriptions; the contours for
         orders four through seven are evaluated cell by cell from the
@@ -182,7 +196,7 @@ export function ThetaAtlasPlate() {
         sampled numerical polylines, with 34 points per Farey interval before
         shared endpoints are removed; SVG coordinates are rounded to 0.01.
         The exact regions are nested by the matrix-padding argument in Topic I;
-        Topic XI compares their scalar candidates.
+        Topic XI compares their scalar candidates.</p></details>
       </figcaption>
     </figure>
   );

@@ -25,6 +25,17 @@ Here $\operatorname{Arg}$ is the principal argument, the representative in $(-\p
 
 The product has two kinds of information to carry. Its absolute value measures accumulated contraction along the return paths. Its angle measures their accumulated turning. Complex multiplication records the latter only modulo a full turn, so we must carry the real angular sum alongside the algebra. Losing that integer here would later allow the convexity calculation to compare the wrong branch of the polynomial.
 
+<aside class="reader-notation-panel" aria-label="Multiplier and angle notation">
+
+| Symbol | Meaning to retain throughout the topic |
+| --- | --- |
+| $\zeta$, $\theta_\zeta$ | The multiplier after arranging half-open contacts, with its angle in $(0,2\pi)$. |
+| $\omega$, $\vartheta$ | Either that multiplier or its conjugate, oriented so that the smaller Farey denominator comes first. |
+| $u_j$ | The principal argument of $\omega^q-\beta_j$, proved to be a positive side-angle increment. |
+| $\Phi_i$ | Continued real vertex angles, with $\Phi_{i+N}=\Phi_i+2\pi$, retaining full turns. |
+
+</aside>
+
 ### The cancellation mechanism
 
 Suppose successive nonzero base coordinates $W_0,\ldots,W_m$ satisfy
@@ -57,7 +68,27 @@ Multiplying the five equations cancels all five vertices and gives $(\lambda-1/2
 
 <!-- reader-figure:early -->
 
-### Coprime shift with more than one interior contact
+<div class="reader-checkpoint" data-retrieval-checkpoint>
+
+**Branch checkpoint.** With $\eta=e^{2\pi i/5}$, compare $\lambda_a=(1+\eta)/2$ and $\lambda_b=(1+\eta^2)/2$. Both satisfy $(\lambda-1/2)^5=(1/2)^5$. Compute the real sum of the five principal factor arguments for each candidate. Does the polynomial equation select the one-turn branch?
+
+<details class="reader-checkpoint-hint">
+<summary>Hint</summary>
+
+Subtract $1/2$ before taking arguments. The two resulting factors are $\eta/2$ and $\eta^2/2$, whose principal arguments are both between zero and $\pi$.
+
+</details>
+<details class="reader-checkpoint-solution">
+<summary>Solution</summary>
+
+For $\lambda_a$, the sum is $5(2\pi/5)=2\pi$. For $\lambda_b$, it is $5(4\pi/5)=4\pi$. Their fifth powers are the same positive real number, so the polynomial cannot distinguish these sums. The arc with Farey data $(p,q,r,s)=(0,1,1,5)$, $m=5$, $e=0$ requires the real phase $2\pi(r-mp)=2\pi$; only $\lambda_a$ has that winding. The second candidate also lies at angle $2\pi/5$, outside this arc's strict angle interval. Both numbers are eigenvalues of the stochastic matrix $(I+C_5)/2$, on different cyclic eigenvectors. The point is branch selection for a particular arc, not a claim that one number is spectrally impossible.
+
+</details>
+</div>
+
+The polynomial forgets the branch selected by the geometry. The real winding identity restores that information. The ordinary coprime construction below is the main mechanism: arrange equal-length return factors, close the path, multiply, and telescope the continued angles. The two exceptional contact patterns are treated afterwards; they preserve this output while changing how the closing path is obtained.
+
+### The core construction: a coprime shift with several interior contacts
 
 Assume $\delta=1$ and $\varphi>1$. The return arithmetic supplies integers $q,p,h$ with
 
@@ -132,7 +163,7 @@ The index zero at the closing endpoint and the continued index eight name the sa
 
 <!-- reader-figure:early-extra -->
 
-### Coprime shift with a single interior contact
+### Complete-proof continuation: the single-contact exception
 
 If $\delta=\varphi=1$, there is no next record from which to obtain $q$. Instead choose the unique $q\in\{1,\ldots,N-1\}$ satisfying $q\kappa\equiv1$ modulo $N$, and put $p=(q\kappa-1)/N$. This inverse exists because $\kappa,N$ are coprime.
 
@@ -140,7 +171,7 @@ Set $m=\lfloor N/q\rfloor$ and $e=N-mq$ as before. The original interior contact
 
 For an arithmetic check, $N=7$ and $\kappa=3$ give $q=5$, $p=2$, because $5\cdot3-2\cdot7=1$. Then $m=1$, $e=2$, and the product would be $\zeta^2(\zeta^5-\beta_1)=1-\beta_1$, with real phase $2\vartheta+u_1=2\pi$. This illustrates the algebra of this case; it does not assert that these data alone provide an extremal polygon.
 
-### Several index cycles: reverse the orientation
+### Complete-proof continuation: several index cycles require reversal
 
 Assume $\varphi=\delta\ge2$. Define $L=N/\delta$ and $K=\kappa/\delta$. Each index cycle has length $L$ and contains one interior contact. Every base therefore first returns to its own assigned side after $L$ steps. Choose $h\in\{1,\ldots,L-1\}$ with $Kh\equiv-1$ modulo $L$, and put
 

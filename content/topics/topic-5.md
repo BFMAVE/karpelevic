@@ -14,6 +14,50 @@ Their heights are three and five. They use each of the eight indices once before
 
 Keep the distinction between a destination index and a destination point. Returning to index two means that the image lands at $c_2$, inside the side ending at $v_2$; it does not mean that it equals $v_2$. All intermediate destinations outside the base set really are vertices. This is why a height records a power of $\zeta$ up to one final averaging equation.
 
+<div class="reader-checkpoint" data-retrieval-checkpoint>
+
+**Return checkpoint.** Starting at base two, the index path is $2\to5\to0\to3\to6\to1$. Does reaching index zero after two steps count as a return? What is the actual point at the five-step return?
+
+<details class="reader-checkpoint-hint">
+<summary>Hint</summary>
+
+A return is tested against the designated base set $I=\{1,2\}$, not against a familiar label or the origin of the index circle.
+
+</details>
+<details class="reader-checkpoint-solution">
+<summary>Solution</summary>
+
+Zero is outside $I$, so it is an intermediate vertex: $\zeta^2v_2=v_0$. The first later index in $I$ is one, reached after five steps. Its actual point is $c_1$, strictly inside side $(v_0,v_1)$, not vertex $v_1$.
+
+</details>
+</div>
+
+### Compute the records before introducing the integer basis
+
+For the same $N=8$, $\kappa=3$, the complete residue period is shown below. A strict record is larger than every earlier residue; time zero is the initial record. The full-wrap counter is $\lfloor3t/8\rfloor$, so
+
+$$
+3t=8\lfloor3t/8\rfloor+[3t]_8.
+$$
+
+The two right-hand terms answer different questions: where are we among the eight labels, and how many complete label wraps preceded that position?
+
+| Time $t$ | Unreduced $3t$ | Full label wraps | Residue $[3t]_8$ | Strict record? | What this entry supplies |
+| --- | --- | --- | --- | --- | --- |
+| $0$ | $0$ | $0$ | $0$ | Initial | Deficit $8$. |
+| $1$ | $3$ | $0$ | $3$ | Yes | Deficit $5$. |
+| $2$ | $6$ | $0$ | $6$ | Yes | Deficit $2$, the chosen number of bases. |
+| $3$ | $9$ | $1$ | $1$ | No | The label wrapped once; it does not exceed record $6$. |
+| $4$ | $12$ | $1$ | $4$ | No | Still below record $6$. |
+| $5$ | $15$ | $1$ | $7$ | Yes | The next deficit is $1$. |
+| $6$ | $18$ | $2$ | $2$ | No | Arithmetic continues, but there is no new record. |
+| $7$ | $21$ | $2$ | $5$ | No | The last distinct residue of this period. |
+| $8$ | $24$ | $3$ | $0$ | No | The residue cycle restarts. |
+
+This table follows the **index permutation**. It must not be read as $\zeta^tv_0=v_{[3t]_8}$ after a side-interior contact has occurred: that equality holds only along vertex-to-vertex portions of a path. At a positive record time $h$, the second coordinate used below is $b=\lceil3h/8\rceil$, the next multiple of eight above $3h$. It is one more than the completed-wrap counter, because a positive record has nonzero residue. Thus the records at times two and five give $(h,b)=(2,1)$ and $(5,2)$.
+
+The integer basis will turn these two counters into return heights. Its job is to prove that the two displayed towers partition all eight vertices, rather than merely proposing two plausible paths.
+
 ### Encode records with integer pairs
 
 Topic IV proved that $\varphi$ is the deficit of a record in $a_t=[t\kappa]_N$: a record exceeds every earlier residue, and its deficit is $N-a_t$. Let $\delta=\gcd(N,\kappa)$. Only multiples of $\delta$ occur, so the last record has deficit $\delta$.
@@ -61,7 +105,7 @@ $$
 
 has the form $W=\xi V+\eta V'$ with $0<\xi,\eta<1$. If $\xi+\eta>1$, replace $W$ by $V+V'-W$; its two coefficients remain positive and now sum to less than one. The time coordinate is $0<\xi h+\eta h'<h'$, and its deficit is $0<\xi\nu+\eta\nu'<\nu$. This integer time would improve the old record before the next record, a contradiction. Therefore $D=1$, which gives $\det(U,V)=1$.
 
-For a concrete check of the rounding contradiction, consider $N=17$ and $\kappa=3$. The residues at times two and five are six and fifteen, so $V=(2,1)$ and $V'=(5,1)$ are both records, with deficits eleven and two. They cannot be consecutive: $-\det(V,V')=3$. Choose $W_0=(1,0)$, so $V'=V+3W_0$. The displayed rounding rule gives $W=V+W_0=(3,1)=(2/3)V+(1/3)V'$. Its time is three and its deficit is eight. It is an intervening better record, exactly the obstruction the general proof finds whenever the determinant exceeds one.
+For a concrete check of the rounding contradiction, consider $N=17$ and $\kappa=3$. The residues at times two and five are six and fifteen, so $V=(2,1)$ and $V'=(5,1)$ are both records, with deficits eleven and two. They cannot be consecutive: $-\det(V,V')=3$. Choose $W_0=(1,0)$, so $V'=V+3W_0$. The displayed rounding rule gives $W=V+W_0=(3,1)$, hence $W=(2/3)V+(1/3)V'$. Its time is three and its deficit is eight. It is an intervening better record, exactly the obstruction the general proof finds whenever the determinant exceeds one.
 
 The two equations involving $L$ follow by subtraction. Expanding the determinant gives $q\nu+h\Delta=N$. Finally, because $U,V$ form an integer basis, the possible values of $L$ are all integer combinations of $\Delta,\nu$. By definition they are also all integer combinations of $\kappa,N$. Their positive greatest common divisors are therefore equal.
 

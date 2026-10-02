@@ -62,8 +62,8 @@ function markerNodes(order: number, upperNodes: PlotPoint[]): PlotPoint[] {
 }
 
 export function BoundaryExplorer() {
-  const [orderDraft, setOrderDraft] = useState("7");
-  const [order, setOrder] = useState(7);
+  const [orderDraft, setOrderDraft] = useState("8");
+  const [order, setOrder] = useState(8);
   const parsedDraft = parseOrder(orderDraft);
   const errorMessage =
     parsedDraft === null
@@ -129,16 +129,40 @@ export function BoundaryExplorer() {
           />
         </label>
       </header>
+      <p className="boundary-explorer-help">
+        Start at order eight to match the worked example. At θ=5π/7 its radius
+        is about 0.97061308. Comparing with order seven changes the Farey
+        interval from (1/3,3/8) to (1/3,2/5), and the radius at the same angle
+        is about 0.94430114. The buttons change the displayed order; the order
+        input remains available for other choices.
+      </p>
+      <div className="boundary-explorer-example-actions" role="group" aria-label="Compare the worked example orders">
+        <button
+          data-boundary-select-order="7"
+          disabled={order === 7}
+          onClick={() => { setOrderDraft("7"); setOrder(7); }}
+          type="button"
+        >Compare with order seven</button>
+        <button
+          data-boundary-select-order="8"
+          disabled={order === 8}
+          onClick={() => { setOrderDraft("8"); setOrder(8); }}
+          type="button"
+        >Return to the eight-state example</button>
+      </div>
       <p id="boundary-order-help" className="boundary-explorer-help">
-        Enter an integer from 1 to 40. Orders 1 and 2 use their exact
-        elementary descriptions. From order 3 onward, each nonreal Farey
+        Enter an integer from 1 to 40. The curves are sampled numerical
+        representations of the proved boundary. Orders 1 and 2 use their exact
+        elementary descriptions; order 3 includes its exact extra real segment.
+      </p>
+      <details className="boundary-explorer-provenance"><summary>How the plot is computed</summary><p>From order 3 onward, each nonreal Farey
         branch is represented by {samplesPerInterval} points, including its
         endpoints before shared endpoints are removed. Each interior modulus
         requests at most ninety bisection updates and stops when IEEE 754
         binary64 double precision can no longer refine the bracket. At order
         3, the segment [−1,−1/2] on
         the real axis is inserted exactly.
-      </p>
+      </p></details>
       {errorMessage ? (
         <p
           className="boundary-explorer-error"

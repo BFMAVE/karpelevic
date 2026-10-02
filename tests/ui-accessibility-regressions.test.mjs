@@ -32,7 +32,7 @@ test("shared proof navigation and controls expose truthful enhanced state", asyn
     source("public/proof-chapter.js"),
   ]);
   assert.match(controls, /data-proof-chapter-controls[\s\S]*?hidden/);
-  assert.match(shell, /href=\{sitePath\("\/prerequisites\/"\)\}/);
+  assert.match(shell, /href=\{sitePath\("\/prerequisites\/#reading-routes"\)\}/);
   assert.match(shell, /aria-current=\{isCurrent \? "step"/);
   assert.ok(controller.indexOf("addEventListener") < controller.lastIndexOf("controls.hidden = false"));
   assert.match(controller, /hashchange/);

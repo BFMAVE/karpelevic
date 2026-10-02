@@ -344,7 +344,7 @@ export const journeyContent = {
       paragraphs: [
         {
           text:
-            "I am part of the Data Analytics Laboratory at the Vrije Universiteit Brussel. Within the Data Lab, we sometimes call ourselves GenAI pioneers: we began experimenting relatively early with the role that generative AI might play in research, while remaining conscious that mathematical verification and responsibility cannot be delegated to a language model.",
+            "At the Data Analytics Laboratory at the Vrije Universiteit Brussel, we began experimenting with generative AI as a research tool. The mathematical questions remained ours, as did the responsibility for checking every proposed argument.",
           citations: ["vibe-proving-2026"],
         },
         {
@@ -395,7 +395,7 @@ export const journeyContent = {
         },
         {
           text:
-            "Vincent and I studied the Type III and Type II reduced Ito families separately. The Type III paper resolves the Kirkland–Šmigoc realization conjecture over the full nonzero parameter range. The Type II paper classifies the corresponding non-degenerate full-degree realizing stochastic matrices. These projects forced us to examine cycles, allowed transitions, weights, and the way local pieces combine into a global characteristic polynomial.",
+            "Vincent and I studied two of these polynomial families separately. In one, we resolved a conjecture about the realizing matrices; in the other, we classified them under the paper’s non-degeneracy conditions. Both projects made the same question concrete: how do local cycles and transition weights combine to give the polynomial of the whole matrix? The linked Type III and Type II papers give the precise statements.",
           citations: ["type-three-2026", "type-two-2026"],
         },
       ],

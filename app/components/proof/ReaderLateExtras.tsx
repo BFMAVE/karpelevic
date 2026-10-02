@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ReaderFigureCaption } from "./ReaderFigureCaption";
 
 const ink = "#18334a";
 const teal = "#315e86";
@@ -145,6 +146,67 @@ function InequalityClosureFigure({ marker }: { marker: string }) {
   </>;
 }
 
+function EightStatePolygonFigure() {
+  const h = Math.PI / 7;
+  let lower = 0, upper = 1;
+  for (let step = 0; step < 64; step++) {
+    const midpoint = (lower + upper) / 2;
+    if (midpoint === lower || midpoint === upper) break;
+    if (midpoint ** 4 + midpoint ** 3 < 2 * Math.cos(h)) lower = midpoint;
+    else upper = midpoint;
+  }
+  const rho = (lower + upper) / 2;
+  const powers = [0, -1, -2, 1, 0, -1, 2, 1];
+  const angles = [0, 2, 4, 5, 7, 9, 10, 12];
+  const point = (radius: number, angle: number) => ({ x: radius * Math.cos(angle), y: radius * Math.sin(angle) });
+  const vertices = angles.map((angle, i) => point(rho ** powers[i], angle * h));
+  const images = angles.map((angle, i) => point(rho ** (powers[i] + 1), (angle + 5) * h));
+  const contacts = [point(rho ** 3, h), point(rho ** 2, 3 * h)];
+  const screen = ({ x, y }: Point) => ({ x: 225 + 175 * x, y: 250 - 175 * y });
+  const polygon = (points: Point[]) => points.map(p => { const q = screen(p); return `${q.x.toFixed(3)},${q.y.toFixed(3)}`; }).join(" ");
+  const subscripts = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇"];
+  return <>
+    <text x="225" y="26" textAnchor="middle" fill={ink}>Actual eigenvector coordinates</text>
+    <text x="602" y="38" textAnchor="middle" fill={ink}>Verified contact pattern</text>
+    <line x1="25" y1="250" x2="438" y2="250" stroke={faint} />
+    <line x1="225" y1="46" x2="225" y2="452" stroke={faint} />
+    <polygon points={polygon(vertices)} fill={pale} stroke={ink} strokeWidth="2.5" data-eigenvector-polygon />
+    <polygon points={polygon(images)} fill="none" stroke={teal} strokeWidth="3" strokeDasharray="7 5" data-image-polygon />
+    {vertices.map((p, i) => {
+      const q = screen(p);
+      const angle = angles[i] * h;
+      return <g key={i} data-eigenvector-coordinate={i}>
+        <circle cx={q.x} cy={q.y} r="4.5" fill={ink} />
+        <text x={q.x + 23 * Math.cos(angle)} y={q.y - 23 * Math.sin(angle) + 6} textAnchor={Math.cos(angle) >= 0 ? "start" : "end"} fill={ink}>{`v${subscripts[i]}`}</text>
+      </g>;
+    })}
+    {images.map((p, i) => {
+      const q = screen(p);
+      return <rect key={i} x={q.x - 7} y={q.y - 7} width="14" height="14" fill="none" stroke={teal} strokeWidth="2" data-image-coordinate={i} />;
+    })}
+    {contacts.map((p, i) => <Dot key={i} {...screen(p)} color={copper} r={5} />)}
+    <text x={screen(contacts[0]).x + 13} y={screen(contacts[0]).y - 12} fill={copper}>c₁</text>
+    <text x={screen(contacts[1]).x + 13} y={screen(contacts[1]).y - 8} fill={copper}>c₂</text>
+    <Dot x={225} y={250} color={ink} r={3} />
+    <text x="235" y="271" fill={ink}>0</text>
+    <line x1="472" y1="75" x2="502" y2="75" stroke={ink} strokeWidth="2.5" />
+    <text x="516" y="81" fill={ink}>P: eight extreme vertices</text>
+    <line x1="472" y1="108" x2="502" y2="108" stroke={teal} strokeWidth="3" strokeDasharray="7 5" />
+    <text x="516" y="114" fill={teal}>zP: image polygon</text>
+    <rect x="467" y="143" width="270" height="190" rx="7" fill={pale} stroke={faint} />
+    <text x="602" y="172" textAnchor="middle" fill={ink}>Six images are vertices.</text>
+    <text x="602" y="207" textAnchor="middle" fill={copper}>zv₆ = c₁ ∈ (v₀,v₁)</text>
+    <text x="602" y="240" textAnchor="middle" fill={copper}>zv₇ = c₂ ∈ (v₁,v₂)</text>
+    <text x="602" y="278" textAnchor="middle" fill={ink}>c₁ = βv₀ + αv₁</text>
+    <text x="602" y="311" textAnchor="middle" fill={ink}>c₂ = βv₁ + αv₂</text>
+    <text x="602" y="371" textAnchor="middle" fill={ink}>α, β &gt; 0; α + β = 1</text>
+    <text x="602" y="407" textAnchor="middle" fill={ink}>Every side is supporting;</text>
+    <text x="602" y="439" textAnchor="middle" fill={ink}>all other vertices lie inward.</text>
+    <text x="380" y="487" textAnchor="middle" fill={ink}>θ = 5π/7 · ρ ≈ {rho.toFixed(8)} · drawing uses numerical coordinates</text>
+    <text x="380" y="520" textAnchor="middle" fill={ink}>Black circles are coordinates; blue squares are their z-images.</text>
+  </>;
+}
+
 const copy: Record<number, { title: string; description: string; caption: string; height: number }> = {
   8: {
     title: "Reflection fixes the denominator order without changing the radius",
@@ -164,6 +226,19 @@ const copy: Record<number, { title: string; description: string; caption: string
     caption: "A diagram of proved inequalities, rather than a drawing to numerical scale. Rₙ(θ) is the actual maximum, Kₙ(θ) the constructed candidate, and k the maximiser's least realising order. On a non-Farey ray the maximiser is nonzero, nonreal, and inside the unit disk, so k≥3. The left path uses the geometric product at order k and the independently established comparison of scalar roots. The right path supplies the exceptional k=3 case. Attainment is a separate input from Topic X. Both inequalities refer to the same original angle, even if a scalar calculation used reflected Farey coordinates. Farey rays were already settled by the unit-circle classification.",
     height: 500,
   },
+  14: {
+    title: "The eight states really produce this invariant octagon",
+    description: "The actual eight complex eigenvector coordinates are plotted in their counterclockwise order and connected as a convex octagon P. All eight are extreme vertices. The image octagon zP is shown with a dashed blue boundary and square markers. Six image coordinates coincide exactly with polygon vertices. The remaining two are strict interior contacts: z v six equals c one on side v zero to v one, and z v seven equals c two on side v one to v two. Both are positive convex combinations with beta and alpha. The geometry is drawn using the numerical solution rho approximately 0.97061308; supporting-side signs and contact identities are verified independently of the drawing.",
+    caption: "Coordinates use h=π/7 and the unique root ρ of ρ⁴+ρ³=2cos h. Their exact polar radii are 1,ρ⁻¹,ρ⁻²,ρ,1,ρ⁻¹,ρ²,ρ at angles 0,2h,4h,5h,7h,9h,10h,12h. The dashed polygon is their image under z=ρe⁵ⁱʰ; its squares coincide with six black vertex circles and the two copper contacts. Contact formulas are exact: c₁=ρ³eⁱʰ=βv₀+αv₁ and c₂=ρ²e³ⁱʰ=βv₁+αv₂. Exact rational interval arithmetic on 97/100<ρ<98/100 certifies all 48 other-vertex supporting-side determinants greater than 1/10, so all coordinates are extreme. The text explains the sign test. The drawing uses floating-point coordinates; polygon path coordinates are rounded to 0.001 viewBox units. These are eigenvector coordinates, which need not lie in the unit disk; they are not points of the stochastic eigenvalue region.",
+    height: 542,
+  },
+};
+
+const captionNotes: Record<number, { takeaway: string; status: string }> = {
+  8: { takeaway: "Conjugating reverses the endpoint order while preserving the radius; the two scaled angles still fit below π.", status: "Exact Farey and angle-budget model, rendered with numerical coordinates." },
+  10: { takeaway: "As the angle increases from 0 to π/2, one decreasing weight moves the selected point from 1 to i exactly once.", status: "Exact order-four segment and explicit weight function; the function graph is sampled." },
+  12: { takeaway: "The least-order upper bound and an independent attaining matrix meet at the same radius.", status: "Proof dependency diagram for a non-Farey ray at order n≥4." },
+  14: { takeaway: "All eight coordinates are extreme, six images land at vertices, and two land strictly inside their assigned sides.", status: "Numerical drawing of this specifically verified invariant octagon; exact contacts and certified supporting-side signs." },
 };
 
 export function ReaderLateExtra({ number }: { number: number }) {
@@ -175,6 +250,7 @@ export function ReaderLateExtra({ number }: { number: number }) {
     case 8: drawing = <ReflectionFigure marker={marker} />; break;
     case 10: drawing = <ArcTraversalFigure marker={marker} />; break;
     case 12: drawing = <InequalityClosureFigure marker={marker} />; break;
+    case 14: drawing = <EightStatePolygonFigure />; break;
     default: return null;
   }
   return <figure className="reader-teaching-figure" data-reader-late-extra={number}>
@@ -188,6 +264,9 @@ export function ReaderLateExtra({ number }: { number: number }) {
         {drawing}
       </svg>
     </div>
-    <figcaption>{content.caption}</figcaption>
+    <ReaderFigureCaption takeaway={captionNotes[number].takeaway} status={captionNotes[number].status}>
+      {content.caption}
+      {number === 14 ? <p><a href="https://github.com/BFMAVE/karpelevic/blob/main/docs/proof-audits/reader-learning-mathematics-2026-10-02.md">Reproduce the rational supporting-side certificate.</a></p> : null}
+    </ReaderFigureCaption>
   </figure>;
 }

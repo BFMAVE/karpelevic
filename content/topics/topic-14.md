@@ -1,6 +1,6 @@
 ### Following one complete eight-state example
 
-This example lets us check the route from return paths to a product, from a product to a radius, and from that radius to a stochastic matrix. It is the eight-state example in the paper. The website's order-seven explorer concerns a different Farey interval, so we will relate the two only after keeping their arithmetic separate.
+This example lets us check the route from return paths to a product, from a product to a radius, and from that radius to a stochastic matrix and its actual invariant polygon. It is the eight-state example in the paper. The explorer starts at order eight to match it. A deliberate comparison with order seven will then show how a different Farey interval changes the radius at the same angle.
 
 Suppose an invariant polygon has eight vertices $v_0,\ldots,v_7$ in cyclic order. Multiplication by $z=\rho e^{i\theta}$ sends each vertex into the assigned side $(v_{i+2},v_{i+3}]$, with indices modulo eight. Only two images are strictly inside sides: $c_1\in(v_0,v_1)$ and $c_2\in(v_1,v_2)$. Thus the order is $N=8$, the cyclic shift is $\kappa=3$, and the number of interior contacts is two.
 
@@ -20,6 +20,23 @@ v_2\longrightarrow v_5\longrightarrow v_0\longrightarrow v_3
 $$
 
 Each arrow is one multiplication by $z$. A return means reaching one of the assigned sides $(v_0,v_1]$ or $(v_1,v_2]$. The point $v_0$ is excluded from the first half-open side, so the second path has not yet returned when it reaches $v_0$. It takes two steps to reach $v_0$ and three more to reach $c_1$.
+
+::: {.reader-checkpoint #eight-state-first-return}
+**Retrieval checkpoint.** Trace the second path without looking at its endpoint. Why is its first return time five rather than two, even though it reaches the familiar vertex $v_0$ after two multiplications?
+
+<details>
+<summary>Hint</summary>
+
+Write out the target set using the two half-open sides. Membership in that set, rather than familiarity of a vertex label, defines a return.
+
+</details>
+<details>
+<summary>Solution</summary>
+
+The target set is $(v_0,v_1]\cup(v_1,v_2]$, which excludes $v_0$. The two-step arrival at $v_0$ therefore continues through $v_3$ and $v_6$. Only the fifth image, $c_1\in(v_0,v_1)$, belongs to the target set. Counting $v_0$ as a return would discard the extra two-step closing relation and change the product's exponent.
+
+</details>
+:::
 
 Write $c_j=\beta_jv_{j-1}+\alpha_jv_j$, where $\alpha_j=1-\beta_j$ and $0<\beta_j<1$. Splitting the longer path gives
 
@@ -92,7 +109,79 @@ and define the remaining coordinates along each weight-one arrow by $v_j=zv_i$. 
 
 Choosing $v_0=1$ fixes only the eigenvector's scale. The last deterministic path returns to it consistently because $zv_5=z\cdot z^{-1}=1$. The other coordinates then propagate forward along unit-weight arrows; only the two branching rows require the product recurrences. This is why all eight rows can be checked without calculating the roots of an eighth-degree determinant.
 
-This eigenvector construction establishes a stochastic realisation. By itself it does not show that all eight coordinates are extreme vertices of a polygon with the assumed contact arrangement. That geometric arrangement was the starting illustration; the independent convexity and Farey arguments prove boundary maximality.
+The rows prove stochastic realisation. It remains to verify that these particular eight coordinates are extreme vertices and have the contact arrangement used at the beginning. We can complete that geometric check for this specified angle; a general transition graph does not guarantee it.
+
+### Checking the actual invariant octagon
+
+Recall $h=\pi/7$. Since $\beta/\alpha=1/\rho$ and $z^3-\beta=\beta e^{2ih}$, the coordinates simplify to the following exact polar forms:
+
+| Coordinate | Exact value | Continued angle |
+|---|---|---|
+| $v_0$ | $1$ | $0$ |
+| $v_1$ | $\rho^{-1}e^{2ih}$ | $2h$ |
+| $v_2$ | $\rho^{-2}e^{4ih}$ | $4h$ |
+| $v_3$ | $\rho e^{5ih}$ | $5h$ |
+| $v_4$ | $-1$ | $7h$ |
+| $v_5$ | $\rho^{-1}e^{9ih}$ | $9h$ |
+| $v_6$ | $\rho^2e^{10ih}$ | $10h$ |
+| $v_7$ | $\rho e^{12ih}$ | $12h$ |
+
+The angles increase around one full turn, including the final gap $2h$ from $v_7$ to $v_0$. This orders the points, but their different radii mean that angular order alone is not a convexity proof. To test each proposed side, identify a complex point with its real and imaginary coordinates and write
+
+$$
+\det((a,b),(c,d))=ad-bc,\qquad
+D_{ij}=\det(v_{i+1}-v_i,\ v_j-v_i).
+$$
+
+Indices are modulo eight. The determinant is the signed area test: $D_{ij}>0$ places $v_j$ strictly to the left of the directed side $v_i\to v_{i+1}$. If this holds for every other vertex, that line is supporting and the proposed side is a genuine convex-hull side. Thus checking all eight sides proves that every listed coordinate is extreme.
+
+Here that finite test has a rigorous certificate. The increasing scalar equation brackets its root in $97/100<\rho<98/100$. Exact rational interval arithmetic gives $D_{ij}>1/10$ for all 48 choices with $j\ne i,i+1$, throughout that entire radius bracket. The conclusion therefore does not depend on interpreting the last displayed decimal digits as exact. For example, expanding the test at edge five and vertex seven gives
+
+$$
+D_{5,7}=\rho^3\sin(2h)+\rho\sin h-\sin(3h).
+$$
+
+The other tests follow by the same determinant expansion using the coordinate table. The [reproducible certificate](https://github.com/BFMAVE/karpelevic/blob/main/docs/proof-audits/reader-learning-mathematics-2026-10-02.md) bounds the trigonometric quantities with Taylor remainders and propagates rational intervals, rather than rounding a floating-point hull test. This is an additional computer-assisted check of this one example; the general boundary proof remains the argument in Topics I–XII.
+
+The origin lies inside too. If $v_i=r_ie^{i\phi_i}$, then
+
+$$
+\det(v_{i+1}-v_i,-v_i)=r_ir_{i+1}\sin(\phi_{i+1}-\phi_i)>0,
+$$
+
+because each continued angle gap is $h$ or $2h$, between zero and $\pi$. Thus zero is strictly inward from every supporting side.
+
+Now check the images. Six are the exact endpoint images already verified by the deterministic rows:
+
+$$
+zv_0=v_3,\quad zv_1=v_4,\quad zv_2=v_5,\quad
+zv_3=v_6,\quad zv_4=v_7,\quad zv_5=v_0.
+$$
+
+The remaining two are
+
+$$
+zv_6=\rho^3e^{ih}=\beta v_0+\alpha v_1=c_1,
+\qquad
+zv_7=\rho^2e^{3ih}=\beta v_1+\alpha v_2=c_2.
+$$
+
+For the first equality of averages, use $1+e^{2ih}=2\cos h\,e^{ih}$ and $2\beta\cos h=\rho^3$. The second uses the same identity after multiplication by $\rho^{-1}e^{2ih}$. Since $0<\alpha,\beta<1$ and $\alpha+\beta=1$, the contacts are strictly inside their respective sides. There are exactly two interior contacts, and all eight assignments are now checked:
+
+| Source | Image | Assigned half-open side |
+|---|---|---|
+| $v_0$ | $v_3$ | $(v_2,v_3]$ |
+| $v_1$ | $v_4$ | $(v_3,v_4]$ |
+| $v_2$ | $v_5$ | $(v_4,v_5]$ |
+| $v_3$ | $v_6$ | $(v_5,v_6]$ |
+| $v_4$ | $v_7$ | $(v_6,v_7]$ |
+| $v_5$ | $v_0$ | $(v_7,v_0]$ |
+| $v_6$ | $c_1$ | $(v_0,v_1]$ |
+| $v_7$ | $c_2$ | $(v_1,v_2]$ |
+
+Each vertex image belongs to $P=\operatorname{conv}\{v_0,\ldots,v_7\}$. Linearity preserves convex combinations, so $zP\subseteq P$. The image polygon in the figure therefore closes the geometric thread with the actual coordinates, while the independently proved upper bound is still what establishes boundary maximality.
+
+<!-- reader-figure:late-extra -->
 
 ### Connecting this example to order seven
 
@@ -105,3 +194,5 @@ $$
 Its closing exponent is $e=-1$. Clearing that negative power gives $z^5(z^3-\beta)^2=(1-\beta)^2z^6$ for the equal-weight construction, used with $z\ne0$.
 
 Why must the eight-state radius be larger at the chosen angle? Increasing the order from seven to eight inserts the mediant $(1+2)/(3+5)=3/8$. Topic XI proves a strict increase on both new open intervals. Since $5/14<3/8$, it is on the new left interval and $K_8(5\pi/7)>K_7(5\pi/7)$. The explorer and the source example therefore illustrate two adjacent stages of the same proof, while their matrices and scalar equations retain their respective orders.
+
+We can now verify the least realising order as well. Topic XII has identified $R_7=K_7$, so this point at radius $K_8>K_7$ cannot occur at order seven or any smaller order. Its eight-state matrix does realise it. Its least order is therefore exactly eight, consistent with the eight extreme coordinates and the structural setup used at the beginning.

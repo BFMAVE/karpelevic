@@ -2,6 +2,37 @@
 
 The product geometry uses the smallest order at which an eigenvalue can be realised. The website's boundary, however, is requested at a specified order $n$. We therefore need to prove that the scalar candidates increase with the order. Using the boundary theorem for this comparison would be circular: the comparison is one of the ingredients proving that theorem.
 
+Here is the obligation this comparison will discharge. Write $R_n(\theta)$ for the actual largest eigenvalue radius on the ray, and let $k\le n$ be the least realising order of a maximiser, as Topic XII will do. For $k\ge4$, the final proof needs the chain
+
+$$
+R_n(\theta)\le K_k(\theta)\le K_n(\theta)\le R_n(\theta).
+$$
+
+| Comparison | Where it comes from |
+|---|---|
+| $R_n\le K_k$ | The least-order geometric product in Topic VII and the upper bound in Topic IX |
+| $K_k\le K_n$ | The independent scalar comparison proved in this topic |
+| $K_n\le R_n$ | The attaining matrix in Topic X |
+
+The actual regions do grow with matrix order: an identity block retains every eigenvalue of the smaller matrix. At this stage, however, $K_n$ is still a proposed radius, so nesting the actual regions cannot establish the middle comparison. If the least order is three, the triangle description provides a separate initial comparison with $K_4$ in Topic XII.
+
+::: {.reader-checkpoint #independent-order-comparison}
+**Retrieval checkpoint.** Why does adjoining an identity block fail to prove $K_{n-1}\le K_n$ at this stage?
+
+<details>
+<summary>Hint</summary>
+
+State separately what is known about the actual eigenvalue region and what remains to be proved about its scalar candidate.
+
+</details>
+<details>
+<summary>Solution</summary>
+
+The identity block proves that the actual region $\Theta_{n-1}$ is contained in $\Theta_n$, hence that their actual radial maxima increase. Attainment only gives $K_j\le R_j$. Two lower bounds for nested maxima need not themselves be ordered. Identifying $K_j=R_j$ first would use the theorem whose proof requires this comparison. We therefore compare the scalar equations directly.
+
+</details>
+:::
+
 The practical test is a sign test. Insert the old radius into the new scalar equation. If its left side is still below the new target, the increasing function has not yet reached its zero, so the new radius must be larger. Most of the work below proves that sign without already knowing where either boundary lies. The figure near the worked comparison shows the actual old and new roots.
 
 When the order increases by one, the Farey interval containing an angle can change in only two ways. Its endpoints may stay the same, in which case its number of product factors may increase. Alternatively it is split by a mediant. Topic VIII defined the scalar candidate $K_n(\theta)$; below all angles remain strictly inside the intervals used in a scalar equation.

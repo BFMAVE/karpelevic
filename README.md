@@ -29,6 +29,23 @@ topic diagrams and an interactive starting example explain these steps.
 Both topic and section directories remain available on mobile, and wide
 diagrams can be focused and scrolled with the keyboard.
 
+The learning review adds two routes on the background page: an overview that
+explicitly accepts three named bundles of results, and the complete proof through
+I–XII. Chapter openings give the idea immediately, with imports and definitions
+in a native disclosure and a sticky, searchable notation reference. Navigation
+groups the stages and recommends XIV's example before optional XIII. Topic VI
+has three lessons and an exact deformation slider; checkpoints elsewhere have
+separate hints and solutions. Figures offer fit/enlarge controls and visible
+scope labels with expandable coordinate checks. The homepage starts with one
+filled region, retaining the full comparison atlas.
+
+The actual eight-state eigenvector polygon and its two interior contacts are
+verified by exact identities and a reproducible rational interval certificate.
+Its drawing uses numerical coordinates. The explorer starts at eight with a
+deliberate order-seven comparison. These interactions use `public/reader-learning.js`
+and the existing standalone explorer controller, retained explicitly in the
+static Pages export. The formal source chapters and both PDFs are unchanged.
+
 ## Development and checks
 
 Node.js 22.13 or newer is required. Run `npm ci` and `npm run dev`.

@@ -49,6 +49,18 @@ Right multiplication restores row $i$. The only other row that could change is r
 
 The new eigenvector has one moved vertex, so its convex hull $P'$ is invariant. It has at most $N$ vertices; least realising order forces exactly $N$. Topic II's universal contact theorem applies to $P'$ as well: every vertex image is on its boundary.
 
+The algebra and the geometry are two descriptions of the same replacement:
+
+| Check | Matrix description | Polygon description |
+| --- | --- | --- |
+| Fixed data | $A$ and $A'=SAS^{-1}$ have the same eigenvalue $\zeta$. | The multiplier $z\mapsto\zeta z$ is unchanged. |
+| Changed data | The eigenvector becomes $Sv$; only coordinate $i$ changes. | Corner $v_i$ moves to its known contact $c_i$. |
+| Admissibility | Reversing the stochastic factors keeps entries nonnegative and row sums one. | The new coordinate hull is invariant and has at most $N$ vertices. |
+| Vertex budget | Least realizing order excludes a smaller realization. | No coordinate can disappear from the extreme vertex list: $P'$ still has $N$ corners. |
+| Contact constraints | Universal saturation and the face rule remove any third positive coefficient in a changed row. | Every vertex image stays on a single vertex or side face. |
+
+The next calculation determines the new contact count; being a smaller-looking polygon is not enough to establish that count.
+
 ### The contact theorem controls the changed row
 
 Set $j=i+\kappa$, modulo $N$. Reversing the factors changes one additional contact row. Before using geometry, that row can involve three consecutive vertices $v'_{j-2},v'_{j-1},v'_j$. The coefficients at the last two vertices are positive. Its image is on the boundary of $P'$.
@@ -85,6 +97,8 @@ I=\{1,\ldots,\varphi\}.
 $$
 
 The area argument is applied separately to the original polygon at each possible run ending. It does not assume that successive intermediate polygons continue to minimise area. Once one run has been obtained, later transfers preserve only the minimum contact count; that is enough to prevent a weight collision.
+
+There are consequently two different contradictions available. A collision reduces the contact count and is forbidden at every count-minimizing intermediate polygon. A proper inward replacement reduces area only when another radius-one vertex remains; that contradiction uses the original count-then-area choice. Keeping these hypotheses separate is what makes the later repeated weight walk legitimate.
 
 Let $\delta=\gcd(N,\kappa)$, the greatest common divisor. Adding $\kappa$ modulo $N$ runs through each residue class modulo $\delta$ separately. Every class must meet $I$, or it would consist entirely of vertex-to-vertex contacts and would give $v=\zeta^{N/\delta}v$. Hence $\varphi\ge\delta$.
 

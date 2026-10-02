@@ -2,6 +2,12 @@
 
 An upper bound becomes a boundary formula only when a stochastic matrix attains it. We will construct such a matrix by drawing its transitions. The same graph also permits unequal weights, and its directed cycles explain its full characteristic polynomial.
 
+::: {.reader-sharpness-ledger}
+**Upper bound — supplied by Topic IX.** A product with the required real winding is bounded by the candidate, with equal weights precisely at equality.
+
+**Attainment — proved here.** We construct stochastic rows reaching every candidate point. Topics XI–XII will still be needed to transfer the least-order upper bound and identify the complete boundary.
+:::
+
 Start with the oriented data of Topic VIII and the scalar solution $\rho=K_n(\theta)$. Thus $q<s$, $m=\lfloor n/q\rfloor$, $\vartheta=2\pi y$, $A=q\vartheta-2\pi p$, and $B=(2\pi r-s\vartheta)/m$. Set $z=\rho e^{i\vartheta}$ and choose
 
 $$
@@ -34,6 +40,17 @@ $$
 We can also let $\beta_0,\ldots,\beta_{m-1}\in[0,1]$ be independent weights and set $\alpha_j=1-\beta_j$. Keep $q<s$, assume $s>(m-1)q$, and put $n_0=\max\{mq,s\}$. For each $j$, make a block of $q$ vertices $v_{j,0},\ldots,v_{j,q-1}$. Connect successive vertices within the block by arrows of weight one. From its last vertex, place an arrow of weight $\beta_j$ back to its first vertex, and an arrow of weight $\alpha_j$ toward the next block. When $q=1$, the local closing arrow is a loop at the block's sole vertex; the same construction applies.
 
 A directed arrow of weight $a$ from vertex $u$ to vertex $v$ means that the matrix entry $M_{uv}$ is $a$, where $M$ denotes the transition matrix. Rows describe departure vertices. The final row of a block splits its total weight as $\beta_j+\alpha_j=1$; every other row has one arrow of weight one. This is why the matrix is row-stochastic. We use $M$ for the matrix to distinguish it from the scalar angle $A$.
+
+The graph's vertices are **states**, or row indices. The coordinates of an eigenvector are **complex points** attached to those states. A state is not automatically an extreme vertex of their convex hull: coordinates can coincide or lie inside that hull. For an eigenvector $x$, each row equation $\lambda x_u=\sum_v M_{uv}x_v$ places the image $\lambda x_u$ at the weighted average specified by the outgoing arrows. That is the matrix–polygon bridge from Topic I.
+
+For the three-state block $0,1,2$ followed by a block starting at $3$, the translation is:
+
+| Graph information | Matrix entries | Eigenvector row equation |
+|---|---|---|
+| $0\to1$ with weight one | $M_{01}=1$ | $\lambda x_0=x_1$ |
+| $2\to0$ with weight $\beta_0$, $2\to3$ with weight $\alpha_0$ | $M_{20}=\beta_0$, $M_{23}=\alpha_0$ | $\lambda x_2=\beta_0x_0+\alpha_0x_3$ |
+
+An individual arrow supplies one term of the row sum; the entire outgoing row supplies the eigenvector equation. Topic XIV will check that, in its particular eight-state example, all eight complex coordinates really are extreme polygon vertices.
 
 The blocks are designed to reproduce the product factors. For a three-vertex block labelled $0,1,2$ followed by a block starting at $3$, consider an eigenvector with coordinates $x_i$ and eigenvalue $\lambda$. Its two weight-one rows require $x_1=\lambda x_0$ and $x_2=\lambda x_1$. The branching row then requires
 

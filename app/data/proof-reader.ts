@@ -163,10 +163,13 @@ export function getProofReaderNeighbours(key: string): {
   previous?: ProofReaderRoute;
   next?: ProofReaderRoute;
 } {
-  const index = proofReaderRoutes.findIndex((route) => route.key === key);
+  // Learning order preserves source numbering while placing the worked
+  // example after the completed theorem and before optional asymptotics.
+  const learningOrder = [...proofReaderRoutes.slice(0, 12), proofReaderRoutes[13], proofReaderRoutes[12]];
+  const index = learningOrder.findIndex((route) => route.key === key);
   if (index < 0) return {};
-  const precedingRoutes = proofReaderRoutes.slice(0, index).reverse();
-  const followingRoutes = proofReaderRoutes.slice(index + 1);
+  const precedingRoutes = learningOrder.slice(0, index).reverse();
+  const followingRoutes = learningOrder.slice(index + 1);
   return {
     previous: precedingRoutes.find((route) =>
       isProofTopicAvailable(route.topicNumber),

@@ -46,6 +46,18 @@ $$
 
 The last inequality holds because $E\cap R$ and $S\cap R$ are disjoint subsets of $R$. Thus $b_T(Q)\le b_T(P)$. Minimum-count selection forces equality. If the cut retains a radius-one vertex, it also preserves normalisation, and a proper cut would reduce area. Such a cut is impossible for the selected polygon.
 
+The cut has two separate checks. This ledger keeps its admissibility separate from the contradiction:
+
+| Question | Answer for this intermediate hull |
+| --- | --- |
+| What stays fixed? | The multiplier $T$, the original image $TP$, and the permitted budget of $N$ vertices. |
+| What changes? | Old corners may be removed and image points become new corners; the area may decrease. |
+| Why is it invariant? | $TQ\subseteq TP\subseteq Q$, using $Q\subseteq P$. |
+| What happens to the counts? | For equal vertex counts, the counting proof gives $b_T(Q)\le b_T(P)$; minimality then forces equality. |
+| When does area contradict the choice of $P$? | Only when a radius-one vertex remains, so $Q$ is still normalized and has strictly smaller area. |
+
+If the cut removes all radius-one vertices, it is not normalized. Rescaling it would destroy the containment $Q\subseteq P$, so the area contradiction cannot simply be asserted for that cut.
+
 ### Assign each corner contact only once
 
 List the vertices of $TP$ as $y_1,\ldots,y_N$ counterclockwise. The boundary arc $(y_j,y_{j+1}]$ excludes its starting point and includes its ending point. These arcs partition the boundary, so each old vertex is counted exactly once.
@@ -53,6 +65,19 @@ List the vertices of $TP$ as $y_1,\ldots,y_N$ counterclockwise. The boundary arc
 At a shared corner $v_i$, the incoming side $(v_{i-1},v_i]$ includes the point and the outgoing side $(v_i,v_{i+1}]$ excludes it. Nothing moves geometrically when we make this convention. It is a bookkeeping rule, like a half-open partition of a real interval, except that the included endpoint here is the ending one.
 
 <!-- reader-figure:early -->
+
+For a complete ownership example, temporarily use a separate square with vertices $w_0=1$, $w_1=i$, $w_2=-1$, $w_3=-i$, in that counterclockwise order. The quarter-turn $\mu=i$ sends $w_{i-1}$ to $w_i$, with indices modulo four. This example has $|\mu|=1$: it teaches endpoint bookkeeping, not the contracting extremal configuration, whose multiplier still satisfies $0<|\zeta|<1$.
+
+| Half-open side | Excluded starting corner | Included ending corner | Image assigned to this side |
+| --- | --- | --- | --- |
+| $(w_0,w_1]=(1,i]$ | $1$ | $i$ | $\mu w_0=i$ |
+| $(w_1,w_2]=(i,-1]$ | $i$ | $-1$ | $\mu w_1=-1$ |
+| $(w_2,w_3]=(-1,-i]$ | $-1$ | $-i$ | $\mu w_2=-i$ |
+| $(w_3,w_0]=(-i,1]$ | $-i$ | $1$ | $\mu w_3=1$ |
+
+Every image corner has exactly one owner. With closed sides, the image $i$ would be counted on both $[1,i]$ and $[i,-1]$; the half-open convention keeps it only on the first. With this bookkeeping understood, return to the selected polygon $P$ and multiplier $\zeta$ for the cut argument.
+
+
 
 Cut $P$ along the line joining $y_j$ to $y_{j+1}$, retaining the half-plane containing $TP$. If their closed boundary arc contains $k_j$ old vertices, a proper cut has at most $N+2-k_j$ vertices: it discards those vertices and adds back the two image endpoints. The new polygon is invariant, so minimal order requires at least $N$ vertices. Consequently $k_j\le2$.
 
@@ -86,6 +111,24 @@ c_i=\zeta v_{i-\kappa}=\beta_i v_{i-1}+\alpha_i v_i,
 $$
 
 All vertex indices are read modulo $N$. The coefficient $\beta_i=0$ means the image is the ending vertex; $\beta_i>0$ means it is strictly inside the side. The exceptional shift $N$ can be converted to shift one by reflection, so it need not be retained.
+
+<div class="reader-checkpoint" data-retrieval-checkpoint>
+
+**Ownership checkpoint.** A contact lands exactly at $v_i$. Which side owns it, and is its coefficient $\beta_i$ positive or zero?
+
+<details class="reader-checkpoint-hint">
+<summary>Hint</summary>
+
+Use the included endpoint of $(v_{i-1},v_i]$, and then compare the contact with its two-endpoint formula.
+
+</details>
+<details class="reader-checkpoint-solution">
+<summary>Solution</summary>
+
+It belongs to $(v_{i-1},v_i]$, not $(v_i,v_{i+1}]$. Since $c_i=\beta_i v_{i-1}+(1-\beta_i)v_i=v_i$ and the endpoints are distinct, $\beta_i=0$. A side-interior contact instead has $\beta_i>0$.
+
+</details>
+</div>
 
 Choose increasing real vertex angles $\Phi_i$ and continue them by $\Phi_{i+N}=\Phi_i+2\pi$. Retain the argument representative $0<\theta_\zeta<2\pi$ for the multiplier after any reflection. Each side spans less than half a turn because zero lies inside the polygon. Its image assignment gives
 

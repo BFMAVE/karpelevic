@@ -21,7 +21,8 @@ if (boundaryExplorerRoot) {
   const fareyPairTable = fareyPairDetails?.querySelector(".farey-pair-table");
   const fareyPairTableCaption = fareyPairTable?.querySelector("caption");
   const fareyPairRows = fareyPairTable?.querySelector("[data-farey-pair-rows]");
-  let acceptedOrder = 7;
+  const exampleOrderButtons = boundaryExplorerRoot.querySelectorAll("[data-boundary-select-order]");
+  let acceptedOrder = 8;
 
   function parseExplorerOrder(value) {
     if (!/^\d+$/.test(value)) return null;
@@ -298,6 +299,9 @@ if (boundaryExplorerRoot) {
     }
 
     acceptedOrder = order;
+    exampleOrderButtons.forEach((button) => {
+      button.disabled = Number(button.dataset.boundarySelectOrder) === order;
+    });
     boundaryExplorerRoot.dataset.standaloneBoundaryExplorer = "enhanced";
     boundaryExplorerRoot.dataset.boundaryOrder = String(order);
     boundaryExplorerRoot.dataset.boundaryKind = kind;
@@ -309,6 +313,15 @@ if (boundaryExplorerRoot) {
   }
 
   if (orderInput && plot) {
+    exampleOrderButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const candidate = parseExplorerOrder(button.dataset.boundarySelectOrder);
+        if (candidate === null) return;
+        orderInput.value = String(candidate);
+        setInputError("");
+        updatePlot(candidate);
+      });
+    });
     orderInput.addEventListener("input", () => {
       const candidate = parseExplorerOrder(orderInput.value);
       if (candidate === null) {
