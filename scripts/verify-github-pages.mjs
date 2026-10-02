@@ -21,7 +21,10 @@ for (const route of routes) {
     assert.match(html, /https:\/\/arxiv\.org\/abs\/2609\.26058v2/);
     assert.doesNotMatch(html, /Forthcoming/);
   }
-  if (route === "proof/topic-xiv/") assert.match(html, /\/karpelevic\/topic-xiv\.js/);
+  if (route === "proof/topic-xiv/") {
+    assert.match(html, /\/karpelevic\/topic-xiv\.js/);
+    assert.match(html, /\/karpelevic\/eight-state-links\.js/);
+  }
   if (route === "prerequisites/") {
     assert.match(html, /id="main-ideas"/);
     assert.match(html, /data-weighted-average/);
@@ -33,7 +36,7 @@ for (const [route, html] of pages) {
     assert.ok(pages.get(match[1])?.includes(`id="${match[2]}"`), `${route}: unresolved link ${match[0]}`);
   }
 }
-for (const file of ["paper/critical-invariant-polygons.pdf", "paper/teaching-manuscript.pdf", "proof-chapter.js", "reader-learning.js", "topic-xiv.js", "weighted-average.js", "code/karpelevic-boundary.mjs"]) await access(path.join(root, file));
+for (const file of ["paper/critical-invariant-polygons.pdf", "paper/teaching-manuscript.pdf", "proof-chapter.js", "reader-learning.js", "topic-xiv.js", "eight-state-links.js", "weighted-average.js", "code/karpelevic-boundary.mjs"]) await access(path.join(root, file));
 for (const route of ["proof/topic-vi/a/", "proof/topic-vi/b/", "proof/topic-xii/a/", "proof/topic-xii/b/"]) {
   const html = await readFile(path.join(root, route, "index.html"), "utf8");
   assert.match(html, /http-equiv="refresh"/);

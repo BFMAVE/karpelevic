@@ -127,7 +127,18 @@ $$
 \left(\frac{\eta_0(x)}{\eta(x)},\frac{\psi(x)}{\eta(x)}\right).
 $$
 
-The first coordinate has unique extremes zero and one at the endpoints. A transformed convex combination is a convex combination with weights multiplied by the positive denominators and renormalised. Hence the image stays convex and the selected boundary chain becomes, after a possible reflection, the graph of a convex piecewise-linear function.
+The first coordinate has unique minimum zero at $X_0$ and unique maximum one at $X_{\ell+1}$. A transformed convex combination is a convex combination with weights multiplied by the positive denominators and renormalised. Conversely, divide any desired image weights by the positive endpoint denominators and renormalise to recover preimage weights; this shows that every segment between image points belongs to the image. Thus the transformed polygon is convex, its sides are still segments, and side-interior contacts stay inside those segments. Positivity is doing real work here: a change of chart with a denominator vanishing on the polygon would not justify these conclusions.
+
+To see why a graph now describes our chain, intersect the transformed polygon with a vertical line $t=\tau$, where $0<\tau<1$. Convexity makes the intersection an interval. It has positive length: interpolate an interior point with the left or right extreme to reach $\tau$; the positive weight on the interior point leaves a small disk inside the polygon. No side can be vertical: the line containing a vertical side would support the polygon at a horizontal extreme, whereas both horizontal extremes are single vertices. Consequently the lower and upper endpoints of every such slice are its only boundary points. A supporting line through a point strictly between them would have to contain the vertical slice, contradicting the absence of vertical supporting sides. As $\tau$ runs from zero to one, the lower endpoints trace one boundary chain from $X_0$ to $X_{\ell+1}$, and the upper endpoints trace the other. The chains cannot switch places in the interior, where their heights are distinct.
+
+Our consecutive vertices belong to one of those two chains. If it is the upper one, reflect the second coordinate. It is then the lower graph, and traversal from $X_0$ to $X_{\ell+1}$ strictly increases the first coordinate: each vertical line meets that chain once, and there are no vertical sides. Write its height as $f(t)$. For two points $(t,f(t))$ and $(u,f(u))$, their convex combination belongs to the polygon, so its height is at least the lower boundary height at its first coordinate. Therefore
+
+$$
+f((1-\lambda)t+\lambda u)
+\le(1-\lambda)f(t)+\lambda f(u),\qquad0\le\lambda\le1.
+$$
+
+This is exactly convexity of $f$. It is piecewise linear because the chain consists of finitely many side segments. We have now justified the graph representation and its direction, rather than assuming that an arbitrary boundary chain is already monotone in ordinary coordinates.
 
 Write $X_i=(t_i,f_i)$ in these coordinates, with $t_0<\cdots<t_{\ell+1}$. Let $d_i$ be the slope of side $X_{i-1}X_i$, and $s_i$ the slope of exposing line $L_i$. Convexity gives
 
@@ -135,18 +146,81 @@ $$
 d_1<\cdots<d_{\ell+1},\qquad d_i<s_i<d_{i+1}.
 $$
 
+The side slopes increase strictly because the $X_i$ are genuine vertices, with no collinear successive sides. The exposing line at $X_i$ lies below the lower graph. Testing it at the preceding vertex gives $d_i\le s_i$, and testing it at the following vertex gives $s_i\le d_{i+1}$. Equality would put that neighbour on the exposing line too, so exposure makes both inequalities strict. That line is nonvertical, since a vertical supporting line could touch only a horizontal extreme.
+
 Put $s_1=d_1$, let $h_i=t_i-t_{i-1}>0$, and express each contact as
 
 $$
 C_i=X_i-\gamma_i h_i(1,d_i),\qquad0<\gamma_i<1.
 $$
 
-For the comparison starting at $X_0$, seek intersections of the form $Z_i=X_i-r_i(1,s_i)$, with $r_1=h_1$. Collinearity of $Z_{i-1},C_i,Z_i$ is expressed by a zero $2\times2$ determinant. Expanding it and putting $x_i=1/r_i$ suggests the recurrence
+For the comparison starting at $X_0$, seek intersections of the form $Z_i=X_i-r_i(1,s_i)$, with $r_1=h_1$. Collinearity of $Z_{i-1},C_i,Z_i$ is expressed by a zero $2\times2$ determinant. Reciprocal variables $x_i=1/r_i$ turn that condition into an affine recurrence:
 
 $$
 x_i=\frac{(1-\gamma_i)(s_i-d_i)}{\gamma_i(d_i-s_{i-1})}x_{i-1}
 +\frac{s_i-s_{i-1}}{\gamma_i h_i(d_i-s_{i-1})}.
 $$
+
+<details class="reader-proof-derivation">
+<summary>Derivation: expand the determinant and justify every division</summary>
+
+Fix a step $2\le i\le\ell$. The established assumptions are $h_i>0$, $0<\gamma_i<1$, and
+
+$$
+s_{i-1}<d_i<s_i.
+$$
+
+For $i=2$, the first inequality follows from $s_1=d_1<d_2$; at later steps it is the upper slope bound for the preceding exposing line. Suppose inductively that $r_{i-1}$ is finite and positive. We have not yet assumed any sign or finiteness for the next intersection.
+
+The side vector is $X_i-X_{i-1}=h_i(1,d_i)$. Subtracting the contact coordinates gives
+
+$$
+\begin{aligned}
+C_i-Z_{i-1}
+&=(1-\gamma_i)h_i(1,d_i)+r_{i-1}(1,s_{i-1}),\\
+Z_i-C_i
+&=\gamma_i h_i(1,d_i)-r_i(1,s_i).
+\end{aligned}
+$$
+
+These two vectors are collinear precisely when their determinant is zero. Use $\det((1,a),(1,b))=b-a$ and expand bilinearly. The result is
+
+$$
+\begin{aligned}
+0={}&\gamma_i h_i r_{i-1}(d_i-s_{i-1})\\
+&-(1-\gamma_i)h_i r_i(s_i-d_i)
+-r_{i-1}r_i(s_i-s_{i-1}).
+\end{aligned}
+$$
+
+Collecting the terms containing $r_i$ gives
+
+$$
+\gamma_i h_i r_{i-1}(d_i-s_{i-1})
+=r_i\bigl[(1-\gamma_i)h_i(s_i-d_i)
++r_{i-1}(s_i-s_{i-1})\bigr].
+$$
+
+Every factor on the left is strictly positive. Both summands in brackets are strictly positive too. We may therefore first solve this equation for a unique finite positive $r_i$. This avoids assuming that the remote projection is finite before proving it. Now $r_i$ and $r_{i-1}$ are nonzero, so division is justified and yields
+
+$$
+\frac1{r_i}
+=\frac{(1-\gamma_i)(s_i-d_i)}{\gamma_i(d_i-s_{i-1})}\frac1{r_{i-1}}
++\frac{s_i-s_{i-1}}{\gamma_i h_i(d_i-s_{i-1})}.
+$$
+
+This is the displayed recurrence with $x_i=1/r_i$. Its intercept is positive, so
+
+$$
+\frac1{r_i}>
+\frac{s_i-s_{i-1}}{\gamma_i h_i(d_i-s_{i-1})}.
+$$
+
+Reciprocating positive quantities gives the strict upper bound on $r_i$ below. Its second inequality uses $d_i<s_i$. The entire calculation takes place in the chosen chart; it proves that the remote intersections are finite there, without requiring them to be finite in the original affine coordinates.
+
+For a check using the earlier coordinate model, take $h_2=1$, $\gamma_2=1/2$, $d_2=1$, $s_1=0$, $s_2=3/2$, and $x_1=1$. The recurrence gives $x_2=(1/2)x_1+3=7/2$, so $r_2=2/7$. Therefore $Z_2=(2,1)-(2/7)(1,3/2)=(12/7,4/7)$, exactly the first remote intersection in the figure.
+
+</details>
 
 Every coefficient is positive. Define $x_i$ by this recurrence, starting from $x_1=1/h_1>0$. Induction gives finite $x_i>0$, so $r_i=1/x_i$ is finite and positive. Substitution verifies the collinearity equations; uniqueness of each projective intersection identifies these constructed points with the required projections. Moreover,
 

@@ -126,22 +126,100 @@ Recall $h=\pi/7$. Since $\beta/\alpha=1/\rho$ and $z^3-\beta=\beta e^{2ih}$, the
 | $v_6$ | $\rho^2e^{10ih}$ | $10h$ |
 | $v_7$ | $\rho e^{12ih}$ | $12h$ |
 
-The angles increase around one full turn, including the final gap $2h$ from $v_7$ to $v_0$. This orders the points, but their different radii mean that angular order alone is not a convexity proof. To test each proposed side, identify a complex point with its real and imaginary coordinates and write
+The angles increase around one full turn, including the final gap $2h$ from $v_7$ to $v_0$. First this proves that the polygon has no crossings. Every side joins two positive-radius points whose angular separation is $h$ or $2h$, less than $\pi$. A point strictly inside that side is a positive combination of its two endpoint vectors, so its angle lies strictly between their angles. The interiors of nonadjacent sides occupy disjoint angular sectors. Adjacent sides meet only at their shared vertex. The resulting polygon is therefore simple.
+
+Its different radii still require a convexity check. We will show that all eight corners turn strictly left. Identify complex points with their real and imaginary coordinates, and define
 
 $$
 \det((a,b),(c,d))=ad-bc,\qquad
-D_{ij}=\det(v_{i+1}-v_i,\ v_j-v_i).
+T_i=\det(v_{i+1}-v_i,\ v_{i+2}-v_i).
 $$
 
-Indices are modulo eight. The determinant is the signed area test: $D_{ij}>0$ places $v_j$ strictly to the left of the directed side $v_i\to v_{i+1}$. If this holds for every other vertex, that line is supporting and the proposed side is a genuine convex-hull side. Thus checking all eight sides proves that every listed coordinate is extreme.
+Indices are modulo eight. If $e_i=v_{i+1}-v_i$ is the outgoing edge, then $v_{i+2}-v_i=e_i+e_{i+1}$ and $T_i=\det(e_i,e_{i+1})$. A positive determinant means that the next edge turns left through an angle between zero and $\pi$.
 
-Here that finite test has a rigorous certificate. The increasing scalar equation brackets its root in $97/100<\rho<98/100$. Exact rational interval arithmetic gives $D_{ij}>1/10$ for all 48 choices with $j\ne i,i+1$, throughout that entire radius bracket. The conclusion therefore does not depend on interpreting the last displayed decimal digits as exact. For example, expanding the test at edge five and vertex seven gives
+Only two expressions are needed for all eight turns. For this calculation, put
 
 $$
-D_{5,7}=\rho^3\sin(2h)+\rho\sin h-\sin(3h).
+U=(\rho+\rho^{-1})\sin(2h)-\sin(3h),
+\qquad V=(1+\rho)(1-\rho^7)\sin h.
 $$
 
-The other tests follow by the same determinant expansion using the coordinate table. The [reproducible certificate](https://github.com/BFMAVE/karpelevic/blob/main/docs/proof-audits/reader-learning-mathematics-2026-10-02.md) bounds the trigonometric quantities with Taylor remainders and propagates rational intervals, rather than rounding a floating-point hull test. This is an additional computer-assisted check of this one example; the general boundary proof remains the argument in Topics I–XII.
+Since $0<\rho<1$ and $0<h<\pi$, we have $V>0$. To check $U$, write $c=\cos h\in(0,1)$ and use the double- and triple-angle identities:
+
+$$
+\frac{U}{\sin h}
+=2c(\rho+\rho^{-1})-4c^2+1
+\ge1+4c(1-c)>0.
+$$
+
+The inequality uses $\rho+\rho^{-1}\ge2$, which follows from $(\rho-1)^2\ge0$ after division by $\rho>0$. Thus $U>0$ too. Expanding the determinants from the coordinate table gives
+
+| $i$ | Consecutive-turn determinant $T_i$ |
+|---|---|
+| $0$ | $U/\rho^2$ |
+| $1$ | $(1+\rho)V/\rho$ |
+| $2$ | $V/\rho^2$ |
+| $3$ | $U$ |
+| $4$ | $\rho(1+\rho)V$ |
+| $5$ | $V$ |
+| $6$ | $\rho^2U$ |
+| $7$ | $U$ |
+
+Every factor is positive, so every corner turns strictly left. A simple polygon is nonconvex only if it has an inward corner, with interior angle greater than $\pi$; such a corner would give a right turn. We have ruled those out, and strict positivity rules out flat corners too. Thus the polygon is strictly convex and all eight coordinates are genuine hull vertices. This argument uses the exact scalar equation, without assigning an exact value to the numerical radius.
+
+<details>
+<summary>Expand the turn calculations</summary>
+
+For polar coordinates $v_i=r_ie^{ik_i h}$, expanding the determinant gives
+
+$$
+T_i=r_ir_{i+1}\sin((k_{i+1}-k_i)h)
++r_{i+1}r_{i+2}\sin((k_{i+2}-k_{i+1})h)
+-r_ir_{i+2}\sin((k_{i+2}-k_i)h).
+$$
+
+Use continued angles $k_8=14$ and $k_9=16$ when wrapping around. For instance, $T_0=\rho^{-1}\sin(2h)+\rho^{-3}\sin(2h)-\rho^{-2}\sin(4h)=U/\rho^2$, because $\sin(4h)=\sin(3h)$ at $h=\pi/7$.
+
+The turn at $v_6$ has
+
+$$
+T_5=\rho^3\sin(2h)+\rho\sin h-\sin(3h).
+$$
+
+Set $s_1=\sin h$. The scalar relation $2\cos h=\rho^3(1+\rho)$ gives
+
+$$
+\sin(2h)=\rho^3(1+\rho)s_1,\qquad
+\sin(3h)=[\rho^6(1+\rho)^2-1]s_1.
+$$
+
+Substitution reduces $T_5/s_1$ to
+
+$$
+\rho^6(1+\rho)+\rho-\rho^6(1+\rho)^2+1
+=(1+\rho)(1-\rho^7).
+$$
+
+Thus $T_5=V$; it is also the supporting-side determinant $D_{5,7}$ from the independent audit. The two turns with different prefactors expand as
+
+$$
+T_1=\rho^{-3}\sin(2h)+\rho^{-1}\sin h-\sin(3h),
+$$
+
+$$
+T_4=\rho^{-1}\sin(2h)+\rho\sin h-\rho^2\sin(3h).
+$$
+
+The same substitutions give $T_1=(1+\rho)V/\rho$ and $T_4=\rho(1+\rho)V$. The remaining turns are scaled copies of the $U$ or $V$ expressions shown in the table.
+
+</details>
+
+<details>
+<summary>Independent interval check (optional)</summary>
+
+The [reproducible rational certificate](https://github.com/BFMAVE/karpelevic/blob/main/docs/proof-audits/reader-learning-mathematics-2026-10-02.md) independently checks all 48 supporting-side determinants $D_{ij}=\det(v_{i+1}-v_i,v_j-v_i)$ with $j\ne i,i+1$. It proves $D_{ij}>1/10$ throughout $97/100\le\rho\le98/100$, and brackets the actual root inside that interval. This is a stronger computational statement across a whole radius interval. The elementary turn proof above already establishes the convexity needed here at the exact scalar root.
+
+</details>
 
 The origin lies inside too. If $v_i=r_ie^{i\phi_i}$, then
 

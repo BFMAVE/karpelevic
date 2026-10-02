@@ -38,10 +38,15 @@ export function CurrentProofChapter({ number }: { number: number }) {
   const chapter = reader.chapters[number - 1];
   const firstPublished = Object.values(publicationDates.pages).slice(4)[number - 1];
   const sourceHtml = chapter.sourceHtml.replace(/href="(\/proof\/[^\"]*)"/g, (_, href: string) => 'href="' + sitePath(href) + '"');
-  const sections = [...chapter.guideHtml.matchAll(/<h3 id="([^"]+)">([\s\S]*?)<\/h3>/g)].map((match) => ({
-    id: match[1],
-    title: match[2].replace(/<annotation\b[\s\S]*?<\/annotation>/g, "").replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&#39;/g, "'").replace(/&quot;/g, '"'),
-  }));
+  const sections: { id: string; title: string; children: { id: string; title: string }[] }[] = [];
+  for (const match of chapter.guideHtml.matchAll(/<h([34]) id="([^"]+)">([\s\S]*?)<\/h\1>/g)) {
+    const section = {
+      id: match[2],
+      title: match[3].replace(/<annotation\b[\s\S]*?<\/annotation>/g, "").replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&#39;/g, "'").replace(/&quot;/g, '"'),
+    };
+    if (match[1] === "4" && sections.length) sections[sections.length - 1].children.push(section);
+    else sections.push({ ...section, children: [] });
+  }
   const revised = getPageTimestamp([
     "content/topics/topic-" + number + ".md",
     "content/paper/karpelevic-invariant-polygons.tex",
@@ -49,6 +54,9 @@ export function CurrentProofChapter({ number }: { number: number }) {
     "app/components/proof/ProofChapterShell.tsx",
     "app/components/proof/ReaderTopicOrientation.tsx",
     "app/components/proof/ReaderNotation.tsx",
+    "app/data/reader-notation.json",
+    "app/data/reader-notation.generated.json",
+    "app/data/reader-notation.ts",
     "app/components/proof/ReaderFigureFrame.tsx",
     "app/components/proof/ReaderFigureCaption.tsx",
     "public/reader-learning.js",
@@ -56,6 +64,7 @@ export function CurrentProofChapter({ number }: { number: number }) {
     number <= 7 ? "app/components/proof/ReaderEarlyFigures.tsx" : "app/components/proof/ReaderLateFigures.tsx",
     number <= 7 ? "app/components/proof/ReaderEarlyExtras.tsx" : "app/components/proof/ReaderLateExtras.tsx",
     "public/proof-chapter.js",
+    ...(number === 14 ? ["app/components/proof/EightStateLinks.tsx", "public/eight-state-links.js"] : []),
     "app/globals.css",
   ]);
   return <ProofChapterShell routeKey={"topic-" + numerals[number - 1]} updatedAt={revised} firstPublishedAt={firstPublished} question={topic.question} manuscriptPages={topic.source} completionMessage={topic.takeaway} chapterSections={sections}>

@@ -1,6 +1,7 @@
 import { readerOrientations } from "../../data/reader-orientation";
 import { sitePath } from "../../lib/site-path";
 import { toRomanNumeral } from "../../data/proof-reader";
+import { readerLocalDefinitionHtml } from "../../data/reader-notation";
 
 const entryIdeas = [
   "Read each row as a weighted average. The eigenvector's complex coordinates form a polygon that contains its rotated and contracted image.",
@@ -35,7 +36,7 @@ export function ReaderTopicOrientation({ number }: { number: number }) {
       </section>
       <section aria-labelledby="reader-definitions-heading">
         <h3 id="reader-definitions-heading">New ideas and notation</h3>
-        <dl>{orientation.definitions.map((item) => <div key={item.term}><dt>{item.term}</dt><dd>{item.meaning}</dd></div>)}</dl>
+        <dl>{readerLocalDefinitionHtml(number).map((item, index) => <div key={index}><dt dangerouslySetInnerHTML={{ __html: item.termHtml }} /><dd dangerouslySetInnerHTML={{ __html: item.meaningHtml }} /></div>)}</dl>
       </section>
     </div>
     <div className="reader-strategy"><h3>The construction in more detail</h3><p>{orientation.strategy}</p></div>

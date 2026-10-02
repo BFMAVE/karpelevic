@@ -62,6 +62,9 @@ GitHub Pages artifact. The existing Pages workflow publishes pushes to main.
 - `app/data/reader-topics.ts`: titles, reader questions, and source locations.
 - `app/data/reader.generated.json`: native MathML guides and complete source passages.
 - `scripts/generate-reader.mjs`: deterministic conversion and source-reference resolution.
+- `app/data/reader-notation.json`: chapter-scoped notation in Markdown and TeX.
+- `app/data/reader-notation.generated.json`: the corresponding native MathML reference entries.
+- `scripts/generate-reader-notation.mjs`: reproducible conversion and freshness verification for those entries.
 - `app/components/proof/CurrentProofChapter.tsx`: the shared reader and exact diagrams.
 - `public/paper/critical-invariant-polygons.pdf`: the downloaded arXiv v2 PDF.
 - `public/paper/teaching-manuscript.pdf`: the supplied teaching manuscript PDF.
@@ -77,6 +80,19 @@ The teaching figures distinguish exact models and verified numerical
 illustrations from critical configurations and from proofs of extremality.
 On narrow screens, wide diagrams scroll inside their own frames so their
 labels remain legible and the page itself does not overflow.
+
+After editing notation, run `npm run content:reader-notation` with Pandoc.
+Builds check its source/generator hashes too. The same checked definitions
+appear in the notation utility and folded orientation panel. Both reading
+modes retain the utility; search supports symbol names and TeX spellings.
+Fragment navigation closes an expanded reference and clears its measured
+summary height, including repeated clicks on the same fragment. Responsive
+checks inspect directory content widths and the first line of destinations.
+
+Topic XIV's convexity lesson uses an elementary positive-turn proof at the
+exact scalar root. Its interval certificate remains an optional independent
+check. `public/eight-state-links.js` connects all eight native row equations
+to the polygon and graph without React hydration in the Pages export.
 
 The previous edition's hand-authored and generated reader files are retained
 for provenance but no longer supply the public proof routes. Its obsolete

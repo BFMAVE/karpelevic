@@ -11,10 +11,10 @@ export function ReaderTheoremPreview() {
     const r = radialBoundaryRadius(x, left, right, 5);
     return map(r * Math.cos(2 * Math.PI * x), r * Math.sin(2 * Math.PI * x)).join(",");
   }).join(" ");
-  return <section className="reader-theorem-preview" aria-labelledby="theorem-preview-heading">
+  return <section className="reader-theorem-preview" id="theorem-preview" aria-labelledby="theorem-preview-heading">
     <h2 id="theorem-preview-heading">See the answer before the machinery</h2>
     <p>A cyclic permutation matrix moves each coordinate to the next. After q steps it returns to where it began, so its eigenvalues satisfy λ<sup>q</sup> = 1. These <em>roots of unity</em> sit on the unit circle. A fraction p/q records p/q of a full turn: its point is e<sup>2πip/q</sup>.</p>
-    <ReaderFigureFrame><figure className="reader-teaching-figure">
+    <ReaderFigureFrame defaultView="fit"><figure className="reader-teaching-figure">
       <div className="reader-figure-visual" tabIndex={0} role="region" aria-label="Roots of unity and the order-five arc; scroll horizontally if needed">
         <svg viewBox="0 0 660 350" role="img" aria-labelledby="preview-roots-title preview-roots-desc">
           <title id="preview-roots-title">Neighbouring fractions mark the ends of a boundary arc</title>
@@ -40,5 +40,6 @@ export function ReaderTheoremPreview() {
       <p>Let Rₙ(θ) be the largest r for which reⁱθ is an eigenvalue of an n-state row-stochastic matrix. For n ≥ 4, Rₙ(θ) = Kₙ(θ), where Topic VIII defines Kₙ by the unique positive scalar root on each open Farey interval and by the value 1 at its endpoints. Extend it to 0 ≤ θ &lt; 2π by reflection. Thus Θₙ = {"{"}reⁱθ : 0 ≤ θ &lt; 2π, 0 ≤ r ≤ Kₙ(θ){"}"}. <a href={sitePath("/proof/topic-xii/#thm:karpelevic")}>The exact source theorem and small-order cases are in Topic XII.</a></p>
       <p>Order one gives {"{1}"}. Order two gives [−1,1]. Order three gives the triangle with corners 1, e²πⁱᐟ³, e⁴πⁱᐟ³ together with [−1,−1/2]. In particular, its nonreal radial limit near the negative axis is 1/2 although the radius on that axis is 1.</p>
     </details>
+    <p><a href="#reading-routes">Choose how you want to study the theorem →</a></p>
   </section>;
 }

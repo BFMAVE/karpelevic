@@ -157,6 +157,29 @@ $$
 
 The left side strictly increases with $\rho$. Its equality radius is the candidate $K_n$ from Topic VIII, so $\rho\le K_n$. Every algebraic step after Jensen is reversible. Equality holds exactly when all $u_j$ agree, and the strictly increasing weight-to-angle map makes that equivalent to $\beta_1=\cdots=\beta_m$.
 
+::: {.reader-checkpoint #phase-hypothesis-transfer}
+**Changed-hypothesis checkpoint.** Keep the product and the factor assumptions, but replace the real phase identity by equality only modulo $2\pi$. A student proposes to use exactly the same Jensen calculation and conclude $\rho\le K_n$. Which step no longer follows? Does the convexity calculation itself fail?
+
+<details>
+<summary>Hint</summary>
+
+Allow an unknown integer $k$ in $e\vartheta+\sum_j u_j=2\pi(r-mp)+2\pi k$. What is the resulting average factor angle?
+
+</details>
+<details>
+<summary>Solution</summary>
+
+Jensen's inequality still holds at the actual average, because every $u_j$ and its average lie in $(0,M)$. What fails is identifying that average with the prescribed angle $A+B$. With only the congruence, we know instead
+
+$$
+\bar u=A+B+\frac{2\pi k}{m}
+$$
+
+for an integer $k$ that has not been determined. We cannot substitute $F(A+B)$ for $F(\bar u)$, so this calculation does not give the claimed candidate bound until the exact winding fixes $k=0$. The product supplies a modular phase relation automatically; the polygon's real angle lift in Topic VII supplies the additional information. This is why convexity and a characteristic equation cannot replace the winding argument.
+
+</details>
+:::
+
 ### Check the source of strictness
 
 Suppose $m=2$ and the factor arguments are $\bar u-h$ and $\bar u+h$, both in $(0,M)$, where $h\ne0$. Do they give the same bound as two factors with argument $\bar u$? No. Strict convexity gives

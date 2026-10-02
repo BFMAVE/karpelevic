@@ -48,6 +48,21 @@
       buttons.forEach((button) => button.addEventListener("click", () => setView(button.dataset.figureViewButton)));
       controls.hidden = false;
     });
+    // One spelling for Greek names, glyph variants and TeX commands in both searches.
+    const greekSearchNames = {
+      "α": "alpha", "β": "beta", "γ": "gamma", "δ": "delta", "ε": "epsilon", "ϵ": "epsilon",
+      "ζ": "zeta", "η": "eta", "θ": "theta", "ϑ": "theta", "ι": "iota", "κ": "kappa", "ϰ": "kappa",
+      "λ": "lambda", "μ": "mu", "ν": "nu", "ξ": "xi", "ο": "omicron", "π": "pi", "ϖ": "pi",
+      "ρ": "rho", "ϱ": "rho", "σ": "sigma", "ς": "sigma", "τ": "tau", "υ": "upsilon",
+      "φ": "phi", "ϕ": "phi", "χ": "chi", "ψ": "psi", "ω": "omega",
+    };
+    function searchSpelling(value) {
+      return value.normalize("NFKC").toLocaleLowerCase()
+        .replace(/\\([a-z]+)/g, "$1")
+        .replace(/[α-ωϵϑϰϖϱϕ]/g, (letter) => " " + (greekSearchNames[letter] || letter) + " ")
+        .replace(/\bvar(epsilon|theta|kappa|pi|rho|sigma|phi)\b/g, "$1")
+        .replace(/\s+/g, " ").trim();
+    }
     document.querySelectorAll("[data-reader-notation]").forEach((panel) => {
       const input = panel.querySelector("[data-notation-search]");
       const label = panel.querySelector("[data-notation-search-label]");
@@ -55,8 +70,8 @@
       const status = panel.querySelector("[data-notation-search-status]");
       if (!input || !label) return;
       input.addEventListener("input", () => {
-        const query = input.value.trim().toLocaleLowerCase();
-        entries.forEach((entry) => { entry.hidden = !entry.textContent.toLocaleLowerCase().includes(query); });
+        const query = searchSpelling(input.value);
+        entries.forEach((entry) => { entry.hidden = !searchSpelling(entry.dataset.notationSearchText || entry.textContent).includes(query); });
         const count = entries.filter((entry) => !entry.hidden).length;
         if (status) status.textContent = query ? `${count} matching notation ${count === 1 ? "entry" : "entries"}.` : "";
       });
@@ -70,8 +85,8 @@
       const status = directory.querySelector("[data-topic-search-status]");
       if (!input || !label) return;
       input.addEventListener("input", () => {
-        const query = input.value.trim().toLocaleLowerCase();
-        entries.forEach((entry) => { entry.hidden = !(entry.dataset.topicSearchText || entry.textContent).toLocaleLowerCase().includes(query); });
+        const query = searchSpelling(input.value);
+        entries.forEach((entry) => { entry.hidden = !searchSpelling(entry.dataset.topicSearchText || entry.textContent).includes(query); });
         stages.forEach((stage) => { stage.hidden = Array.from(stage.querySelectorAll("[data-topic-entry]")).every((entry) => entry.hidden); });
         const count = entries.filter((entry) => !entry.hidden).length;
         if (status) status.textContent = query ? `${count} matching ${count === 1 ? "topic" : "topics"}.` : "";

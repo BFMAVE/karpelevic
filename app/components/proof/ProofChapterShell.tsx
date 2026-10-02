@@ -50,7 +50,7 @@ type ProofChapterShellProps = {
   deck?: React.ReactNode;
   showReadingControls?: boolean;
   completionMessage?: React.ReactNode;
-  chapterSections?: readonly { id: string; title: string }[];
+  chapterSections?: readonly { id: string; title: string; children?: readonly { id: string; title: string }[] }[];
   children: React.ReactNode;
 };
 
@@ -77,14 +77,16 @@ export function ProofChapterShell({
           {chapterSections.length ? <nav className="reader-section-directory" aria-label="On this topic">
             <details data-reader-section-directory open>
             <summary>On this topic · {roman}</summary>
-            <ol>{chapterSections.map((section) => <li key={section.id}><a href={"#" + section.id}>{section.title}</a></li>)}</ol>
+            <ol>{chapterSections.map((section) => <li key={section.id}><a href={"#" + section.id}>{section.title}</a>
+              {section.children?.length ? <ol>{section.children.map((child) => <li key={child.id}><a href={"#" + child.id}>{child.title}</a></li>)}</ol> : null}
+            </li>)}</ol>
             <a href="#source-argument">Source statements and proofs</a>
             </details>
           </nav> : null}
           <nav className="proof-chapter-atlas reader-topic-directory" aria-label="Fourteen proof topics">
             <details data-reader-directory>
               <summary>All topics and reading routes</summary>
-              <a className="proof-chapter-prerequisite-link" href={sitePath("/prerequisites/#reading-routes")}>Main ideas or complete proof?</a>
+              <a className="proof-chapter-prerequisite-link" href={sitePath("/prerequisites/#theorem-preview")}>See the theorem, then choose a route</a>
               <label className="reader-topic-search" hidden data-topic-search-label>Find a topic or symbol<input type="search" data-topic-search placeholder="For example: convexity, κ, winding" /></label>
               {stages.map((stage) => <section key={stage.title} data-topic-stage><h2>{stage.title}</h2><ol>
                 {proofReaderTopicLinks.filter((link) => stage.topics.includes(link.topicNumber)).map((link) => {
@@ -106,6 +108,7 @@ export function ProofChapterShell({
             <p className="section-label">Topic {roman} of XIV</p>
             <h1>{route.title}</h1>
             <p className="reader-chapter-question">{question ?? topic.question}</p>
+            {route.topicNumber === 1 ? <p className="reader-preview-link"><a href={sitePath("/prerequisites/#theorem-preview")}>First see the theorem&apos;s picture and statement →</a></p> : null}
             <details className="reader-chapter-publication"><summary>Source and revision</summary><p className="reader-chapter-source">{manuscriptPages ?? topic.manuscriptPages}</p><div className="proof-edition-meta reader-chapter-meta">
               {stats.map((stat) => <span key={stat.label}>{stat.value} {stat.label}</span>)}
               {firstPublishedAt ? <time dateTime={firstPublishedAt}>First published {formatDate(firstPublishedAt)}.</time> : null}
@@ -137,5 +140,6 @@ export function ProofChapterShell({
     </div></footer>
     <script src={sitePath("/proof-chapter.js")} defer />
     <script src={sitePath("/reader-learning.js")} defer />
+    {route.topicNumber === 14 ? <script src={sitePath("/eight-state-links.js")} defer /> : null}
   </>;
 }

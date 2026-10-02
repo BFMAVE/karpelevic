@@ -1,5 +1,30 @@
 # Project Status
 
+## Focused consistency and visibility pass — 2 October 2026
+
+The two follow-up reviews identify specific reference and combined-interaction
+problems rather than a need for another redesign. This pass fixes the inherited
+mobile catalogue width, clears fragment destinations below the notation bar,
+handles repeated fragments, limits the open reference footprint, and retains
+the reference in both reading modes. Chapter-sensitive MathML entries support
+symbol names and TeX spellings. The theorem preview precedes the route chooser
+and is the homepage learning destination.
+
+VI now exposes its nested subsections, justifies its convex graph and derives
+the reciprocal recurrence with positive denominators. II and IX include
+changed-inference checks. XIV uses an elementary exact-root convexity argument,
+retains the interval certificate as optional, and links each of eight matrix
+rows to graph edges, coordinates, images and averaging equations. Topic I's
+colliding SVG sentence is now in the reflowing caption.
+
+The release record is `docs/proof-audits/reader-consistency-review-2026-10-02.md`.
+The formal source passages and both paper editions are preserved. All 78 tests,
+type-checking, lint and the Pages export pass. Browser checks cover all fourteen
+Source-mode references at 320 pixels, expanded directories at four widths,
+destination first lines, aliases and all eight linked row states. Two long
+inline identities in XIII now scroll locally without widening the page. No full assistive-
+technology or cross-browser certification is claimed.
+
 ## Learning review implemented — 2 October 2026
 
 The supplied review's sequencing, retrieval, practice and hierarchy recommendations

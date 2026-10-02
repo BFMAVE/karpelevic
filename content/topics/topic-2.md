@@ -36,7 +36,7 @@ $$
 \qquad \widehat Av=\frac{2\omega}{3}v.
 $$
 
-The chosen eigenvalue has moved from radius $1/2$ to radius $2/3$ at the same angle. This is an exact nonextremal example. All its rows are positive, allowing a uniform subtraction and an especially simple normalization. The general proof below needs only one positive row; then the row sums differ, and a positive diagonal change of coordinates restores them before division by $r$. At a radially extremal eigenvalue, that outward movement is forbidden.
+The chosen eigenvalue has moved from radius $1/2$ to radius $2/3$ at the same angle. This is an exact nonextremal example. All its rows are positive, allowing a uniform subtraction and an especially simple normalization. The general proof below needs only one positive row; then the row sums differ. A positive diagonal change of coordinates makes every row sum equal to $r$, and division by $r$ restores the stochastic row sum one. At a radially extremal eigenvalue, that outward movement is forbidden.
 
 ### The positive eigenvector needed for the general normalization
 
@@ -67,6 +67,29 @@ Put $D=\operatorname{diag}(h_1,\ldots,h_N)$ and
 $$C=r^{-1}D^{-1}BD.$$
 
 Similarity by $D$ preserves eigenvalues, while division by $r$ enlarges the non-Perron ones. Also $C\mathbf1=r^{-1}D^{-1}Bh=\mathbf1$, so $C$ is stochastic. In particular it realizes $\zeta/r$, on the same ray and strictly farther from zero. Extremality forbids a positive row.
+
+::: {.reader-checkpoint #deflation-two-operations}
+**Distinguish the operations.** Suppose $Bv=\zeta v$ and $Bh=rh$ with $h>0$ and $0<r<1$. A student says: “The diagonal similarity $D^{-1}BD$ is already stochastic, and its chosen eigenvalue is $\zeta/r$.” Identify both errors. What are its row sums and chosen eigenvector, and what changes when we next divide by $r$?
+
+<details>
+<summary>Hint</summary>
+
+Compute $D^{-1}BD\mathbf1$ using $D\mathbf1=h$. Then apply $D^{-1}BD$ to $D^{-1}v$. Similarity changes coordinates; scalar multiplication changes eigenvalues.
+
+</details>
+<details>
+<summary>Solution</summary>
+
+The row sums of $D^{-1}BD$ are $r$, because $D^{-1}Bh=r\mathbf1$. Its eigenvector is $D^{-1}v$ and its eigenvalue is still $\zeta$, since
+
+$$
+D^{-1}BD(D^{-1}v)=D^{-1}Bv=\zeta D^{-1}v.
+$$
+
+Thus the similarity makes the row sums equal, but does not yet make them one or enlarge the eigenvalue. Dividing the whole matrix by $r$ does both: $C\mathbf1=\mathbf1$ and $C(D^{-1}v)=(\zeta/r)D^{-1}v$. The nonnegative entries remain nonnegative in each operation because $D$ has positive diagonal entries and $r>0$. In the numerical example above, $h=\mathbf1$ and $D$ is the identity, so only the scalar division is visible.
+
+</details>
+:::
 
 ### An interior image would give exactly that forbidden row
 

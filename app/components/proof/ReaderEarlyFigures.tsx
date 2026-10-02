@@ -33,7 +33,7 @@ function Segment({ from, to, color = ink, dashed = false, width = 2.5, arrow }: 
 
 function TeachingFigure({ id, title, description, height, children, caption, controls }: { id: string; title: string; description: string; height: number; children: ReactNode; caption: ReactNode; controls?: ReactNode }) {
   const notes: Record<string, { takeaway: string; status: string }> = {
-    "reader-i-averaging": { takeaway: "Each row sends a vertex to a side midpoint; the image square stays inside the diamond.", status: "Exact invariant example. Containment supplies an eigenvalue; maximality needs the later proof." },
+    "reader-i-averaging": { takeaway: "Row 1 averages 1 and i with weights 1/2 and 1/2. Each row sends a vertex to a side midpoint; the image square stays inside the diamond.", status: "Exact invariant example. Containment supplies an eigenvalue; maximality needs the later proof." },
     "reader-ii-polar": { takeaway: "An interior image has room to move outward; a polar boundary equality identifies contact with an original side.", status: "Exact averaging and polar models. The interior-image example is nonextremal." },
     "reader-iii-half-open": { takeaway: "One side owns the ending corner, so the contact is counted exactly once.", status: "Exact endpoint-assignment diagram; a bookkeeping model." },
     "reader-iv-replacement": { takeaway: "A legal replacement transfers one positive contact weight without changing the minimum contact count.", status: "Local corner and coefficient diagram. The proof's factor reversal establishes invariance; the drawing illustrates its effect." },
@@ -90,7 +90,6 @@ function AveragingPolygon() {
       <Label at={[402, 182]}>λ = (1+i)/2</Label>
       <Label at={[402, 224]}>rotation: 45°</Label>
       <Label at={[402, 266]}>scale: 1/√2</Label>
-      <Label at={[330, 340]} anchor="middle" size={21}>row 1: average 1 and i with weights 1/2, 1/2</Label>
     </TeachingFigure>
   );
 }

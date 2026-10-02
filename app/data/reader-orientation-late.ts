@@ -88,13 +88,13 @@ export const lateOrientations: Record<number, TopicOrientation> = {
     ],
     definitions: [
       { term: "Polygon gauge Vₚ", meaning: "Vₚ(x) is the least scale a with x in aP. An asymmetric polygon can give Vₚ(−x) ≠ Vₚ(x), so the gauge need not be a norm." },
-      { term: "Optimal factor Γₙ", meaning: "The smallest γ for which ρRθ P is contained in γP among polygons with at most N vertices and zero in their interior; N ≥ 4." },
+      { term: "Optimal factor for vertex budget N", meaning: "The smallest containment factor for the rotation-dilation among polygons with at most N vertices and zero in their interior; N is at least four." },
       { term: "Badly approximable angle fraction", meaning: "An irrational x for which |x−a/b| ≥ cₓ/b² for all rationals, for some fixed cₓ > 0." },
       { term: "Uniform relative asymptotic", meaning: "The error divided by the positive leading gap is O(N⁻²), with one constant for all open Farey intervals and all interior positions t." },
-      { term: "Positive leading gap Lₙ(θ)", meaning: "The displayed Farey expression without its final error factor. Uniformity means |(1−Kₙ)−Lₙ|≤(C/N²)Lₙ with one constant C for every interval and interior position." },
+      { term: "Positive leading gap at order N", meaning: "The displayed Farey expression without its final error factor. Its relative error is bounded by one constant divided by N squared, for every interval and interior position." },
     ],
     strategy: "First solve the exact polygon-measurement problem by rescaling an invariant inclusion. Then factor the sine defect so that the small endpoint factor t(1−t) survives the error estimate.",
-    payoff: "Γₙ = ρ/Kₙ. The worst-angle loss is of order N⁻²; a fixed badly approximable angle has loss of order N⁻³. Endpoint-uniform relative error does not mean every irrational angle has the same rate.",
+    payoff: "Dividing the dilation by the order-N boundary radius gives the optimal factor. The worst-angle loss is of order N⁻²; a fixed badly approximable angle has loss of order N⁻³. Endpoint-uniform relative error does not mean every irrational angle has the same rate.",
   },
   14: {
     imports: [

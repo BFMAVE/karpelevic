@@ -57,7 +57,7 @@ export default function Home() {
               <p className="hero-deck">{homeContent.descriptor}</p>
 
               <nav className="reader-home-actions" aria-label="Start here">
-                <a href={sitePath("/prerequisites/#reading-routes")}>Start learning →</a>
+                <a href={sitePath("/prerequisites/#theorem-preview")}>Start learning →</a>
                 <a href="#region-atlas">Explore the region</a>
                 <a href="https://arxiv.org/abs/2609.26058v2">Read the research paper ↗</a>
               </nav>

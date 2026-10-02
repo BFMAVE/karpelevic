@@ -6,7 +6,7 @@ export function ReaderLearningRoutes() {
     <p>Basic analysis and linear algebra are enough to start. Following every proof independently also takes practice with constraints, integer arithmetic and accumulated angles. You can first learn the mechanism, then return to its harder justifications.</p>
     <div className="reader-learning-route-grid">
       <article><h3>Understand the theorem and its main ideas</h3><p>Read the overview below, try its checkpoints, then follow the eight-state example. Three results are explicitly accepted along this route, with links to their proofs.</p><a href="#main-ideas">Begin the main-ideas route →</a></article>
-      <article><h3>Study the complete proof</h3><p>Read I–XII in order, working through the guided lessons and opening the source proofs. No lemma is omitted from this route. Finish with XIV&apos;s example; XIII is an optional application.</p><a href={sitePath("/proof/")}>Begin the complete-proof route →</a></article>
+      <article><h3>Study the complete proof</h3><p>Read I–XII in order, working through the guided lessons and opening the source proofs. No lemma is omitted from this route. Finish with XIV&apos;s example; XIII is an optional application.</p><p><a href="#theorem-preview">Review the theorem&apos;s picture</a></p><a href={sitePath("/proof/")}>Begin the complete-proof route →</a></article>
     </div>
   </section>;
 }

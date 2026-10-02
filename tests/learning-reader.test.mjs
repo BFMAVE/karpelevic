@@ -31,19 +31,22 @@ test("the learning overview identifies deferred obligations and preserves the co
   assert.match(html, /least realizing order/);
   assert.match(html, /stationary reset matrix/);
   assert.match(html, /id="main-ideas"/);
+  assert.ok(html.indexOf('id="theorem-preview"') < html.indexOf('id="reading-routes"'), "the destination picture precedes the route chooser");
   assert.match(html, /State the answer precisely/);
   assert.match(html, /negative axis is 1\/2/);
   const home = await render("/");
   assert.match(home, /name="atlas-view"[^>]*value="single"/);
   assert.match(home, /Compare orders one–seven/);
   assert.ok(home.indexOf("Start learning") < home.indexOf("Publication, editions and verification"));
+  assert.match(home, /href="[^"]*\/prerequisites\/#theorem-preview"[^>]*>Start learning/);
 });
 
 test("the current lesson has compact orientation, searchable notation and explicit figure scope", async () => {
   const html = await render("/proof/topic-vi");
   assert.match(html, /<details class="reader-orientation-details">/);
-  assert.match(html, /<details class="reader-notation proof-guided-layer"/);
-  assert.match(html, /data-topic-search-text="[^"]*κ/);
+  assert.match(html, /<details class="reader-notation"/);
+  assert.match(html, /data-topic-search-text="[^"]*(?:κ|\\kappa)/);
+  assert.match(html, /<ol><li><a href="#guide-6-build-the-general-motion-by-intersecting-lines"/);
   assert.match(html, /Guided lesson/);
   assert.match(html, /Source proof/);
   assert.match(html, /Lesson 1:/);
@@ -134,5 +137,5 @@ test("the drawn octagon uses the actual eigenvector and its scaled rotated image
   assert.match(html, /value="8"/);
   assert.match(html, /Compare with order seven/);
   assert.match(html, /supporting-side certificate/);
-  assert.match(html, /exact contacts and certified supporting-side signs/);
+  assert.match(html, /analytically verified invariant octagon/);
 });

@@ -1,0 +1,629 @@
+{
+  "description": "Chapter-scoped notation. Terms and meanings are Markdown with TeX math; scripts/generate-reader-notation.mjs converts them through Pandoc to native MathML.",
+  "topics": {
+    "1": [
+      [
+        "Row-stochastic matrix",
+        "A matrix whose rows are weighted averaging instructions: entries are nonnegative and each row sums to one."
+      ],
+      [
+        "Eigenvalue region $\\Theta_n$",
+        "The set of single complex numbers that can occur as eigenvalues of some stochastic matrix with $n$ rows."
+      ],
+      [
+        "Convex hull and vertex",
+        "The hull contains all weighted averages of the given points. A vertex cannot be obtained by averaging other points of the hull."
+      ],
+      [
+        "Invariant polygon $P$",
+        "A polygon satisfying $\\lambda P\\subseteq P$: rotating and scaling any point of $P$ keeps it in $P$."
+      ],
+      [
+        "Supporting line",
+        "A line touching the polygon while all its points lie on one side of that line."
+      ],
+      [
+        "Stationary probability row $\\pi^T$",
+        "A nonnegative row of total mass one with $\\pi^T A=\\pi^T$."
+      ],
+      [
+        "Radial filling",
+        "If $\\lambda$ is attainable, every $t\\lambda$ with $0\\le t\\le1$ is attainable in the same order, for $n\\ge2$."
+      ]
+    ],
+    "2": [
+      [
+        "Least realising order $N$",
+        "The smallest number of states, equivalently polygon vertices, that can realise this particular nonreal eigenvalue."
+      ],
+      [
+        "Radial extremality",
+        "Any increase of $|\\zeta|$ at the same angle requires more than $N$ vertices."
+      ],
+      [
+        "Chosen multiplier $\\zeta$ and angle $\\theta_\\zeta$",
+        "Write $\\zeta=\\rho e^{i\\theta_\\zeta}$ with $0<\\theta_\\zeta<2\\pi$. Conjugation replaces its chosen argument by $2\\pi-\\theta_\\zeta$, rather than using a negative principal argument."
+      ],
+      [
+        "Irreducible matrix",
+        "Its positive-entry arrows allow a directed path from every state to every other state."
+      ],
+      [
+        "Spectral radius and Perron root",
+        "The largest eigenvalue modulus; for the nonnegative irreducible matrix used here it is a positive eigenvalue with a positive eigenvector."
+      ],
+      [
+        "Deflation and normalisation",
+        "The rank-one subtraction lowers the Perron root to $r<1$ while preserving the chosen $\\zeta$. The diagonal similarity restores equal row sums $r$; division by $r$ then restores row sums one and changes $\\zeta$ to $\\zeta/r$."
+      ],
+      [
+        "Polar polygon $P^\\circ$ and adjoint $T^*$",
+        "The polar records inequalities $\\langle a,x\\rangle\\le1$. The adjoint obeys $\\langle T^*a,x\\rangle=\\langle a,Tx\\rangle$."
+      ],
+      [
+        "Active polar inequality",
+        "A vertex inequality $\\langle a,v_j\\rangle\\le1$ that attains equality. Two independent active endpoint equations identify an original side's polar vertex."
+      ],
+      [
+        "Face and relative interior",
+        "The smallest containing face can be a vertex, a whole side, or the whole polygon for an interior point. A point in a side's relative interior lies strictly between its endpoints."
+      ]
+    ],
+    "3": [
+      [
+        "Contact counts $b_T,d_T$ and chosen count $\\varphi$",
+        "$b_T$ counts vertex images strictly inside sides; $d_T$ counts vertex images that are vertices. The chosen minimal interior-contact count is denoted by $\\varphi$."
+      ],
+      [
+        "Normalised polygon",
+        "Its largest distance from zero is one, so shrinking all coordinates cannot artificially lower the area."
+      ],
+      [
+        "Count-then-area selection",
+        "First minimise the integer contact count; use smallest area only to choose among polygons with that count and fixed scale."
+      ],
+      [
+        "Half-open side $(v_{i-1},v_i]$",
+        "The ending corner belongs to this side and the starting corner belongs to the preceding side, so each boundary point is assigned once."
+      ],
+      [
+        "Cyclic shift $\\kappa$",
+        "The fixed number of index positions by which multiplication moves the side assignment."
+      ],
+      [
+        "Contact coefficients $\\alpha_i,\\beta_i$",
+        "The weights in $c_i=\\beta_i v_{i-1}+\\alpha_i v_i$, with $\\alpha_i+\\beta_i=1$. A zero $\\beta_i$ means the contact is the ending vertex."
+      ],
+      [
+        "Continued vertex angles $\\Phi_i$",
+        "These are real angles with $\\Phi_{i+N}=\\Phi_i+2\\pi$, where the uppercase $N$ counts polygon vertices. Reducing them modulo $2\\pi$ would discard the whole turns needed for the winding identity."
+      ],
+      [
+        "Chosen multiplier $\\zeta$ and angle $\\theta_\\zeta$",
+        "Write $\\zeta=\\rho e^{i\\theta_\\zeta}$ with $0<\\theta_\\zeta<2\\pi$. Conjugation replaces its chosen argument by $2\\pi-\\theta_\\zeta$, rather than using a negative principal argument."
+      ]
+    ],
+    "4": [
+      [
+        "Stochastic factor reversal",
+        "Replace $HS$ by $SH$; when $S$ is invertible the two matrices are similar and preserve their eigenvalues."
+      ],
+      [
+        "Local vertex replacement",
+        "Move one vertex to its already known contact on the preceding side, while a matrix factorisation proves invariance."
+      ],
+      [
+        "Logarithmic weight $w_i$",
+        "The number $w_i=-\\log\\alpha_i$. Multiplying contact coefficients becomes adding these nonnegative weights."
+      ],
+      [
+        "Consecutive contact run $I$",
+        "One uninterrupted interval of side indices with $\\beta_i>0$, interpreted around the closed boundary. Its chosen length is $\\varphi$."
+      ],
+      [
+        "Residue $[a]_N$ and index orbit",
+        "Reduce $a$ to $0,\\ldots,N-1$. Repeated addition of $\\kappa$ visits one of $\\gcd(N,\\kappa)$ cycles."
+      ],
+      [
+        "Record and deficit",
+        "A residue larger than every earlier residue is a record; its deficit is its distance below $N$."
+      ],
+      [
+        "Chosen multiplier $\\zeta$ and angle $\\theta_\\zeta$",
+        "Write $\\zeta=\\rho e^{i\\theta_\\zeta}$ with $0<\\theta_\\zeta<2\\pi$. Conjugation replaces its chosen argument by $2\\pi-\\theta_\\zeta$, rather than using a negative principal argument."
+      ]
+    ],
+    "5": [
+      [
+        "Vertex count $N$ and contact shift $\\kappa$",
+        "$N$ is the least realising order, also the polygon's vertex count. Multiplication sends $v_i$ to the side ending at $v_{i+\\kappa}$; vertex indices are taken modulo $N$."
+      ],
+      [
+        "Record deficits $\\varphi,\\psi$ and displacement $\\Delta$",
+        "Consecutive record deficits satisfy $\\varphi>\\psi$ and $\\Delta=\\varphi-\\psi$. The non-singleton return case has $1\\le\\Delta<\\varphi$."
+      ],
+      [
+        "Return times $q,h$ and heights $H_j$",
+        "$h$ is the earlier record time and $q$ is the time difference to the next record. The tower heights $H_j$ are $q$ or $q+h$, with $q\\varphi+h\\Delta=N$."
+      ],
+      [
+        "Base and first return",
+        "Start at an index in the contact run. The first return is the first later index in that run, whose image lands inside its assigned side."
+      ],
+      [
+        "Tower and height $H_j$",
+        "The finite list of vertices before that first return; its height is the number of steps before the final side contact."
+      ],
+      [
+        "Record vector $(h,b)$",
+        "An integer pair recording the record time $h$ and the multiple $bN$ just above $h\\kappa$. Here $b$ is a record coordinate, not a tower height."
+      ],
+      [
+        "Determinant-one integer basis",
+        "Two integer vectors whose $2\\times2$ determinant is one, so every integer pair has unique integer coordinates in them."
+      ],
+      [
+        "Bézout's identity",
+        "Coprime integers have an integer linear combination equal to one. Integer division supplies the complementary basis vector."
+      ],
+      [
+        "Return displacement $\\Delta$",
+        "The number of base positions advanced by the first-return permutation; it is the drop between two consecutive record deficits."
+      ],
+      [
+        "Arithmetic suspension",
+        "Replace each base by its tower of vertices. Counting joined tower cycles proves these lists cover every polygon index exactly once."
+      ],
+      [
+        "Continued vertex angles $\\Phi_i$",
+        "These are real angles with $\\Phi_{i+N}=\\Phi_i+2\\pi$, where the uppercase $N$ counts polygon vertices. Reducing them modulo $2\\pi$ would discard the whole turns needed for the winding identity."
+      ],
+      [
+        "Chosen multiplier $\\zeta$ and angle $\\theta_\\zeta$",
+        "Write $\\zeta=\\rho e^{i\\theta_\\zeta}$ with $0<\\theta_\\zeta<2\\pi$. Conjugation replaces its chosen argument by $2\\pi-\\theta_\\zeta$, rather than using a negative principal argument."
+      ]
+    ],
+    "6": [
+      [
+        "Vertex count $N$ and contact shift $\\kappa$",
+        "$N$ is the least realising order, also the polygon's vertex count. Multiplication sends $v_i$ to the side ending at $v_{i+\\kappa}$; vertex indices are taken modulo $N$."
+      ],
+      [
+        "Record deficits $\\varphi,\\psi$ and displacement $\\Delta$",
+        "Consecutive record deficits satisfy $\\varphi>\\psi$ and $\\Delta=\\varphi-\\psi$. The non-singleton return case has $1\\le\\Delta<\\varphi$."
+      ],
+      [
+        "Return times $q,h$ and heights $H_j$",
+        "$h$ is the earlier record time and $q$ is the time difference to the next record. The tower heights $H_j$ are $q$ or $q+h$, with $q\\varphi+h\\Delta=N$."
+      ],
+      [
+        "Selected chain return time $a$",
+        "In Lesson 3, $a=q$ for the forward chain or $a=q+h$ for the backward chain. Thus $S=F^a|_\\Lambda$. This local $a$ is a selected return time, not a fixed name for the taller tower."
+      ],
+      [
+        "Smallest face and face persistence",
+        "The smallest containing face is a vertex, a side, or the whole polygon for an interior point. Under an invertible invariant map its dimension cannot decrease."
+      ],
+      [
+        "Exposing line",
+        "A supporting line meeting the polygon at just one vertex, supplying a line along which that vertex can be moved."
+      ],
+      [
+        "Projectivity and coefficients $a,b,d,e$",
+        "An invertible fractional-linear map $(a\\tau+b)/(d\\tau+e)$ between completed lines. These real coefficients are local to that formula and are unrelated to the return time $a$ or tower arithmetic."
+      ],
+      [
+        "Point at infinity",
+        "The direction-point added to a line so a parallel projection still has a defined intersection."
+      ],
+      [
+        "Positive-denominator coordinates",
+        "Coordinates obtained by dividing affine functions by one that stays positive on the polygon; they preserve segments and their interiors."
+      ],
+      [
+        "Closing function $u(t)=at/(1+bt)$",
+        "Here $a,b$ are new local real coefficients of the closing function. They are not tower heights or the selected return time. The inward defect is $t-u(t)=((1-a)t+bt^2)/(1+bt)$."
+      ],
+      [
+        "Transported tower motion",
+        "After choosing a moved base, move its level-$t$ vertex to $F^t$ of that base, preserving every vertex-to-vertex relation."
+      ],
+      [
+        "Chosen multiplier $\\zeta$ and angle $\\theta_\\zeta$",
+        "Write $\\zeta=\\rho e^{i\\theta_\\zeta}$ with $0<\\theta_\\zeta<2\\pi$. Conjugation replaces its chosen argument by $2\\pi-\\theta_\\zeta$, rather than using a negative principal argument."
+      ]
+    ],
+    "7": [
+      [
+        "Vertex count $N$ and contact shift $\\kappa$",
+        "$N$ is the least realising order, also the polygon's vertex count. Multiplication sends $v_i$ to the side ending at $v_{i+\\kappa}$; vertex indices are taken modulo $N$."
+      ],
+      [
+        "Record deficits $\\varphi,\\psi$ and displacement $\\Delta$",
+        "Consecutive record deficits satisfy $\\varphi>\\psi$ and $\\Delta=\\varphi-\\psi$. The non-singleton return case has $1\\le\\Delta<\\varphi$."
+      ],
+      [
+        "Return times $q,h$ and heights $H_j$",
+        "$h$ is the earlier record time and $q$ is the time difference to the next record. The tower heights $H_j$ are $q$ or $q+h$, with $q\\varphi+h\\Delta=N$."
+      ],
+      [
+        "Chosen multiplier $\\zeta$ and angle $\\theta_\\zeta$",
+        "Write $\\zeta=\\rho e^{i\\theta_\\zeta}$ with $0<\\theta_\\zeta<2\\pi$. Conjugation replaces its chosen argument by $2\\pi-\\theta_\\zeta$, rather than using a negative principal argument."
+      ],
+      [
+        "Original angle $\\theta$, oriented multiplier $\\omega$ and coordinate $y$",
+        "The original upper-ray angle is $\\theta$. The oriented multiplier $\\omega$ has angle $\\vartheta=2\\pi y$, where $y=\\theta/(2\\pi)$ or $y=1-\\theta/(2\\pi)$ after reflection. This orientation puts the smaller Farey denominator on the left."
+      ],
+      [
+        "Continued vertex angles $\\Phi_i$",
+        "These are real angles with $\\Phi_{i+N}=\\Phi_i+2\\pi$, where the uppercase $N$ counts polygon vertices. Reducing them modulo $2\\pi$ would discard the whole turns needed for the winding identity."
+      ],
+      [
+        "Farey list $F_N$",
+        "The ordered reduced fractions between zero and one whose denominators are at most the structural vertex count $N$."
+      ],
+      [
+        "Farey neighbour criterion",
+        "Reduced fractions $p/q<r/s$ in $F_N$ are consecutive exactly when $rq-ps=1$ and $q+s>N$."
+      ],
+      [
+        "Mediant",
+        "The fraction $(p+r)/(q+s)$ lies between $p/q$ and $r/s$."
+      ],
+      [
+        "Structural factor count $m$ and closing exponent $e$",
+        "For the least-order polygon, $m=\\lfloor N/q\\rfloor$ and $e=s-mq$. After the prescribed orientation, $q<s$; $e$ can be negative."
+      ],
+      [
+        "Principal factor argument $u_j$",
+        "The argument of $\\omega^q-\\beta_j$ chosen in $(-\\pi,\\pi]$. In this construction it lies in $[A,M)$, where $A=\\operatorname{Arg}(\\omega^q)$ and $M=\\operatorname{Arg}(\\omega^q-1)$, both positive."
+      ],
+      [
+        "Exact winding identity",
+        "The real sum $e\\vartheta+\\sum_{j=1}^m u_j$ equals $2\\pi(r-mp)$, not merely that value modulo $2\\pi$."
+      ]
+    ],
+    "8": [
+      [
+        "Actual region $\\Theta_n$, actual radius $R_n$ and candidate $K_n$",
+        "$\\Theta_n$ is the eigenvalue region and $R_n(\\theta)$ its actual radial maximum. $K_n(\\theta)$ is the scalar candidate. Topic XII identifies $R_n=K_n$ for $n\\ge4$; order three needs a separate negative-ray check."
+      ],
+      [
+        "Requested order $n$ versus structural order $N$",
+        "Here $n$ is the matrix order requested for the scalar candidate. The imported geometric theorem uses the least realising order $N$; it does not set $N=n$."
+      ],
+      [
+        "Original angle $\\theta$, oriented multiplier $\\omega$ and coordinate $y$",
+        "$\\theta$ is the original upper-ray angle used by $K_n(\\theta)$. After any required reflection, $\\omega$ has angle $\\vartheta=2\\pi y$, where $y=\\theta/(2\\pi)$ or $y=1-\\theta/(2\\pi)$. The requested radius still belongs to the original ray."
+      ],
+      [
+        "Candidate factor count $m$ and closing exponent $e$",
+        "For the requested order, $m=\\lfloor n/q\\rfloor$ and $e=s-mq$. The structural product instead uses $\\lfloor N/q\\rfloor$ at its own least order."
+      ],
+      [
+        "Angle budget $A,B$",
+        "$A=2\\pi(qy-p)$ and $B=2\\pi(r-sy)/m$. Both are positive inside the oriented Farey interval $p/q<y<r/s$."
+      ],
+      [
+        "Interval position $t$",
+        "$t=(y-p/q)/(r/s-p/q)$ lies between zero and one; $A=2\\pi t/s$ and $B=2\\pi(1-t)/(mq)$."
+      ],
+      [
+        "Candidate radius $K_n(\\theta)$",
+        "The unique $\\rho\\in(0,1)$ solving $\\rho^{s/m}\\sin A+\\rho^q\\sin B=\\sin(A+B)$ on an interior ray. Its boundary interpretation is proved in Topics IX–XII."
+      ],
+      [
+        "Principal arguments $u_j$ versus continued angles $\\Phi_i$",
+        "$u_j=\\operatorname{Arg}(\\omega^q-\\beta_j)$ is a principal factor argument. The imported vertex angles satisfy $\\Phi_{i+N}=\\Phi_i+2\\pi$ with the polygon's uppercase $N$, preserving the exact winding."
+      ]
+    ],
+    "9": [
+      [
+        "Actual region $\\Theta_n$, actual radius $R_n$ and candidate $K_n$",
+        "$\\Theta_n$ is the eigenvalue region and $R_n(\\theta)$ its actual radial maximum. $K_n(\\theta)$ is the scalar candidate. Topic XII identifies $R_n=K_n$ for $n\\ge4$; order three needs a separate negative-ray check."
+      ],
+      [
+        "Original angle $\\theta$, oriented multiplier $\\omega$ and coordinate $y$",
+        "$\\theta$ is the original upper-ray angle used by $K_n(\\theta)$. After any required reflection, $\\omega$ has angle $\\vartheta=2\\pi y$, where $y=\\theta/(2\\pi)$ or $y=1-\\theta/(2\\pi)$. The requested radius still belongs to the original ray."
+      ],
+      [
+        "Factor count $m$ and order scope",
+        "$m$ counts the product factors. The order-$n$ candidate uses $m=\\lfloor n/q\\rfloor$; an extremal polygon's product uses $\\lfloor N/q\\rfloor$ at its least realising order $N$."
+      ],
+      [
+        "Normalised factor $g_j$",
+        "$g_j=(w-\\beta_j)/(1-\\beta_j)$, where $w=z^q=a+ib$ and $b>0$. Normalisation preserves its argument. Here $a,b$ are the real and imaginary parts of $w$."
+      ],
+      [
+        "Common line and coefficient $c$",
+        "$c=(1-a)/b$ and every factor obeys $\\operatorname{Re}g_j+c\\operatorname{Im}g_j=1$. At argument $u$, its modulus is $1/(\\cos u+c\\sin u)$."
+      ],
+      [
+        "Logarithmic size $F(u)$",
+        "$F(u)=-\\log(\\cos u+c\\sin u)$ on $0<u<M$, where $M=\\operatorname{Arg}(w-1)$. Its second derivative is at least one."
+      ],
+      [
+        "Average argument $\\bar u$",
+        "$\\bar u=(u_1+\\cdots+u_m)/m$. The exact real phase gives $\\bar u=A+B$; Jensen gives $F(\\bar u)\\le(F(u_1)+\\cdots+F(u_m))/m$."
+      ],
+      [
+        "Equality of contact weights",
+        "Strict convexity gives equality precisely when all $u_j$ agree, equivalently all $\\beta_j$ agree, under the stated product and real phase hypotheses."
+      ]
+    ],
+    "10": [
+      [
+        "Actual region $\\Theta_n$, actual radius $R_n$ and candidate $K_n$",
+        "$\\Theta_n$ is the eigenvalue region and $R_n(\\theta)$ its actual radial maximum. $K_n(\\theta)$ is the scalar candidate. Topic XII identifies $R_n=K_n$ for $n\\ge4$; order three needs a separate negative-ray check."
+      ],
+      [
+        "Original angle $\\theta$, oriented multiplier $\\omega$ and coordinate $y$",
+        "$\\theta$ is the original upper-ray angle used by $K_n(\\theta)$. After any required reflection, $\\omega$ has angle $\\vartheta=2\\pi y$, where $y=\\theta/(2\\pi)$ or $y=1-\\theta/(2\\pi)$. The requested radius still belongs to the original ray."
+      ],
+      [
+        "Candidate parameters $n,m,q,s,e$",
+        "For an order-$n$ Farey candidate, $m=\\lfloor n/q\\rfloor$ and $e=s-mq$. The general graph construction also accepts independently specified positive integers $m,q,s$ with $s>(m-1)q$."
+      ],
+      [
+        "Weighted transition matrix $M$",
+        "An arrow $u\\to v$ of weight $a$ means $M_{uv}=a$: $u$ is the row and $v$ the column. The matrix $M$ is distinct from the scalar angle $A$."
+      ],
+      [
+        "Local and connecting cycles",
+        "$m$ local $q$-cycles close with weights $\\beta_j$; the complementary weights $1-\\beta_j$ connect them into one cycle of length $s$."
+      ],
+      [
+        "Realisation order $n_0$",
+        "$n_0=\\max\\{mq,s\\}$. The final connection skips or inserts vertices to obtain the required cycle length $s$."
+      ],
+      [
+        "Selected arc weight $\\beta(\\vartheta)$",
+        "The equal weight selected at each oriented angle decreases strictly from one to zero, so each interior weight corresponds to exactly one selected point."
+      ],
+      [
+        "State versus polygon vertex",
+        "Every graph state gives an eigenvector coordinate; different states can have equal coordinates or coordinates inside the hull. Matrix order does not by itself prove that every coordinate is an extreme polygon vertex."
+      ]
+    ],
+    "11": [
+      [
+        "Actual region $\\Theta_n$, actual radius $R_n$ and candidate $K_n$",
+        "$\\Theta_n$ is the eigenvalue region and $R_n(\\theta)$ its actual radial maximum. $K_n(\\theta)$ is the scalar candidate. Topic XII identifies $R_n=K_n$ for $n\\ge4$; order three needs a separate negative-ray check."
+      ],
+      [
+        "Requested order $n$ and candidate factor count $m$",
+        "Candidate comparison is between orders $n-1$ and $n$. Within either candidate calculation, the floor uses that candidate's order: $\\lfloor(n-1)/q\\rfloor$ or $\\lfloor n/q\\rfloor$."
+      ],
+      [
+        "Original angle $\\theta$ and reflected coordinate $y$",
+        "Set $\\rho=K_{n-1}(\\theta)$ on the original upper ray first. Then use $x=\\theta/(2\\pi)$, or $y=1-x$ after reflection, in the scalar calculations. Reflection does not change the argument passed to $K_{n-1}$."
+      ],
+      [
+        "Mediant $\\xi$",
+        "Between $a/b$ and $c/d$, $\\xi=(a+c)/(b+d)$. A new order-$n$ fraction appears in an old interval exactly when $b+d=n$."
+      ],
+      [
+        "Scalar residual",
+        "The left side of the new scalar equation minus its right side. A negative residual at the old radius puts the new root farther out."
+      ],
+      [
+        "Independent candidate comparison",
+        "The proof establishes $K_{n-1}(\\theta)\\le K_n(\\theta)$ before identifying either candidate with the actual boundary; nesting of the regions alone would not prove this."
+      ]
+    ],
+    "12": [
+      [
+        "Actual region $\\Theta_n$, actual radius $R_n$ and candidate $K_n$",
+        "$\\Theta_n$ is the eigenvalue region and $R_n(\\theta)$ its actual radial maximum. $K_n(\\theta)$ is the scalar candidate. Topic XII identifies $R_n=K_n$ for $n\\ge4$; order three needs a separate negative-ray check."
+      ],
+      [
+        "Actual radial maximum $R_n(\\theta)$",
+        "The largest $r$ with $re^{i\\theta}\\in\\Theta_n$. Compactness ensures that the maximum is attained."
+      ],
+      [
+        "Requested order $n$ and least realising order $k$",
+        "$k$ is the smallest matrix order realising the selected maximiser; $k\\le n$. For $k\\ge4$, its geometric product uses $m=\\lfloor k/q\\rfloor$, while the order-$n$ scalar candidate uses $\\lfloor n/q\\rfloor$."
+      ],
+      [
+        "Exceptional order-three region",
+        "$\\Theta_3$ is the triangle with vertices $1$ and the two cubic roots of unity, together with the real segment $[-1,-1/2]$. The negative-ray maximum is one, although the nearby nonreal radii tend to $1/2$."
+      ],
+      [
+        "Interior radial gap",
+        "At a point of radius $r<K_n(\\theta)$, the gap $K_n(\\theta)-r$ is positive. Continuity keeps that gap positive nearby, proving the point is interior."
+      ],
+      [
+        "Closing bounds",
+        "For a maximiser with $k\\ge4$, the proof combines $R_n(\\theta)\\le K_k(\\theta)\\le K_n(\\theta)\\le R_n(\\theta)$. The small-order cases are checked separately."
+      ]
+    ],
+    "13": [
+      [
+        "Vertex budget $N$ and boundary radius $K_N(\\theta)$",
+        "Here uppercase $N\\ge4$ is the allowed number of polygon vertices. Topic XII has already identified $K_N(\\theta)$ with the actual radial maximum."
+      ],
+      [
+        "Farey factor count $m$ and angle budget $A,B$",
+        "For this budget, $m=\\lfloor N/q\\rfloor$, $A=2\\pi t/s$ and $B=2\\pi(1-t)/(mq)$, with $0<t<1$ in the oriented Farey interval."
+      ],
+      [
+        "Polygon gauge $V_P$",
+        "$V_P(x)=\\inf\\{a>0:x\\in aP\\}$. An asymmetric polygon can have $V_P(-x)\\ne V_P(x)$, so its gauge need not be a norm."
+      ],
+      [
+        "Optimal factor $\\Gamma_N$",
+        "The smallest $\\gamma$ for which $\\rho R_\\theta P\\subseteq\\gamma P$ among convex polygons with at most $N$ vertices and zero in their interior. The exact optimum is $\\Gamma_N=\\rho/K_N(\\theta)$."
+      ],
+      [
+        "Badly approximable angle fraction",
+        "An irrational $x$ with $|x-a/b|\\ge c_x/b^2$ for all rational $a/b$, for some fixed $c_x>0$."
+      ],
+      [
+        "Uniform relative asymptotic",
+        "The error divided by the positive leading gap is $O(N^{-2})$, with one constant for all open Farey intervals and all interior positions $t$."
+      ],
+      [
+        "Positive leading gap $L_N(\\theta)$",
+        "The displayed Farey expression without its final error factor. Uniformity means $|(1-K_N(\\theta))-L_N(\\theta)|\\le (C/N^2)L_N(\\theta)$ with one constant $C$."
+      ]
+    ],
+    "14": [
+      [
+        "Eight-state polygon: $N=8$ and $\\kappa=3$",
+        "Here the eight constructed coordinates are genuine extreme vertices, so the polygon vertex count and matrix order both equal eight. The contact-index shift is $\\kappa=3$."
+      ],
+      [
+        "Eight-state parameters $q,s,m,e$",
+        "The Farey interval is $(1/3,3/8)$, with $q=3$, $s=8$, $m=\\lfloor8/3\\rfloor=2$ and $e=s-mq=2$."
+      ],
+      [
+        "Seven-state comparison",
+        "At the same original angle, the interval is $(1/3,2/5)$, with $q=3$, $s=5$, $m=\\lfloor7/3\\rfloor=2$ and $e=-1$. The two orders have different equations."
+      ],
+      [
+        "Contact count $\\varphi$, record time $h$ and return heights",
+        "The source tower data have $\\varphi=2$, $h=2$, $q=3$ and $\\Delta=1$, giving return heights three and five. In the coordinate calculation the letter $h$ is reused locally for the angle $\\pi/7$."
+      ],
+      [
+        "Angle $h=\\pi/7$ and radius $\\rho$",
+        "In the coordinate and convexity calculation, $h$ is an angle, not the record time. The selected $\\rho\\in(0,1)$ satisfies $\\rho^3(1+\\rho)=2\\cos h$."
+      ],
+      [
+        "Contact weights $\\alpha,\\beta$",
+        "$\\alpha=\\rho/(1+\\rho)$ and $\\beta=1/(1+\\rho)$, so $\\alpha+\\beta=1$. The two interior contacts use these same weights."
+      ],
+      [
+        "Continued angles and exact winding",
+        "For this polygon, $\\Phi_{i+8}=\\Phi_i+2\\pi$. The two principal factor arguments and the closing angle satisfy $2(5\\pi/7)+2(2\\pi/7)=2\\pi$."
+      ],
+      [
+        "Numerical illustration",
+        "Floating-point radii and plotted polylines illustrate the proved identities; they do not replace the proof or provide an error bound for the drawn curve."
+      ]
+    ]
+  },
+  "localDefinitionIndices": {
+    "1": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "2": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "3": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "4": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "5": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "6": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "7": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "8": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "9": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "10": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "11": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "12": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "13": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "14": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ]
+  }
+}

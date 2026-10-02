@@ -141,9 +141,11 @@ function makeStatic(html, requestPath) {
     : "";
   const learningScript = requestPath === "/prerequisites" || requestPath === "/proof" || requestPath.startsWith("/proof/topic-")
     ? `<script src="${basePath}/reader-learning.js" defer></script>` : "";
+  const stateLinksScript = requestPath === "/proof/topic-xiv"
+    ? `<script src="${basePath}/eight-state-links.js" defer></script>` : "";
   return withProjectAssets.replace(
     "</body>",
-    `<script src="${basePath}/contact.js" defer></script>${proofChapterScript}${topicXIVScript}${averageScript}${learningScript}</body>`,
+    `<script src="${basePath}/contact.js" defer></script>${proofChapterScript}${topicXIVScript}${averageScript}${learningScript}${stateLinksScript}</body>`,
   );
 }
 

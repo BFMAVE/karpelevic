@@ -28,10 +28,10 @@ export default function BackgroundPage() {
     <a className="skip-link" href="#main-content">Skip to the background reminders</a>
     <SiteHeader current="proof" />
     <main className="proof-page reader-background" id="main-content" tabIndex={-1}>
-      <header><p className="kicker">Start learning</p><h1>Basic analysis and linear algebra are enough to begin</h1><p className="proof-deck">Begin with the theorem&apos;s picture, then choose an overview or the complete proof. The reader teaches its additional tools as they become necessary.</p><p><a href="#reading-routes">Choose a route</a> · <a href="#background-reminders">Refresh the starting tools</a></p></header>
+      <header><p className="kicker">Start learning</p><h1>Basic analysis and linear algebra are enough to begin</h1><p className="proof-deck">Begin with the theorem&apos;s picture, then choose an overview or the complete proof. The reader teaches its additional tools as they become necessary.</p><p><a href="#theorem-preview">See the theorem</a> · <a href="#reading-routes">Choose a route</a> · <a href="#background-reminders">Refresh the starting tools</a></p></header>
       <div className="reader-guide">
-        <ReaderLearningRoutes />
         <ReaderTheoremPreview />
+        <ReaderLearningRoutes />
         <ReaderMainIdeas />
         <section id="background-reminders" aria-labelledby="background-reminders-heading"><h2 id="background-reminders-heading">Background reminders</h2>
         {basics.map(([title, explanation, use]) => <section key={title}><h2>{title}</h2><p>{explanation}</p><p>{use}</p></section>)}

@@ -82,14 +82,14 @@ test("reading controls open the full formal proof, close all levels, and reveal 
   const controls = { dataset: {}, hidden: true, querySelector() { return announcement; }, querySelectorAll(selector) { return selector.includes("reading-mode") ? [guided, formal] : [open, close]; } };
   const outer = { tagName: "DETAILS", open: false, addEventListener() {} };
   const inner = { tagName: "DETAILS", open: false, addEventListener() {}, parentElement: outer };
-  const chapter = { dataset: { chapterReadingMode: "guided" }, querySelector(selector) { return selector.includes("announcement") ? announcement : controls; }, querySelectorAll() { return [outer, inner]; }, contains() { return true; } };
+  const chapter = { dataset: { chapterReadingMode: "guided" }, style: { setProperty() {} }, querySelector(selector) { return selector.includes("notation") ? null : selector.includes("announcement") ? announcement : controls; }, querySelectorAll() { return [outer, inner]; }, contains() { return true; } };
   outer.parentElement = chapter;
   const target = { parentElement: inner, closest() { return null; }, scrollIntoView(options) { this.scrolled = options; } };
   const directory = { open: true, hasAttribute() { return false; } };
   const sections = { open: true, hasAttribute(name) { return name === "data-reader-section-directory"; } };
   const compact = { matches: true, addEventListener(type, callback) { this.resize = callback; } };
   const window = { location: { hash: "" }, matchMedia() { return compact; }, setTimeout(callback) { scheduled.push(callback); }, addEventListener(type, callback) { listeners.set(type, callback); } };
-  const document = { readyState: "complete", querySelectorAll(selector) { return selector.includes("projection") ? [] : selector.includes("directory") ? [directory, sections] : [chapter]; }, getElementById() { return target; } };
+  const document = { readyState: "complete", addEventListener() {}, querySelectorAll(selector) { return selector.includes("projection") ? [] : selector.includes("directory") ? [directory, sections] : [chapter]; }, getElementById() { return target; } };
   vm.runInNewContext(await read("public/proof-chapter.js"), { window, document });
   scheduled[0]();
   assert.equal(directory.open, false, "mobile topic directory starts compact");

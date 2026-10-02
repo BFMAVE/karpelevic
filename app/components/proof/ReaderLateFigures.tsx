@@ -107,12 +107,12 @@ function ConvexFigure() {
   </>;
 }
 
-function GraphNode({ x, y, label }: Point & { label: string }) {
-  return <g><circle cx={x} cy={y} r="19" fill="white" stroke={ink} strokeWidth="2" /><text x={x} y={y + 6} fill={ink} textAnchor="middle">{label}</text></g>;
+function GraphNode({ x, y, label, state }: Point & { label: string; state?: number }) {
+  return <g data-eight-state-node={state} data-eight-state-role={state === undefined ? undefined : state === 6 ? "source" : state === 0 || state === 1 ? "target" : "other"}><circle cx={x} cy={y} r="19" fill="white" stroke={ink} strokeWidth="2" /><text x={x} y={y + 6} fill={ink} textAnchor="middle">{label}</text></g>;
 }
 
-function Edge({ d, label, x, y, marker, color = ink }: { d: string; label?: string; x?: number; y?: number; marker: string; color?: string }) {
-  return <g><path d={d} stroke={color} strokeWidth="2.5" fill="none" markerEnd={`url(#${marker})`} />{label ? <text x={x} y={y} fill={color} textAnchor="middle">{label}</text> : null}</g>;
+function Edge({ d, label, x, y, marker, color = ink, from, to }: { d: string; label?: string; x?: number; y?: number; marker: string; color?: string; from?: number; to?: number }) {
+  return <g data-eight-state-edge-from={from} data-eight-state-edge-to={to} data-eight-state-active={from === undefined ? undefined : String(from === 6)}><path d={d} stroke={color} strokeWidth="2.5" fill="none" markerEnd={`url(#${marker})`} />{label ? <text x={x} y={y} fill={color} textAnchor="middle">{label}</text> : null}</g>;
 }
 
 function RealisationFigure({ marker }: { marker: string }) {
@@ -226,17 +226,17 @@ function EightStateFigure({ marker }: { marker: string }) {
   const beta = 1 / (1 + radius), alpha = 1 - beta;
   return <>
     <text x="380" y="31" textAnchor="middle" fill={ink}>The source&apos;s eight-state stochastic realisation</text>
-    <Edge d="M99 139 L171 139" label="1" x={135} y={125} marker={marker} />
-    <Edge d="M209 139 L281 139" label="1" x={245} y={125} marker={marker} />
-    <Edge d="M429 139 L501 139" label="1" x={465} y={125} marker={marker} />
-    <Edge d="M539 139 L611 139" label="1" x={575} y={125} marker={marker} />
-    <Edge d="M289 122 C252 63 126 63 91 122" label="β" x={190} y={67} marker={marker} color={red} />
-    <Edge d="M619 122 C582 63 456 63 421 122" label="β" x={520} y={67} marker={marker} color={red} />
-    <Edge d="M319 139 L391 139" label="α" x={355} y={125} marker={marker} color={teal} />
-    <Edge d="M630 158 L630 231" label="α" x={654} y={201} marker={marker} color={teal} />
-    <Edge d="M611 250 L391 250" label="1" x={500} y={275} marker={marker} />
-    <Edge d="M351 250 L98 151" label="1" x={224} y={230} marker={marker} />
-    {[[80, 139, "0"], [190, 139, "3"], [300, 139, "6"], [410, 139, "1"], [520, 139, "4"], [630, 139, "7"], [630, 250, "2"], [370, 250, "5"]].map(([x, y, label]) => <GraphNode key={label} x={Number(x)} y={Number(y)} label={String(label)} />)}
+    <Edge d="M99 139 L171 139" label="1" x={135} y={125} marker={marker} from={0} to={3} />
+    <Edge d="M209 139 L281 139" label="1" x={245} y={125} marker={marker} from={3} to={6} />
+    <Edge d="M429 139 L501 139" label="1" x={465} y={125} marker={marker} from={1} to={4} />
+    <Edge d="M539 139 L611 139" label="1" x={575} y={125} marker={marker} from={4} to={7} />
+    <Edge d="M289 122 C252 63 126 63 91 122" label="β" x={190} y={67} marker={marker} color={red} from={6} to={0} />
+    <Edge d="M619 122 C582 63 456 63 421 122" label="β" x={520} y={67} marker={marker} color={red} from={7} to={1} />
+    <Edge d="M319 139 L391 139" label="α" x={355} y={125} marker={marker} color={teal} from={6} to={1} />
+    <Edge d="M630 158 L630 231" label="α" x={654} y={201} marker={marker} color={teal} from={7} to={2} />
+    <Edge d="M611 250 L391 250" label="1" x={500} y={275} marker={marker} from={2} to={5} />
+    <Edge d="M351 250 L98 151" label="1" x={224} y={230} marker={marker} from={5} to={0} />
+    {[[80, 139, "0"], [190, 139, "3"], [300, 139, "6"], [410, 139, "1"], [520, 139, "4"], [630, 139, "7"], [630, 250, "2"], [370, 250, "5"]].map(([x, y, label]) => <GraphNode key={label} x={Number(x)} y={Number(y)} label={String(label)} state={Number(label)} />)}
     <text x="380" y="321" textAnchor="middle" fill={ink}>ρ ≈ {radius.toFixed(8)} · β ≈ {beta.toFixed(6)} · α ≈ {alpha.toFixed(6)}</text>
     <text x="380" y="354" textAnchor="middle" fill={teal}>Each branch row sums to α + β = 1; every other row has weight 1.</text>
     <text x="380" y="390" textAnchor="middle" fill={ink}>θ = 5π/7, u₁ = u₂ = 2π/7 ⇒ 2θ + u₁ + u₂ = 2π</text>

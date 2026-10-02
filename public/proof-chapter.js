@@ -138,17 +138,35 @@
         if (!id) return;
         const target = document.getElementById(id);
         if (!target || !chapter.contains(target)) return;
+        const notation = chapter.querySelector("[data-reader-notation]");
+        if (notation && !notation.contains(target)) notation.open = false;
         if (target.closest(".proof-guided-layer")) setMode("guided", true);
         let parent = target.parentElement;
         while (parent && parent !== chapter) {
           if (parent.tagName === "DETAILS") parent.open = true;
           parent = parent.parentElement;
         }
+        // Reserve the closed reference bar's actual height, including wrapped
+        // summaries at enlarged text sizes, so the target's first line is clear.
+        const referenceHeight = notation?.querySelector("summary")?.getBoundingClientRect().height || 0;
+        chapter.style.setProperty("--reader-anchor-clearance", `${Math.ceil(referenceHeight) + 20}px`);
         target.scrollIntoView({ block: "start", behavior: "instant" });
         updateProofButtons();
       }
       revealSourceTarget();
+      document.fonts?.ready.then(revealSourceTarget);
       window.addEventListener("hashchange", revealSourceTarget);
+      document.addEventListener("click", (event) => {
+        if (event.defaultPrevented || event.button > 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+        const link = event.target.closest?.("a[href]");
+        if (!link) return;
+        const destination = new URL(link.href, window.location.href);
+        if (destination.origin === window.location.origin && destination.pathname === window.location.pathname &&
+            destination.search === window.location.search && destination.hash && destination.hash === window.location.hash) {
+          // A second click on the same fragment emits no hashchange event.
+          revealSourceTarget();
+        }
+      });
     });
   }
 

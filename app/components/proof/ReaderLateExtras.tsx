@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { ReaderFigureCaption } from "./ReaderFigureCaption";
+import { EightStateLinks, eightStateRows } from "./EightStateLinks";
 
 const ink = "#18334a";
 const teal = "#315e86";
@@ -146,7 +147,7 @@ function InequalityClosureFigure({ marker }: { marker: string }) {
   </>;
 }
 
-function EightStatePolygonFigure() {
+function EightStatePolygonFigure({ marker }: { marker: string }) {
   const h = Math.PI / 7;
   let lower = 0, upper = 1;
   for (let step = 0; step < 64; step++) {
@@ -167,7 +168,7 @@ function EightStatePolygonFigure() {
   const subscripts = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇"];
   return <>
     <text x="225" y="26" textAnchor="middle" fill={ink}>Actual eigenvector coordinates</text>
-    <text x="602" y="38" textAnchor="middle" fill={ink}>Verified contact pattern</text>
+    <text x="602" y="38" textAnchor="middle" fill={ink}>Selected transition row</text>
     <line x1="25" y1="250" x2="438" y2="250" stroke={faint} />
     <line x1="225" y1="46" x2="225" y2="452" stroke={faint} />
     <polygon points={polygon(vertices)} fill={pale} stroke={ink} strokeWidth="2.5" data-eigenvector-polygon />
@@ -184,6 +185,24 @@ function EightStatePolygonFigure() {
       const q = screen(p);
       return <rect key={i} x={q.x - 7} y={q.y - 7} width="14" height="14" fill="none" stroke={teal} strokeWidth="2" data-image-coordinate={i} />;
     })}
+    {vertices.map((p, i) => {
+      const q = screen(p);
+      return <g key={i} data-eight-state-source-highlight={i} style={{ display: i === 6 ? "" : "none" }}>
+        <circle cx={q.x} cy={q.y} r="12" fill="none" stroke={ink} strokeWidth="3" />
+      </g>;
+    })}
+    {images.map((p, i) => {
+      const q = screen(p);
+      return <g key={i} data-eight-state-image-highlight={i} style={{ display: i === 6 ? "" : "none" }}>
+        <polygon points={`${q.x},${q.y - 14} ${q.x + 14},${q.y} ${q.x},${q.y + 14} ${q.x - 14},${q.y}`} fill="none" stroke={copper} strokeWidth="3" />
+      </g>;
+    })}
+    {vertices.map((p, i) => {
+      const q = screen(p);
+      return <g key={i} data-eight-state-target-highlight={i} style={{ display: i === 0 || i === 1 ? "" : "none" }}>
+        <polygon points={`${q.x},${q.y - 15} ${q.x + 13},${q.y + 9} ${q.x - 13},${q.y + 9}`} fill="none" stroke={teal} strokeWidth="3" />
+      </g>;
+    })}
     {contacts.map((p, i) => <Dot key={i} {...screen(p)} color={copper} r={5} />)}
     <text x={screen(contacts[0]).x + 13} y={screen(contacts[0]).y - 12} fill={copper}>c₁</text>
     <text x={screen(contacts[1]).x + 13} y={screen(contacts[1]).y - 8} fill={copper}>c₂</text>
@@ -193,15 +212,25 @@ function EightStatePolygonFigure() {
     <text x="516" y="81" fill={ink}>P: eight extreme vertices</text>
     <line x1="472" y1="108" x2="502" y2="108" stroke={teal} strokeWidth="3" strokeDasharray="7 5" />
     <text x="516" y="114" fill={teal}>zP: image polygon</text>
-    <rect x="467" y="143" width="270" height="190" rx="7" fill={pale} stroke={faint} />
-    <text x="602" y="172" textAnchor="middle" fill={ink}>Six images are vertices.</text>
-    <text x="602" y="207" textAnchor="middle" fill={copper}>zv₆ = c₁ ∈ (v₀,v₁)</text>
-    <text x="602" y="240" textAnchor="middle" fill={copper}>zv₇ = c₂ ∈ (v₁,v₂)</text>
-    <text x="602" y="278" textAnchor="middle" fill={ink}>c₁ = βv₀ + αv₁</text>
-    <text x="602" y="311" textAnchor="middle" fill={ink}>c₂ = βv₁ + αv₂</text>
-    <text x="602" y="371" textAnchor="middle" fill={ink}>α, β &gt; 0; α + β = 1</text>
-    <text x="602" y="407" textAnchor="middle" fill={ink}>Every side is supporting;</text>
-    <text x="602" y="439" textAnchor="middle" fill={ink}>all other vertices lie inward.</text>
+    <rect x="467" y="143" width="270" height="220" rx="7" fill="white" stroke={faint} />
+    {eightStateRows.map(row => <g key={row.state} data-eight-state-row-diagram={row.state} style={{ display: row.state === 6 ? "" : "none" }}>
+      <text x="602" y="166" textAnchor="middle" fill={ink}>Source state</text>
+      <circle cx="602" cy="201" r="20" fill={pale} stroke={ink} strokeWidth="3" />
+      <text x="602" y="207" textAnchor="middle" fill={ink}>{row.state}</text>
+      {row.targets.map((target, i) => {
+        const destinationX = row.targets.length === 1 ? 602 : i === 0 ? 544 : 660;
+        const startX = row.targets.length === 1 ? 602 : i === 0 ? 592 : 612;
+        return <g key={target.state} data-eight-state-edge-from={row.state} data-eight-state-edge-to={target.state}>
+          <path d={`M${startX} 220 L${destinationX} 292`} fill="none" stroke={teal} strokeWidth="3" markerEnd={`url(#${marker})`} />
+          <text x={row.targets.length === 1 ? 621 : i === 0 ? 549 : 656} y="254" textAnchor="middle" fill={teal}>{target.weight}</text>
+          <circle cx={destinationX} cy="316" r="20" fill={pale} stroke={teal} strokeWidth="2.5" />
+          <text x={destinationX} y="322" textAnchor="middle" fill={ink}>{target.state}</text>
+        </g>;
+      })}
+      <text x="602" y="351" textAnchor="middle" fill={ink}>Destination {row.targets.length === 1 ? "state" : "states"}</text>
+    </g>)}
+    <text x="602" y="400" textAnchor="middle" fill={ink}>Graph nodes are row indices.</text>
+    <text x="602" y="435" textAnchor="middle" fill={ink}>Read this row&apos;s equation above.</text>
     <text x="380" y="487" textAnchor="middle" fill={ink}>θ = 5π/7 · ρ ≈ {rho.toFixed(8)} · drawing uses numerical coordinates</text>
     <text x="380" y="520" textAnchor="middle" fill={ink}>Black circles are coordinates; blue squares are their z-images.</text>
   </>;
@@ -228,8 +257,8 @@ const copy: Record<number, { title: string; description: string; caption: string
   },
   14: {
     title: "The eight states really produce this invariant octagon",
-    description: "The actual eight complex eigenvector coordinates are plotted in their counterclockwise order and connected as a convex octagon P. All eight are extreme vertices. The image octagon zP is shown with a dashed blue boundary and square markers. Six image coordinates coincide exactly with polygon vertices. The remaining two are strict interior contacts: z v six equals c one on side v zero to v one, and z v seven equals c two on side v one to v two. Both are positive convex combinations with beta and alpha. The geometry is drawn using the numerical solution rho approximately 0.97061308; supporting-side signs and contact identities are verified independently of the drawing.",
-    caption: "Coordinates use h=π/7 and the unique root ρ of ρ⁴+ρ³=2cos h. Their exact polar radii are 1,ρ⁻¹,ρ⁻²,ρ,1,ρ⁻¹,ρ²,ρ at angles 0,2h,4h,5h,7h,9h,10h,12h. The dashed polygon is their image under z=ρe⁵ⁱʰ; its squares coincide with six black vertex circles and the two copper contacts. Contact formulas are exact: c₁=ρ³eⁱʰ=βv₀+αv₁ and c₂=ρ²e³ⁱʰ=βv₁+αv₂. Exact rational interval arithmetic on 97/100<ρ<98/100 certifies all 48 other-vertex supporting-side determinants greater than 1/10, so all coordinates are extreme. The text explains the sign test. The drawing uses floating-point coordinates; polygon path coordinates are rounded to 0.001 viewBox units. These are eigenvector coordinates, which need not lie in the unit disk; they are not points of the stochastic eigenvalue region.",
+    description: "The actual eight complex eigenvector coordinates are plotted in counterclockwise order as a convex octagon P. Its image zP has a dashed blue boundary and square markers. Six image coordinates coincide exactly with polygon vertices; the remaining two are strict interior contacts. A row selector connects the source coordinate, marked by a double circle, its image, marked by a diamond, and the coordinates in its average, marked by triangles. The adjacent small graph shows that matrix row's outgoing edges and state indices. Row six is the static example. The drawing is numerical; the text proves simplicity, positive turns, convexity and contacts analytically at the exact scalar root.",
+    caption: "Coordinates use h=π/7 and the unique root ρ of ρ⁴+ρ³=2cos h. Their exact polar radii are 1,ρ⁻¹,ρ⁻²,ρ,1,ρ⁻¹,ρ²,ρ at angles 0,2h,4h,5h,7h,9h,10h,12h. The dashed polygon is their image under z=ρe⁵ⁱʰ; its squares coincide with six black vertex circles and the two copper contacts. Contact formulas are exact: c₁=ρ³eⁱʰ=βv₀+αv₁ and c₂=ρ²e³ⁱʰ=βv₁+αv₂. The lesson proves that the angularly ordered polygon is simple and all eight turn determinants are positive multiples of U or V, so all coordinates are extreme. The selected row's small graph uses state indices; its equation supplies the corresponding geometric average. The drawing uses floating-point coordinates; polygon path coordinates are rounded to 0.001 viewBox units. These are eigenvector coordinates, which need not lie in the unit disk; they are not points of the stochastic eigenvalue region.",
     height: 542,
   },
 };
@@ -238,7 +267,7 @@ const captionNotes: Record<number, { takeaway: string; status: string }> = {
   8: { takeaway: "Conjugating reverses the endpoint order while preserving the radius; the two scaled angles still fit below π.", status: "Exact Farey and angle-budget model, rendered with numerical coordinates." },
   10: { takeaway: "As the angle increases from 0 to π/2, one decreasing weight moves the selected point from 1 to i exactly once.", status: "Exact order-four segment and explicit weight function; the function graph is sampled." },
   12: { takeaway: "The least-order upper bound and an independent attaining matrix meet at the same radius.", status: "Proof dependency diagram for a non-Farey ray at order n≥4." },
-  14: { takeaway: "All eight coordinates are extreme, six images land at vertices, and two land strictly inside their assigned sides.", status: "Numerical drawing of this specifically verified invariant octagon; exact contacts and certified supporting-side signs." },
+  14: { takeaway: "Connect a row's outgoing edges to its source coordinate, image and exact averaging equation.", status: "Numerical drawing of an analytically verified invariant octagon; the static selection is row six." },
 };
 
 export function ReaderLateExtra({ number }: { number: number }) {
@@ -250,11 +279,12 @@ export function ReaderLateExtra({ number }: { number: number }) {
     case 8: drawing = <ReflectionFigure marker={marker} />; break;
     case 10: drawing = <ArcTraversalFigure marker={marker} />; break;
     case 12: drawing = <InequalityClosureFigure marker={marker} />; break;
-    case 14: drawing = <EightStatePolygonFigure />; break;
+    case 14: drawing = <EightStatePolygonFigure marker={marker} />; break;
     default: return null;
   }
   return <figure className="reader-teaching-figure" data-reader-late-extra={number}>
     <h4>{content.title}</h4>
+    {number === 14 ? <EightStateLinks /> : null}
     <p className="reader-figure-scroll-hint">Scroll across the diagram →</p>
     <div className="reader-figure-visual" tabIndex={0} role="region" aria-label={`${content.title}. Scroll horizontally when needed to see the full diagram.`}>
       <svg viewBox={`0 0 760 ${content.height}`} role="img" aria-labelledby={`reader-late-extra-${number}-title reader-late-extra-${number}-desc`} fontSize="18" fontFamily="inherit">
