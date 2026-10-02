@@ -79,6 +79,9 @@ The independent mathematical review is recorded in
 [the reproducible audit](reader-learning-mathematics-2026-10-02.md). It checks
 all new examples, ledgers, checkpoints, route scopes, notation, contacts,
 and the local interactive model. No unresolved mathematical issue remains.
+The final pass also made the overview's scope explicit: its main geometric
+chain is for nonreal rays between endpoint roots, with endpoint rays and small
+orders handled separately in XII.
 
 All fourteen formal source passages are byte-for-byte unchanged from the prior
 commit. All 86 source labels, 50 labelled equations, 26 proofs, 35 bibliography
