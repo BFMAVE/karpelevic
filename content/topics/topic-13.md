@@ -90,7 +90,11 @@ $$
 \le\frac{C}{N^2}L_N(\theta).
 $$
 
-This is what the notation $1+O(N^{-2})$ means here. A single relative bound covers positions arbitrarily close to both endpoints. There the gap itself is especially small.
+A single relative bound covers positions arbitrarily close to either endpoint, where the gap itself is especially small. To put a scale on the formula, take the eight-state ray $y=5/14$. Between $1/3$ and $3/8$ its relative position is
+$$
+t=\frac{5/14-1/3}{3/8-1/3}=\frac47.
+$$
+Here $q=3$, $s=8$ and $m=2$. The two terms $t/s$ and $(1-t)/(mq)$ are both $1/14$, giving $L_8=\pi^2/343\approx0.02877$. The radius equation gives an actual gap of about $1-0.970613=0.02939$. The relative error in using the leading term is about two per cent in this example. The uniform estimate states how the error behaves as $N$ grows.
 
 <details>
 <summary>Where does the leading term come from?</summary>

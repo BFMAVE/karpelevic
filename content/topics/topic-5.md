@@ -58,11 +58,11 @@ The records are shown in bold. At time two the deficit is $8-6=2$. At time five 
 
 ![Each diamond stands higher than all earlier residues. At time two the distance from the record $6$ to the level $8$ is $2$. This is the record belonging to the two bases.](/figures/bachelor-foundations-records.svg)
 
-The table follows the **index permutation**, which continues for as many steps as we please. The geometric identity $\zeta^tv_0=v_{[3t]_8}$ holds only while the orbit has visited vertices at every step. At a positive record time $h$, the second coordinate used below is $b=\lceil3h/8\rceil$, the next multiple of eight above $3h$. It is one more than the completed-wrap counter, because a positive record has nonzero residue. Thus the records at times two and five give $(h,b)=(2,1)$ and $(5,2)$.
+The table follows the **index permutation**, which continues for as many steps as we please. The geometric identity $\zeta^tv_0=v_{[3t]_8}$ holds only while the orbit has visited vertices at every step. At a positive record time $h$, put $b=\lceil3h/8\rceil$. It is $8b$ that gives the next multiple of eight above $3h$. At $h=2$, for instance, $3h=6$, the next multiple is $8$, and $b=1$. The difference $8b-3h=2$ is the deficit. Thus the records at times two and five give $(h,b)=(2,1)$ and $(5,2)$.
 
 There is a short way to see what the pair can tell us. From the first base we need a net gain of one label to reach the second. Three additions of $3$ give $9=8+1$, so three steps will do it. From the second base to the first we need a net change of $-1$. Five additions give $15=16-1$, so five steps will do it. The numbers of full turns of the *labels* in these two calculations differ. Later, when we multiply complex contact equations, the analogous distinction for *angles* will tell us which argument the product has accumulated.
 
-The integer basis will turn these two counters into return heights. Its job is to prove that the two displayed towers partition all eight vertices, rather than merely proposing two plausible paths.
+For this example we could inspect all eight labels to check the first returns. For general $N$ we need an argument that proves how long each path is and that no two paths share an intermediate vertex. The two successive records supply both facts.
 
 ### Encode records with integer pairs
 
@@ -96,7 +96,14 @@ Here $q=h'-h>0$ and $0<\Delta<\nu$. The determinant $qb-ph$ is the signed area o
 
 Why introduce a second coordinate $b$ when the residues are one-dimensional? Reducing $h\kappa$ modulo $N$ forgets how many multiples of $N$ were crossed. The pair $(h,b)$ retains that information. Its determinant relates elapsed time to the change in the remaining gap, and the identity $q\nu+h\Delta=N$ will count exactly how many vertices the towers contain.
 
-What forces the determinant to equal one? A record vector has coprime coordinates. If both were divisible by $g>1$, dividing by $g$ would yield an earlier positive time with smaller deficit, contradicting the record. The initial vector $(0,1)$ is also coprime. Using this coprimality, an integer vector complementary to $V$ can be found with determinant one, by Bézout's identity: coprime integers have an integer linear combination equal to one.
+For a picture of the determinant argument, consider a possible pair of records at $N=17$, $\kappa=3$. At times two and five the residues are $6$ and $15$, with deficits $11$ and $2$. Their record vectors are $V=(2,1)$ and $V'=(5,1)$. On squared paper join them by a segment. It passes through the integer point $(3,1)$. That point represents time three and deficit $17-3\cdot3=8$, already better than the deficit at time two. The two records cannot be consecutive.
+
+For the general pair, consider the triangle with corners $0,V,V'$. An integer point of the form $W=\xi V+\eta V'$ with $\xi,\eta>0$ and $\xi+\eta\le1$ would give the same contradiction. Its time is positive and less than $h'$, and its deficit is positive and less than $\nu$, since time and deficit are linear functions of the pair. Thus consecutive records exclude such an integer point. The following argument shows that a determinant with absolute value greater than one always supplies one.
+
+<details class="reader-proof-derivation">
+<summary>Find the extra integer point if the determinant exceeds one in absolute value</summary>
+
+A record vector has coprime coordinates. If both were divisible by $g>1$, dividing by $g$ would yield an earlier positive time with smaller deficit, contradicting the record. The initial vector $(0,1)$ is also coprime. Using this coprimality, an integer vector complementary to $V$ can be found with determinant one, by Bézout's identity: coprime integers have an integer linear combination equal to one.
 
 <details class="reader-proof-derivation">
 <summary>Recover Bézout’s identity by division with remainder</summary>
@@ -116,13 +123,13 @@ $$
 
 has the form $W=\xi V+\eta V'$ with $0<\xi,\eta<1$. If $\xi+\eta>1$, replace $W$ by $V+V'-W$; its two coefficients remain positive and now sum to less than one. Thus we can take $\xi+\eta\le1$. The time coordinate is $0<\xi h+\eta h'<h'$, because $h<h'$ and $\xi,\eta>0$. Its deficit is $0<\xi\nu+\eta\nu'<\nu$, because $\nu'<\nu$. Calling these two integers $t$ and $d$, we have $t\kappa\equiv-d\pmod N$ and $0<d<\nu\le N$. Its residue $N-d$ really does exceed $N-\nu$. This integer time would improve the old record before the next record, a contradiction. Therefore $D=1$, which gives $\det(U,V)=1$.
 
-For a concrete check of the rounding contradiction, consider $N=17$ and $\kappa=3$. The residues at times two and five are six and fifteen, so $V=(2,1)$ and $V'=(5,1)$ are both records, with deficits eleven and two. They cannot be consecutive: $-\det(V,V')=3$. Choose $W_0=(1,0)$, so $V'=V+3W_0$. The displayed rounding rule gives $W=V+W_0=(3,1)$, hence $W=(2/3)V+(1/3)V'$. Its time is three and its deficit is eight. The residue at time three already improves on the one at time two, before time five is reached.
+</details>
 
-The two equations involving $L$ follow by subtraction. Expanding the determinant gives $q\nu+h\Delta=N$. Finally, because $U,V$ form an integer basis, the possible values of $L$ are all integer combinations of $\Delta,\nu$. By definition they are also all integer combinations of $\kappa,N$. Their positive greatest common divisors are therefore equal.
+It follows that $\det(U,V)=1$. The two equations involving $L$ follow from the record deficits. Expanding the determinant gives $q\nu+h\Delta=N$. Finally, because $U,V$ form an integer basis, the possible values of $L$ are all integer combinations of $\Delta,\nu$. By definition they are also all integer combinations of $\kappa,N$. Their positive greatest common divisors are therefore equal.
 
 ### The tower partition is a counting proof
 
-Assume $\varphi>\delta$, so its record has a successor, and use the preceding formulas with $\nu=\varphi$. The proposed first-return heights and destinations are
+Assume $\varphi>\delta$, so its record has a successor, and put $\nu=\varphi$. Begin at a base $j\in\{1,\ldots,\varphi\}$. Taking $q$ steps adds $q\kappa=pN+\Delta$ to the label, the same as moving forward $\Delta$ places modulo $N$. If $j+\Delta\le\varphi$, this already gives a base. For the last $\Delta$ bases we instead take $q+h$ steps. The extra $h$ steps add $h\kappa=bN-\varphi$, putting the final label at $j+\Delta-\varphi\in\{1,\ldots,\Delta\}$. These are candidate destinations. We still have to exclude an earlier return on either path. Writing $H_j$ for the proposed height and $\sigma(j)$ for the destination gives
 
 $$
 H_j=\begin{cases}q,&1\le j\le\varphi-\Delta,\\q+h,&\varphi-\Delta<j\le\varphi,\end{cases}
@@ -132,7 +139,7 @@ $$
 \sigma(j)=\begin{cases}j+\Delta,&j\le\varphi-\Delta,\\j+\Delta-\varphi,&j>\varphi-\Delta.\end{cases}
 $$
 
-Thus $\sigma$ adds $\Delta$ modulo $\varphi$, returning an index in $I$. The congruences $q\kappa\equiv\Delta$ and $h\kappa\equiv-\varphi$ modulo $N$ show that $j+H_j\kappa$ has residue $\sigma(j)$. Congruence means that the difference is divisible by $N$.
+Thus the original vertex labels are read modulo $N$, while $\sigma$ adds $\Delta$ among the $\varphi$ base labels, returning to $1$ after $\varphi$.
 
 Correct return destinations alone do not prove first returns: the lists could overlap or enter $I$ sooner. To exclude this, initially regard each pair $(t,j)$ with $0\le t<H_j$ as a separate tower position. There are
 
@@ -142,7 +149,7 @@ $$
 
 positions. Join each tower top to the base $\sigma(j)$. Every step then adds $\kappa$ modulo $N$.
 
-The return permutation $\sigma$ has $\delta$ cycles, one in each residue class modulo $\delta$. Each cycle contains $\varphi/\delta$ bases, including exactly $\Delta/\delta$ of the taller towers. Consequently its joined tower cycle contains
+The return permutation adds $\Delta$ modulo $\varphi$. Its period is $\varphi/\delta$ because $\gcd(\Delta,\varphi)=\delta$. Thus it visits every base in one residue class modulo $\delta$ before returning. Which of them have a taller tower? The last $\Delta$ consecutive base labels give exactly $\Delta/\delta$ labels from each class, since $\delta$ divides $\Delta$. Consequently its joined tower cycle contains
 
 $$
 q\frac\varphi\delta+h\frac\Delta\delta=\frac N\delta

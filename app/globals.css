@@ -9399,6 +9399,14 @@ math mover > mo[accent="true"] {
 .reader-learning-route-grid p { font-size: 1rem; line-height: 1.65; }
 .reader-learning-route-grid a { font-size: 1rem; }
 .reader-main-ideas { margin-top: 52px; padding-top: 28px; border-top: 4px double var(--ink); }
+.reader-plane-pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 12px;
+  text-align: center;
+}
+.reader-plane-pair > div { min-width: 0; }
+.reader-plane-pair svg { max-width: 300px; margin-inline: auto; }
 .reader-main-ideas h3 { font-size: 1.45rem; }
 .reader-accepted-result { padding: 14px 18px; background: color-mix(in srgb, var(--copper) 6%, transparent); border-left: 3px solid var(--copper); font-size: 1rem; line-height: 1.65; }
 .reader-closure-chain { color: var(--oxblood); font-size: clamp(1.05rem, 2.5vw, 1.4rem); overflow-x: auto; white-space: nowrap; }

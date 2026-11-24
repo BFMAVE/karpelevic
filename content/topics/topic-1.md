@@ -16,9 +16,9 @@ View each complex coordinate $v_j$ as a point of the plane. A **convex combinati
 
 $$P=\operatorname{conv}\{v_1,\ldots,v_n\}.$$
 
-Before proceeding, [move the weights in the background interaction](/prerequisites/#average-heading). Keep the two points fixed and vary their nonnegative weights while their sum stays one. The average travels along their joining segment. A stochastic row makes exactly this choice among its available coordinates.
+With just two points the hull is their joining segment. You can [move the weights](/prerequisites/#average-heading) to see the row choose different points on this segment.
 
-The eigenvector equation says that $\lambda v_i$ is a convex combination of the original points. Consequently $\lambda P\subseteq P$. Multiplying by $\lambda=\rho e^{i\theta}$ rotates every point through $\theta$ and scales its distance from zero by $\rho$. The matrix equation has become a rotation and contraction fitting inside a polygon.
+The eigenvector equation puts each image $\lambda v_i$ in $P$. The hull of these images is $\lambda P$, the whole original hull multiplied by $\lambda$. Since $P$ contains every average of points in $P$, it contains that image hull too. Multiplying by $\lambda=\rho e^{i\theta}$ rotates every point through $\theta$ and scales its distance from zero by $\rho$. The matrix equation has become a rotation and contraction fitting inside a polygon.
 
 A **vertex** is an extreme point: it cannot be expressed as a nontrivial average of other points of the hull. Some coordinates may repeat or lie inside the hull, so the polygon has at most $n$ vertices. A finite convex hull is called a **polytope**; in the plane it can also be a segment or a single point.
 
@@ -103,7 +103,9 @@ Fix a ray on which a nonzero eigenvalue is possible, and let $r$ be the supremum
 
 Real matrices give conjugate eigenvalues, so reflection in the real axis preserves $\Theta_n$. Appending an identity block gives $\Theta_n\subseteq\Theta_{n+1}$.
 
-For $n\ge2$, finding the outermost point on a ray gives us the entire segment back to zero. To see this **radial filling**, choose a stationary probability row $\pi^T$ for a realising matrix $A$. Its entries are nonnegative and sum to one, and $\pi^TA=\pi^T$.
+Return to the diamond with $\lambda=(1+i)/2$. Its first vertex goes to a side midpoint. Halve the multiplier. The image now lies halfway from zero to that midpoint, still inside the diamond. The same is true at every vertex. For any nonreal attainable $\lambda$, the polygon contains both $0$ and $\lambda v_j$, so it contains the segment between them. Hence $(t\lambda)P\subseteq P$ for $0\le t\le1$. The polygon correspondence gives a matrix at every point of that radial segment. For real eigenvalues the two-state calculation already fills $[-1,1]$.
+
+We can also construct a matrix for $t\lambda$ from one for $\lambda$. We want a row whose weighted average of the eigenvector coordinates is zero. Averaging against a **stationary probability row** $\pi^T$ does just this when $\lambda\ne1$. Its entries are nonnegative and sum to one, and stationarity means $\pi^TA=\pi^T$.
 
 <details class="reader-proof-derivation">
 <summary>Why a stationary probability row exists</summary>
@@ -118,11 +120,11 @@ The numerator is the difference of two bounded probability rows. At the limit we
 
 </details>
 
-If $Av=\lambda v$ and $\lambda\ne1$, then $(\lambda-1)\pi^Tv=0$, so $\pi^Tv=0$. For $0\le t\le1$ the matrix
+Indeed, $\pi^TAv$ equals $\pi^Tv$ by stationarity and equals $\lambda\pi^Tv$ by the eigenvector equation. Thus $\pi^Tv=0$ when $\lambda\ne1$. Give weight $t$ to the original row and weight $1-t$ to the stationary average in every row. The matrix
 
 $$A_t=tA+(1-t)\mathbf1\pi^T$$
 
-is stochastic and satisfies $A_tv=t\lambda v$. For $\lambda=1$, the stochastic matrix with rows $(1,0)$ and $(1-t,t)$ has eigenvalues $1,t$. Padding gives every order $n\ge2$. At order one only the point $1$ is available.
+is stochastic and sends $v$ to $t\lambda v+(1-t)\mathbf1(\pi^Tv)=t\lambda v$. This gives **radial filling** for $n\ge2$. At order one the only point is $1$.
 
 ### A worked check
 

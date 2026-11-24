@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 275" role="img" aria-labelledby="title description">
+  <title id="title">The triangle in the radius equation</title>
+  <desc id="description">In the order-six example the side from zero to beta has length one half and lies on the real axis. The side from beta to w also has length one half and makes an angle of sixty degrees with the real axis. The side from zero to w has length square root of three over two. The interior angles at zero and w are both thirty degrees.</desc>
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M36 221 H445" stroke="#6d7779" stroke-dasharray="4 5" stroke-width="1.4"/>
+    <path d="M48 221 H248 L348 47.795 Z" fill="#edf3f0" stroke="#253e4b" stroke-width="2"/>
+    <path d="M248 221 L348 47.795" stroke="#a14731" stroke-width="3"/>
+    <path d="M348 47.795 L48 221" stroke="#226965" stroke-width="3"/>
+    <path d="M94 221 A46 46 0 0 0 87.84 198" stroke="#226965" stroke-width="1.5"/>
+    <path d="M314.23 67.30 A39 39 0 0 0 328.5 81.57" stroke="#253e4b" stroke-width="1.5"/>
+    <path d="M279 221 A31 31 0 0 0 263.5 194.15" stroke="#a14731" stroke-width="1.5"/>
+  </g>
+  <g fill="#253e4b">
+    <circle cx="48" cy="221" r="3.8"/>
+    <circle cx="248" cy="221" r="3.8"/>
+    <circle cx="348" cy="47.795" r="3.8"/>
+  </g>
+  <g font-family="Georgia, serif" font-size="18" fill="#253e4b">
+    <text x="38" y="245">0</text>
+    <text x="243" y="246">β</text>
+    <text x="355" y="44" font-style="italic">w</text>
+    <text x="99" y="211" fill="#225b57">A</text>
+    <text x="303" y="96">B</text>
+    <text x="282" y="203" fill="#843a2a">A + B</text>
+    <text x="145" y="246" text-anchor="middle">1/2</text>
+    <text x="315" y="150" fill="#843a2a">1/2</text>
+    <text x="169" y="118" fill="#225b57">√3/2</text>
+  </g>
+</svg>

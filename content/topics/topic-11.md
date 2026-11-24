@@ -113,7 +113,18 @@ $$
 
 The old scalar equation is $\rho^{d/m}\sin A+\rho^b\sin B=\sin(A+B)$. We evaluate it using $y$, without writing $K_{n-1}(2\pi y)$ at a lower-half-plane angle. The Farey calculation above gives $n=b+d$, so $mB-A=2\pi(a+c-ny)$. Its sign tells us which equation to use. It is positive on the left of $\xi$ and negative on the right. Reflection may interchange left and right in the original picture, but it leaves this radius comparison unchanged.
 
-Evaluate each new equation at the old radius. For the left interval, temporarily keep $m$ factors. For the right interval, reflection makes $d$ the smaller denominator and its required factor count is one. The right side minus the left side is respectively
+Which angles enter the two new equations? On the left of $\xi$ the lower endpoint $a/b$ stays in place, so its angle is still $A$. Temporarily keep the old factor count $m$. The upper endpoint is now $(a+c)/n$, giving second angle $2\pi(a+c-ny)/m=B-A/m$.
+
+On the right of $\xi$ the smaller denominator $d$ is on the right. Reflect. The fraction being tested becomes $1-y$ and the endpoints, in increasing order, are $(d-c)/d$ and $(n-a-c)/n$. The new count is one because $d<n=b+d<2d$. Substitution gives the two angles
+
+$$
+2\pi\bigl(d(1-y)-(d-c)\bigr)=mB,\qquad
+2\pi\bigl((n-a-c)-n(1-y)\bigr)=A-mB.
+$$
+
+For example, at order seven take $y=7/18$ in $(1/3,2/5)$. The new fraction $3/8$ lies to its left. The original angles are $A=\pi/3$ and $B=\pi/18$, with $m=2$. At order eight the reflected fraction is $11/18$, between $3/5$ and $5/8$. The angles in its equation are $\pi/9$ and $2\pi/9$. Their sum is the original $A$.
+
+In each interval evaluate the new equation at the old radius $\rho$. Subtract its left side from its right side. In the first interval the difference is $D_L$, and in the second it is $D_R$, where
 
 $$
 D_L=\sin(A+B-A/m)-\rho^{n/m}\sin A-\rho^b\sin(B-A/m),

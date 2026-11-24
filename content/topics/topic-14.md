@@ -4,9 +4,9 @@ On the ray of angle $5\pi/7$, how far can an eigenvalue of an eight-state stocha
 
 We first work out what the proposed contacts would force. Once we have a value of $z$, we can check the contacts by constructing the polygon.
 
-Suppose an invariant polygon has eight vertices $v_0,\ldots,v_7$ in cyclic order. Multiplication by $z=\rho e^{i\theta}$ sends each vertex into the assigned side $(v_{i+2},v_{i+3}]$, with indices modulo eight. Two images fall strictly between the endpoints of a side, namely $c_1\in(v_0,v_1)$ and $c_2\in(v_1,v_2)$. Thus the order is $N=8$, the cyclic shift is $\kappa=3$, and the number of interior contacts is two.
+Suppose an invariant polygon has eight vertices $v_0,\ldots,v_7$ in counterclockwise order. Multiplication by $z=\rho e^{i\theta}$ sends each vertex into the assigned side $(v_{i+2},v_{i+3}]$, with indices modulo eight. Two images fall strictly between the endpoints of a side, namely $c_1\in(v_0,v_1)$ and $c_2\in(v_1,v_2)$. Thus the order is $N=8$, the cyclic shift is $\kappa=3$, and the number of interior contacts is two.
 
-The integer relation $3\cdot3-1\cdot8=1$ gives $p=1$, $q=3$, $r=3$, and $s=8$. The fractions $1/3<3/8$ are consecutive at order eight because their determinant is one and $3+8>8$. The product count is $m=\lfloor8/3\rfloor=2$, and the closing exponent is $e=8-2\cdot3=2$.
+Where do the fractions come from in this example? The ray makes $5/14$ of a turn. With denominators at most eight, its neighbours are $1/3$ below and $3/8$ above. Indeed $3\cdot3-1\cdot8=1$ and their denominator sum is $11>8$, so no fraction of order eight fits between them. In the notation $p/q<r/s$ we have $q=3$, $s=8$ and $m=\lfloor8/3\rfloor=2$. There is room for two blocks of three steps and two steps left over. We shall find all eight in the following paths.
 
 ### The return paths and the real turn count
 
@@ -56,7 +56,9 @@ $$
 
 For example, the intermediate coordinate $v_1$ occurs once in a numerator and once in a denominator. In full, the three ratios are $v_1/v_0$, $v_2/v_1$ and $v_0/v_2$. Their product equals one regardless of the scale of the drawing. There is also information in the order in which the vertices occur.
 
-Let $\Phi_j$ be continued real vertex angles, with $\Phi_8=\Phi_0+2\pi$. Define $u_1=\Phi_1-\Phi_0$ and $u_2=\Phi_2-\Phi_1$. The closing path says $\Phi_2+2\theta=\Phi_8$. Hence
+Here we can count the turn directly. Write the vertex angles as increasing real numbers $\Phi_0<\cdots<\Phi_7<\Phi_8=\Phi_0+2\pi$. The two closing steps go from $v_2$ to $v_5$ and then to $v_0$. Each adds the angle $\theta=5\pi/7$. On the first step we meet index $5$ farther along the same list. On the second we pass the end of the list and meet index $0$ on the next turn. Thus $\Phi_5-\Phi_2=\theta$ and $\Phi_8-\Phi_5=\theta$.
+
+The first factor $z^3-\beta_1$ is $\alpha_1v_1/v_0$, so its angle is $u_1=\Phi_1-\Phi_0$. The second has angle $u_2=\Phi_2-\Phi_1$. These are the successive counterclockwise gaps between the first three vertices. Together with the two closing steps they take us from $\Phi_0$ to $\Phi_8$. Hence
 
 $$
 2\theta+u_1+u_2=2\pi.
@@ -105,7 +107,7 @@ Thus both factor arguments are $2\pi/7$. The product's modulus is $\rho^2\beta^2
 
 ### The matrix and its eigenvector
 
-Use rows and columns numbered zero through seven. Give the six arrows
+We now use the indices of the polygon vertices as state labels. In Topic X the states were numbered block by block. In the present labels the first block is $(0,3,6)$, the second is $(1,4,7)$, and the two states on the closing path are $(2,5)$. Reading these lists in order identifies each state of the earlier graph with its label here. Give the six arrows
 
 $$
 0\to3\to6,\qquad 1\to4\to7,\qquad 2\to5\to0

@@ -36,7 +36,7 @@ export function ReaderOrderComparison() {
       <div className="reader-figure-visual" tabIndex={0} role="region" aria-label="Boundary radius by angle for orders seven and eight">
         <svg viewBox="0 0 600 305" role="img" aria-labelledby="two-orders-title two-orders-desc">
           <title id="two-orders-title">How much farther can eight states reach?</title>
-          <desc id="two-orders-desc">Both boundaries start at radius one at one third of a turn. At five fourteenths of a turn the seven-state radius is about 0.9443 and the eight-state radius about 0.9706. Only the eight-state curve returns to one at three eighths of a turn.</desc>
+          <desc id="two-orders-desc">Both boundaries start at radius one at one third of a turn. At five fourteenths of a turn the seven-state radius is about 0.9443 and the eight-state radius about 0.9706. A cross at radius 0.98 on the same vertical line is above both curves. Only the eight-state curve returns to one at three eighths of a turn.</desc>
           <g fontSize="17" fill="#18394b">
             <text x="75" y="25">Largest eigenvalue modulus</text>
             {[1, 0.98, 0.96, 0.94].map(tick => <g key={tick}>
@@ -46,6 +46,10 @@ export function ReaderOrderComparison() {
             <polyline points={curve(8)} fill="none" stroke="#247073" strokeWidth="3.5" />
             <polyline points={curve(7)} fill="none" stroke="#904337" strokeWidth="3" strokeDasharray="8 5" />
             <line x1={markerX} x2={markerX} y1={y(1)} y2={y(0.93)} stroke="#68787e" strokeDasharray="3 4" />
+            <g transform={`translate(${markerX} ${y(0.98)})`} stroke="#253d48" strokeWidth="2">
+              <path d="M -4 -4 L 4 4 M -4 4 L 4 -4" />
+            </g>
+            <text x={markerX + 12} y={y(0.98) - 7}>trial 0.98</text>
             <circle cx={markerX} cy={y(eight)} r="4.5" fill="#247073" />
             <rect x={markerX - 4} y={y(seven) - 4} width="8" height="8" fill="#904337" />
             <text x={markerX - 10} y={y(eight) - 15} textAnchor="end">8 states</text>
@@ -56,7 +60,7 @@ export function ReaderOrderComparison() {
           </g>
         </svg>
       </div>
-      <figcaption>Read vertically at 5/14 of a turn. Seven states can reach radius {seven.toFixed(4)}. An eighth state raises it to {eight.toFixed(4)}. Farther right, at 3/8 of a turn, an eight-state cycle reaches the unit circle. Both curves sample the radial equation on the indicated interval.</figcaption>
+      <figcaption>Here the horizontal coordinate is the angle and the vertical coordinate is the distance from zero. Follow the vertical line at 5/14 of a turn. Seven states can reach radius {seven.toFixed(4)}. An eighth state raises it to {eight.toFixed(4)}. The cross marks the proposed radius 0.98. Farther right, an eight-state cycle reaches radius one at 3/8 of a turn. Both curves sample the radial equation on the indicated interval.</figcaption>
     </figure>
   </ReaderFigureFrame>;
 }

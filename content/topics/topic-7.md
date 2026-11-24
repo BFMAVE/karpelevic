@@ -114,7 +114,7 @@ q\kappa\equiv1\pmod N,\qquad
 e\kappa\equiv-m\pmod N,\qquad qm+e=N.
 $$
 
-To check the second congruence, substitute $e=N-mq$ and reduce $q\kappa$ modulo $N$. Each base returns to the next one after $q$ steps, except the last, whose closing path has $q+e$ steps. That path reaches $v_0=v_N$ after $e$ steps. Thus
+To check the second congruence, substitute $e=N-mq$ and reduce $q\kappa$ modulo $N$. Starting at $v_{j-1}$, the $q$th image lands on the side ending at $v_j$. There it equals $\beta_jv_{j-1}+\alpha_jv_j$. If $\beta_j=0$ it lands exactly on $v_j$. Starting at the last base $v_m$ takes $q+e$ steps to reach the contact on side one. This longer path passes through $v_0=v_N$ after $e$ steps. Thus
 
 $$
 (\zeta^q-\beta_j)v_{j-1}=\alpha_jv_j\quad(1\le j\le m),
@@ -180,7 +180,9 @@ For an arithmetic check, $N=7$ and $\kappa=3$ give $q=5$, $p=2$, because $5\cdot
 
 ### Complete-proof continuation: several index cycles require reversal
 
-Assume $\varphi=\delta\ge2$. Define $L=N/\delta$ and $K=\kappa/\delta$. Each index cycle has length $L$ and contains one interior contact. Every base therefore first returns to its own assigned side after $L$ steps. Choose $h\in\{1,\ldots,L-1\}$ with $Kh\equiv-1$ modulo $L$, and put
+Take the indices $N=6$ and $\kappa=2$ to see what changes when the shift has two cycles. The even indices go $2,4,0,2$ and the odd indices go $1,3,5,1$. If sides one and two each receive an interior contact, the return from $v_2$ ends on the side from $v_1$ to $v_2$. Writing $\zeta^3v_2=\alpha_2v_2+\beta_2v_1$ gives a recurrence from $v_2$ back to $v_1$. This is the reason to read the bases backwards. The two earlier steps $v_2\to v_4\to v_0$ give $\zeta^2v_2=v_0$. When the reversed list starts at $v_2$ and ends at $v_0$, its closing equation therefore uses $\zeta^{-2}v_0=v_2$.
+
+For the general case assume $\varphi=\delta\ge2$. Define $L=N/\delta$ and $K=\kappa/\delta$. Each index cycle has length $L$ and contains one interior contact. Every base therefore first returns to its own assigned side after $L$ steps. Choose $h\in\{1,\ldots,L-1\}$ with $Kh\equiv-1$ modulo $L$, and put
 
 $$
 b=\frac{Kh+1}{L},\qquad s_0=N-h,\qquad r_0=\kappa-b.
@@ -230,7 +232,9 @@ e\vartheta+\sum_j u_j
 =2\pi(b-h)=2\pi(r-mp).
 $$
 
-The negative exponent is harmless because $\omega\ne0$. Multiplying the product by $\omega^{mq}$ gives the polynomial form
+Here is the angle calculation for those same six indices. We have $L=3$, $K=1$, $h=2$ and $b=1$. The original interval is $(1/4,1/3)$ of a turn. Choose $\theta_\zeta=105^\circ$ inside it to check the arithmetic. The closing equality gives $\Gamma=360^\circ-2(105^\circ)=150^\circ$. After conjugation the ray is at $255^\circ$ and the endpoints are $2/3$ and $3/4$. Hence $m=2$, $e=-2$, and the lifted sum is $-2(255^\circ)+150^\circ=-360^\circ$. Both factor angles are positive. The negative turn comes from reading the closing path backwards. These data illustrate the index and angle calculation under the return hypotheses.
+
+The negative exponent is defined because $\omega\ne0$. Multiplying the product by $\omega^{mq}$ gives the polynomial form
 
 $$
 \omega^s\prod_j(\omega^q-\beta_j)

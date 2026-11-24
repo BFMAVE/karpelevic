@@ -165,7 +165,7 @@ export default function Home() {
                 </math>
               </div>
               <PrerequisitePlate slug="invariant-polygons" />
-              <p className="context-note">No background in polygon geometry or number theory is assumed. The reader introduces convex combinations, supporting lines, first returns, and Farey fractions at the points where the proof needs them.</p>
+              <p className="context-note">In this drawing the corners are entries of one eigenvector. In the atlas above, each point is a possible eigenvalue. To pass from the polygon to the atlas, take the multiplier that fits its image inside it and mark that single number in Θₙ.</p>
               <a className="text-link" href={sitePath("/proof/")}>See the bridge worked out in Topic I →</a>
             </div>
           </section>

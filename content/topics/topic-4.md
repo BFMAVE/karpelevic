@@ -11,6 +11,13 @@ $$
 
 Suppose this contact is inside its side and the next contact is a vertex, so $\beta_i>0$ and $\beta_{i+1}=0$. Try replacing the corner $v_i$ by $c_i$. The smaller polygon has retained the image that previously landed on this side. But the moved corner has its own image under $\zeta$. Where does that image go? We will calculate it by changing one coordinate of the eigenvector. This gives a stochastic matrix for the smaller polygon and tells us exactly which contact has moved.
 
+Consider the eight-state indices from Topic III, with shift $\kappa=3$. Suppose only sides 1 and 2 receive images between their endpoints, as in the [worked octagon](/proof/topic-xiv/#guide-14-checking-the-actual-invariant-octagon). Move $v_2$ to $v'_2=c_2=\beta_2v_1+\alpha_2v_2$. Two images explain what this move does. First, $\zeta v_7=c_2=v'_2$, so the old contact on side 2 becomes a corner. Next, by linearity,
+$$
+\zeta v'_2=\beta_2\zeta v_1+\alpha_2\zeta v_2
+          =\beta_2 v_4+\alpha_2 v_5.
+$$
+The last equality uses the fact that sides 4 and 5 each received an image at their ending corner. Both those corners stay fixed. Hence the moved vertex now lands between $v_4$ and $v_5$. We have transferred the contact from side 2 to side 5, three places ahead. The matrix calculation explains why a transfer works at the end of any run.
+
 ### Reversing stochastic factors
 
 A row-stochastic matrix has nonnegative entries and row sums one. Products of such matrices are row-stochastic, because multiplying a vector of all ones still gives that vector and all product entries are nonnegative.
@@ -79,8 +86,6 @@ $$
 For a permitted transfer in the selected polygon, take $\alpha_i=1/2$ and $\alpha_{i+\kappa}=1$. Their new values are $1$ and $1/2$: the positive weight $\log2$ moves from $i$ to $i+\kappa$, while the number of positive weights stays the same. Could the target already carry positive weight? If instead $\alpha_{i+\kappa}=3/4$, the new coefficient would be $3/8$, with weight $-\log(3/8)=-\log(1/2)-\log(3/4)$. Two positive weights would merge into one, reducing the minimum contact count. Thus every permitted move in the selected polygon has a target that previously had weight zero.
 
 <!-- reader-figure:early -->
-
-The numerical update in the figure shows the allowed transfer. The two-positive-weight calculation is the contradiction that excludes a collision; those data cannot occur at a permitted move in our selected polygon. Later transfers preserve the contact count by the same zero-target rule.
 
 ### Why all interior contacts form one run
 

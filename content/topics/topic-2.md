@@ -38,7 +38,7 @@ The chosen eigenvalue has moved from radius $1/2$ to radius $2/3$ at the same an
 
 ### The positive eigenvector needed for the general normalization
 
-A nonnegative matrix is **irreducible** if its directed graph has a path from every vertex to every other, drawing an arrow $i\to j$ when $a_{ij}>0$. For an irreducible stochastic matrix, a stationary probability row $\pi^T$ has strictly positive entries. More generally, an irreducible nonnegative matrix has a positive right eigenvector for its spectral radius and a positive left eigenvector; a positive left eigenvector identifies that radius. These are the precise Perron–Frobenius facts used below. They extend familiar eigenvector theory to matrices with nonnegative entries.
+A nonnegative matrix is **irreducible** if its directed graph has a path from every vertex to every other, drawing an arrow $i\to j$ when $a_{ij}>0$. For an irreducible stochastic matrix, a stationary probability row $\pi^T$ has strictly positive entries. The spectral radius of a matrix is the largest absolute value of its eigenvalues. An irreducible nonnegative matrix has positive left and right eigenvectors for that radius. In particular, once we find a strictly positive left eigenvector with eigenvalue $r$, we also have a strictly positive column with eigenvalue $r$. These are the precise Perron–Frobenius facts used below. They extend familiar eigenvector theory to matrices with nonnegative entries.
 
 <details class="reader-proof-derivation">
 <summary>Derive the positive eigenvectors from stationary averages</summary>
@@ -67,7 +67,9 @@ $$
 $$
 Since $\zeta\ne1$, we have $\pi^Tv=0$, so $Bv=Av=\zeta v$. The positive row provided room for the subtraction, and the stationary mean ensured that our chosen eigenvector survived it.
 
-Put $D=\operatorname{diag}(h_1,\ldots,h_N)$ and
+How should we restore the row sums? If we divide row $j$ by its own sum $s_j$, then $(Bv)_j=\zeta v_j$ becomes $\zeta v_j/s_j$. After the subtraction the row sums are $1-\varepsilon$ in row $i$ and $1$ elsewhere. These divisions would give our nonzero vertex coordinates two different multipliers.
+
+Instead measure coordinate $j$ in units of $h_j$. An entry $B_{jk}$ then becomes $B_{jk}h_k/h_j$, and the sum in row $j$ is $(Bh)_j/h_j=r$ for every $j$. We can now divide by a *single* number. Put $D=\operatorname{diag}(h_1,\ldots,h_N)$ and
 
 $$C=r^{-1}D^{-1}BD.$$
 
@@ -111,11 +113,11 @@ Its row sums, after division by twelve, are $3/4,1,1$. Its column sums are all $
 
 ### An interior image would give exactly that forbidden row
 
-Let the polygon vertices be $v_1,\ldots,v_N$. If $\zeta v_i$ lies in the interior, choose $0<\eta<1/N$ small enough that
-
-$$w=\frac{\zeta v_i-\eta\sum_jv_j}{1-N\eta}\in P.$$
-
-This is possible because $w\to\zeta v_i$ as $\eta\to0$. Express $w$ as a convex combination of the vertices. Rearranging expresses $\zeta v_i$ with weight at least $\eta$ on every vertex. That makes row $i$ of the realizing matrix strictly positive, giving the contradiction just proved. Every vertex image therefore lies on the boundary.
+Let $x=\zeta v_i$ lie inside the polygon with vertices $v_1,\ldots,v_N$. We want a representation of $x$ using every vertex. Their average $g=(v_1+\cdots+v_N)/N$ already has that property. Starting at $g$, draw the line to $x$ and continue a little beyond $x$ to a point $w$. Since $x$ is interior, we can keep $w$ in the polygon. Thus $x$ lies on the segment from $g$ to $w$. In symbols, choose a small $s>0$ with $s<1$ and set
+$$
+w=\frac{x-sg}{1-s}\in P,\qquad x=sg+(1-s)w.
+$$
+If $g=x$, the same formula gives $w=x$. Express $w$ as any average of the vertices. Each vertex already receives weight $s/N$ from $sg$, so every coefficient in the combined average is positive. This gives the forbidden positive row, and proves that every vertex image lies on the boundary.
 
 For a numerical picture, use the diamond with vertices $1,i,-1,-i$ from Topic I. The interior point $(1+i)/4$ is
 
@@ -163,7 +165,7 @@ For the diamond from Topic I, the side endpoints $(1,0)$ and $(0,1)$ give the eq
 
 Invariance of $P$ gives $T^*P^\circ\subseteq P^\circ$: for $a\in P^\circ$ and $x\in P$, the adjoint identity reads $\langle T^*a,x\rangle=\langle a,Tx\rangle\le1$, because $Tx\in P$.
 
-Conjugation preserves the two extremality assumptions. Apply the vertex-contact result to $P^\circ$: for each polar vertex $a$, $T^*a$ is on its boundary. A polar point satisfying all $N$ vertex inequalities strictly has a whole small neighbourhood satisfying them, so it is interior. Thus at least one original vertex $x$ satisfies $\langle T^*a,x\rangle=1$. Equivalently $Tx$ lies on the original side $\langle a,Tx\rangle=1$. Every side meets $TP$.
+The polar construction has changed the multiplier to $\bar\zeta$. A smaller matrix realising $\bar\zeta$ would also realise $\zeta$, since the matrix is real. The conjugate of any point farther out on this new ray would lie farther out on the original ray. Thus $\bar\zeta$ has the same least order $N$ and the same maximality property. Apply the vertex-contact result to $P^\circ$: for each polar vertex $a$, $T^*a$ is on its boundary. A polar point satisfying all $N$ vertex inequalities strictly has a whole small neighbourhood satisfying them, so it is interior. Thus at least one original vertex $x$ satisfies $\langle T^*a,x\rangle=1$. Equivalently $Tx$ lies on the original side $\langle a,Tx\rangle=1$. Every side meets $TP$.
 
 ### Boundary averages use one face
 

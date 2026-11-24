@@ -140,7 +140,7 @@ $$
 =\frac{2\pi(r-mp)-e\vartheta}{m}=A+B.
 $$
 
-Taking absolute values in $z^e\prod_jg_j=1$ and then real logarithms gives $\sum_jF(u_j)=-e\log\rho$. This remains valid when $e<0$, since $\rho>0$. Therefore
+On the ray at the mean angle $A+B$, the line $\operatorname{Re}g+c\operatorname{Im}g=1$ meets the ray at distance $1/\mathcal D(A+B)$. Jensen says that this distance is at most the geometric mean of the actual distances $|g_1|,\ldots,|g_m|$. The product equation tells us that mean exactly. Taking absolute values in $z^e\prod_jg_j=1$ gives $\prod_j |g_j|=\rho^{-e}$, even for $e<0$. Taking logarithms gives $\sum_jF(u_j)=-e\log\rho$. In logarithms and then in reciprocals the same bound reads
 
 $$
 F(A+B)\le-\frac em\log\rho,
@@ -192,6 +192,12 @@ For $\vartheta=5\pi/7$ in the interval $(1/3,3/8)$ at order eight, $q=3$, $s=8$,
 $$
 \rho^4+\rho^3\le 2\cos(\pi/7).
 $$
+Try the radius $0.98$ from the overview *on the factor line*. Here $w=0.98^3e^{i\pi/7}\approx0.8480+0.4084i$, so $c=(1-\operatorname{Re}w)/\operatorname{Im}w\approx0.3723$. At the mean angle the intersection lies at distance
+$$
+\frac{1}{\cos(2\pi/7)+c\sin(2\pi/7)}\approx1.0935.
+$$
+If two contact weights produced this radius on the eight-state arc, the geometric mean of their factor lengths would have to be $\rho^{-e/m}=1/0.98\approx1.0204$. Even the smallest geometric mean compatible with that angle is larger. This is how a chord inequality for a fixed $w$ rules out a trial radius.
+
 The closing path fixed the sum $u_1+u_2=4\pi/7$. If one of these angles exceeds $2\pi/7$, the other is smaller by the same amount. Strict convexity makes the displayed inequality strict. Thus a point attaining the equality radius requires $u_1=u_2=2\pi/7$, and the two averaging rows then have the same weight. We can already predict a feature of the attaining matrix before constructing it.
 
 ### Check the source of strictness

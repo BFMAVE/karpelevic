@@ -73,7 +73,17 @@ M=\left|\sum_j a_{ij}v_j\right|
 \le\sum_j a_{ij}|v_j|\le M.
 $$
 
-Equality forces every positive-weight destination $j$ to belong to $S$ and to satisfy $v_j=\lambda v_i$. Following positive-weight arrows within the finite set $S$ eventually produces a directed cycle of length $\ell\le n$. Around that cycle $v_i=\lambda^\ell v_i$, so $\lambda^\ell=1$. There are no other unit-circle points.
+Why does equality determine the *direction* of each destination? Divide row $i$ by its target $\lambda v_i$, which has modulus $M>0$. Write $w_j=v_j/(\lambda v_i)$. All the $w_j$ lie in the unit disk, and their weighted average is the point $1$. Taking real parts gives
+
+$$
+\sum_j a_{ij}(1-\operatorname{Re}w_j)=0.
+$$
+
+Each summand is nonnegative. A destination with $a_{ij}>0$ therefore has real part one. The only point of the unit disk on that vertical line is $1$ itself. Thus $v_j=\lambda v_i$ at every such destination, even when several different states share this coordinate.
+
+![The midpoint of $1$ and $i$ has real part $1/2$. Any positive weight on a point to the left of the tangent lowers the real part of the average below one.](/figures/unit-circle-row-average.svg)
+
+Start at any index of $S$ and choose an outgoing arrow of positive weight. Its destination is again in $S$, since $|\lambda v_i|=M$. We can keep going. Stop at the first repeated index and count the $\ell$ steps since its previous visit. These steps form a cycle with $\ell\le n$. Each multiplies the coordinate by $\lambda$. The repeated coordinate is nonzero, so returning to it gives $\lambda^\ell=1$.
 
 ### The two inequalities meet
 

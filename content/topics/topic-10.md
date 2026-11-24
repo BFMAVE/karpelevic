@@ -118,9 +118,33 @@ $$
 \end{array}
 $$
 
-Selecting both local cycles gives two minus signs, hence the positive constant term. Selecting the five-cycle leaves one vertex outside it, hence its factor $t$. This explains both the signs and the powers, rather than just matching a determinant formula to the drawing.
+Selecting both local cycles gives two minus signs, hence the positive constant term. Selecting the five-cycle leaves state $0$ outside it, hence its factor $t$.
 
-For the concrete weights $\beta_0=0.4$ and $\beta_1=0.7$, the two branch rows have weights $(0.4,0.6)$ and $(0.7,0.3)$. Their connecting-cycle weight is $0.6\cdot0.3=0.18$, so the polynomial is $t^6-1.1t^3-0.18t+0.28$. At $t=1$ it vanishes: $1-1.1-0.18+0.28=0$. This checks the expected eigenvalue one of a stochastic matrix. In the drawing follow the two local cycles first, then the five-step cycle. The one state it skips is the factor of $t$ multiplying $0.18$.
+Can we see that extra $t$ in the eigenvector itself? Write $x_j$ for its entries. The four arrows of weight one give $x_1=tx_0$, $x_2=t^2x_0$, $x_4=tx_3$ and $x_5=t^2x_3$. Only the two branching rows remain. They read
+
+$$
+(t^3-\beta_0)x_0=\alpha_0x_3,\qquad
+(t^3-\beta_1)x_3=\alpha_1x_1=\alpha_1t x_0.
+$$
+
+The final arrow enters state $1$. Its coordinate is already one multiplication by $t$ beyond $x_0$. When $0<\beta_0,\beta_1<1$, we can use these two rows to construct the vector. Set $x_0=1$ and take $x_3=(t^3-\beta_0)/\alpha_0$ from the first equation. The second row now holds exactly when $(t^3-\beta_0)(t^3-\beta_1)=\alpha_0\alpha_1t$. Every root of the polynomial gives six coordinates satisfying the original rows.
+
+For the weights $\beta_0=0.4$ and $\beta_1=0.7$ in the drawing, the product of the two connecting weights is $0.6\cdot0.3=0.18$. The polynomial is $t^6-1.1t^3-0.18t+0.28$. At $t=1$ it vanishes, and the construction gives $x_3=(1-0.4)/0.6=1$. The four deterministic rows then give the familiar eigenvector of all ones.
+
+<details>
+<summary>Use the same graph to construct a nonconstant eigenvector</summary>
+
+Keep the arrows in the drawing and give both local returns a common weight $0<\beta<1$. Can we choose it so that $t=1/4$ is an eigenvalue? With $x_0=1$ the two branching equations reduce to $x_3^2=t$. Take $x_3=-1/2$. The first branching equation now requires
+$$
+\frac1{64}-\beta=-\frac{1-\beta}{2},
+$$
+so $\beta=11/32$ and $\alpha=21/32$. Following the deterministic arrows gives
+$$
+x=(1,1/4,1/16,-1/2,-1/8,-1/32)^T.
+$$
+For instance the last row averages states $3$ and $1$. It gives $(11/32)(-1/2)+(21/32)(1/4)=-1/128$, exactly one quarter of $x_5$.
+
+</details>
 
 <!-- reader-figure:late -->
 

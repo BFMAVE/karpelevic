@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 355 258" role="img" aria-labelledby="title desc">
+  <title id="title">Counting each corner on the boundary of a square</title>
+  <desc id="desc">Corners A, B, C, and D run counterclockwise from the top right. The four circular marks lie at the midpoint of DA, B, C, and the midpoint of CD. Dashed chords show the sides of the inner quadrilateral that cut across corners A and D.</desc>
+  <style>
+    text { font: 16px Georgia, serif; fill: #18394b; }
+    .edge { stroke: #18394b; stroke-width: 2.5; }
+    .chord { fill: none; stroke: #a04f37; stroke-width: 2; stroke-dasharray: 6 5; }
+    .corner { fill: white; stroke: #18394b; stroke-width: 2; }
+    .mark { fill: #1b7275; }
+  </style>
+  <path d="M255 38 H75 V218 H255 Z" fill="#faf6ec" class="edge"/>
+  <path d="M255 128 L75 38 V218 H165 Z" fill="#e7efeb"/>
+  <path d="M255 128 L75 38 M165 218 L255 128" class="chord"/>
+  <path d="M255 38 H75 V218 H255 Z" fill="none" class="edge"/>
+  <path d="M175 38 l8 -4 v8 Z M75 140 l-4 -8 h8 Z" fill="#18394b"/>
+  <g class="corner">
+    <rect x="250" y="33" width="10" height="10"/>
+    <rect x="69" y="32" width="12" height="12"/>
+    <rect x="69" y="212" width="12" height="12"/>
+    <rect x="250" y="213" width="10" height="10"/>
+  </g>
+  <g class="mark">
+    <circle cx="255" cy="128" r="5"/>
+    <circle cx="75" cy="38" r="4"/>
+    <circle cx="75" cy="218" r="4"/>
+    <circle cx="165" cy="218" r="5"/>
+  </g>
+  <g>
+    <text x="260" y="28">A</text>
+    <text x="53" y="26">B = y₂</text>
+    <text x="42" y="243">C = y₃</text>
+    <text x="260" y="241">D</text>
+    <text x="269" y="133">y₁</text>
+    <text x="165" y="242" text-anchor="middle">y₄</text>
+  </g>
+</svg>

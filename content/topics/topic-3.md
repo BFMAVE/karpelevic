@@ -48,13 +48,22 @@ If a cut removes all vertices with radius one, restoring the original scale incr
 
 ### Assign each corner contact only once
 
-List the vertices of $TP$ as $y_1,\ldots,y_N$ counterclockwise. The boundary arc $(y_j,y_{j+1}]$ excludes its starting point and includes its ending point. These arcs partition the boundary, so each old vertex is counted exactly once.
+List the vertices of $TP$ as $y_1,\ldots,y_N$ counterclockwise. Both $y_j$ and $y_{j+1}$ lie on the boundary of the outer polygon $P$. Write $(y_j,y_{j+1}]$ for the arc **along that outer boundary** from one to the next, excluding its starting point and including its ending point. These arcs partition the boundary, so each old vertex is counted exactly once.
 
 At a shared corner $v_i$, the incoming side $(v_{i-1},v_i]$ includes the point and the outgoing side $(v_i,v_{i+1}]$ excludes it. Nothing moves geometrically when we make this convention. It is a bookkeeping rule, like a half-open partition of a real interval, except that the included endpoint here is the ending one.
 
 <!-- reader-figure:early -->
 
-Take a square with corners $1,i,-1,-i$ in that order. A quarter-turn sends $1$ to $i$. The image belongs to the side $(1,i]$. The side $(i,-1]$ begins at the same corner but excludes it. Continuing around the square puts the other three images at the included ends of the other three sides. The unit rotation illustrates the counting convention. We now apply it to the contracting map $T$ of our proof.
+What difficulty can the choice of endpoint solve? Use the four corners $A,B,C,D$ of the square below. Place $y_1$ midway along $DA$, put $y_2=B$ and $y_3=C$, and place $y_4$ midway along $CD$. These are four marks for a counting example. Follow the *outer boundary* of the square from one mark to the next.
+
+![The dashed chords cut across corners $A$ and $D$. Counting corners along the solid boundary, the arc from $y_1$ to $y_2$ passes through $A$ and ends at $B$. The arc from $y_3$ to $y_4$ begins at $C$ and passes no other corner.](/figures/half-open-boundary-count.svg)
+
+| Corners counted on the arc | $y_1$ to $y_2$ | $y_2$ to $y_3$ | $y_3$ to $y_4$ | $y_4$ to $y_1$ |
+|---|:---:|:---:|:---:|:---:|
+| Include the end | $A,B$ | $C$ | none | $D$ |
+| Include the start | $A$ | $B$ | $C$ | $D$ |
+
+The second convention moves $B$ into the next arc and $C$ into the empty one. Now each arc receives one corner. Why does a *single* choice of endpoint always work for the polygon we selected? We use the area condition to rule out a second excess.
 
 Cut $P$ along the line joining $y_j$ to $y_{j+1}$, retaining the half-plane containing $TP$. If their closed boundary arc contains $k_j$ old vertices, a proper cut has at most $N+2-k_j$ vertices: it discards those vertices and adds back the two image endpoints. The new polygon is invariant, so minimal order requires at least $N$ vertices. Consequently $k_j\le2$.
 
@@ -116,7 +125,7 @@ $$
 \qquad\frac{\kappa-1}{N}<\frac{\theta_\zeta}{2\pi}<\frac\kappa N.
 $$
 
-There is no hidden multiple of $2\pi$ in the first inequality. After subtracting $\Phi_{i-\kappa}$, its interval lies between zero and $2\pi$, because $1\le\kappa<N$; the chosen $\theta_\zeta$ lies there too. The geometric argument relation therefore selects this exact representative. Summing the $N$ inequalities gives $2\pi(\kappa-1)<N\theta_\zeta\le2\pi\kappa$: each wrap of the continued index adds $2\pi$. Equality at the upper bound would make every image a vertex; following that finite cycle would give $v=\zeta^L v$ for a positive integer $L$, impossible when $v\ne0$ and $|\zeta|<1$.
+There is no hidden multiple of $2\pi$ in the first inequality. After subtracting $\Phi_{i-\kappa}$, its interval lies between zero and $2\pi$, because $1\le\kappa<N$; the chosen $\theta_\zeta$ lies there too. The geometric argument relation therefore selects this exact representative. To sum the upper bounds, write $\Phi_i-\Phi_{i-\kappa}$ as the sum of the $\kappa$ angle gaps from index $i-\kappa$ to $i$. As $i$ runs around the polygon, each of the $N$ gaps occurs exactly $\kappa$ times. The gaps together make $2\pi$, so the upper bounds sum to $2\pi\kappa$. Each lower bound has one fewer gap. We obtain $2\pi(\kappa-1)<N\theta_\zeta\le2\pi\kappa$. Equality at the upper bound would make every image a vertex; following that finite cycle would give $v=\zeta^L v$ for a positive integer $L$, impossible when $v\ne0$ and $|\zeta|<1$.
 
 The angle already determines the shift. For the eight-state example we will meet again, $N=8$ and $\theta_\zeta=5\pi/7$. Its angle in turns is $5/14$, and
 $$

@@ -17,7 +17,7 @@ The contradiction uses the word *every* in Topic II. The deformed polygon still 
 
 A supporting line touches a convex polygon while leaving it in one closed half-plane. A supporting linear functional is a linear function maximised on that touching part. A face is a vertex, a side, or the whole polygon. The smallest face containing a point is the vertex itself, its side if it lies strictly inside that side, or the whole polygon if it is interior.
 
-An invertible affine map is a map $x\mapsto Mx+a$ with invertible matrix $M$. If such a map sends $P$ into itself, it sends the smallest face at $x$ into the smallest face at its image. To verify the boundary case, take a supporting functional maximised at the image. Composing with the map gives an affine function maximised at $x$. If $x$ is inside a side, that function is constant along the side. A nonconstant linear function reaches its maximum only at an endpoint. Applying every supporting functional gives the face inclusion.
+Let $x=(1-t)a+tb$ lie between the distinct endpoints of a side, with $0<t<1$. An affine map $F$ sends it to $(1-t)F(a)+tF(b)$. Suppose $F(P)\subseteq P$ and $F(x)$ lies on a supporting line where a linear function reaches its maximum. Both endpoints have function value at most that maximum. Their weighted average equals it, so both values equal it. Thus the whole segment $[F(a),F(b)]$ lies on that line. If $F(x)$ were a corner, we could repeat the argument with its other supporting side. The two lines meet only at the corner, forcing $F(a)=F(b)$, which is impossible for invertible $F$. More generally the image of the smallest face at $x$ lies in the smallest face at $F(x)$.
 
 An invertible map preserves the dimension of a segment. Therefore the dimension of the smallest containing face cannot decrease. In particular, a point inside a side cannot become a vertex at a later iterate. Interior points also stay interior, since invertible maps send open sets to open sets.
 
@@ -35,7 +35,9 @@ $$
 L_j=F^{-H_j}(\operatorname{aff}E_{\sigma(j)}).
 $$
 
-Here $\operatorname{aff}E$ means the full line containing the side. This preimage line supports $P$ at $v_j$. It touches no other point of $P$. Otherwise it would contain an incident side. One incident side would force $F^{H_j}v_j$ to be a vertex; the other would force the preceding base's image to remain a vertex. The heights from Topic V are $q$ on an initial block and $q+h$ on the final block, so $H_{j-1}\le H_j$. The preceding base has therefore already returned inside a side by time $H_j$, and face persistence prevents it from becoming a vertex during any extra steps. Both incident-side possibilities are impossible. Thus $L_j$ **exposes** $v_j$: its intersection with $P$ is the single point $v_j$. This height ordering handles the transition between short and tall towers.
+Here $\operatorname{aff}E$ means the full line containing the side. The entire image $F^{H_j}P$ is on the inward side of that line, with $F^{H_j}v_j$ on the line. Taking preimages gives a supporting line at $v_j$. If it touched a second point of $P$, it would contain one of the two sides meeting at $v_j$.
+
+Consider first $E_{j+1}=[v_j,v_{j+1}]$. Its starting endpoint is $v_j$. The preceding argument would keep $F^{H_j}v_j$ a vertex, but this is the open-side contact defining $H_j$. For $E_j=[v_{j-1},v_j]$, the starting endpoint is $v_{j-1}$. Its return time satisfies $H_{j-1}\le H_j$, since the short towers come first. At time $H_{j-1}$ this vertex is already between the endpoints of a side and can never again be a vertex. This rules out the other incident side as well. Thus $L_j$ **exposes** $v_j$, meaning that $P\cap L_j=\{v_j\}$.
 
 The first lesson supplies movement lines, rather than a finished deformation. A base moved along $L_j$ has its returning image on the required target line by definition of $F^{-H_j}$. Each neighbouring base also has a contact to preserve. The next lesson shows how successive line intersections do that.
 
@@ -49,7 +51,12 @@ $$
 
 is a model for the projection lemma. It is not being proposed as an invariant eigenvalue polygon. Take $C_2=(3/2,1/2)$ and $C_3=(5/2,2)$, the midpoints of its last two chain sides. The line $L_2:y=3x/2-2$ exposes $X_2$: the affine function $y-3x/2+2$ vanishes there and is positive at the other three vertices.
 
-Move $X_1$ to $X_1(t)=(1-t,0)$ and project through $C_2$ onto $L_2$. Solving the two line equations gives
+Move $X_1$ to $X_1(t)=(1-t,0)$. We want the next vertex to satisfy two conditions. It has to stay on $L_2$, and the side from $X_1(t)$ to it has to pass through $C_2$. A point on that second line has coordinates
+$$
+X_1(t)+s\bigl(C_2-X_1(t)\bigr)
+=\left(1-t+s(\tfrac12+t),\tfrac{s}{2}\right).
+$$
+Substituting its coordinates in $y=3x/2-2$ gives $s=2(1+3t)/(1+6t)$. At $t=0$ we get $s=2$, as expected since $C_2$ is the midpoint. Substitution back into the line gives
 
 $$
 X_2(t)=\left(\frac{2(1+5t)}{1+6t},\frac{1+3t}{1+6t}\right).
@@ -61,7 +68,7 @@ $$
 u(t)=\frac{t}{1+6t},\qquad t-u(t)=\frac{6t^2}{1+6t}.
 $$
 
-This positive difference, for sufficiently small nonzero $t$, puts the returning point $Y(t)$ inward of the moving final side. At $t=0$ the first derivative of the difference is zero, so the actual movement is detected at second order. Starting the same projection chain at $X_0$ instead of $X_1$ corresponds to $t=1$ and gives $Z_2=(12/7,4/7)$ and
+Which side of the moving line contains $Y(t)$? On $K$, increasing the parameter moves towards $C_2$. At $t=0$ the point $C_2$ lies strictly on the polygon side of the final line $X_2X_3$. We can check the direction by taking the determinant of $X_3-X_2=(1,2)$ and $C_2-C_3=(-1,-3/2)$, which gives $1/2>0$. For sufficiently small $t$ the same direction still points inward. The line crosses $K$ at $Y(u(t))$. From that crossing to $Y(t)$ we move by $(t-u(t))(C_2-C_3)$, so a positive difference puts $Y(t)$ inward. At $t=0$ the first derivative of the difference is zero, so the actual movement is detected at second order. Starting the same projection chain at $X_0$ instead of $X_1$ corresponds to $t=1$ and gives $Z_2=(12/7,4/7)$ and
 
 $$
 \Pi(X_0)=(33/14,25/14)=C_3+(C_2-C_3)/7.
@@ -267,7 +274,7 @@ $$
 u(t)=\frac{at}{1+bt},\qquad a\ne0,\qquad0<u(1)<1.
 $$
 
-The moving final side meets $K$ at $Y(u(t))$. Increasing the coordinate on $K$ initially enters its inward half-plane. Consequently the signed distance of $Y(t)$ from that side has the same sign, for small $t$, as
+The moving final side meets $K$ at $Y(u(t))$. At parameter zero the line is the final side, and increasing the coordinate on $K$ moves from $C_{\ell+1}$ towards $C_\ell$ on the adjacent side. This direction points strictly inward and keeps that property for all sufficiently small motions. Consequently the signed distance of $Y(t)$ from that side has the same sign, for small $t$, as
 
 $$
 t-u(t)=\frac{(1-a)t+bt^2}{1+bt}.
