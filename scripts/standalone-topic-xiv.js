@@ -325,6 +325,7 @@ if (boundaryExplorerRoot) {
     orderInput.addEventListener("input", () => {
       const candidate = parseExplorerOrder(orderInput.value);
       if (candidate === null) {
+        exampleOrderButtons.forEach((button) => { button.disabled = false; });
         setInputError(
           "Enter an integer from 1 to 40. The plot remains at n=" +
             acceptedOrder +

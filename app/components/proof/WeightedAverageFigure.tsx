@@ -4,7 +4,6 @@ import { ReaderFigureCaption } from "./ReaderFigureCaption";
 export function WeightedAverageFigure() {
   return <figure className="reader-teaching-figure reader-average-figure" aria-labelledby="average-heading" data-weighted-average>
     <h3 id="average-heading">One matrix row, one point in a polygon</h3>
-    <p className="reader-figure-scroll-hint">Scroll the diagram sideways; when focused, use the arrow keys.</p>
     <div className="reader-figure-visual" tabIndex={0} role="region" aria-label="Weighted-average diagram">
       <svg viewBox="0 0 660 355" role="img" aria-labelledby="average-title average-description">
         <title id="average-title">A weighted average stays on the segment from 1 to i</title>

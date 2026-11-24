@@ -280,7 +280,6 @@ export function ReaderLateFigure({ number }: { number: number }) {
   }
   return <figure className="reader-teaching-figure" data-reader-late-figure={number}>
     <h4>{content.title}</h4>
-    <p className="reader-figure-scroll-hint">Scroll across the diagram →</p>
     <div className="reader-figure-visual" tabIndex={0} role="region" aria-label={`${content.title}. Scroll horizontally when needed to see the full diagram.`}>
       <svg viewBox="0 0 760 420" role="img" aria-labelledby={`reader-late-${number}-title reader-late-${number}-desc`} fontSize="17" fontFamily="inherit">
         <title id={`reader-late-${number}-title`}>{content.title}</title>

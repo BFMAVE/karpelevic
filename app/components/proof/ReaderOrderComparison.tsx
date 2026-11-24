@@ -31,7 +31,7 @@ export function ReaderOrderComparison() {
   const eight = radius(markedTurn, 8);
   const seven = radius(markedTurn, 7);
   const markerX = x(markedTurn);
-  return <ReaderFigureFrame defaultView="fit">
+  return <ReaderFigureFrame>
     <figure className="reader-teaching-figure">
       <div className="reader-figure-visual" tabIndex={0} role="region" aria-label="Boundary radius by angle for orders seven and eight">
         <svg viewBox="0 0 600 305" role="img" aria-labelledby="two-orders-title two-orders-desc">

@@ -285,7 +285,6 @@ export function ReaderLateExtra({ number }: { number: number }) {
   return <figure className="reader-teaching-figure" data-reader-late-extra={number}>
     <h4>{content.title}</h4>
     {number === 14 ? <EightStateLinks /> : null}
-    <p className="reader-figure-scroll-hint">Scroll across the diagram →</p>
     <div className="reader-figure-visual" tabIndex={0} role="region" aria-label={`${content.title}. Scroll horizontally when needed to see the full diagram.`}>
       <svg viewBox={`0 0 760 ${content.height}`} role="img" aria-labelledby={`reader-late-extra-${number}-title reader-late-extra-${number}-desc`} fontSize="18" fontFamily="inherit">
         <title id={`reader-late-extra-${number}-title`}>{content.title}</title>

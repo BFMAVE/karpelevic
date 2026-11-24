@@ -15,7 +15,7 @@ export function ReaderTheoremPreview() {
     <h2 id="theorem-preview-heading">See the answer before the machinery</h2>
     <p>Take a cycle on q states. Its matrix C shifts every coordinate to the next and returns the last to the first. If ω<sup>q</sup> = 1, shifting the column (1, ω, …, ω<sup>q−1</sup>) multiplies it by ω. Thus every qth root of unity occurs. Conversely C<sup>q</sup> is the identity, so every eigenvalue of C has qth power one. A point at p/q of a turn is one of these roots.</p>
     <p>Why does the five-state drawing below include a third of a turn? Let the first three states cycle and let each of the other two stay where it is. If ω is a cube root of unity, the column (1, ω, ω², 0, 0) still satisfies Cv = ωv for this five-state matrix C. Any shorter cycle fits into five states in the same way. This gives every marked point. The harder direction of the theorem shows that these are all the points on the unit circle that five states can reach.</p>
-    <ReaderFigureFrame defaultView="fit"><figure className="reader-teaching-figure">
+    <ReaderFigureFrame><figure className="reader-teaching-figure">
       <div className="reader-figure-visual" tabIndex={0} role="region" aria-label="Roots of unity and the order-five arc; scroll horizontally if needed">
         <svg viewBox="0 0 660 350" role="img" aria-labelledby="preview-roots-title preview-roots-desc">
           <title id="preview-roots-title">Neighbouring fractions mark the ends of a boundary arc</title>

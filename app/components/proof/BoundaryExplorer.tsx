@@ -139,13 +139,13 @@ export function BoundaryExplorer() {
       <div className="boundary-explorer-example-actions" role="group" aria-label="Compare the worked example orders">
         <button
           data-boundary-select-order="7"
-          disabled={order === 7}
+          disabled={parsedDraft === 7}
           onClick={() => { setOrderDraft("7"); setOrder(7); }}
           type="button"
         >Compare with order seven</button>
         <button
           data-boundary-select-order="8"
-          disabled={order === 8}
+          disabled={parsedDraft === 8}
           onClick={() => { setOrderDraft("8"); setOrder(8); }}
           type="button"
         >Return to the eight-state example</button>

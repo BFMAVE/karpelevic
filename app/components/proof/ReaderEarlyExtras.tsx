@@ -44,7 +44,6 @@ function ExtraFigure({ id, title, description, height, children, caption }: { id
   };
   return (
     <figure className="reader-teaching-figure">
-      <p className="reader-figure-scroll-hint">Scroll across the diagram →</p>
       <div className="reader-figure-visual" tabIndex={0} role="region" aria-label={`${title}; scroll horizontally if needed`}>
         <svg viewBox={`0 0 760 ${height}`} role="img" aria-labelledby={`${id}-title ${id}-desc`} style={{ display: "block", width: "100%", background: paper, fontFamily: "ui-sans-serif, system-ui, sans-serif" }}>
           <title id={`${id}-title`}>{title}</title>

@@ -14,6 +14,7 @@ import {
   upperFarey,
 } from "../public/code/karpelevic-boundary.mjs";
 import { composeTopicXIVRuntime } from "../scripts/lib/topic-xiv-runtime.mjs";
+import { chromiumFixture } from "./helpers/chromium.mjs";
 
 function determinant(matrix) {
   const work = matrix.map((row) => [...row]);
@@ -77,6 +78,34 @@ test("the composed classic-script runtime is strict, valid, and executable", asy
       document: { querySelector: () => null },
     }),
   );
+});
+
+test("each worked-example button restores its plotted order after an invalid entry", async (t) => {
+  const dumpDOM = await chromiumFixture(t);
+  if (!dumpDOM) return;
+  const runtime = await composeTopicXIVRuntime(new URL("..", import.meta.url).pathname);
+  const dom = await dumpDOM(`<!doctype html><section class="boundary-explorer">
+    <input type="number" data-boundary-order-input value="8"><p id="boundary-order-help"></p>
+    <button data-boundary-select-order="7">Seven</button><button data-boundary-select-order="8">Eight</button>
+    <svg role="img"></svg></section><output></output><script>${runtime}</script><script>
+    const input = document.querySelector("input"), plot = document.querySelector("svg");
+    const outcomes = [...document.querySelectorAll("button")].map(button => {
+      button.click();
+      const previous = plot.querySelector("path").getAttribute("d");
+      input.value = "41";
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+      const error = document.getElementById("boundary-order-error");
+      const errorShown = !error.hidden && input.getAttribute("aria-invalid") === "true";
+      const samePlot = plot.querySelector("path").getAttribute("d") === previous;
+      button.click();
+      return [errorShown, samePlot, input.value, error.hidden, plot.getAttribute("aria-label")];
+    });
+    document.querySelector("output").textContent = JSON.stringify(outcomes);
+  </script>`);
+  assert.deepEqual(JSON.parse(dom.match(/<output>([^<]+)<\/output>/)[1]), [
+    [true, true, "7", true, "Boundary of Theta 7"],
+    [true, true, "8", true, "Boundary of Theta 8"],
+  ]);
 });
 
 test("order-seven Farey table is exact", () => {

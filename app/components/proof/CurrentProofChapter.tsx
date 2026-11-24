@@ -35,7 +35,7 @@ function GuidedChapter({ number, html }: { number: number; html: string }) {
       if (block.startsWith("<figure>")) {
         const drawing = block.replace("<figure>", '<figure class="reader-chapter-drawing">')
           .replace(/<img\b[^>]*>/, '<div class="reader-figure-visual" tabindex="0" role="region" aria-label="Chapter drawing">$&</div>');
-        return <ReaderFigureFrame key={index} defaultView="fit"><div dangerouslySetInnerHTML={{ __html: drawing }} /></ReaderFigureFrame>;
+        return <ReaderFigureFrame key={index}><div dangerouslySetInnerHTML={{ __html: drawing }} /></ReaderFigureFrame>;
       }
       const Figure = figures[block as keyof typeof figures];
       if (Figure) return <ReaderFigureFrame key={index}><Figure number={number} /></ReaderFigureFrame>;

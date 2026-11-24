@@ -54,7 +54,11 @@ test("the current lesson has compact orientation, searchable notation and explic
   assert.match(html, /Lesson 3:/);
   assert.match(html, /Hypothetical skipped-return index diagram/);
   assert.match(html, /Exact local deformation model; not an invariant eigenvalue polygon/);
-  assert.match(html, /data-figure-view-button="fit"/);
+  const initialViews = [...html.matchAll(/data-figure-frame="true" data-figure-view="([^"]+)"/g)];
+  assert.ok(initialViews.length > 0);
+  assert.ok(initialViews.every(([, view]) => view === "fit"));
+  assert.match(html, /data-figure-view-button="fit" aria-pressed="true"/);
+  assert.match(html, /data-figure-view-button="enlarge" aria-pressed="false"/);
   assert.doesNotMatch(html, /Accessibility does not lower the standard/);
   assert.match(html, /Mathematical and editorial responsibility remains with the authors/);
 });

@@ -44,7 +44,6 @@ function TeachingFigure({ id, title, description, height, children, caption, con
   };
   return (
     <figure className="reader-teaching-figure">
-      <p className="reader-figure-scroll-hint">Scroll across the diagram →</p>
       {controls}
       <div className="reader-figure-visual" tabIndex={0} role="region" aria-label={`${title}; scroll horizontally if needed`}>
         <svg viewBox={`0 0 660 ${height}`} role="img" aria-labelledby={`${id}-title ${id}-desc`} style={{ display: "block", width: "100%", background: paper, fontFamily: "ui-sans-serif, system-ui, sans-serif" }}>
