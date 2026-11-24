@@ -9049,6 +9049,11 @@ math mover > mo[accent="true"] {
   overflow-x: auto;
   padding: .65rem 0;
 }
+/* WebKit can size a MathML box to the full equation even when its paragraph is narrower. */
+.reader-guide p:has(> math[display="block"]),
+.reader-source-text p:has(> math[display="block"]) {
+  overflow-x: auto;
+}
 .reader-source-text math[display="inline"] {
   max-width: 100%;
   overflow-x: auto;
