@@ -9184,11 +9184,15 @@ math mover > mo[accent="true"] {
 .reader-guide blockquote p { margin: 0; }
 .reader-guide table { display: block; overflow-x: auto; max-width: 100%; border-collapse: collapse; font-size: .98rem; }
 .reader-guide th, .reader-guide td { padding: 9px 13px; border-bottom: 1px solid var(--rule); text-align: left; }
-.reader-teaching-figure {
+.reader-chapter-drawing, .reader-teaching-figure {
   margin: 30px 0 38px; padding: 22px; border: 1px solid var(--rule-dark);
   background: var(--paper-light); box-shadow: 5px 5px 0 color-mix(in srgb, var(--rule) 25%, transparent);
 }
 .reader-teaching-figure svg { display: block; width: 100%; height: auto; overflow: visible; }
+.reader-chapter-drawing img { display: block; width: 100%; height: auto; }
+@media screen and (max-width: 700px) {
+  [data-figure-view="enlarge"] .reader-chapter-drawing img { min-width: 640px; }
+}
 .reader-figure-visual { overflow-x: auto; overscroll-behavior-x: contain; }
 .reader-figure-visual:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 4px; }
 .reader-figure-scroll-hint { display: none; }
@@ -9202,7 +9206,7 @@ math mover > mo[accent="true"] {
 .reader-projection-controls button:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 3px; }
 .reader-projection-controls [data-projection-status] { flex-basis: 100%; min-height: 3.2em; margin: 12px 0 0; font-size: .96rem; color: var(--oxblood); line-height: 1.55; }
 .reader-teaching-figure svg text { font-family: var(--font-reading), Georgia, serif; }
-.reader-teaching-figure figcaption { margin-top: 16px; padding-top: 13px; border-top: 1px solid var(--rule); font-size: .93rem; line-height: 1.6; color: var(--ink-soft); text-align: left; }
+.reader-chapter-drawing figcaption, .reader-teaching-figure figcaption { margin-top: 16px; padding-top: 13px; border-top: 1px solid var(--rule); font-size: .93rem; line-height: 1.6; color: var(--ink-soft); text-align: left; }
 .reader-teaching-figure figcaption strong { color: var(--ink); }
 .reader-formal { margin: 42px 0; padding-top: 28px; border-top: 4px double var(--ink); scroll-margin-top: 24px; }
 .reader-formal > h2 { margin: 0 0 12px; font-size: 1.75rem; font-weight: 500; }
@@ -9283,7 +9287,7 @@ math mover > mo[accent="true"] {
   .reader-orientation-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .reader-orientation-grid > section + section { padding-top: 20px; border-top: 1px solid var(--rule); }
   .reader-guide { font-size: 1.08rem; }
-  .reader-teaching-figure { padding: 12px; box-shadow: 3px 3px 0 color-mix(in srgb, var(--rule) 25%, transparent); }
+  .reader-chapter-drawing, .reader-teaching-figure { padding: 12px; box-shadow: 3px 3px 0 color-mix(in srgb, var(--rule) 25%, transparent); }
   .reader-figure-visual svg { min-width: 660px; }
   .reader-figure-scroll-hint { display: block; margin: 0 0 10px; color: var(--oxblood); font-size: .8rem; }
   .reader-source-text { padding: 8px 10px 18px; }

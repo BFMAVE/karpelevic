@@ -139,8 +139,8 @@
         "$N$ is the least realising order, also the polygon's vertex count. Multiplication sends $v_i$ to the side ending at $v_{i+\\kappa}$; vertex indices are taken modulo $N$."
       ],
       [
-        "Record deficits $\\varphi,\\psi$ and displacement $\\Delta$",
-        "Consecutive record deficits satisfy $\\varphi>\\psi$ and $\\Delta=\\varphi-\\psi$. The non-singleton return case has $1\\le\\Delta<\\varphi$."
+        "Record deficits $\\varphi,\\psi$ and their difference $\\Delta$",
+        "Consecutive record deficits satisfy $\\varphi>\\psi$ and $\\Delta=\\varphi-\\psi$. When the record with deficit $\\varphi$ has a successor, $1\\le\\Delta<\\varphi$."
       ],
       [
         "Return times $q,h$ and heights $H_j$",
@@ -189,8 +189,8 @@
         "$N$ is the least realising order, also the polygon's vertex count. Multiplication sends $v_i$ to the side ending at $v_{i+\\kappa}$; vertex indices are taken modulo $N$."
       ],
       [
-        "Record deficits $\\varphi,\\psi$ and displacement $\\Delta$",
-        "Consecutive record deficits satisfy $\\varphi>\\psi$ and $\\Delta=\\varphi-\\psi$. The non-singleton return case has $1\\le\\Delta<\\varphi$."
+        "Record deficits $\\varphi,\\psi$ and their difference $\\Delta$",
+        "Consecutive record deficits satisfy $\\varphi>\\psi$ and $\\Delta=\\varphi-\\psi$. When the record with deficit $\\varphi$ has a successor, $1\\le\\Delta<\\varphi$."
       ],
       [
         "Return times $q,h$ and heights $H_j$",
@@ -239,8 +239,8 @@
         "$N$ is the least realising order, also the polygon's vertex count. Multiplication sends $v_i$ to the side ending at $v_{i+\\kappa}$; vertex indices are taken modulo $N$."
       ],
       [
-        "Record deficits $\\varphi,\\psi$ and displacement $\\Delta$",
-        "Consecutive record deficits satisfy $\\varphi>\\psi$ and $\\Delta=\\varphi-\\psi$. The non-singleton return case has $1\\le\\Delta<\\varphi$."
+        "Record deficits $\\varphi,\\psi$ and their difference $\\Delta$",
+        "Consecutive record deficits satisfy $\\varphi>\\psi$ and $\\Delta=\\varphi-\\psi$. When the record with deficit $\\varphi$ has a successor, $1\\le\\Delta<\\varphi$."
       ],
       [
         "Return times $q,h$ and heights $H_j$",

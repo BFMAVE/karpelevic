@@ -8,7 +8,7 @@ import { ReaderTheoremPreview } from "../components/proof/ReaderTheoremPreview";
 import { ReaderFigureFrame } from "../components/proof/ReaderFigureFrame";
 
 export const metadata = createPageMetadata({ title: "Background for the proof reader", description: "Basic analysis and linear algebra reminders, with a map of where the proof teaches its additional tools.", pathname: "/prerequisites/" });
-const revised = getPageTimestamp(["app/prerequisites/page.tsx", "app/components/proof/WeightedAverageFigure.tsx", "app/components/proof/ReaderLearningRoutes.tsx", "app/components/proof/ReaderTheoremPreview.tsx", "public/weighted-average.js", "public/reader-learning.js", "app/globals.css"]);
+const revised = getPageTimestamp(["app/prerequisites/page.tsx", "app/components/proof/WeightedAverageFigure.tsx", "app/components/proof/ReaderLearningRoutes.tsx", "app/components/proof/ReaderTheoremPreview.tsx", "app/components/proof/ReaderOrderComparison.tsx", "public/weighted-average.js", "public/reader-learning.js", "app/globals.css"]);
 const basics = [
   ["Complex numbers as points", "Write z=x+iy. Its absolute value is its distance from zero. Multiplication by ρeⁱθ rotates through θ and multiplies distances by ρ. Conjugation x−iy reflects in the real axis. Angles are measured in radians.", "Topic I uses this picture to interpret an eigenvector."],
   ["Matrices and eigenvectors", "An eigenvector v is a nonzero column satisfying Av=λv. Similarity S⁻¹AS changes coordinates and preserves eigenvalues. The determinant det(λI−A) vanishes exactly at eigenvalues. In the plane, det(u,v)=u₁v₂−u₂v₁ records signed area and which side of a line a point lies on.", "Topics I–II translate matrices into polygons. Topics IV and X use similarity and determinants."],
@@ -28,7 +28,7 @@ export default function BackgroundPage() {
     <a className="skip-link" href="#main-content">Skip to the background reminders</a>
     <SiteHeader current="proof" />
     <main className="proof-page reader-background" id="main-content" tabIndex={-1}>
-      <header><p className="kicker">Start learning</p><h1>Basic analysis and linear algebra are enough to begin</h1><p className="proof-deck">Begin with the theorem&apos;s picture, then choose an overview or the complete proof. The reader teaches its additional tools as they become necessary.</p><p><a href="#theorem-preview">See the theorem</a> · <a href="#reading-routes">Choose a route</a> · <a href="#background-reminders">Refresh the starting tools</a></p></header>
+      <header><p className="kicker">Start learning</p><h1>Basic analysis and linear algebra are enough to begin</h1><p className="proof-deck">Start with a cycle of a matrix. Its eigenvalues mark points on the unit circle. What happens between two of those points when we allow each row to take an average?</p><p><a href="#theorem-preview">See the theorem</a> · <a href="#reading-routes">Choose a route</a> · <a href="#background-reminders">Refresh the starting tools</a></p></header>
       <div className="reader-guide">
         <ReaderTheoremPreview />
         <ReaderLearningRoutes />

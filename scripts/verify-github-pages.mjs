@@ -32,6 +32,10 @@ for (const route of routes) {
   }
 }
 for (const [route, html] of pages) {
+  for (const [, url] of html.matchAll(/<img\b[^>]*\bsrc="([^"]*\/figures\/[^"]+)"/g)) {
+    assert.ok(url.startsWith("/karpelevic/figures/"), `${route}: figure outside Pages project: ${url}`);
+    await access(path.join(root, url.slice("/karpelevic/".length)));
+  }
   for (const match of html.matchAll(/href="(\/karpelevic\/[^"#]*)#([^"?]+)"/g)) {
     assert.ok(pages.get(match[1])?.includes(`id="${match[2]}"`), `${route}: unresolved link ${match[0]}`);
   }

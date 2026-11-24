@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 570 312" width="570" height="312" role="img" aria-labelledby="title desc">
+  <title id="title">Two polynomial roots in the first Farey sector</title>
+  <desc id="desc">The two roots lie inside the same sector measured from zero. Measured from two thirds, the solid factor makes an angle of sixty degrees and the dashed factor an angle of one hundred twenty degrees.</desc>
+  <rect width="100%" height="100%" fill="#fffdfa"/>
+  <g font-family="Georgia, serif" font-size="18" fill="#242e30">
+<path d="M 48.000 267.000 L 183.000 33.173 H 530 V 267 Z" fill="#eef4f2"/>
+    <path d="M 26 267 H 540 M 48 286 V 20" fill="none" stroke="#767d79" stroke-width="1.4"/>
+    <path d="M 48.000 267.000 L 183.000 33.173" fill="none" stroke="#798781" stroke-width="1.7" stroke-dasharray="7 5"/>
+    <text x="166" y="43" font-size="16" text-anchor="end">π/3 ray</text>
+    <path d="M 198.000 267.000 A 150 150 0 0 1 498.000 267.000" fill="none" stroke="#a3ada8" stroke-width="1.8"/>
+    <path d="M 48.000 267.000 L 423.000 137.096 M 48.000 267.000 L 273.000 137.096" fill="none" stroke="#9ba7a1" stroke-width="1.5"/>
+    <path d="M 348.000 267.000 L 423.000 137.096" fill="none" stroke="#126a68" stroke-width="3.4"/>
+    <path d="M 348.000 267.000 L 273.000 137.096" fill="none" stroke="#944b32" stroke-width="3.4" stroke-dasharray="8 4"/>
+    <path d="M 379.0 267.0 A 31 31 0 0 0 363.500 240.153" fill="none" stroke="#126a68" stroke-width="1.8"/>
+    <path d="M 396.0 267.0 A 48 48 0 0 0 324.000 225.431" fill="none" stroke="#944b32" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <circle cx="423.000" cy="137.096" r="5" fill="#126a68"/>
+    <rect x="268.500" y="132.596" width="9" height="9" fill="#944b32"/>
+    <circle cx="348.0" cy="267.0" r="4" fill="#293331"/>
+    <text x="435.000" y="134.096">z₁</text><text x="262.000" y="131.096" text-anchor="end">z₂</text>
+    <text x="46" y="291" text-anchor="end">0</text><text x="348.0" y="292" text-anchor="middle">2/3</text>
+    <text x="498" y="292" text-anchor="middle">1</text>
+  </g>
+</svg>

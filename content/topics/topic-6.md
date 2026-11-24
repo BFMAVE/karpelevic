@@ -1,23 +1,23 @@
 ### Why a return cannot skip a base
 
-The arithmetic in Topic V produced $\varphi$ base vertices, first-return heights $q$ or $q+h$, and a return permutation $\sigma(j)=j+\Delta$ modulo $\varphi$. Its parameters satisfy
+In the eight-vertex calculation of Topic V, base $1$ returns to the side ending at base $2$, and base $2$ returns to the side ending at base $1$. With seven bases, arithmetic alone would also allow a return that adds three to each base label. Then base $1$ would return on the side ending at base $4$. What property of a boundary eigenvalue rules out such a skip?
+
+Assume $N\ge4$ and $\varphi>\gcd(N,\kappa)$, the case in which the record for $\varphi$ has a successor. The first returns add $\Delta$ modulo $\varphi$ and take $q$ or $q+h$ steps, with
 
 $$
 q\varphi+h\Delta=N,\qquad1\le\Delta<\varphi,
 \qquad\gcd(\Delta,\varphi)=\gcd(N,\kappa).
 $$
 
-Here $N$ is the polygon's vertex count, $\kappa$ its contact-index shift, and $I=\{1,\ldots,\varphi\}$ its consecutive interior-contact indices. If $\Delta=1$, each first return lands on the side ending at the next base. If $\Delta>1$, it skips bases. This topic proves $\Delta=1$ whenever these return data apply.
+Suppose $\Delta>1$. Along the boundary there is space between a moving base and the side that receives its return. We use those intermediate vertices to adjust the side lines one at a time. Each has to pass through an already known contact. At the last side we can make the returning point fall strictly inside the polygon. Moving all the higher vertices along with their bases then preserves containment for the same map $F(x)=\zeta x$.
 
-The proof constructs a small deformation of the polygon while keeping the map $F(x)=\zeta x$ fixed. All vertex images will stay inside the new polygon, and one will become strictly interior. Topic II's contact theorem forbids that for **every** invariant polygon with at most $N$ vertices. The theorem's universal scope is essential: the deformed polygon need not minimise area or contact count.
-
-A side contact is an equality constraint: its image must remain on one particular line. Moving a base freely would generally break several such equalities. The construction moves a chain by solving those equalities one after another as line intersections. Only the final contact is left unconstrained. The projective calculation determines whether that one contact falls inward, while the tower arithmetic ensures that no other contact was accidentally broken.
+The contradiction uses the word *every* in Topic II. The deformed polygon still has $N$ vertices and is invariant under $F$, so even here each vertex image has to touch the boundary. Our construction would give a vertex whose image lies in the interior.
 
 ### Lesson 1: find the lines along which bases may move
 
 A supporting line touches a convex polygon while leaving it in one closed half-plane. A supporting linear functional is a linear function maximised on that touching part. A face is a vertex, a side, or the whole polygon. The smallest face containing a point is the vertex itself, its side if it lies strictly inside that side, or the whole polygon if it is interior.
 
-An invertible affine map is a map $x\mapsto Mx+a$ with invertible matrix $M$. If such a map sends $P$ into itself, it sends the smallest face at $x$ into the smallest face at its image. To verify the boundary case, take a supporting functional maximised at the image. Composing with the map gives an affine function maximised at $x$. If $x$ is inside a side, that function must be constant along the side: a nonconstant linear function on a segment cannot have a maximum away from its endpoints. Applying every supporting functional gives the face inclusion.
+An invertible affine map is a map $x\mapsto Mx+a$ with invertible matrix $M$. If such a map sends $P$ into itself, it sends the smallest face at $x$ into the smallest face at its image. To verify the boundary case, take a supporting functional maximised at the image. Composing with the map gives an affine function maximised at $x$. If $x$ is inside a side, that function is constant along the side. A nonconstant linear function reaches its maximum only at an endpoint. Applying every supporting functional gives the face inclusion.
 
 An invertible map preserves the dimension of a segment. Therefore the dimension of the smallest containing face cannot decrease. In particular, a point inside a side cannot become a vertex at a later iterate. Interior points also stay interior, since invertible maps send open sets to open sets.
 
@@ -27,7 +27,7 @@ $$
 F^tv_{i-1}=v_{i-1+t\kappa}\quad(0\le t\le r).
 $$
 
-At the first step, the assigned images of the two endpoints lie on successive half-open sides. For their joining segment to lie on one side, the first image must equal their shared corner. Repeating proves the statement. A point inside the image segment, together with the supporting-functional argument, ensures that the whole next side remains on the boundary for the remaining steps.
+At the first step, the assigned images of the two endpoints lie on successive half-open sides. For their joining segment to lie on one side, the first image has to equal their shared corner. Repeating proves the statement. A point inside the image segment, together with the supporting-functional argument, ensures that the whole next side remains on the boundary for the remaining steps.
 
 This gives lines along which bases can move. If base $v_j$, with $j\ge2$, first returns at time $H_j$ to a contact on side $E_{\sigma(j)}$, define
 
@@ -37,7 +37,7 @@ $$
 
 Here $\operatorname{aff}E$ means the full line containing the side. This preimage line supports $P$ at $v_j$. It touches no other point of $P$. Otherwise it would contain an incident side. One incident side would force $F^{H_j}v_j$ to be a vertex; the other would force the preceding base's image to remain a vertex. The heights from Topic V are $q$ on an initial block and $q+h$ on the final block, so $H_{j-1}\le H_j$. The preceding base has therefore already returned inside a side by time $H_j$, and face persistence prevents it from becoming a vertex during any extra steps. Both incident-side possibilities are impossible. Thus $L_j$ **exposes** $v_j$: its intersection with $P$ is the single point $v_j$. This height ordering handles the transition between short and tall towers.
 
-The first lesson supplies movement lines, rather than a finished deformation. A base moved along $L_j$ has its returning image on the required target line by definition of $F^{-H_j}$. We must still coordinate neighbouring bases so that their other contacts remain on their side lines. The next lesson shows how successive line intersections do that.
+The first lesson supplies movement lines, rather than a finished deformation. A base moved along $L_j$ has its returning image on the required target line by definition of $F^{-H_j}$. Each neighbouring base also has a contact to preserve. The next lesson shows how successive line intersections do that.
 
 ### Lesson 2: calculate one local motion before proving the general lemma
 
@@ -109,7 +109,7 @@ $$
 \tau\longmapsto\frac{a\tau+b}{d\tau+e},\qquad ae-bd\ne0.
 $$
 
-The letters $a,b,d,e$ here are real coefficients of this particular function, not the tower parameters. The formula follows by solving two linear equations for the intersection; their common denominator is linear in the starting coordinate $\tau$. The projection centre must lie on neither the source nor the target line. Projection back from the same centre is then its inverse. A zero denominator describes a parallel intersection, represented by a point at infinity. Adding that one direction-point to each line makes the projection invertible everywhere. This is what “projective” means in this proof: compositions of these ordinary line-intersection maps.
+The letters $a,b,d,e$ here are real coefficients of this particular function, not the tower parameters. The formula follows by solving two linear equations for the intersection; their common denominator is linear in the starting coordinate $\tau$. The projection centre lies off both lines. Projection back from the same centre is then its inverse. A zero denominator describes a parallel intersection, represented by a point at infinity. Adding that one direction-point to each line makes the projection invertible everywhere. This is what “projective” means in this proof: compositions of these ordinary line-intersection maps.
 
 #### Why the long comparison has a definite direction
 
@@ -121,7 +121,12 @@ $$
 \Pi(X_0)\in(C_{\ell+1},C_\ell).
 $$
 
-Its proof uses coordinates with positive denominators, so segments and interior points retain their meanings. To construct them, choose nonnegative affine functions $\eta_0,\eta_1$ on $P$ vanishing only at $X_0,X_{\ell+1}$ respectively. Each can be obtained by adding the two side inequalities incident to its vertex. Their sum $\eta=\eta_0+\eta_1$ is strictly positive throughout $P$. With a third independent affine function $\psi$, use coordinates
+In our four-vertex calculation the point was $1/7$ of the way from $C_3$ to $C_2$. Its precise position played no role in choosing an inward motion. We need the intersection to lie **strictly between** the two contacts. We can test this without computing the intersection itself. Draw the line through the final projected vertex and the fixed endpoint. If the two contacts are strictly on opposite sides of this line, their segment crosses it in its interior. The calculation below proves those signs for any chain satisfying the hypotheses.
+
+<details class="reader-proof-derivation">
+<summary>Prove the opposite signs for a chain of any length</summary>
+
+Choose nonnegative affine functions $\eta_0,\eta_1$ on $P$ vanishing only at $X_0,X_{\ell+1}$ respectively. Each can be obtained by adding the two side inequalities incident to its vertex. Their sum $\eta=\eta_0+\eta_1$ is strictly positive throughout $P$. With a third independent affine function $\psi$, use coordinates
 
 $$
 \left(\frac{\eta_0(x)}{\eta(x)},\frac{\psi(x)}{\eta(x)}\right).
@@ -244,7 +249,9 @@ $$
 G(C_{\ell+1})=-\gamma_{\ell+1}Hr(D-s)<0.
 $$
 
-The signs follow from $0<r<g$, $H>0$, and $d<s<D$. Since $G$ is affine, it crosses zero strictly between the contacts. The final projection therefore lands inside their segment. This establishes the comparison without assuming that an arbitrary projection chain stays finite in the original coordinates.
+The signs follow from $0<r<g$, $H>0$, and $d<s<D$. Since $G$ is affine, it crosses zero strictly between the contacts. The final projection therefore lands inside their segment. We calculated the signs in coordinates in which the required intersections are finite. The two contacts and the open segment between them correspond to the original ones.
+
+</details>
 
 #### The closing motion can have zero first derivative
 
@@ -266,13 +273,13 @@ $$
 t-u(t)=\frac{(1-a)t+bt^2}{1+bt}.
 $$
 
-If $a\ne1$, choose the sign of $t$ so that $(1-a)t>0$. If $a=1$, the inequality $0<u(1)<1$ forces $b>0$; then every sufficiently small nonzero $t$ gives positive inward displacement, of second order. This handles a possible zero first derivative. The comparison at parameter one selects a direction near zero; the construction need not remain finite at every intermediate parameter.
+If $a\ne1$, choose the sign of $t$ so that $(1-a)t>0$. If $a=1$, the inequality $0<u(1)<1$ forces $b>0$; then every sufficiently small nonzero $t$ places the return inward by a quantity of second order. This handles a possible zero first derivative. The comparison at parameter one selects a direction near zero; the construction need not remain finite at every intermediate parameter.
 
 As a check, $u(t)=t/(1+t)$ has derivative one at zero, yet $t-u(t)=t^2/(1+t)>0$ near zero for both nonzero signs. A purely first-order argument would miss the usable motion.
 
 ### Lesson 3: preserve the polygon’s complete contact network
 
-The local projection lemma opens one contact inward. To obtain a contradiction, all other returns must remain admissible in the *same* deformed polygon. Keep the following four cases in view while choosing the chain and transporting its vertices:
+The local projection lemma opens one contact inward. To obtain a contradiction, we have to keep all the other returns inside that same deformed polygon. Keep the following four cases in view while choosing the chain and transporting its vertices:
 
 | Returning base source | Target side line | How its constraint is handled |
 | --- | --- | --- |
@@ -294,7 +301,13 @@ $$
 \quad0\le i\le\ell+1.
 $$
 
-Here $\varepsilon$ specifies the boundary direction. Its length satisfies $2\le\ell\le(\varphi+1)/2$. Because $N\ge4$, at least one polygon side lies outside it. The exposing lines already constructed supply its $L_i$. Keep $X_0,X_{\ell+1}$ fixed. If $X_0=v_0$, that vertex remains fixed because $v_0=F^hv_\varphi$ and base $v_\varphi$ is fixed. The tower identities give $F^aX_0=C_\ell$ and $F^aX_1=C_{\ell+1}$, so $S$ is the restriction of $F^a$ to $\Lambda$.
+Here $\varepsilon$ specifies the boundary direction. Its length satisfies $2\le\ell\le(\varphi+1)/2$. The chain uses $\ell+1$ sides. If $\varphi<N$, then $\ell+1\le\varphi<N$, since a skipped return requires $\varphi\ge3$. If $\varphi=N$, then $\ell+1\le(N+3)/2<N$ for $N\ge4$. In both cases at least one side lies outside the chain. The exposing lines already constructed supply its $L_i$. Keep $X_0,X_{\ell+1}$ fixed. If $X_0=v_0$, that vertex remains fixed because $v_0=F^hv_\varphi$ and base $v_\varphi$ is fixed. On the forward chain the last two sides are $E_\Delta,E_{\Delta+1}$. We have $F^qv_0=F^{q+h}v_\varphi=c_\Delta$ and $F^qv_1=c_{\Delta+1}$. On the reverse chain the side from $X_{i-1}$ to $X_i$ is $E_{\varphi-i+1}$, so the last two sides are $E_\Delta,E_{\Delta-1}$. Both starting vertices $v_\varphi,v_{\varphi-1}$ have height $q+h$, and their images after that many steps are $c_\Delta,c_{\Delta-1}$. In either direction $F^aX_0=C_\ell$ and $F^aX_1=C_{\ell+1}$. Hence the restriction of $F^a$ to the initial line $\Lambda$ gives exactly the map $S$ used in Lesson 2.
+
+Take the reverse chain with $N=17$, $\varphi=7$, $\kappa=5$, $\Delta=5$, $q=1$ and $h=2$. The identity $7+2\cdot5=17$ counts its vertices. The chain starts at $v_7$ and passes through $v_6,v_5,v_4$ to $v_3$. A side is always named by its ending vertex **in the original cyclic order**. Thus the step from $v_6$ to $v_5$ follows $E_6=[v_5,v_6]$ backwards. Its contact is $c_6$, supplied by the fixed base $v_1$ in one step since $1+5=6$. Between the two moved vertices we have a fixed point through which their side line can turn.
+
+The moving bases $6,5,4$ return to sides $4,3,2$, respectively. For instance the tower from $6$ follows $v_6\to v_{11}\to v_{16}\to c_4$ since $16+5\equiv4\pmod{17}$. The last side of the chain is $E_4$, so this return is the one we intend to move inside. At the other end, $F^3v_7=c_5$. Hence $F^3$ sends the initial line through $v_7,v_6$ onto the line through $c_5,c_4$, in exactly the order the local calculation requires.
+
+![Read the chain from left to right, in decreasing vertex order. The diamonds on $E_6$ and $E_5$ mark the fixed contacts about which those lines can turn. The closing return from $v_6$ has to move inward across $E_4$. The drawing shows index order.](/figures/bachelor-foundations-reverse-chain.svg)
 
 The index check ensures that this local construction respects all return relations. Let $M$ be the moving base indices, let $k_*$ be the return side of the first moving base, and let $\varepsilon=1$ for the forward chain and $-1$ for the backward chain. Modulo $\varphi$, its moving-base return sides and internal chain sides are
 
@@ -303,7 +316,7 @@ $$
 J=\{k_*-\varepsilon r:1\le r<\ell\}.
 $$
 
-They are disjoint: an intersection would require $\varphi$ to divide $t+r$, but $1\le t+r\le2\ell-2<\varphi$. Thus the contacts on internal moving sides come from fixed bases. The projection construction keeps those fixed contacts on their moving sides. Every moving base except the first lies on its exposing preimage line, so its return stays on its fixed target side line. The first moving base alone has both a moving source and the final moving target side; the closing comparison puts its return strictly inward.
+They are disjoint: an intersection would require $\varphi$ to divide $t+r$, but $1\le t+r\le2\ell-2<\varphi$. Thus the contacts on internal moving sides come from fixed bases. The projection construction keeps those fixed contacts on their moving sides. Every moving base except the first lies on its exposing preimage line, so its return stays on its fixed target side line. The first side line can also receive a moving return. When $2\Delta=\varphi+1$, for instance, base $\Delta$ returns to side $1$. Its endpoint $X_1$ slides along the original first line, so that line stays fixed. Among the moving bases only the first returns to a line that moves, namely the final side line. The closing comparison puts its return strictly inward.
 
 The following index example displays the three kinds of contact that this argument separates. Take the hypothetical skipped-return data
 
@@ -317,17 +330,8 @@ They satisfy $q\varphi+h\Delta=17$. Here $\ell=3$, the moving bases are $M=\{1,2
 
 Propagate each moved base $\widehat v_j$ along its entire tower by setting the new level-$t$ vertex equal to $F^t\widehat v_j$ for $0\le t<H_j$. Topic V's partition ensures this defines every vertex exactly once. All intermediate vertex-to-vertex identities are preserved. The remaining returns either stay on their corresponding side lines or are unchanged. In the displayed example the moving towers are $(1,11)$, $(2,12)$, and $(3,13)$, each of height two; the fixed towers contain every other index. A moved base therefore carries its subsequent vertices with it, rather than leaving incompatible copies behind.
 
-The final admissibility check uses two kinds of reasoning:
-
-| Exact because of the construction | Retained for a sufficiently small motion |
-| --- | --- |
-| Each tower level is $F^t$ of its moved base, so intermediate vertex identities hold. | Distinctness and all strict supporting-side inequalities preserve the convex $N$-gon and its cyclic order. |
-| Projection intersections keep fixed contacts on moving side lines. | Those contacts remain between their moving endpoints. |
-| Exposing preimage lines keep moving returns on fixed target lines. | Those returns remain in the relative interiors of their side segments. |
-| The closing lemma proves positive inward defect for arbitrarily small nonzero parameters. | The exceptional image remains strictly inside every other supporting half-plane, where it already had positive slack. |
-
-The closing defect is a newly proved inequality. Continuity alone cannot open it inward, since its original value is zero; continuity preserves the strict inequalities that were already present.
+What remains is to pass from lines to segments and from one inward inequality to membership in the whole polygon. We kept the required line incidences by construction. We obtained a *new* strict inequality at the closing side from $t-u(t)>0$. At every other side the closing contact already had positive distance to the line before the motion.
 
 For sufficiently small motion, the vertices remain distinct and form a convex $N$-gon in the same cyclic order. This follows from finitely many strict side inequalities: each original side has every other vertex strictly on its inward side, and these inequalities persist by continuity. Every preserved contact remains strictly between its endpoints. The exceptional contact starts inside its final side and strictly inside every other supporting half-plane. Moving it inward across the final line therefore makes it strictly interior to the new $N$-gon $Q$.
 
-All vertex images belong to $Q$, so convexity gives $FQ\subseteq Q$. One vertex image is interior. The universal contact theorem contradicts that conclusion, proving $\Delta=1$. Since $\gcd(\Delta,\varphi)=\gcd(N,\kappa)$, this case also forces $\gcd(N,\kappa)=1$.
+Every vertex image belongs to $Q$, so convexity gives $FQ\subseteq Q$. Which vertex has an interior image? Start at the moving base $X_1$ and follow its tower up to the last vertex before the return. Applying $F$ once more gives $F^aX_1(\tau)$, the point placed strictly inside $Q$ by the closing calculation; here $\tau$ is the small motion parameter. The universal contact theorem contradicts that conclusion, proving $\Delta=1$. Since $\gcd(\Delta,\varphi)=\gcd(N,\kappa)$, this case also forces $\gcd(N,\kappa)=1$.

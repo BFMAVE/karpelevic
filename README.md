@@ -9,10 +9,18 @@ revised 23 September 2026. The reader uses the supplied teaching manuscript,
 source. These versions have the same mathematical proof route; their titles
 and exposition differ.
 
-All fourteen topics were rewritten on 1 October 2026 for readers with basic
-analysis and linear algebra. Topics I–XII build and complete the theorem;
-Topic XIII treats gauges and asymptotics; Topic XIV gives the eight-state
-worked example and retains the order-selectable boundary explorer.
+The November 2026 revision reworks all fourteen guided chapters for readers
+with undergraduate linear algebra and calculus. The overview asks how far
+seven and eight states can reach at angle `5π/7`. Worked examples follow the
+same ray from a polygon contact through its turn count to a matrix that
+attains the boundary. The chapter drawings include both directions of a
+skipped return and two polynomial roots in one sector with different turn
+counts. The formal passages and their numbering follow the linked teaching
+manuscript.
+
+Topics I–XII build and complete the theorem. Topic XIII treats gauges and
+asymptotics. Topic XIV gives the eight-state worked example and the
+order-selectable boundary explorer.
 
 The illustrated edition restores visible topic introductions (imported
 results, new definitions, strategy, and payoff), chapter and section

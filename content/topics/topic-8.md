@@ -1,6 +1,6 @@
 ### Turning a Farey interval into one candidate radius
 
-The geometric work in Topics IV–VII has reduced an extremal eigenvalue to a product and an exact count of its turns. This topic constructs the radius that this information will eventually force. At this stage it is a candidate: Topic IX proves the upper bound, Topic X constructs a matrix attaining it, and Topics XI–XII identify it with the complete boundary.
+Consider a point on the segment from $1$ to $i$. If it lies on the ray making an angle of $\pi/4$, its real and imaginary parts agree, so it is $(1+i)/2$. Its radius is $1/\sqrt2$. The first arc at order four has precisely this shape. On a more complicated arc we should still be able to fix a ray and solve for just one real number. Which equation takes the place of intersecting that segment with the ray?
 
 ::: {.reader-sharpness-ledger}
 **Upper bound — still to prove.** Topic IX will show that a product with the specified real winding cannot have radius beyond this candidate. Topic XI will compare candidates at different orders.
@@ -8,7 +8,7 @@ The geometric work in Topics IV–VII has reduced an extremal eigenvalue to a pr
 **Attainment — still to prove.** Topic X will build a stochastic matrix whose eigenvalue reaches the candidate. A scalar solution alone establishes neither of these two claims.
 :::
 
-Fixing the angle means fixing a ray from the origin. The only unknown position on that ray is its distance from zero. A complex polynomial can have several roots, including roots on other rays or on another winding branch. We therefore look for an equation in the one positive real variable $\rho$, together with the turn count that identifies which polynomial branch it represents. An increasing scalar left side will turn this selection into a checkable crossing of one target value.
+The polygon supplies its data at the least order that realises a point. For the moment we can perform the following construction at any given order. We write $K_n(\theta)$ for the distance it assigns to the ray of angle $\theta$.
 
 Let $n\ge4$ be the required matrix order. Write $F_n$ for the increasing list of reduced fractions in $[0,1]$ with denominator at most $n$. Fix an angle $\theta$ in the upper half-plane and set $x=\theta/(2\pi)$. Suppose $x$ lies strictly between consecutive fractions $f<g$ in $F_n\cap[0,1/2]$. Consecutive fractions $p/q<r/s$ satisfy
 
@@ -18,7 +18,7 @@ $$
 
 The first identity says that their separation is exactly $1/(qs)$. The second says that their mediant, $(p+r)/(q+s)$, has denominator too large to appear at order $n$.
 
-The product formula is oriented so that its left endpoint has the smaller denominator. If that is already true, set $p/q=f$, $r/s=g$, and $y=x$. Otherwise set $p/q=1-g$, $r/s=1-f$, and $y=1-x$. Reflection reverses the endpoints and corresponds to complex conjugation: $e^{2\pi iy}=e^{-i\theta}$. It preserves the modulus we want to determine. In both cases $q<s$ and $p/q<y<r/s$. The reflected interval may lie in the lower half-plane; its fractional coordinate $y$ remains in $[0,1]$.
+The product formula is oriented so that its left endpoint has the smaller denominator. If that is already true, set $p/q=f$, $r/s=g$, and $y=x$. Otherwise set $p/q=1-g$, $r/s=1-f$, and $y=1-x$. Reflection reverses the endpoints because conjugation gives $e^{2\pi iy}=e^{-i\theta}$. It preserves the modulus we want to determine. In both cases $q<s$ and $p/q<y<r/s$. The reflected interval then lies in the lower half-plane. Its fractional coordinate $y$ remains in $[0,1]$.
 
 Set $\vartheta=2\pi y$, and introduce
 
@@ -41,7 +41,7 @@ A=\frac{2\pi t}{s},\qquad
 B=\frac{2\pi(1-t)}{mq}.
 $$
 
-For these order-$n$ data, $s,mq\ge3$. Consequently $A+B<\pi$. All the sines appearing below are positive; this is a domain condition that makes the comparison work.
+Both denominators in these last expressions are at least three. Indeed, $q<s$ and $q+s>n\ge4$ give $s\ge3$. For $q=1$ we have $mq=n$, for $q=2$ we have $m\ge2$, and for $q\ge3$ already $mq\ge3$. Hence $A+B$ is a convex combination of $2\pi/s$ and $2\pi/(mq)$, each at most $2\pi/3$. In particular $A$, $B$ and $A+B$ have positive sines.
 
 Here is an example where reflection is necessary. At order five, take $x=7/24$ in $(1/4,1/3)$. The smaller denominator is on the right. Set $y=1-x=17/24$ and use the reflected interval $(2/3,3/4)$. Now $p=2$, $q=3$, $r=3$, $s=4$, and $m=\lfloor5/3\rfloor=1$. The determinant is $3\cdot3-2\cdot4=1$, and the denominator sum is seven, larger than five. The position is $t=1/2$, giving
 
@@ -49,7 +49,7 @@ $$
 A=\frac\pi4,\qquad B=\frac\pi3,\qquad A+B=\frac{7\pi}{12}<\pi.
 $$
 
-The original angle is $\theta=7\pi/12$, whereas the oriented angle is $\vartheta=17\pi/12$. We keep $K_5(\theta)$ as the radius of the original upper ray; only the coordinates used in its equation have been reflected. Although $e^{i\vartheta}$ is in the lower half-plane, its third power has argument $A=\pi/4$ after subtracting the full turns. That upper-half-plane factor is what the convexity calculation in Topic IX needs. The two angle budgets in the diagram add to less than a half-turn.
+The original angle is $\theta=7\pi/12$, whereas the oriented angle is $\vartheta=17\pi/12$. We keep $K_5(\theta)$ as the radius of the original upper ray; only the coordinates used in its equation have been reflected. Although $e^{i\vartheta}$ is in the lower half-plane, its third power has argument $A=\pi/4$ after subtracting the full turns. That upper-half-plane factor is what the convexity calculation in Topic IX needs. In the drawing, follow the endpoint $1/3$ as it becomes $2/3$. The marked angle is halfway across the interval on either side of the drawing.
 
 <!-- reader-figure:late-extra -->
 
@@ -61,23 +61,16 @@ $$
 \rho^{s/m}\sin A+\rho^q\sin B=\sin(A+B).
 $$
 
-Fractional powers cause no ambiguity: $\rho$ is a positive real number. The left side is a continuous, strictly increasing function of $\rho$. At zero it is zero, whereas the right side is positive. At one the left side exceeds the right side because
+All powers are real powers of a positive number. The left side is a continuous, strictly increasing function of $\rho$. At zero it is zero, whereas the right side is positive. At one the left side exceeds the right side because
 
 $$
 \sin A+\sin B-\sin(A+B)
 =4\sin(A/2)\sin(B/2)\sin((A+B)/2)>0.
 $$
 
-The intermediate value theorem gives a solution between zero and one; strict increase proves uniqueness. Bisection therefore computes the candidate reliably: if the left side is too small, increase the radius; if too large, decrease it.
+The intermediate value theorem now gives a solution between zero and one. Strict increase gives uniqueness and a way to compute it. If the left side is too small at the midpoint of a trial interval, retain the upper half. Otherwise retain the lower half.
 
-For a first calculation, take order four and the interval $(0/1,1/4)$ at $\theta=\pi/4$. Then $q=1$, $s=m=4$, and $A=B=\pi/4$. Both powers in the equation are just $\rho$, so it reduces to
-
-$$
-\rho\left(\frac1{\sqrt2}+\frac1{\sqrt2}\right)=1,
-\qquad \rho=\frac1{\sqrt2}.
-$$
-
-The candidate point is $\rho e^{i\pi/4}=(1+i)/2$. This example explains the equation's role: it locates where a prescribed ray meets an arc. The order-seven example below requires fractional powers, but the same increasing-function argument gives its unique answer without solving a polynomial by hand.
+Return to the ray through $(1+i)/2$. At order four its interval is $(0/1,1/4)$, so $q=1$, $s=m=4$, and $A=B=\pi/4$. Substituting gives $2\rho\sin(\pi/4)=1$. We recover the radius $1/\sqrt2$ that we read off the segment.
 
 The candidate changes continuously with the angle. To see this without assuming a differentiability theorem, take angles tending to an interior angle and any convergent subsequence of their radii in $[0,1]$. Passing to the limit in the equation gives the equation at the limiting angle. Its unique solution determines every possible subsequential limit, so the whole sequence converges.
 
@@ -93,10 +86,11 @@ z^e\prod_{j=1}^{m}(z^q-\beta_j)=\prod_{j=1}^{m}(1-\beta_j),
 e\vartheta+\sum_{j=1}^{m}u_j=2\pi(r-mp).
 $$
 
-The second equality holds in the real numbers. A complex product by itself determines the sum only modulo $2\pi$, and may have other polynomial roots. The polygon's continued angles specify the actual turn count. In particular the average factor argument is
+Divide the real equality by $m$ and collect the two terms involving $\vartheta$. Each of the $m$ factors then has the same share of the total *on average*, even while their weights differ.
 
 $$
-\frac1m\sum_j u_j=A+B.
+\frac1m\sum_j u_j
+=\frac{2\pi r-s\vartheta}{m}+q\vartheta-2\pi p=B+A.
 $$
 
 If $e<0$, the product is used for $z\ne0$, or written without negative powers as $z^s\prod_j(z^q-\beta_j)=z^{mq}\prod_j(1-\beta_j)$. Clearing powers does not make zero a valid root of the original nonzero product.
@@ -109,9 +103,9 @@ $$
 \rho^{5/2}\sin(\pi/7)+\rho^3\sin(3\pi/14)=\sin(5\pi/14).
 $$
 
-Why can there be only one radius? Both powers are positive and both sine coefficients are positive, so the left side strictly increases. Notice also that $e=5-6=-1$. This is a legitimate example of the negative-exponent case, not a reason to change the Farey data.
+Here $e=5-6=-1$ in the product. Its radius equation still has the two positive exponents $5/2$ and $3$.
 
-The numerical crossing is $\rho\approx0.94430114$. Substituting a smaller trial radius makes the left side too small; substituting a larger one makes it too large. The following plot is computed from this actual scalar function, rather than an assumed curve shape.
+Try two values before finding the zero to many places. At $\rho=0.94$ the left side minus the target is approximately $-0.0114$. At $0.95$ it is about $0.0153$. Strict increase places the root between these two radii. Repeating the check on successively smaller intervals gives $K_7(5\pi/7)\approx0.94430114$. In the plot, the horizontal coordinate is this trial radius.
 
 <!-- reader-figure:late -->
 

@@ -1,8 +1,8 @@
 ### Turn the contact pattern into return paths
 
-The map $T(x)=\zeta x$ sends vertex $v_j$ to the contact on side $j+\kappa$, with vertex indices modulo $N$. Interior contacts occur exactly on sides indexed by $I=\{1,\ldots,\varphi\}$. If a destination index is outside $I$, its contact coefficient $\beta$ is zero and the image is the ending vertex itself.
+At a vertex $v_j$ there are two possibilities for the next iterate. The contact on side $j+\kappa$ either equals the vertex $v_{j+\kappa}$ or lies between the endpoints of that side. Topic IV arranged the sides of the second kind in one block, $I=\{1,\ldots,\varphi\}$. All indices on the polygon are read modulo $N$.
 
-Start at a base vertex $v_j$ with $j\in I$. Follow the indices $j,j+\kappa,j+2\kappa,\ldots$ until they first return to $I$. Before that return, all images are vertices. The final image is a point inside a side. The list before the return is called a tower, and its number of vertices is its height. This is a finite list of iterates, not an additional geometric object.
+Choose a vertex whose index belongs to $I$ and call it a **base**. Add $\kappa$ to its index until the next label in $I$ occurs. Until the last step, the actual orbit under $T(x)=\zeta x$ visits precisely the vertices in this list. At the last step it reaches a point inside the side with the new label. The vertices visited before that step form a **tower**. Its height counts the applications of $T$ needed to reach the open side.
 
 With $N=8$, $\kappa=3$ and $I=\{1,2\}$, the paths are
 
@@ -42,19 +42,25 @@ $$
 
 The two right-hand terms answer different questions: where are we among the eight labels, and how many complete label wraps preceded that position?
 
-| Time $t$ | Unreduced $3t$ | Full label wraps | Residue $[3t]_8$ | Strict record? | What this entry supplies |
-| --- | --- | --- | --- | --- | --- |
-| $0$ | $0$ | $0$ | $0$ | Initial | Deficit $8$. |
-| $1$ | $3$ | $0$ | $3$ | Yes | Deficit $5$. |
-| $2$ | $6$ | $0$ | $6$ | Yes | Deficit $2$, the chosen number of bases. |
-| $3$ | $9$ | $1$ | $1$ | No | The label wrapped once; it does not exceed record $6$. |
-| $4$ | $12$ | $1$ | $4$ | No | Still below record $6$. |
-| $5$ | $15$ | $1$ | $7$ | Yes | The next deficit is $1$. |
-| $6$ | $18$ | $2$ | $2$ | No | Arithmetic continues, but there is no new record. |
-| $7$ | $21$ | $2$ | $5$ | No | The last distinct residue of this period. |
-| $8$ | $24$ | $3$ | $0$ | No | The residue cycle restarts. |
+| Time $t$ | $3t$ | Full label wraps | Residue $[3t]_8$ |
+| --- | --- | --- | --- |
+| $0$ | $0$ | $0$ | **0** |
+| $1$ | $3$ | $0$ | **3** |
+| $2$ | $6$ | $0$ | **6** |
+| $3$ | $9$ | $1$ | $1$ |
+| $4$ | $12$ | $1$ | $4$ |
+| $5$ | $15$ | $1$ | **7** |
+| $6$ | $18$ | $2$ | $2$ |
+| $7$ | $21$ | $2$ | $5$ |
+| $8$ | $24$ | $3$ | $0$ |
 
-This table follows the **index permutation**. It must not be read as $\zeta^tv_0=v_{[3t]_8}$ after a side-interior contact has occurred: that equality holds only along vertex-to-vertex portions of a path. At a positive record time $h$, the second coordinate used below is $b=\lceil3h/8\rceil$, the next multiple of eight above $3h$. It is one more than the completed-wrap counter, because a positive record has nonzero residue. Thus the records at times two and five give $(h,b)=(2,1)$ and $(5,2)$.
+The records are shown in bold. At time two the deficit is $8-6=2$. At time five it falls to $8-7=1$.
+
+![Each diamond stands higher than all earlier residues. At time two the distance from the record $6$ to the level $8$ is $2$. This is the record belonging to the two bases.](/figures/bachelor-foundations-records.svg)
+
+The table follows the **index permutation**, which continues for as many steps as we please. The geometric identity $\zeta^tv_0=v_{[3t]_8}$ holds only while the orbit has visited vertices at every step. At a positive record time $h$, the second coordinate used below is $b=\lceil3h/8\rceil$, the next multiple of eight above $3h$. It is one more than the completed-wrap counter, because a positive record has nonzero residue. Thus the records at times two and five give $(h,b)=(2,1)$ and $(5,2)$.
+
+There is a short way to see what the pair can tell us. From the first base we need a net gain of one label to reach the second. Three additions of $3$ give $9=8+1$, so three steps will do it. From the second base to the first we need a net change of $-1$. Five additions give $15=16-1$, so five steps will do it. The numbers of full turns of the *labels* in these two calculations differ. Later, when we multiply complex contact equations, the analogous distinction for *angles* will tell us which argument the product has accumulated.
 
 The integer basis will turn these two counters into return heights. Its job is to prove that the two displayed towers partition all eight vertices, rather than merely proposing two plausible paths.
 
@@ -90,9 +96,14 @@ Here $q=h'-h>0$ and $0<\Delta<\nu$. The determinant $qb-ph$ is the signed area o
 
 Why introduce a second coordinate $b$ when the residues are one-dimensional? Reducing $h\kappa$ modulo $N$ forgets how many multiples of $N$ were crossed. The pair $(h,b)$ retains that information. Its determinant relates elapsed time to the change in the remaining gap, and the identity $q\nu+h\Delta=N$ will count exactly how many vertices the towers contain.
 
-Why must it be one? A record vector has coprime coordinates. If both were divisible by $g>1$, dividing by $g$ would yield an earlier positive time with smaller deficit, contradicting the record. The initial vector $(0,1)$ is also coprime. Using this coprimality, an integer vector complementary to $V$ can be found with determinant one, by Bézout's identity: coprime integers have an integer linear combination equal to one.
+What forces the determinant to equal one? A record vector has coprime coordinates. If both were divisible by $g>1$, dividing by $g$ would yield an earlier positive time with smaller deficit, contradicting the record. The initial vector $(0,1)$ is also coprime. Using this coprimality, an integer vector complementary to $V$ can be found with determinant one, by Bézout's identity: coprime integers have an integer linear combination equal to one.
 
-Here is a proof of that integer tool. For integers $h,b$ not both zero, take the smallest positive integer $d=hr+bs$ obtainable with integer coefficients $r,s$. Such a positive combination exists. Divide $h$ by $d$ with remainder $0\le z<d$. That remainder is also an integer combination of $h,b$, so minimality forces $z=0$. The same argument gives $d\mid b$. Conversely, every common divisor of $h,b$ divides $d$. Hence $d=\gcd(h,b)$; for a coprime pair it is one. This supplies the complementary vector using ordinary integer division.
+<details class="reader-proof-derivation">
+<summary>Recover Bézout’s identity by division with remainder</summary>
+
+For integers $h,b$ not both zero, take the smallest positive integer $d=hr+bs$ obtainable with integer coefficients $r,s$. Such a positive combination exists. Divide $h$ by $d$ with remainder $0\le z<d$. That remainder is also an integer combination of $h,b$, so minimality forces $z=0$. The same argument gives $d\mid b$. Conversely, every common divisor of $h,b$ divides $d$. Hence $d=\gcd(h,b)$; for a coprime pair it is one. We can therefore choose $r,s$ below with $hr+bs=1$.
+
+</details>
 
 Here is the integer-vector construction. Set $D=-\det(V,V')=(h'\nu-h\nu')/N$, which is a positive integer. Choose integers $r,s$ with $hr+bs=1$, and put $W_0=(s,-r)$, so $\det(V,W_0)=-1$. These vectors form an integer basis, and we can write $V'=aV+DW_0$ for an integer $a$. Since $V'$ has coprime coordinates, $\gcd(a,D)=1$.
 
@@ -103,9 +114,9 @@ W=\left\lceil\frac aD\right\rceil V+W_0
 =\left(\left\lceil\frac aD\right\rceil-\frac aD\right)V+\frac1D V'
 $$
 
-has the form $W=\xi V+\eta V'$ with $0<\xi,\eta<1$. If $\xi+\eta>1$, replace $W$ by $V+V'-W$; its two coefficients remain positive and now sum to less than one. The time coordinate is $0<\xi h+\eta h'<h'$, and its deficit is $0<\xi\nu+\eta\nu'<\nu$. This integer time would improve the old record before the next record, a contradiction. Therefore $D=1$, which gives $\det(U,V)=1$.
+has the form $W=\xi V+\eta V'$ with $0<\xi,\eta<1$. If $\xi+\eta>1$, replace $W$ by $V+V'-W$; its two coefficients remain positive and now sum to less than one. Thus we can take $\xi+\eta\le1$. The time coordinate is $0<\xi h+\eta h'<h'$, because $h<h'$ and $\xi,\eta>0$. Its deficit is $0<\xi\nu+\eta\nu'<\nu$, because $\nu'<\nu$. Calling these two integers $t$ and $d$, we have $t\kappa\equiv-d\pmod N$ and $0<d<\nu\le N$. Its residue $N-d$ really does exceed $N-\nu$. This integer time would improve the old record before the next record, a contradiction. Therefore $D=1$, which gives $\det(U,V)=1$.
 
-For a concrete check of the rounding contradiction, consider $N=17$ and $\kappa=3$. The residues at times two and five are six and fifteen, so $V=(2,1)$ and $V'=(5,1)$ are both records, with deficits eleven and two. They cannot be consecutive: $-\det(V,V')=3$. Choose $W_0=(1,0)$, so $V'=V+3W_0$. The displayed rounding rule gives $W=V+W_0=(3,1)$, hence $W=(2/3)V+(1/3)V'$. Its time is three and its deficit is eight. It is an intervening better record, exactly the obstruction the general proof finds whenever the determinant exceeds one.
+For a concrete check of the rounding contradiction, consider $N=17$ and $\kappa=3$. The residues at times two and five are six and fifteen, so $V=(2,1)$ and $V'=(5,1)$ are both records, with deficits eleven and two. They cannot be consecutive: $-\det(V,V')=3$. Choose $W_0=(1,0)$, so $V'=V+3W_0$. The displayed rounding rule gives $W=V+W_0=(3,1)$, hence $W=(2/3)V+(1/3)V'$. Its time is three and its deficit is eight. The residue at time three already improves on the one at time two, before time five is reached.
 
 The two equations involving $L$ follow by subtraction. Expanding the determinant gives $q\nu+h\Delta=N$. Finally, because $U,V$ form an integer basis, the possible values of $L$ are all integer combinations of $\Delta,\nu$. By definition they are also all integer combinations of $\kappa,N$. Their positive greatest common divisors are therefore equal.
 
@@ -161,4 +172,4 @@ $$
 
 The tower starting at $\varphi$ reaches $v_0=v_N$ after $h$ steps and its return contact $c_\Delta$ after another $q$. Therefore $\zeta^hv_\varphi=v_0$ and $\zeta^qv_0=c_\Delta$. These powers and their real angle changes will become the closing relation in Topic VII.
 
-At this point a first return advances by $\Delta$ among the bases. If $\Delta>1$, it skips intervening bases. Arithmetic permits this; Topic VI uses extremal polygon geometry to rule it out. The case $\varphi=\delta$ has no next record and is handled separately in Topic VII.
+At this point a first return advances by $\Delta$ among the bases. If $\Delta>1$, it passes over at least one base. Arithmetic permits this; Topic VI uses extremal polygon geometry to rule it out. The case $\varphi=\delta$ has no next record and is handled separately in Topic VII.

@@ -41,7 +41,7 @@ export const earlyOrientations: Record<number, TopicOrientation> = {
   },
   3: {
     imports: [
-      { term: "Universal vertex and side contact", from: 2, anchor: "thm:saturation", use: "Know that every image lies on the boundary and no side is missed, even after a permitted cut." },
+      { term: "Universal vertex and side contact", from: 2, anchor: "thm:saturation", use: "After a permitted cut, every vertex image still lies on the boundary and each side receives a contact." },
       { term: "Least realising order", from: 2, anchor: "thm:saturation", use: "Prevent a cut or a limit from producing an invariant polygon with fewer than N vertices." },
       { term: "Zero is interior", from: 1, use: "Order vertices by angles and ensure each side spans less than half a turn." },
     ],

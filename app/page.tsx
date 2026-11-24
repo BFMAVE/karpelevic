@@ -160,8 +160,8 @@ export default function Home() {
             <div className="reading-column">
               <p>{homeContent.invariantPolygon}</p>
               <div className="display-equation">
-                <math display="block" aria-label="The matrix equation A z equals lambda z gives the geometric inclusion lambda P is a subset of P.">
-                  <mrow><mi>A</mi><mi>z</mi><mo>=</mo><mi>λ</mi><mi>z</mi><mo>⇒</mo><mi>λ</mi><mi>P</mi><mo>⊆</mo><mi>P</mi></mrow>
+                <math display="block" aria-label="The eigenvector equation A v equals lambda v gives the inclusion lambda P is a subset of P.">
+                  <mrow><mi>A</mi><mi>v</mi><mo>=</mo><mi>λ</mi><mi>v</mi><mo>⇒</mo><mi>λ</mi><mi>P</mi><mo>⊆</mo><mi>P</mi></mrow>
                 </math>
               </div>
               <PrerequisitePlate slug="invariant-polygons" />
@@ -174,7 +174,7 @@ export default function Home() {
             <header className="section-heading">
               <p className="section-number">III</p>
               <p className="section-label">The route through the proof</p>
-              <h2 id="proof-route-heading">Three ideas hold the argument together</h2>
+              <h2 id="proof-route-heading">How a polygon determines a boundary point</h2>
             </header>
             <div className="reading-column">
               {homeContent.proofOrientation.map((step) => (

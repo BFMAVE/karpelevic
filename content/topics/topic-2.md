@@ -1,14 +1,12 @@
 ### An extremal eigenvalue has no room to move outward
 
-Fix a nonreal number $\zeta=\rho e^{i\theta_\zeta}$ with $0<\rho<1$, choosing its argument representative $0<\theta_\zeta<2\pi$. We study it under two assumptions. First, $N$ is the least number of vertices of a polygon invariant under $Tz=\zeta z$. By Topic I, $N$ is also its least realizing stochastic-matrix order. Second, no $t\zeta$ with $t>1$ has an invariant polygon with at most $N$ vertices. This is **radial extremality**: increasing the modulus without changing the angle costs more vertices. If we later conjugate $\zeta$, its chosen argument becomes $2\pi-\theta_\zeta$.
+Choose the outermost eigenvalue on a ray in $\Theta_n$ and call it $\zeta=\rho e^{i\theta_\zeta}$. We consider the nonreal case with $0<\rho<1$ and choose $0<\theta_\zeta<2\pi$. Draw a polygon $P$ for which $TP\subseteq P$, where $Tx=\zeta x$. If the whole image $TP$ lies in the interior of $P$, we can increase $\rho$ a little. There are finitely many vertices, and each image has a positive distance to the boundary. Moving all of them outward by less than the smallest of these distances still gives an invariant polygon. This contradicts the choice of $\zeta$.
 
-These assumptions hold when we choose a maximal eigenvalue on a ray in $\Theta_n$ and let $N\le n$ be its least realizing order. Indeed, an outward realization of order at most $N$ would also be one of order $n$ after padding. We do not assume that $N=n$. That distinction is why the independent order comparison in Topic XI is necessary.
+Now suppose only **one** image lies inside. A second image may already touch a side. Enlarging both images about zero could carry the second one out of the polygon immediately. How can we use the room around the first image? We will turn that room into a choice of strictly positive coefficients in one matrix row. Subtracting a little from that row and normalising the matrix will move the eigenvalue outward.
 
-For example, any three-state realization can be enlarged to eight states by appending a five-state identity block. Those extra states preserve its eigenvalue; they do not force its geometric proof to use eight vertices. Our reduction therefore starts at the least order $N$. Later we obtain a radius formula at that order and must compare it independently with the formula for the requested order $n$, before identifying either formula with the full boundary.
+Use $N$ for the least number of vertices that suffice for $\zeta$. Topic I identifies this number with the least order of a stochastic matrix having eigenvalue $\zeta$. A three-state realisation can be padded to order eight by adding five fixed states, so we keep $N$ distinct from the requested order $n$. Any realisation of $t\zeta$, $t>1$, with at most $N$ states could likewise be padded to $n$, contradicting our original choice. This property at order $N$ is **radial extremality**. Topic XI compares the eventual formulas at $N$ and $n$.
 
-Every invariant polygon under consideration has exactly $N$ vertices. The goal is stronger than finding a single well-chosen polygon: **for every such polygon, each vertex image lies on the boundary and every side meets the image polygon**. We will need this universal statement after changing vertices in Topics IV and VI.
-
-If the entire image polygon were strictly inside $P$, increasing $\rho$ a little would preserve containment by continuity. But that argument does not settle a mixed configuration: perhaps one vertex image is interior while all the others already touch the boundary. Those other contacts prevent a direct outward expansion of the same polygon. Deflation changes the realising matrix, and with it the polygon, so that even one interior vertex image becomes impossible at an extremal eigenvalue.
+We will prove that in **every** invariant polygon with at most $N$ vertices each vertex image is on the boundary and every side meets $TP$. This lets us apply the theorem again after changing the polygon. Reflection replaces $\zeta$ by $\bar\zeta$ and its chosen argument by $2\pi-\theta_\zeta$.
 
 ### Lesson 1: watch deflation move an eigenvalue outward
 
@@ -42,13 +40,16 @@ The chosen eigenvalue has moved from radius $1/2$ to radius $2/3$ at the same an
 
 A nonnegative matrix is **irreducible** if its directed graph has a path from every vertex to every other, drawing an arrow $i\to j$ when $a_{ij}>0$. For an irreducible stochastic matrix, a stationary probability row $\pi^T$ has strictly positive entries. More generally, an irreducible nonnegative matrix has a positive right eigenvector for its spectral radius and a positive left eigenvector; a positive left eigenvector identifies that radius. These are the precise Perron–Frobenius facts used below. They extend familiar eigenvector theory to matrices with nonnegative entries.
 
-These particular facts can also be obtained from Topic I's averaging argument. A stationary probability row of an irreducible stochastic matrix is positive: if its $j$th entry were zero, stationarity and nonnegative entries would force every incoming predecessor with a positive arrow to have zero stationary mass too. Connectivity propagates this to all states, contradicting total mass one.
+<details class="reader-proof-derivation">
+<summary>Derive the positive eigenvectors from stationary averages</summary>
 
-For the nonnegative irreducible matrix $B$ used below, we explicitly know $\pi^TB=r\pi^T$ with $\pi>0$ and $r>0$. Put $P_\pi=\operatorname{diag}(\pi_1,\ldots,\pi_N)$. The matrix $Q=r^{-1}P_\pi^{-1}B^TP_\pi$ is irreducible and row-stochastic, since $Q\mathbf1=\mathbf1$. Its stationary probability column $\mu>0$ satisfies $Q^T\mu=\mu$. Therefore $h=P_\pi^{-1}\mu>0$ satisfies $Bh=rh$. This proves the exact positive-eigenvector statement our deflation needs using only stationary averages and matrix algebra. Also $B$ is similar to $rQ^T$, so its spectral radius is $r$ by the unit-disk bound from Topic I.
+A stationary probability row of an irreducible stochastic matrix is positive. If $\pi_j=0$, then $0=\sum_i\pi_i a_{ij}$ forces $\pi_i=0$ for each predecessor $i$ with $a_{ij}>0$. Every vertex has a path to $j$, so all entries of $\pi$ would vanish. This contradicts $\sum_i\pi_i=1$.
+
+Below we have an irreducible nonnegative matrix $B$ and a strictly positive row with $\pi^TB=r\pi^T$, $r>0$. Write $P_\pi=\operatorname{diag}(\pi_1,\ldots,\pi_N)$ and put $Q=r^{-1}P_\pi^{-1}B^TP_\pi$. Since $B^T\pi=r\pi$, we get $Q\mathbf1=\mathbf1$. The new matrix is stochastic and irreducible. Topic I gives it a stationary row $\mu^T$, which is positive by the argument above. From $Q^T\mu=\mu$ it follows that $h=P_\pi^{-1}\mu$ satisfies $Bh=rh$ with $h>0$. Also $B$ is similar to $rQ^T$, whose spectral radius is $r$ by the unit-disk bound.
+
+</details>
 
 Any stochastic realization from an invariant $N$-gon is irreducible. If not, its graph has a nonempty proper set $I$ with no arrows leaving it. The submatrix on $I$ is stochastic and the corresponding coordinates of the polygon eigenvector still realize $\zeta$. Those coordinates are nonzero because zero is interior to the polygon. This would realize $\zeta$ with fewer than $N$ states.
-
-The graph language has a concrete matrix meaning: a set with no arrows leaving it has zero entries in columns outside the set. Its own rows still sum to one, so those rows can run independently as a smaller stochastic matrix. Least order excludes precisely this way of hiding the chosen eigenvalue in a smaller closed subsystem.
 
 ### Lower one eigenvalue and preserve the others
 
@@ -60,13 +61,17 @@ Then $\pi^TB=r\pi^T$. Since the pattern of positive entries is unchanged, $B$ re
 
 Why are the other eigenvalues preserved? The subspace $H=\{x:\pi^Tx=0\}$ is invariant under both matrices, and $Bx=Ax$ on $H$. The space splits as $H\oplus\operatorname{span}\{\mathbf1\}$. In a basis adapted to this splitting, $A$ and $B$ have the same block on $H$, with final diagonal entries $1$ and $r$. Their other eigenvalues, including algebraic multiplicities, agree.
 
-The subtraction acts only on vectors whose stationary weighted average is nonzero. Every eigenvector of an eigenvalue other than one has weighted average zero, since $\pi^TAv=\pi^Tv=\zeta\pi^Tv$. On those vectors the rank-one term vanishes. The block argument adds what an eigenvector calculation alone would miss: it also preserves algebraic multiplicities and covers matrices that cannot be diagonalised.
+For the one eigenvalue we are following, we can see the cancellation directly. Write $Av=\zeta v$. Then
+$$
+\pi^Tv=\pi^TAv=\zeta\pi^Tv.
+$$
+Since $\zeta\ne1$, we have $\pi^Tv=0$, so $Bv=Av=\zeta v$. The positive row provided room for the subtraction, and the stationary mean ensured that our chosen eigenvector survived it.
 
 Put $D=\operatorname{diag}(h_1,\ldots,h_N)$ and
 
 $$C=r^{-1}D^{-1}BD.$$
 
-Similarity by $D$ preserves eigenvalues, while division by $r$ enlarges the non-Perron ones. Also $C\mathbf1=r^{-1}D^{-1}Bh=\mathbf1$, so $C$ is stochastic. In particular it realizes $\zeta/r$, on the same ray and strictly farther from zero. Extremality forbids a positive row.
+Similarity by $D$ preserves the eigenvalues of $B$. Dividing by $r$ then multiplies each eigenvalue by $1/r$. Also $C\mathbf1=r^{-1}D^{-1}Bh=\mathbf1$, so $C$ is stochastic. In particular it realizes $\zeta/r$, on the same ray and strictly farther from zero. Extremality forbids a positive row.
 
 ::: {.reader-checkpoint #deflation-two-operations}
 **Distinguish the operations.** Suppose $Bv=\zeta v$ and $Bh=rh$ with $h>0$ and $0<r<1$. A student says: “The diagonal similarity $D^{-1}BD$ is already stochastic, and its chosen eigenvalue is $\zeta/r$.” Identify both errors. What are its row sums and chosen eigenvector, and what changes when we next divide by $r$?
@@ -91,13 +96,26 @@ Thus the similarity makes the row sums equal, but does not yet make them one or 
 </details>
 :::
 
+<details class="reader-proof-derivation">
+<summary>Calculate a normalisation when the row sums differ</summary>
+
+Return to the three-state matrix in Lesson 1. Subtract $\pi^T/4$ from the **first row only**. In units of $1/12$ the new matrix is
+
+$$
+12B=\begin{pmatrix}1&7&1\\2&2&8\\8&2&2\end{pmatrix}.
+$$
+
+Its row sums, after division by twelve, are $3/4,1,1$. Its column sums are all $11/12$, in agreement with $r=1-(1/4)(1/3)$. The vector $h=(65,82,76)^T$ satisfies $12Bh=11h$. For example, the first row gives $65+7\cdot82+76=715=11\cdot65$. Thus the first row of $D^{-1}BD$ sums to $715/(12\cdot65)=11/12$, and the other two sums equal $11/12$ by the same eigenvector identity. The choice of $D$ has removed the discrepancy between the row sums. Dividing by $11/12$ now carries the eigenvalue $\omega/2$ to $6\omega/11$.
+
+</details>
+
 ### An interior image would give exactly that forbidden row
 
 Let the polygon vertices be $v_1,\ldots,v_N$. If $\zeta v_i$ lies in the interior, choose $0<\eta<1/N$ small enough that
 
 $$w=\frac{\zeta v_i-\eta\sum_jv_j}{1-N\eta}\in P.$$
 
-This is possible because $w\to\zeta v_i$ as $\eta\to0$. Express $w$ as a convex combination of the vertices. Rearranging expresses $\zeta v_i$ with weight at least $\eta$ on every vertex. That makes row $i$ of the realizing matrix strictly positive, giving the contradiction just proved. Every vertex image must therefore lie on the boundary.
+This is possible because $w\to\zeta v_i$ as $\eta\to0$. Express $w$ as a convex combination of the vertices. Rearranging expresses $\zeta v_i$ with weight at least $\eta$ on every vertex. That makes row $i$ of the realizing matrix strictly positive, giving the contradiction just proved. Every vertex image therefore lies on the boundary.
 
 For a numerical picture, use the diamond with vertices $1,i,-1,-i$ from Topic I. The interior point $(1+i)/4$ is
 
@@ -137,7 +155,7 @@ It is bounded because $P$ contains a disk of some radius $r>0$ about zero: for n
 
 Let $a_i$ be the normal defining the original side from $v_{i-1}$ to $v_i$, so that $\langle a_i,v_{i-1}\rangle=\langle a_i,v_i\rangle=1$. The two endpoint vectors are linearly independent: their line does not pass through zero, since zero is interior to $P$. These two linear equations determine $a_i$ uniquely. If $a_i$ were a nontrivial average of two polar points, both points would have to satisfy both equalities; otherwise their average would be strictly below one. Uniqueness forces them both to be $a_i$. Thus $a_i$ is a polar vertex.
 
-Conversely, a polar vertex must have two linearly independent **active inequalities**, meaning inequalities attaining equality there. If the active endpoint vectors spanned at most one line, a small motion perpendicular to that line in both directions would keep all active equalities, and the finitely many strict inequalities would remain strict. The point would lie inside a polar segment and would not be a vertex. Two independent active original vertices lie on the supporting line $\langle a,x\rangle=1$; in a polygon they are the endpoints of one side. This identifies the polar vertex as its normal. The correspondence is therefore exact, and $P^\circ$ has $N$ vertices.
+Conversely, a polar vertex has two linearly independent **active inequalities**, meaning inequalities attaining equality there. If the active endpoint vectors spanned at most one line, a small motion perpendicular to that line in both directions would keep all active equalities, and the finitely many strict inequalities would remain strict. The point would lie inside a polar segment and would not be a vertex. Two independent active original vertices lie on the supporting line $\langle a,x\rangle=1$; in a polygon they are the endpoints of one side. This identifies the polar vertex as its normal. The correspondence is therefore exact, and $P^\circ$ has $N$ vertices.
 
 For the diamond from Topic I, the side endpoints $(1,0)$ and $(0,1)$ give the equations $a_x=1$ and $a_y=1$. They meet at the polar vertex $a=(1,1)$. The next figure displays the original side and these two active polar inequalities in their respective coordinate planes.
 
@@ -149,8 +167,6 @@ Conjugation preserves the two extremality assumptions. Apply the vertex-contact 
 
 ### Boundary averages use one face
 
-A supporting functional takes its maximum on a boundary face. If a convex combination with all weights positive attains that maximum, every point used must also attain it: averaging smaller values could not give the maximum. Thus a boundary average lies in one common face. In a polygon, it uses either one vertex or the two endpoints of one side. A **relative-interior contact** means an image strictly between those endpoints.
+A supporting functional takes its maximum on a boundary face. If a convex combination with all weights positive attains that maximum, each point given positive weight attains it. A single smaller value would lower the average. Thus a boundary average lies in one common face. In a polygon, it uses either one vertex or the two endpoints of one side. A **relative-interior contact** means an image strictly between those endpoints.
 
-Check why an interior image is different: it can be expressed with positive weights on every vertex after the small adjustment above. A side-interior point cannot do this, because vertices away from that side satisfy its supporting inequality strictly. This distinction drives both deflation and the contact arithmetic.
-
-We now know that every vertex image touches the boundary. Topic III counts which images touch vertices and which lie inside sides, then chooses a polygon whose contacts can be organized without losing extremality.
+At an interior point we can assign a little weight to every vertex. On a side all positive weight goes to its endpoints. In the next chapter we count how often both endpoints receive a positive weight.

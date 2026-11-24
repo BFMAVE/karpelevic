@@ -1,8 +1,10 @@
 ### Following one complete eight-state example
 
-This example lets us check the route from return paths to a product, from a product to a radius, and from that radius to a stochastic matrix and its actual invariant polygon. It is the eight-state example in the paper. The explorer starts at order eight to match it. A deliberate comparison with order seven will then show how a different Farey interval changes the radius at the same angle.
+On the ray of angle $5\pi/7$, how far can an eigenvalue of an eight-state stochastic matrix lie from zero? We will find the point, write down a matrix that reaches it and draw the eight coordinates of an eigenvector. A state will therefore have two pictures. In the transition graph it has a label and arrows to its successors. In the complex plane it is a point, and its successors tell us where multiplication by the eigenvalue sends that point.
 
-Suppose an invariant polygon has eight vertices $v_0,\ldots,v_7$ in cyclic order. Multiplication by $z=\rho e^{i\theta}$ sends each vertex into the assigned side $(v_{i+2},v_{i+3}]$, with indices modulo eight. Only two images are strictly inside sides: $c_1\in(v_0,v_1)$ and $c_2\in(v_1,v_2)$. Thus the order is $N=8$, the cyclic shift is $\kappa=3$, and the number of interior contacts is two.
+We first work out what the proposed contacts would force. Once we have a value of $z$, we can check the contacts by constructing the polygon.
+
+Suppose an invariant polygon has eight vertices $v_0,\ldots,v_7$ in cyclic order. Multiplication by $z=\rho e^{i\theta}$ sends each vertex into the assigned side $(v_{i+2},v_{i+3}]$, with indices modulo eight. Two images fall strictly between the endpoints of a side, namely $c_1\in(v_0,v_1)$ and $c_2\in(v_1,v_2)$. Thus the order is $N=8$, the cyclic shift is $\kappa=3$, and the number of interior contacts is two.
 
 The integer relation $3\cdot3-1\cdot8=1$ gives $p=1$, $q=3$, $r=3$, and $s=8$. The fractions $1/3<3/8$ are consecutive at order eight because their determinant is one and $3+8>8$. The product count is $m=\lfloor8/3\rfloor=2$, and the closing exponent is $e=8-2\cdot3=2$.
 
@@ -22,18 +24,18 @@ $$
 Each arrow is one multiplication by $z$. A return means reaching one of the assigned sides $(v_0,v_1]$ or $(v_1,v_2]$. The point $v_0$ is excluded from the first half-open side, so the second path has not yet returned when it reaches $v_0$. It takes two steps to reach $v_0$ and three more to reach $c_1$.
 
 ::: {.reader-checkpoint #eight-state-first-return}
-**Retrieval checkpoint.** Trace the second path without looking at its endpoint. Why is its first return time five rather than two, even though it reaches the familiar vertex $v_0$ after two multiplications?
+**Retrieval checkpoint.** Trace the second path without looking at its endpoint. The second image is $v_0$. Which side owns that endpoint, and after how many multiplications does the path first reach the target?
 
 <details>
 <summary>Hint</summary>
 
-Write out the target set using the two half-open sides. Membership in that set, rather than familiarity of a vertex label, defines a return.
+Write out the target set using the two half-open sides. The square bracket identifies the endpoint each side includes.
 
 </details>
 <details>
 <summary>Solution</summary>
 
-The target set is $(v_0,v_1]\cup(v_1,v_2]$, which excludes $v_0$. The two-step arrival at $v_0$ therefore continues through $v_3$ and $v_6$. Only the fifth image, $c_1\in(v_0,v_1)$, belongs to the target set. Counting $v_0$ as a return would discard the extra two-step closing relation and change the product's exponent.
+The target set is $(v_0,v_1]\cup(v_1,v_2]$, and $v_0$ belongs to the preceding side $(v_7,v_0]$. The two-step arrival at $v_0$ therefore continues through $v_3$ and $v_6$. Only the fifth image, $c_1\in(v_0,v_1)$, belongs to the target set. Counting $v_0$ as a return would discard the extra two-step closing relation and change the product's exponent.
 
 </details>
 :::
@@ -46,13 +48,13 @@ $$
 z^2v_2=v_0.
 $$
 
-Multiplying cancels the nonzero vertex coordinates:
+Now divide the first two relations by their positive weights and their starting coordinates, and multiply by the closing ratio. We obtain
 
 $$
 z^2(z^3-\beta_1)(z^3-\beta_2)=\alpha_1\alpha_2.
 $$
 
-The cancellation has a useful geometric meaning. Dividing the first two recurrences by their positive weights gives the ratios $v_1/v_0$ and $v_2/v_1$. Their product is $v_2/v_0$, so intermediate bases disappear. The closing relation $z^2v_2=v_0$ supplies its inverse. What survives is a condition on the rotation-dilation $z$ and the contact weights, independent of the scale at which the polygon was drawn.
+For example, the intermediate coordinate $v_1$ occurs once in a numerator and once in a denominator. In full, the three ratios are $v_1/v_0$, $v_2/v_1$ and $v_0/v_2$. Their product equals one regardless of the scale of the drawing. There is also information in the order in which the vertices occur.
 
 Let $\Phi_j$ be continued real vertex angles, with $\Phi_8=\Phi_0+2\pi$. Define $u_1=\Phi_1-\Phi_0$ and $u_2=\Phi_2-\Phi_1$. The closing path says $\Phi_2+2\theta=\Phi_8$. Hence
 
@@ -60,7 +62,7 @@ $$
 2\theta+u_1+u_2=2\pi.
 $$
 
-This is one full turn as a real equality, not merely a phase congruence. It matches $r-mp=3-2=1$.
+The right side records one full turn. Taking the argument of the product alone would leave an unknown multiple of $2\pi$ here. The path supplies the integer $r-mp=3-2=1$.
 
 ### Choosing and checking the radius
 
@@ -79,13 +81,27 @@ $$
 
 Its left side strictly increases from zero to two on $[0,1]$, and the right side lies strictly between zero and two. There is exactly one root $\rho\in(0,1)$, numerically about $0.97061308$.
 
-Set $\beta_1=\beta_2=\beta=1/(1+\rho)$ and $\alpha_1=\alpha_2=\alpha=\rho/(1+\rho)$. To check the factor identity directly, let $h=\pi/7$. Since $z^3=\rho^3e^{ih}$ and $\rho^3=2\cos h/(1+\rho)=2\beta\cos h$,
+How do we find the weights for the matrix? Equality in Topic IX's convexity bound makes the two weights equal. Write $\beta_1=\beta_2=\beta$ and $\alpha=1-\beta$. Put $h=\pi/7$. The two equal factor arguments have sum $2\pi-2\theta=4h$, so each is $2h$. The modulus of the product gives $|z^3-\beta|=\alpha/\rho$. Hence
+
+$$
+ z^3=\beta+\frac{\alpha}{\rho}e^{2ih}.
+$$
+
+The left side has argument $h$, exactly between $0$ and $2h$. Rotate the equation through $-h$ and take imaginary parts. The two terms on the right have imaginary parts $-\beta\sin h$ and $(\alpha/\rho)\sin h$, which cancel. We obtain $\beta=\alpha/\rho$. Together with $\alpha+\beta=1$ this gives
+
+$$
+\beta=\frac{1}{1+\rho},\qquad \alpha=\frac{\rho}{1+\rho}.
+$$
+
+![After rotation through $-h$, the first vector drops by $\beta\sin h$ and the second rises by $(\alpha/\rho)\sin h$. Their sum lies on the real axis.](/figures/bachelor-assembly-weights.svg)
+
+We can now check these weights directly. Since $z^3=\rho^3e^{ih}$ and $\rho^3=2\cos h/(1+\rho)=2\beta\cos h$,
 
 $$
 z^3-\beta=\beta(2\cos h\,e^{ih}-1)=\beta e^{2ih}.
 $$
 
-Thus both factor arguments are $2\pi/7$. The product's modulus is $\rho^2\beta^2=\alpha^2$, and its real total argument is $2(5\pi/7)+2(2\pi/7)=2\pi$. Both product requirements are checked.
+Thus both factor arguments are $2\pi/7$. The product's modulus is $\rho^2\beta^2=\alpha^2$, and its real total argument is $2(5\pi/7)+2(2\pi/7)=2\pi$.
 
 ### The matrix and its eigenvector
 
@@ -107,13 +123,13 @@ $$
 
 and define the remaining coordinates along each weight-one arrow by $v_j=zv_i$. Thus $v_3=z$, $v_6=z^2$, $v_4=zv_1$, $v_7=z^2v_1$, and $v_5=z^{-1}$. All six weight-one rows satisfy $Mv=zv$. Row six satisfies it because $\beta v_0+\alpha v_1=z^3=zv_6$. For row seven the product identity gives $(z^3-\beta)v_1=\alpha v_2$, hence $\beta v_1+\alpha v_2=z^3v_1=zv_7$. The vector is nonzero since $v_0=1$.
 
-Choosing $v_0=1$ fixes only the eigenvector's scale. The last deterministic path returns to it consistently because $zv_5=z\cdot z^{-1}=1$. The other coordinates then propagate forward along unit-weight arrows; only the two branching rows require the product recurrences. This is why all eight rows can be checked without calculating the roots of an eighth-degree determinant.
+For instance the last deterministic path closes because $zv_5=z\cdot z^{-1}=1$. Rows six and seven place a point strictly inside a side once we know that the two coordinates in each average are consecutive hull vertices.
 
-The rows prove stochastic realisation. It remains to verify that these particular eight coordinates are extreme vertices and have the contact arrangement used at the beginning. We can complete that geometric check for this specified angle; a general transition graph does not guarantee it.
+We can check this last condition from the coordinates themselves.
 
 ### Checking the actual invariant octagon
 
-Recall $h=\pi/7$. Since $\beta/\alpha=1/\rho$ and $z^3-\beta=\beta e^{2ih}$, the coordinates simplify to the following exact polar forms:
+Recall $h=\pi/7$. Since $\beta/\alpha=1/\rho$ and $z^3-\beta=\beta e^{2ih}$, the coordinates have the following polar forms.
 
 | Coordinate | Exact value | Continued angle |
 |---|---|---|
@@ -126,91 +142,44 @@ Recall $h=\pi/7$. Since $\beta/\alpha=1/\rho$ and $z^3-\beta=\beta e^{2ih}$, the
 | $v_6$ | $\rho^2e^{10ih}$ | $10h$ |
 | $v_7$ | $\rho e^{12ih}$ | $12h$ |
 
-The angles increase around one full turn, including the final gap $2h$ from $v_7$ to $v_0$. First this proves that the polygon has no crossings. Every side joins two positive-radius points whose angular separation is $h$ or $2h$, less than $\pi$. A point strictly inside that side is a positive combination of its two endpoint vectors, so its angle lies strictly between their angles. The interiors of nonadjacent sides occupy disjoint angular sectors. Adjacent sides meet only at their shared vertex. The resulting polygon is therefore simple.
+The angles increase around one full turn, including the final gap $2h$ from $v_7$ to $v_0$. First this proves that the polygon has no crossings. Every side joins two positive-radius points whose angular separation is $h$ or $2h$, less than $\pi$. A point strictly inside that side is a positive combination of its two endpoint vectors, so its angle lies strictly between their angles. The interiors of nonadjacent sides occupy disjoint angular sectors. Adjacent sides meet only at their shared vertex. The polygon is simple.
 
-Its different radii still require a convexity check. We will show that all eight corners turn strictly left. Identify complex points with their real and imaginary coordinates, and define
+The remaining danger is a dent. A list of points can be ordered perfectly well by angle and still have a point hidden inside the convex hull of the others. To rule this out, take three consecutive vertices. A positive determinant of the incoming and outgoing edge vectors says that the path turns left at the middle vertex. Since the polygon is simple and winds counterclockwise, a strict left turn at every vertex gives a convex polygon with eight genuine corners.
 
-$$
-\det((a,b),(c,d))=ad-bc,\qquad
-T_i=\det(v_{i+1}-v_i,\ v_{i+2}-v_i).
-$$
-
-Indices are modulo eight. If $e_i=v_{i+1}-v_i$ is the outgoing edge, then $v_{i+2}-v_i=e_i+e_{i+1}$ and $T_i=\det(e_i,e_{i+1})$. A positive determinant means that the next edge turns left through an angle between zero and $\pi$.
-
-Only two expressions are needed for all eight turns. For this calculation, put
+Write $r_j=|v_j|$ and let $a,b$ be the angular gaps on either side of $v_j$. The turn at $v_j$, divided by the positive number $r_{j-1}r_{j+1}$, is
 
 $$
-U=(\rho+\rho^{-1})\sin(2h)-\sin(3h),
-\qquad V=(1+\rho)(1-\rho^7)\sin h.
+\frac{r_j}{r_{j+1}}\sin a+\frac{r_j}{r_{j-1}}\sin b-\sin(a+b).
 $$
 
-Since $0<\rho<1$ and $0<h<\pi$, we have $V>0$. To check $U$, write $c=\cos h\in(0,1)$ and use the double- and triple-angle identities:
+The last term depends only on the two outer rays. How close can the middle point come to the origin before the turn ceases to be positive?
+
+The powers of $\rho$ in the table are $0,-1,-2,1,0,-1,2,1$. Neighbouring exponents differ by at most three, including the last and first. As $\rho<1$, each of the two radius ratios is at least $\rho^3$. The scalar equation gives a convenient lower bound,
 
 $$
-\frac{U}{\sin h}
-=2c(\rho+\rho^{-1})-4c^2+1
-\ge1+4c(1-c)>0.
+\rho^3=\frac{2\cos h}{1+\rho}>\cos h .
 $$
 
-The inequality uses $\rho+\rho^{-1}\ge2$, which follows from $(\rho-1)^2\ge0$ after division by $\rho>0$. Thus $U>0$ too. Expanding the determinants from the coordinate table gives
+Each gap is $h$ or $2h$. Thus $\cos a,\cos b\le\cos h$, and
 
-| $i$ | Consecutive-turn determinant $T_i$ |
-|---|---|
-| $0$ | $U/\rho^2$ |
-| $1$ | $(1+\rho)V/\rho$ |
-| $2$ | $V/\rho^2$ |
-| $3$ | $U$ |
-| $4$ | $\rho(1+\rho)V$ |
-| $5$ | $V$ |
-| $6$ | $\rho^2U$ |
-| $7$ | $U$ |
+$$
+\sin(a+b)=\sin a\cos b+\cos a\sin b
+\le\cos h\,(\sin a+\sin b).
+$$
 
-Every factor is positive, so every corner turns strictly left. A simple polygon is nonconvex only if it has an inward corner, with interior angle greater than $\pi$; such a corner would give a right turn. We have ruled those out, and strict positivity rules out flat corners too. Thus the polygon is strictly convex and all eight coordinates are genuine hull vertices. This argument uses the exact scalar equation, without assigning an exact value to the numerical radius.
+The sum of the two positive terms in the turn is strictly larger than this upper bound. This proves strict convexity at the exact root $\rho$.
 
 <details>
-<summary>Expand the turn calculations</summary>
+<summary>Derive the turn formula</summary>
 
-For polar coordinates $v_i=r_ie^{ik_i h}$, expanding the determinant gives
-
-$$
-T_i=r_ir_{i+1}\sin((k_{i+1}-k_i)h)
-+r_{i+1}r_{i+2}\sin((k_{i+2}-k_{i+1})h)
--r_ir_{i+2}\sin((k_{i+2}-k_i)h).
-$$
-
-Use continued angles $k_8=14$ and $k_9=16$ when wrapping around. For instance, $T_0=\rho^{-1}\sin(2h)+\rho^{-3}\sin(2h)-\rho^{-2}\sin(4h)=U/\rho^2$, because $\sin(4h)=\sin(3h)$ at $h=\pi/7$.
-
-The turn at $v_6$ has
+For two vectors at angles $\phi$ and $\psi$, their determinant is the product of their lengths times $\sin(\psi-\phi)$. Expand the turn by bilinearity,
 
 $$
-T_5=\rho^3\sin(2h)+\rho\sin h-\sin(3h).
+\det(v_j-v_{j-1},v_{j+1}-v_j)
+=\det(v_{j-1},v_j)+\det(v_j,v_{j+1})-\det(v_{j-1},v_{j+1}).
 $$
 
-Set $s_1=\sin h$. The scalar relation $2\cos h=\rho^3(1+\rho)$ gives
-
-$$
-\sin(2h)=\rho^3(1+\rho)s_1,\qquad
-\sin(3h)=[\rho^6(1+\rho)^2-1]s_1.
-$$
-
-Substitution reduces $T_5/s_1$ to
-
-$$
-\rho^6(1+\rho)+\rho-\rho^6(1+\rho)^2+1
-=(1+\rho)(1-\rho^7).
-$$
-
-Thus $T_5=V$; it is also the supporting-side determinant $D_{5,7}$ from the independent audit. The two turns with different prefactors expand as
-
-$$
-T_1=\rho^{-3}\sin(2h)+\rho^{-1}\sin h-\sin(3h),
-$$
-
-$$
-T_4=\rho^{-1}\sin(2h)+\rho\sin h-\rho^2\sin(3h).
-$$
-
-The same substitutions give $T_1=(1+\rho)V/\rho$ and $T_4=\rho(1+\rho)V$. The remaining turns are scaled copies of the $U$ or $V$ expressions shown in the table.
+The three angle differences are $a,b,a+b$. Dividing each term by $r_{j-1}r_{j+1}$ gives the displayed formula.
 
 </details>
 
@@ -229,7 +198,7 @@ $$
 
 because each continued angle gap is $h$ or $2h$, between zero and $\pi$. Thus zero is strictly inward from every supporting side.
 
-Now check the images. Six are the exact endpoint images already verified by the deterministic rows:
+Now compare the polygon with its image. The six rows with a single successor take a vertex exactly to the next vertex on its path,
 
 $$
 zv_0=v_3,\quad zv_1=v_4,\quad zv_2=v_5,\quad
@@ -244,7 +213,7 @@ zv_6=\rho^3e^{ih}=\beta v_0+\alpha v_1=c_1,
 zv_7=\rho^2e^{3ih}=\beta v_1+\alpha v_2=c_2.
 $$
 
-For the first equality of averages, use $1+e^{2ih}=2\cos h\,e^{ih}$ and $2\beta\cos h=\rho^3$. The second uses the same identity after multiplication by $\rho^{-1}e^{2ih}$. Since $0<\alpha,\beta<1$ and $\alpha+\beta=1$, the contacts are strictly inside their respective sides. There are exactly two interior contacts, and all eight assignments are now checked:
+For the first equality of averages, use $1+e^{2ih}=2\cos h\,e^{ih}$ and $2\beta\cos h=\rho^3$. The second uses the same identity after multiplication by $\rho^{-1}e^{2ih}$. Since $0<\alpha,\beta<1$ and $\alpha+\beta=1$, the contacts are strictly inside their respective sides. We can read off the assigned side of each image.
 
 | Source | Image | Assigned half-open side |
 |---|---|---|
@@ -257,13 +226,13 @@ For the first equality of averages, use $1+e^{2ih}=2\cos h\,e^{ih}$ and $2\beta\
 | $v_6$ | $c_1$ | $(v_0,v_1]$ |
 | $v_7$ | $c_2$ | $(v_1,v_2]$ |
 
-Each vertex image belongs to $P=\operatorname{conv}\{v_0,\ldots,v_7\}$. Linearity preserves convex combinations, so $zP\subseteq P$. The image polygon in the figure therefore closes the geometric thread with the actual coordinates, while the independently proved upper bound is still what establishes boundary maximality.
+Each vertex image belongs to $P=\operatorname{conv}\{v_0,\ldots,v_7\}$. Linearity preserves convex combinations, so $zP\subseteq P$. In the diagram select row six. Its two arrows end at states zero and one. The corresponding two corners of the octagon span the side containing the image of $v_6$. Select row zero for comparison. Its single arrow ends at state three, and its image lands exactly on $v_3$.
 
 <!-- reader-figure:late-extra -->
 
 ### Connecting this example to order seven
 
-At order seven, the angle fraction $5/14$ lies between $1/3$ and $2/5$, not between $1/3$ and $3/8$; the latter endpoint has denominator eight. The determinant $2\cdot3-1\cdot5=1$ and denominator sum $3+5=8>7$ verify the order-seven interval. Its data are $q=3$, $s=5$, $m=2$, $A=\pi/7$, and $B=3\pi/14$, so its candidate solves
+Removing the eighth state changes the interval containing $5/14$. The fraction $3/8$ drops out of the Farey list, leaving $1/3$ and $2/5$ as neighbours. The determinant $2\cdot3-1\cdot5=1$ and denominator sum $3+5=8>7$ verify the order-seven interval. Its data are $q=3$, $s=5$, $m=2$, $A=\pi/7$, and $B=3\pi/14$, so its candidate solves
 
 $$
 \rho^{5/2}\sin(\pi/7)+\rho^3\sin(3\pi/14)=\sin(5\pi/14).
@@ -271,6 +240,10 @@ $$
 
 Its closing exponent is $e=-1$. Clearing that negative power gives $z^5(z^3-\beta)^2=(1-\beta)^2z^6$ for the equal-weight construction, used with $z\ne0$.
 
-Why must the eight-state radius be larger at the chosen angle? Increasing the order from seven to eight inserts the mediant $(1+2)/(3+5)=3/8$. Topic XI proves a strict increase on both new open intervals. Since $5/14<3/8$, it is on the new left interval and $K_8(5\pi/7)>K_7(5\pi/7)$. The explorer and the source example therefore illustrate two adjacent stages of the same proof, while their matrices and scalar equations retain their respective orders.
+In the explorer, keep the ray fixed and change the order from seven to eight. The new Farey fraction is the mediant $(1+2)/(3+5)=3/8$. The ray stays to its left, where Topic XI gives strict increase. The two radii on the same ray are
 
-We can now verify the least realising order as well. Topic XII has identified $R_7=K_7$, so this point at radius $K_8>K_7$ cannot occur at order seven or any smaller order. Its eight-state matrix does realise it. Its least order is therefore exactly eight, consistent with the eight extreme coordinates and the structural setup used at the beginning.
+$$
+K_7(5\pi/7)\approx0.94430114,\qquad K_8(5\pi/7)\approx0.97061308 .
+$$
+
+We can now verify the least realising order as well. Topic XII has identified $R_7=K_7$, so this point at radius $K_8>K_7$ cannot occur at order seven or any smaller order. Its eight-state matrix does realise it. Eight is the least possible number of states for this boundary point.

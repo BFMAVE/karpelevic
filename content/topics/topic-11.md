@@ -1,8 +1,10 @@
 ### Comparing the candidates without assuming the theorem
 
-The product geometry uses the smallest order at which an eigenvalue can be realised. The website's boundary, however, is requested at a specified order $n$. We therefore need to prove that the scalar candidates increase with the order. Using the boundary theorem for this comparison would be circular: the comparison is one of the ingredients proving that theorem.
+Keep the ray through $e^{5\pi i/7}$ fixed and allow one more state. Its angular fraction $5/14$ lies between $1/3$ and $2/5$ at order seven. At order eight a new fraction $3/8$ lies between them. Thus the two equations for the radius use different endpoints. How can we be sure the new equation places its point at least as far from zero?
 
-Here is the obligation this comparison will discharge. Write $R_n(\theta)$ for the actual largest eigenvalue radius on the ray, and let $k\le n$ be the least realising order of a maximiser, as Topic XII will do. For $k\ge4$, the final proof needs the chain
+We can certainly keep a seven-state eigenvalue by adjoining an eighth, absorbing state. That argument concerns eigenvalues of matrices. We still have to compare the two numbers computed by the scalar equations.
+
+Write $R_n(\theta)$ for the actual largest eigenvalue radius on the ray, and let $k\le n$ be the least order of a matrix with eigenvalue $R_n(\theta)e^{i\theta}$. For $k\ge4$, the final proof needs the chain
 
 $$
 R_n(\theta)\le K_k(\theta)\le K_n(\theta)\le R_n(\theta).
@@ -14,7 +16,7 @@ $$
 | $K_k\le K_n$ | The independent scalar comparison proved in this topic |
 | $K_n\le R_n$ | The attaining matrix in Topic X |
 
-The actual regions do grow with matrix order: an identity block retains every eigenvalue of the smaller matrix. At this stage, however, $K_n$ is still a proposed radius, so nesting the actual regions cannot establish the middle comparison. If the least order is three, the triangle description provides a separate initial comparison with $K_4$ in Topic XII.
+The middle inequality is the one we shall establish. If the least order is three, Topic XII uses the triangle description for the initial comparison with $K_4$.
 
 ::: {.reader-checkpoint #independent-order-comparison}
 **Retrieval checkpoint.** Why does adjoining an identity block fail to prove $K_{n-1}\le K_n$ at this stage?
@@ -33,9 +35,21 @@ The identity block proves that the actual region $\Theta_{n-1}$ is contained in 
 </details>
 :::
 
-The practical test is a sign test. Insert the old radius into the new scalar equation. If its left side is still below the new target, the increasing function has not yet reached its zero, so the new radius must be larger. Most of the work below proves that sign without already knowing where either boundary lies. The figure near the worked comparison shows the actual old and new roots.
+Insert the old radius into the new equation. When the left side is below the target, strict increase puts the new equality radius farther out.
 
 When the order increases by one, the Farey interval containing an angle can change in only two ways. Its endpoints may stay the same, in which case its number of product factors may increase. Alternatively it is split by a mediant. Topic VIII defined the scalar candidate $K_n(\theta)$; below all angles remain strictly inside the intervals used in a scalar equation.
+
+There is a case where we can see the comparison without estimating a derivative. On the first interval at orders four and five the candidate follows the segment from $1$ to $e^{2\pi i/n}$. Here $q=1$ and $m=s=n$, so the factor identity in Topic X gives $z=\beta+(1-\beta)e^{2\pi i/n}$. The line containing the segment has unit normal in direction $\pi/n$ and passes through $1$, so its equation on our ray is
+$$
+\rho\cos(\theta-\pi/n)=\cos(\pi/n).
+$$
+For $\theta=\pi/4$, both segments meet the ray in their interiors. Dividing by $\cos(\pi/n)$ gives
+$$
+\rho=\frac{1}{\cos\theta+\tan(\pi/n)\sin\theta}.
+$$
+Increasing $n$ from four to five decreases $\tan(\pi/n)$, so the new segment meets the ray farther out. In the drawing, compare the two marked intersections along the *same ray*. For other intervals the arcs can bend. Evaluating the new equation at the old radius gives us a comparison that works there too.
+
+![Starting at zero on the ray of angle π/4, we meet the solid order-four segment at the circle, then the dashed order-five segment at the square. Both segments have endpoint 1.](/figures/bachelor-product-first-arcs.svg)
 
 ### Adding a product factor
 
@@ -45,7 +59,7 @@ $$
 A=q\vartheta-2\pi p,\qquad B_k=(2\pi r-s\vartheta)/k.
 $$
 
-For a positive integer $k$, let $\rho_k$ solve the scalar equation with $k$ factors. Assume $A+B_m<\pi$ for the old count $m$. Topic X supplies a common weight $\beta\in(0,1)$ at $z=\rho_me^{i\vartheta}$, with
+Assume $A+B_m<\pi$ for the old count $m$. Since $0<B_{m+1}<B_m$, both counts satisfy the angle condition of Topic VIII. For $k=m,m+1$, let $\rho_k$ be the unique positive solution of the scalar equation with $k$ factors. Topic X supplies a common weight $\beta\in(0,1)$ at $z=\rho_me^{i\vartheta}$, with
 
 $$
 z^{s-mq}(z^q-\beta)^m=(1-\beta)^m.
@@ -58,7 +72,7 @@ $$
 =2\pi[r-(m+1)p].
 $$
 
-We now have $m+1$ admissible factors with weights $(\beta,\ldots,\beta,0)$. They are unequal. Topic IX gives a strict scalar inequality at $\rho_m$ for the new count. Because the new scalar left side increases with the radius, its equality root must be larger: $\rho_{m+1}>\rho_m$.
+Both hypotheses of Topic IX hold for these $m+1$ factors. Their weights $(\beta,\ldots,\beta,0)$ differ because $\beta>0$. Strict convexity therefore puts the new scalar left side strictly below its target at $\rho_m$. The new root satisfies $\rho_{m+1}>\rho_m$.
 
 ### Why new fractions are mediants
 
@@ -68,7 +82,7 @@ $$
 (n,h)=(cn-dh)(b,a)+(bh-an)(d,c).
 $$
 
-Comparing first coordinates gives $n\ge b+d\ge n$. Both positive coefficients must therefore equal one, and $b+d=n$, $h=a+c$. The inserted fraction is exactly the mediant $\xi=(a+c)/(b+d)$. If no such fraction appears, the old interval stays unchanged.
+Comparing first coordinates gives $n\ge b+d\ge n$. Since $b,d$ are positive, equality forces both coefficients to be one, and $b+d=n$, $h=a+c$. The inserted fraction is exactly the mediant $\xi=(a+c)/(b+d)$. If no such fraction appears, the old interval stays unchanged.
 
 ### The calculus behind a split interval
 
@@ -97,7 +111,7 @@ m=\lfloor(n-1)/b\rfloor,\quad
 A=2\pi(by-a),\quad B=2\pi(c-dy)/m.
 $$
 
-The old scalar equation is $\rho^{d/m}\sin A+\rho^b\sin B=\sin(A+B)$. We evaluate it using $y$, without writing $K_{n-1}(2\pi y)$ at a lower-half-plane angle. The Farey calculation above gives $n=b+d$, so $mB-A=2\pi(a+c-ny)$. Its sign tells us which new interval contains $y$: it is positive on the left of $\xi$ and negative on the right. Reflection may interchange left and right in the original picture, but it leaves this radius comparison unchanged.
+The old scalar equation is $\rho^{d/m}\sin A+\rho^b\sin B=\sin(A+B)$. We evaluate it using $y$, without writing $K_{n-1}(2\pi y)$ at a lower-half-plane angle. The Farey calculation above gives $n=b+d$, so $mB-A=2\pi(a+c-ny)$. Its sign tells us which equation to use. It is positive on the left of $\xi$ and negative on the right. Reflection may interchange left and right in the original picture, but it leaves this radius comparison unchanged.
 
 Evaluate each new equation at the old radius. For the left interval, temporarily keep $m$ factors. For the right interval, reflection makes $d$ the smaller denominator and its required factor count is one. The right side minus the left side is respectively
 
@@ -118,7 +132,10 @@ D_L=\operatorname{Im}\bigl(e^{iB}G_m(e^{i\eta},u)\bigr),\qquad
 D_R=\frac{\sin A}{\sin B}\operatorname{Im}\bigl(e^{iB}G_m(1,ve^{iB})\bigr).
 $$
 
-For example, the left expression expands as
+<details>
+<summary>Check both reductions using the old scalar equation</summary>
+
+The left expression expands as
 
 $$
 \sin(B+(m-1)\eta)-u\sin(B+m\eta)
@@ -141,9 +158,11 @@ $$
 
 This is the imaginary part of $e^{iB}(1-ve^{-iB})(1-v^me^{imB})$; its extra term $-v$ is real. That product is $e^{iB}G_m(1,ve^{iB})$, which verifies the stated right reduction.
 
+</details>
+
 On the left, the segment from $u$ to $e^{i\eta}$ has arguments between zero and $\eta$. The rotated derivative $e^{iB}mz^{m-1}$ therefore has arguments between $B$ and $B+(m-1)\eta$, all in $(0,\pi)$ because $A+B<\pi$. Thus $D_L>0$. On the right, the segment from $ve^{iB}$ to one has arguments between zero and $B$. Its rotated derivative has arguments between $B$ and $mB$. Here $mB<A<\pi$, so $D_R>0$. Neither segment contains zero. The sign lemma applies also when $m=1$, when the derivative is constant.
 
-The right count is already correct. The left required count $\lfloor n/b\rfloor$ differs from $m$ only if $b$ divides $n$, equivalently $d$. Coprimality forces $b=1$. In that case the adding-factor argument increases the left root once more. Every new open subinterval therefore has a strictly larger candidate radius.
+The right subinterval uses the smaller denominator $d$. Since $b<d$ and $n=b+d$, its count is $\lfloor(b+d)/d\rfloor=1$, the count used in $D_R$. The left required count $\lfloor n/b\rfloor$ differs from $m$ only if $b$ divides $n$, equivalently $d$. Coprimality forces $b=1$. In that case the adding-factor argument increases the left root once more. Every new open subinterval therefore has a strictly larger candidate radius.
 
 ### An arithmetic check and the equality cases
 
@@ -151,7 +170,7 @@ Unchanged endpoints can still give a larger radius. Return to Topic VIII's refle
 
 From order seven to eight, the interval $(1/3,2/5)$ splits because $3+5=8$, inserting $3/8$. The angle fraction $5/14$ satisfies $1/3<5/14<3/8$, so the split comparison gives $K_8(5\pi/7)>K_7(5\pi/7)$.
 
-The computed radii are approximately $0.94430114$ and $0.97061308$. In this example the new equation simplifies to $\rho^4+\rho^3=2\cos(\pi/7)$. At the old radius its left side minus the target is about $-0.164763$. The new increasing function therefore needs a larger radius to reach zero. This numerical check illustrates the general sign proof; the proof covers every angle in the two new open intervals.
+The computed radii are approximately $0.94430114$ and $0.97061308$. In this example the new equation simplifies to $\rho^4+\rho^3=2\cos(\pi/7)$. At the old radius its left side minus the target is about $-0.164763$. The function $\rho\mapsto\rho^4+\rho^3-2\cos(\pi/7)$ is strictly increasing on $(0,1)$. Its negative sign at the old radius puts its zero farther out. This numerical check illustrates the general sign proof; the proof covers every angle in the two new open intervals.
 
 <!-- reader-figure:late -->
 

@@ -1,15 +1,15 @@
 ### Move a vertex without changing the eigenvalue
 
-Topic III gave a normalised invariant $N$-gon $P$, chosen first to minimise the number of images inside sides and then to minimise area. Its vertices are $v_i$ in counterclockwise order, with indices modulo $N$, and
+At a side with an interior contact, an orbit that has so far followed vertices reaches a genuine average of two different vertices. We would like all these transitions to occur on one run of consecutive sides. The polygon chosen in Topic III gives us some freedom to arrange this. It minimises the number of images in open sides, then minimises area after scaling its largest vertex radius to one.
+
+Write the contact on the side ending at $v_i$ as
 
 $$
 \zeta v_{i-\kappa}=c_i=\beta_i v_{i-1}+\alpha_i v_i,
 \qquad \alpha_i=1-\beta_i>0.
 $$
 
-The positive coefficients $\beta_i$ identify the sides with interior contacts. We will show that their indices form one consecutive run. The permitted move is concrete: if $\beta_i>0$ and $\beta_{i+1}=0$, replace $v_i$ by its side contact $c_i$. The proof must verify invariance and preserve the eigenvalue; a picture of a smaller polygon alone does not do that.
-
-Think of following vertex images until a path reaches a point inside a side. Those points are the places where the motion stops being a permutation of vertices and becomes an average of two endpoints. Fewer such stopping places make the later path equations simpler. The operation below moves one stopping place along the index shift while retaining the same eigenvalue, so two stopping places cannot collide when the count has already been minimised.
+Suppose this contact is inside its side and the next contact is a vertex, so $\beta_i>0$ and $\beta_{i+1}=0$. Try replacing the corner $v_i$ by $c_i$. The smaller polygon has retained the image that previously landed on this side. But the moved corner has its own image under $\zeta$. Where does that image go? We will calculate it by changing one coordinate of the eigenvector. This gives a stochastic matrix for the smaller polygon and tells us exactly which contact has moved.
 
 ### Reversing stochastic factors
 
@@ -49,23 +49,19 @@ Right multiplication restores row $i$. The only other row that could change is r
 
 The new eigenvector has one moved vertex, so its convex hull $P'$ is invariant. It has at most $N$ vertices; least realising order forces exactly $N$. Topic II's universal contact theorem applies to $P'$ as well: every vertex image is on its boundary.
 
-The algebra and the geometry are two descriptions of the same replacement:
-
-| Check | Matrix description | Polygon description |
-| --- | --- | --- |
-| Fixed data | $A$ and $A'=SAS^{-1}$ have the same eigenvalue $\zeta$. | The multiplier $z\mapsto\zeta z$ is unchanged. |
-| Changed data | The eigenvector becomes $Sv$; only coordinate $i$ changes. | Corner $v_i$ moves to its known contact $c_i$. |
-| Admissibility | Reversing the stochastic factors keeps entries nonnegative and row sums one. | The new coordinate hull is invariant and has at most $N$ vertices. |
-| Vertex budget | Least realizing order excludes a smaller realization. | No coordinate can disappear from the extreme vertex list: $P'$ still has $N$ corners. |
-| Contact constraints | Universal saturation and the face rule remove any third positive coefficient in a changed row. | Every vertex image stays on a single vertex or side face. |
-
-The next calculation determines the new contact count; being a smaller-looking polygon is not enough to establish that count.
+The new corners remain in cyclic order, since $v_i$ moved along the preceding side. We can use the same side labels to count the contacts again.
 
 ### The contact theorem controls the changed row
 
-Set $j=i+\kappa$, modulo $N$. Reversing the factors changes one additional contact row. Before using geometry, that row can involve three consecutive vertices $v'_{j-2},v'_{j-1},v'_j$. The coefficients at the last two vertices are positive. Its image is on the boundary of $P'$.
+Put $j=i+\kappa$ and $t=\beta_i$. Before reversing the factors we copied coordinate $i$ in $\widehat B$. Moving $S_i(t)$ through the cyclic shift moves its row index from $i$ to $j$. Indeed $S_i(t)C^\kappa=C^\kappa S_j(t)$. The new averaging rows therefore come from $S_j(t)\widehat B$. Row $j$ now takes a fraction $t$ of the preceding row of $\widehat B$ and a fraction $1-t$ of its own. Apply it to the new vertex list $v'$. The three possible terms are
 
-A boundary point expressed as a convex combination can use positive weights only on one supporting face. Indeed, a linear functional maximal at the boundary point is at most that maximum on every vertex. A weighted average can attain the maximum only if each positive-weight vertex attains it. Two consecutive distinct vertices already determine the side; a third polygon vertex cannot lie on it. The coefficient at $v'_{j-2}$ must therefore vanish.
+$$
+t\widehat\beta_{j-1}v'_{j-2}
++\bigl(t\widehat\alpha_{j-1}+(1-t)\beta_j\bigr)v'_{j-1}
++(1-t)\alpha_jv'_j .
+$$
+
+A hat denotes the coefficient after replacing row $i$ by a copying row. Since $0<t<1$ and all endpoint coefficients $\widehat\alpha$ are positive, the last two vertices occur with positive weights. The sum is a boundary point by Topic II. A supporting functional reaches its maximum at this point, so each vertex with positive weight belongs to the same supporting line. The last two vertices already determine the side. Its line excludes $v'_{j-2}$, so the first coefficient is zero. We can now read off the coefficient at the ending vertex, $(1-t)\alpha_j=\alpha_i\alpha_j$.
 
 Consequently the new contacts retain the same two-endpoint form, with
 
@@ -80,7 +76,7 @@ $$
 w_i'=0,\qquad w_{i+\kappa}'=w_i+w_{i+\kappa}.
 $$
 
-For a permitted transfer in the selected polygon, take $\alpha_i=1/2$ and $\alpha_{i+\kappa}=1$. Their new values are $1$ and $1/2$: the positive weight $\log2$ moves from $i$ to $i+\kappa$, while the number of positive weights stays the same. Why must the target have weight zero? If instead $\alpha_{i+\kappa}=3/4$, the new coefficient would be $3/8$, with weight $-\log(3/8)=-\log(1/2)-\log(3/4)$. Two positive weights would merge into one, reducing the minimum contact count. Thus every permitted move in the selected polygon has a target that previously had weight zero.
+For a permitted transfer in the selected polygon, take $\alpha_i=1/2$ and $\alpha_{i+\kappa}=1$. Their new values are $1$ and $1/2$: the positive weight $\log2$ moves from $i$ to $i+\kappa$, while the number of positive weights stays the same. Could the target already carry positive weight? If instead $\alpha_{i+\kappa}=3/4$, the new coefficient would be $3/8$, with weight $-\log(3/8)=-\log(1/2)-\log(3/4)$. Two positive weights would merge into one, reducing the minimum contact count. Thus every permitted move in the selected polygon has a target that previously had weight zero.
 
 <!-- reader-figure:early -->
 
@@ -98,18 +94,20 @@ $$
 
 The area argument is applied separately to the original polygon at each possible run ending. It does not assume that successive intermediate polygons continue to minimise area. Once one run has been obtained, later transfers preserve only the minimum contact count; that is enough to prevent a weight collision.
 
-There are consequently two different contradictions available. A collision reduces the contact count and is forbidden at every count-minimizing intermediate polygon. A proper inward replacement reduces area only when another radius-one vertex remains; that contradiction uses the original count-then-area choice. Keeping these hypotheses separate is what makes the later repeated weight walk legitimate.
+After a transfer, a rescaling may be needed to put a vertex back at radius one. Rescaling has no effect on the number of interior contacts, so the next transfer still cannot merge two positive weights.
 
-Let $\delta=\gcd(N,\kappa)$, the greatest common divisor. Adding $\kappa$ modulo $N$ runs through each residue class modulo $\delta$ separately. Every class must meet $I$, or it would consist entirely of vertex-to-vertex contacts and would give $v=\zeta^{N/\delta}v$. Hence $\varphi\ge\delta$.
+Let $\delta=\gcd(N,\kappa)$, the greatest common divisor. Adding $\kappa$ modulo $N$ runs through each residue class modulo $\delta$ separately. Every class meets $I$, or it would consist entirely of vertex-to-vertex contacts and would give $v=\zeta^{N/\delta}v$. Hence $\varphi\ge\delta$.
 
 ### A record in the cyclic shift
 
 For an integer $a$, write $[a]_N$ for its residue in $\{0,\ldots,N-1\}$. If $\varphi<N$, relabel the positive indices temporarily as $\{N-\varphi+1,\ldots,N-1\}\cup\{0\}$. Move the weight at zero repeatedly by the permitted operation. Before reaching the final block, its successive positions are $[t\kappa]_N<N-\varphi$, so its next ordinary neighbour has zero weight and the operation remains available.
 
-That block contains $\varphi\ge\delta$ consecutive residues, so it contains a multiple of $\delta$. The orbit of zero under addition by $\kappa$ visits every multiple of $\delta$, proving that an entrance occurs. The first entrance cannot land on an already positive index. It must land exactly at $N-\varphi$. There is therefore a time $h>0$ such that
+That block contains $\varphi\ge\delta$ consecutive residues, so it contains a multiple of $\delta$. The orbit of zero under addition by $\kappa$ visits every multiple of $\delta$, proving that an entrance occurs. The first entrance cannot land on an already positive index. It therefore lands exactly at $N-\varphi$. There is therefore a time $h>0$ such that
 
 $$
 [h\kappa]_N=N-\varphi,\qquad[t\kappa]_N<N-\varphi\quad(0\le t<h).
 $$
+
+Try this walk with $N=8$, $\kappa=3$ and two positive weights. In the temporary labelling they occupy $7$ and $0$. The weight at $0$ may move because label $1$ is empty. It lands on $3$. Its neighbour $4$ is empty too, so it moves again, arriving at $6$. This time its neighbour is the occupied label $7$. The walk stops. The residues visited were $0,3,6$, and $8-6=2$ recovers the number of occupied sides. Topic V will read the same three integers as information about return times.
 
 The new residue exceeds every earlier one: it is a strict record. For $\varphi=N$, the initial record at time zero has deficit $N$. Topic V translates these records into exact first-return paths; later moves require only the minimum contact count, so rescaling them never requires a new area-minimisation argument.

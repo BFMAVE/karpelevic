@@ -1,6 +1,6 @@
 ### Why equal contact weights give the largest radius
 
-The geometric product permits different weights on different sides. To prove a sharp bound, we must compare all those possibilities at once. Normalising each factor puts them on a single straight line. On that line, the logarithm of the distance from zero is a strictly convex function of the angle. Averaging then says precisely why equal weights are optimal.
+In the eight-state example the closing path gives $2\vartheta+u_1+u_2=2\pi$. Fix $\vartheta=5\pi/7$. Then the two angles can change only in opposite directions around their mean $2\pi/7$. What does moving them apart do to the two factor lengths? If we can answer that question on one line in the complex plane, the same argument will compare all $m$ factors.
 
 ::: {.reader-sharpness-ledger}
 **Upper bound — proved here.** Under the product and exact real phase hypotheses, no radius can exceed the scalar candidate. We will also identify exactly when equality holds.
@@ -8,7 +8,7 @@ The geometric product permits different weights on different sides. To prove a s
 **Attainment — next in Topic X.** Knowing the equality condition does not yet produce a stochastic matrix. That construction supplies the other half of sharpness.
 :::
 
-The product fixes a multiplicative constraint on factor sizes, while the real phase fixes an additive constraint on their angles. Taking logarithms makes the sizes additive too. We can then compare factors by moving their angles toward the same average. The straight-line normalisation is what makes their sizes a single function of those angles; without it, an average angle alone would not determine a size comparison.
+Two operations put the comparison within reach of ordinary calculus. Divide each factor by its positive weight $1-\beta_j$. Then take the logarithm of its length, so that multiplying lengths becomes adding real numbers.
 
 Use the oriented Farey data from Topic VIII: integers $p,r$, positive integers $q<s$ and $m$, and an angle $\vartheta$ between $2\pi p/q$ and $2\pi r/s$. Set
 
@@ -37,7 +37,11 @@ The denominator $1-\beta_j$ is positive, so normalisation leaves the argument un
 
 ### A line becomes a convex function
 
-The same linear equation holds for every $g_j$:
+Fix $w$. Where can the point $g(\beta)$ move? Write
+$$
+g(\beta)=1+\frac{w-1}{1-\beta}.
+$$
+At $\beta=0$ we are at $w$. Increasing $\beta$ moves the point farther from $1$ along the straight line through $1$ and $w$. For example, take $w=(1+i)/2$. One endpoint is $g(0)=w$, and $g(1/2)=i$ lies farther along the same line $x+y=1$. For general $w$, its equation follows from $a+cb=1$.
 
 $$
 \operatorname{Re}g_j+c\operatorname{Im}g_j
@@ -71,7 +75,7 @@ $$
 F''(u)=1+\left(\frac{\mathcal D'(u)}{\mathcal D(u)}\right)^2\ge1.
 $$
 
-The denominator is positive on the entire domain, so these derivatives are valid there. This proves strict convexity: bending the argument to either side of its average increases the average logarithmic size. We also need to distinguish weights. For a moving upper-half-plane point $X+iY$, its argument derivative is $(XY'-YX')/(X^2+Y^2)$. Here $X=a-\beta$ and $Y=b$, so $X'=-1$ and $Y'=0$. Thus
+The denominator is positive on the entire domain, so these derivatives are valid there. This proves strict convexity. For two angles, the point on the graph at their mean lies strictly below the chord whenever the angles differ. We also need to distinguish weights. For a moving upper-half-plane point $X+iY$, its argument derivative is $(XY'-YX')/(X^2+Y^2)$. Here $X=a-\beta$ and $Y=b$, so $X'=-1$ and $Y'=0$. Thus
 
 $$
 \frac{d}{d\beta}\operatorname{Arg}(w-\beta)
@@ -97,7 +101,9 @@ It decreases. With $\bar u=(u_1+u_2)/2$ and $u_1\ne u_2$, strict convexity gives
 </details>
 :::
 
-For a concrete line calculation, choose $w=(1+i)/2$. Then $a=b=1/2$, $c=1$, and the line is $\operatorname{Re}g+\operatorname{Im}g=1$. At weight zero the normalised factor is $g(0)=(1+i)/2$, with angle $\pi/4$ and size $1/\sqrt2$. At weight $1/2$ it is $g(1/2)=i$, with angle $\pi/2$ and size one. Their average angle is $3\pi/8$. Hence
+Return to $w=(1+i)/2$. Read off the angles and lengths of the two factors we already placed on the line. The point $w$ has angle $\pi/4$ and length $1/\sqrt2$. The point $i$ has angle $\pi/2$ and length one. Their mean angle is $3\pi/8$.
+
+Hence
 
 $$
 \frac{F(\pi/4)+F(\pi/2)}2=-\frac14\log2\approx-0.1733,
@@ -109,7 +115,7 @@ $$
 F(3\pi/8)=-\log\bigl(\sqrt2\cos(\pi/8)\bigr)\approx-0.2674.
 $$
 
-The logarithmic size at the average angle is strictly smaller. Two factors at that average angle therefore have a smaller product of sizes than these two unequal factors. Their common weight would be $1-1/\sqrt2$. This calculation illustrates the convexity mechanism only; these illustrative weights are not being asserted to satisfy an eigenvalue product or its real phase identity.
+Read the two panels from left to right. In the complex plane the middle ray meets $x+y=1$ at angle $3\pi/8$. Its weight is $1-1/\sqrt2$. On the graph at that same angle, the point on the curve lies below the midpoint of the chord. The vertical difference measures exactly how much *average logarithmic length* we lose by bringing the angles together. The product and turn assumptions enter in the next step.
 
 <!-- reader-figure:late -->
 
@@ -149,7 +155,7 @@ $$
 =\frac{\sin(A+B)-\rho^q\sin B}{\rho^q\sin A}.
 $$
 
-Multiplication by the positive denominator, and $q+e/m=s/m$, now give
+Every factor in the denominator is positive. On multiplying through, the term $\rho^{e/m}\rho^q$ becomes $\rho^{s/m}$ because $e=s-mq$. We obtain
 
 $$
 \rho^{s/m}\sin A+\rho^q\sin B\le\sin(A+B).
@@ -163,13 +169,13 @@ The left side strictly increases with $\rho$. Its equality radius is the candida
 <details>
 <summary>Hint</summary>
 
-Allow an unknown integer $k$ in $e\vartheta+\sum_j u_j=2\pi(r-mp)+2\pi k$. What is the resulting average factor angle?
+Allow an unknown integer $k$ in $e\vartheta+\sum_j u_j=2\pi(r-mp)+2\pi k$. What average does this give?
 
 </details>
 <details>
 <summary>Solution</summary>
 
-Jensen's inequality still holds at the actual average, because every $u_j$ and its average lie in $(0,M)$. What fails is identifying that average with the prescribed angle $A+B$. With only the congruence, we know instead
+Jensen's inequality still holds at the actual average, because every $u_j$ and its average lie in $(0,M)$. What fails is identifying that average with the known angle $A+B$. With only the congruence, we know instead
 
 $$
 \bar u=A+B+\frac{2\pi k}{m}
@@ -180,6 +186,14 @@ for an integer $k$ that has not been determined. We cannot substitute $F(A+B)$ f
 </details>
 :::
 
+### Return to the ray through the eight-state example
+
+For $\vartheta=5\pi/7$ in the interval $(1/3,3/8)$ at order eight, $q=3$, $s=8$, $m=2$. Hence $A=B=\pi/7$. Dividing the scalar bound by $\sin(\pi/7)>0$ gives
+$$
+\rho^4+\rho^3\le 2\cos(\pi/7).
+$$
+The closing path fixed the sum $u_1+u_2=4\pi/7$. If one of these angles exceeds $2\pi/7$, the other is smaller by the same amount. Strict convexity makes the displayed inequality strict. Thus a point attaining the equality radius requires $u_1=u_2=2\pi/7$, and the two averaging rows then have the same weight. We can already predict a feature of the attaining matrix before constructing it.
+
 ### Check the source of strictness
 
 Suppose $m=2$ and the factor arguments are $\bar u-h$ and $\bar u+h$, both in $(0,M)$, where $h\ne0$. Do they give the same bound as two factors with argument $\bar u$? No. Strict convexity gives
@@ -188,4 +202,4 @@ $$
 \frac{F(\bar u-h)+F(\bar u+h)}2>F(\bar u).
 $$
 
-In fact $F''\ge1$ gives a gap of at least $h^2/2$. These unequal arguments therefore produce a strict scalar inequality and a radius strictly below the candidate. When $m=1$, equality of all weights is automatic; the one-factor product and the specified real phase already force the scalar equality. Topic X supplies the missing existence step by building a stochastic matrix at the equality radius.
+One can even measure the loss. The function $F(u)-u^2/2$ has nonnegative second derivative. Apply its midpoint inequality at $\bar u-h$ and $\bar u+h$. The quadratic terms contribute $[(\bar u-h)^2+(\bar u+h)^2-2\bar u^2]/4=h^2/2$, so the displayed difference is at least $h^2/2$. These unequal arguments therefore produce a strict scalar inequality and a radius strictly below the candidate. When $m=1$, equality of all weights is automatic; the one-factor product and the specified real phase already force the scalar equality. Topic X supplies the missing existence step by building a stochastic matrix at the equality radius.

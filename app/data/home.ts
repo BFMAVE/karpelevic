@@ -5,7 +5,7 @@ export const homeContent = {
   subtitle: SITE_SUBTITLE,
   authors: ["Brecht Verbeken", "Vincent Ginis"],
   descriptor:
-    "Which complex numbers can be eigenvalues of an averaging matrix? Follow the answer from elementary linear algebra to polygons, rational angles, and the exact boundary.",
+    "How far can an eigenvalue of an n-state stochastic matrix lie from zero in a given direction? A drawing of its eigenvector turns this question into a problem about fitting one polygon inside another.",
   projectAim:
     "The fourteen topics develop the proof for readers with basic analysis and linear algebra. Each topic introduces the extra ideas it needs, connects them to a geometric picture, and includes the detailed source argument. The aim is to understand why the theorem is true, as well as what it says.",
   readingRoutes: [
@@ -35,25 +35,25 @@ export const homeContent = {
     },
   ],
   problemIntroduction: [
-    "A row-stochastic matrix is a nonnegative matrix whose rows each add to one. Such matrices encode finite Markov chains, averaging processes, and many other systems in which mass or probability is redistributed without being lost.",
-    "For a fixed size n, which complex numbers can occur as an eigenvalue of one of these matrices? The union of all possibilities is denoted by Θₙ. The problem is to determine this set for every n.",
+    "A row-stochastic matrix has nonnegative entries and each row adds to one. A row such as (½, ½, 0, 0) takes the midpoint of the first two coordinates of a vector. Another row may choose different weights. What restricts the eigenvalues when all four rows are free to choose?",
+    "We can already find one eigenvalue by choosing the rows in a particular way. Let the first row take the second coordinate, the second take the third, and so on around a cycle. Applied to the column with entries 1, i, −1, −i, this matrix gives i, −1, −i, 1. Each entry has been multiplied by i. Four states can therefore produce an exact quarter turn.",
   ],
   problemOrientation:
-    "The eigenvalue 1 is always present, and every eigenvalue lies in the closed unit disc. Those bounds leave much unanswered: at a fixed matrix size, most points on the unit circle are impossible, and the boundary inside the disc has a precise curved shape. The atlas above shows how the allowed region grows as n increases.",
+    "Write Θₙ for the set of eigenvalues we can obtain with n states. The point i belongs to Θ₄. Could three states also produce i? On the atlas the three-state region falls short of i, although both regions lie in the same unit disk. The theorem tells us exactly how far each region reaches in every direction.",
   invariantPolygon:
-    "Place the complex coordinates of an eigenvector in the plane and take their convex hull. Each row of the matrix forms an average of these points, so the eigenvalue equation says that multiplication by λ sends the hull into itself. For a nonreal eigenvalue, this hull is a genuine polygon. Conversely, the averages expressing that inclusion give the rows of a stochastic matrix. Topic I proves both directions and handles the real eigenvalues and smaller matrix sizes separately.",
+    "Put the entries of an eigenvector on a sheet of paper. A row with two nonzero weights picks a point on a joining segment. With more weights it can pick any point in the convex hull P of the entries. If the eigenvalue is λ, row j has to land at λ times entry j. Every one of these targets lies in P, so the whole rotated and scaled copy λP fits inside P. Conversely, if such a copy fits, the weights that locate its vertices give us the rows of a matrix.",
   proofOrientation: [
     {
-      title: "Averages become geometry",
-      text: "For a nonreal eigenvalue, multiplication rotates and scales the plane. The problem becomes finding a polygon, with at most n vertices, that contains its rotated and scaled image.",
+      title: "How far can the polygon turn and stretch?",
+      text: "Fix the angle of rotation. For each polygon with at most n vertices we can ask how much of the rotated copy still fits inside. The largest radius attainable by any such polygon is the distance from zero to the boundary along that ray.",
     },
     {
-      title: "The boundary forces contact",
-      text: "Fix a direction and push the eigenvalue as far from the origin as possible. The image polygon must then touch the original in a rigid pattern. The middle topics explain how these contacts lead to first returns and a finite product equation.",
+      title: "What can we read from a contact?",
+      text: "At a radial maximum of least order, every vertex of the image polygon touches the boundary of the original. Some vertices land on corners. Following these corner images until one lands inside a side gives an equation with two weights, one for each end of that side. Following the same path in the plane also records how far it has turned.",
     },
     {
-      title: "Geometry determines the curve",
-      text: "An inequality turns the product equation into a sharp bound. Explicit stochastic matrices attain it, and rational angles identify the endpoints of every boundary arc. The final topics assemble the theorem and work through an example.",
+      title: "Which weights reach the boundary?",
+      text: "Multiplying the contact equations removes the vertex coordinates. The total turn fixes the average angle of the factors that remain. A convexity inequality bounds the radius, and equality tells us to give every factor the same weight. We can then build a stochastic matrix that reaches this radius.",
     },
   ],
   contributionSummary: [

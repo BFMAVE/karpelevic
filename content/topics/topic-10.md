@@ -1,6 +1,8 @@
 ### Building a matrix that reaches the bound
 
-An upper bound becomes a boundary formula only when a stochastic matrix attains it. We will construct such a matrix by drawing its transitions. The same graph also permits unequal weights, and its directed cycles explain its full characteristic polynomial.
+At order four we found the candidate $(1+i)/2$. Can we produce a stochastic matrix with that eigenvalue? Let $C_4$ shift the four coordinates of a column vector one place, so that $C_4(1,i,-1,-i)^T=i(1,i,-1,-i)^T$. At each state, stay with probability $1/2$ and take the next step with probability $1/2$. The transition matrix is $(I+C_4)/2$. Applied to the same vector, it multiplies it by $(1+i)/2$.
+
+For a general arc, one row that chooses between staying and moving no longer suffices. Instead we let it choose between two *return paths*. Their lengths will supply the powers of $z$ in the product equation.
 
 ::: {.reader-sharpness-ledger}
 **Upper bound — supplied by Topic IX.** A product with the required real winding is bounded by the candidate, with equal weights precisely at equality.
@@ -15,7 +17,12 @@ $$
 \beta=\frac{\rho^q\sin B}{\sin(A+B)}.
 $$
 
-Both are positive and the scalar equation says $\alpha+\beta=1$. Taking imaginary and real parts, respectively, verifies
+The scalar equation gives $\alpha+\beta=1$, and both sines in the numerators are positive. To recover the complex factor, compare $z^q=\rho^q e^{iA}$ with a point in direction $A+B$. Subtracting a real $\beta$ leaves the height $\rho^q\sin A$ fixed, so the length along that direction has to be $\rho^q\sin A/\sin(A+B)$. The horizontal difference is
+$$
+\rho^q\left(\cos A-\frac{\sin A\cos(A+B)}{\sin(A+B)}\right)
+=\frac{\rho^q\sin B}{\sin(A+B)}=\beta .
+$$
+Together the two coordinates give
 
 $$
 z^q-\beta
@@ -39,7 +46,7 @@ $$
 
 We can also let $\beta_0,\ldots,\beta_{m-1}\in[0,1]$ be independent weights and set $\alpha_j=1-\beta_j$. Keep $q<s$, assume $s>(m-1)q$, and put $n_0=\max\{mq,s\}$. For each $j$, make a block of $q$ vertices $v_{j,0},\ldots,v_{j,q-1}$. Connect successive vertices within the block by arrows of weight one. From its last vertex, place an arrow of weight $\beta_j$ back to its first vertex, and an arrow of weight $\alpha_j$ toward the next block. When $q=1$, the local closing arrow is a loop at the block's sole vertex; the same construction applies.
 
-A directed arrow of weight $a$ from vertex $u$ to vertex $v$ means that the matrix entry $M_{uv}$ is $a$, where $M$ denotes the transition matrix. Rows describe departure vertices. The final row of a block splits its total weight as $\beta_j+\alpha_j=1$; every other row has one arrow of weight one. This is why the matrix is row-stochastic. We use $M$ for the matrix to distinguish it from the scalar angle $A$.
+A directed arrow of weight $a$ from vertex $u$ to vertex $v$ means that the matrix entry $M_{uv}$ is $a$, where $M$ denotes the transition matrix. Rows describe departure vertices. At the last vertex of a block the row sum is $\beta_j+\alpha_j=1$. Every other vertex has a single outgoing arrow of weight one. Thus $M$ is row-stochastic. We use $M$ for the matrix to distinguish it from the scalar angle $A$.
 
 The graph's vertices are **states**, or row indices. The coordinates of an eigenvector are **complex points** attached to those states. A state is not automatically an extreme vertex of their convex hull: coordinates can coincide or lie inside that hull. For an eigenvector $x$, each row equation $\lambda x_u=\sum_v M_{uv}x_v$ places the image $\lambda x_u$ at the weighted average specified by the outgoing arrows. That is the matrix–polygon bridge from Topic I.
 
@@ -52,7 +59,7 @@ For the three-state block $0,1,2$ followed by a block starting at $3$, the trans
 
 An individual arrow supplies one term of the row sum; the entire outgoing row supplies the eigenvector equation. Topic XIV will check that, in its particular eight-state example, all eight complex coordinates really are extreme polygon vertices.
 
-The blocks are designed to reproduce the product factors. For a three-vertex block labelled $0,1,2$ followed by a block starting at $3$, consider an eigenvector with coordinates $x_i$ and eigenvalue $\lambda$. Its two weight-one rows require $x_1=\lambda x_0$ and $x_2=\lambda x_1$. The branching row then requires
+Read the first two deterministic rows together. They give $x_2=\lambda x_1=\lambda^2x_0$. Substitute this into the branching row shown in the table to obtain
 
 $$
 \lambda x_2=\beta_0x_0+\alpha_0x_3,
@@ -67,6 +74,8 @@ If $s\le mq$, set $d=mq-s$. Redirect the last connecting arrow into $v_{0,d}$. T
 
 If $s>mq$, insert $s-mq$ new vertices into that final connection. Give the first arrow weight $\alpha_{m-1}$ and the remaining arrows weight one. The connecting cycle and the graph now have $s$ vertices. In either case the graph has exactly $n_0$ vertices.
 
+For the example from Topic VII, $q=3$, $m=2$ and $s=8$. The two blocks use six states. Send the last connecting arrow from state $5$ through the two additional states $6$ and $7$ before returning to $0$. Following the connecting arrows now uses eight steps, while taking a local return still uses three. Writing down the eigenvector rows along these routes recovers the two factors with exponent three and the extra power $z^2$ found in the closing path.
+
 ### Why these cycles determine the polynomial
 
 Let $t$ be the variable in the characteristic polynomial $\det(tI-M)$. Its determinant expansion can be organised by collections of directed cycles that have no vertex in common. For a cycle of length $\ell\ge2$, the permutation sign is $(-1)^{\ell-1}$ and its $\ell$ off-diagonal entries contribute $(-1)^\ell$. Their product is $-1$. A loop gives the same choice by expanding the diagonal entry $t-M_{ii}$: either choose $t$ or choose the negative loop weight. Every selected directed cycle therefore contributes one minus sign and the product of its weights. Vertices outside the selected cycles contribute factors of $t$.
@@ -77,7 +86,7 @@ $$
 t^{n_0-mq}\prod_{j=0}^{m-1}(t^q-\beta_j).
 $$
 
-The connecting $s$-cycle meets every local cycle, so it can only be selected alone. Its contribution is $-t^{n_0-s}\prod_j\alpha_j$. There are no other simple cycles: once a path chooses a local closing arrow it closes that block, and otherwise it follows the connecting route. Consequently
+The connecting $s$-cycle meets every local cycle, so it can only be selected alone. Its contribution is $-t^{n_0-s}\prod_j\alpha_j$. To exhaust the possibilities, start a simple cycle at a block's last vertex. If its first arrow is a local return, the next $q-1$ steps lead straight back to that vertex and the cycle is complete. Thus a cycle containing *any* local return is one of the local cycles. A cycle using only connecting exits has all its steps forced. It is the one of length $s$. This argument includes loops when $q=1$. Consequently
 
 $$
 \det(tI-M)
@@ -111,7 +120,7 @@ $$
 
 Selecting both local cycles gives two minus signs, hence the positive constant term. Selecting the five-cycle leaves one vertex outside it, hence its factor $t$. This explains both the signs and the powers, rather than just matching a determinant formula to the drawing.
 
-For the concrete weights $\beta_0=0.4$ and $\beta_1=0.7$, the two branch rows have weights $(0.4,0.6)$ and $(0.7,0.3)$. Their connecting-cycle weight is $0.6\cdot0.3=0.18$, so the polynomial is $t^6-1.1t^3-0.18t+0.28$. At $t=1$ it vanishes: $1-1.1-0.18+0.28=0$. This checks the expected eigenvalue one of a stochastic matrix. The graph below shows exactly which cycles account for these terms.
+For the concrete weights $\beta_0=0.4$ and $\beta_1=0.7$, the two branch rows have weights $(0.4,0.6)$ and $(0.7,0.3)$. Their connecting-cycle weight is $0.6\cdot0.3=0.18$, so the polynomial is $t^6-1.1t^3-0.18t+0.28$. At $t=1$ it vanishes: $1-1.1-0.18+0.28=0$. This checks the expected eigenvalue one of a stochastic matrix. In the drawing follow the two local cycles first, then the five-step cycle. The one state it skips is the factor of $t$ multiplying $0.18$.
 
 <!-- reader-figure:late -->
 
@@ -125,7 +134,7 @@ $$
 
 Here $C(0)=\beta^2>0$, so zero is not a matrix eigenvalue. The cleared equation has five zero roots introduced by multiplication. This is why the equivalence used above is explicitly for nonzero $z$.
 
-### Why the weight traverses the selected arc exactly once
+### How the weight changes from one endpoint to the other {#why-the-weight-traverses-the-selected-arc-exactly-once}
 
 So far each angle has supplied an attaining weight. We still have to show that continuously varying the weight follows that selected arc, without stopping or retracing it. Fix the oriented Farey interval and let $\rho=\rho(\vartheta)$ be its scalar radius. Define the residual
 
@@ -164,7 +173,7 @@ $$
 
 The last nonvanishing follows from $\rho>0$. If $\beta'=0$, the first identity would force the product of two nonzero numbers $H_z z'$ to vanish. Thus $\beta'$ never vanishes. Its continuity makes its sign constant. At the left endpoint $\rho\to1$, $A\to0$ and the formula for $\beta$ tends to one; at the right endpoint $B\to0$ and $\beta\to0$. These limits force $\beta'<0$. Every weight between zero and one is taken exactly once, on this selected branch. If we reflected the original interval, increasing $\vartheta=2\pi-\theta$ means decreasing the original angle $\theta$.
 
-The first order-four arc makes this traversal elementary. Its data are $q=1$ and $s=m=4$, and $A+B=\pi/2$. The factor identity says $z-\beta=i(1-\beta)$, so
+On the first order-four arc we can calculate the weight directly. Its data are $q=1$ and $s=m=4$, and $A+B=\pi/2$. The factor identity says $z-\beta=i(1-\beta)$, so
 
 $$
 z=\beta+(1-\beta)i,\qquad
@@ -173,7 +182,7 @@ z=\beta+(1-\beta)i,\qquad
 \quad 0\le\theta\le\frac\pi2.
 $$
 
-Direct differentiation gives $\beta'=-1/(\cos\theta+\sin\theta)^2<0$. At $\theta=\pi/4$ the weight is $1/2$ and the point is $(1+i)/2$. Let $C_4$ be the permutation matrix taking each of four states to the next. Then $M_\beta=\beta I+(1-\beta)C_4$ has a self-loop of weight $\beta$ and a next-state arrow of weight $1-\beta$ in every row. Since $C_4$ has eigenvalue $i$, this stochastic matrix has exactly the selected eigenvalue $\beta+(1-\beta)i$. The diagram shows its movement on the segment and the corresponding decrease of the weight as the ray angle increases.
+Direct differentiation gives $\beta'=-1/(\cos\theta+\sin\theta)^2<0$. At $\theta=\pi/4$ the two arrows have equal weight. We recover the matrix $(I+C_4)/2$ and the point $(1+i)/2$ from the beginning of the chapter. Moving along the segment toward $i$ increases the probability of taking the next step. At $i$ itself the transition is deterministic.
 
 <!-- reader-figure:late-extra -->
 

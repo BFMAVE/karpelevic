@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="489.6pt" height="259.2pt" viewBox="0 0 489.6 259.2" xmlns="http://www.w3.org/2000/svg" version="1.1" role="img" aria-labelledby="plot-title plot-description">
+<title id="plot-title">One hexagon for every rotation</title>
+<desc id="plot-description">A regular hexagon with unit circumradius rotates through thirty degrees. Its marked vertex touches a side of the enlarged hexagon. That hexagon also contains the unit disk, so the same enlargement covers every angle.</desc>
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.9.1.post1, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 259.2
+L 489.6 259.2
+L 489.6 0
+L 0 0
+z
+" style="fill: #fffcf6"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 174.576696 228.506062
+C 200.80689 228.506062 225.966295 218.084696 244.513843 199.537147
+C 263.061391 180.989599 273.482758 155.830194 273.482758 129.6
+C 273.482758 103.369806 263.061391 78.210401 244.513843 59.662853
+C 225.966295 41.115304 200.80689 30.693938 174.576696 30.693938
+C 148.346501 30.693938 123.187096 41.115304 104.639548 59.662853
+C 86.092 78.210401 75.670633 103.369806 75.670633 129.6
+C 75.670633 155.830194 86.092 180.989599 104.639548 199.537147
+C 123.187096 218.084696 148.346501 228.506062 174.576696 228.506062
+L 174.576696 228.506062
+z
+" clip-path="url(#pe7ed96b4f7)" style="fill: none; stroke-dasharray: 1.4,2.31; stroke-dashoffset: 0; stroke: #77838b; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 288.783579 129.6
+L 231.680137 30.693938
+L 117.473254 30.693938
+L 60.369812 129.6
+L 117.473254 228.506062
+L 231.680137 228.506062
+L 288.783579 129.6
+" clip-path="url(#pe7ed96b4f7)" style="fill: none; stroke: #233347; stroke-width: 1.8; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 273.482758 129.6
+L 224.029727 43.944837
+L 125.123664 43.944837
+L 75.670633 129.6
+L 125.123664 215.255163
+L 224.029727 215.255163
+L 273.482758 129.6
+" clip-path="url(#pe7ed96b4f7)" style="fill: none; stroke: #176b69; stroke-width: 1.8; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 260.231858 80.146969
+L 174.576696 30.693938
+L 88.921533 80.146969
+L 88.921533 179.053031
+L 174.576696 228.506062
+L 260.231858 179.053031
+L 260.231858 80.146969
+" clip-path="url(#pe7ed96b4f7)" style="fill: none; stroke-dasharray: 6.66,2.88; stroke-dashoffset: 0; stroke: #a54d32; stroke-width: 1.8"/>
+   </g>
+   <g id="line2d_4">
+    <path d="M 260.231858 80.146969
+" clip-path="url(#pe7ed96b4f7)" style="fill: none; stroke: #a54d32; stroke-width: 1.5; stroke-linecap: square"/>
+    <defs>
+     <path id="m156eeeb609" d="M 0 2.5
+C 0.663008 2.5 1.29895 2.236584 1.767767 1.767767
+C 2.236584 1.29895 2.5 0.663008 2.5 0
+C 2.5 -0.663008 2.236584 -1.29895 1.767767 -1.767767
+C 1.29895 -2.236584 0.663008 -2.5 0 -2.5
+C -0.663008 -2.5 -1.29895 -2.236584 -1.767767 -1.767767
+C -2.236584 -1.29895 -2.5 -0.663008 -2.5 0
+C -2.5 0.663008 -2.236584 1.29895 -1.767767 1.767767
+C -1.29895 2.236584 -0.663008 2.5 0 2.5
+z
+" style="stroke: #a54d32"/>
+    </defs>
+    <g clip-path="url(#pe7ed96b4f7)">
+     <use xlink:href="#m156eeeb609" x="260.231858" y="80.146969" style="fill: #a54d32; stroke: #a54d32"/>
+    </g>
+   </g>
+   <g id="line2d_5">
+    <path d="M 174.576696 129.6
+L 260.231858 80.146969
+" clip-path="url(#pe7ed96b4f7)" style="fill: none; stroke: #77838b; stroke-width: 0.8; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_6">
+    <defs>
+     <path id="md6d821f049" d="M 0 1.5
+C 0.397805 1.5 0.77937 1.341951 1.06066 1.06066
+C 1.341951 0.77937 1.5 0.397805 1.5 0
+C 1.5 -0.397805 1.341951 -0.77937 1.06066 -1.06066
+C 0.77937 -1.341951 0.397805 -1.5 0 -1.5
+C -0.397805 -1.5 -0.77937 -1.341951 -1.06066 -1.06066
+C -1.341951 -0.77937 -1.5 -0.397805 -1.5 0
+C -1.5 0.397805 -1.341951 0.77937 -1.06066 1.06066
+C -0.77937 1.341951 -0.397805 1.5 0 1.5
+z
+" style="stroke: #233347"/>
+    </defs>
+    <g clip-path="url(#pe7ed96b4f7)">
+     <use xlink:href="#md6d821f049" x="174.576696" y="129.6" style="fill: #233347; stroke: #233347"/>
+    </g>
+   </g>
+   <g id="legend_1">
+    <g id="line2d_7">
+     <path d="M 294.064613 104.566406
+L 305.064613 104.566406
+L 316.064613 104.566406
+" style="fill: none; stroke: #233347; stroke-width: 1.8; stroke-linecap: square"/>
+    </g>
+    <g id="text_1">
+     <text style="fill: #233347; font: 11px 'DejaVu Sans'; text-anchor: start" x="324.864613" y="108.416406" transform="rotate(-0 324.864613 108.416406)">Enlarged hexagon</text>
+    </g>
+    <g id="line2d_8">
+     <path d="M 294.064613 120.712344
+L 305.064613 120.712344
+L 316.064613 120.712344
+" style="fill: none; stroke: #176b69; stroke-width: 1.8; stroke-linecap: square"/>
+    </g>
+    <g id="text_2">
+     <text style="fill: #233347; font: 11px 'DejaVu Sans'; text-anchor: start" x="324.864613" y="124.562344" transform="rotate(-0 324.864613 124.562344)">Original hexagon</text>
+    </g>
+    <g id="line2d_9">
+     <path d="M 294.064613 136.858281
+L 305.064613 136.858281
+L 316.064613 136.858281
+" style="fill: none; stroke-dasharray: 6.66,2.88; stroke-dashoffset: 0; stroke: #a54d32; stroke-width: 1.8"/>
+    </g>
+    <g id="text_3">
+     <text style="fill: #233347; font: 11px 'DejaVu Sans'; text-anchor: start" x="324.864613" y="140.708281" transform="rotate(-0 324.864613 140.708281)">Rotated hexagon</text>
+    </g>
+    <g id="patch_3">
+     <path d="M 294.064613 156.854219
+L 316.064613 156.854219
+L 316.064613 149.154219
+L 294.064613 149.154219
+L 294.064613 156.854219
+z
+" style="fill: none; stroke-dasharray: 1.4,2.31; stroke-dashoffset: 0; stroke: #77838b; stroke-width: 1.4; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_4">
+     <text style="fill: #233347; font: 11px 'DejaVu Sans'; text-anchor: start" x="324.864613" y="156.854219" transform="rotate(-0 324.864613 156.854219)">Unit circle</text>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pe7ed96b4f7">
+   <rect x="47.976936" y="3.00024" width="393.646129" height="253.19952"/>
+  </clipPath>
+ </defs>
+</svg>

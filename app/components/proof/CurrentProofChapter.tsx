@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { ProofChapterShell } from "./ProofChapterShell";
 import { BoundaryExplorer } from "./BoundaryExplorer";
 import { ReaderTopicOrientation } from "./ReaderTopicOrientation";
@@ -22,14 +21,26 @@ export function readerMetadata(number: number) {
 }
 
 function GuidedChapter({ number, html }: { number: number; html: string }) {
-  const parts = html.replace(/href="(\/(?!\/)[^"]*)"/g, (_, href: string) => 'href="' + sitePath(href) + '"').split(/<!-- reader-figure:(early|late|early-extra|late-extra) -->\s*/);
+  const localHtml = html.replace(/\b(href|src)="(\/(?!\/)[^"]*)"/g,
+    (_, attribute: string, path: string) => `${attribute}="${sitePath(path)}"`);
+  const blocks = localHtml.split(/(<!-- reader-figure:[\w-]+ -->|<figure>[\s\S]*?<\/figure>)/);
+  const figures = {
+    "<!-- reader-figure:early -->": ReaderEarlyFigure,
+    "<!-- reader-figure:late -->": ReaderLateFigure,
+    "<!-- reader-figure:early-extra -->": ReaderEarlyExtra,
+    "<!-- reader-figure:late-extra -->": ReaderLateExtra,
+  };
   return <div className="reader-guide proof-guided-layer">
-    {parts.map((part, index) => index % 2 === 0
-      ? <div key={index} dangerouslySetInnerHTML={{ __html: part }} />
-      : <Fragment key={index}><ReaderFigureFrame>{part === "early" ? <ReaderEarlyFigure number={number} />
-        : part === "late" ? <ReaderLateFigure number={number} />
-        : part === "early-extra" ? <ReaderEarlyExtra number={number} />
-        : <ReaderLateExtra number={number} />}</ReaderFigureFrame></Fragment>)}
+    {blocks.map((block, index) => {
+      if (block.startsWith("<figure>")) {
+        const drawing = block.replace("<figure>", '<figure class="reader-chapter-drawing">')
+          .replace(/<img\b[^>]*>/, '<div class="reader-figure-visual" tabindex="0" role="region" aria-label="Chapter drawing">$&</div>');
+        return <ReaderFigureFrame key={index} defaultView="fit"><div dangerouslySetInnerHTML={{ __html: drawing }} /></ReaderFigureFrame>;
+      }
+      const Figure = figures[block as keyof typeof figures];
+      if (Figure) return <ReaderFigureFrame key={index}><Figure number={number} /></ReaderFigureFrame>;
+      return <div key={index} dangerouslySetInnerHTML={{ __html: block }} />;
+    })}
   </div>;
 }
 
@@ -74,9 +85,9 @@ export function CurrentProofChapter({ number }: { number: number }) {
     <section className="reader-formal" id="source-argument" aria-labelledby="source-argument-heading">
       <p className="section-label">Check the mathematics</p>
       <h2 id="source-argument-heading">The source statements and proofs</h2>
-      <p>The guided explanation above develops the ideas. Here you can read the complete source passage, with individual proofs to open as needed and links to the results used in other topics.</p>
+      <p>Open a statement below to follow its proof in the teaching manuscript. Its equation numbers and links let you trace where an earlier result enters the argument.</p>
       <aside className="reader-source-note">
-        <p>This reader follows <em>A proof of the Karpelevič theorem via invariant polygons</em>, the teaching manuscript supplied by the author. The current preprint is <a href="https://arxiv.org/abs/2609.26058v2"><em>A structural proof of the Karpelevič theorem</em>, arXiv v2</a> (23 September 2026). <a href={sitePath("/paper/teaching-manuscript.pdf")}>Read the teaching manuscript PDF</a> for its original drawings and layout.</p>
+        <p>The source passages below reproduce <em>A proof of the Karpelevič theorem via invariant polygons</em>, the teaching manuscript supplied by the author. The current preprint is <a href="https://arxiv.org/abs/2609.26058v2"><em>A structural proof of the Karpelevič theorem</em>, arXiv v2</a> (23 September 2026). <a href={sitePath("/paper/teaching-manuscript.pdf")}>Read the teaching manuscript PDF</a> for its original drawings and layout.</p>
       </aside>
       <details className="proof-chapter-proof reader-source-proof" data-complete-proof>
         <summary>Read the source argument for Topic {numerals[number - 1].toUpperCase()}</summary>

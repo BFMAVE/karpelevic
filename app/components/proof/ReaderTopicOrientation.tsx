@@ -4,20 +4,20 @@ import { toRomanNumeral } from "../../data/proof-reader";
 import { readerLocalDefinitionHtml } from "../../data/reader-notation";
 
 const entryIdeas = [
-  "Read each row as a weighted average. The eigenvector's complex coordinates form a polygon that contains its rotated and contracted image.",
-  "An interior image leaves room to enlarge the multiplier. Deflation makes that contradiction precise; polarity applies it to sides as well as vertices.",
-  "Minimize the interior-contact count before minimizing area. Then let each half-open side own its ending corner, so every image is assigned once.",
-  "A factor reversal gives a legal vertex replacement. Its coefficient changes reveal why the interior contacts form one consecutive run.",
-  "Keep both the residue and the full-turn count. Consecutive records organize all vertices into towers with two possible return heights.",
-  "A skipped return would let us preserve the required contacts while moving one image strictly inward. Universal boundary contact then supplies the contradiction.",
-  "Multiply the return equations to cancel vertices, but add their real angles separately. The product forgets full turns; the winding identity retains them.",
-  "Use the Farey angle budget to build a strictly increasing scalar equation. Its unique root is a candidate radius whose sharpness is still to be proved.",
-  "The real winding fixes an average factor angle. Convexity of the logarithmic sizes bounds the product, with equality precisely at equal weights.",
-  "Construct a stochastic graph whose eigenvector recurrences reproduce the equal-weight product. This proves attainment without assuming the boundary theorem.",
-  "A maximizer may have smaller least realizing order. Compare the scalar candidates directly before identifying them with the actual regions.",
-  "Combine the upper bound, independent order comparison and attainment. Check the small orders and endpoints separately; radial filling gives the whole region.",
-  "The completed theorem now gives the best polygonal contraction factor. Keep endpoint distance visible when estimating how rapidly the boundary approaches the circle.",
-  "Follow the same eight-state example through its returns, winding, matrix rows and actual polygon. Then compare its radius with order seven.",
+  "Plot the coordinates of an eigenvector. One row takes a weighted average of these points. Reading all the rows together tells us exactly where the rotated and scaled polygon has to fit.",
+  "Suppose one vertex lands strictly inside the polygon. We can give every entry in its matrix row a small positive weight. That spare room lets us change the matrix and move the eigenvalue farther out on the same ray.",
+  "A corner belongs to two sides. Counting an image twice would spoil the argument, so we assign it to the side ending there. We can now count the images that land strictly between two corners and choose a polygon with as few of them as possible.",
+  "What if the sides with interior contacts came in two separate runs? We could replace one vertex, keep the same eigenvalue, and improve one of the quantities used to choose the polygon.",
+  "Starting at a base vertex, follow its images until one lands between two corners. The shift in the vertex indices determines the number of steps. Keeping track of complete turns as well gives the fractions that will label the boundary arc.",
+  "If a return skips a base, the vertices between the base and its target side give us room to move. We keep the other contacts on their sides and move one image into the interior. Yet Topic II required that image to touch the boundary.",
+  "Two products can agree even when one list of factors turns once more around zero. Following each contact along its side records the actual angle. This lets us eliminate the vertex coordinates and still know the sum of the factor angles.",
+  "Choose a ray between two neighbouring roots of unity. Its angular distances from the endpoints are fixed. The radius is now the only unknown in an equation whose left side increases with that radius.",
+  "Plot the logarithm of a factor’s length against its angle. At the mean angle the graph lies below each chord joining two different points. Because the polygon fixes that mean, we can compare unequal contact weights with equal ones.",
+  "At a branching state, give one weight to the edge that closes a short cycle and the remaining weight to the edge that continues. The lengths of the cycles tell us which powers occur in the characteristic polynomial.",
+  "An eigenvalue of an eight-state matrix might already occur with seven states. A bound proved at its smallest possible order therefore raises a question about the formulas themselves. How does the proposed radius change when we add a state?",
+  "The construction supplies a matrix at the proposed radius. Contact geometry and the comparison between orders bound every eigenvalue on the ray by that same number. The two inequalities identify the boundary.",
+  "Rotate a square and ask how much the original square has to grow to cover it. Its corners make the answer depend on the angle. The boundary theorem lets us choose the best polygon under a limit on the number of vertices.",
+  "Fix the ray at 5π/7. With eight states we can compute its boundary radius, build a matrix with that eigenvalue, and draw its eigenvector. In the drawing, six vertex images land on corners and two land between corners.",
 ];
 
 export function ReaderTopicOrientation({ number }: { number: number }) {

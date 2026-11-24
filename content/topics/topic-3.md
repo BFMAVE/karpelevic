@@ -1,10 +1,8 @@
-### What must be organised before we can multiply equations
+### Matching the images to the sides {#what-must-be-organised-before-we-can-multiply-equations}
 
-Topic II fixed a nonreal number $\zeta=\rho e^{i\theta_\zeta}$, with $0<\rho<1$, whose modulus is maximal at its angle. Its least stochastic realising order is $N\ge4$. The map $T(x)=\zeta x$ rotates the plane and then contracts it. There is a convex polygon $P$ with exactly $N$ vertices, with zero in its interior, such that $TP\subseteq P$.
+Mark the $N$ vertices of $P$ on its boundary, then mark the $N$ images of these vertices in a second colour. Topic II puts all the second marks on the boundary and guarantees that each closed side contains one or more of them. Would it follow that each side has one image? An image at a corner already touches two sides. Counting it twice would leave too few images to describe the other side contacts.
 
-Every vertex image lies on the boundary of $P$, and every side meets $TP$. These properties apply to every invariant polygon with at most $N$ vertices for this same $\zeta$. The remaining problem is organisation: an image might be an old vertex or might lie strictly between the endpoints of a side. We want one unambiguous image assignment per side.
-
-There are $N$ images and $N$ sides, but those two numbers alone do not produce a bijection. A corner belongs to two closed sides; two images might initially sit on one side while another side is met only at a corner. The proof must choose a polygon and an endpoint convention that remove these ambiguities simultaneously. This is the purpose of the count and area optimisation.
+We may choose our polygon. Fix the nonreal multiplier $\zeta$ at its largest modulus on its ray in $\Theta_N$, where $N\ge4$ is its least realising order and $0<|\zeta|<1$. Write $T(x)=\zeta x$. Our aim is to put the two kinds of marks in alternating order, allowing a vertex and an image to coincide. We first choose an invariant $N$-gon in which as many images as possible are already vertices. We then test what would happen if two consecutive image marks enclosed two old corners. Their joining chord gives us a smaller polygon to compare with the one we chose.
 
 ### Count interior contacts before minimising area
 
@@ -16,7 +14,7 @@ $$
 
 The vertical bars around a finite set mean its number of elements. Because every image is on the boundary, $b_T(P)$ counts images strictly inside sides. An image at a vertex is excluded from this count.
 
-Scale the polygon about zero until $\max_{x\in P}|x|=1$. Scaling preserves invariance and both counts. Among these normalised polygons, first minimise $b_T(P)$; among the minimisers of that count, minimise area. The order matters. We will move vertices while controlling the count, and use area only when a replacement also preserves the chosen scale.
+Scale the polygon about zero until $\max_{x\in P}|x|=1$. Scaling preserves invariance and both counts. Among these normalised polygons, first minimise $b_T(P)$. Among polygons attaining this count choose one with the smallest area. The order matters. We will move vertices while controlling the count, and use area only when a replacement also preserves the chosen scale.
 
 Without fixing scale, area could be made arbitrarily small just by multiplying every coordinate by $1/2$ repeatedly. Without first fixing the contact count, a smaller-area polygon might have more contacts to organise. The two choices solve different problems: the integer count prevents unnecessary branching in the image paths, and the fixed-scale area prevents a corner from being cut away while all those paths remain just as complicated.
 
@@ -46,17 +44,7 @@ $$
 
 The last inequality holds because $E\cap R$ and $S\cap R$ are disjoint subsets of $R$. Thus $b_T(Q)\le b_T(P)$. Minimum-count selection forces equality. If the cut retains a radius-one vertex, it also preserves normalisation, and a proper cut would reduce area. Such a cut is impossible for the selected polygon.
 
-The cut has two separate checks. This ledger keeps its admissibility separate from the contradiction:
-
-| Question | Answer for this intermediate hull |
-| --- | --- |
-| What stays fixed? | The multiplier $T$, the original image $TP$, and the permitted budget of $N$ vertices. |
-| What changes? | Old corners may be removed and image points become new corners; the area may decrease. |
-| Why is it invariant? | $TQ\subseteq TP\subseteq Q$, using $Q\subseteq P$. |
-| What happens to the counts? | For equal vertex counts, the counting proof gives $b_T(Q)\le b_T(P)$; minimality then forces equality. |
-| When does area contradict the choice of $P$? | Only when a radius-one vertex remains, so $Q$ is still normalized and has strictly smaller area. |
-
-If the cut removes all radius-one vertices, it is not normalized. Rescaling it would destroy the containment $Q\subseteq P$, so the area contradiction cannot simply be asserted for that cut.
+If a cut removes all vertices with radius one, restoring the original scale increases its area. We then have no area comparison with $P$. We use the area argument only for cuts that leave a radius-one vertex in place.
 
 ### Assign each corner contact only once
 
@@ -66,22 +54,11 @@ At a shared corner $v_i$, the incoming side $(v_{i-1},v_i]$ includes the point a
 
 <!-- reader-figure:early -->
 
-For a complete ownership example, temporarily use a separate square with vertices $w_0=1$, $w_1=i$, $w_2=-1$, $w_3=-i$, in that counterclockwise order. The quarter-turn $\mu=i$ sends $w_{i-1}$ to $w_i$, with indices modulo four. This example has $|\mu|=1$: it teaches endpoint bookkeeping, not the contracting extremal configuration, whose multiplier still satisfies $0<|\zeta|<1$.
-
-| Half-open side | Excluded starting corner | Included ending corner | Image assigned to this side |
-| --- | --- | --- | --- |
-| $(w_0,w_1]=(1,i]$ | $1$ | $i$ | $\mu w_0=i$ |
-| $(w_1,w_2]=(i,-1]$ | $i$ | $-1$ | $\mu w_1=-1$ |
-| $(w_2,w_3]=(-1,-i]$ | $-1$ | $-i$ | $\mu w_2=-i$ |
-| $(w_3,w_0]=(-i,1]$ | $-i$ | $1$ | $\mu w_3=1$ |
-
-Every image corner has exactly one owner. With closed sides, the image $i$ would be counted on both $[1,i]$ and $[i,-1]$; the half-open convention keeps it only on the first. With this bookkeeping understood, return to the selected polygon $P$ and multiplier $\zeta$ for the cut argument.
-
-
+Take a square with corners $1,i,-1,-i$ in that order. A quarter-turn sends $1$ to $i$. The image belongs to the side $(1,i]$. The side $(i,-1]$ begins at the same corner but excludes it. Continuing around the square puts the other three images at the included ends of the other three sides. The unit rotation illustrates the counting convention. We now apply it to the contracting map $T$ of our proof.
 
 Cut $P$ along the line joining $y_j$ to $y_{j+1}$, retaining the half-plane containing $TP$. If their closed boundary arc contains $k_j$ old vertices, a proper cut has at most $N+2-k_j$ vertices: it discards those vertices and adds back the two image endpoints. The new polygon is invariant, so minimal order requires at least $N$ vertices. Consequently $k_j\le2$.
 
-A cut with $k_j=2$ preserves the vertex count and cannot increase $b_T$. It must therefore remove every radius-one vertex, or it would contradict minimum area. Different discarded arcs are disjoint, so there is at most one such proper cut.
+A cut with $k_j=2$ preserves the vertex count and cannot increase $b_T$. If it left a radius-one vertex in place, its smaller area would contradict our choice of $P$. Different discarded arcs are disjoint, so there is at most one such proper cut.
 
 Let $r_j$ count old vertices on $(y_j,y_{j+1}]$, and let $\varepsilon_j$ be one when $y_j$ is an old vertex and zero otherwise. Then
 
@@ -89,28 +66,30 @@ $$
 \sum_j r_j=N,\qquad k_j=r_j+\varepsilon_j,\qquad 0\le r_j\le2.
 $$
 
-There is at most one count of two. Either every $r_j=1$, or exactly one is two and exactly one is zero. In the latter case, the count of two forces a change from a nonvertex image to a vertex image. Every change back must occur at the count of zero; another would create a second forbidden cut with $k_j=2$. Switching endpoint conventions therefore changes every count to one.
+A chord that already lies on a side makes no cut. Its half-open boundary arc contains at most one old vertex. Consequently an arc with $r_j=2$ always makes a proper cut, and at most one such arc exists. The sum of the $N$ counts is $N$. If they are not all one, we have exactly one double count and exactly one empty arc. Call their indices $s$ and $t$.
 
-The formula below is just an endpoint ledger: adding the starting endpoint contributes $\varepsilon_j$, and deleting the ending endpoint removes $\varepsilon_{j+1}$. At the unique doubled arc the change is $0-1$, so two becomes one; at the empty arc it is $1-0$, so zero becomes one. Every other arc keeps its count.
+Look at the ends of the doubled arc. Since $r_s=2$ and $k_s\le2$, its starting point is not an old vertex. Its ending point *is* an old vertex. Otherwise the two counted corners would both be strictly between $y_s$ and $y_{s+1}$. The side joining those two corners would contain no image vertex. Yet Topic II guarantees a contact there. A linear functional supporting that side attains its maximum on $TP$ at some image vertex, which gives the contradiction.
+
+The sequence $\varepsilon_j$ therefore changes from zero to one at $s$. Where can it change back? If it changes from one to zero at a position with $r_j=1$, then $k_j=2$. Its chord makes a proper cut. Indeed an uncut arc going from an old corner to a point inside the same side would have $r_j=0$. This would be a second proper cut with $k_j=2$. The only available change back to zero is at $t$. Since the sequence is cyclic, these are its only two changes.
+
+Now count with the starting endpoint included instead. We gain the old vertex at the start if $\varepsilon_j=1$, and lose the one at the end if $\varepsilon_{j+1}=1$. Thus
 
 $$
 |V\cap[y_j,y_{j+1})|=r_j+\varepsilon_j-\varepsilon_{j+1}=1.
 $$
 
-Every side meets $TP$, as Topic II proved. This excludes the possibility that the two counted old vertices sit strictly inside an image-to-image arc with no image vertex on their joining side. That is the geometric fact needed in the preceding endpoint argument.
-
-The images and old vertices consequently alternate in one of these two endpoint conventions. Reflect across the real axis if necessary. Reflection reverses boundary order and replaces $\zeta$ by its conjugate. We can arrange that each half-open side $(v_{i-1},v_i]$ contains exactly one image vertex.
+At $s$ the count falls from two to one, at $t$ it rises from zero to one, and at every other position it stays one. We have found a direction in which the two sets of marks alternate. More explicitly, if $u_j$ is the unique old vertex in $[y_j,y_{j+1})$, then $y_j$ belongs to $(u_{j-1},u_j]$. If the original arcs $(y_j,y_{j+1}]$ already had one old vertex each, the image lies on the half-open side with the *starting* endpoint included instead. Reflect both polygon and multiplier across the real axis in this case. Relabelling counterclockwise reverses the endpoint convention and gives the desired assignment $(v_{i-1},v_i]$ in either case.
 
 ### The contact equations and their real angular lift
 
-Multiplication by $\zeta$ preserves cyclic order. The assignment must therefore be one constant cyclic shift. For some $1\le\kappa<N$,
+Multiplication by $\zeta$ preserves cyclic order. Once we know which side receives the first image, each succeeding image belongs to the succeeding side. The assignment is a constant cyclic shift. For some $1\le\kappa<N$,
 
 $$
 c_i=\zeta v_{i-\kappa}=\beta_i v_{i-1}+\alpha_i v_i,
 \qquad \alpha_i=1-\beta_i>0,\quad 0\le\beta_i<1.
 $$
 
-All vertex indices are read modulo $N$. The coefficient $\beta_i=0$ means the image is the ending vertex; $\beta_i>0$ means it is strictly inside the side. The exceptional shift $N$ can be converted to shift one by reflection, so it need not be retained.
+All vertex indices are read modulo $N$. The coefficient $\beta_i=0$ means the image is the ending vertex; $\beta_i>0$ means it is strictly inside the side. There is one apparent extra possibility, a shift of zero modulo $N$. In that case $c_i=\zeta v_i$ cannot equal $v_i$, because $v_i\ne0$ and $|\zeta|<1$. Every contact then lies strictly between its endpoints. Reflection interchanges the endpoints of every side in the cyclic order, so the image of each vertex now belongs to the side ending at its successor. This gives $\kappa=1$.
 
 <div class="reader-checkpoint" data-retrieval-checkpoint>
 
@@ -137,6 +116,10 @@ $$
 \qquad\frac{\kappa-1}{N}<\frac{\theta_\zeta}{2\pi}<\frac\kappa N.
 $$
 
-There is no hidden multiple of $2\pi$ in the first inequality. After subtracting $\Phi_{i-\kappa}$, its interval lies between zero and $2\pi$, because $1\le\kappa<N$; the chosen $\theta_\zeta$ lies there too. The geometric argument relation therefore selects this exact representative. Summing the $N$ inequalities gives $2\pi(\kappa-1)<N\theta_\zeta\le2\pi\kappa$: each wrap of the continued index adds $2\pi$. Equality at the upper bound would make every image a vertex; following the resulting finite cycle would give $v=\zeta^L v$ for a positive integer $L$, impossible when $v\ne0$ and $|\zeta|<1$.
+There is no hidden multiple of $2\pi$ in the first inequality. After subtracting $\Phi_{i-\kappa}$, its interval lies between zero and $2\pi$, because $1\le\kappa<N$; the chosen $\theta_\zeta$ lies there too. The geometric argument relation therefore selects this exact representative. Summing the $N$ inequalities gives $2\pi(\kappa-1)<N\theta_\zeta\le2\pi\kappa$: each wrap of the continued index adds $2\pi$. Equality at the upper bound would make every image a vertex; following that finite cycle would give $v=\zeta^L v$ for a positive integer $L$, impossible when $v\ne0$ and $|\zeta|<1$.
 
-As a small check, if $\beta_i=1/4$, then $c_i=(1/4)v_{i-1}+(3/4)v_i$ is inside the side and contributes one to $b_T$. If $\beta_i=0$, it contributes zero and belongs only to the half-open side ending at $v_i$. This convention prevents double counting throughout the later return paths.
+The angle already determines the shift. For the eight-state example we will meet again, $N=8$ and $\theta_\zeta=5\pi/7$. Its angle in turns is $5/14$, and
+$$
+2<8\cdot\frac{5}{14}=\frac{20}{7}<3.
+$$
+So $\kappa=3$. An image starting at $v_1$ belongs to side $4$. Its exact position on that side still depends on the polygon. The next chapter asks which of these positions are genuine averages and which coincide with the ending vertex.
