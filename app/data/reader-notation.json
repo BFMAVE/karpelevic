@@ -16,7 +16,7 @@
       ],
       [
         "Invariant polygon $P$",
-        "A polygon satisfying $\\lambda P\\subseteq P$: rotating and scaling any point of $P$ keeps it in $P$."
+        "For the [polygon defined in Topic I](#guide-1-polygon), invariance means $\\lambda P\\subseteq P$. Multiplication by $\\lambda$ takes every point of $P$ back into $P$."
       ],
       [
         "Supporting line",
@@ -167,7 +167,7 @@
         "Coprime integers have an integer linear combination equal to one. Integer division supplies the complementary basis vector."
       ],
       [
-        "Return displacement $\\Delta$",
+        "Number of bases advanced on return, $\\Delta$",
         "The number of base positions advanced by the first-return permutation; it is the drop between two consecutive record deficits."
       ],
       [
@@ -272,7 +272,7 @@
       ],
       [
         "Structural factor count $m$ and closing exponent $e$",
-        "For the least-order polygon, $m=\\lfloor N/q\\rfloor$ and $e=s-mq$. After the prescribed orientation, $q<s$; $e$ can be negative."
+        "For the least-order polygon, $m=\\lfloor N/q\\rfloor$ and $e=s-mq$. Number the endpoints so that $q<s$. Then $e$ can be negative."
       ],
       [
         "Principal factor argument $u_j$",
@@ -422,7 +422,7 @@
       ],
       [
         "Requested order $n$ and least realising order $k$",
-        "$k$ is the smallest matrix order realising the selected maximiser; $k\\le n$. For $k\\ge4$, its geometric product uses $m=\\lfloor k/q\\rfloor$, while the order-$n$ scalar candidate uses $\\lfloor n/q\\rfloor$."
+        "$k$ is the smallest matrix order realising the farthest eigenvalue on this ray; $k\\le n$. For $k\\ge4$, its geometric product uses $m=\\lfloor k/q\\rfloor$, while the order-$n$ scalar candidate uses $\\lfloor n/q\\rfloor$."
       ],
       [
         "Exceptional order-three region",
@@ -434,7 +434,7 @@
       ],
       [
         "Closing bounds",
-        "For a maximiser with $k\\ge4$, the proof combines $R_n(\\theta)\\le K_k(\\theta)\\le K_n(\\theta)\\le R_n(\\theta)$. The small-order cases are checked separately."
+        "If this eigenvalue first occurs at order $k\\ge4$, the proof combines $R_n(\\theta)\\le K_k(\\theta)\\le K_n(\\theta)\\le R_n(\\theta)$. The small-order cases are checked separately."
       ]
     ],
     "13": [

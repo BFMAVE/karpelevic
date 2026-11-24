@@ -10,7 +10,7 @@ Where do the fractions come from in this example? The ray makes $5/14$ of a turn
 
 ### The return paths and the real turn count
 
-The two paths are
+Starting at $v_1$ or $v_2$, each image that lands on a vertex advances its index by three modulo eight. Following the images from the two starting points gives
 
 $$
 v_1\longrightarrow v_4\longrightarrow v_7\longrightarrow c_2,
@@ -21,7 +21,7 @@ v_2\longrightarrow v_5\longrightarrow v_0\longrightarrow v_3
 \longrightarrow v_6\longrightarrow c_1.
 $$
 
-Each arrow is one multiplication by $z$. A return means reaching one of the assigned sides $(v_0,v_1]$ or $(v_1,v_2]$. The point $v_0$ is excluded from the first half-open side, so the second path has not yet returned when it reaches $v_0$. It takes two steps to reach $v_0$ and three more to reach $c_1$.
+The first line tells us $z^3v_1=c_2$. Why does the second line continue past $v_0$? Our target consists of the sides $(v_0,v_1]$ and $(v_1,v_2]$. The bracket convention assigns the endpoint $v_0$ to the side ending there, $(v_7,v_0]$, which is outside this target. Starting at $v_2$, we therefore spend two steps getting to $v_0$ and three more getting from $v_0$ to $c_1$. The return takes five steps.
 
 ::: {.reader-checkpoint #eight-state-first-return}
 **Retrieval checkpoint.** Trace the second path without looking at its endpoint. The second image is $v_0$. Which side owns that endpoint, and after how many multiplications does the path first reach the target?
@@ -40,7 +40,7 @@ The target set is $(v_0,v_1]\cup(v_1,v_2]$, and $v_0$ belongs to the preceding s
 </details>
 :::
 
-Write $c_j=\beta_jv_{j-1}+\alpha_jv_j$, where $\alpha_j=1-\beta_j$ and $0<\beta_j<1$. Splitting the longer path gives
+For $j=1,2$, the contact $c_j$ is strictly inside the segment from $v_{j-1}$ to $v_j$. Write $c_j=\beta_jv_{j-1}+\alpha_jv_j$ with $0<\beta_j<1$ and $\alpha_j=1-\beta_j$. Now read three pieces of the paths separately. From $v_0$ it takes three steps to $c_1$, from $v_1$ three to $c_2$, and from $v_2$ two back to $v_0$. Substitution gives
 
 $$
 (z^3-\beta_1)v_0=\alpha_1v_1,\qquad
@@ -68,22 +68,22 @@ The right side records one full turn. Taking the argument of the product alone w
 
 ### Choosing and checking the radius
 
-Take $\theta=5\pi/7$, whose fractional angle is $5/14\in(1/3,3/8)$. The two scalar angles are
+For our ray $\theta=5\pi/7$, the lower Farey endpoint $1/3$ makes a whole turn after three steps. Our ray has then turned a little farther. This excess is $A$. At the upper endpoint $3/8$ it would take eight steps to complete three turns. Our ray falls short there, and half the shortfall is $B$ because there are two factors. Putting the two calculations side by side gives
 
 $$
 A=3\theta-2\pi=\pi/7,\qquad
 B=(6\pi-8\theta)/2=\pi/7.
 $$
 
-Topic VIII's scalar equation simplifies, after dividing by $\sin(\pi/7)>0$, to
+The equation of Topic VIII has the form $\rho^{s/m}\sin A+\rho^q\sin B=\sin(A+B)$. Here $s/m=4$, $q=3$, and both sine coefficients equal $\sin(\pi/7)$. Using $\sin(2h)=2\sin h\cos h$ with $h=\pi/7$ and dividing by $\sin h>0$ gives
 
 $$
 \rho^4+\rho^3=2\cos(\pi/7).
 $$
 
-Its left side strictly increases from zero to two on $[0,1]$, and the right side lies strictly between zero and two. There is exactly one root $\rho\in(0,1)$, numerically about $0.97061308$.
+At $\rho=0$ the left side is zero, and at $\rho=1$ it is two. Between these values both powers increase strictly and continuously. Since $0<2\cos(\pi/7)<2$, the equation picks out exactly one radius in $(0,1)$. Bisection gives $\rho\approx0.97061308$.
 
-How do we find the weights for the matrix? Equality in Topic IX's convexity bound makes the two weights equal. Write $\beta_1=\beta_2=\beta$ and $\alpha=1-\beta$. Put $h=\pi/7$. The two equal factor arguments have sum $2\pi-2\theta=4h$, so each is $2h$. The modulus of the product gives $|z^3-\beta|=\alpha/\rho$. Hence
+How do we find the weights for the matrix? Equality in Topic IX's convexity bound makes the two weights equal. Write $\beta_1=\beta_2=\beta$ and $\alpha=1-\beta$. The two equal factor arguments have sum $2\pi-2\theta=4h$, so each is $2h$. The modulus of the product gives $|z^3-\beta|=\alpha/\rho$. Hence
 
 $$
  z^3=\beta+\frac{\alpha}{\rho}e^{2ih}.
@@ -113,17 +113,17 @@ $$
 0\to3\to6,\qquad 1\to4\to7,\qquad 2\to5\to0
 $$
 
-weight one. The remaining arrows are $6\to0$ with weight $\beta$, $6\to1$ with weight $\alpha$, $7\to1$ with weight $\beta$, and $7\to2$ with weight $\alpha$. Let $M$ be the matrix whose entries are these arrow weights, with all other entries zero. Every row sums to one, so $M$ is stochastic.
+probability one. State $6$ splits its probability between $0$ and $1$ in the proportions $\beta,\alpha$. State $7$ splits it between $1$ and $2$ in the same proportions. To form $M$, put each probability in row $i$, column $j$ for the arrow $i\to j$, and fill the unused entries with zeros. A row now sums either to $1$ or to $\beta+\alpha=1$.
 
 <!-- reader-figure:late -->
 
-To prove that $z$ is an eigenvalue, set
+We can construct an eigenvector by following these same arrows. Choose the scale so that $v_0=1$. The contact equation $(z^3-\beta)v_0=\alpha v_1$ determines $v_1$, and the closing equation $z^2v_2=v_0$ determines $v_2$. Thus our starting values are
 
 $$
 v_0=1,\qquad v_1=(z^3-\beta)/\alpha,\qquad v_2=z^{-2},
 $$
 
-and define the remaining coordinates along each weight-one arrow by $v_j=zv_i$. Thus $v_3=z$, $v_6=z^2$, $v_4=zv_1$, $v_7=z^2v_1$, and $v_5=z^{-1}$. All six weight-one rows satisfy $Mv=zv$. Row six satisfies it because $\beta v_0+\alpha v_1=z^3=zv_6$. For row seven the product identity gives $(z^3-\beta)v_1=\alpha v_2$, hence $\beta v_1+\alpha v_2=z^3v_1=zv_7$. The vector is nonzero since $v_0=1$.
+On an arrow $i\to j$ with probability one, row $i$ of $Mv=zv$ reads $v_j=zv_i$. Starting with the three values above, this gives $v_3=z$, $v_6=z^2$, $v_4=zv_1$, $v_7=z^2v_1$ and $v_5=z^{-1}$. Row $6$ gives $\beta v_0+\alpha v_1=z^3=zv_6$ by the choice of $v_1$. To check row $7$, use $z^2(z^3-\beta)^2=\alpha^2$ from the product. Dividing by $\alpha z^2$ gives $(z^3-\beta)v_1=\alpha z^{-2}=\alpha v_2$. Thus $\beta v_1+\alpha v_2=z^3v_1=zv_7$. All eight rows hold, and $v_0=1$ ensures we have a nonzero vector.
 
 For instance the last deterministic path closes because $zv_5=z\cdot z^{-1}=1$. Rows six and seven place a point strictly inside a side once we know that the two coordinates in each average are consecutive hull vertices.
 
@@ -133,7 +133,7 @@ We can check this last condition from the coordinates themselves.
 
 Recall $h=\pi/7$. Since $\beta/\alpha=1/\rho$ and $z^3-\beta=\beta e^{2ih}$, the coordinates have the following polar forms.
 
-| Coordinate | Exact value | Continued angle |
+| Vertex | Eigenvector coordinate | Angle measured counterclockwise from $v_0$ |
 |---|---|---|
 | $v_0$ | $1$ | $0$ |
 | $v_1$ | $\rho^{-1}e^{2ih}$ | $2h$ |
@@ -186,19 +186,19 @@ The three angle differences are $a,b,a+b$. Dividing each term by $r_{j-1}r_{j+1}
 </details>
 
 <details>
-<summary>Independent interval check (optional)</summary>
+<summary>Check the side inequalities over a whole interval of radii</summary>
 
-The [reproducible rational certificate](https://github.com/BFMAVE/karpelevic/blob/main/docs/proof-audits/reader-learning-mathematics-2026-10-02.md) independently checks all 48 supporting-side determinants $D_{ij}=\det(v_{i+1}-v_i,v_j-v_i)$ with $j\ne i,i+1$. It proves $D_{ij}>1/10$ throughout $97/100\le\rho\le98/100$, and brackets the actual root inside that interval. This is a stronger computational statement across a whole radius interval. The elementary turn proof above already establishes the convexity needed here at the exact scalar root.
+There is also a [calculation with rational bounds](https://github.com/BFMAVE/karpelevic/blob/main/docs/proof-audits/reader-learning-mathematics-2026-10-02.md). For each directed side $v_i v_{i+1}$, test the six vertices other than its endpoints. The determinant $D_{ij}=\det(v_{i+1}-v_i,v_j-v_i)$ is positive exactly when $v_j$ lies to the left of that side. There are $8\cdot6=48$ such tests. The calculation brackets our root between $97/100$ and $98/100$ and proves $D_{ij}>1/10$ in all 48 tests throughout that interval. Our turn calculation established convexity directly at the root. These bounds show that every other vertex stays strictly to the left of each directed side even if we vary the radius within this interval.
 
 </details>
 
-The origin lies inside too. If $v_i=r_ie^{i\phi_i}$, then
+To locate zero, walk along each side in counterclockwise order. Since the vertices go round counterclockwise, the interior lies to the left of each side. A point strictly to the left of them all is inside the polygon. For the side from $v_i$ to $v_{i+1}$, the vector from $v_i$ to zero is $-v_i$. Using $v_i=r_i e^{i\phi_i}$ gives
 
 $$
 \det(v_{i+1}-v_i,-v_i)=r_ir_{i+1}\sin(\phi_{i+1}-\phi_i)>0,
 $$
 
-because each continued angle gap is $h$ or $2h$, between zero and $\pi$. Thus zero is strictly inward from every supporting side.
+The two radii are positive, and the turn from one radius vector to the next is either $h$ or $2h$, also on the last side. Both angles are less than $\pi$, so their sines are positive. The determinant has the required sign on every side, placing zero in the interior.
 
 Now compare the polygon with its image. The six rows with a single successor take a vertex exactly to the next vertex on its path,
 
@@ -207,7 +207,7 @@ zv_0=v_3,\quad zv_1=v_4,\quad zv_2=v_5,\quad
 zv_3=v_6,\quad zv_4=v_7,\quad zv_5=v_0.
 $$
 
-The remaining two are
+Rows $6$ and $7$ each have two destinations. In these rows the eigenvector equation gives the position of the image on the side joining the two destinations. With our coordinates this reads
 
 $$
 zv_6=\rho^3e^{ih}=\beta v_0+\alpha v_1=c_1,
@@ -217,7 +217,7 @@ $$
 
 For the first equality of averages, use $1+e^{2ih}=2\cos h\,e^{ih}$ and $2\beta\cos h=\rho^3$. The second uses the same identity after multiplication by $\rho^{-1}e^{2ih}$. Since $0<\alpha,\beta<1$ and $\alpha+\beta=1$, the contacts are strictly inside their respective sides. We can read off the assigned side of each image.
 
-| Source | Image | Assigned half-open side |
+| Vertex before multiplication | Image under $z$ | Side containing the image (left endpoint excluded) |
 |---|---|---|
 | $v_0$ | $v_3$ | $(v_2,v_3]$ |
 | $v_1$ | $v_4$ | $(v_3,v_4]$ |
@@ -240,7 +240,7 @@ $$
 \rho^{5/2}\sin(\pi/7)+\rho^3\sin(3\pi/14)=\sin(5\pi/14).
 $$
 
-Its closing exponent is $e=-1$. Clearing that negative power gives $z^5(z^3-\beta)^2=(1-\beta)^2z^6$ for the equal-weight construction, used with $z\ne0$.
+At order seven, two groups of $q=3$ leave the leading exponent $s-mq=5-2\cdot3=-1$. The product therefore reads $z^{-1}(z^3-\beta)^2=(1-\beta)^2$. We are looking for a point of positive radius, so $z\ne0$ and we can clear the power of $z$ in the denominator. In the polynomial form from Topic X this gives $z^5(z^3-\beta)^2=(1-\beta)^2z^6$.
 
 In the explorer, keep the ray fixed and change the order from seven to eight. The new Farey fraction is the mediant $(1+2)/(3+5)=3/8$. The ray stays to its left, where Topic XI gives strict increase. The two radii on the same ray are
 

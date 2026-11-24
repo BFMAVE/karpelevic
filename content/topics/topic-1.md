@@ -6,21 +6,21 @@ An eigenvector $v$ gives us a particularly simple way of doing all these average
 
 Throughout this construction $v$ is a column of values. A row of probabilities evolves by multiplication on the other side, $\mu^T\mapsto\mu^TA$. We will use both conventions when we fill the region along a ray.
 
-If $Av=\lambda v$, choose a coordinate $v_i$ of largest absolute value. The triangle inequality gives
+How far from zero can $\lambda$ be? Choose a coordinate $v_i$ farthest from zero. Row $i$ takes a weighted average of coordinates, each at distance at most $|v_i|$. Applying the triangle inequality to this row gives
 
 $$|\lambda|\,|v_i|=\left|\sum_j a_{ij}v_j\right|\le\sum_j a_{ij}|v_j|\le |v_i|.$$
 
-Since $v\ne0$, this proves $|\lambda|\le1$. Also $A\mathbf1=\mathbf1$, where $\mathbf1$ is the column of ones, so $1$ is always an eigenvalue. The interesting question is where the other eigenvalues can lie inside the unit disk.
+Our chosen coordinate is nonzero because $v$ is an eigenvector. Dividing the inequality by $|v_i|$ gives $|\lambda|\le1$. We can reach the point $1$ on the unit circle. Every entry of $A\mathbf1$ is a weighted average of ones, so $A\mathbf1=\mathbf1$. Which other points in the disk can we reach?
 
-View each complex coordinate $v_j$ as a point of the plane. A **convex combination** is a weighted average $\sum_j c_jv_j$ with $c_j\ge0$ and $\sum_jc_j=1$. The **convex hull** of the coordinates is the set of all these averages:
+Mark $v_1,\ldots,v_n$ in the complex plane. What points could a row send us to if we were free to choose its weights? A row can produce any sum $\sum_j c_jv_j$ with $c_j\ge0$ and $\sum_j c_j=1$. Such a sum is a **convex combination** of the coordinates. The set of all these sums is their **convex hull**,
 
 $$P=\operatorname{conv}\{v_1,\ldots,v_n\}.$$
 
-With just two points the hull is their joining segment. You can [move the weights](/prerequisites/#average-heading) to see the row choose different points on this segment.
+Take a finite set of at least two distinct points in the complex plane. In this walkthrough we call its convex hull a [**polygon**]{#polygon}. If the points do not all lie on a line, the polygon includes the whole region inside its sides. If all the points lie on one line, the polygon is the segment between the two outermost points. You can [move the weights](/prerequisites/#average-heading) to trace the segment from $1$ to $i$. Why exclude a single point? If we could choose $P=\{0\}$, then $\lambda P\subseteq P$ would hold for every complex number, even for $\lambda=2$, which our matrix bound has already ruled out.
 
-The eigenvector equation puts each image $\lambda v_i$ in $P$. The hull of these images is $\lambda P$, the whole original hull multiplied by $\lambda$. Since $P$ contains every average of points in $P$, it contains that image hull too. Multiplying by $\lambda=\rho e^{i\theta}$ rotates every point through $\theta$ and scales its distance from zero by $\rho$. The matrix equation has become a rotation and contraction fitting inside a polygon.
+The eigenvector equation puts each image $\lambda v_i$ in $P$. The hull of these images is $\lambda P$, the original hull multiplied by $\lambda$. Since $P$ contains every average of points in $P$, it contains that image hull too. Multiplying by $\lambda=\rho e^{i\theta}$ rotates every point through $\theta$ and scales its distance from zero by $\rho$. The matrix equation has given us the containment $\lambda P\subseteq P$.
 
-A **vertex** is an extreme point: it cannot be expressed as a nontrivial average of other points of the hull. Some coordinates may repeat or lie inside the hull, so the polygon has at most $n$ vertices. A finite convex hull is called a **polytope**; in the plane it can also be a segment or a single point.
+A point of $P$ is a **vertex** if we cannot draw a segment in $P$ that extends past that point in both directions. In a triangle the three corners have this property. Every vertex of the hull comes from one of our coordinates, although a coordinate can also lie on a side, lie inside, or repeat an earlier coordinate. There are therefore at most $n$ vertices.
 
 We can already settle order two. Write the two averaging rows as $(1-a,a)$ and $(b,1-b)$, with $0\le a,b\le1$. Subtract their outputs on a column $x$:
 
@@ -34,7 +34,7 @@ On constant columns the multiplier is one. On an eigenvector with unequal entrie
 
 ### An exact four-point picture
 
-Take $v=(1,i,-1,-i)^T$, and let $C$ shift each coordinate to the next one, returning from the fourth to the first. Then $Cv=iv$. Writing out the stochastic matrix $A=(I+C)/2$, where $I$ is the identity, gives
+Place the four numbers $1,i,-1,-i$ around the unit circle in this order and collect them in the column $v$. The matrix $C$ reads the next entry in the list, starting again at $1$ after $-i$. Thus $Cv=(i,-1,-i,1)^T=iv$. To average an entry with its neighbour, give equal weight to leaving the list in place and shifting it. With $I$ the identity matrix, this gives
 
 $$
 A=\begin{pmatrix}
@@ -45,13 +45,13 @@ A=\begin{pmatrix}
 \end{pmatrix}.
 $$
 
-Its first row computes
+For the entry at $1$ we get
 
 $$
 (Av)_1=\tfrac12(1)+\tfrac12(i)=\frac{1+i}{2}.
 $$
 
-Algebraically, this is the first coordinate of $\lambda v$. Geometrically, it is the midpoint of the side joining the points $1$ and $i$. The remaining rows make the same midpoint choice on the other three sides. Hence
+The point $(1+i)/2$ is halfway from $1$ to $i$. The next row averages $i$ and $-1$. Its output is $i$ times the first midpoint, since both inputs have been multiplied by $i$. The same quarter turn takes us from each row to the next. All four midpoints are therefore obtained from their starting vertices by the same multiplier. In matrix form we have
 
 $$
 Av=\frac{1+i}{2}v=\lambda v,\qquad
@@ -66,29 +66,29 @@ Join the four midpoints in the drawing. The smaller square is $\lambda P$. Each 
 
 ### Why the translation works in both directions
 
-Suppose conversely that a non-singleton polytope $P$ has vertices $w_1,\ldots,w_k$ and $\lambda P\subseteq P$. For each vertex, choose coefficients expressing its image as an average:
+Now start with the picture. We have a polygon $P$ with vertices $w_1,\ldots,w_k$, and we know that $\lambda P\subseteq P$. Where can we get the entries of a matrix? The point $\lambda w_i$ lies in the hull of the vertices, so we can choose weights $a_{ij}$ for which
 
 $$\lambda w_i=\sum_{j=1}^k a_{ij}w_j,\qquad a_{ij}\ge0,\quad\sum_j a_{ij}=1.$$
 
-These coefficients are the rows of a stochastic matrix, and the nonzero column $(w_1,\ldots,w_k)^T$ is an eigenvector for $\lambda$. If $k<n$, append an identity block. This leaves the old eigenvalues present and gives order $n$.
+Use the weights for $\lambda w_i$ as row $i$ of $A$. The row sums are one, and reading the displayed equations down the rows gives $Aw=\lambda w$ for $w=(w_1,\ldots,w_k)^T$. At least one vertex differs from zero, so $w$ is an eigenvector. If we need $n>k$ states, add $n-k$ states that each stay where they are. The enlarged matrix has diagonal blocks $A$ and $I_{n-k}$, and extending $w$ by zeros gives the same eigenvalue.
 
-For $n\ge2$ we therefore have the exact correspondence
+Together the two constructions give the following criterion for every $n\ge2$.
 
-$$\lambda\in\Theta_n\quad\Longleftrightarrow\quad\lambda P\subseteq P\text{ for a non-singleton polytope with at most }n\text{ vertices}.$$
+$$\lambda\in\Theta_n\quad\Longleftrightarrow\quad\text{there is a polygon }P\text{ with at most }n\text{ vertices and }\lambda P\subseteq P.$$
 
-There is one small detail in the forward direction. If all eigenvector coordinates are the same nonzero number, the equation forces $\lambda=1$. We then use any nontrivial segment, which multiplication by $1$ preserves. The one-state case is handled separately: $\Theta_1=\{1\}$.
+One case in the construction from a matrix deserves a check. If every coordinate of $v$ is the same number $c$, then $c\ne0$, and each row returns $c$. Hence $\lambda c=c$ and $\lambda=1$. For this eigenvalue the segment $[0,1]$ supplies the polygon in the criterion. At order one the only stochastic matrix is $(1)$, so $\Theta_1=\{1\}$.
 
-Why check only vertex images? Any point of $P$ is an average $x=\sum_jc_jw_j$. Linearity gives $\lambda x=\sum_jc_j\lambda w_j$. If each vertex image belongs to $P$, convexity puts this average in $P$ too. Conversely, invariance of the whole polygon certainly includes the vertices. This observation will let later deformations verify finitely many contacts instead of every point of a two-dimensional region.
+In a drawing we only have to check the $k$ points $\lambda w_j$. To see why, choose any $x\in P$ and write it as a convex combination $x=\sum_j c_jw_j$. Its image $\lambda x=\sum_j c_j(\lambda w_j)$ uses the same weights. As soon as the vertex images lie in $P$, every such average lies there as well. This lets us check containment again after moving a vertex.
 
 To describe the boundary, we will rotate about zero and measure distance along a ray. We first need to know where zero lies in an invariant polygon.
 
 ### Why zero is inside a nonreal invariant polygon
 
-For nonreal $\lambda$, a nontrivial segment cannot contain its rotated image: the two segments have different directions. Thus the invariant hull is a genuine two-dimensional polygon.
+Consider a nonreal eigenvalue $\lambda$. Multiplication by $\lambda$ turns a segment through an angle different from a multiple of $\pi$. Its image then lies on a line with a different direction and cannot fit in the original segment. Our polygon therefore has interior. Where is zero in relation to its sides?
 
-When $0<|\lambda|<1$, every orbit $w,\lambda w,\lambda^2w,\ldots$ converges to zero. Closedness puts zero in $P$. For $|\lambda|=1$ and $\lambda\ne1$, the averages of the first $k$ iterates converge to zero by the finite geometric-series formula, so convexity again puts zero in $P$.
+Choose $w\in P$. By containment, $w,\lambda w,\lambda^2w,\ldots$ all belong to $P$. If $|\lambda|<1$, their distances from zero tend to zero. The polygon is closed, so it contains their limit. If $|\lambda|=1$, average the first $k$ points instead. Their average is $w(1-\lambda^k)/(k(1-\lambda))$. Its numerator stays bounded and $1-\lambda\ne0$, so it also tends to zero. Each average belongs to $P$ by convexity.
 
-Zero cannot lie on the boundary. A supporting line through zero would put the polygon in one closed half-plane. The directions of a nonzero orbit cannot remain in that half-plane. A finite nonreal rotation orbit goes around zero and its direction vectors sum to zero and are not collinear; an infinite rotation orbit is dense in the circle. Either possibility contradicts that half-plane restriction. This is why later arguments may order vertices by their angles about zero.
+Could zero be on a side or at a corner? There would then be a line through zero with all of $P$ in one closed half-plane. Follow the directions of any $w\ne0$ in $P$. If the rotation repeats after $m$ steps, the $m$ unit vectors in these directions sum to zero by the geometric sum formula. Take components perpendicular to the line, choosing the positive direction into the half-plane. These components are all nonnegative and their sum is zero. Each one would have to vanish, putting all the directions on the line. Yet two successive directions form an angle different from a multiple of $\pi$. If the rotation never repeats, its directions enter every open arc, including one on the other side of the line. In both cases we get a contradiction. Thus zero lies in the interior, and we can order the vertices by their angles around it.
 
 <details class="reader-proof-derivation">
 <summary>Why an irrational rotation visits every open arc</summary>
@@ -101,7 +101,7 @@ Write the rotation angle as $2\pi\alpha$ with $\alpha$ irrational. Divide $[0,1)
 
 Fix a ray on which a nonzero eigenvalue is possible, and let $r$ be the supremum of the possible radii there. The unit-disk bound gives $r\le1$. Choose realising matrices $A_k$ with eigenvalues $\lambda_k$ on this ray and $|\lambda_k|\to r$. Their entries are bounded by one, so a subsequence converges entry by entry. The limit $A$ is still stochastic. Along the same subsequence $\lambda_k\to\lambda$ with $|\lambda|=r$, and continuity of the determinant gives $\det(\lambda I-A)=0$. We can therefore choose an **outermost eigenvalue** on this ray. The same argument for any convergent sequence of attainable eigenvalues shows that $\Theta_n$ is closed, and hence compact.
 
-Real matrices give conjugate eigenvalues, so reflection in the real axis preserves $\Theta_n$. Appending an identity block gives $\Theta_n\subseteq\Theta_{n+1}$.
+Two operations tell us where else to look for eigenvalues. Taking complex conjugates gives $A\overline v=\overline\lambda\,\overline v$, since the entries of $A$ are real. It is therefore enough to draw the upper half of the region and reflect it. Adding a state that stays fixed preserves the old eigenvalue, so $\Theta_n\subseteq\Theta_{n+1}$.
 
 Return to the diamond with $\lambda=(1+i)/2$. Its first vertex goes to a side midpoint. Halve the multiplier. The image now lies halfway from zero to that midpoint, still inside the diamond. The same is true at every vertex. For any nonreal attainable $\lambda$, the polygon contains both $0$ and $\lambda v_j$, so it contains the segment between them. Hence $(t\lambda)P\subseteq P$ for $0\le t\le1$. The polygon correspondence gives a matrix at every point of that radial segment. For real eigenvalues the two-state calculation already fills $[-1,1]$.
 
@@ -128,11 +128,11 @@ is stochastic and sends $v$ to $t\lambda v+(1-t)\mathbf1(\pi^Tv)=t\lambda v$. Th
 
 ### A worked check
 
-Take the three-cycle matrix $A=\begin{pmatrix}0&1&0\\0&0&1\\1&0&0\end{pmatrix}$ and $\omega=e^{2\pi i/3}$. With $v=(1,\omega,\omega^2)^T$, direct multiplication gives $Av=\omega v$. Its coordinate hull is an equilateral triangle; multiplication by $\omega$ permutes the vertices. For $0\le t\le1$, the matrix $tA+(1-t)\mathbf1\mathbf1^T/3$ realizes $t\omega$.
+Try radial filling on a triangle. Write $\omega=e^{2\pi i/3}$ and take $v=(1,\omega,\omega^2)^T$. The cycle matrix $A=\begin{pmatrix}0&1&0\\0&0&1\\1&0&0\end{pmatrix}$ gives $Av=(\omega,\omega^2,1)^T=\omega v$. Its action on the triangle is a turn through $2\pi/3$. Now $1+\omega+\omega^2=0$, so a row giving weight $1/3$ to each vertex sends it to the centre. Giving each row weight $t$ on the cycle instruction and $1-t$ on this average gives $tA+(1-t)\mathbf1\mathbf1^T/3$. Its eigenvalue on $v$ is $t\omega$ for every $0\le t\le1$.
 
 <div class="reader-checkpoint" data-retrieval-checkpoint>
 
-**Row checkpoint.** Replace the first row of the four-point example by $(1/4,3/4,0,0)$. Which point does that row compute, and where does it lie? Does changing this row alone establish a new eigenpair for the whole matrix?
+**Row checkpoint.** In the square example, give the first row weights $(1/4,3/4,0,0)$ and leave the other three rows alone. Mark the new image of $1$ on the square. Is there still one multiplier that gives all four images of the original column?
 
 <details class="reader-checkpoint-hint">
 <summary>Hint</summary>
@@ -148,4 +148,4 @@ The row computes $(1+3i)/4$, strictly inside the side from $1$ to $i$ and closer
 </details>
 </div>
 
-At the outermost point of a ray, can even one vertex image lie inside the polygon? Topic II answers this question by changing the averaging rows.
+Take a nonreal outermost point on a ray and choose an invariant polygon with as few vertices as possible. Can even one vertex land strictly inside it? Topic II answers this question by changing the averaging rows.

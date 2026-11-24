@@ -13,8 +13,8 @@ export const lateOrientations: Record<number, TopicOrientation> = {
       { term: "Interval position t", meaning: "t = (y − p/q)/(r/s − p/q), between 0 and 1; A = 2πt/s and B = 2π(1 − t)/(mq)." },
       { term: "Candidate radius Kₙ(θ)", meaning: "The unique ρ in (0,1) solving ρ^(s/m) sin A + ρ^q sin B = sin(A+B). Its boundary interpretation will be proved in Topics IX–XII." },
     ],
-    strategy: "Replace a many-root complex equation by one increasing real function on the chosen ray. Keep the geometric turn count to select the intended polynomial branch.",
-    payoff: "One continuous candidate radius per interior ray, with endpoint value 1 for n ≥ 4. The order-three negative-ray endpoint remains exceptional.",
+    strategy: "Fix the angle of the ray. The turn count gives an angle for each equal factor, and only the radius remains to be found. On the relevant interval the left side of its real equation increases with the radius, so there is only one possible solution.",
+    payoff: "We have one candidate radius on each ray between neighbouring Farey directions. For n ≥ 4 it tends to 1 at each end. At order three the ray along the negative real axis needs a separate calculation.",
   },
   9: {
     imports: [
@@ -28,14 +28,14 @@ export const lateOrientations: Record<number, TopicOrientation> = {
       { term: "Logarithmic size F(u)", meaning: "F(u) = −log(cos u + c sin u) on 0 < u < M, where M = Arg(w − 1). Its second derivative is at least 1." },
       { term: "Average argument ū", meaning: "ū = (u₁+⋯+uₘ)/m. The real phase fixes ū=A+B; the tangent-line proof shows F(ū)≤(F(u₁)+⋯+F(uₘ))/m." },
     ],
-    strategy: "Draw the normalised factors on their common line, then use their arguments as the one-dimensional variable. Derive the convexity by differentiation, and prove Jensen by summing tangent-line inequalities whose linear terms cancel.",
-    payoff: "The radius cannot exceed the candidate. Equality holds precisely when all contact weights βⱼ agree, under the specified product and real phase hypotheses.",
+    strategy: "As the weight varies, a normalised factor moves on a line. Use its angle to locate it on that line and express the logarithm of its length in terms of the angle. The graph lies above its tangent at the mean angle. Adding the tangent bounds makes the terms linear in the angle differences cancel.",
+    payoff: "For factors satisfying the return product and its angle sum, the radius is at most the candidate radius. To reach it, every contact has to use the same weight.",
   },
   10: {
     imports: [
-      { term: "Stochastic rows as convex averages", from: 1, anchor: "eq:polygon-criterion", use: "Outgoing transition weights must be nonnegative and sum to one in each row." },
+      { term: "Stochastic rows as convex averages", from: 1, anchor: "eq:polygon-criterion", use: "Choose a nonnegative weight for each outgoing edge so that the weights from each state sum to one." },
       { term: "Scalar candidate radius", from: 8, anchor: "eq:radial", use: "Its equation supplies positive weights α and β with α + β = 1." },
-      { term: "The equality case of convexity", from: 9, anchor: "thm:convex-product", use: "Equal weights are the parameters that must realise the sharp radius on the selected branch." },
+      { term: "The equality case of convexity", from: 9, anchor: "thm:convex-product", use: "Equality in the convexity bound tells us to give each branching row the same contact weight." },
       { term: "Determinant expansion", from: null, use: "Group permutation terms by disjoint directed cycles to find the full characteristic polynomial." },
     ],
     definitions: [
@@ -44,8 +44,8 @@ export const lateOrientations: Record<number, TopicOrientation> = {
       { term: "Realisation order n₀", meaning: "n₀ = max(mq,s). The final connection skips or inserts vertices to obtain the required length s." },
       { term: "Selected arc parameter β(ϑ)", meaning: "The equal weight chosen at each oriented angle. We prove it decreases strictly from 1 to 0, so each interior weight corresponds to exactly one selected point." },
     ],
-    strategy: "Build the rows first and translate the determinant into disjoint cycle choices, including their signs and powers. Then use nonvanishing derivatives to prove that the equal weight traverses the chosen arc once.",
-    payoff: "Every candidate point is a stochastic eigenvalue, and each equal weight selects one point on its arc. The full characteristic polynomial distinguishes actual zero eigenvalues from zeros introduced by clearing the Ito equation.",
+    strategy: "Draw one arrow for each positive entry of the proposed matrix. To find the characteristic polynomial of the matrix M, expand det(tI − M). The arrows in each nonzero term form disjoint cycles once the unused diagonal factors have been set aside. Once the matrix gives the candidate eigenvalue, differentiating the equation for that eigenvalue tells us how the point moves as its common weight changes.",
+    payoff: "Every candidate point is attained. Moving the common weight from one endpoint to the other takes us once along the selected arc. Reading the characteristic polynomial also tells us when zero itself is an eigenvalue.",
   },
   11: {
     imports: [
@@ -59,25 +59,25 @@ export const lateOrientations: Record<number, TopicOrientation> = {
       { term: "Mediant ξ", meaning: "Between a/b and c/d, ξ = (a+c)/(b+d). A new order-n fraction appears in an old interval exactly when b+d=n." },
       { term: "Scalar residual", meaning: "The left side of the new scalar equation minus its right side. A negative residual at the old radius places the new root farther out." },
     ],
-    strategy: "Separate an unchanged Farey interval from a split interval. Use strict Jensen in the first case; in the second, check the sign of a rotated polynomial derivative all along one segment.",
-    payoff: "Kₙ₋₁(θ) ≤ Kₙ(θ), with exact equality cases. The bound obtained at an eigenvalue's least realising order can therefore be compared with the required order.",
+    strategy: "When we add one to the order, an old Farey interval either stays intact or acquires a new fraction. On an intact interval we compare the two scalar equations by convexity. On a split interval we follow the child equation along a segment and determine the sign of its change.",
+    payoff: "The candidate radius at order n is at least the radius at order n − 1 on the rays covered by the comparison. Repeating this at successive orders lets us use a bound proved at an eigenvalue’s smallest order.",
   },
   12: {
     imports: [
       { term: "Polygon correspondence and radial filling", from: 1, anchor: "eq:polygon-criterion", use: "Invariant polygons translate back to stochastic eigenvalues, and every segment from zero to an attainable point is attainable for n ≥ 2." },
-      { term: "Least-order geometric product", from: 7, anchor: "thm:product", use: "Apply the product to a radial maximiser at its own least realising order, when that order is at least four." },
-      { term: "Sharp upper bound", from: 9, anchor: "thm:convex-product", use: "The geometric product bounds that maximiser by its own candidate radius." },
+      { term: "Least-order geometric product", from: 7, anchor: "thm:product", use: "Use the product equation for the farthest eigenvalue on the ray at its smallest realising order, when that order is at least four." },
+      { term: "Sharp upper bound", from: 9, anchor: "thm:convex-product", use: "The geometric product bounds the modulus of this eigenvalue by the candidate radius at its smallest order." },
       { term: "Attainment", from: 10, anchor: "thm:independent-realization", use: "The order-n candidate is already an eigenvalue, so it is a lower bound for the actual radial maximum." },
       { term: "Independent order comparison", from: 11, anchor: "thm:order-monotonicity", use: "Compare the least-order bound with the order-n candidate without circular reasoning." },
     ],
     definitions: [
       { term: "Actual radial maximum Rₙ(θ)", meaning: "The largest r with re^(iθ) in Θₙ. Compactness ensures the maximum is attained." },
-      { term: "Least realising order k", meaning: "The smallest matrix order that can have the selected maximiser as an eigenvalue; k ≤ n." },
+      { term: "Least realising order k", meaning: "The smallest order of a matrix having the farthest point on this ray as an eigenvalue. It satisfies k ≤ n." },
       { term: "The exceptional order-three region", meaning: "Θ₃ is the triangle with vertices 1 and the two cubic roots of unity, together with the real segment [−1,−1/2]." },
       { term: "Interior radial gap", meaning: "At a point of radius r<Kₙ(θ), the difference Kₙ(θ)−r is positive. Continuity keeps this gap positive nearby, proving the point is interior." },
     ],
-    strategy: "Check the order-three scalar domains and the unit-circle classification, then combine attainment below with the least-order bound above. Radial filling gives the whole region; continuity of the positive radial gap identifies its boundary.",
-    payoff: "Rₙ = Kₙ for n ≥ 4: the candidates are exactly the boundary. At order three, the nonreal radius tends to 1/2 near angle π but the negative-ray maximum is 1.",
+    strategy: "Start at the farthest attainable point on a ray and use the smallest matrix that realises it. Geometry bounds its radius at that order, and the comparison between orders gives a bound at n. The matrix from Topic X reaches that bound. Radial filling then gives every point between it and zero.",
+    payoff: "For n ≥ 4 the actual radius Rₙ equals the proposed radius Kₙ. At order three the nonreal boundary approaches −1/2 as the angle approaches π, although the real eigenvalue −1 is attainable.",
   },
   13: {
     imports: [
@@ -93,8 +93,8 @@ export const lateOrientations: Record<number, TopicOrientation> = {
       { term: "Uniform relative asymptotic", meaning: "The error divided by the positive leading gap is O(N⁻²), with one constant for all open Farey intervals and all interior positions t." },
       { term: "Positive leading gap at order N", meaning: "The displayed Farey expression without its final error factor. Its relative error is bounded by one constant divided by N squared, for every interval and interior position." },
     ],
-    strategy: "First solve the exact polygon-measurement problem by rescaling an invariant inclusion. Then factor the sine defect so that the small endpoint factor t(1−t) survives the error estimate.",
-    payoff: "Dividing the dilation by the order-N boundary radius gives the optimal factor. The worst-angle loss is of order N⁻²; a fixed badly approximable angle has loss of order N⁻³. Endpoint-uniform relative error does not mean every irrational angle has the same rate.",
+    strategy: "By what factor do we have to scale P to contain its rotated and dilated image? The boundary theorem gives the best scale for a fixed number of vertices. For large N we estimate the loss from the unit circle, keeping a factor that tends to zero at either endpoint of a Farey interval.",
+    payoff: "The optimal dilation is the given multiplier’s modulus divided by the order-N boundary radius. The largest radial loss over all angles has order N⁻². At a fixed angle whose fraction of a turn is badly approximable it has order N⁻³.",
   },
   14: {
     imports: [
@@ -109,7 +109,7 @@ export const lateOrientations: Record<number, TopicOrientation> = {
       { term: "Seven-state comparison data", meaning: "At the same angle, the interval is (1/3,2/5), with q=3, s=5, m=2, and e=−1. The two orders have different equations." },
       { term: "Numerical illustration", meaning: "Floating-point radii and plotted polylines illustrate the proved identities; they are not a replacement for the proof or an error bound for the drawn curve." },
     ],
-    strategy: "Follow the source example all the way through the paths, product, phase, scalar root, graph, and eigenvector. Compare orders only after checking their distinct Farey endpoints.",
-    payoff: "A fully checked eight-state stochastic eigenvalue and a precise connection to the order-seven explorer, with the distinction between assumed polygon contacts and constructed eigenvector coordinates retained.",
+    strategy: "For the ray at 5π/7, first follow the eight vertex labels to find the possible return paths. Then solve the radius equation, build the matrix and use its eigenvector to check where the vertices actually land. The same ray lies between different Farey neighbours at order seven.",
+    payoff: "Two rows of the eight-state matrix split their weight between outgoing edges. The eigenvector shows the two corresponding images landing inside sides of the octagon. Its radius is about 0.970613, compared with 0.944301 at order seven.",
   },
 };

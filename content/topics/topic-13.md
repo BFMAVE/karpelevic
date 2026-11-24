@@ -4,7 +4,7 @@ Draw a square centred at the origin, with a horizontal top side. A quarter turn 
 
 For a fixed rotation and dilation, we can answer the question with the boundary radius from Topic XII. The shape used in Topic XIV gives a concrete example at eight vertices.
 
-Let $N\ge4$, take $0\le\theta\le\pi$, let $R_\theta$ denote rotation through $\theta$, and set $T=\rho R_\theta$ with $\rho>0$. Reflection covers the other directions. Choose a convex polygon $P$ with at most $N$ vertices and zero in its interior. Define its gauge by
+Let $N\ge4$, take $0\le\theta\le\pi$, let $R_\theta$ denote rotation through $\theta$, and set $T=\rho R_\theta$ with $\rho>0$. Reflection covers the other directions. Choose a polygon $P$ with at most $N$ vertices and zero in its interior. Define its gauge by
 
 $$
 V_P(x)=\inf\{a>0:x\in aP\},\qquad x\in\mathbb R^2.
@@ -24,7 +24,7 @@ $$
 
 To see both directions, first note that $P$ is the unit sublevel set $\{x:V_P(x)\le1\}$. For $x\ne0$, the gauge is positive because $P$ is bounded. The polygon is closed, so the least scale is attained and $x/V_P(x)\in P$. If $TP\subseteq\gamma P$, apply the inclusion to this rescaled vector and use homogeneity to obtain the gauge inequality. At $x=0$ both sides are zero. Conversely, if the inequality holds for every vector, then every $x\in P$ has $V_P(x)\le1$, so $V_P(Tx)\le\gamma$ and $Tx\in\gamma P$.
 
-Dividing the inclusion by $\gamma$ makes $P$ invariant under multiplication by $(\rho/\gamma)e^{i\theta}$. The polygon criterion from Topic I puts this number in $\Theta_N$. Its modulus cannot exceed $K_N(\theta)$, hence $\gamma\ge\rho/K_N(\theta)$.
+Identify the plane with $\mathbb C$. Dividing $TP\subseteq\gamma P$ by $\gamma$ asks whether multiplication by $z=(\rho/\gamma)e^{i\theta}$ takes $P$ into itself. Topic I turns this inclusion into an eigenvalue of a stochastic matrix with at most $N$ states. We can add absorbing states to reach order $N$. On the ray of angle $\theta$, Topic XII gives $|z|=\rho/\gamma\le K_N(\theta)$. Thus every possible choice of $P$ requires $\gamma\ge\rho/K_N(\theta)$.
 
 This bound is attained. A nonreal boundary point inside the unit disk supplies an invariant polygon with zero in its interior. A nonreal unit-circle boundary point is a root of unity of order at most $N$. Its orbit gives a regular invariant polygon. At angles zero and $\pi$, a centred square works. Thus, if $\Gamma_N(T)$ denotes the smallest factor over allowed polygons,
 
@@ -38,7 +38,7 @@ Strict contraction in some such gauge is possible exactly when $\rho<K_N(\theta)
 
 Let $Q$ be the convex hull of the $N$th roots of unity. For $z\in Q$, express $z$ as a convex combination of those roots. Multiplying by any vertex of $Q$ permutes the roots, so every image vertex under multiplication by $z$ is again in $Q$. Thus $zQ\subseteq Q$, and the polygon criterion gives $Q\subseteq\Theta_N$. Its inscribed disk has radius $\cos(\pi/N)$, so $K_N(\theta)\ge\cos(\pi/N)$ at every angle.
 
-On the first Farey arc, from angle zero to $2\pi/N$, the scalar equation has $q=1$ and $s=m=N$. The sum-of-sines identity gives
+Where can equality occur in this bound? On the first Farey interval the endpoints are $0/1$ and $1/N$. There $q=1$ and $s=m=N$, and the boundary is the segment joining $1$ to $e^{2\pi i/N}$, as in Topic XI. The perpendicular from the origin to this segment points in direction $\pi/N$ and has length $\cos(\pi/N)$. Project the boundary point $K_N(\theta)e^{i\theta}$ onto this direction to obtain
 
 $$
 K_N(\theta)=\frac{\cos(\pi/N)}{\cos(\theta-\pi/N)}.
@@ -56,9 +56,9 @@ for every $\theta$, with one fixed polygon. At $\theta=\pi/N$ even the best poly
 
 ![A regular hexagon after a rotation through $\pi/6$. The marked vertex meets a side of the enlarged hexagon. The enlarged hexagon has inradius one, so it also contains every other rotation of the original hexagon.](/figures/bachelor-assembly-fixed-polygon.svg)
 
-For $N=4$ and $\theta=\pi/4$, $K_4=1/\sqrt2$. A map with $\rho=0.7$ therefore has optimal gauge factor $0.7\sqrt2\approx0.98995<1$. Replacing $0.7$ by $0.8$ gives a factor $0.8\sqrt2>1$, so no four-vertex gauge gives strict contraction at that angle, even though the map decreases Euclidean lengths.
+For a square and an eighth of a turn the formula gives $K_4(\pi/4)=1/\sqrt2$. A dilation by $0.7$ combined with this rotation has smallest possible factor $0.7\sqrt2\approx0.98995$, so we can make all vectors contract. Increasing the dilation to $0.8$ still shortens every Euclidean length, but $0.8\sqrt2>1$. With only four vertices no choice of polygon then gives strict contraction for all vectors.
 
-The centred square $P=[-1,1]^2$ makes these numbers visible. Its gauge is $V_P(x_1,x_2)=\max\{|x_1|,|x_2|\}$. Its corner $(1,1)$ has gauge one. After a $\pi/4$ rotation and dilation $\rho$, it becomes $(0,\rho\sqrt2)$, with gauge $\rho\sqrt2$. The entire rotated square is the diamond with extreme coordinates $\pm\rho\sqrt2$, so its containment condition is exactly that factor. The theorem shows that changing to another four-vertex polygon cannot improve it at this angle.
+Try the square $P=[-1,1]^2$ itself. The least scale that contains $(x_1,x_2)$ is $\max\{|x_1|,|x_2|\}$. Take its corner $(1,1)$, which has gauge one. The rotation sends it to $(0,\sqrt2)$, and the dilation takes it to $(0,\rho\sqrt2)$. The other three corners give the same gauge by symmetry. Since the image of the square is their convex hull, $\rho\sqrt2 P$ contains it. Any smaller copy misses the first corner image. This square therefore attains the factor predicted by the theorem.
 
 <!-- reader-figure:late -->
 
@@ -66,7 +66,7 @@ The angle $5\pi/7$ of the worked octagon gives a different answer to the same pr
 
 ### The gap near the unit circle
 
-To estimate how many vertices are needed, fix an angle inside an order-$N$ Farey interval. Use the conjugate orientation of Topic VIII so that $p/q<y<r/s$, $q<s$, and $y=\theta/(2\pi)$ or $1-\theta/(2\pi)$. Put
+For a given number $N$ of vertices we would like to estimate the distance $1-K_N(\theta)$ from the boundary point on our ray to the unit circle. Take an angle strictly between two Farey endpoints. Write $y$ for its fraction of a turn, reflecting to $1-\theta/(2\pi)$ if necessary to place the smaller denominator on the left. In these coordinates $p/q<y<r/s$ and $q<s$. Let $t$ be the fraction of the interval width between its left endpoint and $y$. With the factor count $m$ of Topic VIII this gives
 
 $$
 m=\lfloor N/q\rfloor,\qquad
@@ -107,14 +107,16 @@ D:=H(1)-\sin(A+B)
 =\frac{AB(A+B)}2\bigl(1+O(N^{-2})\bigr).
 $$
 
-The ratios $\sin h/h$ approach one with error $O(h^2)$ uniformly as $h\to0$. Factoring the defect into positive sines retains the small factor $t(1-t)$ instead of losing it in an absolute error estimate. Similarly
+Each sine in the product has a positive argument of order at most $1/N$. For such $h$, Taylor’s formula gives $\sin(h)/h=1+O(N^{-2})$. We can therefore replace all three sines by their arguments with a relative error of this order, even when $t$ is so close to an endpoint that one factor is very small. For the slope we use $(s/m)A=(2\pi/m)t$ and $qB=(2\pi/m)(1-t)$. Replacing the two sines by their arguments now gives
 
 $$
 H'(1)=\frac{s}{m}\sin A+q\sin B
 =\frac{2\pi}{m}\bigl(1+O(N^{-2})\bigr).
 $$
 
-The mean-value theorem gives $D=(1-K)H'(\xi)$ for some $K<\xi<1$. Replacing $H'(\xi)$ by $H'(1)$ needs care. The bound $K\ge\cos(\pi/N)$ first gives $1-K=O(N^{-2})$, enough for derivative relative error $O(N^{-1})$. Substituting this weaker estimate back gives $1-K=O(mN^{-3})=O((qN^2)^{-1})$. Since $s/m<2q$, the powers of $\xi$ in the derivative now differ from one by $O(N^{-2})$. This improves the derivative comparison to the required relative error. Therefore
+To turn $D$ into the distance from $K$ to one, the mean-value theorem gives $D=(1-K)H'(\xi)$ for some $K<\xi<1$. How close is this slope to $H'(1)$? The two terms in $H'(\xi)$ are the terms in $H'(1)$ multiplied by $\xi^{s/m-1}$ and $\xi^{q-1}$, respectively. Since $K\ge\cos(\pi/N)$, we first have $1-K=O(N^{-2})$ and $|\log\xi|=O(N^{-2})$. Both exponents have absolute value at most $N$. Writing each power as an exponential shows that each multiplier is $1+O(N^{-1})$.
+
+This first estimate already gives $H'(\xi)$ of order $1/m$. Using $D=O(N^{-3})$ in the mean-value identity gives the sharper bound $1-K=O(mN^{-3})=O(1/(qN^2))$, since $m\le N/q$. Apply the same calculation once more. Now $|\log\xi|=O(1/(qN^2))$ and $s/m\le N/m<2q$, so each multiplier is $1+O(N^{-2})$. The two terms in the slope are positive. Their sum therefore has this same relative error, and dividing $D$ by the slope gives
 
 $$
 1-K=\frac{mAB(A+B)}{4\pi}\,(1+O(N^{-2})),

@@ -4,43 +4,43 @@ At a vertex $v_j$ there are two possibilities for the next iterate. The contact 
 
 Choose a vertex whose index belongs to $I$ and call it a **base**. Add $\kappa$ to its index until the next label in $I$ occurs. Until the last step, the actual orbit under $T(x)=\zeta x$ visits precisely the vertices in this list. At the last step it reaches a point inside the side with the new label. The vertices visited before that step form a **tower**. Its height counts the applications of $T$ needed to reach the open side.
 
-With $N=8$, $\kappa=3$ and $I=\{1,2\}$, the paths are
+Take the eight labels $0,\ldots,7$ and mark the bases $I=\{1,2\}$. Here $\kappa=3$. From each marked label, keep adding three modulo eight and stop at the first marked label you meet again. The two walks in label order are
 
 $$
 1\to4\to7\to2,\qquad2\to5\to0\to3\to6\to1.
 $$
 
-Their heights are three and five. They use each of the eight indices once before their returns. The tower equations are $\zeta^3v_1=c_2$ and $\zeta^5v_2=c_1$. These equations describe what an invariant polygon with this contact data would satisfy; index arithmetic alone does not prove that such a polygon exists.
+Starting at $1$, we reach an open side on the third step. Starting at $2$, we reach one on the fifth. The lists *before* the last arrows are $(1,4,7)$ and $(2,5,0,3,6)$, accounting for all eight vertices exactly once. On a polygon with these contacts, the last arrows give $\zeta^3v_1=c_2$ and $\zeta^5v_2=c_1$. For now we are deducing equations that such a polygon would satisfy. Its existence will require a separate construction.
 
-Keep the distinction between a destination index and a destination point. Returning to index two means that the image lands at $c_2$, inside the side ending at $v_2$; it does not mean that it equals $v_2$. All intermediate destinations outside the base set really are vertices. This is why a height records a power of $\zeta$ up to one final averaging equation.
+Read the last arrow of the first list carefully. From $v_7$ the map reaches the contact on side $2$, at the point $c_2=\beta_2v_1+\alpha_2v_2$. The label $2$ tells us which side receives the image. On the earlier arrows the destination labels were outside $I$, so the images there were the actual vertices $v_4$ and $v_7$. This is how a list of indices produces an equation for a power of $\zeta$.
 
 <div class="reader-checkpoint" data-retrieval-checkpoint>
 
-**Return checkpoint.** Starting at base two, the index path is $2\to5\to0\to3\to6\to1$. Does reaching index zero after two steps count as a return? What is the actual point at the five-step return?
+**Check the second tower.** Follow $2\to5\to0\to3\to6\to1$. At which step do we first reach a side with an interior contact? Identify the two points $\zeta^2v_2$ and $\zeta^5v_2$.
 
 <details class="reader-checkpoint-hint">
 <summary>Hint</summary>
 
-A return is tested against the designated base set $I=\{1,2\}$, not against a familiar label or the origin of the index circle.
+Mark $1$ and $2$ on the list. At a label outside this set the contact is the ending vertex of its side. At a marked label it is strictly between the endpoints.
 
 </details>
 <details class="reader-checkpoint-solution">
 <summary>Solution</summary>
 
-Zero is outside $I$, so it is an intermediate vertex: $\zeta^2v_2=v_0$. The first later index in $I$ is one, reached after five steps. Its actual point is $c_1$, strictly inside side $(v_0,v_1)$, not vertex $v_1$.
+At step two we read label $0$. Its side has an endpoint contact, giving $\zeta^2v_2=v_0$. Labels $3$ and $6$ are outside $I$ as well. The first marked destination is $1$ at step five, so $\zeta^5v_2=c_1$ lies strictly between $v_0$ and $v_1$.
 
 </details>
 </div>
 
 ### Compute the records before introducing the integer basis
 
-For the same $N=8$, $\kappa=3$, the complete residue period is shown below. A strict record is larger than every earlier residue; time zero is the initial record. The full-wrap counter is $\lfloor3t/8\rfloor$, so
+Start at label zero and keep a tally of the *total* advance, three per step. Every eight places bring us once around the labels. After $t$ steps the number of completed turns in the labels is $\lfloor3t/8\rfloor$, the integer quotient of $3t$ by eight. The remainder is the current label. For one period these quantities are related by
 
 $$
 3t=8\lfloor3t/8\rfloor+[3t]_8.
 $$
 
-The two right-hand terms answer different questions: where are we among the eight labels, and how many complete label wraps preceded that position?
+For example, at $t=3$ we have advanced nine places. We have completed one turn in the labels and stand at label one. As you read down the last column, mark a value whenever it exceeds every previous value. Call each such value a *record*, including zero as the initial record.
 
 | Time $t$ | $3t$ | Full label wraps | Residue $[3t]_8$ |
 | --- | --- | --- | --- |
@@ -66,23 +66,23 @@ For this example we could inspect all eight labels to check the first returns. F
 
 ### Encode records with integer pairs
 
-Topic IV proved that $\varphi$ is the deficit of a record in $a_t=[t\kappa]_N$: a record exceeds every earlier residue, and its deficit is $N-a_t$. Let $\delta=\gcd(N,\kappa)$. Only multiples of $\delta$ occur, so the last record has deficit $\delta$.
+Return to an arbitrary $N$ and $\kappa$. Write $a_t=[t\kappa]_N$. Topic IV showed that for some record $a_h$, the number of bases is its remaining distance $\varphi=N-a_h$ from $N$. The residues visited from zero are exactly $0,\delta,2\delta,\ldots,N-\delta$, where $\delta=\gcd(N,\kappa)$. Hence $N-\delta$ is the last record and $\delta$ its distance from $N$.
 
-Define a linear function on integer pairs by
+For a pair of integers $(a,b)$, count the net advance of $a$ steps of size $\kappa$ after subtracting $b$ turns of $N$ labels. Call this number $L(a,b)$, so that
 
 $$
 L(a,b)=a\kappa-bN.
 $$
 
-For a record at time $h>0$, put $b=\lceil h\kappa/N\rceil$, where the ceiling is the smallest integer at least its argument. The pair $V=(h,b)$ satisfies $L(V)=-\nu$, where $\nu$ is the deficit. Encode the initial record by $V=(0,1)$, with deficit $N$.
+At a positive record time $h$, choose $b$ so that $bN$ is the first multiple of $N$ above $h\kappa$. Explicitly $b=\lceil h\kappa/N\rceil$, obtained by rounding up. If $\nu$ denotes the record deficit, then $bN-h\kappa=\nu$, or $L(h,b)=-\nu$. The initial record has deficit $N$ and is represented by $(h,b)=(0,1)$, which obeys the same equation.
 
-Take consecutive record pairs $V=(h,b)$ and $V'=(h',b')$, with deficits $\nu>\nu'$. Put
+We need the change from one record to the next. Let $V=(h,b)$ describe a record of deficit $\nu$ and $V'=(h',b')$ the very next one, with smaller deficit $\nu'$. Write their difference and the gain in the residue as
 
 $$
 U=V'-V=(q,p),\qquad\Delta=\nu-\nu'.
 $$
 
-The record-basis lemma in the paper proves
+The record at $h$ falls short of $bN$ by $\nu$. Between records we gain $\Delta$ places after removing $p$ full turns. The additional fact that these records are consecutive gives a determinant of one. We will prove the identities
 
 $$
 qb-ph=1,\qquad q\kappa-pN=\Delta,\qquad h\kappa-bN=-\nu,
@@ -92,9 +92,9 @@ $$
 q\nu+h\Delta=N,\qquad\gcd(\Delta,\nu)=\delta.
 $$
 
-Here $q=h'-h>0$ and $0<\Delta<\nu$. The determinant $qb-ph$ is the signed area of the parallelogram spanned by the two integer vectors $U,V$. Determinant one means that every integer pair has unique integer coordinates in this basis: the inverse of the $2\times2$ matrix has integer entries.
+Here $q=h'-h$ counts the extra steps, so $q>0$, and $0<\Delta<\nu$ because some deficit remains. Place $U$ and $V$ in the columns of a matrix. Its determinant $qb-ph$ gives the signed area of their parallelogram. When it equals one, the inverse matrix has integer entries by the two-by-two inverse formula. Thus every integer pair has unique integer coordinates in the basis $U,V$.
 
-Why introduce a second coordinate $b$ when the residues are one-dimensional? Reducing $h\kappa$ modulo $N$ forgets how many multiples of $N$ were crossed. The pair $(h,b)$ retains that information. Its determinant relates elapsed time to the change in the remaining gap, and the identity $q\nu+h\Delta=N$ will count exactly how many vertices the towers contain.
+A single residue keeps the current label but loses the complete turns that led there. The second coordinate $b$ lets us put them back. The identity $q\nu+h\Delta=N$ can now be read as $\nu$ paths of length $q$, with $h$ extra steps on $\Delta$ of them. These lengths add to precisely the number of polygon vertices. We still have to justify that they describe the first returns.
 
 For a picture of the determinant argument, consider a possible pair of records at $N=17$, $\kappa=3$. At times two and five the residues are $6$ and $15$, with deficits $11$ and $2$. Their record vectors are $V=(2,1)$ and $V'=(5,1)$. On squared paper join them by a segment. It passes through the integer point $(3,1)$. That point represents time three and deficit $17-3\cdot3=8$, already better than the deficit at time two. The two records cannot be consecutive.
 
@@ -112,16 +112,18 @@ For integers $h,b$ not both zero, take the smallest positive integer $d=hr+bs$ o
 
 </details>
 
-Here is the integer-vector construction. Set $D=-\det(V,V')=(h'\nu-h\nu')/N$, which is a positive integer. Choose integers $r,s$ with $hr+bs=1$, and put $W_0=(s,-r)$, so $\det(V,W_0)=-1$. These vectors form an integer basis, and we can write $V'=aV+DW_0$ for an integer $a$. Since $V'$ has coprime coordinates, $\gcd(a,D)=1$.
+Measure the area of the parallelogram with sides $V,V'$ by the positive integer $D=-\det(V,V')=(h'\nu-h\nu')/N$. The last equality follows by substituting $bN=h\kappa+\nu$ and $b'N=h'\kappa+\nu'$. Take $r,s$ from Bézout's identity above and set $W_0=(s,-r)$. Then $\det(V,W_0)=-hr-bs=-1$. In the integer basis $V,W_0$, write $V'=aV+DW_0$. The second coefficient is $D$ by taking the determinant with $V$. A common divisor of $a,D$ would divide both coordinates of $V'$, so $\gcd(a,D)=1$.
 
-If $D>1$, the integer vector
+Suppose $D>1$. Taking one copy of $W_0$ gives us a fraction $1/D$ of the way towards $V'$. To place the coefficient of $V$ strictly between zero and one as well, choose
 
 $$
 W=\left\lceil\frac aD\right\rceil V+W_0
 =\left(\left\lceil\frac aD\right\rceil-\frac aD\right)V+\frac1D V'
 $$
 
-has the form $W=\xi V+\eta V'$ with $0<\xi,\eta<1$. If $\xi+\eta>1$, replace $W$ by $V+V'-W$; its two coefficients remain positive and now sum to less than one. Thus we can take $\xi+\eta\le1$. The time coordinate is $0<\xi h+\eta h'<h'$, because $h<h'$ and $\xi,\eta>0$. Its deficit is $0<\xi\nu+\eta\nu'<\nu$, because $\nu'<\nu$. Calling these two integers $t$ and $d$, we have $t\kappa\equiv-d\pmod N$ and $0<d<\nu\le N$. Its residue $N-d$ really does exceed $N-\nu$. This integer time would improve the old record before the next record, a contradiction. Therefore $D=1$, which gives $\det(U,V)=1$.
+The first expression makes $W$ an integer vector. In the second expression its coefficients $\xi=\lceil a/D\rceil-a/D$ and $\eta=1/D$ both lie strictly between zero and one, since $\gcd(a,D)=1$ and $D>1$. If their sum exceeds one, use the integer vector $V+V'-W$ instead. Its coefficients $1-\xi$ and $1-\eta$ are again positive and now sum to less than one. We have found an integer point in the triangle with $\xi,\eta>0$ and $\xi+\eta\le1$.
+
+Its time $t=\xi h+\eta h'$ satisfies $0<t<h'$, and its deficit $d=\xi\nu+\eta\nu'$ satisfies $0<d<\nu$. Since $d=-L(W)$, the residue at time $t$ is $N-d>N-\nu$. If $t\le h$, this contradicts the record at $h$. If $h<t<h'$, it puts a better residue between our consecutive records. Both possibilities contradict their choice, which proves $D=1$.
 
 </details>
 
@@ -141,13 +143,13 @@ $$
 
 Thus the original vertex labels are read modulo $N$, while $\sigma$ adds $\Delta$ among the $\varphi$ base labels, returning to $1$ after $\varphi$.
 
-Correct return destinations alone do not prove first returns: the lists could overlap or enter $I$ sooner. To exclude this, initially regard each pair $(t,j)$ with $0\le t<H_j$ as a separate tower position. There are
+A proposed path can end at the correct base even if it has already passed another base on the way. To rule this out, number each proposed position by $(t,j)$, where $j$ is the starting base and $0\le t<H_j$ is the number of steps so far. Keep these positions separate until we know which labels they carry. Counting them from the proposed heights gives
 
 $$
 (\varphi-\Delta)q+\Delta(q+h)=q\varphi+h\Delta=N
 $$
 
-positions. Join each tower top to the base $\sigma(j)$. Every step then adds $\kappa$ modulo $N$.
+positions. From the last position of tower $j$, take one more step and join it to the starting position of tower $\sigma(j)$. Within a tower the label advances by $\kappa$ at each step. The congruence $j+H_j\kappa\equiv\sigma(j)\pmod N$ shows that the step between towers has this same advance.
 
 The return permutation adds $\Delta$ modulo $\varphi$. Its period is $\varphi/\delta$ because $\gcd(\Delta,\varphi)=\delta$. Thus it visits every base in one residue class modulo $\delta$ before returning. Which of them have a taller tower? The last $\Delta$ consecutive base labels give exactly $\Delta/\delta$ labels from each class, since $\delta$ divides $\Delta$. Consequently its joined tower cycle contains
 
@@ -155,28 +157,28 @@ $$
 q\frac\varphi\delta+h\frac\Delta\delta=\frac N\delta
 $$
 
-positions. Addition by $\kappa$ modulo $N$ also has period $N/\delta$, so these positions visit every index in their class exactly once. Different cycles use different classes. All $N$ indices therefore occur once. No intermediate level can lie in $I$, because that index already occurs as a base. Hence the displayed $H_j$ really is the first-return time.
+positions. The first repeated label on a walk adding $\kappa$ occurs exactly $N/\delta$ steps after the start. Indeed, $m\kappa$ is divisible by $N$ precisely when $m$ is divisible by $N/\delta$. Thus each joined cycle uses every label of its residue class once, and the distinct cycles cover distinct classes. This accounts for all $N$ labels with no repetitions. Each member of $I$ already occurs as a starting position, so none can occur partway up a tower. The step at height $H_j$ is therefore the first return.
 
-For the eight-index check, the records of $0,3,6,1,4,7,\ldots$ have deficits $8,5,2,1$. The record of deficit two has $V=(2,1)$, and its successor has $V'=(5,2)$. Thus $(q,p)=(3,1)$ and $\Delta=1$. The determinant is $3\cdot1-1\cdot2=1$, and $q\varphi+h\Delta=3\cdot2+2=8$. The formulas recover the two paths above.
+For $N=8$, $\kappa=3$ the record residues are $0,3,6,7$, leaving deficits $8,5,2,1$. For $\varphi=2$ we take $V=(2,1)$ at residue six and $V'=(5,2)$ at residue seven. Subtracting gives $(q,p)=(3,1)$, and the deficit drops by $\Delta=1$. We can check both counts directly. The determinant is $3\cdot1-1\cdot2=1$. The two towers have heights $q=3$ and $q+h=5$, with $q\varphi+h\Delta=3\cdot2+2=8$ positions altogether.
 
 <!-- reader-figure:early -->
 
-This example also explains why the count is a proof of **first** returns. There are eight tower positions and exactly eight residues. If, say, an intermediate level of the first tower were already base two, that residue would occur both at that level and at the second tower's base. The joined-cycle calculation rules out every such repetition, so no return can happen earlier than the displayed height.
+Follow the two towers in the drawing as a single cycle of labels, joining the top of the first to base $2$ and the top of the second to base $1$. From $1$ it takes eight additions of $3$ modulo $8$ before a label repeats. Since the eight positions already include both bases, neither base can appear a second time on an intermediate level. This proves the *first* in “first return” for this example.
 
 ### Preserve the full turns as well as the residues
 
-Let $\Phi_i$ be increasing real vertex angles, continued by $\Phi_{i+N}=\Phi_i+2\pi$. A vertex-to-vertex path of length $t$ satisfies
+We also want the angle through which a point has actually turned. As in Topic III, list the angles $\Phi_i$ in increasing order and continue them by $\Phi_{i+N}=\Phi_i+2\pi$. Suppose we start at $v_a$ and land on a vertex for the next $t$ steps. Each step adds $\theta_\zeta$ to the angle and $\kappa$ to the index. Adding the $t$ equalities from Topic III gives
 
 $$
 \Phi_a+t\theta_\zeta=\Phi_{a+t\kappa}.
 $$
 
-The index on the right is kept as an integer. Reducing it modulo $N$ would lose its full turns. If the last image is inside a side, the equality becomes
+For example, $\Phi_{N+1}$ describes the same vertex direction as $\Phi_1$, but its value is $\Phi_1+2\pi$. Keeping the integer index $a+t\kappa$ preserves this extra turn. If the first $t-1$ images are vertices and the last lies inside side $a+t\kappa$, the final angle is strictly between the angles of its endpoints. In that case we have
 
 $$
 \Phi_{a+t\kappa-1}<\Phi_a+t\theta_\zeta<\Phi_{a+t\kappa}.
 $$
 
-The tower starting at $\varphi$ reaches $v_0=v_N$ after $h$ steps and its return contact $c_\Delta$ after another $q$. Therefore $\zeta^hv_\varphi=v_0$ and $\zeta^qv_0=c_\Delta$. These powers and their real angle changes will become the closing relation in Topic VII.
+One tower will later close the product around the polygon. From base $\varphi$ its height is $q+h$ and its destination is $\Delta$. At level $h$ its label is $\varphi+h\kappa\equiv0\pmod N$. Since $q>0$, this occurs before the return and the actual point is $v_0=v_N$. Thus the first $h$ steps give $\zeta^hv_\varphi=v_0$, including the possibility $h=0$. The last $q$ steps give $\zeta^qv_0=c_\Delta$. Topic VII uses both equalities and their accumulated angles.
 
 At this point a first return advances by $\Delta$ among the bases. If $\Delta>1$, it passes over at least one base. Arithmetic permits this; Topic VI uses extremal polygon geometry to rule it out. The case $\varphi=\delta$ has no next record and is handled separately in Topic VII.

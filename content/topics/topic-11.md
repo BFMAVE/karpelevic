@@ -10,34 +10,34 @@ $$
 R_n(\theta)\le K_k(\theta)\le K_n(\theta)\le R_n(\theta).
 $$
 
-| Comparison | Where it comes from |
+| Inequality | What we use to prove it |
 |---|---|
-| $R_n\le K_k$ | The least-order geometric product in Topic VII and the upper bound in Topic IX |
-| $K_k\le K_n$ | The independent scalar comparison proved in this topic |
-| $K_n\le R_n$ | The attaining matrix in Topic X |
+| $R_n\le K_k$ | A matrix of least order $k$ gives the product in Topic VII. Topic IX bounds its radius. |
+| $K_k\le K_n$ | Compare the roots of the two radius equations. We do this below. |
+| $K_n\le R_n$ | Topic X constructs a matrix of order $n$ with an eigenvalue of radius $K_n$. |
 
 The middle inequality is the one we shall establish. If the least order is three, Topic XII uses the triangle description for the initial comparison with $K_4$.
 
 ::: {.reader-checkpoint #independent-order-comparison}
-**Retrieval checkpoint.** Why does adjoining an identity block fail to prove $K_{n-1}\le K_n$ at this stage?
+**Retrieval checkpoint.** Suppose we have already proved $\Theta_{n-1}\subseteq\Theta_n$. Can we deduce that the two numbers $K_{n-1}(\theta)$ and $K_n(\theta)$ occur in the same order?
 
 <details>
 <summary>Hint</summary>
 
-State separately what is known about the actual eigenvalue region and what remains to be proved about its scalar candidate.
+On a fixed ray, the inclusion compares the two *largest* radii. What does the matrix construction tell us about the radius $K_j$ relative to the largest radius at order $j$?
 
 </details>
 <details>
 <summary>Solution</summary>
 
-The identity block proves that the actual region $\Theta_{n-1}$ is contained in $\Theta_n$, hence that their actual radial maxima increase. Attainment only gives $K_j\le R_j$. Two lower bounds for nested maxima need not themselves be ordered. Identifying $K_j=R_j$ first would use the theorem whose proof requires this comparison. We therefore compare the scalar equations directly.
+The larger matrix keeps the eigenvalues of the smaller one, so $R_{n-1}\le R_n$. Our construction gives one point of radius $K_j$ at each order $j$. For all we know so far, either point could lie strictly inside its region. The point we constructed at order $n$ could then lie closer to zero than the one we constructed at order $n-1$. To rule this out we use the equations that selected those two points.
 
 </details>
 :::
 
 Insert the old radius into the new equation. When the left side is below the target, strict increase puts the new equality radius farther out.
 
-When the order increases by one, the Farey interval containing an angle can change in only two ways. Its endpoints may stay the same, in which case its number of product factors may increase. Alternatively it is split by a mediant. Topic VIII defined the scalar candidate $K_n(\theta)$; below all angles remain strictly inside the intervals used in a scalar equation.
+On increasing the order from $n-1$ to $n$, first look at the two Farey fractions on either side of the ray. If they stay in place, only the number of factors in the equation of Topic VIII can change. If a new fraction enters between them, it divides the old interval in two. We shall identify that fraction and compare radii in each of the two smaller intervals. The equations below concern angles strictly between the endpoints. We return to the endpoints at the end.
 
 There is a case where we can see the comparison without estimating a derivative. On the first interval at orders four and five the candidate follows the segment from $1$ to $e^{2\pi i/n}$. Here $q=1$ and $m=s=n$, so the factor identity in Topic X gives $z=\beta+(1-\beta)e^{2\pi i/n}$. The line containing the segment has unit normal in direction $\pi/n$ and passes through $1$, so its equation on our ray is
 $$
@@ -53,7 +53,7 @@ Increasing $n$ from four to five decreases $\tan(\pi/n)$, so the new segment mee
 
 ### Adding a product factor
 
-Fix oriented endpoints $p/q<r/s$, with $q<s$ and $rq-ps=1$, and a fractional angle $y$ between them. Put $\vartheta=2\pi y$ and
+First keep both endpoints fixed. As in Topic VIII, reflect the ray and interval together if necessary so that the endpoint with smaller denominator lies on the left. Write the endpoints as $p/q<r/s$, with $q<s$ and $rq-ps=1$, and the chosen fraction of a turn as $p/q<y<r/s$. The ray angle is $\vartheta=2\pi y$. For $k$ factors the angles in the radius equation are
 
 $$
 A=q\vartheta-2\pi p,\qquad B_k=(2\pi r-s\vartheta)/k.
@@ -65,7 +65,7 @@ $$
 z^{s-mq}(z^q-\beta)^m=(1-\beta)^m.
 $$
 
-Append the factor $z^q-0=z^q$ and decrease the initial exponent by $q$. The product remains unchanged. Its real phase changes in exactly the required way, since $\operatorname{Arg}(z^q)=A$ and
+To build a product with one more factor, choose the extra weight to be zero. Its factor on the left is $z^q$ and on the right it is $1-0=1$. Taking $q$ off the exponent in front of the product cancels the extra $z^q$. We also need the sum of the angles as a real number. Each of the original factors has angle $A+B_m$, while the extra one has angle $A$. Together with the new leading power they give
 
 $$
 [s-(m+1)q]\vartheta+m(A+B_m)+A
@@ -76,7 +76,7 @@ Both hypotheses of Topic IX hold for these $m+1$ factors. Their weights $(\beta,
 
 ### Why new fractions are mediants
 
-Suppose $a/b<c/d$ are consecutive in $F_{n-1}$ and a new reduced fraction $h/n$ lies between them. Farey adjacency gives $bc-ad=1$ and $b+d\ge n$. The integers $cn-dh$ and $bh-an$ are positive, and
+Which interval can split when the denominator $n$ first becomes available? Take consecutive fractions $a/b<c/d$ at order $n-1$, and suppose they enclose a new reduced fraction $h/n$. The Farey properties give $bc-ad=1$ and $b+d>n-1$. Cross-multiplication of $a/b<h/n<c/d$ shows that $bh-an$ and $cn-dh$ are positive integers. Using $bc-ad=1$, we can express the new denominator and numerator together as
 
 $$
 (n,h)=(cn-dh)(b,a)+(bh-an)(d,c).
@@ -86,25 +86,25 @@ Comparing first coordinates gives $n\ge b+d\ge n$. Since $b,d$ are positive, equ
 
 ### The calculus behind a split interval
 
-The split comparison needs a sign test for powers along a complex segment. Let $z_0,z_1$ be distinct complex numbers, let $k\ge1$ be an integer, and let $\chi$ be a real angle. The ordinary fundamental theorem of calculus, applied to real and imaginary parts, gives
+After an interval splits we shall need the sign of an expression involving powers at two points $z_0\ne z_1$. Join the points by $z(t)=z_0+t(z_1-z_0)$ for $0\le t\le1$, and take an integer $k\ge1$. Differentiating $z(t)^k$ gives $kz(t)^{k-1}(z_1-z_0)$. Integrate the real and imaginary parts from $0$ to $1$, then multiply by $\overline{z_1-z_0}$. We obtain
 
 $$
 (\overline{z_1}-\overline{z_0})(z_1^k-z_0^k)
 =|z_1-z_0|^2\int_0^1k[z_0+t(z_1-z_0)]^{k-1}\,dt.
 $$
 
-If every integrand, after multiplication by $e^{i\chi}$, has positive imaginary part, the left side has positive imaginary part after that same rotation. We will verify this by keeping the derivative's angle strictly between zero and $\pi$.
+Rotate both sides by the same angle $\chi$, that is, multiply by $e^{i\chi}$. If every rotated derivative $e^{i\chi}kz(t)^{k-1}$ lies above the real axis, its imaginary part has positive integral. The remaining factor $|z_1-z_0|^2$ is positive, so the rotated expression on the left also lies above the real axis.
 
-The square case shows the mechanism without an integral calculation. When $k=2$, the identity reduces to
+For $k=2$ we can check this directly. Factor $z_1^2-z_0^2=(z_1-z_0)(z_1+z_0)$ to obtain
 
 $$
 (\overline{z_1}-\overline{z_0})(z_1^2-z_0^2)
 =|z_1-z_0|^2(z_1+z_0).
 $$
 
-For $z_0=4/5$, $z_1=e^{i\pi/6}$, and $\chi=\pi/8$, points of the segment have arguments from zero to $\pi/6$. The rotated derivative $e^{i\chi}2z$ has arguments from $\pi/8$ to $7\pi/24$, all strictly above the real axis. Averaging these derivative vectors cannot change the sign of their imaginary parts. The mediant calculation uses this same observation for arbitrary $m$, with segments chosen to match its algebra.
+Try $z_0=4/5$, $z_1=e^{i\pi/6}$ and $\chi=\pi/8$. The whole segment lies between the rays of angles $0$ and $\pi/6$. The derivative $2z$ points in the same direction as $z$, so after rotation its angle lies between $\pi/8$ and $\pi/8+\pi/6=7\pi/24$. Both bounds lie strictly between $0$ and $\pi$. This is the calculation we can repeat for higher powers once we know the endpoint rays.
 
-Fix the original upper angle $\theta$, and set $x=\theta/(2\pi)$. It lies in an old interval that is split at order $n$. Define $\rho=K_{n-1}(\theta)$ before making any reflection: this radius always belongs to the original upper ray. Write the oriented old endpoints as $a/b<c/d$, with $b<d$, and use $y=x$ if their original order already had the smaller denominator on the left, or $y=1-x$ after reflection. The new fraction is $\xi=(a+c)/(b+d)$ in these oriented coordinates. Assume $y\ne\xi$, and define
+Return to an angle $\theta$ in the upper half-plane and put $x=\theta/(2\pi)$. Suppose the order-$n-1$ interval containing $x$ splits. Keep the radius $\rho=K_{n-1}(\theta)$ fixed. To write the old equation with its smaller denominator first, use either the angle fraction $y=x$ or its reflection $y=1-x$, as above. Call the endpoints in this order $a/b<c/d$, with $b<d$. The new endpoint between them is $\xi=(a+c)/(b+d)$. Consider $y\ne\xi$. The old count and angles are
 
 $$
 m=\lfloor(n-1)/b\rfloor,\quad
@@ -134,9 +134,9 @@ $$
 D_R=\sin A-\rho^n\sin(mB)-\rho^d\sin(A-mB).
 $$
 
-A positive value means that the old radius is too small for the new equality.
+The left side of each new equation increases with radius. A positive difference on either interval means the left side at the old radius falls short of its target. The new equation reaches equality only at a larger radius.
 
-Put $\eta=A/m$, $u=\rho^{b/m}$, $v=\rho^{d/m}$, and define $G_m(z,w)=(\bar z-\bar w)(z^m-w^m)$. Eliminating one term with the old equation and using angle-addition identities gives
+To apply the segment calculation, write $\eta=A/m$, $u=\rho^{b/m}$ and $v=\rho^{d/m}$. Denote the product $(\bar z-\bar w)(z^m-w^m)$ by $G_m(z,w)$. The old equation gives $v\sin A+u^m\sin B=\sin(A+B)$, letting us eliminate one of the powers in each difference. After expanding the sines of sums and differences, we obtain
 
 $$
 D_L=\operatorname{Im}\bigl(e^{iB}G_m(e^{i\eta},u)\bigr),\qquad
@@ -153,36 +153,38 @@ $$
 -u^m\sin(B-\eta)+u^{m+1}\sin B,
 $$
 
-which is $D_L$ after eliminating $\rho^{n/m}=uv$ using the old equation. On the right, the identity
+To recover $D_L$, multiply the old equation by $u$. It gives $uv\sin A=u\sin(A+B)-u^{m+1}\sin B$, and $uv=\rho^{n/m}$ since $n=b+d$. Substitute in $D_L$ and use $A=m\eta$. For $D_R$, the angle addition that we need is
 
 $$
 \sin(A+B)\sin(mB)+\sin B\sin(A-mB)
 =\sin A\sin((m+1)B)
 $$
 
-and the old equation give
+Multiply $D_R$ by $\sin B/\sin A$ and use $u^m\sin B=\sin(A+B)-v\sin A$ to eliminate $u^m$ from $\rho^n=u^mv^m$. The identity just above then gives
 
 $$
 \frac{\sin B}{\sin A}D_R
 =\sin B-v^m\sin((m+1)B)+v^{m+1}\sin(mB).
 $$
 
-This is the imaginary part of $e^{iB}(1-ve^{-iB})(1-v^me^{imB})$; its extra term $-v$ is real. That product is $e^{iB}G_m(1,ve^{iB})$, which verifies the stated right reduction.
+Expand $e^{iB}(1-ve^{-iB})(1-v^me^{imB})$. Three of its four terms give the sines on the right when we take imaginary parts. The fourth term is $-v$, which is real. Recognising the product as $e^{iB}G_m(1,ve^{iB})$ gives the formula for $D_R$.
 
 </details>
 
-On the left, the segment from $u$ to $e^{i\eta}$ has arguments between zero and $\eta$. The rotated derivative $e^{iB}mz^{m-1}$ therefore has arguments between $B$ and $B+(m-1)\eta$, all in $(0,\pi)$ because $A+B<\pi$. Thus $D_L>0$. On the right, the segment from $ve^{iB}$ to one has arguments between zero and $B$. Its rotated derivative has arguments between $B$ and $mB$. Here $mB<A<\pi$, so $D_R>0$. Neither segment contains zero. The sign lemma applies also when $m=1$, when the derivative is constant.
+For $D_L$ the segment runs from $u>0$ to $e^{i\eta}$. Every point on it has an angle $\phi$ between $0$ and $\eta$, since the opening between its endpoint rays is less than $\pi$. The rotated derivative has angle $B+(m-1)\phi$. Its smallest possible value is $B>0$ and its largest is $B+(m-1)\eta<A+B<\pi$. The segment calculation gives $D_L>0$.
+
+For $D_R$ the segment runs from $ve^{iB}$ to $1$. Now $0\le\phi\le B$, so the rotated derivative has angle between $B$ and $mB$. On this side of the mediant we have $mB<A<\pi$. Thus its imaginary part is positive throughout, and so is $D_R$ since $\sin A/\sin B>0$. Both segments avoid zero. For $m=1$ the derivative is constant and its rotated angle is simply $B$.
 
 The right subinterval uses the smaller denominator $d$. Since $b<d$ and $n=b+d$, its count is $\lfloor(b+d)/d\rfloor=1$, the count used in $D_R$. The left required count $\lfloor n/b\rfloor$ differs from $m$ only if $b$ divides $n$, equivalently $d$. Coprimality forces $b=1$. In that case the adding-factor argument increases the left root once more. Every new open subinterval therefore has a strictly larger candidate radius.
 
 ### An arithmetic check and the equality cases
 
-Unchanged endpoints can still give a larger radius. Return to Topic VIII's reflected example $x=7/24$, $y=17/24$ in $(2/3,3/4)$. These endpoints remain consecutive at orders four, five, and six: their denominators sum to seven. The factor count is one at orders four and five, so the two scalar equations agree and $K_4(7\pi/12)=K_5(7\pi/12)\approx0.86752212$. At order six the count rises to two. Now $A=\pi/4$ stays fixed, but $B$ decreases from $\pi/3$ to $\pi/6$. Appending a zero weight gives the strict comparison, and the new numerical radius is $K_6(7\pi/12)\approx0.91141595$. A Farey interval can therefore stay unchanged while its product has gained one factor.
+Return to the reflected fraction $y=17/24$ from Topic VIII, corresponding to $x=7/24$. Its endpoints $2/3$ and $3/4$ have denominator sum seven, so they are neighbours at orders four, five and six. What changes as we add the two states? At four and five the count $\lfloor n/3\rfloor$ is one, giving the same equation and the same radius $K_4(7\pi/12)=K_5(7\pi/12)\approx0.86752212$. At six we can fit two groups of three. The first angle stays $A=\pi/4$ and the second is now $B=\pi/6$, half its old value $\pi/3$. The argument with the extra zero weight gives a strictly larger root, $K_6(7\pi/12)\approx0.91141595$.
 
-From order seven to eight, the interval $(1/3,2/5)$ splits because $3+5=8$, inserting $3/8$. The angle fraction $5/14$ satisfies $1/3<5/14<3/8$, so the split comparison gives $K_8(5\pi/7)>K_7(5\pi/7)$.
+For the ray we started with, the change happens at the endpoints themselves. The fractions $1/3$ and $2/5$ are neighbours at order seven. Their mediant $3/8$ enters at order eight. Our angular fraction $5/14$ lies between $1/3$ and $3/8$. This is the left part of the split, so $D_L>0$ gives $K_7(5\pi/7)<K_8(5\pi/7)$.
 
 The computed radii are approximately $0.94430114$ and $0.97061308$. In this example the new equation simplifies to $\rho^4+\rho^3=2\cos(\pi/7)$. At the old radius its left side minus the target is about $-0.164763$. The function $\rho\mapsto\rho^4+\rho^3-2\cos(\pi/7)$ is strictly increasing on $(0,1)$. Its negative sign at the old radius puts its zero farther out. This numerical check illustrates the general sign proof; the proof covers every angle in the two new open intervals.
 
 <!-- reader-figure:late -->
 
-If an old Farey endpoint is retained, both radii are one. Inside an unchanged interval the radii agree exactly when $\lfloor(n-1)/q\rfloor=\lfloor n/q\rfloor$, with $q$ the smaller denominator; otherwise the inequality is strict. At an inserted mediant the new radius is one and the old one is below one. These cases prove $K_{n-1}\le K_n$ for $n\ge5$. Topic XII handles the initial passage from order three to four and then completes the boundary theorem.
+We can now tell exactly when two successive orders give equality. At an old Farey endpoint both radii are one. Inside an interval whose endpoints stay fixed, write $q$ for their smaller denominator. The roots agree if $\lfloor(n-1)/q\rfloor=\lfloor n/q\rfloor$, and adding one factor makes the new root strictly larger. A split increases the radius on each of its two open subintervals. At the mediant itself the old radius was below one and the new radius is one. This proves $K_{n-1}(\theta)\le K_n(\theta)$ for $n\ge5$. To use the comparison starting from three states, we still need to examine the triangle at order three.

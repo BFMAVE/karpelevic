@@ -15,8 +15,8 @@ export const earlyOrientations: Record<number, TopicOrientation> = {
       { term: "Stationary probability row", meaning: "A nonnegative row πᵀ with total mass one that is unchanged by multiplication by A." },
       { term: "Radial filling", meaning: "If λ is attainable, every tλ with 0 ≤ t ≤ 1 is attainable in the same order, for n ≥ 2." },
     ],
-    strategy: "Read every matrix row as a weighted average. Its eigenvector coordinates then form a polygon containing their rotated and contracted images. Reverse the averaging instructions to recover a stochastic matrix from any such polygon.",
-    payoff: "The eigenvalue question becomes a planar containment question with a fixed budget of vertices. Compactness lets us look for the largest feasible radius at each angle.",
+    strategy: "Start with a matrix and mark its eigenvector coordinates in the plane. The weights in each row tell us where one point lands. To go back from a picture to a matrix, express each image vertex as an average and use those weights as a row.",
+    payoff: "With n states we can use at most n vertices. Fix an angle and move out along that ray. Compactness ensures that, whenever the ray contains a nonzero eigenvalue, there is a last attainable point.",
   },
   2: {
     imports: [
@@ -36,8 +36,8 @@ export const earlyOrientations: Record<number, TopicOrientation> = {
       { term: "Active polar inequality", meaning: "A vertex inequality a · vⱼ ≤ 1 that attains equality. Two independent active endpoint equations identify an original side's polar vertex." },
       { term: "Face and relative interior", meaning: "A boundary face is a vertex or a whole side. A point in a side's relative interior is strictly between its endpoints." },
     ],
-    strategy: "An interior vertex image allows a strictly positive averaging row. Deflation then preserves the chosen eigenvalue while lowering the positive Perron root; restoring row sums to one enlarges the chosen eigenvalue. Polarity turns the resulting vertex statement into a side statement.",
-    payoff: "Every vertex image is on the boundary and every side meets the image polygon, for every invariant polygon with at most N vertices. This remains available after later deformations.",
+    strategy: "If a vertex lands in the interior, we can give all the entries of one row positive weight. We use a stationary row to lower the Perron eigenvalue while keeping the chosen eigenvalue. Scaling back to a stochastic matrix then moves that eigenvalue beyond the last point on its ray. Applying the vertex argument to the polar polygon gives the corresponding fact about sides.",
+    payoff: "For the extremal eigenvalue, every vertex image touches the boundary and every side meets the image polygon. The conclusion applies to any invariant polygon with at most N vertices, so we can use it again after moving a vertex.",
   },
   3: {
     imports: [
@@ -54,8 +54,8 @@ export const earlyOrientations: Record<number, TopicOrientation> = {
       { term: "Contact coefficients αᵢ, βᵢ", meaning: "The weights expressing an image as βᵢvᵢ₋₁ + αᵢvᵢ, with αᵢ + βᵢ = 1. A zero βᵢ means an endpoint contact." },
       { term: "Continued vertex angles", meaning: "Real angles that keep increasing as the labels pass around the polygon. Advancing by the polygon's N vertices adds one full turn." },
     ],
-    strategy: "Choose an invariant polygon that cannot be simplified by reducing its interior-contact count. Cut along image edges and count removed and added vertices. The remaining endpoint ambiguity is resolved by one consistent half-open convention, with reflection if needed.",
-    payoff: "Every side receives one image vertex, with one cyclic shift and explicit two-endpoint averaging coefficients. Later index arithmetic now has a precise geometric meaning.",
+    strategy: "First count the vertex images landing strictly between two corners. Choose a polygon for which this count is as small as possible. Cutting along an image edge lets us compare the corners we lose with the new ones we introduce. At a shared endpoint we then have to decide which side counts the contact.",
+    payoff: "After choosing the direction of the labels, each side receives one image. A single shift of the vertex indices tells us which image it receives. Its position on that side gives the two averaging weights.",
   },
   4: {
     imports: [
@@ -71,8 +71,8 @@ export const earlyOrientations: Record<number, TopicOrientation> = {
       { term: "Residue modulo N and index orbit", meaning: "Reduce an index to one of the N cyclic labels. Repeated addition of the contact shift visits one of the cycles determined by its greatest common divisor with N." },
       { term: "Record and deficit", meaning: "A residue larger than every earlier residue is a record; its deficit is its distance below N." },
     ],
-    strategy: "Transfer a positive contact weight across the cyclic shift by reversing two stochastic factors. Minimal count prevents collisions of weights; minimum area forces all movable ending corners to belong to one run. Follow one transferred weight until its first entrance into the fixed block.",
-    payoff: "Interior contacts occupy the consecutive indices 1,…,φ, and φ is a record deficit of the cyclic shift. This is the geometric input for the tower arithmetic.",
+    strategy: "We can move one contact weight to a different row by reversing the order of two matrix factors. The number of interior contacts cannot decrease, since we chose it as small as possible. Among the polygons with this count we chose one of least area at a fixed scale. That second choice rules out a gap in the run of movable corners.",
+    payoff: "We can now number the sides with interior contacts consecutively from 1 to φ. The count φ also appears as a record in the cyclic shift. This lets us calculate return times from the indices.",
   },
   5: {
     imports: [
@@ -86,16 +86,16 @@ export const earlyOrientations: Record<number, TopicOrientation> = {
       { term: "Record vector (h,b)", meaning: "An integer pair recording the record time h and the multiple bN just above hκ." },
       { term: "Determinant-one integer basis", meaning: "Two integer vectors whose 2×2 determinant is one, so every integer pair has unique integer coordinates in them." },
       { term: "Bézout's identity", meaning: "Coprime integers have an integer linear combination equal to one. An elementary integer-division proof here supplies the complementary basis vector." },
-      { term: "Return displacement Δ", meaning: "The number of base positions advanced by the first-return permutation; it is the drop between two consecutive record deficits." },
+      { term: "Number of bases advanced on return, Δ", meaning: "The number of base positions advanced by the first-return permutation; it is the drop between two consecutive record deficits." },
       { term: "Arithmetic suspension", meaning: "Replace each base by its tower of vertices. Counting joined tower cycles proves these lists cover every polygon index exactly once." },
     ],
-    strategy: "Encode consecutive records as integer vectors. A determinant-one calculation yields two possible tower heights. Join towers according to their proposed returns and compare the cycle length with the period of adding κ modulo N; this excludes overlaps and earlier returns.",
-    payoff: "Every vertex belongs to exactly one tower, and its first-return height and target side are known. The geometry must now decide whether the arithmetic displacement Δ can exceed one.",
+    strategy: "Write down how far successive multiples of the index shift fall short of a multiple of N. Two consecutive improvements give us two integer vectors and two possible return times. We join the proposed paths and check when an index repeats. This check shows that no path has passed through a base earlier.",
+    payoff: "The paths use every vertex exactly once before the paths are joined. For each base we know how many steps it takes to return and which side it reaches. We can now ask whether a return can skip a base.",
   },
   6: {
     imports: [
       { term: "Universal boundary contact", from: 2, anchor: "thm:saturation", use: "Contradict an interior vertex image in the deformed polygon, which need not minimise area or contact count." },
-      { term: "Half-open contact assignment", from: 3, anchor: "eq:contacts", use: "Identify which endpoint must stay a vertex when an entire side remains on the boundary." },
+      { term: "Half-open contact assignment", from: 3, anchor: "eq:contacts", use: "Determine which endpoint stays a vertex when the whole side lies on the boundary." },
       { term: "Consecutive contact bases", from: 4, anchor: "prop:interval", use: "Choose a chain of adjacent bases instead of unrelated vertices." },
       { term: "Tower partition and return data", from: 5, anchor: "lem:suspension", use: "Transport each moved base along its whole tower and check every final contact without assigning a vertex twice." },
     ],
@@ -108,8 +108,8 @@ export const earlyOrientations: Record<number, TopicOrientation> = {
       { term: "Closing defect t−u(t)", meaning: "Compare the returning point's coordinate with where the moving final side meets the contact line. Its positive sign means the point has moved inward." },
       { term: "Transported tower motion", meaning: "After choosing a moved base, move its level-t vertex to Fᵗ of that base, preserving every vertex-to-vertex relation." },
     ],
-    strategy: "If a return skips a base, expose a short chain of vertices and move them by line intersections through the fixed contacts. Positive reciprocal coordinates locate the closing projection. Its fractional-linear defect supplies an inward direction even when the first derivative is zero. Extend the motion along all towers.",
-    payoff: "A skipped return would create an invariant N-gon with an interior vertex image. Hence Δ = 1, and this case forces gcd(N,κ) = 1.",
+    strategy: "Suppose a return passes over a base. Move a short chain of vertices, using intersections of lines to keep the other contacts on their sides. The calculation at the last side gives a direction in which one image moves into the polygon. Even if its first derivative vanishes, the change can be detected at second order.",
+    payoff: "Topic II requires that same image to touch the boundary. We can therefore rule out a skipped base. In the case with a next record, the return advances by one base and N and κ are coprime.",
   },
   7: {
     imports: [
@@ -126,7 +126,7 @@ export const earlyOrientations: Record<number, TopicOrientation> = {
       { term: "Principal factor argument uⱼ", meaning: "The angle of ωᵠ−βⱼ chosen in (−π,π]; this construction places it in the positive interval [A,M)." },
       { term: "Exact winding identity", meaning: "The real sum eϑ + Σuⱼ equals the specified full-turn value 2π(r−mp), not just that value modulo 2π." },
     ],
-    strategy: "Write return relations between successive bases, close the list, and multiply to cancel every vertex coordinate. Add their continued angle differences separately. Treat the singleton case explicitly and reverse/conjugate the multiple-cycle case before putting the smaller Farey denominator on the left.",
-    payoff: "The extremal eigenvalue satisfies both the unequal-parameter product equation and the exact real winding identity. The latter fixes the average factor angle needed for the convexity bound.",
+    strategy: "Write the ratio between the coordinates of two successive bases. When we multiply the ratios around the polygon, each coordinate in a numerator cancels with one in a denominator. To keep the number of whole turns, add the actual angle changes before reducing any angle modulo 2π. When only one image lands between two corners, or when the index shift has several cycles, we check separately how the path closes.",
+    payoff: "The return paths now tell us both the product of the factors and the sum of their angles as a real number. Dividing that sum by the number of factors gives the mean angle used in the radius bound.",
   },
 };

@@ -6,43 +6,45 @@ We may choose our polygon. Fix the nonreal multiplier $\zeta$ at its largest mod
 
 ### Count interior contacts before minimising area
 
-For a polygon with vertex set $V$, define
+Take a vertex $v$ in the vertex set $V$ of $P$ and ask whether its image $Tv$ is another vertex. To count the two possible answers, put
 
 $$
 d_T(P)=|\{v\in V:Tv\in V\}|,\qquad b_T(P)=|V|-d_T(P).
 $$
 
-The vertical bars around a finite set mean its number of elements. Because every image is on the boundary, $b_T(P)$ counts images strictly inside sides. An image at a vertex is excluded from this count.
+Here $|V|$ is the number of vertices. The first count, $d_T(P)$, includes each starting vertex whose image is a vertex. Topic II puts every image on the boundary. Each of the remaining $b_T(P)$ starting vertices therefore has its image strictly between the endpoints of a side.
 
 Scale the polygon about zero until $\max_{x\in P}|x|=1$. Scaling preserves invariance and both counts. Among these normalised polygons, first minimise $b_T(P)$. Among polygons attaining this count choose one with the smallest area. The order matters. We will move vertices while controlling the count, and use area only when a replacement also preserves the chosen scale.
 
-Without fixing scale, area could be made arbitrarily small just by multiplying every coordinate by $1/2$ repeatedly. Without first fixing the contact count, a smaller-area polygon might have more contacts to organise. The two choices solve different problems: the integer count prevents unnecessary branching in the image paths, and the fixed-scale area prevents a corner from being cut away while all those paths remain just as complicated.
+Halving every vertex coordinate divides the area by four and leaves every contact of the same kind. This explains why an area comparison needs a fixed radius. It also explains what sort of smaller polygon would lead to a contradiction. A cut that preserves both the radius and the smallest possible value of $b_T$ gives a better choice of polygon. A cut that creates more images inside sides gives us no such comparison.
 
-These minima exist. Every vertex is in the closed unit disk, so a sequence has a subsequence with convergent vertex coordinates. Their convex hull remains invariant, contains zero, and has maximal radius one. The last two properties exclude collapse to a point. A nonreal rotation cannot preserve a nonzero line segment containing zero; therefore it cannot collapse to a segment. A limit with fewer than $N$ vertices would contradict the least realising order. Thus the limit is still an $N$-gon. Vertex-to-vertex equalities persist under limits, and new equalities can appear, so a minimum count is preserved. Area is continuous in the vertex coordinates and therefore attains its minimum on that class.
+To see that we can make both choices, take a sequence of normalised polygons with the smallest contact count and areas tending to the infimum. All $N$ vertices lie in the closed unit disk. After taking a subsequence we may assume each vertex coordinate converges. The convex hull of the limits still contains zero and a point of modulus one. It is still invariant, since the inclusions $TP\subseteq P$ pass to the limit. A segment through zero cannot contain its image under multiplication by the nonreal number $\zeta$, so the limiting hull has interior. Fewer than $N$ vertices would contradict the choice of $N$.
+
+There are only finitely many possible pairs $(i,j)$ with $Tv_i=v_j$. Pass to a further subsequence on which the list of equalities is fixed. Each equality persists in the limit. Thus the number of images inside sides can only fall, and it was already as small as possible. Finally, polygon area is continuous in the cyclically ordered coordinates, so the limiting polygon attains the desired area.
 
 ### Why a permitted cut cannot increase the count
 
-Suppose another polygon $Q$ satisfies
+We want to cut off part of $P$ and still have a polygon with the same multiplier and vertex count. Consider a choice of $Q$ for which
 
 $$
 TP\subseteq Q\subseteq P,\qquad |\operatorname{ext}Q|=|\operatorname{ext}P|,
 \qquad\operatorname{ext}Q\subseteq V\cup TV.
 $$
 
-Here $\operatorname{ext}$ denotes the vertices. The last condition says that every new vertex is the image of an old one. Since $TQ\subseteq TP\subseteq Q$, the new polygon is invariant.
+The notation $\operatorname{ext}Q$ means the set of vertices of $Q$. The inclusions already prove invariance. Indeed, applying $T$ to $Q\subseteq P$ gives $TQ\subseteq TP$, which is contained in $Q$. The last condition tells us where to look for the vertices introduced by the cut. Each is an image of an old vertex.
 
-The subtlety is that removing a vertex can destroy a vertex-to-vertex image relation. A new image vertex compensates for that loss. The following count matches those gains and losses without assuming that the particular old relation survives. It is the reason we restrict new vertices to old vertices and their images.
+What happens to $d_T$ when a corner disappears? If the removed corner started a path from one vertex to another, we lose that path. On the other hand, each corner added by the cut is of the form $Tv$ and hence gives a possible endpoint. We count how many of these paths still have their starting vertex in $Q$.
 
-Let $R$ be the removed old vertices and $U$ the newly added vertices. Equal vertex counts give $|R|=|U|$. No removed vertex belongs to $TV$, because all of $TV$ lies in $Q$; an old vertex retained in $Q$ remains a vertex there. Because $T$ is one-to-one, the set $S=T^{-1}U$ contains exactly $|U|$ old vertices. Let $E$ be the old vertices that already mapped to old vertices.
+Write $R=V\setminus\operatorname{ext}Q$ for the lost vertices and $U=\operatorname{ext}Q\setminus V$ for the new ones. The polygons have equally many vertices, so $|U|=|R|$. An old vertex lying in $Q$ is still a vertex of $Q$, since expressing it as an average of other points of $Q$ would also express it that way in $P$. In particular, no old vertex in $TV$ can be lost, because $TV\subseteq Q$. Each new vertex in $U$ has a unique old preimage under $T$. Write $S=T^{-1}U$ for these $|U|$ starting vertices, and $E=\{v\in V:Tv\in V\}$ for the starting vertices we counted in $P$.
 
-Every vertex in $E\setminus R$ still maps to a retained old vertex. Every vertex in $S\setminus R$ maps to a new vertex. These two groups are disjoint. Therefore
+For $v\in E\setminus R$, both $v$ and its old endpoint $Tv$ survive. For $v\in S\setminus R$, the endpoint $Tv$ is one of the new vertices. Each such $v$ counts towards $d_T(Q)$, and the two groups cannot overlap because their endpoints belong to disjoint sets. This gives
 
 $$
 d_T(Q)\ge |E\setminus R|+|S\setminus R|
 =|E|+|R|-|E\cap R|-|S\cap R|\ge |E|.
 $$
 
-The last inequality holds because $E\cap R$ and $S\cap R$ are disjoint subsets of $R$. Thus $b_T(Q)\le b_T(P)$. Minimum-count selection forces equality. If the cut retains a radius-one vertex, it also preserves normalisation, and a proper cut would reduce area. Such a cut is impossible for the selected polygon.
+In the last step, at most $|R|$ starting vertices have been lost from the two groups together. Thus $d_T(Q)\ge d_T(P)$ and, since the total vertex count is fixed, $b_T(Q)\le b_T(P)$. Our choice of $P$ forces equal counts. If $Q$ also keeps a vertex of modulus one, its scale is already correct. Any proper cut would now give the same count and a smaller area, contradicting our second choice.
 
 If a cut removes all vertices with radius one, restoring the original scale increases its area. We then have no area comparison with $P$. We use the area argument only for cuts that leave a radius-one vertex in place.
 
@@ -50,7 +52,7 @@ If a cut removes all vertices with radius one, restoring the original scale incr
 
 List the vertices of $TP$ as $y_1,\ldots,y_N$ counterclockwise. Both $y_j$ and $y_{j+1}$ lie on the boundary of the outer polygon $P$. Write $(y_j,y_{j+1}]$ for the arc **along that outer boundary** from one to the next, excluding its starting point and including its ending point. These arcs partition the boundary, so each old vertex is counted exactly once.
 
-At a shared corner $v_i$, the incoming side $(v_{i-1},v_i]$ includes the point and the outgoing side $(v_i,v_{i+1}]$ excludes it. Nothing moves geometrically when we make this convention. It is a bookkeeping rule, like a half-open partition of a real interval, except that the included endpoint here is the ending one.
+Imagine walking counterclockwise through the corner $v_i$. The side just completed is $(v_{i-1},v_i]$, so it counts the corner. The next side starts there and excludes it. In this way a mark right at a corner contributes to one side, just as a point at a division between two half-open intervals contributes to one interval.
 
 <!-- reader-figure:early -->
 
@@ -65,11 +67,11 @@ What difficulty can the choice of endpoint solve? Use the four corners $A,B,C,D$
 
 The second convention moves $B$ into the next arc and $C$ into the empty one. Now each arc receives one corner. Why does a *single* choice of endpoint always work for the polygon we selected? We use the area condition to rule out a second excess.
 
-Cut $P$ along the line joining $y_j$ to $y_{j+1}$, retaining the half-plane containing $TP$. If their closed boundary arc contains $k_j$ old vertices, a proper cut has at most $N+2-k_j$ vertices: it discards those vertices and adds back the two image endpoints. The new polygon is invariant, so minimal order requires at least $N$ vertices. Consequently $k_j\le2$.
+Join $y_j$ to $y_{j+1}$ by a line and keep the part of $P$ on the same side as $TP$. Suppose this cuts off a corner or several corners. To count the remaining vertices, erase the $k_j$ old vertices on the closed boundary arc from $y_j$ to $y_{j+1}$ and put back its two endpoints. This gives at most $N-k_j+2$ vertices, including endpoints that were themselves old vertices. The polygon still contains $TP$ and lies in $P$. It is therefore invariant and has at least $N$ vertices. The two bounds give $k_j\le2$.
 
 A cut with $k_j=2$ preserves the vertex count and cannot increase $b_T$. If it left a radius-one vertex in place, its smaller area would contradict our choice of $P$. Different discarded arcs are disjoint, so there is at most one such proper cut.
 
-Let $r_j$ count old vertices on $(y_j,y_{j+1}]$, and let $\varepsilon_j$ be one when $y_j$ is an old vertex and zero otherwise. Then
+To count without duplication, let $r_j$ be the number of old vertices on the arc with its end included, $(y_j,y_{j+1}]$. We recover $k_j$ by putting back the starting point if it too is an old vertex. Denote this extra contribution by $\varepsilon_j$, equal to one in that case and zero otherwise. Because the half-open arcs partition the boundary, we obtain
 
 $$
 \sum_j r_j=N,\qquad k_j=r_j+\varepsilon_j,\qquad 0\le r_j\le2.
@@ -102,23 +104,23 @@ All vertex indices are read modulo $N$. The coefficient $\beta_i=0$ means the im
 
 <div class="reader-checkpoint" data-retrieval-checkpoint>
 
-**Ownership checkpoint.** A contact lands exactly at $v_i$. Which side owns it, and is its coefficient $\beta_i$ positive or zero?
+**Check the endpoint convention.** Suppose the image on side $i$ is the corner $v_i$ itself. To which half-open side do we assign it? How much weight can its expression as an average give to $v_{i-1}$?
 
 <details class="reader-checkpoint-hint">
 <summary>Hint</summary>
 
-Use the included endpoint of $(v_{i-1},v_i]$, and then compare the contact with its two-endpoint formula.
+Write down the two sides meeting at $v_i$. Locate the closed bracket in each interval, then set $c_i=v_i$ in the contact equation.
 
 </details>
 <details class="reader-checkpoint-solution">
 <summary>Solution</summary>
 
-It belongs to $(v_{i-1},v_i]$, not $(v_i,v_{i+1}]$. Since $c_i=\beta_i v_{i-1}+(1-\beta_i)v_i=v_i$ and the endpoints are distinct, $\beta_i=0$. A side-interior contact instead has $\beta_i>0$.
+The ending bracket places $v_i$ on $(v_{i-1},v_i]$. In the expression for $c_i$, subtract $v_i$ from both sides. This gives $\beta_i(v_{i-1}-v_i)=0$. The vertices are distinct, hence $\beta_i=0$. As soon as the contact moves strictly between these two vertices, both weights are positive.
 
 </details>
 </div>
 
-Choose increasing real vertex angles $\Phi_i$ and continue them by $\Phi_{i+N}=\Phi_i+2\pi$. Retain the argument representative $0<\theta_\zeta<2\pi$ for the multiplier after any reflection. Each side spans less than half a turn because zero lies inside the polygon. Its image assignment gives
+Follow the vertices counterclockwise and keep a running angle $\Phi_i$, adding $2\pi$ each time we go round the polygon. Thus $\Phi_{i+N}=\Phi_i+2\pi$. From the interior point zero, a side subtends an angle strictly less than $\pi$. As a point moves from $v_{i-1}$ to $v_i$ along that side, its angle runs from $\Phi_{i-1}$ to $\Phi_i$. Use $0<\theta_\zeta<2\pi$ for the angle of the multiplier after any reflection. Rotating $v_{i-\kappa}$ through this angle places its image on side $i$. The location of that image and the bounds on the rotation angle are
 
 $$
 \Phi_{i-1}<\Phi_{i-\kappa}+\theta_\zeta\le\Phi_i,

@@ -5,27 +5,27 @@ In the eight-state example the closing path gives $2\vartheta+u_1+u_2=2\pi$. Fix
 ::: {.reader-sharpness-ledger}
 **Upper bound — proved here.** Under the product and exact real phase hypotheses, no radius can exceed the scalar candidate. We will also identify exactly when equality holds.
 
-**Attainment — next in Topic X.** Knowing the equality condition does not yet produce a stochastic matrix. That construction supplies the other half of sharpness.
+**Attainment.** Equality will tell us which weights to choose. Topic X then uses them as entries of a stochastic matrix with the required eigenvalue.
 :::
 
 Two operations put the comparison within reach of ordinary calculus. Divide each factor by its positive weight $1-\beta_j$. Then take the logarithm of its length, so that multiplying lengths becomes adding real numbers.
 
-Use the oriented Farey data from Topic VIII: integers $p,r$, positive integers $q<s$ and $m$, and an angle $\vartheta$ between $2\pi p/q$ and $2\pi r/s$. Set
+Fix the interval from Topic VIII, in the orientation with $q<s$. Thus $p/q<\vartheta/(2\pi)<r/s$, and $m$ counts the factors. For the two endpoint angles and the closing exponent, put
 
 $$
 A=q\vartheta-2\pi p,\qquad
 B=(2\pi r-s\vartheta)/m,\qquad e=s-mq,
 $$
 
-with $A,B>0$ and $A+B<\pi$. Let $z=\rho e^{i\vartheta}$, where $0<\rho<1$. Suppose $0\le\beta_j<1$ for $j=1,\ldots,m$, and suppose both the product and the real argument identity of Topic VIII hold. These are the hypotheses; an arbitrary polynomial root need not satisfy the second one.
+Here $A,B>0$ and $A+B<\pi$. Take $z=\rho e^{i\vartheta}$ with $0<\rho<1$, together with weights $0\le\beta_j<1$ for $1\le j\le m$. Assume the product and the real angle sum of Topic VIII. In particular we know the number of full turns, which a polynomial equation for $z$ alone would leave undetermined.
 
-Write
+All the factors start from the same complex point. Write its coordinates as
 
 $$
 w=z^q=\rho^qe^{iA}=a+ib.
 $$
 
-Here $a=\rho^q\cos A$ and $b=\rho^q\sin A>0$. Also $a<1$ because $\rho^q<1$. Define the normalised factors and their arguments by
+Its height $b=\rho^q\sin A$ is positive, and its horizontal coordinate $a=\rho^q\cos A$ is less than one. Draw the line from $1$ through $w$. We will express its points using the ratio $c$ of the horizontal distance $1-a$ to the height $b$. For each factor put
 
 $$
 g_j=\frac{w-\beta_j}{1-\beta_j},\qquad
@@ -33,7 +33,7 @@ u_j=\operatorname{Arg}(w-\beta_j),\qquad
 c=\frac{1-a}{b}>0.
 $$
 
-The denominator $1-\beta_j$ is positive, so normalisation leaves the argument unchanged. It changes the complex product into $z^e\prod_jg_j=1$.
+Dividing by $1-\beta_j$ changes the length but leaves the angle $u_j$ unchanged. Performing this division for every factor cancels all the weights on the right of the product, leaving $z^e\prod_j g_j=1$.
 
 ### A line becomes a convex function
 
@@ -48,28 +48,28 @@ $$
 =\frac{a-\beta_j+cb}{1-\beta_j}=1.
 $$
 
-Writing $g_j=|g_j|e^{iu_j}$, define
+Where does this line meet a ray of angle $u_j$? The coordinates of the intersection are $|g_j|\cos u_j$ and $|g_j|\sin u_j$. Substitution in the line equation introduces the function
 
 $$
 \mathcal D(u)=\cos u+c\sin u.
 $$
 
-Then $|g_j|\mathcal D(u_j)=1$. Thus the size of a normalised factor is determined by its angle, rather than by a separate unknown weight.
+The line equation becomes $|g_j|\mathcal D(u_j)=1$. Knowing the direction of the intersection now gives its distance from zero, namely $1/\mathcal D(u_j)$.
 
-Let $M=\operatorname{Arg}(w-1)\in(A,\pi)$. Subtracting a real number from $w$ moves it horizontally to the left in the upper half-plane. Its angle therefore increases from $A$ to $M$ as that number increases from zero to one. Since every $\beta_j<1$, we have $A\le u_j<M$. The relation $c=-\cot M$ gives
+The ray from zero to $w$ has angle $A$. As $\beta$ increases from zero to one, $w-\beta$ moves to the left at a fixed positive height, so its direction increases to $M=\operatorname{Arg}(w-1)\in(A,\pi)$. Our factor angles satisfy $A\le u_j<M$ because $\beta_j<1$. The coordinates of $w-1$ give $\cot M=(a-1)/b=-c$. The sine subtraction formula then gives
 
 $$
 \mathcal D(u)=\frac{\sin(M-u)}{\sin M}>0
 \qquad(0<u<M).
 $$
 
-We may consequently define
+At angle $u$ the ray meets the line at distance $1/\mathcal D(u)$ from zero. Its logarithm is therefore the real function
 
 $$
 F(u)=-\log\mathcal D(u),\qquad 0<u<M.
 $$
 
-For our factors $F(u_j)=\log|g_j|$. Equivalently, $F$ is a constant minus the logarithm of a sine, which explains the term log-sine convexity. The derivatives are $\mathcal D'=-\sin u+c\cos u$ and $\mathcal D''=-\mathcal D$. First $F'=-\mathcal D'/\mathcal D$; differentiating this quotient gives
+In particular $F(u_j)=\log|g_j|$. We want to know how two such lengths compare when their angles move apart. It suffices to determine the curvature of $F$. We have $F'=-\mathcal D'/\mathcal D$, where $\mathcal D'=-\sin u+c\cos u$ and $\mathcal D''=-\mathcal D$. The quotient rule gives
 
 $$
 F''(u)=1+\left(\frac{\mathcal D'(u)}{\mathcal D(u)}\right)^2\ge1.
@@ -82,7 +82,7 @@ $$
 =\frac{b}{|w-\beta|^2}>0.
 $$
 
-Different weights have different factor arguments.
+Thus two factors with the same direction have the same weight. We will use this when we identify the case of equality.
 
 ::: {.reader-checkpoint #jensen-prediction}
 **Prediction checkpoint.** Keep the average of two unequal factor angles fixed. If both angles are replaced by that common average on the normalised line, should the product of factor sizes increase, decrease, or stay the same? Make a prediction before reading the numbers below.
@@ -90,13 +90,13 @@ Different weights have different factor arguments.
 <details>
 <summary>Hint</summary>
 
-The size is $e^{F(u)}$, so the product of two sizes is $e^{F(u_1)+F(u_2)}$. Compare the point on a strictly convex graph at the average angle with the midpoint of the chord.
+At angle $u$, the length is $e^{F(u)}$. Taking logarithms changes the question into one about $F(u_1)+F(u_2)$. On the graph, what is the height of the midpoint of the chord between these two angles?
 
 </details>
 <details>
 <summary>Solution</summary>
 
-It decreases. With $\bar u=(u_1+u_2)/2$ and $u_1\ne u_2$, strict convexity gives $2F(\bar u)<F(u_1)+F(u_2)$. Exponentiation preserves this inequality. This prediction concerns the factors at a fixed $w$; it does not assert that both weight choices satisfy an eigenvalue product. The next calculation isolates this comparison.
+The product decreases. At $\bar u=(u_1+u_2)/2$ the height $F(\bar u)$ lies strictly below the chord midpoint when $u_1\ne u_2$. Hence $2F(\bar u)<F(u_1)+F(u_2)$. Exponentiating compares the two products of lengths at this fixed $w$. We can try the comparison numerically before imposing the eigenvalue product.
 
 </details>
 :::
@@ -109,7 +109,7 @@ $$
 \frac{F(\pi/4)+F(\pi/2)}2=-\frac14\log2\approx-0.1733,
 $$
 
-whereas
+At the same angle the graph itself has height
 
 $$
 F(3\pi/8)=-\log\bigl(\sqrt2\cos(\pi/8)\bigr)\approx-0.2674.
@@ -121,19 +121,19 @@ Read the two panels from left to right. In the complex plane the middle ray meet
 
 ### Applying the average fixed by geometry
 
-We can prove the finite form of Jensen's inequality needed here from ordinary calculus. Let $\bar u=m^{-1}\sum_j u_j$. This average also lies in $(0,M)$. Since $F''>0$, the derivative $F'$ is strictly increasing. Integrating $F'$ between $\bar u$ and any $u$ shows
+Let $\bar u=(u_1+\cdots+u_m)/m$. Each angle belongs to $(0,M)$, so the mean does too. To compare $F(\bar u)$ with the mean height, draw the tangent at $\bar u$. Since $F''>0$, its slope $F'(\bar u)$ is smaller than $F'(v)$ to the right of $\bar u$ and larger to the left. Integrating the slope gives
 
 $$
 F(u)\ge F(\bar u)+F'(\bar u)(u-\bar u),
 $$
 
-with equality only at $u=\bar u$. For $u>\bar u$, the integrand $F'(v)$ is larger than $F'(\bar u)$; for $u<\bar u$, reverse the integral and use the smaller derivative. The graph therefore lies above its tangent at $\bar u$. Sum these tangent-line inequalities over $u_1,\ldots,u_m$. Their linear terms cancel because $\sum_j(u_j-\bar u)=0$, leaving
+Equality holds at the point of tangency. At any other $u$ the inequality is strict, because the derivative is strictly increasing, with the integration limits reversed when $u<\bar u$. Add this tangent bound at each $u_j$. The slope terms sum to $F'(\bar u)\sum_j(u_j-\bar u)=0$ by the definition of the mean. Dividing by $m$ leaves
 
 $$
 F(\bar u)\le\frac1m\sum_j F(u_j).
 $$
 
-Equality is possible precisely when every $u_j=\bar u$. This is Jensen's inequality, including its equality condition, proved for our function. The geometric argument identity fixes the average itself:
+This proves Jensen's inequality for $F$. A single angle different from $\bar u$ makes the sum strictly larger. Thus equality holds exactly when the angles are all equal. Their mean is known from the real turn count in Topic VII.
 
 $$
 \bar u=\frac1m\sum_j u_j
@@ -148,7 +148,7 @@ F(A+B)\le-\frac em\log\rho,
 \mathcal D(A+B)\ge\rho^{e/m}.
 $$
 
-Substitute the value $c=(1-\rho^q\cos A)/(\rho^q\sin A)$. The angle-addition formulas reduce the left side to
+It remains to express the bound in terms of the radius. Replace $c$ by $(1-\rho^q\cos A)/(\rho^q\sin A)$ and put the two terms in $\mathcal D(A+B)$ over the same denominator. The terms multiplied by $\rho^q$ combine to $\sin(A-(A+B))=-\sin B$, giving
 
 $$
 \mathcal D(A+B)
@@ -161,7 +161,7 @@ $$
 \rho^{s/m}\sin A+\rho^q\sin B\le\sin(A+B).
 $$
 
-The left side strictly increases with $\rho$. Its equality radius is the candidate $K_n$ from Topic VIII, so $\rho\le K_n$. Every algebraic step after Jensen is reversible. Equality holds exactly when all $u_j$ agree, and the strictly increasing weight-to-angle map makes that equivalent to $\beta_1=\cdots=\beta_m$.
+If $\rho$ exceeded $K_n$, strict increase of the left side would make it larger than the right. Thus $\rho\le K_n$. All steps from Jensen's inequality to this bound were equalities or multiplication by positive quantities. Consequently $\rho=K_n$ precisely when all factor angles coincide. Their strict increase with $\beta$ makes this equivalent to $\beta_1=\cdots=\beta_m$.
 
 ::: {.reader-checkpoint #phase-hypothesis-transfer}
 **Changed-hypothesis checkpoint.** Keep the product and the factor assumptions, but replace the real phase identity by equality only modulo $2\pi$. A student proposes to use exactly the same Jensen calculation and conclude $\rho\le K_n$. Which step no longer follows? Does the convexity calculation itself fail?
@@ -181,7 +181,7 @@ $$
 \bar u=A+B+\frac{2\pi k}{m}
 $$
 
-for an integer $k$ that has not been determined. We cannot substitute $F(A+B)$ for $F(\bar u)$, so this calculation does not give the claimed candidate bound until the exact winding fixes $k=0$. The product supplies a modular phase relation automatically; the polygon's real angle lift in Topic VII supplies the additional information. This is why convexity and a characteristic equation cannot replace the winding argument.
+for some integer $k$. Convexity still compares the product with the value at this actual mean. To evaluate the scalar bound at $A+B$, however, we have to know $k=0$. The product determines angles only up to full turns. Following the vertices in Topic VII is what determined that missing integer.
 
 </details>
 :::
@@ -202,7 +202,7 @@ The closing path fixed the sum $u_1+u_2=4\pi/7$. If one of these angles exceeds 
 
 ### Check the source of strictness
 
-Suppose $m=2$ and the factor arguments are $\bar u-h$ and $\bar u+h$, both in $(0,M)$, where $h\ne0$. Do they give the same bound as two factors with argument $\bar u$? No. Strict convexity gives
+For two factors we can even estimate the cost of separating their angles. Write them as $\bar u-h$ and $\bar u+h$ in $(0,M)$, with $h\ne0$. The chord joining their graph points has its midpoint at $\bar u$. Comparing its height with the height of the curve gives
 
 $$
 \frac{F(\bar u-h)+F(\bar u+h)}2>F(\bar u).

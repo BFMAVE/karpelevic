@@ -7,10 +7,10 @@ For a general arc, one row that chooses between staying and moving no longer suf
 ::: {.reader-sharpness-ledger}
 **Upper bound — supplied by Topic IX.** A product with the required real winding is bounded by the candidate, with equal weights precisely at equality.
 
-**Attainment — proved here.** We construct stochastic rows reaching every candidate point. Topics XI–XII will still be needed to transfer the least-order upper bound and identify the complete boundary.
+**Attainment.** For every ray we will put the candidate point into the spectrum of an explicit stochastic matrix. Comparing the upper bound at different matrix orders remains for Topics XI and XII.
 :::
 
-Start with the oriented data of Topic VIII and the scalar solution $\rho=K_n(\theta)$. Thus $q<s$, $m=\lfloor n/q\rfloor$, $\vartheta=2\pi y$, $A=q\vartheta-2\pi p$, and $B=(2\pi r-s\vartheta)/m$. Set $z=\rho e^{i\vartheta}$ and choose
+Fix an open Farey interval at order $n$, in the orientation of Topic VIII. Its endpoints are $p/q<r/s$ with $q<s$, its angle is $\vartheta=2\pi y$, and it gives $m=\lfloor n/q\rfloor$ factors. Use the candidate radius $\rho=K_n(\theta)$ and put $z=\rho e^{i\vartheta}$. With $A=q\vartheta-2\pi p$ and $B=(2\pi r-s\vartheta)/m$, the two lengths obtained from the triangle in Topic VIII give the row weights
 
 $$
 \alpha=\frac{\rho^{s/m}\sin A}{\sin(A+B)},\qquad
@@ -30,13 +30,13 @@ z^q-\beta
 =\alpha\rho^{q-s/m}e^{i(A+B)}.
 $$
 
-Every factor thus has the equality argument $A+B$. The exact angle calculation
+The direction of $z^q-\beta$ is therefore $A+B$, precisely the mean angle required in Topic IX. To see what happens to the directions when we multiply $m$ copies of this factor and include the closing power of $z$, use
 
 $$
 (s-mq)\vartheta+m(A+B)=2\pi(r-mp)
 $$
 
-ensures that the product has positive real phase. Raising the factor identity to the $m$th power gives the Ito equation
+The right side is a whole number of turns, so the complex number with this argument and positive modulus is positive real. The lengths from the factor identity give $z^{s-mq}(z^q-\beta)^m=\alpha^m$. Multiplying by $z^{mq}$ and using $\alpha=1-\beta$ yields the Ito equation
 
 $$
 z^s(z^q-\beta)^m=(1-\beta)^mz^{mq}.
@@ -44,20 +44,20 @@ $$
 
 ### The transition graph
 
-We can also let $\beta_0,\ldots,\beta_{m-1}\in[0,1]$ be independent weights and set $\alpha_j=1-\beta_j$. Keep $q<s$, assume $s>(m-1)q$, and put $n_0=\max\{mq,s\}$. For each $j$, make a block of $q$ vertices $v_{j,0},\ldots,v_{j,q-1}$. Connect successive vertices within the block by arrows of weight one. From its last vertex, place an arrow of weight $\beta_j$ back to its first vertex, and an arrow of weight $\alpha_j$ toward the next block. When $q=1$, the local closing arrow is a loop at the block's sole vertex; the same construction applies.
+The graph can be built with a separate weight $\beta_j\in[0,1]$ for every block $j=0,\ldots,m-1$. Write $\alpha_j=1-\beta_j$. For now assume $q<s$ and $s>(m-1)q$, and let $n_0=\max\{mq,s\}$. In block $j$, label the $q$ states $v_{j,0},\ldots,v_{j,q-1}$. From each state before the last, move to the next with probability one. At the last state there are two choices. The weight $\beta_j$ takes us back to the start of this block. The weight $\alpha_j$ takes us towards the next block, with the last connection specified below. For $q=1$ the return to the start is a loop.
 
 A directed arrow of weight $a$ from vertex $u$ to vertex $v$ means that the matrix entry $M_{uv}$ is $a$, where $M$ denotes the transition matrix. Rows describe departure vertices. At the last vertex of a block the row sum is $\beta_j+\alpha_j=1$. Every other vertex has a single outgoing arrow of weight one. Thus $M$ is row-stochastic. We use $M$ for the matrix to distinguish it from the scalar angle $A$.
 
-The graph's vertices are **states**, or row indices. The coordinates of an eigenvector are **complex points** attached to those states. A state is not automatically an extreme vertex of their convex hull: coordinates can coincide or lie inside that hull. For an eigenvector $x$, each row equation $\lambda x_u=\sum_v M_{uv}x_v$ places the image $\lambda x_u$ at the weighted average specified by the outgoing arrows. That is the matrix–polygon bridge from Topic I.
+Keep track of what the graph and the polygon each label. A vertex $u$ of the graph is a state and indexes a row. Its complex coordinate $x_u$ comes from a chosen eigenvector. Distinct states can have the same coordinate, and a coordinate can lie inside the convex hull of the others. To draw row $u$, attach the point $x_v$ to the end of each outgoing arrow and take their weighted average. The equation $\lambda x_u=\sum_v M_{uv}x_v$ says that this average is where multiplication by $\lambda$ sends $x_u$.
 
-For the three-state block $0,1,2$ followed by a block starting at $3$, the translation is:
+For instance, take a block on states $0,1,2$, with the next block starting at $3$. Compare the row at $0$, which offers a single move, with the row at $2$, which offers two.
 
-| Graph information | Matrix entries | Eigenvector row equation |
+| Outgoing arrows | Nonzero entries when the weights are positive | What the row gives |
 |---|---|---|
-| $0\to1$ with weight one | $M_{01}=1$ | $\lambda x_0=x_1$ |
-| $2\to0$ with weight $\beta_0$, $2\to3$ with weight $\alpha_0$ | $M_{20}=\beta_0$, $M_{23}=\alpha_0$ | $\lambda x_2=\beta_0x_0+\alpha_0x_3$ |
+| $0\to1$ with probability one | $M_{01}=1$ | $x_1=\lambda x_0$ |
+| From $2$, return to $0$ with probability $\beta_0$ or move to $3$ with probability $\alpha_0$. | $M_{20}=\beta_0$, $M_{23}=\alpha_0$ | $\lambda x_2=\beta_0x_0+\alpha_0x_3$ |
 
-An individual arrow supplies one term of the row sum; the entire outgoing row supplies the eigenvector equation. Topic XIV will check that, in its particular eight-state example, all eight complex coordinates really are extreme polygon vertices.
+Each arrow accounts for one summand. Only after summing the outgoing arrows do we know the image of the coordinate at their common starting state. Whether each coordinate is a corner of the polygon is a further question. Topic XIV will verify this for all eight states of the worked example.
 
 Read the first two deterministic rows together. They give $x_2=\lambda x_1=\lambda^2x_0$. Substitute this into the branching row shown in the table to obtain
 
@@ -66,21 +66,21 @@ $$
 \qquad (\lambda^3-\beta_0)x_0=\alpha_0x_3.
 $$
 
-Thus a deterministic path followed by one averaging row produces exactly a factor $\lambda^q-\beta_j$. The links between blocks let those coordinate ratios telescope around a cycle. The final route length supplies the remaining power of $\lambda$.
+For a block of length $q$ there are $q-1$ steps of weight one before this last row. They replace each intermediate coordinate by a power of $\lambda$ times the first one, giving the factor $\lambda^q-\beta_j$. On multiplying across blocks the coordinate at a shared end cancels. Where the final arrow returns decides which power of $\lambda$ is still needed to close the path.
 
-Following the closing arrows gives $m$ separate cycles of length $q$, each with product of weights $\beta_j$. Following the connecting arrows gives a cycle through the blocks. Its length would initially be $mq$; only its final connection needs adjustment to make its length $s$.
+Always choose the return within a given block and we have a cycle of length $q$. Its arrow weights multiply to $\beta_j$ because the other weights are one. Instead choose the connection to the next block at each exit. Connecting the last state straight back to the first would give a cycle of length $mq$. We want length $s$, so we adjust just that last connection.
 
-If $s\le mq$, set $d=mq-s$. Redirect the last connecting arrow into $v_{0,d}$. The assumption $s>(m-1)q$ guarantees $0\le d<q$. The connecting cycle skips the first $d$ vertices of block zero and has length $s$. The graph has $mq$ vertices.
+Suppose first that $s\le mq$. We need to omit $d=mq-s$ steps. Since $s>(m-1)q$ we have $d<q$, so the state $v_{0,d}$ exists in the first block. End the final connecting arrow there. The cycle now omits exactly the states $v_{0,0},\ldots,v_{0,d-1}$, none when $d=0$. It visits $s$ of the $mq$ states.
 
-If $s>mq$, insert $s-mq$ new vertices into that final connection. Give the first arrow weight $\alpha_{m-1}$ and the remaining arrows weight one. The connecting cycle and the graph now have $s$ vertices. In either case the graph has exactly $n_0$ vertices.
+When $s>mq$, keep the return to the first state but insert $s-mq$ new states on the way. Choose this route with the usual weight $\alpha_{m-1}$ at the last block and give each subsequent step probability one. Now the connecting cycle visits all $s$ states. Together the two constructions give $n_0=\max\{mq,s\}$ states.
 
 For the example from Topic VII, $q=3$, $m=2$ and $s=8$. The two blocks use six states. Send the last connecting arrow from state $5$ through the two additional states $6$ and $7$ before returning to $0$. Following the connecting arrows now uses eight steps, while taking a local return still uses three. Writing down the eigenvector rows along these routes recovers the two factors with exponent three and the extra power $z^2$ found in the closing path.
 
 ### Why these cycles determine the polynomial
 
-Let $t$ be the variable in the characteristic polynomial $\det(tI-M)$. Its determinant expansion can be organised by collections of directed cycles that have no vertex in common. For a cycle of length $\ell\ge2$, the permutation sign is $(-1)^{\ell-1}$ and its $\ell$ off-diagonal entries contribute $(-1)^\ell$. Their product is $-1$. A loop gives the same choice by expanding the diagonal entry $t-M_{ii}$: either choose $t$ or choose the negative loop weight. Every selected directed cycle therefore contributes one minus sign and the product of its weights. Vertices outside the selected cycles contribute factors of $t$.
+Expand $\det(tI-M)$ by permutations. If a term selects a nondiagonal entry in row $u$, its column is the next state of an arrow out of $u$. A permutation uses each column once, so these moves form directed cycles with disjoint vertices. A cycle of length $\ell\ge2$ has permutation sign $(-1)^{\ell-1}$. Its $\ell$ entries from $-M$ contribute another $(-1)^\ell$, leaving a single minus sign times the product of arrow weights. At a fixed vertex the diagonal entry $t-M_{ii}$ lets us choose either $t$ or a loop of weight $M_{ii}$ with the same minus sign.
 
-Any subset of the $m$ local $q$-cycles can be selected because they are disjoint. Summing those choices gives
+In block $j$ we can leave all its $q$ vertices unused, contributing $t^q$, or take its return cycle, contributing $-\beta_j$. Different blocks use disjoint vertices, so these choices multiply. Any states outside the $m$ blocks still contribute $t$. Thus the terms using only local cycles sum to
 
 $$
 t^{n_0-mq}\prod_{j=0}^{m-1}(t^q-\beta_j).
@@ -94,19 +94,19 @@ $$
 -t^{n_0-s}\prod_{j=0}^{m-1}(1-\beta_j).
 $$
 
-This is the full polynomial, including zero roots and their multiplicities. The displayed powers are nonnegative because of the definition of $n_0$.
+The exponent $n_0-mq$ counts the states outside the blocks, while $n_0-s$ counts those outside the connecting cycle. Both counts are nonnegative. We have therefore obtained the characteristic polynomial directly, with the correct multiplicity even at $t=0$.
 
-Take all $\beta_j=\beta$ from the equality construction. For a nonzero $z$, the Ito equation is equivalent to this characteristic polynomial vanishing at $z$, after multiplying or dividing by a power of $z$. Thus $z$ is an eigenvalue. With Farey data, $q+s>n$ implies $s>n-q\ge(m-1)q$, and $n_0\le n$. An identity block enlarges the matrix to order $n$ if necessary. If we used conjugate orientation, a real matrix also has the conjugate eigenvalue, recovering the original angle $\theta$.
+Now choose every $\beta_j$ equal to the weight $\beta$ calculated from the scalar radius. At our point $z\ne0$ the Ito equation and $\det(zI-M)=0$ differ only by a power of $z$. Hence $M$ has the desired eigenvalue. For these Farey endpoints, $q+s>n$ gives $s>n-q\ge(m-1)q$, exactly the condition needed for the last connecting arrow. Also $s\le n$ and $mq\le n$. If $n_0<n$, adjoining an identity block supplies the remaining states and keeps $z$ as an eigenvalue. When the interval was reflected, complex conjugation gives the eigenvalue on the original ray because $M$ is real.
 
 ### A six-state construction to check
 
-Choose $q=3$, $m=2$, and $s=5$. Label the blocks $0,1,2$ and $3,4,5$. Give $0\to1$, $1\to2$, $3\to4$, and $4\to5$ weight one. Set $2\to0$ to $\beta_0$, $2\to3$ to $1-\beta_0$, $5\to3$ to $\beta_1$, and $5\to1$ to $1-\beta_1$. The connecting cycle is $1\to2\to3\to4\to5\to1$, with five steps. Can the two local three-cycles be selected together in the determinant? Yes: their vertices are disjoint. Can either be selected with that five-cycle? No: they share vertices. Hence
+Take two blocks of three states, labelled $0,1,2$ and $3,4,5$, and ask for a connecting cycle of length five. Inside the blocks use $0\to1\to2$ and $3\to4\to5$, with weight one at every step. The two exits from $2$ go to $0$ and $3$ with weights $\beta_0$ and $1-\beta_0$. At $5$ return to $3$ with weight $\beta_1$ or go to $1$ with weight $1-\beta_1$. This last arrow skips state $0$, giving the five-cycle $1\to2\to3\to4\to5\to1$. The two three-cycles can appear in the same determinant term. The five-cycle meets both, so its term contains neither. We obtain
 
 $$
 \det(tI-M)=(t^3-\beta_0)(t^3-\beta_1)-t(1-\beta_0)(1-\beta_1).
 $$
 
-One can read all five terms directly from the permitted cycle selections:
+We can also check the five terms one at a time. Each chosen cycle contributes a minus sign, and each unused state contributes a factor $t$.
 
 $$
 \begin{array}{c|c}
@@ -148,54 +148,54 @@ For instance the last row averages states $3$ and $1$. It gives $(11/32)(-1/2)+(
 
 <!-- reader-figure:late -->
 
-At all weights one, the nonzero eigenvalues are the $q$th roots of unity; at all weights zero, they are the $s$th roots of unity, with any remaining eigenvalues zero. For weights strictly between zero and one the graph is connected in both directions by directed paths. For Farey data $q$ and $s$ are coprime, which also ensures positivity of every sufficiently high matrix power.
+At $\beta_j=1$ for all $j$, the connecting route has weight zero and the local $q$-cycles give the $q$th roots of unity. At $\beta_j=0$ for all $j$, only the connecting $s$-cycle remains and gives the $s$th roots of unity. In each case any other eigenvalues are zero. For $0<\beta_j<1$ we can follow the connecting arrows through all blocks and the local return arrows to reach the states skipped by that route. Thus each state can reach every other. For Farey data the cycle lengths $q$ and $s$ are coprime. The period, which divides both lengths, is one. Consequently every sufficiently high power of this finite irreducible matrix has positive entries.
 
-The full characteristic polynomial also tells us which zero roots belong to the matrix. In this six-state example, with equal weights $\beta\in(0,1)$, write $C(t)=(t^3-\beta)^2-(1-\beta)^2t$. The cleared Ito equation has left side minus right side
+Return to the six-state example with both local weights equal to $\beta\in(0,1)$. Its characteristic polynomial is $C(t)=(t^3-\beta)^2-(1-\beta)^2t$. What happens at zero if we use the Ito equation with nonnegative exponents instead? Taking its two sides to the left gives
 
 $$
 t^5(t^3-\beta)^2-(1-\beta)^2t^6=t^5C(t).
 $$
 
-Here $C(0)=\beta^2>0$, so zero is not a matrix eigenvalue. The cleared equation has five zero roots introduced by multiplication. This is why the equivalence used above is explicitly for nonzero $z$.
+The extra factor $t^5$ vanishes at zero, while $C(0)=\beta^2>0$. Thus the five zero roots on this last line come entirely from clearing powers. The matrix has precisely the roots of $C$, which is why we checked the equivalence with the Ito equation at a nonzero point.
 
 ### How the weight changes from one endpoint to the other {#why-the-weight-traverses-the-selected-arc-exactly-once}
 
-So far each angle has supplied an attaining weight. We still have to show that continuously varying the weight follows that selected arc, without stopping or retracing it. Fix the oriented Farey interval and let $\rho=\rho(\vartheta)$ be its scalar radius. Define the residual
+For each angle of the oriented interval we have found a weight $\beta$. Does increasing the angle run through all weights between zero and one exactly once? Follow the scalar radius $\rho=\rho(\vartheta)$ along the interval. By its defining equation $\mathcal R(\rho,\vartheta)=0$, where
 
 $$
 \mathcal R(\rho,\vartheta)=\rho^{s/m}\sin A+\rho^q\sin B-\sin(A+B).
 $$
 
-A subscript denotes a partial derivative, keeping the other variable fixed. Inside the interval,
+First vary $\rho$ while holding $\vartheta$ fixed. The derivative of the difference, denoted by $\mathcal R_\rho$, is
 
 $$
 \mathcal R_\rho=\frac{s}{m}\rho^{s/m-1}\sin A+q\rho^{q-1}\sin B>0.
 $$
 
-The scalar radius is continuous by Topic VIII. Apply the mean-value theorem to the change in $\mathcal R$ caused first by changing $\rho$ and then by changing $\vartheta$. Divide by the angle change and pass to its limit. Since the limiting denominator $\mathcal R_\rho$ is positive, this gives $\rho'=-\mathcal R_\vartheta/\mathcal R_\rho$. This derivative is continuous; the formula can be differentiated again. The equal-weight formula then makes $\beta(\vartheta)$ differentiable with continuous derivative too.
+Along the arc, $\mathcal R$ has value zero before and after a small change in $\vartheta$. Split that zero change into one change at fixed angle and one at fixed radius. By the mean-value theorem the first is $\Delta\rho$ times an intermediate value of $\mathcal R_\rho$, and the second is $\Delta\vartheta$ times an intermediate value of $\mathcal R_\vartheta$. Topic VIII gives $\Delta\rho\to0$ as $\Delta\vartheta\to0$. Dividing by $\Delta\vartheta$ and using $\mathcal R_\rho>0$ therefore gives $\rho'=-\mathcal R_\vartheta/\mathcal R_\rho$. This quotient is continuous along the open arc, so the formula for $\beta$ also gives it a continuous derivative.
 
-Let $e=s-mq$ and introduce
+To decide whether $\beta'$ can reach zero, put $e=s-mq$ and write the product equation as $H(z,\beta)=0$, where
 
 $$
 H(z,\beta)=z^e(z^q-\beta)^m-(1-\beta)^m.
 $$
 
-All powers are differentiable at $z\ne0$, including when $e<0$. Differentiating them gives
+Near our point $z\ne0$ even a negative power $z^e$ can be differentiated. Holding $\beta$ fixed and factoring out the common powers of $z$ and $z^q-\beta$ gives
 
 $$
 H_z=z^{e-1}(z^q-\beta)^{m-1}(sz^q-e\beta)\ne0.
 $$
 
-Indeed, $z\ne0$ and $\operatorname{Im}z^q=\rho^q\sin A>0$. Therefore $z^q-\beta$ has positive imaginary part, as does $sz^q-e\beta$, whose imaginary part is $s\rho^q\sin A$. None of these factors can vanish.
+The last factor $sz^q-e\beta$ has imaginary part $s\rho^q\sin A>0$. For the same reason $z^q-\beta$ is nonzero, and $z$ has radius $\rho>0$. This verifies every nonvanishing factor in the derivative.
 
-On our attaining curve $H(z(\vartheta),\beta(\vartheta))=0$. Differentiate this identity, using the ordinary chain rule for the real and imaginary parts:
+As $\vartheta$ varies, the identity $H(z(\vartheta),\beta(\vartheta))=0$ continues to hold. Differentiating along the arc gives
 
 $$
 H_z z'+H_\beta\beta'=0,\qquad
 z'=e^{i\vartheta}(\rho'+i\rho)\ne0.
 $$
 
-The last nonvanishing follows from $\rho>0$. If $\beta'=0$, the first identity would force the product of two nonzero numbers $H_z z'$ to vanish. Thus $\beta'$ never vanishes. Its continuity makes its sign constant. At the left endpoint $\rho\to1$, $A\to0$ and the formula for $\beta$ tends to one; at the right endpoint $B\to0$ and $\beta\to0$. These limits force $\beta'<0$. Every weight between zero and one is taken exactly once, on this selected branch. If we reflected the original interval, increasing $\vartheta=2\pi-\theta$ means decreasing the original angle $\theta$.
+Since $\rho>0$, the imaginary part of $\rho'+i\rho$ is positive and hence $z'\ne0$. If $\beta'$ vanished, the first identity would give $H_z z'=0$, although both factors are nonzero. Thus the continuous derivative $\beta'$ keeps one sign on the interval. At the left end $\rho$ tends to one and $A$ to zero, giving $\beta\to1$. At the right end $B$ tends to zero and hence $\beta\to0$. The sign is therefore negative. Continuity and strict decrease show that each weight in $(0,1)$ occurs exactly once. On a reflected interval the original angle $\theta=2\pi-\vartheta$ runs in the opposite direction.
 
 On the first order-four arc we can calculate the weight directly. Its data are $q=1$ and $s=m=4$, and $A+B=\pi/2$. The factor identity says $z-\beta=i(1-\beta)$, so
 
@@ -210,4 +210,4 @@ Direct differentiation gives $\beta'=-1/(\cos\theta+\sin\theta)^2<0$. At $\theta
 
 <!-- reader-figure:late-extra -->
 
-Unequal weights produce valid stochastic matrices too. Topic IX compares their roots with the boundary only when those roots also satisfy the specified real argument identity. The characteristic polynomial alone allows other roots. Equal weights attain the boundary on the selected branch; they do not make every root of the polynomial a boundary point.
+Allowing the block weights to differ still gives a stochastic matrix. To decide whether one of its eigenvalues reaches this particular arc, we need its factor angles as well as its characteristic equation. Topic IX bounds the radius for a root with the required real sum of angles and forces equal weights at equality. The construction here selects the root attaining that bound among the roots of the equal-weight matrix.

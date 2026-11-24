@@ -20,41 +20,41 @@ The last equality uses the fact that sides 4 and 5 each received an image at the
 
 ### Reversing stochastic factors
 
-A row-stochastic matrix has nonnegative entries and row sums one. Products of such matrices are row-stochastic, because multiplying a vector of all ones still gives that vector and all product entries are nonnegative.
+Taking an average of averages still gives an average of the original entries. In matrix language, if $H$ and $S$ are stochastic, then $HS$ has nonnegative entries and $(HS)\mathbf1=H(S\mathbf1)=H\mathbf1=\mathbf1$. We can take the averages in the reverse order and reach the same conclusion about the row sums of $SH$.
 
-Suppose $A=HS$, where $H,S$ are row-stochastic and $S$ is invertible. Reversing the factors gives
+The two orders generally give different matrices. But suppose that $A=HS$ and that $S$ is invertible. Multiplying $A$ on the left by $S$ and on the right by $S^{-1}$ gives
 
 $$
 A'=SH=SAS^{-1}.
 $$
 
-Thus $A'$ is stochastic and similar to $A$. Similarity preserves eigenvalues: if $Av=\zeta v$, then $A'(Sv)=\zeta(Sv)$. We use a matrix $S$ that changes just one coordinate of the vertex vector $v=(v_1,\ldots,v_N)^T$.
+Start with $Av=\zeta v$, where $v=(v_1,\ldots,v_N)^T$ lists the polygon vertices. Multiplication by $S$ gives $A'(Sv)=SAv=\zeta(Sv)$. Thus the entries of $Sv$ give a new list of complex coordinates for the same multiplier. We will choose $S$ so that just the coordinate $v_i$ changes.
 
-The factor order has two separate jobs. Both factors are stochastic, so either order still gives nonnegative averaging rows. Invertibility of $S$ makes the reversal a change of basis, so the eigenvalue does not move. An arbitrary inward corner movement would give neither assurance; the factorisation is what makes this particular geometric move legitimate.
+We need both properties of the factors here. Stochasticity lets us read the rows of $A'$ as convex combinations. Invertibility makes $A'$ similar to $A$, and ensures that $Sv$ is still an eigenvector. Together they let us move a corner and continue to use $\zeta$.
 
-Define $E_i$ to copy coordinate $i-1$ into coordinate $i$, leaving every other coordinate unchanged. It satisfies $E_i^2=E_i$. For $0\le t<1$,
+To move $v_i$ towards $v_{i-1}$, first consider the matrix $E_i$ which replaces coordinate $i$ by coordinate $i-1$ and leaves all the others fixed. A second application copies exactly the same entry, giving $E_i^2=E_i$. We can move part of the way by averaging this operation with the identity. For $0\le t<1$ set
 
 $$
 S_i(t)=(1-t)I+tE_i,\qquad S_i(t)^{-1}=\frac{I-tE_i}{1-t},
 $$
 
-where $I$ is the identity matrix. The transformed vertex is $(1-t)v_i+t v_{i-1}$. With $t=\beta_i$, it is exactly $c_i$.
+where $I$ denotes the identity. Multiplying the proposed inverse by $S_i(t)$ and using $E_i^2=E_i$ gives $I$. The new $i$th coordinate of the vertex list is $(1-t)v_i+tv_{i-1}$. We reach $c_i$ by choosing $t=\beta_i$.
 
-To see the factorisation, define matrices $C$ and $B$ by
+There are two operations in each contact equation. One takes an average of neighbouring coordinates, and one shifts the index by $\kappa$. To write them as matrices, put
 
 $$
 (Cx)_r=x_{r+1},\qquad(Bx)_j=\beta_jx_{j-1}+\alpha_jx_j.
 $$
 
-Here $x$ is any column vector of $N$ coordinates. The contact equations say that $A=C^\kappa B$ satisfies $Av=\zeta v$. Replace row $i$ of $B$ by the row that copies coordinate $i$, calling the result $\widehat B$. Then
+For an arbitrary column $x$ with $N$ entries, $C$ reads the next coordinate and row $j$ of $B$ averages the two endpoints of side $j$. In particular $(C^\kappa Bv)_r=c_{r+\kappa}=\zeta v_r$, so $A=C^\kappa B$ realises our multiplier. To separate the desired factor $S_i(\beta_i)$ from $B$, first replace row $i$ of $B$ by the row that returns $x_i$ unchanged. Call this matrix $\widehat B$. We claim that
 
 $$
 B=\widehat B S_i(\beta_i),\qquad H=C^\kappa\widehat B.
 $$
 
-Right multiplication restores row $i$. The only other row that could change is row $i+1$, and it does not use coordinate $i$ because $\beta_{i+1}=0$. This explains the condition on the neighbouring contact.
+To check the first identity, apply $\widehat B S_i(\beta_i)$ to a column $x$, starting with $S_i(\beta_i)x$. Its $i$th coordinate is already the average wanted in row $i$ of $B$, and $\widehat B$ copies this entry. Row $i+1$ is the only other row that could read the modified coordinate. Its weight on that coordinate is $\beta_{i+1}=0$. This verifies the factorisation and explains why we chose the end of a run.
 
-The new eigenvector has one moved vertex, so its convex hull $P'$ is invariant. It has at most $N$ vertices; least realising order forces exactly $N$. Topic II's universal contact theorem applies to $P'$ as well: every vertex image is on its boundary.
+We can now reverse the factors in $A=H S_i(\beta_i)$. The rows of the new stochastic matrix express every $\zeta v'_j$ as a convex combination of the entries of $v'=S_i(\beta_i)v$. Their hull $P'$ is therefore invariant. There are $N$ entries and a polygon realising $\zeta$ needs at least $N$ vertices. Thus all $N$ are vertices of $P'$, and the contact theorem of Topic II puts every one of their images on the boundary of $P'$.
 
 The new corners remain in cyclic order, since $v_i$ moved along the preceding side. We can use the same side labels to count the contacts again.
 
@@ -70,14 +70,14 @@ $$
 
 A hat denotes the coefficient after replacing row $i$ by a copying row. Since $0<t<1$ and all endpoint coefficients $\widehat\alpha$ are positive, the last two vertices occur with positive weights. The sum is a boundary point by Topic II. A supporting functional reaches its maximum at this point, so each vertex with positive weight belongs to the same supporting line. The last two vertices already determine the side. Its line excludes $v'_{j-2}$, so the first coefficient is zero. We can now read off the coefficient at the ending vertex, $(1-t)\alpha_j=\alpha_i\alpha_j$.
 
-Consequently the new contacts retain the same two-endpoint form, with
+Only sides $i$ and $i+\kappa$ can have changed their coefficients. On side $i$ the image is now the ending vertex. On side $i+\kappa$ the weight at the ending vertex has been multiplied by $\alpha_i$. The complete update is
 
 $$
 \alpha_i'=1,\qquad\alpha_{i+\kappa}'=\alpha_i\alpha_{i+\kappa},
 \qquad\alpha_j'=\alpha_j\text{ at every other index}.
 $$
 
-Introduce $w_j=-\log\alpha_j\ge0$. The update becomes addition:
+We want to follow that product through several moves. Let $w_j=-\log\alpha_j$. Since $0<\alpha_j\le1$, this number is nonnegative, and it vanishes precisely when the image is the ending vertex. Taking logarithms gives
 
 $$
 w_i'=0,\qquad w_{i+\kappa}'=w_i+w_{i+\kappa}.
@@ -89,15 +89,15 @@ For a permitted transfer in the selected polygon, take $\alpha_i=1/2$ and $\alph
 
 ### Why all interior contacts form one run
 
-Let $I=\{i:w_i>0\}$ and $\varphi=|I|$. If $I$ contains every index, it is already one cyclic run. Otherwise each run has an ending index with $\beta_i>0$ and $\beta_{i+1}=0$, so the move applies there. It removes part of a corner and produces a proper subpolygon with the same minimum count.
+Mark the indices $I=\{i:w_i>0\}$ and write $\varphi=|I|$. These marks are precisely the sides whose contacts lie in their interiors. If every index is marked, they already make one run around the polygon. Otherwise the final index $i$ of each run is marked and $i+1$ is unmarked. At such an index the move just proved replaces a corner by a point strictly inside the preceding side. The smaller polygon still has the smallest possible count of interior contacts.
 
-Every contact has modulus at most $\rho<1$. If any radius-one vertex other than $v_i$ remained, the subpolygon would still be normalised and would have smaller area. Therefore the ending vertex of each run would have to be the unique radius-one vertex. Two distinct runs have different ending vertices, which is impossible. After choosing the starting label, we have
+Take a vertex of modulus one in our chosen polygon. Any move at a *different* vertex would leave it in place. We would then have produced a smaller area at the same scale and with the same count, which is impossible. The move at a run ending removes $v_i$ and replaces it by $c_i$ of modulus at most $\rho<1$. Thus the ending vertex of each run has to be the only vertex of modulus one. There can be just one such ending. Starting our numbering at the beginning of its run gives
 
 $$
 I=\{1,\ldots,\varphi\}.
 $$
 
-The area argument is applied separately to the original polygon at each possible run ending. It does not assume that successive intermediate polygons continue to minimise area. Once one run has been obtained, later transfers preserve only the minimum contact count; that is enough to prevent a weight collision.
+We tested each possible move on the polygon originally chosen to have smallest area. This is why we could compare the areas separately at the ends of two putative runs. For the sequence of moves below we use a different consequence which survives every move. The number of interior contacts is still the smallest possible, so a positive weight always moves to an unoccupied index.
 
 After a transfer, a rescaling may be needed to put a vertex back at radius one. Rescaling has no effect on the number of interior contacts, so the next transfer still cannot merge two positive weights.
 
@@ -105,7 +105,7 @@ Let $\delta=\gcd(N,\kappa)$, the greatest common divisor. Adding $\kappa$ modulo
 
 ### A record in the cyclic shift
 
-For an integer $a$, write $[a]_N$ for its residue in $\{0,\ldots,N-1\}$. If $\varphi<N$, relabel the positive indices temporarily as $\{N-\varphi+1,\ldots,N-1\}\cup\{0\}$. Move the weight at zero repeatedly by the permitted operation. Before reaching the final block, its successive positions are $[t\kappa]_N<N-\varphi$, so its next ordinary neighbour has zero weight and the operation remains available.
+Write $[a]_N$ for the remainder in $\{0,\ldots,N-1\}$ after dividing $a$ by $N$. Suppose $\varphi<N$. For this calculation only, label the end of the run $0$, so its other indices are $N-\varphi+1,\ldots,N-1$. Leave those other weights in place and move the one initially at $0$. Its label after $t$ moves is $[t\kappa]_N$. As long as it is below $N-\varphi$, the next label in ordinary order is empty. We can therefore make another move of $\kappa$ places.
 
 That block contains $\varphi\ge\delta$ consecutive residues, so it contains a multiple of $\delta$. The orbit of zero under addition by $\kappa$ visits every multiple of $\delta$, proving that an entrance occurs. The first entrance cannot land on an already positive index. It therefore lands exactly at $N-\varphi$. There is therefore a time $h>0$ such that
 
@@ -115,4 +115,4 @@ $$
 
 Try this walk with $N=8$, $\kappa=3$ and two positive weights. In the temporary labelling they occupy $7$ and $0$. The weight at $0$ may move because label $1$ is empty. It lands on $3$. Its neighbour $4$ is empty too, so it moves again, arriving at $6$. This time its neighbour is the occupied label $7$. The walk stops. The residues visited were $0,3,6$, and $8-6=2$ recovers the number of occupied sides. Topic V will read the same three integers as information about return times.
 
-The new residue exceeds every earlier one: it is a strict record. For $\varphi=N$, the initial record at time zero has deficit $N$. Topic V translates these records into exact first-return paths; later moves require only the minimum contact count, so rescaling them never requires a new area-minimisation argument.
+At time $h$ the remainder first reaches $N-\varphi$. Every earlier remainder was smaller, which is what makes this value a *record*. Its distance from $N$ tells us exactly how many interior contacts there are. When all $N$ weights are positive, the initial value $0$ already has the required distance $N$ and we take $h=0$. In Topic V we use the times of these records to calculate how many steps separate successive visits to the marked sides.

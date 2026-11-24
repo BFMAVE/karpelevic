@@ -5,22 +5,22 @@ Consider a point on the segment from $1$ to $i$. If it lies on the ray making an
 ::: {.reader-sharpness-ledger}
 **Upper bound — still to prove.** Topic IX will show that a product with the specified real winding cannot have radius beyond this candidate. Topic XI will compare candidates at different orders.
 
-**Attainment — still to prove.** Topic X will build a stochastic matrix whose eigenvalue reaches the candidate. A scalar solution alone establishes neither of these two claims.
+**Attainment.** Even after finding a radius, we still need a matrix with an eigenvalue at that point. Topic X will construct one.
 :::
 
 The polygon supplies its data at the least order that realises a point. For the moment we can perform the following construction at any given order. We write $K_n(\theta)$ for the distance it assigns to the ray of angle $\theta$.
 
-Let $n\ge4$ be the required matrix order. Write $F_n$ for the increasing list of reduced fractions in $[0,1]$ with denominator at most $n$. Fix an angle $\theta$ in the upper half-plane and set $x=\theta/(2\pi)$. Suppose $x$ lies strictly between consecutive fractions $f<g$ in $F_n\cap[0,1/2]$. Consecutive fractions $p/q<r/s$ satisfy
+Fix the matrix order $n\ge4$. To find the equation for a ray of angle $\theta$ in the upper half-plane, measure its direction in turns, $x=\theta/(2\pi)$. Arrange all reduced fractions in $[0,1]$ with denominator at most $n$ in increasing order. This list is $F_n$. Suppose $x$ lies in a gap with endpoints $f<g$ in its upper-ray portion $[0,1/2]$. For any two neighbours $p/q<r/s$ of $F_n$, Topic VII gives
 
 $$
 rq-ps=1,\qquad q+s>n.
 $$
 
-The first identity says that their separation is exactly $1/(qs)$. The second says that their mediant, $(p+r)/(q+s)$, has denominator too large to appear at order $n$.
+Indeed, subtracting the fractions gives $(rq-ps)/(qs)=1/(qs)$. If the denominator sum $q+s$ were at most $n$, the intermediate fraction $(p+r)/(q+s)$ would be available already. Its numerator and denominator are coprime since a common divisor would divide $q(p+r)-p(q+s)=1$.
 
 The product formula is oriented so that its left endpoint has the smaller denominator. If that is already true, set $p/q=f$, $r/s=g$, and $y=x$. Otherwise set $p/q=1-g$, $r/s=1-f$, and $y=1-x$. Reflection reverses the endpoints because conjugation gives $e^{2\pi iy}=e^{-i\theta}$. It preserves the modulus we want to determine. In both cases $q<s$ and $p/q<y<r/s$. When we have reflected, $y>1/2$, so the corresponding ray lies in the lower half-plane.
 
-Set $\vartheta=2\pi y$, and introduce
+Using the oriented angle $\vartheta=2\pi y$, put
 
 $$
 m=\lfloor n/q\rfloor,\qquad
@@ -28,13 +28,13 @@ A=q\vartheta-2\pi p,\qquad
 B=\frac{2\pi r-s\vartheta}{m}.
 $$
 
-The integer $m$ counts the product factors. The positive angles $A$ and $B$ measure how far our ray is from the two endpoint rays, after the scalings needed by that product. Their sizes become transparent if we use the fractional position
+There are $m$ factors to compare. The angle $A$ counts $q$ copies of the angular distance from the left endpoint. The angle $B$ counts $s$ copies of the distance to the right endpoint, shared equally among the $m$ factors. Both are positive. To see their sizes, measure the distance from the left endpoint as a fraction of the interval width. Denote that fraction by
 
 $$
 t=\frac{y-p/q}{r/s-p/q}\in(0,1).
 $$
 
-Since the interval length is $1/(qs)$,
+Then $y-p/q=t/(qs)$ and $r/s-y=(1-t)/(qs)$. Substituting in the definitions gives
 
 $$
 A=\frac{2\pi t}{s},\qquad
@@ -43,7 +43,7 @@ $$
 
 Both denominators in these last expressions are at least three. Indeed, $q<s$ and $q+s>n\ge4$ give $s\ge3$. For $q=1$ we have $mq=n$, for $q=2$ we have $m\ge2$, and for $q\ge3$ already $mq\ge3$. Hence $A+B$ is a convex combination of $2\pi/s$ and $2\pi/(mq)$, each at most $2\pi/3$. In particular $A$, $B$ and $A+B$ have positive sines.
 
-Here is an example where reflection is necessary. At order five, take $x=7/24$ in $(1/4,1/3)$. The smaller denominator is on the right. Set $y=1-x=17/24$ and use the reflected interval $(2/3,3/4)$. Now $p=2$, $q=3$, $r=3$, $s=4$, and $m=\lfloor5/3\rfloor=1$. The determinant is $3\cdot3-2\cdot4=1$, and the denominator sum is seven, larger than five. The position is $t=1/2$, giving
+Take $n=5$ and $x=7/24$. The neighbours $1/4=6/24$ and $1/3=8/24$ put the smaller denominator on the right. Reflection gives $y=17/24$ between $2/3=16/24$ and $3/4=18/24$. We read off $p=2$, $q=3$, $r=3$, $s=4$ and $m=\lfloor5/3\rfloor=1$. The check $3\cdot3-2\cdot4=1$ and $3+4>5$ confirms adjacency. The midpoint is still the midpoint, so $t=1/2$ gives
 
 $$
 A=\frac\pi4,\qquad B=\frac\pi3,\qquad A+B=\frac{7\pi}{12}<\pi.
@@ -55,7 +55,7 @@ The original angle is $\theta=7\pi/12$, whereas the oriented angle is $\vartheta
 
 ### Selecting a branch requires the turn count
 
-Let $z=\rho e^{i\vartheta}$ and put $e=s-mq$. When these are the least-order data furnished by Topic VII, its geometric construction supplies weights $0\le\beta_j<1$ and factor arguments $u_j=\operatorname{Arg}(z^q-\beta_j)$ satisfying
+Write $z=\rho e^{i\vartheta}$ and $e=s-mq$. Recall the setting of Topic VII. There we took a nonreal eigenvalue at the greatest radius on its ray, with modulus less than one and least realising order at least four. A tower ending on a side gives a weight $0\le\beta_j<1$ and a factor angle $u_j=\operatorname{Arg}(z^q-\beta_j)$. Multiplication gives the first equality below. Counting the turns along the same paths gives the second.
 
 $$
 z^e\prod_{j=1}^{m}(z^q-\beta_j)=\prod_{j=1}^{m}(1-\beta_j),
@@ -70,7 +70,7 @@ $$
 =\frac{2\pi r-s\vartheta}{m}+q\vartheta-2\pi p=B+A.
 $$
 
-If $e<0$, the product is used for $z\ne0$, or written without negative powers as $z^s\prod_j(z^q-\beta_j)=z^{mq}\prod_j(1-\beta_j)$. Clearing powers does not make zero a valid root of the original nonzero product.
+For a negative $e$, the first equation involves a reciprocal power of $z$, so $z\ne0$. One can also multiply it by $z^{mq}$ to obtain $z^s\prod_j(z^q-\beta_j)=z^{mq}\prod_j(1-\beta_j)$. This polynomial equation holds at zero as well. Only its nonzero roots can be checked in the original product.
 
 ### Why the scalar equation has exactly one answer
 
@@ -103,13 +103,13 @@ The intermediate value theorem now gives a solution between zero and one. Strict
 
 Return to the ray through $(1+i)/2$. At order four its interval is $(0/1,1/4)$, so $q=1$, $s=m=4$, and $A=B=\pi/4$. Substituting gives $2\rho\sin(\pi/4)=1$. We recover the radius $1/\sqrt2$ that we read off the segment.
 
-The candidate changes continuously with the angle. To see this without assuming a differentiability theorem, take angles tending to an interior angle and any convergent subsequence of their radii in $[0,1]$. Passing to the limit in the equation gives the equation at the limiting angle. Its unique solution determines every possible subsequential limit, so the whole sequence converges.
+Vary the angle inside one Farey interval. If a sequence of angles tends to $\theta$, each corresponding radius lies in $[0,1]$, so every subsequence has a further convergent subsequence. Taking limits in the equation shows that its limit solves the equation at $\theta$. There is just one such radius, $K_n(\theta)$. Thus the radii themselves converge to it.
 
-At the left endpoint $A\to0$, while $B\to2\pi/(mq)\in(0,\pi)$. The limiting equation is $\rho^q\sin B=\sin B$, hence $\rho=1$. At the right endpoint the same reasoning gives $\rho^{s/m}=1$. Assigning $K_n=1$ at Farey fractions joins the candidates continuously to the endpoint roots of unity.
+What happens as the ray reaches an endpoint? On the left, $A$ tends to zero and $B$ tends to $2\pi/(mq)$, with positive sine. Any limiting radius therefore satisfies $\rho^q\sin B=\sin B$, forcing $\rho=1$. On the right, $B$ tends to zero and the surviving equation gives $\rho^{s/m}=1$. The arc thus joins the two roots of unity continuously if we set $K_n=1$ at their directions.
 
 ### A calculation to check
 
-At order seven, $1/3$ and $2/5$ are consecutive: $2\cdot3-1\cdot5=1$ and $3+5>7$. Choose $\theta=5\pi/7$, so $x=5/14$. Here $q=3$, $s=5$, and $m=2$, giving $A=\pi/7$ and $B=3\pi/14$. The candidate solves
+On the ray $\theta=5\pi/7$ we have $x=5/14$. At order seven the fractions on either side are $1/3$ and $2/5$, with determinant $2\cdot3-1\cdot5=1$ and denominator sum eight. The smaller denominator is on the left, so $\vartheta=\theta$. Substituting $q=3$, $s=5$ and $m=2$ gives $A=3(5\pi/7)-2\pi=\pi/7$ and $B=(4\pi-5(5\pi/7))/2=3\pi/14$. The equation for the radius becomes
 
 $$
 \rho^{5/2}\sin(\pi/7)+\rho^3\sin(3\pi/14)=\sin(5\pi/14).
@@ -121,4 +121,4 @@ Try two values before finding the zero to many places. At $\rho=0.94$ the left s
 
 <!-- reader-figure:late -->
 
-Order three needs a separate endpoint convention. Its nonreal boundary radius approaches $1/2$ as $\theta\uparrow\pi$, although $-1$ is itself an order-three eigenvalue. Topic XII explains this discontinuity; the continuous endpoint rule above is for $n\ge4$.
+The endpoint convention uses $n\ge4$. At order three the nonreal boundary approaches the point $-1/2$ as $\theta$ tends to $\pi$ from below, but along the negative real ray the boundary point is $-1$. We will see both pieces of the order-three region in Topic XII.

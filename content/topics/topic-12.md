@@ -8,15 +8,15 @@ Recall that $\Theta_n$ is the set of individual eigenvalues of real row-stochast
 
 ### The first three orders
 
-At order one the only matrix is $[1]$, so $\Theta_1=\{1\}$. At order two write
+The single entry of a stochastic matrix of order one has to be $1$, so $\Theta_1=\{1\}$. With two states we can choose the first entry in each row freely. The row sums determine the other entries, giving
 
 $$
 A=\begin{pmatrix}a&1-a\\b&1-b\end{pmatrix},\qquad a,b\in[0,1].
 $$
 
-Its eigenvalues are $1$ and $a-b$. Every value in $[-1,1]$ occurs, giving $\Theta_2=[-1,1]$.
+The column of ones gives the eigenvalue $1$. The trace $a+1-b$ is the sum of the two eigenvalues, so the other is $a-b$. This difference lies between $-1$ and $1$. For any $t\in[0,1]$, the choices $(a,b)=(t,0)$ and $(0,t)$ give $t$ and $-t$, respectively. Thus $\Theta_2=[-1,1]$.
 
-For order three put $\xi=e^{2\pi i/3}$. The answer is
+Three states allow a rotation through a third of a turn. Write $\xi=e^{2\pi i/3}$. The three points $1,\xi,\bar\xi$ are the vertices of an equilateral triangle. The region consists of this triangle together with one more segment on the real axis. In symbols,
 
 $$
 \Theta_3=\operatorname{conv}\{1,\xi,\bar\xi\}\ \cup\ [-1,-1/2].
@@ -31,7 +31,7 @@ $$
 
 Substituting the eigenvalues gives $(1+2u)^2\le3(1+2u^2-2v^2)$, or $3v^2\le(1-u)^2$. Since $u\le1$, the sloping lines are $v=\pm(1-u)/\sqrt3$. The trace condition $u\ge-1/2$ cuts off their left ends.
 
-Conversely, let $C_3$ be the three-cycle permutation matrix. For nonnegative $a,b,c$ summing to one, $aI+bC_3+cC_3^2$ is stochastic and has eigenvalue $a+b\xi+c\bar\xi$. This realises the triangle. An order-two matrix enlarged by an identity block realises the remaining real segment.
+Can we reach every point allowed by these inequalities? Take a cyclic permutation matrix $C_3$ and an eigenvector $v$ for $\xi$. The same vector satisfies $Iv=v$ and $C_3^2v=\xi^2v=\bar\xi v$. Choose any point $a+b\xi+c\bar\xi$ in the triangle, where $a,b,c\ge0$ and $a+b+c=1$. With these same coefficients the matrix $aI+bC_3+cC_3^2$ is stochastic, and multiplying it by $v$ gives the chosen point times $v$. On the real line we already have all of $[-1,1]$ from order two. Adjoining one absorbing state keeps these eigenvalues at order three.
 
 On the vertical side from $\xi$ to $-1/2$, the real coordinate of $\rho e^{i\theta}$ is $\rho\cos\theta=-1/2$. Therefore
 
@@ -50,9 +50,9 @@ Why do we need the scalar radii for this triangle? The order comparison in Topic
 
 Topic X expresses the boundary equation in terms of equal weights when $A,B>0$ and $A+B<\pi$. These inequalities hold on both open intervals at order three.
 
-For $0<x=\theta/(2\pi)<1/3$, the data are $q=1$ and $s=m=3$. Thus $A=\theta$, $B=2\pi/3-\theta$, and $A+B=2\pi/3<\pi$. The same increasing scalar function has a unique positive root $\rho<1$. Its equal weights $\alpha,\beta$ are positive and sum to one. With $z=\rho e^{i\theta}\ne0$, the reduced product is $(z-\beta)^3=\alpha^3$. The selected factor argument is $2\pi/3$, giving $z=\beta+\alpha\xi$, on the side from one to $\xi$.
+On the arc $0<x=\theta/(2\pi)<1/3$ the smaller denominator is $q=1$, and $s=m=3$. The two angles in the scalar equation are $A=\theta$ and $B=2\pi/3-\theta$. Both are positive and their sum is $2\pi/3$, so we obtain a unique positive root $\rho<1$ and weights $\alpha,\beta>0$ with $\alpha+\beta=1$. Put $z=\rho e^{i\theta}$. The product simplifies to $(z-\beta)^3=\alpha^3$. Which cube root do we take? The factor $z-\beta$ has argument $A+B=2\pi/3$, so $z=\beta+\alpha\xi$. This is precisely a point on the side joining $1$ to $\xi$.
 
-For $1/3<x<1/2$, use the conjugate-oriented point $w=\rho e^{i\vartheta}$, where $\vartheta=2\pi(1-x)=2\pi-\theta$. The oriented interval is $(1/2,2/3)$, so $q=2$, $s=3$, and $m=1$. Now $A=2\pi-2\theta>0$, $B=3\theta-2\pi>0$, and $A+B=\theta<\pi$. Thus the scalar root and positive equal weights are valid here as well. Since $w\ne0$, we may cancel its powers in the Ito equation, obtaining
+On the arc $1/3<x<1/2$ the smaller denominator is on the right. Reflect the ray, taking $\vartheta=2\pi-\theta$ and $w=\rho e^{i\vartheta}$. Its fraction of a turn, $1-x$, now lies between $1/2$ and $2/3$. Thus $q=2$, $s=3$ and $m=1$. Substitution gives $A=2\pi-2\theta$, $B=3\theta-2\pi$. Both angles are positive for $2\pi/3<\theta<\pi$, and their sum is $\theta<\pi$. For the root $\rho$ and weights $\alpha,\beta$ obtained here, the product is $w(w^2-\beta)=\alpha$. Since $\alpha+\beta=1$, the polynomial has a root at one and factors as
 
 $$
 w^3-\beta w-\alpha=(w-1)(w^2+w+\alpha)=0.
@@ -60,7 +60,9 @@ $$
 
 The nonreal root $w$ solves $w^2+w+\alpha=0$. A nonreal quadratic root requires $4\alpha-1>0$, hence $1/4<\alpha<1$. Its real part is $-1/2$. Conjugating back gives $z=-1/2+(i/2)\sqrt{4\alpha-1}$, strictly between $-1/2$ and $\xi$ on the vertical side. The selected factor argument and the scalar root's uniqueness identify the radius in both ranges with the ray's intersection with the corresponding triangle side.
 
-We may therefore begin the comparison at order four with these scalar radii. The interval $(0,1/3)$ splits by insertion of $1/4$, and Topic XI's split argument applies because its old angle sum is $2\pi/3<\pi$. On $(1/3,1/2)$ the endpoints stay fixed while the factor count rises from one to two, so its adding-factor argument applies because the old angle sum is $\theta<\pi$. At the inserted fraction $1/4$, the new radius is one while the triangle radius is smaller than one. At $x=0,1/3,1/2$, both actual maxima are one, realised directly. Thus the order-three radial maximum is at most $K_4$ on every upper ray, including the exceptional negative ray itself.
+Now add a fourth state. On $(0,1/3)$ the new fraction $1/4$ divides the arc in two. The comparison for a split interval in Topic XI applies on either side because the old angle sum was $2\pi/3$. At $1/4$ itself the new radius is one, while the same ray at order three meets the triangle strictly between two vertices. On $(1/3,1/2)$ the endpoints stay in place and the count rises from one to two. Here we can use the comparison for an extra factor since the old angle sum was $\theta<\pi$.
+
+At $x=0,1/3,1/2$ the numbers $1,\xi,-1$ occur already at order three and also at order four. This last endpoint accounts for the tip of the extra real segment. We have now proved $R_3(\theta)\le K_4(\theta)$ everywhere in the upper half-plane.
 
 </details>
 
@@ -91,7 +93,7 @@ Return to order $n\ge4$ and the upper ray chosen at the start. At Farey angles t
 
 Choose $z=R_n(\theta)e^{i\theta}$ on this non-Farey ray and let $k\le n$ be its least realising order. The construction gives a positive radius, and the unit-circle classification excludes radius one. Since $z$ is nonreal, $k\ge3$. It lies as far out on the ray in $\Theta_k$ as it does in $\Theta_n$. A point farther out at order $k$ would also occur at order $n$ by adjoining an identity block.
 
-If $k=3$, the small-order description and comparisons give
+If $k=3$, the point $z$ lies in $\Theta_3$. We have just compared its outer radius with $K_4$, and Topic XI compares $K_4$ with every subsequent radius up to $K_n$. Starting and ending at the radius we chose gives
 
 $$
 |z|\le R_3(\theta)\le K_4(\theta)\le K_n(\theta)\le |z|.
@@ -103,7 +105,7 @@ $$
 |z|\le K_k(\theta)\le K_n(\theta)\le|z|.
 $$
 
-Both chains force $R_n(\theta)=K_n(\theta)$. Complex conjugation supplies the lower half-plane.
+In either case the inequalities start and finish at the same number. Every intermediate value therefore equals $|z|$, in particular $K_n(\theta)=R_n(\theta)$. Since the matrices have real entries, conjugating an eigenvector and its eigenvalue gives another eigenvector and eigenvalue of the same matrix. Reflecting the upper rays now gives the entire lower half of the region.
 
 Read the next diagram from the two ends of the argument. On one side we begin with an unknown matrix reaching the outermost point. On the other, we know every row of a matrix that reaches the candidate radius. The order comparison is what lets these conclusions meet at the same $n$.
 
@@ -150,7 +152,7 @@ Every segment from zero to an attainable point is attainable for $n\ge2$. One ma
 
 The added matrix $\mathbf1\pi^T$ resets every row to the same probability distribution. It annihilates this eigenvector because its weighted mean $\pi^Tv$ is zero. For a small exact check, take $A=\left(\begin{smallmatrix}1/5&4/5\\4/5&1/5\end{smallmatrix}\right)$, whose vector $(1,-1)^T$ has eigenvalue $-3/5$ and whose stationary row is $(1/2,1/2)$. At $t=1/2$, the new matrix is $\left(\begin{smallmatrix}7/20&13/20\\13/20&7/20\end{smallmatrix}\right)$ and has eigenvalue $-3/10$. It has moved exactly halfway toward zero while retaining stochastic rows.
 
-Thus, for $n\ge4$,
+We know the last point on each ray, and we can reach every point between it and zero. Putting the rays together gives, for $n\ge4$,
 
 $$
 \Theta_n=\{re^{i\theta}:-\pi\le\theta\le\pi,\ 0\le r\le K_n(\theta)\}.

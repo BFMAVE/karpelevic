@@ -15,13 +15,13 @@ The contradiction uses the word *every* in Topic II. The deformed polygon still 
 
 ### Lesson 1: find the lines along which bases may move
 
-A supporting line touches a convex polygon while leaving it in one closed half-plane. A supporting linear functional is a linear function maximised on that touching part. A face is a vertex, a side, or the whole polygon. The smallest face containing a point is the vertex itself, its side if it lies strictly inside that side, or the whole polygon if it is interior.
+Draw a line through a side of $P$. All of $P$ lies on one side of the line. Such a line **supports** $P$, and we can describe it by an equation $\ell(x)=c$ with $\ell$ linear and $\ell(x)\le c$ throughout $P$. The points where equality holds form a side or a single vertex. We call these sets faces and also count $P$ itself as a face. Thus a point between the ends of a side belongs to two faces, that side and $P$. The side is the smaller one.
 
 Let $x=(1-t)a+tb$ lie between the distinct endpoints of a side, with $0<t<1$. An affine map $F$ sends it to $(1-t)F(a)+tF(b)$. Suppose $F(P)\subseteq P$ and $F(x)$ lies on a supporting line where a linear function reaches its maximum. Both endpoints have function value at most that maximum. Their weighted average equals it, so both values equal it. Thus the whole segment $[F(a),F(b)]$ lies on that line. If $F(x)$ were a corner, we could repeat the argument with its other supporting side. The two lines meet only at the corner, forcing $F(a)=F(b)$, which is impossible for invertible $F$. More generally the image of the smallest face at $x$ lies in the smallest face at $F(x)$.
 
-An invertible map preserves the dimension of a segment. Therefore the dimension of the smallest containing face cannot decrease. In particular, a point inside a side cannot become a vertex at a later iterate. Interior points also stay interior, since invertible maps send open sets to open sets.
+Applying an invertible map to a segment with two distinct ends again gives a segment with two distinct ends. The face containing its image therefore has dimension at least one. Once a point between the ends of a side ceases to be on a side, its only possible destination is the interior. It then stays there because $F$ carries an open neighbourhood of the point to an open set contained in $P$.
 
-Write $E_i=[v_{i-1},v_i]$. If $F^rE_i$ remains on the boundary, then its starting endpoint remains a vertex at every step:
+Follow the side $E_i=[v_{i-1},v_i]$ for $r$ applications of $F$. If $F^rE_i$ is still on the boundary, we can identify its starting endpoint at every earlier step. In the cyclic numbering of the vertices it is
 
 $$
 F^tv_{i-1}=v_{i-1+t\kappa}\quad(0\le t\le r).
@@ -29,7 +29,7 @@ $$
 
 At the first step, the assigned images of the two endpoints lie on successive half-open sides. For their joining segment to lie on one side, the first image has to equal their shared corner. Repeating proves the statement. A point inside the image segment, together with the supporting-functional argument, ensures that the whole next side remains on the boundary for the remaining steps.
 
-This gives lines along which bases can move. If base $v_j$, with $j\ge2$, first returns at time $H_j$ to a contact on side $E_{\sigma(j)}$, define
+To move a base without losing its return, first ask where the base is allowed to move. Take $j\ge2$ and let $H_j$ be the number of steps from $v_j$ to the contact on $E_{\sigma(j)}$. All starting points that reach the line of that side after $H_j$ steps lie on the line
 
 $$
 L_j=F^{-H_j}(\operatorname{aff}E_{\sigma(j)}).
@@ -43,13 +43,13 @@ The first lesson supplies movement lines, rather than a finished deformation. A 
 
 ### Lesson 2: calculate one local motion before proving the general lemma
 
-The polygon with consecutive vertices
+We can try the construction on the quadrilateral whose consecutive vertices are
 
 $$
 X_0=(0,0),\quad X_1=(1,0),\quad X_2=(2,1),\quad X_3=(3,3)
 $$
 
-is a model for the projection lemma. It is not being proposed as an invariant eigenvalue polygon. Take $C_2=(3/2,1/2)$ and $C_3=(5/2,2)$, the midpoints of its last two chain sides. The line $L_2:y=3x/2-2$ exposes $X_2$: the affine function $y-3x/2+2$ vanishes there and is positive at the other three vertices.
+Mark the midpoints $C_2=(3/2,1/2)$ and $C_3=(5/2,2)$ of its last two sides. We use this quadrilateral only to study the motion of the lines. To see that $L_2:y=3x/2-2$ touches it only at $X_2$, evaluate $y-3x/2+2$ at the four vertices. The values in order are $2,1/2,0,1/2$. Thus $L_2$ exposes $X_2$.
 
 Move $X_1$ to $X_1(t)=(1-t,0)$. We want the next vertex to satisfy two conditions. It has to stay on $L_2$, and the side from $X_1(t)$ to it has to pass through $C_2$. A point on that second line has coordinates
 $$
@@ -62,7 +62,7 @@ $$
 X_2(t)=\left(\frac{2(1+5t)}{1+6t},\frac{1+3t}{1+6t}\right).
 $$
 
-On the contact line $K=C_2C_3$, write $Y(t)=(5/2-t,2-3t/2)$. The moving final line through $X_2(t)$ and fixed $X_3$ meets $K$ at $Y(u(t))$, where direct substitution gives
+Measure position on the line $K=C_2C_3$ by $Y(t)=(5/2-t,2-3t/2)$, so that $Y(0)=C_3$ and $Y(1)=C_2$. Where does the new line from $X_2(t)$ to $X_3$ cross $K$? Write the crossing as $Y(u)$. Substituting $Y(u)$ for a point on that new line and solving for $u$ gives
 
 $$
 u(t)=\frac{t}{1+6t},\qquad t-u(t)=\frac{6t^2}{1+6t}.
@@ -74,24 +74,24 @@ $$
 \Pi(X_0)=(33/14,25/14)=C_3+(C_2-C_3)/7.
 $$
 
-The global comparison lies strictly between the contacts; the formula then identifies the locally usable motion. The following proof obtains the same strict comparison for every permitted chain, without relying on these special coordinates.
+The coefficient $1/7$ puts this last point strictly between $C_3$ and $C_2$. We will prove the same ordering for a chain of any length. It will give us enough information at $t=1$ to choose a small motion near $t=0$.
 
-Two equalities hold because we constructed $X_2(t)$ by an intersection: $X_2(t)\in L_2$ and $C_2\in\operatorname{aff}(X_1(t),X_2(t))$. They hold exactly for every sufficiently small parameter, not approximately. Convexity of the moved quadrilateral and the fact that $C_2$ stays between its moving endpoints are separate strict inequalities; they persist only after restricting the parameter to a sufficiently small neighbourhood of zero.
+Notice which conditions the intersection enforces. For each small $t$ we have $X_2(t)\in L_2$, and the line joining $X_1(t)$ to $X_2(t)$ passes through $C_2$. To belong to the *side*, $C_2$ has to lie between the two endpoints as well. At $t=0$ it is their midpoint. Both this strict ordering and the strict turns at the corners persist for small $t$, so the moving quadrilateral remains convex.
 
 <div class="reader-checkpoint" data-retrieval-checkpoint>
 
-**Second-order checkpoint.** Evaluate the closing defect at $t=1/20$ and $t=-1/20$. Does either sign fail? Would the derivative at zero detect this movement?
+**Check the motion in both directions.** Take $t=1/20$ and then $t=-1/20$. In each case, is $Y(t)$ farther towards $C_2$ than the crossing $Y(u(t))$? What would the derivative of $t-u(t)$ at zero tell us?
 
 <details class="reader-checkpoint-hint">
 <summary>Hint</summary>
 
-Use $6t^2/(1+6t)$. The numerator is positive for either nonzero sign; check that both denominators remain positive.
+Compare the two coordinates by subtracting them. In $6t^2/(1+6t)$ the denominators for these choices are $13/10$ and $7/10$. What sign does the numerator have?
 
 </details>
 <details class="reader-checkpoint-solution">
 <summary>Solution</summary>
 
-The two defects are $3/260$ and $3/140$, respectively, both positive. The first derivative at zero is zero, because the numerator begins with $t^2$. An argument requiring a nonzero first derivative would miss both inward motions.
+At $t=1/20$ we obtain $t-u(t)=3/260$. At $t=-1/20$ we obtain $3/140$. Both differences put $Y(t)$ on the inward side. Dividing the difference by $t$ gives $6t/(1+6t)$, which tends to zero. The derivative alone would therefore have given no preference for either direction.
 
 </details>
 </div>
@@ -100,17 +100,17 @@ The two defects are $3/260$ and $3/140$, respectively, both positive. The first 
 
 #### Build the general motion by intersecting lines
 
-Consider consecutive vertices $X_0,X_1,\ldots,X_{\ell+1}$ of a convex polygon, in either boundary direction, with $\ell\ge2$ and at least one side outside the chain. For each internal side choose a contact $C_i\in(X_{i-1},X_i)$, for $2\le i\le\ell+1$. At $X_i$, for $2\le i\le\ell$, choose an exposing line $L_i$.
+Take a chain of consecutive vertices $X_0,X_1,\ldots,X_{\ell+1}$ with $\ell\ge2$. We may read the boundary in either direction. Leave at least one side of the polygon outside the chain. Mark a point $C_i$ strictly between $X_{i-1}$ and $X_i$ for each $i=2,\ldots,\ell+1$. At each $X_i$ with $2\le i\le\ell$, choose a line $L_i$ that exposes that vertex.
 
-Keep $X_0,X_{\ell+1}$ fixed and move $X_1$ slightly along the line $X_0X_1$. Define successive moved vertices by
+The endpoints $X_0$ and $X_{\ell+1}$ stay where they are. Slide $X_1$ a little along $X_0X_1$. Once $X_{i-1}(t)$ is known, the new vertex has to lie on $L_i$ and its side line has to pass through $C_i$. We therefore take
 
 $$
 X_i(t)=L_i\cap\operatorname{aff}(X_{i-1}(t),C_i),\qquad2\le i\le\ell.
 $$
 
-The parameter $t$ measures a small real motion. Each intersection keeps contact $C_i$ on the corresponding side line. At zero the intersections are the original vertices, so for sufficiently small $t$ they are finite and vary smoothly. The issue is how the final side moves relative to its returning contact.
+At $t=0$ each pair of lines crosses at $X_i$. The crossing is unique because $C_i$ is on the side and $L_i$ touches the polygon only at $X_i$. For a small change in $t$ the lines still cross, and their intersection depends smoothly on $t$. We can therefore follow the construction to its last side. We have yet to determine on which side of that moving line the returning point will lie.
 
-A projection from a fixed point between two lines is a fractional-linear function of line coordinates:
+Consider one of these steps on its own. From a point with coordinate $\tau$ on the first line, draw the line through the fixed contact and mark its crossing on the second line. In coordinates on the two lines this operation has the form
 
 $$
 \tau\longmapsto\frac{a\tau+b}{d\tau+e},\qquad ae-bd\ne0.
@@ -120,9 +120,9 @@ The letters $a,b,d,e$ here are real coefficients of this particular function, no
 
 #### Why the long comparison has a definite direction
 
-Let $\Lambda$ be the initial line $X_0X_1$, and let $K$ be the line through $C_\ell,C_{\ell+1}$. Project from $\Lambda$ through $C_2$ to $L_2$, continue through the remaining contacts to the exposing lines, then project through $X_{\ell+1}$ to $K$. Call this combined projection $\Pi$. The centre condition holds at every step: exposure excludes interior contacts from both adjoining exposing lines, and distinct adjoining sides exclude $C_2$ from $\Lambda$. At the last step, exposure excludes $X_{\ell+1}$ from $L_\ell$, and the two contacts on distinct adjacent sides ensure $X_{\ell+1}\notin K$.
+Denote the first line $X_0X_1$ by $\Lambda$ and the line through $C_\ell,C_{\ell+1}$ by $K$. Starting anywhere on $\Lambda$, project through $C_2$ onto $L_2$ and continue through $C_i$ onto $L_i$. For the last projection use the fixed vertex $X_{\ell+1}$ as centre and $K$ as target. Write $\Pi$ for the composition. Every centre lies off the two lines it connects. Indeed, each exposing line touches the polygon only at its own vertex, while $C_i$ lies between vertices. Also $C_2$ lies off the first side line, and $C_\ell,C_{\ell+1}$ lie inside two different sides, so their line misses $X_{\ell+1}$.
 
-Starting at $X_1$ follows the original vertices and gives $\Pi(X_1)=C_{\ell+1}$. The decisive geometric comparison is
+We know one value of $\Pi$ immediately. A start at $X_1$ reproduces the original chain and ends at $C_{\ell+1}$. Now start at the other marked point on $\Lambda$, namely $X_0$. We claim that
 
 $$
 \Pi(X_0)\in(C_{\ell+1},C_\ell).
@@ -139,34 +139,34 @@ $$
 \left(\frac{\eta_0(x)}{\eta(x)},\frac{\psi(x)}{\eta(x)}\right).
 $$
 
-The first coordinate has unique minimum zero at $X_0$ and unique maximum one at $X_{\ell+1}$. A transformed convex combination is a convex combination with weights multiplied by the positive denominators and renormalised. Conversely, divide any desired image weights by the positive endpoint denominators and renormalise to recover preimage weights; this shows that every segment between image points belongs to the image. Thus the transformed polygon is convex, its sides are still segments, and side-interior contacts stay inside those segments. Positivity is doing real work here: a change of chart with a denominator vanishing on the polygon would not justify these conclusions.
+In the first coordinate $t=\eta_0/\eta$ we have $0\le t\le1$. Equality at zero singles out $X_0$, and equality at one singles out $X_{\ell+1}$ because $1-t=\eta_1/\eta$. To see what happens to a segment, take two points $U,V$ with weights $1-\lambda,\lambda$. Their images acquire weights proportional to $(1-\lambda)\eta(U)$ and $\lambda\eta(V)$. These denominators are positive. Given any two image weights, dividing by the same denominators and rescaling their sum to one recovers the starting weights. Thus a whole segment goes onto a whole segment, with points strictly between its ends staying strictly between. In particular the polygon is still convex in these coordinates.
 
-To see why a graph now describes our chain, intersect the transformed polygon with a vertical line $t=\tau$, where $0<\tau<1$. Convexity makes the intersection an interval. It has positive length: interpolate an interior point with the left or right extreme to reach $\tau$; the positive weight on the interior point leaves a small disk inside the polygon. No side can be vertical: the line containing a vertical side would support the polygon at a horizontal extreme, whereas both horizontal extremes are single vertices. Consequently the lower and upper endpoints of every such slice are its only boundary points. A supporting line through a point strictly between them would have to contain the vertical slice, contradicting the absence of vertical supporting sides. As $\tau$ runs from zero to one, the lower endpoints trace one boundary chain from $X_0$ to $X_{\ell+1}$, and the upper endpoints trace the other. The chains cannot switch places in the interior, where their heights are distinct.
+Cut this polygon by a vertical line $t=\tau$ with $0<\tau<1$. The cut is an interval by convexity. It contains an interior point since we can join an interior point to either extreme vertex and reach the required value of $\tau$ while keeping a positive weight on the interior point. A small disk about that point shrinks to a smaller disk along the segment, so the cut has positive length. Only its endpoints can lie on the boundary. A supporting line through a point strictly between them would have to contain the cut, giving a vertical supporting side. Yet a vertical supporting side could only occur at $t=0$ or $t=1$, where the polygon has just one point. The bottom and top of the cuts therefore trace two distinct chains from $X_0$ to $X_{\ell+1}$.
 
-Our consecutive vertices belong to one of those two chains. If it is the upper one, reflect the second coordinate. It is then the lower graph, and traversal from $X_0$ to $X_{\ell+1}$ strictly increases the first coordinate: each vertical line meets that chain once, and there are no vertical sides. Write its height as $f(t)$. For two points $(t,f(t))$ and $(u,f(u))$, their convex combination belongs to the polygon, so its height is at least the lower boundary height at its first coordinate. Therefore
+Our vertices follow one of these chains. Reflect the vertical coordinate if necessary so that they follow the bottom of each cut. Every vertical line then meets the chain just once, and the first coordinate increases as we go from $X_0$ to $X_{\ell+1}$. Write $f(t)$ for the height of the chain. Join the points over $t$ and $u$ by a straight segment. This segment lies in the polygon, so every point on it lies at or above the bottom of its own cut. This gives
 
 $$
 f((1-\lambda)t+\lambda u)
 \le(1-\lambda)f(t)+\lambda f(u),\qquad0\le\lambda\le1.
 $$
 
-This is exactly convexity of $f$. It is piecewise linear because the chain consists of finitely many side segments. We have now justified the graph representation and its direction, rather than assuming that an arbitrary boundary chain is already monotone in ordinary coordinates.
+This inequality says that $f$ is convex. Between two successive vertices its graph is a straight side. The change of coordinates has thus given us a convex, piecewise linear function whose side slopes we can compare in the order of the chain.
 
-Write $X_i=(t_i,f_i)$ in these coordinates, with $t_0<\cdots<t_{\ell+1}$. Let $d_i$ be the slope of side $X_{i-1}X_i$, and $s_i$ the slope of exposing line $L_i$. Convexity gives
+Let $X_i=(t_i,f_i)$, so $t_0<\cdots<t_{\ell+1}$. Denote the slope on $[t_{i-1},t_i]$ by $d_i$. For $2\le i\le\ell$ the exposing line $L_i$ is not vertical because $t_i$ lies strictly between the two horizontal extremes. Write $s_i$ for its slope. The inequalities we need are
 
 $$
 d_1<\cdots<d_{\ell+1},\qquad d_i<s_i<d_{i+1}.
 $$
 
-The side slopes increase strictly because the $X_i$ are genuine vertices, with no collinear successive sides. The exposing line at $X_i$ lies below the lower graph. Testing it at the preceding vertex gives $d_i\le s_i$, and testing it at the following vertex gives $s_i\le d_{i+1}$. Equality would put that neighbour on the exposing line too, so exposure makes both inequalities strict. That line is nonvertical, since a vertical supporting line could touch only a horizontal extreme.
+At each vertex the lower graph turns upwards. The turn is strict because two successive sides of equal slope would form one side with no vertex between them. The line $L_i$ lies below the graph and passes through $X_i$. On the left of $X_i$ this requires slope at least $d_i$, and on the right it requires slope at most $d_{i+1}$. Either equality would put a neighbouring vertex on $L_i$, contrary to exposure.
 
-Put $s_1=d_1$, let $h_i=t_i-t_{i-1}>0$, and express each contact as
+For the first line use $s_1=d_1$. The horizontal width of side $i$ is $h_i=t_i-t_{i-1}>0$. Starting from $X_i$ and going back a fraction $\gamma_i$ of that side brings us to its contact, so
 
 $$
 C_i=X_i-\gamma_i h_i(1,d_i),\qquad0<\gamma_i<1.
 $$
 
-For the comparison starting at $X_0$, seek intersections of the form $Z_i=X_i-r_i(1,s_i)$, with $r_1=h_1$. Collinearity of $Z_{i-1},C_i,Z_i$ is expressed by a zero $2\times2$ determinant. Reciprocal variables $x_i=1/r_i$ turn that condition into an affine recurrence:
+Now start the projection at $Z_1=X_0$, which is $r_1=h_1$ units to the left of $X_1$. Write the next intersection on $L_i$ as $Z_i=X_i-r_i(1,s_i)$. Its position is fixed by requiring $Z_{i-1},C_i,Z_i$ to be collinear. The equation is easier to solve for the reciprocal $x_i=1/r_i$. Expanding the determinant gives
 
 $$
 x_i=\frac{(1-\gamma_i)(s_i-d_i)}{\gamma_i(d_i-s_{i-1})}x_{i-1}
@@ -176,15 +176,15 @@ $$
 <details class="reader-proof-derivation">
 <summary>Derivation: expand the determinant and justify every division</summary>
 
-Fix a step $2\le i\le\ell$. The established assumptions are $h_i>0$, $0<\gamma_i<1$, and
+Consider the step from $Z_{i-1}$ to $Z_i$, for $2\le i\le\ell$. We know that the side has width $h_i>0$ and its contact divides it with $0<\gamma_i<1$. The three slopes used in this step satisfy
 
 $$
 s_{i-1}<d_i<s_i.
 $$
 
-For $i=2$, the first inequality follows from $s_1=d_1<d_2$; at later steps it is the upper slope bound for the preceding exposing line. Suppose inductively that $r_{i-1}$ is finite and positive. We have not yet assumed any sign or finiteness for the next intersection.
+When $i=2$ the left inequality reads $d_1<d_2$. For $i>2$ it follows by comparing $L_{i-1}$ with the side on its right. Start the step with $r_{i-1}>0$ finite, as is the case for $r_1=h_1$. We can determine the sign of $r_i$ directly from the collinearity equation.
 
-The side vector is $X_i-X_{i-1}=h_i(1,d_i)$. Subtracting the contact coordinates gives
+To form that equation, subtract the coordinates of successive points on the projected line. Using $X_i-X_{i-1}=h_i(1,d_i)$ gives
 
 $$
 \begin{aligned}
@@ -195,7 +195,7 @@ Z_i-C_i
 \end{aligned}
 $$
 
-These two vectors are collinear precisely when their determinant is zero. Use $\det((1,a),(1,b))=b-a$ and expand bilinearly. The result is
+A zero determinant says exactly that these differences are parallel. In expanding it, each pair of directions contributes its difference of slopes since $\det((1,a),(1,b))=b-a$. We obtain
 
 $$
 \begin{aligned}
@@ -205,7 +205,7 @@ $$
 \end{aligned}
 $$
 
-Collecting the terms containing $r_i$ gives
+The first term is known already. Moving the other two to the right and factoring out $r_i$ gives
 
 $$
 \gamma_i h_i r_{i-1}(d_i-s_{i-1})
@@ -213,7 +213,7 @@ $$
 +r_{i-1}(s_i-s_{i-1})\bigr].
 $$
 
-Every factor on the left is strictly positive. Both summands in brackets are strictly positive too. We may therefore first solve this equation for a unique finite positive $r_i$. This avoids assuming that the remote projection is finite before proving it. Now $r_i$ and $r_{i-1}$ are nonzero, so division is justified and yields
+The known quantity on the left is positive, as is each term in the bracket on the right. Their quotient gives a unique finite $r_i>0$. We can now take reciprocals without losing any solutions. Dividing the bracket by $\gamma_i h_i r_{i-1}(d_i-s_{i-1})$ gives the reciprocal
 
 $$
 \frac1{r_i}
@@ -221,32 +221,32 @@ $$
 +\frac{s_i-s_{i-1}}{\gamma_i h_i(d_i-s_{i-1})}.
 $$
 
-This is the displayed recurrence with $x_i=1/r_i$. Its intercept is positive, so
+In terms of $x_i=1/r_i$ this is the stated recurrence. Its first summand is positive. Dropping it gives
 
 $$
 \frac1{r_i}>
 \frac{s_i-s_{i-1}}{\gamma_i h_i(d_i-s_{i-1})}.
 $$
 
-Reciprocating positive quantities gives the strict upper bound on $r_i$ below. Its second inequality uses $d_i<s_i$. The entire calculation takes place in the chosen chart; it proves that the remote intersections are finite there, without requiring them to be finite in the original affine coordinates.
+Both sides are positive, so taking reciprocals reverses this inequality. The remaining comparison uses $d_i-s_{i-1}<s_i-s_{i-1}$. We have established finiteness for the intersections in the new coordinates, which is where we need the bound.
 
-For a check using the earlier coordinate model, take $h_2=1$, $\gamma_2=1/2$, $d_2=1$, $s_1=0$, $s_2=3/2$, and $x_1=1$. The recurrence gives $x_2=(1/2)x_1+3=7/2$, so $r_2=2/7$. Therefore $Z_2=(2,1)-(2/7)(1,3/2)=(12/7,4/7)$, exactly the first remote intersection in the figure.
+Try the recurrence on the quadrilateral above. The values $h_2=1$, $\gamma_2=1/2$, $d_2=1$, $s_1=0$ and $s_2=3/2$ give $x_2=x_1/2+3$. From $x_1=1$ we obtain $r_2=2/7$. Moving that far to the left on $L_2$ gives $Z_2=(2,1)-(2/7)(1,3/2)=(12/7,4/7)$, as in the direct calculation.
 
 </details>
 
-Every coefficient is positive. Define $x_i$ by this recurrence, starting from $x_1=1/h_1>0$. Induction gives finite $x_i>0$, so $r_i=1/x_i$ is finite and positive. Substitution verifies the collinearity equations; uniqueness of each projective intersection identifies these constructed points with the required projections. Moreover,
+Starting at $x_1=1/h_1$, each use of the recurrence adds a positive constant to a positive multiple of the preceding value. All the $x_i$ are therefore finite and positive. Their reciprocals give points $Z_i$ on the required lines, and the determinant calculation puts $Z_{i-1},C_i,Z_i$ on one line. These points are the required intersections because each projection has a unique value. Retaining just the constant term in the lower bound for $x_i$ gives
 
 $$
 0<r_i<\gamma_i h_i\frac{d_i-s_{i-1}}{s_i-s_{i-1}}<\gamma_i h_i.
 $$
 
-Set $r=r_\ell$, $g=\gamma_\ell h_\ell$, $H=h_{\ell+1}$, $d=d_\ell$, $s=s_\ell$, and $D=d_{\ell+1}$. For a plane point $W$, the affine function
+We need the position of the final crossing on $K$. To shorten this last calculation write $r=r_\ell$, $g=\gamma_\ell h_\ell$, $H=h_{\ell+1}$, $d=d_\ell$, $s=s_\ell$, and $D=d_{\ell+1}$. Test which side of the line through $Z_\ell$ and $X_{\ell+1}$ contains a point $W$ by evaluating
 
 $$
 G(W)=\det(X_{\ell+1}-Z_\ell,W-Z_\ell)
 $$
 
-vanishes on the final projection line. The determinant of two plane vectors is their signed $2\times2$ determinant. Substituting the displayed contact coordinates gives
+This signed determinant vanishes on the line. Its signs at the two contacts will tell us whether their joining segment crosses the line. Substituting their coordinates gives
 
 $$
 G(C_\ell)=H(g-r)(D-s)+g(H+r)(s-d)>0,
@@ -262,13 +262,13 @@ The signs follow from $0<r<g$, $H>0$, and $d<s<D$. Since $G$ is affine, it cross
 
 #### The closing motion can have zero first derivative
 
-Let $S:\overline\Lambda\to\overline K$ be a **projectivity**, an invertible fractional-linear map between the completed lines, sending $X_0$ to $C_\ell$ and $X_1$ to $C_{\ell+1}$. The bar here means that the direction-point at infinity is included, not complex conjugation. In the application $S$ is the restriction of a power of $F$, hence is such a projectivity. Parametrise the finite part of $K$ by
+We have compared the two endpoints of the initial side. To turn this comparison into a motion, take an invertible fractional-linear map $S$ from $\overline\Lambda$ to $\overline K$ with $S(X_0)=C_\ell$ and $S(X_1)=C_{\ell+1}$. Such a map is called a **projectivity**. A bar on a line includes its point at infinity. In the polygon argument a power of $F$ will give us $S$. Give $K$ the coordinate that puts $C_{\ell+1}$ at zero and $C_\ell$ at one by writing
 
 $$
 Y(t)=(1-t)C_{\ell+1}+tC_\ell,\qquad X_1(t)=S^{-1}Y(t).
 $$
 
-Define $u(t)$ by $\Pi(S^{-1}Y(t))=Y(u(t))$. This fractional-linear function fixes zero, so, with new real constants $a,b$, it has the form
+From the same starting point $X_1(t)$ we can reach $K$ by following the chain of projections. Denote the coordinate of that crossing by $u(t)$, so $\Pi(S^{-1}Y(t))=Y(u(t))$. The original chain gives $u(0)=0$, and the comparison starting at $X_0$ gives $0<u(1)<1$. A fractional-linear map fixing zero has the form
 
 $$
 u(t)=\frac{at}{1+bt},\qquad a\ne0,\qquad0<u(1)<1.
@@ -282,22 +282,22 @@ $$
 
 If $a\ne1$, choose the sign of $t$ so that $(1-a)t>0$. If $a=1$, the inequality $0<u(1)<1$ forces $b>0$; then every sufficiently small nonzero $t$ places the return inward by a quantity of second order. This handles a possible zero first derivative. The comparison at parameter one selects a direction near zero; the construction need not remain finite at every intermediate parameter.
 
-As a check, $u(t)=t/(1+t)$ has derivative one at zero, yet $t-u(t)=t^2/(1+t)>0$ near zero for both nonzero signs. A purely first-order argument would miss the usable motion.
+For example, $u(t)=t/(1+t)$ has $u'(0)=1$. Thus the crossing and the returning point initially move at the same rate. Their difference is nevertheless $t^2/(1+t)>0$ for every sufficiently small $t\ne0$. It takes a second-order term to put one point inside.
 
 ### Lesson 3: preserve the polygon’s complete contact network
 
 The local projection lemma opens one contact inward. To obtain a contradiction, we have to keep all the other returns inside that same deformed polygon. Keep the following four cases in view while choosing the chain and transporting its vertices:
 
-| Returning base source | Target side line | How its constraint is handled |
+| Which base returns? | Does its target line move? | How do we handle the return? |
 | --- | --- | --- |
-| Fixed | Moving | The contact is fixed; the projection intersection keeps it on the moving line. |
-| Moving | Fixed | The base moves on the preimage of that fixed target line. |
-| Fixed | Fixed | The returning point and its line are unchanged. |
-| Moving | Moving | This is the unique exceptional closing return; the local lemma places it strictly inward. |
+| Fixed | Yes | Draw the new side through the original contact. |
+| Moving | No | Slide the base along the preimage of its target line. |
+| Fixed | No | Both the returning point and its side keep their positions. |
+| Moving | Yes | At the closing side choose the motion that sends the image inward. |
 
-The first three rows preserve line equalities exactly. Being on a line does not yet prove that a point is on the side segment; that requires the endpoint and convexity inequalities checked after the tower extension below. The last row deliberately replaces a line equality by an inward inequality.
+In the first three cases we know that the image still lies on its target *line*. We will check that it lies between the endpoints after the bases and their towers have all been moved. The fourth case is the one where the returning point enters the inward half-plane.
 
-Suppose now that $\Delta>1$. Choose the chain and the power $a$ explicitly:
+With $\Delta>1$ we can choose the shorter of two chains along the boundary. Write $\varepsilon$ for its direction and $a$ for the exponent of the closing map $F^a$. In terms of the base indices we take
 
 $$
 (\varepsilon,\ell,X_i,a)=
@@ -316,7 +316,7 @@ The moving bases $6,5,4$ return to sides $4,3,2$, respectively. For instance the
 
 ![Read the chain from left to right, in decreasing vertex order. The diamonds on $E_6$ and $E_5$ mark the fixed contacts about which those lines can turn. The closing return from $v_6$ has to move inward across $E_4$. The drawing shows index order.](/figures/bachelor-foundations-reverse-chain.svg)
 
-The index check ensures that this local construction respects all return relations. Let $M$ be the moving base indices, let $k_*$ be the return side of the first moving base, and let $\varepsilon=1$ for the forward chain and $-1$ for the backward chain. Modulo $\varphi$, its moving-base return sides and internal chain sides are
+Which of the other returns could be disturbed by moving these particular vertices? Denote the moving base indices by $M$. Let $k_*$ be the side where the first moving base returns. In direction $\varepsilon$ the return sides from $M$ run *forward* from $k_*$, while the internal sides of the chain run *back* from it. Modulo $\varphi$ these two lists are
 
 $$
 \sigma(M)=\{k_*+\varepsilon t:0\le t<\ell\},\qquad
@@ -325,20 +325,20 @@ $$
 
 They are disjoint: an intersection would require $\varphi$ to divide $t+r$, but $1\le t+r\le2\ell-2<\varphi$. Thus the contacts on internal moving sides come from fixed bases. The projection construction keeps those fixed contacts on their moving sides. Every moving base except the first lies on its exposing preimage line, so its return stays on its fixed target side line. The first side line can also receive a moving return. When $2\Delta=\varphi+1$, for instance, base $\Delta$ returns to side $1$. Its endpoint $X_1$ slides along the original first line, so that line stays fixed. Among the moving bases only the first returns to a line that moves, namely the final side line. The closing comparison puts its return strictly inward.
 
-The following index example displays the three kinds of contact that this argument separates. Take the hypothetical skipped-return data
+We can read the same separation of indices on a forward chain. Suppose the integers in the return calculation are
 
 $$
 (N,\kappa,\varphi,\Delta,q,h)=(17,10,7,3,2,1).
 $$
 
-They satisfy $q\varphi+h\Delta=17$. Here $\ell=3$, the moving bases are $M=\{1,2,3\}$, their target sides are $\sigma(M)=\{4,5,6\}$, and the internal moving sides are $J=\{2,3\}$. Fixed bases six and seven return to the moving side lines two and three; the projections keep these fixed contacts on those lines. Moving bases two and three return to fixed side lines five and six; their exposing lines preserve those returns. Only moving base one returns to the moving final side four. Its image is the contact made interior. These integer data illustrate the contradiction construction; the no-skipping theorem says that an extremal polygon with this skipped return cannot exist.
+The count is $2\cdot7+1\cdot3=17$. Here $\ell=3$ and $M=\{1,2,3\}$. Adding three modulo seven gives their target sides $\sigma(M)=\{4,5,6\}$. The internal sides $J=\{2,3\}$ receive their contacts from bases six and seven, both fixed, so we draw the new side lines through those points. Bases two and three move, but the lines of their target sides five and six stay fixed. This leaves one return to move inward, from base one to side four. We are testing the proposed skip on its indices. The contradiction below will exclude it for an extremal polygon.
 
 <!-- reader-figure:early-extra -->
 
-Propagate each moved base $\widehat v_j$ along its entire tower by setting the new level-$t$ vertex equal to $F^t\widehat v_j$ for $0\le t<H_j$. Topic V's partition ensures this defines every vertex exactly once. All intermediate vertex-to-vertex identities are preserved. The remaining returns either stay on their corresponding side lines or are unchanged. In the displayed example the moving towers are $(1,11)$, $(2,12)$, and $(3,13)$, each of height two; the fixed towers contain every other index. A moved base therefore carries its subsequent vertices with it, rather than leaving incompatible copies behind.
+Once a base is moved to $\widehat v_j$, put its next $H_j-1$ vertices at $F\widehat v_j,\ldots,F^{H_j-1}\widehat v_j$. Every vertex occurs at exactly one such level, counting the base as level zero, by the partition of Topic V. Each intermediate step is then an application of $F$ by construction. For instance our three moving towers consist of $(1,11)$, $(2,12)$ and $(3,13)$. Moving base one carries vertex eleven with it. Only at the top of a tower do we need the return conditions from the table.
 
 What remains is to pass from lines to segments and from one inward inequality to membership in the whole polygon. We kept the required line incidences by construction. We obtained a *new* strict inequality at the closing side from $t-u(t)>0$. At every other side the closing contact already had positive distance to the line before the motion.
 
-For sufficiently small motion, the vertices remain distinct and form a convex $N$-gon in the same cyclic order. This follows from finitely many strict side inequalities: each original side has every other vertex strictly on its inward side, and these inequalities persist by continuity. Every preserved contact remains strictly between its endpoints. The exceptional contact starts inside its final side and strictly inside every other supporting half-plane. Moving it inward across the final line therefore makes it strictly interior to the new $N$-gon $Q$.
+Originally every side has every vertex except its two ends strictly on the inward side of its line. There are finitely many such inequalities. By continuity one sufficiently small motion preserves all of them, and also keeps the vertices distinct. We therefore still have a convex $N$-gon in the same order. Each contact kept on a line started strictly between its endpoints and stays between them for a small motion. As for the closing contact, every other side already had it strictly on the inside. Giving it a strict inward inequality at the last side puts it in the interior of the new polygon $Q$.
 
 Every vertex image belongs to $Q$, so convexity gives $FQ\subseteq Q$. Which vertex has an interior image? Start at the moving base $X_1$ and follow its tower up to the last vertex before the return. Applying $F$ once more gives $F^aX_1(\tau)$, the point placed strictly inside $Q$ by the closing calculation; here $\tau$ is the small motion parameter. The universal contact theorem contradicts that conclusion, proving $\Delta=1$. Since $\gcd(\Delta,\varphi)=\gcd(N,\kappa)$, this case also forces $\gcd(N,\kappa)=1$.
