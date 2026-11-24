@@ -107,7 +107,7 @@ Let $\delta=\gcd(N,\kappa)$, the greatest common divisor. Adding $\kappa$ modulo
 
 Write $[a]_N$ for the remainder in $\{0,\ldots,N-1\}$ after dividing $a$ by $N$. Suppose $\varphi<N$. For this calculation only, label the end of the run $0$, so its other indices are $N-\varphi+1,\ldots,N-1$. Leave those other weights in place and move the one initially at $0$. Its label after $t$ moves is $[t\kappa]_N$. As long as it is below $N-\varphi$, the next label in ordinary order is empty. We can therefore make another move of $\kappa$ places.
 
-That block contains $\varphi\ge\delta$ consecutive residues, so it contains a multiple of $\delta$. The orbit of zero under addition by $\kappa$ visits every multiple of $\delta$, proving that an entrance occurs. The first entrance cannot land on an already positive index. It therefore lands exactly at $N-\varphi$. There is therefore a time $h>0$ such that
+Consider the last $\varphi$ labels, from $N-\varphi$ through $N-1$. Since $\varphi\ge\delta$, at least one of these labels is a multiple of $\delta$. Repeatedly adding $\kappa$ from zero visits every such multiple modulo $N$, so the moving weight eventually reaches this block. All its labels except $N-\varphi$ already carry a weight. Two weights cannot merge, so the first label we reach in the block is $N-\varphi$. Calling that first time $h$, we have
 
 $$
 [h\kappa]_N=N-\varphi,\qquad[t\kappa]_N<N-\varphi\quad(0\le t<h).

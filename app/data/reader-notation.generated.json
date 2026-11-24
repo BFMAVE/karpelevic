@@ -1,6 +1,6 @@
 {
   "hashes": {
-    "input": "fb89c3bc5791e0b8be5be8b8b494133d8a1d15e77db8186ee9da6c2058aaffb0",
+    "input": "9687ee2ee76b107c4f182e26f187163bf25dbf4424bf40ab3fea06ab807eb167",
     "generator": "345f951628033928fb34b9ab27f880ece92b53f64390d30b045bd23feeb9c02e"
   },
   "topics": {
@@ -470,7 +470,7 @@
       },
       {
         "termHtml": "Selected arc weight <math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>β</mi><mo stretchy=\"false\" form=\"prefix\">(</mo><mi>ϑ</mi><mo stretchy=\"false\" form=\"postfix\">)</mo></mrow><annotation encoding=\"application/x-tex\">\\beta(\\vartheta)</annotation></semantics></math>",
-        "meaningHtml": "The equal weight selected at each oriented angle decreases strictly from one to zero, so each interior weight corresponds to exactly one selected point.",
+        "meaningHtml": "The probability of taking the return arrow within a block. For <math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>n</mi><mo>≥</mo><mn>4</mn></mrow><annotation encoding=\"application/x-tex\">n\\ge4</annotation></semantics></math> this weight decreases strictly from one to zero as the oriented angle <math display=\"inline\" xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mi>ϑ</mi><annotation encoding=\"application/x-tex\">\\vartheta</annotation></semantics></math> increases.",
         "aliases": "beta \\beta β Β theta \\theta θ ϑ Θ vartheta"
       },
       {

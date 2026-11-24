@@ -378,7 +378,7 @@
       ],
       [
         "Selected arc weight $\\beta(\\vartheta)$",
-        "The equal weight selected at each oriented angle decreases strictly from one to zero, so each interior weight corresponds to exactly one selected point."
+        "The probability of taking the return arrow within a block. For $n\\ge4$ this weight decreases strictly from one to zero as the oriented angle $\\vartheta$ increases."
       ],
       [
         "State versus polygon vertex",

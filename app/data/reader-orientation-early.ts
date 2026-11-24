@@ -72,7 +72,7 @@ export const earlyOrientations: Record<number, TopicOrientation> = {
       { term: "Record and deficit", meaning: "A residue larger than every earlier residue is a record; its deficit is its distance below N." },
     ],
     strategy: "We can move one contact weight to a different row by reversing the order of two matrix factors. The number of interior contacts cannot decrease, since we chose it as small as possible. Among the polygons with this count we chose one of least area at a fixed scale. That second choice rules out a gap in the run of movable corners.",
-    payoff: "We can now number the sides with interior contacts consecutively from 1 to φ. The count φ also appears as a record in the cyclic shift. This lets us calculate return times from the indices.",
+    payoff: "We can now number the sides with interior contacts consecutively from 1 to φ. The cyclic shift gives us another way to find this count. In the eight-side example the residues start 0, 3, 6. The record is 6. Subtracting it from 8 gives φ = 2 sides with interior contacts. In general the record is N − φ and its deficit is φ.",
   },
   5: {
     imports: [

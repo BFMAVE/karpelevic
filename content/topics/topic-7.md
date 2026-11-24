@@ -32,11 +32,15 @@ Multiplication by the positive number $\alpha_j$ leaves a direction unchanged. O
 
 ### Eliminate the vertices, but keep the number of turns
 
-Let $\zeta$ be the nonreal eigenvalue of largest modulus on its ray, and $N\ge4$ the smallest matrix order that realises it. We use the invariant polygon chosen in the preceding chapters. Its $\varphi$ contacts strictly between the ends of their sides occupy consecutive sides. Adding $\kappa$ to an index gives the side assigned to its image. This shift has $\delta=\gcd(N,\kappa)$ cycles.
+Take a nonreal eigenvalue $\zeta$ and let $N\ge4$ be the smallest matrix order that realises it. We assume that $\zeta$ is the farthest point from zero on its ray in $\Theta_N$ and that its radius $\rho=|\zeta|$ satisfies $0<\rho<1$.
+
+We use the invariant polygon chosen in the preceding chapters. Its $\varphi$ contacts strictly between the ends of their sides occupy consecutive sides. Adding $\kappa$ to an index gives the side assigned to its image. This shift has $\delta=\gcd(N,\kappa)$ cycles.
 
 When $\varphi>\delta$, Topic VI gives $\Delta=1$ and hence $\delta=1$. We therefore begin with the coprime case $\delta=1$, including the special possibility of just one contact in an open side. Since $\varphi\ge\delta$, the remaining case has $\varphi=\delta\ge2$. Its closing path goes in the other direction.
 
-We will choose between $\zeta$ and $\overline\zeta$ so that the fractions at the ends of the interval occur in a convenient order. Call that choice $\omega=\rho e^{i\vartheta}$, with $0<\vartheta<2\pi$. List the reduced fractions in $[0,1]$ with denominator at most $N$ in increasing order. In this Farey list $F_N$ we will find neighbours $p/q$ and $r/s$ satisfying
+List the reduced fractions in $[0,1]$ with denominator at most $N$ in increasing order. This is the Farey list $F_N$. At any direction $a/b$ in the list, a cycle on $b$ states has the eigenvalue $e^{2\pi i a/b}$. Adding fixed states if needed gives a matrix of order $N$ with that same eigenvalue. The farthest point on such a ray therefore has radius one. Since $\rho<1$, the direction of $\zeta$ lies strictly between two entries.
+
+We will choose between $\zeta$ and $\overline\zeta$ so that the smaller denominator lies on the left. Call that choice $\omega=\rho e^{i\vartheta}$, with $0<\vartheta<2\pi$. For the two neighbours $p/q$ and $r/s$ on either side of its direction we then have
 
 $$
 \frac pq<\frac{\vartheta}{2\pi}<\frac rs,\qquad q<s.

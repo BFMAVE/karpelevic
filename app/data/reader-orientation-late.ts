@@ -42,10 +42,10 @@ export const lateOrientations: Record<number, TopicOrientation> = {
       { term: "Weighted transition matrix M", meaning: "An arrow u → v of weight a means Mᵤᵥ = a: u is the row and v is the column. M is distinct from the scalar angle A." },
       { term: "Local and connecting cycles", meaning: "m local q-cycles close with weights βⱼ; complementary weights 1 − βⱼ connect them into one cycle of length s." },
       { term: "Realisation order n₀", meaning: "n₀ = max(mq,s). The final connection skips or inserts vertices to obtain the required length s." },
-      { term: "Selected arc parameter β(ϑ)", meaning: "The equal weight chosen at each oriented angle. We prove it decreases strictly from 1 to 0, so each interior weight corresponds to exactly one selected point." },
+      { term: "Selected arc parameter β(ϑ)", meaning: "The probability of taking the return arrow within a block. For n ≥ 4 it decreases strictly from 1 to 0 as the oriented angle increases." },
     ],
     strategy: "Draw one arrow for each positive entry of the proposed matrix. To find the characteristic polynomial of the matrix M, expand det(tI − M). The arrows in each nonzero term form disjoint cycles once the unused diagonal factors have been set aside. Once the matrix gives the candidate eigenvalue, differentiating the equation for that eigenvalue tells us how the point moves as its common weight changes.",
-    payoff: "Every candidate point is attained. Moving the common weight from one endpoint to the other takes us once along the selected arc. Reading the characteristic polynomial also tells us when zero itself is an eigenvalue.",
+    payoff: "Every candidate point is attained. For n ≥ 4 each common weight between 0 and 1 picks out exactly one point on the open arc. Reading the characteristic polynomial also tells us when zero itself is an eigenvalue.",
   },
   11: {
     imports: [

@@ -160,7 +160,7 @@ The extra factor $t^5$ vanishes at zero, while $C(0)=\beta^2>0$. Thus the five z
 
 ### How the weight changes from one endpoint to the other {#why-the-weight-traverses-the-selected-arc-exactly-once}
 
-For each angle of the oriented interval we have found a weight $\beta$. Does increasing the angle run through all weights between zero and one exactly once? Follow the scalar radius $\rho=\rho(\vartheta)$ along the interval. By its defining equation $\mathcal R(\rho,\vartheta)=0$, where
+For this argument fix an order $n\ge4$. At each angle $\vartheta$ in the oriented interval we know the probability $\beta$ of taking the return arrow within a block. As the angle increases from left to right, does each weight between zero and one occur exactly once? To find out, follow the radius $\rho=\rho(\vartheta)$ along the interval. By its defining equation $\mathcal R(\rho,\vartheta)=0$, where
 
 $$
 \mathcal R(\rho,\vartheta)=\rho^{s/m}\sin A+\rho^q\sin B-\sin(A+B).
@@ -195,7 +195,11 @@ H_z z'+H_\beta\beta'=0,\qquad
 z'=e^{i\vartheta}(\rho'+i\rho)\ne0.
 $$
 
-Since $\rho>0$, the imaginary part of $\rho'+i\rho$ is positive and hence $z'\ne0$. If $\beta'$ vanished, the first identity would give $H_z z'=0$, although both factors are nonzero. Thus the continuous derivative $\beta'$ keeps one sign on the interval. At the left end $\rho$ tends to one and $A$ to zero, giving $\beta\to1$. At the right end $B$ tends to zero and hence $\beta\to0$. The sign is therefore negative. Continuity and strict decrease show that each weight in $(0,1)$ occurs exactly once. On a reflected interval the original angle $\theta=2\pi-\vartheta$ runs in the opposite direction.
+Since $\rho>0$, the imaginary part of $\rho'+i\rho$ is positive and hence $z'\ne0$. If $\beta'$ vanished, the first identity would give $H_z z'=0$, although both factors are nonzero. Thus the continuous derivative $\beta'$ keeps one sign on the interval.
+
+Which sign? For $n\ge4$, Topic VIII gives $\rho\to1$ at both ends. At the left end $A\to0$ and $B\to2\pi/(mq)$, an angle strictly between zero and $\pi$. The formula for $\alpha$ then gives $\alpha\to0$, so $\beta=1-\alpha\to1$. At the right end $B\to0$ while $A$ tends to $2\pi/s$, also strictly between zero and $\pi$. Now the formula for $\beta$ gives $\beta\to0$. Thus $\beta$ decreases and takes every value in $(0,1)$ exactly once. On a reflected interval the original angle $\theta=2\pi-\vartheta$ runs in the opposite direction.
+
+At order three the endpoint can behave differently. On the vertical side of the triangle in [Topic XII](/proof/topic-xii/#guide-12-the-first-three-orders), the eigenvalue $w$ satisfies $w^2+w+\alpha=0$. As $w$ approaches $-1/2$, we get $\alpha\to1/4$ and hence $\beta\to3/4$.
 
 On the first order-four arc we can calculate the weight directly. Its data are $q=1$ and $s=m=4$, and $A+B=\pi/2$. The factor identity says $z-\beta=i(1-\beta)$, so
 
