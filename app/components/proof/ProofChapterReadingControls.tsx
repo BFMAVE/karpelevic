@@ -1,4 +1,4 @@
-export function ProofChapterReadingControls() {
+export function ProofChapterReadingControls({ formalLabel = "Source proof", showBulkControls = true } = {}) {
   return (
     <section
       className="proof-chapter-reading-controls"
@@ -24,10 +24,10 @@ export function ProofChapterReadingControls() {
             data-chapter-reading-mode-button="formal"
             type="button"
           >
-            Source proof
+            {formalLabel}
           </button>
         </div>
-        <div role="group" aria-label="Complete proofs">
+        {showBulkControls && <div role="group" aria-label="Complete proofs">
           <span>Proofs</span>
           <button data-chapter-proofs="open" type="button">
             Open all proofs
@@ -35,7 +35,7 @@ export function ProofChapterReadingControls() {
           <button data-chapter-proofs="close" disabled type="button">
             Close all proofs
           </button>
-        </div>
+        </div>}
       </div>
       <p
         className="proof-visually-hidden"

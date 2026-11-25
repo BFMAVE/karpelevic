@@ -9056,10 +9056,6 @@ math mover > mo[accent="true"] {
     overflow-x: auto;
   }
 }
-.reader-source-text math[display="inline"] {
-  max-width: 100%;
-  overflow-x: auto;
-}
 .reader-source-proof { margin: 1.5rem 0; }
 .reader-source-proof > summary { font-size: 1.05rem; line-height: 1.5; }
 .reader-source-text { padding: 1rem 1.25rem; }

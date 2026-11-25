@@ -70,6 +70,8 @@ const routes = [
     requestPath: "/prerequisites",
     outputPath: "prerequisites/index.html",
   },
+  ...["/perfect-mirsky", ...["ii", "iii", "iv", "v", "vi", "vii", "viii"].map((topic) => `/perfect-mirsky/topic-${topic}`)]
+    .map((requestPath) => ({ requestPath, outputPath: `${requestPath.slice(1)}/index.html` })),
 ];
 const compatibilityRedirects = [
   {
@@ -128,10 +130,9 @@ function makeStatic(html, requestPath) {
     `${basePath}/assets/`,
   );
 
-  const proofChapterScript =
-    requestPath === "/proof" || requestPath.startsWith("/proof/topic-")
-    ? `<script src="${basePath}/proof-chapter.js" defer></script>`
-    : "";
+  const mirsky = requestPath === "/perfect-mirsky" || requestPath.startsWith("/perfect-mirsky/topic-");
+  const proofChapter = mirsky || requestPath === "/proof" || requestPath.startsWith("/proof/topic-");
+  const proofChapterScript = proofChapter ? `<script src="${basePath}/proof-chapter.js" defer></script>` : "";
   const topicXIVScript =
     requestPath === "/proof/topic-xiv"
       ? `<script src="${basePath}/topic-xiv.js" defer></script>`
@@ -139,13 +140,14 @@ function makeStatic(html, requestPath) {
   const averageScript = requestPath === "/prerequisites"
     ? `<script src="${basePath}/weighted-average.js" defer></script>`
     : "";
-  const learningScript = requestPath === "/prerequisites" || requestPath === "/proof" || requestPath.startsWith("/proof/topic-")
+  const learningScript = requestPath === "/prerequisites" || proofChapter
     ? `<script src="${basePath}/reader-learning.js" defer></script>` : "";
+  const mirskyScript = mirsky ? `<script type="module" src="${basePath}/perfect-mirsky.js"></script>` : "";
   const stateLinksScript = requestPath === "/proof/topic-xiv"
     ? `<script src="${basePath}/eight-state-links.js" defer></script>` : "";
   return withProjectAssets.replace(
     "</body>",
-    `<script src="${basePath}/contact.js" defer></script>${proofChapterScript}${topicXIVScript}${averageScript}${learningScript}${stateLinksScript}</body>`,
+    `<script src="${basePath}/contact.js" defer></script>${proofChapterScript}${topicXIVScript}${averageScript}${learningScript}${stateLinksScript}${mirskyScript}</body>`,
   );
 }
 

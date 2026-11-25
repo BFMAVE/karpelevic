@@ -7,7 +7,10 @@ const pagePaths = {
   history: "/history/",
   journey: "/journey/",
   proof: "/proof/",
+  mirsky: "/perfect-mirsky/",
 } as const;
+
+const navigation = [...primaryNavigation, { label: "Perfect–Mirsky", href: pagePaths.mirsky }];
 
 export function SiteHeader({
   current,
@@ -30,7 +33,7 @@ export function SiteHeader({
         </a>
       </div>
       <nav className="primary-navigation" aria-label="Primary navigation">
-        {primaryNavigation.map((item) => (
+        {navigation.map((item) => (
           <a
             aria-current={current && item.href === pagePaths[current] ? "page" : undefined}
             href={sitePath(item.href)}

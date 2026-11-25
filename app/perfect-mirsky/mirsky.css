@@ -1,0 +1,76 @@
+.mirsky-page .reader-chapter-publication { font-size: .9rem; }
+.mirsky-page .reader-chapter-source { margin: .75rem 0 0; }
+.mirsky-page .mirsky-actions { margin-top: 14px; }
+.mirsky-page .reader-section-directory li a { font-size: .88rem; }
+.mirsky-page .reader-neighbours { margin-bottom: 3rem; }
+.mirsky-page .reader-source-text { overflow-wrap: break-word; }
+.mirsky-proof > h3 { margin-block: 2rem .5rem; font-size: 1.42rem; }
+.mirsky-proof > h3:first-child { margin-top: .6rem; }
+.mirsky-proof > p, .mirsky-proof > ol { max-width: 75ch; }
+.mirsky-figure h4 { color: var(--ink); font-size: 1.28rem; margin: 0 0 .8rem; }
+.mirsky-figure .mirsky-experiment { font-size: 1rem; line-height: 1.5; }
+.mirsky-diagram-grid, .mirsky-loop {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 1.15rem;
+}
+.mirsky-figure .reader-figure-visual { min-width: 0; }
+.mirsky-figure svg text { fill: var(--ink); font-size: 14px; }
+.mirsky-figure svg [hidden] { display: none; }
+.mirsky-figure svg text.mirsky-label-accent { fill: var(--oxblood); font-weight: 700; }
+.mirsky-axis, .mirsky-gridline { fill: none; stroke: var(--rule-dark); stroke-width: 1; }
+.mirsky-gridline { stroke: var(--rule); }
+.mirsky-outline, .mirsky-unit, .mirsky-trial { fill: none; }
+.mirsky-outline { stroke: var(--ink); stroke-width: 2; }
+.mirsky-unit { stroke: var(--ink-soft); stroke-width: 1.25; stroke-dasharray: 5 4; }
+.mirsky-trial { stroke: var(--copper); stroke-width: 1.6; stroke-dasharray: 5 4; }
+.mirsky-disk { fill: color-mix(in srgb, var(--copper) 14%, transparent); stroke: var(--copper); stroke-width: 1.3; }
+.mirsky-triangle { fill: color-mix(in srgb, var(--oxblood) 8%, transparent); stroke: var(--oxblood); stroke-width: 1.6; }
+.mirsky-mark { stroke-width: 1.8; }
+.mirsky-fixed { fill: var(--ink); stroke: var(--ink); }
+.mirsky-source { fill: var(--copper); stroke: var(--ink); }
+.mirsky-interior { fill: var(--oxblood); stroke: var(--oxblood); }
+.mirsky-target { fill: var(--paper-light); stroke: var(--oxblood); }
+.mirsky-quiet-point { fill: var(--rule-dark); }
+.mirsky-region { stroke-width: 1.8; }
+.mirsky-n2 { stroke: var(--ink-soft); stroke-width: 2.2; }
+.mirsky-n3 { fill: color-mix(in srgb, var(--ink) 8%, transparent); stroke: var(--ink); }
+.mirsky-n4 { fill: color-mix(in srgb, var(--ink) 5%, transparent); stroke: var(--ink); stroke-dasharray: 5 4; }
+.mirsky-n5 { fill: color-mix(in srgb, var(--copper) 7%, transparent); stroke: var(--copper); }
+.mirsky-n6 { fill: color-mix(in srgb, var(--oxblood) 4%, transparent); stroke: var(--oxblood); stroke-dasharray: 3 3; }
+.mirsky-zoom-frame { fill: none; stroke: var(--rule-dark); }
+.mirsky-zoom-triangle { fill: none; stroke: var(--ink); stroke-width: 2; }
+.mirsky-zoom-pentagon { fill: none; stroke: var(--copper); stroke-width: 2.5; stroke-dasharray: 5 3; }
+.mirsky-chord { fill: none; stroke: var(--oxblood); stroke-width: 2.6; }
+.mirsky-path { fill: none; stroke: var(--ink); stroke-width: 2.8; stroke-linejoin: round; }
+.mirsky-loop-edges { stroke-dasharray: 4 2; }
+.mirsky-readout { min-width: 0; border-left: 1px solid var(--rule); padding: .6rem 0 .6rem 1rem; }
+.mirsky-readout-heading { margin: 0 0 .7rem; color: var(--oxblood); font-weight: 700; }
+.mirsky-readout dl { margin: 0 0 .65rem; }
+.mirsky-readout dl > div {
+  display: flex; align-items: baseline; justify-content: space-between; gap: .75rem;
+  padding: .35rem 0; border-bottom: 1px solid var(--rule);
+}
+.mirsky-readout dd { margin: 0; font-variant-numeric: tabular-nums; font-weight: 700; }
+.mirsky-mass-bar { position: relative; display: flex; height: 14px; margin-top: .9rem; border: 1px solid var(--rule-dark); }
+.mirsky-demand-one { width: 50%; background: var(--ink); }
+.mirsky-demand-two { background: var(--oxblood); }
+.mirsky-supply-mark { position: absolute; top: -4px; bottom: -4px; left: 66.667%; width: 2px; background: var(--ink); }
+.mirsky-supply-key { margin: .45rem 0 .7rem; font-size: .88rem; }
+.mirsky-status { display: block; margin-top: .8rem; color: var(--ink); }
+.mirsky-status strong { display: block; margin-top: .3rem; color: var(--oxblood); }
+.mirsky-figure .reader-average-presets button { min-height: 42px; color: var(--ink); }
+.mirsky-figure .reader-average-presets button[aria-pressed="true"] { color: var(--paper-light); }
+.mirsky-figure .reader-average-presets button:disabled { opacity: .52; cursor: default; }
+.mirsky-figure .reader-average-presets button:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 4px; }
+.mirsky-controls label strong { padding-inline-start: .4rem; }
+.mirsky-controls input[type="range"] { min-height: 24px; }
+.mirsky-path-status { min-height: 2.9em; }
+.mirsky-loop .reader-figure-visual { max-width: 350px; }
+
+@media (max-width: 660px) {
+  .mirsky-diagram-grid, .mirsky-loop { grid-template-columns: minmax(0, 1fr); gap: .65rem; }
+  .mirsky-readout { border-left: 0; border-top: 1px solid var(--rule); padding: .9rem 0 0; }
+  .mirsky-figure .reader-figure-visual { max-width: 460px; width: 100%; margin-inline: auto; }
+}

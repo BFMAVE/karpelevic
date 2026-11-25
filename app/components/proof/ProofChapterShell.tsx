@@ -109,6 +109,7 @@ export function ProofChapterShell({
             <h1>{route.title}</h1>
             <p className="reader-chapter-question">{question ?? topic.question}</p>
             {route.topicNumber === 1 ? <p className="reader-preview-link"><a href={sitePath("/prerequisites/#theorem-preview")}>First see the theorem&apos;s picture and statement →</a></p> : null}
+            {route.topicNumber === 1 ? <p className="reader-preview-link"><a href={sitePath("/perfect-mirsky/")}>What if the columns also sum to one?</a></p> : null}
             <details className="reader-chapter-publication"><summary>Source and revision</summary><p className="reader-chapter-source">{manuscriptPages ?? topic.manuscriptPages}</p><div className="proof-edition-meta reader-chapter-meta">
               {stats.map((stat) => <span key={stat.label}>{stat.value} {stat.label}</span>)}
               {firstPublishedAt ? <time dateTime={firstPublishedAt}>First published {formatDate(firstPublishedAt)}.</time> : null}

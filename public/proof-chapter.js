@@ -46,6 +46,7 @@
       const announcement = controls.querySelector(
         "[data-proof-chapter-announcement]",
       );
+      const closeProofsInGuide = chapter.dataset.chapterCloseProofsInGuide !== undefined;
       let printState = [];
 
       function announce(message) {
@@ -61,14 +62,15 @@
             String(button.dataset.chapterReadingModeButton === resolvedMode),
           );
         });
-        if (resolvedMode === "formal") {
-          proofs.forEach((proof) => { proof.open = true; });
+        if (resolvedMode === "formal" || (shouldAnnounce && closeProofsInGuide)) {
+          proofs.forEach((proof) => { proof.open = resolvedMode === "formal"; });
           updateProofButtons();
         }
         if (shouldAnnounce) {
           announce(
             resolvedMode === "formal"
-              ? "Source proof selected. The complete source argument and its proofs are open."
+              ? (closeProofsInGuide ? "Detailed proof selected. The argument is open."
+                : "Source proof selected. The complete source argument and its proofs are open.")
               : "Guided lesson selected. The illustrated explanation and topic introduction are visible.",
           );
         }
