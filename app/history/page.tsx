@@ -7,6 +7,7 @@ import {
   getPageTimestamp,
 } from "../lib/git-dates";
 import { createPageMetadata } from "../lib/site-metadata";
+import { sitePath } from "../lib/site-path";
 
 export const metadata = createPageMetadata({
   title: "History",
@@ -75,6 +76,7 @@ export default function HistoryPage() {
           <aside className="history-disclaimer" aria-label="Scope of this history">
             <p className="section-label">A personal historiographical note</p>
             <p>{historyContent.disclaimer}</p>
+            <p>Perfect and Mirsky asked what changes when the columns also sum to one. Their question and its history have a separate overview. <a href={sitePath("/perfect-mirsky/#history")}>Perfect–Mirsky history</a>.</p>
             <p className="page-publication-meta">
               <time dateTime={firstPublished}>
                 First published {formatDate(firstPublished)}

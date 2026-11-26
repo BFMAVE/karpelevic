@@ -70,7 +70,7 @@ const routes = [
     requestPath: "/prerequisites",
     outputPath: "prerequisites/index.html",
   },
-  ...["/perfect-mirsky", ...["ii", "iii", "iv", "v", "vi", "vii", "viii"].map((topic) => `/perfect-mirsky/topic-${topic}`)]
+  ...["/perfect-mirsky", ...["i", "ii", "iii", "iv", "v", "vi", "vii", "viii"].map((topic) => `/perfect-mirsky/topic-${topic}`)]
     .map((requestPath) => ({ requestPath, outputPath: `${requestPath.slice(1)}/index.html` })),
 ];
 const compatibilityRedirects = [
@@ -130,8 +130,9 @@ function makeStatic(html, requestPath) {
     `${basePath}/assets/`,
   );
 
-  const mirsky = requestPath === "/perfect-mirsky" || requestPath.startsWith("/perfect-mirsky/topic-");
-  const proofChapter = mirsky || requestPath === "/proof" || requestPath.startsWith("/proof/topic-");
+  const mirskyTopic = requestPath.startsWith("/perfect-mirsky/topic-");
+  const mirsky = requestPath === "/perfect-mirsky" || mirskyTopic;
+  const proofChapter = mirskyTopic || requestPath === "/proof" || requestPath.startsWith("/proof/topic-");
   const proofChapterScript = proofChapter ? `<script src="${basePath}/proof-chapter.js" defer></script>` : "";
   const topicXIVScript =
     requestPath === "/proof/topic-xiv"

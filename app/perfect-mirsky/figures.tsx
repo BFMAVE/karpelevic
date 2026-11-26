@@ -1,4 +1,4 @@
-import { chordEnd as sideEnd, chordState, circularPath, correctedDistances, onCircle, pathLabels, pathState, sixMarkState } from "../lib/perfect-mirsky-model.mjs";
+import { chordEnd as sideEnd, chordState, circularPath, correctedDistances, onCircle, orderFiveWitness, pathLabels, pathState, polygonWitnessState, sixMarkState } from "../lib/perfect-mirsky-model.mjs";
 
 type Point = [number, number];
 type Plane = { cx: number; cy: number; scale: number };
@@ -26,7 +26,7 @@ const squarePlane = { cx: 180, cy: 151, scale: 105 };
 const levels = [{ step: 0, label: "0" }, { step: 20, label: "1/3" }, { step: 30, label: "1/2" }];
 
 export function SixMarks() {
-  const step = 30;
+  const step = 20;
   const { a, spacing, rowDemand, total, bound, status } = sixMarkState(step);
   const t = 3 / 4;
 
@@ -84,62 +84,58 @@ export function SixMarks() {
   </div>;
 }
 
-const witness: Point = [-0.2792925778257751, 0.7635163746738518];
 const regionPlane = { cx: 168, cy: 142, scale: 108 };
+const zoomPlane = { cx: 52 + .33 * 2600, cy: 234 + .719 * 2600, scale: 2600 };
+const regionOrders = [3, 4, 5, 6];
 
 export function PolygonRegion() {
   const order = 5;
-  const [witnessX, witnessY] = projected(witness, regionPlane);
-  const zoom = ([x, y]: Point) => [42 + (x + .33) * 2900, 233 - (y - .727) * 3900];
-  const triangleSide = (x: number) => (1 - x) / Math.sqrt(3);
-  const pentagon = regularPolygon(5);
-  const [px, py] = pentagon[1];
-  const [qx, qy] = pentagon[2];
-  const pentagonSide = (x: number) => py + (qy - py) * (x - px) / (qx - px);
-  const [windowX, windowY] = zoom(witness);
+  const [witnessX, witnessY] = projected(orderFiveWitness, regionPlane);
+  const [windowX, windowY] = projected(orderFiveWitness, zoomPlane);
+  const { note } = polygonWitnessState(order);
   return <div className="mirsky-experiment" data-mirsky-union>
     <div className="reader-average-presets" role="group" aria-label="Order of the polygon union">
-      {[3, 4, 5, 6].map((n) => <button key={n} type="button" aria-pressed={order === n}
+      {regionOrders.map((n) => <button key={n} type="button" aria-pressed={order === n}
         disabled data-mirsky-control data-mirsky-order={n}>Order {n}</button>)}
     </div>
     <div className="mirsky-diagram-grid">
       <div className="reader-figure-visual" tabIndex={0} role="region" aria-label="Union of regular polygons and the unit circle">
         <svg viewBox="0 0 336 303" role="img" aria-labelledby="mirsky-union-title">
-          <title id="mirsky-union-title" data-mirsky-text="region-title">Union of the regular polygons of order at most five. The highlighted point is the order-five witness.</title>
+          <title id="mirsky-union-title" data-mirsky-text="region-title">Union of the regular polygons through order 5. The point is the same order-five eigenvalue for every choice.</title>
           <path d="M37 142H299 M168 19V264" className="mirsky-axis" />
           <circle cx="168" cy="142" r="108" className="mirsky-unit" />
           <line x1="60" y1="142" x2="276" y2="142" className="mirsky-n2" />
-          {[3, 4, 5, 6].map((n) => <polygon key={n} points={pointList(regularPolygon(n), regionPlane)}
+          {regionOrders.map((n) => <polygon key={n} points={pointList(regularPolygon(n), regionPlane)}
             className={"mirsky-region mirsky-n" + n} data-mirsky-polygon={n} {...{ hidden: n > order }} />)}
-          <g data-mirsky-witness><rect x={witnessX - 7} y={witnessY - 7} width="14" height="14" className="mirsky-zoom-frame" />
-            <Mark at={witness} plane={regionPlane} kind="mirsky-interior" /></g>
+          <rect x={witnessX - 7} y={witnessY - 7} width="14" height="14" className="mirsky-zoom-frame" />
+          <Mark at={orderFiveWitness} plane={regionPlane} kind="mirsky-interior" />
           <text x="284" y="163">1</text><text x="169" y="14" textAnchor="middle">Im z</text>
           <text x="296" y="135">Re z</text>
           <text x="168" y="286" textAnchor="middle">The union U<tspan baselineShift="sub" fontSize="12" data-mirsky-text="order">{order}</tspan></text>
         </svg>
       </div>
-      <div className="reader-figure-visual" tabIndex={0} role="region" aria-label="Enlarged order-five witness">
+      <div className="reader-figure-visual" tabIndex={0} role="region" aria-label="Close-up at equal horizontal and vertical scales">
         <svg viewBox="0 0 336 303" role="img" aria-labelledby="mirsky-zoom-title">
-          <title id="mirsky-zoom-title">Enlargement at order five. The witness lies above both the descending triangle side and the rising pentagon side.</title>
-          <defs><clipPath id="mirsky-zoom-clip"><rect x="42" y="33" width="262" height="200" /></clipPath></defs>
-          <rect x="42" y="33" width="262" height="200" className="mirsky-zoom-frame" />
-          {[.74, .75, .76, .77].map((v) => (
-            <g key={v}><line x1="42" x2="304" y1={zoom([-.33, v])[1]} y2={zoom([-.33, v])[1]} className="mirsky-gridline" />
-              <text x="37" y={zoom([-.33, v])[1] + 4} textAnchor="end">{v.toFixed(2)}</text></g>
-          ))}
+          <title id="mirsky-zoom-title" data-mirsky-text="zoom-title">{note}</title>
+          <defs><clipPath id="mirsky-zoom-clip"><rect x="52" y="28" width="234" height="206" /></clipPath></defs>
+          {[.74, .76, .78].map((v) => {
+            const [, y] = projected([-.33, v], zoomPlane);
+            return <g key={v}><line x1="52" x2="286" y1={y} y2={y} className="mirsky-gridline" />
+              <text x="47" y={y + 4} textAnchor="end">{v.toFixed(2)}</text></g>;
+          })}
           <g clipPath="url(#mirsky-zoom-clip)">
-            <polyline points={[-.33, -.24].map((x) => zoom([x, triangleSide(x)]).join(",")).join(" ")} className="mirsky-zoom-triangle" />
-            <polyline points={[-.33, -.24].map((x) => zoom([x, pentagonSide(x)]).join(",")).join(" ")} className="mirsky-zoom-pentagon" />
+            {[...regionOrders].reverse().map((n) => <polygon key={n} points={pointList(regularPolygon(n), zoomPlane)}
+              className={"mirsky-region mirsky-n" + n} data-mirsky-polygon={n} {...{ hidden: n > order }} />)}
           </g>
+          <rect x="52" y="28" width="234" height="206" className="mirsky-zoom-frame" />
           <circle cx={windowX} cy={windowY} r="5" className="mirsky-mark mirsky-interior" />
-          <text x={windowX - 8} y={windowY - 15} className="mirsky-label-accent" textAnchor="middle">witness</text>
-          <text x="48" y="64">triangle</text>
-          <text x="234" y="104">pentagon</text>
-          <text x="43" y="254">−.33</text><text x="303" y="254" textAnchor="end">−.24</text>
-          <text x="173" y="286" textAnchor="middle">Close to the boundary of U₅</text>
+          <text x={windowX} y={windowY - 13} className="mirsky-label-accent" textAnchor="middle">order-five eigenvalue</text>
+          <text x="52" y="254">−.33</text><text x="286" y="254" textAnchor="end">−.24</text>
+          <text x="169" y="286" textAnchor="middle">Equal scale on both axes</text>
         </svg>
       </div>
     </div>
+    <p className="mirsky-region-note" aria-live="polite" data-mirsky-text="union-status">{note}</p>
   </div>;
 }
 
@@ -147,7 +143,7 @@ const chordPlane = { cx: 160, cy: 140, scale: 97 };
 
 export function Chord() {
   const percent = 50;
-  const { u, x, y, chance, loss } = chordState(percent);
+  const { u, x, y, chance, pairLoss, radiusLoss, radiusSquared } = chordState(percent);
   const eta: Point = [x, y];
   const [etaX, etaY] = projected(eta, chordPlane);
   return <div className="mirsky-experiment" data-mirsky-chord={JSON.stringify(chordPlane)}>
@@ -168,19 +164,19 @@ export function Chord() {
       <div className="mirsky-readout">
         <p className="mirsky-readout-heading">Compare two draws</p>
         <dl>
-          <div><dt>Chance of different shifts</dt><dd data-mirsky-text="chance">{chance}</dd></div>
-          <div><dt>Half the mean squared distance</dt><dd data-mirsky-text="distance">{loss}</dd></div>
-          <div><dt>Loss of squared radius</dt><dd data-mirsky-text="loss">{loss}</dd></div>
+          <div><dt>Chance of different shifts</dt><dd data-mirsky-text="chance">{chance.toFixed(3)}</dd></div>
+          <div><dt>Half the mean squared distance</dt><dd data-mirsky-text="distance">{pairLoss.toFixed(4)}</dd></div>
+          <div><dt>Loss of squared radius</dt><dd data-mirsky-text="loss">{radiusLoss.toFixed(4)}</dd></div>
         </dl>
         <output className="mirsky-status" htmlFor="mirsky-chord-weight" aria-live="polite" data-mirsky-text="chord-status">
-          At u = {u}, both ways of measuring the loss give {loss}.
+          The average lies at squared radius {radiusSquared.toFixed(4)}.
         </output>
       </div>
     </div>
     <div className="reader-average-controls mirsky-controls">
-      <label htmlFor="mirsky-chord-weight">Probability u of advancing one label <strong data-mirsky-text="u">{u}</strong></label>
+      <label htmlFor="mirsky-chord-weight">Probability u of advancing one label <strong data-mirsky-text="u">{u.toFixed(2)}</strong></label>
       <input id="mirsky-chord-weight" type="range" min={0} max={100} defaultValue={percent}
-        aria-valuetext={u} disabled data-mirsky-control />
+        aria-valuetext={u.toFixed(2)} disabled data-mirsky-control />
     </div>
   </div>;
 }

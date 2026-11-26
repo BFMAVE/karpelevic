@@ -4,9 +4,23 @@
 .mirsky-page .reader-section-directory li a { font-size: .88rem; }
 .mirsky-page .reader-neighbours { margin-bottom: 3rem; }
 .mirsky-page .reader-source-text { overflow-wrap: break-word; }
-.mirsky-proof > h3 { margin-block: 2rem .5rem; font-size: 1.42rem; }
-.mirsky-proof > h3:first-child { margin-top: .6rem; }
-.mirsky-proof > p, .mirsky-proof > ol { max-width: 75ch; }
+.mirsky-proof h3 { margin-block: 2rem .5rem; font-size: 1.42rem; }
+.mirsky-proof h3:first-child { margin-top: .6rem; }
+.mirsky-proof p, .mirsky-proof ol { max-width: 75ch; }
+.mirsky-proof-context { margin: 0 0 1rem; font-size: .88rem; }
+.mirsky-page [data-chapter-reading-mode="formal"] .proof-guided-layer { display: block; }
+.mirsky-overview { max-width: 960px; margin-inline: auto; padding-top: clamp(1.5rem, 3vw, 2.75rem); }
+.mirsky-overview .reader-guide h2 { margin-top: 2.2rem; }
+.mirsky-overview-topics { padding: 0; list-style: none; margin: 1rem 0; }
+.mirsky-overview-topics li { border-bottom: 1px solid var(--rule); }
+.mirsky-overview-topics a { display: flex; gap: .85rem; align-items: baseline; padding: .6rem 0; }
+.mirsky-overview-topics span { flex: 0 0 2.6rem; color: var(--oxblood); }
+.mirsky-overview table, .mirsky-proof table { overflow-x: auto; text-align: left; border-collapse: collapse; }
+.mirsky-overview table { display: block; max-width: 100%; }
+.mirsky-overview :is(th, td), .mirsky-proof :is(th, td) { padding: .55rem .75rem; border-bottom: 1px solid var(--rule); }
+.mirsky-overview th:first-child, .mirsky-overview td:first-child { min-width: 7ch; }
+.mirsky-overview blockquote { margin: 1.3rem 0; padding: .65rem 1rem; border-left: 3px solid var(--copper); background: color-mix(in srgb, var(--copper) 6%, transparent); }
+.mirsky-overview blockquote p { margin: 0; }
 .mirsky-figure h4 { color: var(--ink); font-size: 1.28rem; margin: 0 0 .8rem; }
 .mirsky-figure .mirsky-experiment { font-size: 1rem; line-height: 1.5; }
 .mirsky-diagram-grid, .mirsky-loop {
@@ -40,8 +54,7 @@
 .mirsky-n5 { fill: color-mix(in srgb, var(--copper) 7%, transparent); stroke: var(--copper); }
 .mirsky-n6 { fill: color-mix(in srgb, var(--oxblood) 4%, transparent); stroke: var(--oxblood); stroke-dasharray: 3 3; }
 .mirsky-zoom-frame { fill: none; stroke: var(--rule-dark); }
-.mirsky-zoom-triangle { fill: none; stroke: var(--ink); stroke-width: 2; }
-.mirsky-zoom-pentagon { fill: none; stroke: var(--copper); stroke-width: 2.5; stroke-dasharray: 5 3; }
+.mirsky-region-note { margin: .5rem 0 0; }
 .mirsky-chord { fill: none; stroke: var(--oxblood); stroke-width: 2.6; }
 .mirsky-path { fill: none; stroke: var(--ink); stroke-width: 2.8; stroke-linejoin: round; }
 .mirsky-loop-edges { stroke-dasharray: 4 2; }

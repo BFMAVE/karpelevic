@@ -26,12 +26,35 @@ export function sixMarkState(step) {
 
 export const chordEnd = onCircle(1, Math.PI / 4);
 
+/** @type {[number, number]} */
+export const orderFiveWitness = [-0.2792925778257751, 0.7635163746738518];
+
+/** @param {number} order */
+export function polygonWitnessState(order) {
+  const [x, y] = orderFiveWitness;
+  const inside = Array.from({ length: order - 2 }, (_, index) => index + 3).some((sides) => {
+    const apothem = Math.cos(Math.PI / sides);
+    return Array.from({ length: sides }, (_, index) => onCircle(1, (2 * index + 1) * Math.PI / sides))
+      .every(([nx, ny]) => x * nx + y * ny <= apothem);
+  });
+  return {
+    inside,
+    note: inside
+      ? "The hexagon contains the point. Its upper side is above this close-up."
+      : "The point lies outside the union at order " + order + ".",
+  };
+}
+
 /** @param {number} percent */
 export function chordState(percent) {
   const u = percent / 100;
-  const x = 1 - u + u * chordEnd[0], y = u * chordEnd[1];
-  return { u: u.toFixed(2), x, y, chance: (2 * u * (1 - u)).toFixed(3),
-    loss: ((2 - Math.SQRT2) * u * (1 - u)).toFixed(4) };
+  const [endX, endY] = chordEnd;
+  const x = 1 - u + u * endX;
+  const y = u * endY;
+  const chance = 2 * u * (1 - u);
+  const squaredSide = (endX - 1) ** 2 + endY ** 2;
+  const radiusSquared = x ** 2 + y ** 2;
+  return { u, x, y, chance, pairLoss: chance * squaredSide / 2, radiusLoss: 1 - radiusSquared, radiusSquared };
 }
 
 export const pathLabels = [0, 1, 2, 3, 5, 7, 9];

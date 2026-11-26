@@ -2,6 +2,12 @@
 
 The public site is https://bfmave.github.io/karpelevic/.
 
+The [Perfect–Mirsky walkthrough](https://bfmave.github.io/karpelevic/perfect-mirsky/)
+studies eigenvalues of doubly stochastic matrices. Its overview records the
+order-450 result and the descriptions at orders five and six. The eight
+topics follow the pencil-and-paper proof for orders at least \(10^{30}\).
+They are based on [arXiv:2611.30905v2](https://arxiv.org/abs/2611.30905v2).
+
 The current preprint is **A structural proof of the Karpelevič theorem**, by
 Brecht Verbeken and Vincent Ginis, [arXiv:2609.26058v2](https://arxiv.org/abs/2609.26058v2),
 revised 23 September 2026. The reader uses the supplied teaching manuscript,
@@ -96,6 +102,11 @@ modes retain the utility; search supports symbol names and TeX spellings.
 Fragment navigation closes an expanded reference and clears its measured
 summary height, including repeated clicks on the same fragment. Responsive
 checks inspect directory content widths and the first line of destinations.
+
+The Perfect–Mirsky sources are in `content/perfect-mirsky/`. Run
+`node scripts/generate-perfect-mirsky.mjs` with Pandoc after editing them.
+To check links into the paper, save the official arXiv v2 HTML and pass its
+filename to `node scripts/verify-github-pages.mjs` after a Pages build.
 
 Topic XIV's convexity lesson uses an elementary positive-turn proof at the
 exact scalar root. Its interval certificate remains an optional independent

@@ -31,13 +31,13 @@ Write $P$ for the hull of the marks. We have $\lambda P\subseteq P$, and $1$ bel
 
 <!-- mirsky-figure:spiral -->
 
-A disk this large could still fit inside a polygon with only a number of sides of order $\sqrt N$. Here the small angle of $\lambda$ imposes more. Let $b$ be the number of distinct hull vertices. Express each image of a vertex as an average of the vertices. This produces a row-stochastic matrix on the vertices. A stationary flow for that matrix is a collection of nonnegative edge weights with equal total incoming and outgoing weight at each vertex. It can be split into closed cycles. Along each cycle, the sum of the signed angular terms is bounded by half of $\cot(\pi/b)$ times the sum of squared edge lengths. The detailed proof derives this bound by expanding the cycle in the Fourier modes of Topic IV.
+A disk this large could still fit inside a polygon with only a number of sides of order $\sqrt N$. Here the small angle of $\lambda$ imposes more. Let $m_v$ be the number of distinct hull vertices. Express each image of a vertex as an average of the vertices. This produces a row-stochastic matrix on the vertices. A stationary flow for that matrix is a collection of nonnegative edge weights with equal total incoming and outgoing weight at each vertex. It can be split into closed cycles. Along each cycle, the sum of the signed angular terms is bounded by half of $\cot(\pi/m_v)$ times the sum of squared edge lengths. The detailed proof derives this bound by expanding the cycle in the Fourier modes of Topic IV.
 
 The balanced flows preserve the sum of the squared radii. We can therefore use the signed angular terms to measure the turn and the squared edges to measure its cost. Averaging over the cycles gives
 $$
- R\sin\varphi \le \cot(\pi/b)(1-R\cos\varphi).
+ R\sin\varphi \le \cot(\pi/m_v)(1-R\cos\varphi).
 $$
-Use the two bounds from the small step and $\cot(\pi/b)\le b/\pi$. We obtain $b>.332N$. Thus a positive proportion of all labels already lie near the outside. Those labels give a large enough prefix for the estimate in V whenever we cut just below them.
+Use the two bounds from the small step and $\cot(\pi/m_v)\le m_v/\pi$. We obtain $m_v>.332N$. Thus a positive proportion of all labels already lie near the outside. Those labels give a large enough prefix for the estimate in V whenever we cut just below them.
 
 ::: {.reader-checkpoint}
 **Use the same vector.** Why does passing from $A$ to $A^d$ multiply the angle by $d$ while preserving the marks?
@@ -63,13 +63,13 @@ For $0\le k\le\lfloor2\pi/\varphi\rfloor$, each $|\lambda^k|$ is at least $\exp(
 
 ### Bound the angular part on a cycle
 
-Let $u_1,\ldots,u_b$ be the hull vertices and $S$ a row-stochastic matrix with $Su=\lambda u$. We obtained $S$ by choosing an average for each vertex. To balance its flows, use a stationary probability row $\mu$ satisfying $\mu S=\mu$. To find one, start from any probability row and take a convergent subsequence of the averages of its first $m$ iterates. Probability rows form a closed bounded set, and applying $S$ to an average changes only two terms of weight $1/m$. The limit is stationary.
+Let $u_1,\ldots,u_{m_v}$ be the hull vertices and $S$ a row-stochastic matrix with $Su=\lambda u$. We obtained $S$ by choosing an average for each vertex. To balance its flows, use a stationary probability row $\pi_0$ satisfying $\pi_0 S=\pi_0$. To find one, start from any probability row and take a convergent subsequence of the averages of its first $m$ iterates. Probability rows form a closed bounded set, and applying $S$ to an average changes only two terms of weight $1/m$. The limit is stationary.
 
-At vertex $i$ the flow weights $\mu_i S_{ij}$ sum to $\mu_i$ over outgoing edges, and the weights of the incoming edges also sum to $\mu_i$. This balance allows us to keep following positive edges until a label repeats. Subtract the smallest weight on the resulting simple directed cycle from its edges, preserving the balance. At least one positive edge disappears at each subtraction, so the process ends.
+At vertex $i$ write $\pi_{0,i}$ for its weight. The flow weights $\pi_{0,i}S_{ij}$ sum to $\pi_{0,i}$ over outgoing edges, and the weights of the incoming edges also sum to $\pi_{0,i}$. This balance allows us to keep following positive edges until a label repeats. Subtract the smallest weight on that simple directed cycle from its edges, preserving the balance. At least one positive edge disappears at each subtraction, so the process ends.
 
-For a cycle $y_0,\ldots,y_{\ell-1},y_\ell=y_0$ with $\ell\le b$, expand $y_j$ in the modes $e^{2\pi i kj/\ell}$. For $k\ne0$ the ratio of the signed term $\operatorname{Im}(\bar y_j y_{j+1})$ to the squared edge cost, after summing that mode around the cycle, is
+For a cycle $y_0,\ldots,y_{\ell-1},y_\ell=y_0$ with $\ell\le m_v$, expand $y_j$ in the modes $e^{2\pi i kj/\ell}$. For $k\ne0$ the ratio of the signed term $\operatorname{Im}(\bar y_j y_{j+1})$ to the squared edge cost, after summing that mode around the cycle, is
 $$
  \frac{\sin(2\pi k/\ell)}{4\sin^2(\pi k/\ell)}
-      =\tfrac12\cot(\pi k/\ell)\le\tfrac12\cot(\pi/b).
+      =\tfrac12\cot(\pi k/\ell)\le\tfrac12\cot(\pi/m_v).
 $$
-Orthogonality of the modes removes the cross terms. Constant modes and cycles of length one contribute zero to both sums. Hence the same inequality holds after summing over cycles with their flow weights. On the left we get $R\sin\varphi\sum_i\mu_i|u_i|^2$ by $Su=\lambda u$. The squared edge sum is $2(1-R\cos\varphi)\sum_i\mu_i|u_i|^2$ by stationarity and the same square expansion as above. The common factor is positive because every hull vertex has positive modulus. Divide it out and use $.999\pi/9.44>.332$ to get the claimed count.
+Orthogonality of the modes removes the cross terms. Constant modes and cycles of length one contribute zero to both sums. Hence the same inequality holds after summing over cycles with their flow weights. On the left we get $R\sin\varphi\sum_i\pi_{0,i}|u_i|^2$ by $Su=\lambda u$. The squared edge sum is $2(1-R\cos\varphi)\sum_i\pi_{0,i}|u_i|^2$ by stationarity and the same square expansion as above. The common factor is positive because every hull vertex has positive modulus. Divide it out and use $.999\pi/9.44>.332$ to get the claimed count.

@@ -3,7 +3,7 @@ import { SiteHeader } from "../components/SiteHeader";
 import { ProofChapterReadingControls } from "../components/proof/ProofChapterReadingControls";
 import { ReaderFigureCaption } from "../components/proof/ReaderFigureCaption";
 import { ReaderFigureFrame } from "../components/proof/ReaderFigureFrame";
-import { mirskyPaper, mirskyPaperRecord, mirskyTopicPath, mirskyTopics } from "../data/perfect-mirsky";
+import { mirskyHomePath, mirskyPaper, mirskyPaperRecord, mirskySiteName, mirskyTopicPath, mirskyTopics } from "../data/perfect-mirsky";
 import reader from "../data/perfect-mirsky.generated.json";
 import { createPageMetadata } from "../lib/site-metadata";
 import { sitePath } from "../lib/site-path";
@@ -24,11 +24,11 @@ const figures = {
     coordinates: "The real interior marks are a and −a. The two highlighted targets are 3i/4 and 3ai/4. Their required imaginary parts have sum 3(1 + a)/4.",
   },
   polygons: {
-    title: "An eigenvalue above the two sides at order five",
+    title: "Where the order-five eigenvalue falls",
     Component: PolygonRegion,
-    takeaway: "The red point comes from the average of the two permutations. The enlargement shows the gap between that point and the union of polygons.",
-    scope: "Regular polygons drawn from their exact vertices. The witness is plotted at numerical coordinates from the quartic.",
-    coordinates: "The upper root lies in −0.279293 < Re z < −0.279292, 0.7634 < Im z < 0.7637. The calculation below gives the polynomial and identifies the sides.",
+    takeaway: "The point comes from the average of two permutations. Compare orders five and six to see what changes when the hexagon is added.",
+    scope: "Regular polygons drawn from their exact vertices. The close-up uses equal scales on both axes. The point is plotted at numerical coordinates from the quartic.",
+    coordinates: "The upper root lies in −0.279293 < Re z < −0.279292, 0.7634 < Im z < 0.7637. The proof below gives the polynomial and checks the sides.",
   },
   incircle: {
     title: "Find the largest centred disk in a regular polygon",
@@ -42,7 +42,7 @@ const figures = {
     Component: Chord,
     takeaway: "The average moves along the side. Its loss of squared radius equals half the mean squared difference of two independent draws.",
     scope: "Exact identities for an eight-state cyclic example. Distances in the drawing are evaluated numerically.",
-    coordinates: "The rotations are 1 and exp(iπ/4). The point on the side is 1 − u + u exp(iπ/4). The squared side length is 2 − √2.",
+    coordinates: "One calculation multiplies the chance of different draws by half their squared distance. The other subtracts the squared modulus of 1 − u + u exp(iπ/4) from one.",
   },
   rays: {
     title: "How much does the radius fall when the ray changes?",
@@ -74,7 +74,7 @@ const figures = {
   },
 } as const;
 
-function withBasePath(html: string) {
+export function withMirskyBasePath(html: string) {
   return html.replace(/href="(\/(?!\/)[^"]*)"/g,
     (_, path: string) => 'href="' + sitePath(path) + '"');
 }
@@ -82,9 +82,10 @@ function withBasePath(html: string) {
 export function mirskyMetadata(index: number): Metadata {
   const topic = mirskyTopics[index];
   return createPageMetadata({
-    title: "Perfect–Mirsky Topic " + topic.numeral + " — " + topic.title,
-    description: topic.question,
+    title: topic.title,
+    description: `${topic.question} Topic ${topic.numeral} of the illustrated proof about eigenvalues of doubly stochastic matrices.`,
     pathname: mirskyTopicPath(index),
+    siteName: mirskySiteName,
   });
 }
 
@@ -95,14 +96,14 @@ export function MirskyChapter({ index }: { index: number }) {
     ([, id, title]) => ({ id, title }));
   const previous = mirskyTopics[index - 1];
   const next = mirskyTopics[index + 1];
-  const guideParts = withBasePath(guide).split(/(<!-- mirsky-figure:[\w-]+ -->)/g);
+  const guideParts = withMirskyBasePath(guide).split(/(<!-- mirsky-figure:[\w-]+ -->)/g);
 
   return <>
     <a className="skip-link" href="#chapter-content">Skip to this proof chapter</a>
-    <SiteHeader current="mirsky" />
+    <SiteHeader section="mirsky" />
     <main className="proof-page proof-chapter-page reader-page mirsky-page" id="chapter-content" tabIndex={-1}>
       <div className="reader-series-heading">
-        <p className="kicker">Perfect–Mirsky at large orders · an illustrated proof</p>
+        <p className="kicker">The pencil-and-paper proof for orders N ≥ 10³⁰</p>
         <a href={mirskyPaperRecord}>Read the preprint</a>
       </div>
       <div className="reader-page-grid">
@@ -117,7 +118,7 @@ export function MirskyChapter({ index }: { index: number }) {
           <nav className="proof-chapter-atlas reader-topic-directory" aria-label="Eight Perfect–Mirsky proof topics">
             <details data-reader-directory>
               <summary>All eight topics</summary>
-              <a className="proof-chapter-prerequisite-link" href={sitePath("/perfect-mirsky/#reading-routes")}>Choose a reading route</a>
+              <a className="proof-chapter-prerequisite-link" href={sitePath(mirskyHomePath + "#reading-routes")}>Choose a reading route</a>
               {stages.map((stage) => <section key={stage.title} data-topic-stage>
                 <h2>{stage.title}</h2>
                 <ol>{stage.indices.map((position) => {
@@ -134,7 +135,7 @@ export function MirskyChapter({ index }: { index: number }) {
           </nav>
         </aside>
         <article className="proof-topic-panel proof-chapter-panel reader-chapter"
-          data-proof-chapter data-chapter-close-proofs-in-guide data-chapter-reading-mode="guided">
+          data-proof-chapter data-chapter-detail-target="mirsky-proof-text" data-chapter-reading-mode="guided">
           <header className="proof-chapter-heading reader-chapter-heading">
             <p className="section-label">Topic {topic.numeral} of VIII</p>
             <h1>{topic.title}</h1>
@@ -142,7 +143,6 @@ export function MirskyChapter({ index }: { index: number }) {
             {index === 0 && <div className="reader-home-actions mirsky-actions">
               <a href="#mirsky-figure-square">Try the six-mark example</a>
               <a href={sitePath(mirskyTopicPath(1) + "#theorem")}>See the theorem</a>
-              <a href="#reading-routes">Choose a reading route</a>
             </div>}
             <details className="reader-chapter-publication">
               <summary>Source and revision</summary>
@@ -178,7 +178,10 @@ export function MirskyChapter({ index }: { index: number }) {
             <p>The calculations follow <a href={mirskyPaper + topic.anchor}>{topic.source}</a> of the paper.</p>
             <details className="proof-chapter-proof reader-source-proof">
               <summary>Read the argument for Topic {topic.numeral}</summary>
-              <div id="mirsky-proof-text" className="reader-source-text mirsky-proof" dangerouslySetInnerHTML={{ __html: withBasePath(proof) }} />
+              <div id="mirsky-proof-text" className="reader-source-text mirsky-proof" tabIndex={-1}>
+                <p className="mirsky-proof-context"><a href="#mirsky-idea">Return to the guided lesson and figure</a></p>
+                <div dangerouslySetInnerHTML={{ __html: withMirskyBasePath(proof) }} />
+              </div>
             </details>
           </section>
           <nav className="proof-topic-controls proof-topic-controls-with-previous reader-neighbours" aria-label="Perfect–Mirsky topic navigation">
@@ -197,13 +200,17 @@ export function MirskyChapter({ index }: { index: number }) {
         </article>
       </div>
     </main>
-    <footer className="site-footer"><div className="footer-meta">
-      <span>Perfect–Mirsky at large orders</span>
-      <a href={sitePath("/proof/")}>Karpelevič Topic I</a>
-      <a className="to-top" href="#top">To the top</a>
-    </div></footer>
+    <MirskyFooter />
     <script src={sitePath("/proof-chapter.js")} defer />
     <script src={sitePath("/reader-learning.js")} defer />
     <script src={sitePath("/perfect-mirsky.js")} type="module" defer />
   </>;
+}
+
+export function MirskyFooter() {
+  return <footer className="site-footer"><div className="footer-meta">
+    <a href={sitePath(mirskyHomePath)}>Perfect–Mirsky overview</a>
+    <a href={sitePath("/proof/")}>Karpelevič Topic I</a>
+    <a className="to-top" href="#top">To the top</a>
+  </div></footer>;
 }

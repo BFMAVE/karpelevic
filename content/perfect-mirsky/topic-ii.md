@@ -16,17 +16,19 @@ $$
 $$
 Perfect and Mirsky asked whether every eigenvalue comes from this union. To belong to $U_N$, a point has to lie in at least one of the displayed polygons. The polygons extend in different directions. For example $i\in\Pi_4$ and $e^{2\pi i/3}\in\Pi_3$, and each point lies outside the other polygon. The union retains both corners.
 
-> **Large-order theorem.** For every integer $N\ge10^{30}$, every eigenvalue of a real doubly stochastic matrix of order $N$ belongs to $U_N$. Consequently $D_N=U_N$ in this range.
+Verbeken and Ginis prove $D_N=U_N$ for every integer $N\ge450$ using computer-certified inequalities. The proof in this reader follows their pencil-and-paper argument. [Theorem 6 of the arXiv preprint](https://arxiv.org/html/2611.30905v2#Thmtheorem6)
 
-This is the pencil-and-paper theorem of [Verbeken and Ginis, v2, Theorem 5](https://arxiv.org/html/2611.30905v2#Thmtheorem5). We prove it here by ruling out an eigenvalue outside $U_N$. The calculation that sets the order is in [Topic VIII](/perfect-mirsky/topic-viii/#cutoff). [Appendix A of the paper](https://arxiv.org/html/2611.30905v2#A1) gives equality for every $N\ge450$ with computer-assisted inequalities.
+> **Pencil-and-paper theorem.** For every integer $N\ge10^{30}$, every eigenvalue of a real doubly stochastic matrix of order $N$ belongs to $U_N$. Consequently $D_N=U_N$ in this range.
+
+The argument rules out an eigenvalue outside $U_N$. The size condition comes from fitting many thin annuli near the unit circle and estimating the chance that a path leaves one. [Theorem 5](https://arxiv.org/html/2611.30905v2#Thmtheorem5) · [The cutoff calculation in Topic VIII](/perfect-mirsky/topic-viii/#cutoff)
 
 ### A point that escapes at order five {#order-five}
 
-The converse fails in order five. The example of [Mashreghi and Rivard](https://doi.org/10.1080/03081080600899296), written in the form used in [Appendix B](https://arxiv.org/html/2611.30905v2#A2.SS1), averages two permutation matrices with equal weights. It has a nonreal eigenvalue near $-0.279293+0.763516i$ that lies outside all five polygons. The dashed unit circle in the figure sets the scale. The enlargement shows the side of the triangle, the side of the pentagon and the exceptional point in the same window.
+The converse fails in order five. Mashreghi and Rivard take the average of two permutation matrices. It has a nonreal eigenvalue near $-0.279293+0.763516i$ that lies outside all five polygons. The dashed unit circle sets the scale in the full view. The enlargement uses the same scale on both axes. [Mashreghi and Rivard (2007)](https://doi.org/10.1080/03081080600899296) · [Appendix B.1](https://arxiv.org/html/2611.30905v2#A2.SS1)
 
 <!-- mirsky-figure:polygons -->
 
-At the witness, the positive imaginary part exceeds the upper side of each polygon at that real coordinate. The witness comes from averaging two permutations on five labels. To prove the reverse inclusion in large orders, we need a restriction that applies to every doubly stochastic matrix.
+At order five, the imaginary part of the point exceeds the upper side of each polygon at that real coordinate. Add the hexagon at order six and the same point lies inside. The preprint establishes that the square, pentagon and hexagon give all of $D_6$. To prove equality at other orders, we need a restriction that applies to every doubly stochastic matrix. [Appendix B.3](https://arxiv.org/html/2611.30905v2#A2.SS3)
 
 ::: {.reader-checkpoint}
 **Why take a union?** Which step of the cycle construction would let us take a convex combination of points within one $\Pi_j$? Why does that step give no such claim for a point in $\Pi_3$ combined with a point in $\Pi_4$?

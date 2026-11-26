@@ -1,4 +1,5 @@
 import { primaryNavigation } from "../data/home";
+import { mirskyHomePath, mirskySiteName } from "../data/perfect-mirsky";
 import { SITE_NAME, SITE_SUBTITLE } from "../lib/site-metadata";
 import { sitePath } from "../lib/site-path";
 
@@ -7,28 +8,40 @@ const pagePaths = {
   history: "/history/",
   journey: "/journey/",
   proof: "/proof/",
-  mirsky: "/perfect-mirsky/",
+  mirsky: mirskyHomePath,
 } as const;
 
-const navigation = [...primaryNavigation, { label: "Perfect–Mirsky", href: pagePaths.mirsky }];
+const karpelevicNavigation = [...primaryNavigation, { label: mirskySiteName, href: pagePaths.mirsky }];
+const mirskyNavigation = [
+  { label: "Overview", href: mirskyHomePath },
+  { label: "Eight topics", href: mirskyHomePath + "#topics" },
+  { label: "References", href: mirskyHomePath + "#references" },
+  { label: "Karpelevič", href: pagePaths.problem },
+];
 
 export function SiteHeader({
   current,
+  section = "karpelevic",
 }: {
   current?: keyof typeof pagePaths;
+  section?: "karpelevic" | "mirsky";
 }) {
+  const isMirsky = section === "mirsky";
+  const name = isMirsky ? mirskySiteName : SITE_NAME;
+  const subtitle = isMirsky ? "Eigenvalues of doubly stochastic matrices" : SITE_SUBTITLE;
+  const navigation = isMirsky ? mirskyNavigation : karpelevicNavigation;
   return (
     <header className="site-header" id="top">
       <div className="masthead">
         <a
           className="site-identity"
-          href={sitePath("/")}
-          aria-label={`${SITE_NAME} — Home`}
+          href={sitePath(isMirsky ? mirskyHomePath : "/")}
+          aria-label={`${name} — Home`}
         >
-          <span className="site-monogram" aria-hidden="true">Θ</span>
+          <span className="site-monogram" aria-hidden="true">{isMirsky ? "Π" : "Θ"}</span>
           <span>
-            <strong>{SITE_NAME}</strong>
-            <small>{SITE_SUBTITLE}</small>
+            <strong>{name}</strong>
+            <small>{subtitle}</small>
           </span>
         </a>
       </div>

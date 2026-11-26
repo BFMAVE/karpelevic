@@ -22,7 +22,7 @@ $$
    =(R^{-2T}-1)\mathbb E|v_{X_0}|^2
    \le20/N .
 $$
-To control an earlier excursion, ask for the first time the corrected mark exceeds a distance $\varepsilon$ from $Y_0$. At that time the squared distance is already above $\varepsilon^2$. Conditional averaging cannot decrease its expected final square, by convexity of the squared modulus. Since the first-crossing events are disjoint, their total probability is at most $20/(N\varepsilon^2)$. This estimate controls the whole path even in examples where the endpoint alone is close.
+To control an earlier excursion, ask for the first time the corrected mark exceeds a distance $\varepsilon$ from $Y_0$. At that time the squared distance is already above $\varepsilon^2$. Conditional averaging cannot decrease its expected final square, by convexity of the squared modulus. Since the first-crossing events are disjoint, their total probability is at most $20/(N\varepsilon^2)$. This is Doob's maximal inequality for the squared distance, applied over a finite number of steps. [Doob (1953)](/perfect-mirsky/#reference-doob)
 
 Keep the two measurements separate when reading the next topic. Excursions of $Y_k$ tell us which labels the original path can visit. The sum of squared edge lengths is measured on the marks $v_{X_k}$ in the original plane. Stationarity gives probability $b_{ij}/N$ for edge $i\to j$ at each step. Apply [the bound on $E_{\mathrm{step}}$](/perfect-mirsky/topic-vi/#edge-energy) to obtain
 $$

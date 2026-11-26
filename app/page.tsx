@@ -109,6 +109,7 @@ export default function Home() {
               {homeContent.problemIntroduction.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
+              <p>Requiring the columns to sum to one gives the question asked by Perfect and Mirsky. <a href={sitePath("/perfect-mirsky/")}>Read the Perfect–Mirsky walkthrough</a>.</p>
               <div className="display-equation">
                 <math
                   display="block"

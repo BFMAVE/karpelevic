@@ -4,7 +4,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../pages-out");
 const romans = ["ii","iii","iv","v","vi","vii","viii","ix","x","xi","xii","xiii","xiv"];
-const mirskyRoutes = ["perfect-mirsky/", ...romans.slice(0, 7).map((r) => `perfect-mirsky/topic-${r}/`)];
+const mirskyOverview = "perfect-mirsky/";
+const mirskyTopics = ["i", ...romans.slice(0, 7)].map((r) => `perfect-mirsky/topic-${r}/`);
+const mirskyRoutes = [mirskyOverview, ...mirskyTopics];
 const routes = ["", "history/", "journey/", "prerequisites/", "proof/", ...romans.map((r) => `proof/topic-${r}/`), ...mirskyRoutes];
 const pages = new Map();
 for (const route of routes) {
@@ -14,7 +16,7 @@ for (const route of routes) {
   assert.ok(html.includes('name="twitter:card" content="summary"'));
   assert.doesNotMatch(html, /Under construction|Working edition|awaiting arXiv moderation/);
   assert.doesNotMatch(html, /(?:href|src)="\/assets\//);
-  if (route.startsWith("proof/") || mirskyRoutes.includes(route)) {
+  if (route.startsWith("proof/") || mirskyTopics.includes(route)) {
     assert.match(html, /reader-guide proof-guided-layer/);
     assert.match(html, /proof-chapter-proof reader-source-proof/);
     assert.match(html, /\/karpelevic\/proof-chapter\.js/);
@@ -27,9 +29,21 @@ for (const route of routes) {
   if (mirskyRoutes.includes(route)) {
     assert.match(html, /<script type="module" src="\/karpelevic\/perfect-mirsky\.js"><\/script>/);
     assert.match(html, /https:\/\/arxiv\.org\/abs\/2611\.30905v2/);
+    assert.match(html, /<title>[^<]*· Perfect–Mirsky<\/title>/);
+    assert.match(html, /name="description" content="[^"]*eigenvalues of doubly stochastic matrices/i);
+    assert.match(html, /aria-label="Perfect–Mirsky — Home"/);
     assert.match(html, /<math\b/);
-    assert.match(html, /data-reader-section-directory/);
-    assert.match(html, /data-figure-view-button="enlarge"/);
+    if (route === mirskyOverview) {
+      assert.match(html, /from order 450 onward/);
+      assert.match(html, /id="references"/);
+      assert.match(html, /data-mirsky-former-topic="\/karpelevic\/perfect-mirsky\/topic-i\/"/);
+      for (const topic of mirskyTopics) assert.ok(html.includes(`href="/karpelevic/${topic}"`));
+    } else {
+      assert.match(html, /data-reader-section-directory/);
+      assert.match(html, /data-figure-view-button="enlarge"/);
+      assert.match(html, /data-chapter-detail-target="mirsky-proof-text"/);
+      assert.match(html, /href="#mirsky-idea">Return to the guided lesson and figure/);
+    }
     assert.doesNotMatch(html, /name="robots"[^>]*noindex/);
     for (const [, fragment] of html.matchAll(/href="#([^"?]+)"/g)) {
       assert.ok(html.includes(`id="${fragment}"`), `${route}: unresolved link #${fragment}`);
@@ -62,4 +76,16 @@ for (const route of ["proof/topic-vi/a/", "proof/topic-vi/b/", "proof/topic-xii/
   assert.ok(pages.has(match[1]));
   if (match[2]) assert.ok(pages.get(match[1]).includes(`id="${match[2]}"`));
 }
-console.log("Verified all public pages, fourteen Karpelevič topics, eight Perfect–Mirsky topics, both PDFs, controls, explorer, and compatibility redirects.");
+const arxivHtml = process.argv[2];
+if (arxivHtml) {
+  const source = await readFile(arxivHtml, "utf8");
+  const anchors = new Set();
+  for (const route of mirskyRoutes) {
+    const html = pages.get(`/karpelevic/${route}`);
+    for (const [, id] of html.matchAll(/href="https:\/\/arxiv\.org\/html\/2611\.30905v2#([^"#]+)"/g)) anchors.add(id);
+  }
+  assert.ok(anchors.size > 0);
+  for (const id of anchors) assert.ok(source.includes(`id="${id}"`), `Missing anchor in arXiv v2 HTML: ${id}`);
+  console.log(`Verified ${anchors.size} distinct links to sections and results in the arXiv v2 HTML.`);
+}
+console.log("Verified all public pages, fourteen Karpelevič topics, the Perfect–Mirsky overview and eight topics, both PDFs, controls, explorer, and compatibility redirects.");

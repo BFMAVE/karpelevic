@@ -14,6 +14,7 @@ type PageMetadataOptions = {
   title: string;
   description: string;
   pathname: string;
+  siteName?: string;
   scholarlyLandingPage?: boolean;
 };
 
@@ -21,18 +22,19 @@ export function createPageMetadata({
   title,
   description,
   pathname,
+  siteName = SITE_NAME,
   scholarlyLandingPage = false,
 }: PageMetadataOptions): Metadata {
   const url = publicSiteUrl(pathname);
 
   return {
-    title: pathname === "/" ? { absolute: title } : title,
+    title: siteName !== SITE_NAME ? { absolute: `${title} · ${siteName}` } : pathname === "/" ? { absolute: title } : title,
     description,
     alternates: { canonical: url },
     openGraph: {
       type: scholarlyLandingPage ? "website" : "article",
       locale: "en_GB",
-      siteName: SITE_NAME,
+      siteName,
       title,
       description,
       url,

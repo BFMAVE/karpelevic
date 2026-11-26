@@ -42,7 +42,7 @@ The original path may visit labels repeatedly, and $T$ may be very large. Removi
 
 ### Turn the prefix estimate into an interval count
 
-Write $1=b_1\ge\cdots\ge b_N$ for the ordered moduli and $K=5000$. Choose
+Write $1=r_1\ge\cdots\ge r_N$ for the ordered moduli and $K=5000$. Choose
 $$
  \gamma=1/201,\quad C=1.52K,\quad
  J=\lceil 40C/\gamma\rceil,\quad w=.999\gamma/J.
@@ -57,11 +57,11 @@ $$
 $$
 In particular $40/N<.001\gamma$ and each hull vertex has modulus above $I$.
 
-Suppose an open gap $(b_{h+1},b_h)$ meets the interior of $I$. Its upper endpoint is at least $1-\gamma$, and its lower endpoint is below the hull vertices. The prefix of size $h>.332N$ contains them and has $h\ge10^{16}$. Dividing by its root mean square can only increase its squared gap because that mean is at most one. The estimate in V therefore gives
+Suppose an open gap $(r_{h+1},r_h)$ meets the interior of $I$. Its upper endpoint is at least $1-\gamma$, and its lower endpoint is below the hull vertices. The prefix of size $h>.332N$ contains them and has $h\ge10^{16}$. Dividing by its root mean square can only increase its squared gap because that mean is at most one. The estimate in V therefore gives
 $$
- b_h-b_{h+1}<\frac{K}{h(b_h+b_{h+1})}.
+ r_h-r_{h+1}<\frac{K}{h(r_h+r_{h+1})}.
 $$
-First $b_h+b_{h+1}\ge .995$ gives a gap at most $3.03K/N<.001$. Substituting back gives $b_h+b_{h+1}\ge 2(1-\gamma)-.001\ge1.989$. Now $1/(.332\cdot1.989)<1.52$, so the width is at most $C/N$. The interval count follows.
+First $r_h+r_{h+1}\ge .995$ gives a gap at most $3.03K/N<.001$. Substituting back gives $r_h+r_{h+1}\ge 2(1-\gamma)-.001\ge1.989$. Now $1/(.332\cdot1.989)<1.52$, so the width is at most $C/N$. The interval count follows.
 
 ### Stay within the annulus and get far from the start
 

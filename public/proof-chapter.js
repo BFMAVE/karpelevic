@@ -46,7 +46,7 @@
       const announcement = controls.querySelector(
         "[data-proof-chapter-announcement]",
       );
-      const closeProofsInGuide = chapter.dataset.chapterCloseProofsInGuide !== undefined;
+      const detailTarget = chapter.dataset.chapterDetailTarget;
       let printState = [];
 
       function announce(message) {
@@ -62,14 +62,14 @@
             String(button.dataset.chapterReadingModeButton === resolvedMode),
           );
         });
-        if (resolvedMode === "formal" || (shouldAnnounce && closeProofsInGuide)) {
+        if (resolvedMode === "formal" || (shouldAnnounce && detailTarget)) {
           proofs.forEach((proof) => { proof.open = resolvedMode === "formal"; });
           updateProofButtons();
         }
         if (shouldAnnounce) {
           announce(
             resolvedMode === "formal"
-              ? (closeProofsInGuide ? "Detailed proof selected. The argument is open."
+              ? (detailTarget ? "Detailed proof selected. The argument is open below the lesson."
                 : "Source proof selected. The complete source argument and its proofs are open.")
               : "Guided lesson selected. The illustrated explanation and topic introduction are visible.",
           );
@@ -97,7 +97,13 @@
 
       modeButtons.forEach((button) => {
         button.addEventListener("click", () => {
-          setMode(button.dataset.chapterReadingModeButton, true);
+          const mode = button.dataset.chapterReadingModeButton;
+          setMode(mode, true);
+          if (mode === "formal" && detailTarget) {
+            const target = document.getElementById(detailTarget);
+            target?.focus({ preventScroll: true });
+            target?.scrollIntoView({ block: "start", behavior: "instant" });
+          }
         });
       });
 
@@ -143,6 +149,7 @@
         const notation = chapter.querySelector("[data-reader-notation]");
         if (notation && !notation.contains(target)) notation.open = false;
         if (target.closest(".proof-guided-layer")) setMode("guided", true);
+        else if (detailTarget && (target.id === "source-argument" || target.closest(".proof-chapter-proof"))) setMode("formal", true);
         let parent = target.parentElement;
         while (parent && parent !== chapter) {
           if (parent.tagName === "DETAILS") parent.open = true;

@@ -1,5 +1,14 @@
 # Project Status
 
+## Perfect–Mirsky walkthrough
+
+The overview at `/perfect-mirsky/` gives the results by order and links to
+their proofs in arXiv:2611.30905v2. Eight illustrated topics at
+`/perfect-mirsky/topic-i/` through `/perfect-mirsky/topic-viii/` follow the
+pencil-and-paper argument for orders at least \(10^{30}\). Opening a detailed
+proof keeps its lesson and figure available on the same page. GitHub Pages
+verification checks the overview, topic routes, and links between them.
+
 ## Focused consistency and visibility pass — 2 October 2026
 
 The two follow-up reviews identify specific reference and combined-interaction

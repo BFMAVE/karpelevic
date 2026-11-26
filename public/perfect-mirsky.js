@@ -1,4 +1,21 @@
-import { sixMarkState, chordState, pathState } from "./code/perfect-mirsky-model.mjs";
+import { sixMarkState, chordState, pathState, polygonWitnessState } from "./code/perfect-mirsky-model.mjs";
+
+const formerTopic = document.querySelector("[data-mirsky-former-topic]");
+const formerAnchors = new Set([
+  "#row-receives", "#six-marks", "#mirsky-figure-square", "#mirsky-idea",
+  "#source-argument", "#mirsky-detail-heading", "#mirsky-proof-text", "#allocate-six", "#one-inequality-for-all-the-rows",
+]);
+
+function followFormerTopicLink() {
+  if (formerAnchors.has(window.location.hash)) {
+    window.location.replace(formerTopic.dataset.mirskyFormerTopic + window.location.hash);
+  }
+}
+
+if (formerTopic) {
+  followFormerTopicLink();
+  window.addEventListener("hashchange", followFormerTopicLink);
+}
 
 function text(root, key, value) {
   root.querySelector('[data-mirsky-text="' + key + '"]').textContent = value;
@@ -70,11 +87,13 @@ function enhanceUnion(root) {
   choices.forEach((choice) => choice.addEventListener("click", () => {
     const order = Number(choice.dataset.mirskyOrder);
     polygons.forEach((polygon) => polygon.toggleAttribute("hidden", Number(polygon.dataset.mirskyPolygon) > order));
-    toggle(root, "[data-mirsky-witness]", order >= 5);
     choices.forEach((other) => other.setAttribute("aria-pressed", String(other === choice)));
     text(root, "order", order);
-    text(root, "region-title", "Union of the regular polygons of order at most " + order
-      + (order >= 5 ? ". The highlighted point is the order-five witness." : "."));
+    text(root, "region-title", "Union of the regular polygons through order " + order
+      + ". The point is the same order-five eigenvalue for every choice.");
+    const { note } = polygonWitnessState(order);
+    text(root, "zoom-title", note);
+    text(root, "union-status", note);
   }));
   enable(root);
 }
@@ -83,19 +102,19 @@ function enhanceChord(root) {
   const slider = root.querySelector("input[type=range]");
   const plane = JSON.parse(root.dataset.mirskyChord);
   function update() {
-    const { u, x, y, chance, loss } = chordState(slider.valueAsNumber);
+    const { u, x, y, chance, pairLoss, radiusLoss, radiusSquared } = chordState(slider.valueAsNumber);
     const point = project([x, y], plane);
     move(root, "eta", point);
     root.querySelector("[data-mirsky-chord-ray]").setAttribute("points", points([[plane.cx, plane.cy], point]));
     const label = root.querySelector("[data-mirsky-eta-label]");
     label.setAttribute("x", point[0] - 14);
     label.setAttribute("y", point[1] - 9);
-    slider.setAttribute("aria-valuetext", u);
-    text(root, "u", u);
-    text(root, "chance", chance);
-    text(root, "distance", loss);
-    text(root, "loss", loss);
-    text(root, "chord-status", "At u = " + u + ", both ways of measuring the loss give " + loss + ".");
+    slider.setAttribute("aria-valuetext", u.toFixed(2));
+    text(root, "u", u.toFixed(2));
+    text(root, "chance", chance.toFixed(3));
+    text(root, "distance", pairLoss.toFixed(4));
+    text(root, "loss", radiusLoss.toFixed(4));
+    text(root, "chord-status", "The average lies at squared radius " + radiusSquared.toFixed(4) + ".");
   }
   slider.addEventListener("input", update);
   enable(root);

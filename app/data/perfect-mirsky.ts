@@ -1,5 +1,7 @@
 export const mirskyPaper = "https://arxiv.org/html/2611.30905v2";
 export const mirskyPaperRecord = "https://arxiv.org/abs/2611.30905v2";
+export const mirskySiteName = "Perfect–Mirsky";
+export const mirskyHomePath = "/perfect-mirsky/";
 
 export const mirskyTopics = [
   {
@@ -77,7 +79,5 @@ export const mirskyTopics = [
 ] as const;
 
 export function mirskyTopicPath(index: number): string {
-  return index === 0
-    ? "/perfect-mirsky/"
-    : "/perfect-mirsky/topic-" + mirskyTopics[index].numeral.toLowerCase() + "/";
+  return mirskyHomePath + "topic-" + mirskyTopics[index].numeral.toLowerCase() + "/";
 }
